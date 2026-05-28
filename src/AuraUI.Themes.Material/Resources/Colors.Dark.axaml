@@ -1,0 +1,80 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ========================================
+         Material Design 3 — Dark Theme Colors
+         ======================================== -->
+
+    <!-- Background Hierarchy -->
+    <SolidColorBrush x:Key="AuraBackgroundBrush" Color="#1C1B1F"/>
+    <SolidColorBrush x:Key="AuraSurfaceBrush" Color="#1C1B1F"/>
+    <SolidColorBrush x:Key="AuraCardBrush" Color="#211F26"/>
+    <SolidColorBrush x:Key="AuraOverlayBrush" Color="#00000080"/>
+    <SolidColorBrush x:Key="AuraMutedBrush" Color="#2B2930"/>
+
+    <!-- Foreground Hierarchy -->
+    <SolidColorBrush x:Key="AuraForegroundBrush" Color="#E6E1E5"/>
+    <SolidColorBrush x:Key="AuraForegroundSecondaryBrush" Color="#CAC4D0"/>
+    <SolidColorBrush x:Key="AuraForegroundTertiaryBrush" Color="#938F99"/>
+    <SolidColorBrush x:Key="AuraForegroundDisabledBrush" Color="#49454F"/>
+    <SolidColorBrush x:Key="AuraForegroundOnAccentBrush" Color="#381E72"/>
+
+    <!-- Semantic / Brand Colors -->
+    <SolidColorBrush x:Key="AuraPrimaryBrush" Color="#D0BCFF"/>
+    <SolidColorBrush x:Key="AuraPrimaryHoverBrush" Color="#BEA8F0"/>
+    <SolidColorBrush x:Key="AuraPrimaryPressedBrush" Color="#E0D0FF"/>
+    <SolidColorBrush x:Key="AuraSecondaryBrush" Color="#CCC2DC"/>
+    <SolidColorBrush x:Key="AuraSuccessBrush" Color="#66BB6A"/>
+    <SolidColorBrush x:Key="AuraWarningBrush" Color="#FFA726"/>
+    <SolidColorBrush x:Key="AuraErrorBrush" Color="#F44336"/>
+    <SolidColorBrush x:Key="AuraInfoBrush" Color="#29B6F6"/>
+
+    <!-- Interaction State Colors -->
+    <SolidColorBrush x:Key="AuraHoverBrush" Color="#14E6E1E5"/>
+    <SolidColorBrush x:Key="AuraPressedBrush" Color="#1EE6E1E5"/>
+    <SolidColorBrush x:Key="AuraFocusBrush" Color="#D0BCFF"/>
+    <SolidColorBrush x:Key="AuraDisabledBrush" Color="#1EE6E1E5"/>
+    <SolidColorBrush x:Key="AuraBorderBrush" Color="#49454F"/>
+    <SolidColorBrush x:Key="AuraBorderHoverBrush" Color="#938F99"/>
+    <SolidColorBrush x:Key="AuraDividerBrush" Color="#49454F"/>
+
+    <!-- Surface Tint (Material You) -->
+    <SolidColorBrush x:Key="AuraSurfaceTintBrush" Color="#D0BCFF"/>
+
+    <!-- Primary Container (M3 tonal) -->
+    <SolidColorBrush x:Key="AuraPrimaryContainerBrush" Color="#4F378B"/>
+    <SolidColorBrush x:Key="AuraOnPrimaryContainerBrush" Color="#EADDFF"/>
+
+    <!-- Secondary Container -->
+    <SolidColorBrush x:Key="AuraSecondaryContainerBrush" Color="#4A4458"/>
+    <SolidColorBrush x:Key="AuraOnSecondaryContainerBrush" Color="#E8DEF8"/>
+
+    <!-- Tertiary -->
+    <SolidColorBrush x:Key="AuraTertiaryBrush" Color="#EFB8C8"/>
+    <SolidColorBrush x:Key="AuraTertiaryContainerBrush" Color="#633B48"/>
+    <SolidColorBrush x:Key="AuraOnTertiaryContainerBrush" Color="#FFD8E4"/>
+
+    <!-- Error Container -->
+    <SolidColorBrush x:Key="AuraErrorContainerBrush" Color="#8C1D18"/>
+    <SolidColorBrush x:Key="AuraOnErrorContainerBrush" Color="#F9DEDC"/>
+
+    <!-- Outline / Outline Variant -->
+    <SolidColorBrush x:Key="AuraOutlineBrush" Color="#938F99"/>
+    <SolidColorBrush x:Key="AuraOutlineVariantBrush" Color="#49454F"/>
+
+    <!-- Inverse -->
+    <SolidColorBrush x:Key="AuraInverseSurfaceBrush" Color="#E6E1E5"/>
+    <SolidColorBrush x:Key="AuraInverseOnSurfaceBrush" Color="#313033"/>
+    <SolidColorBrush x:Key="AuraInversePrimaryBrush" Color="#6750A4"/>
+
+    <!-- Scrim -->
+    <SolidColorBrush x:Key="AuraScrimBrush" Color="#000000"/>
+
+    <!-- Shadow -->
+    <SolidColorBrush x:Key="AuraShadowBrush" Color="#000000"/>
+
+    <!-- Common transparent -->
+    <SolidColorBrush x:Key="AuraTransparentBrush" Color="#00000000"/>
+
+</ResourceDictionary>

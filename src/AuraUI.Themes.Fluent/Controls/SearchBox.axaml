@@ -1,0 +1,113 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         SearchBox — Fluent Style (TextBox with search icon)
+         ============================================================ -->
+    <Style Selector="TextBox.search">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Search icon -->
+                        <Path Name="SearchIcon"
+                              DockPanel.Dock="Left"
+                              Width="16" Height="16"
+                              Margin="10,0,4,0"
+                              VerticalAlignment="Center"
+                              Data="M 7,1 A 6,6 0 1,1 7,13 A 6,6 0 1,1 7,1 M 11.5,11.5 L 15,15"
+                              Stroke="{StaticResource AuraForegroundTertiaryBrush}"
+                              StrokeThickness="1.5"/>
+                              Stretch="Uniform"/>
+
+                        <!-- Clear button -->
+                        <Button Name="PART_ClearButton"
+                                DockPanel.Dock="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="6,4"
+                                Margin="0,0,6,0"
+                                VerticalAlignment="Center"
+                                IsVisible="False">
+                            <Path Width="10" Height="10"
+                                  Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                  Stroke="{StaticResource AuraForegroundTertiaryBrush}"
+                                  StrokeThickness="1.5"/>
+                        </Button>
+
+                        <!-- Text area -->
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <Panel>
+                                <TextBlock Name="PART_Watermark"
+                                           Text="{TemplateBinding Watermark}"
+                                           Foreground="{StaticResource AuraPlaceholderBrush}"
+                                           Margin="4,0"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"/>
+                                <TextPresenter Name="PART_TextPresenter"
+                                               Margin="4,0"
+                                               VerticalAlignment="Center"
+                                               Text="{TemplateBinding Text, Mode=TwoWay}"
+                                               TextAlignment="{TemplateBinding TextAlignment}"
+                                               SelectionStart="{TemplateBinding SelectionStart}"
+                                               SelectionEnd="{TemplateBinding SelectionEnd}"
+                                               CaretIndex="{TemplateBinding CaretIndex}"
+                                               CaretBrush="{TemplateBinding CaretBrush}"
+                                               SelectionBrush="{TemplateBinding SelectionBrush}"/>
+                            </Panel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- SearchBox :pointerover -->
+    <Style Selector="TextBox.search:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- SearchBox :focus -->
+    <Style Selector="TextBox.search:focus /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- SearchBox :disabled -->
+    <Style Selector="TextBox.search:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- Size variants -->
+    <Style Selector="TextBox.search.sm">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="TextBox.search.lg">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+</Styles>

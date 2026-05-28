@@ -1,0 +1,69 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — Dialog
+         ======================================== -->
+
+    <Style Selector="Dialog">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraDialogCornerRadius}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraDialogMinWidth}"/>
+        <Setter Property="MaxWidth" Value="{DynamicResource AuraDialogMaxWidth}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Dialog">
+                    <Panel>
+                        <!-- Scrim / overlay -->
+                        <Border Name="PART_Scrim"
+                                Background="{DynamicResource AuraScrimBrush}"
+                                Opacity="0.32"/>
+                        <!-- Dialog surface -->
+                        <Border Name="PART_DialogBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MaxWidth="{TemplateBinding MaxWidth}"
+                                Padding="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Border.BoxShadow>
+                                <BoxShadow BlurRadius="24"
+                                           SpreadRadius="0"
+                                           OffsetX="0"
+                                           OffsetY="8"
+                                           Color="#26000000"/>
+                            </Border.BoxShadow>
+                            <StackPanel Spacing="16">
+                                <!-- Icon (optional) -->
+                                <ContentPresenter Name="PART_IconPresenter"
+                                                  HorizontalAlignment="Center"
+                                                  IsVisible="False"/>
+                                <!-- Title -->
+                                <ContentPresenter Name="PART_TitlePresenter"
+                                                  Content="{TemplateBinding Title}"
+                                                  FontSize="24"
+                                                  FontWeight="Normal"
+                                                  FontFamily="{DynamicResource AuraFontHeadlineSmallFamily}"/>
+                                <!-- Content -->
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                <!-- Buttons -->
+                                <StackPanel Name="PART_ButtonHost"
+                                            Orientation="Horizontal"
+                                            Spacing="8"
+                                            HorizontalAlignment="End"
+                                            Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</Styles>

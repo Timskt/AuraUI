@@ -1,0 +1,145 @@
+namespace AuraUI.Core.Theme;
+
+/// <summary>
+/// Static resource keys for all AuraUI control styles.
+/// Use these to reference specific style keys without loading all styles.
+/// Similar to Panuon's StyleKeys pattern.
+/// </summary>
+public static class StyleKeys
+{
+    // Layout
+    public const string CardStyle = "AuraCardStyle";
+    public const string ExpanderStyle = "AuraExpanderStyle";
+    public const string DividerStyle = "AuraDividerStyle";
+    public const string BadgeStyle = "AuraBadgeStyle";
+    public const string TagStyle = "AuraTagStyle";
+    public const string AvatarStyle = "AuraAvatarStyle";
+    public const string SkeletonStyle = "AuraSkeletonStyle";
+
+    // Input
+    public const string ButtonStyle = "AuraButtonStyle";
+    public const string ToggleButtonStyle = "AuraToggleButtonStyle";
+    public const string RepeatButtonStyle = "AuraRepeatButtonStyle";
+    public const string TextBoxStyle = "AuraTextBoxStyle";
+    public const string PasswordBoxStyle = "AuraPasswordBoxStyle";
+    public const string NumericUpDownStyle = "AuraNumericUpDownStyle";
+    public const string SearchBoxStyle = "AuraSearchBoxStyle";
+    public const string MaskedTextBoxStyle = "AuraMaskedTextBoxStyle";
+
+    // Selection
+    public const string ComboBoxStyle = "AuraComboBoxStyle";
+    public const string MultiComboBoxStyle = "AuraMultiComboBoxStyle";
+    public const string ListBoxStyle = "AuraListBoxStyle";
+    public const string RadioButtonStyle = "AuraRadioButtonStyle";
+    public const string CheckBoxStyle = "AuraCheckBoxStyle";
+    public const string SwitchStyle = "AuraSwitchStyle";
+    public const string RateControlStyle = "AuraRateControlStyle";
+    public const string ColorPickerStyle = "AuraColorPickerStyle";
+
+    // Display
+    public const string CarouselStyle = "AuraCarouselStyle";
+    public const string TimelineStyle = "AuraTimelineStyle";
+    public const string ProgressRingStyle = "AuraProgressRingStyle";
+    public const string ProgressBarStyle = "AuraProgressBarStyle";
+    public const string StepIndicatorStyle = "AuraStepIndicatorStyle";
+
+    // Navigation
+    public const string TabControlStyle = "AuraTabControlStyle";
+    public const string BreadcrumbStyle = "AuraBreadcrumbStyle";
+    public const string NavigationViewStyle = "AuraNavigationViewStyle";
+    public const string PaginationStyle = "AuraPaginationStyle";
+
+    // Feedback
+    public const string MessageBoxStyle = "AuraMessageBoxStyle";
+    public const string ToastStyle = "AuraToastStyle";
+    public const string NotificationStyle = "AuraNotificationStyle";
+    public const string DialogStyle = "AuraDialogStyle";
+    public const string SnackbarStyle = "AuraSnackbarStyle";
+    public const string PendingDialogStyle = "AuraPendingDialogStyle";
+    public const string LoadingOverlayStyle = "AuraLoadingOverlayStyle";
+
+    // Windowing
+    public const string WindowXStyle = "AuraWindowXStyle";
+    public const string WindowXModalDialogStyle = "AuraWindowXModalDialogStyle";
+}
+
+/// <summary>
+/// Resource keys for design tokens (colors, spacing, typography, etc.)
+/// </summary>
+public static class ResourceKeys
+{
+    // Background hierarchy
+    public const string BackgroundBrush = "AuraBackgroundBrush";
+    public const string SurfaceBrush = "AuraSurfaceBrush";
+    public const string CardBrush = "AuraCardBrush";
+    public const string OverlayBrush = "AuraOverlayBrush";
+    public const string MutedBrush = "AuraMutedBrush";
+
+    // Foreground hierarchy
+    public const string ForegroundBrush = "AuraForegroundBrush";
+    public const string ForegroundSecondaryBrush = "AuraForegroundSecondaryBrush";
+    public const string ForegroundTertiaryBrush = "AuraForegroundTertiaryBrush";
+    public const string ForegroundDisabledBrush = "AuraForegroundDisabledBrush";
+    public const string ForegroundOnAccentBrush = "AuraForegroundOnAccentBrush";
+
+    // Semantic colors
+    public const string PrimaryBrush = "AuraPrimaryBrush";
+    public const string PrimaryHoverBrush = "AuraPrimaryHoverBrush";
+    public const string PrimaryPressedBrush = "AuraPrimaryPressedBrush";
+    public const string SecondaryBrush = "AuraSecondaryBrush";
+    public const string SuccessBrush = "AuraSuccessBrush";
+    public const string WarningBrush = "AuraWarningBrush";
+    public const string ErrorBrush = "AuraErrorBrush";
+    public const string InfoBrush = "AuraInfoBrush";
+
+    // Interaction states
+    public const string HoverBrush = "AuraHoverBrush";
+    public const string PressedBrush = "AuraPressedBrush";
+    public const string FocusBrush = "AuraFocusBrush";
+    public const string DisabledBrush = "AuraDisabledBrush";
+    public const string BorderBrush = "AuraBorderBrush";
+    public const string BorderHoverBrush = "AuraBorderHoverBrush";
+    public const string DividerBrush = "AuraDividerBrush";
+
+    // Spacing
+    public const string SpacingXs = "AuraSpacingXs";
+    public const string SpacingSm = "AuraSpacingSm";
+    public const string SpacingMd = "AuraSpacingMd";
+    public const string SpacingLg = "AuraSpacingLg";
+    public const string SpacingXl = "AuraSpacingXl";
+    public const string Spacing2Xl = "AuraSpacing2Xl";
+    public const string Spacing3Xl = "AuraSpacing3Xl";
+    public const string Spacing4Xl = "AuraSpacing4Xl";
+
+    // Corner radius
+    public const string RadiusNone = "AuraRadiusNone";
+    public const string RadiusSm = "AuraRadiusSm";
+    public const string RadiusMd = "AuraRadiusMd";
+    public const string RadiusLg = "AuraRadiusLg";
+    public const string RadiusXl = "AuraRadiusXl";
+    public const string RadiusFull = "AuraRadiusFull";
+
+    // Shadows
+    public const string ShadowNone = "AuraShadowNone";
+    public const string ShadowSm = "AuraShadowSm";
+    public const string ShadowMd = "AuraShadowMd";
+    public const string ShadowLg = "AuraShadowLg";
+    public const string ShadowXl = "AuraShadowXl";
+
+    // Typography
+    public const string FontCaption = "AuraFontCaption";
+    public const string FontBody = "AuraFontBody";
+    public const string FontBodyStrong = "AuraFontBodyStrong";
+    public const string FontSubtitle = "AuraFontSubtitle";
+    public const string FontTitle = "AuraFontTitle";
+    public const string FontTitleLarge = "AuraFontTitleLarge";
+    public const string FontDisplay = "AuraFontDisplay";
+
+    // Animation
+    public const string AnimationFast = "AuraAnimationFast";
+    public const string AnimationNormal = "AuraAnimationNormal";
+    public const string AnimationSlow = "AuraAnimationSlow";
+    public const string EasingDefault = "AuraEasingDefault";
+    public const string EasingEnter = "AuraEasingEnter";
+    public const string EasingExit = "AuraEasingExit";
+}

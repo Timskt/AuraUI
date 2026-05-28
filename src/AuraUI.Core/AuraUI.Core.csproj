@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AuraUI.Core</RootNamespace>
+    <AssemblyName>AuraUI.Core</AssemblyName>
+    <Description>Core utilities, converters, helpers, and interfaces for AuraUI framework</Description>
+    <PackageTags>avalonia;ui;framework;auraui</PackageTags>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.1" />
+  </ItemGroup>
+</Project>

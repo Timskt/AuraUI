@@ -1,0 +1,82 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — Toast
+         ======================================== -->
+
+    <Style Selector="Toast">
+        <Setter Property="Background" Value="{DynamicResource AuraInverseSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraInverseOnSurfaceBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MaxWidth" Value="560"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Toast">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            MaxWidth="{TemplateBinding MaxWidth}">
+                        <Border.BoxShadow>
+                            <BoxShadow BlurRadius="8"
+                                       SpreadRadius="0"
+                                       OffsetX="0"
+                                       OffsetY="4"
+                                       Color="#26000000"/>
+                        </Border.BoxShadow>
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="12"
+                                    VerticalAlignment="Center">
+                            <!-- Icon -->
+                            <ContentPresenter Name="PART_IconPresenter"
+                                              Content="{TemplateBinding Icon}"
+                                              VerticalAlignment="Center"
+                                              IsVisible="False"/>
+                            <!-- Message -->
+                            <TextBlock Name="PART_Message"
+                                       Text="{TemplateBinding Message}"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"/>
+                            <!-- Action button -->
+                            <Button Name="PART_ActionButton"
+                                    Classes="text"
+                                    Content="{TemplateBinding ActionText}"
+                                    Foreground="{DynamicResource AuraInversePrimaryBrush}"
+                                    VerticalAlignment="Center"
+                                    IsVisible="False"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Success variant -->
+    <Style Selector="Toast.success">
+        <Setter Property="Background" Value="#2E7D32"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!-- Error variant -->
+    <Style Selector="Toast.error">
+        <Setter Property="Background" Value="#D32F2F"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!-- Warning variant -->
+    <Style Selector="Toast.warning">
+        <Setter Property="Background" Value="#ED6C02"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!-- Info variant -->
+    <Style Selector="Toast.info">
+        <Setter Property="Background" Value="#0288D1"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+</Styles>

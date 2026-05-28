@@ -1,0 +1,73 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         AuraUI Fluent Theme — Typography Tokens
+         ============================================================ -->
+
+    <!-- Font Family -->
+    <FontFamily x:Key="AuraFontFamilyDefault">Segoe UI Variable, Segoe UI, San Francisco, Helvetica Neue, sans-serif</FontFamily>
+    <FontFamily x:Key="AuraFontFamilyMono">Cascadia Code, Consolas, SF Mono, monospace</FontFamily>
+
+    <!-- Font Sizes -->
+    <x:Double x:Key="AuraFontSizeCaption">12</x:Double>
+    <x:Double x:Key="AuraFontSizeCaptionStrong">12</x:Double>
+    <x:Double x:Key="AuraFontSizeBody">14</x:Double>
+    <x:Double x:Key="AuraFontSizeBodyStrong">14</x:Double>
+    <x:Double x:Key="AuraFontSizeSubtitle">16</x:Double>
+    <x:Double x:Key="AuraFontSizeSubtitleStrong">16</x:Double>
+    <x:Double x:Key="AuraFontSizeTitle">20</x:Double>
+    <x:Double x:Key="AuraFontSizeTitleLarge">28</x:Double>
+    <x:Double x:Key="AuraFontSizeDisplay">40</x:Double>
+
+    <!-- Font Weights -->
+    <FontWeight x:Key="AuraFontWeightNormal">Normal</FontWeight>
+    <FontWeight x:Key="AuraFontWeightSemiBold">SemiBold</FontWeight>
+    <FontWeight x:Key="AuraFontWeightBold">Bold</FontWeight>
+
+    <!-- Line Heights -->
+    <x:Double x:Key="AuraLineHeightCaption">16</x:Double>
+    <x:Double x:Key="AuraLineHeightBody">20</x:Double>
+    <x:Double x:Key="AuraLineHeightSubtitle">22</x:Double>
+    <x:Double x:Key="AuraLineHeightTitle">28</x:Double>
+    <x:Double x:Key="AuraLineHeightTitleLarge">36</x:Double>
+    <x:Double x:Key="AuraLineHeightDisplay">52</x:Double>
+
+    <!-- Text styles — used as direct resources in controls -->
+    <!-- Caption -->
+    <x:Double x:Key="AuraFontCaptionFontSize">12</x:Double>
+    <FontWeight x:Key="AuraFontCaptionFontWeight">Normal</FontWeight>
+
+    <!-- Caption Strong -->
+    <x:Double x:Key="AuraFontCaptionStrongFontSize">12</x:Double>
+    <FontWeight x:Key="AuraFontCaptionStrongFontWeight">SemiBold</FontWeight>
+
+    <!-- Body -->
+    <x:Double x:Key="AuraFontBodyFontSize">14</x:Double>
+    <FontWeight x:Key="AuraFontBodyFontWeight">Normal</FontWeight>
+
+    <!-- Body Strong -->
+    <x:Double x:Key="AuraFontBodyStrongFontSize">14</x:Double>
+    <FontWeight x:Key="AuraFontBodyStrongFontWeight">SemiBold</FontWeight>
+
+    <!-- Subtitle -->
+    <x:Double x:Key="AuraFontSubtitleFontSize">16</x:Double>
+    <FontWeight x:Key="AuraFontSubtitleFontWeight">Normal</FontWeight>
+
+    <!-- Subtitle Strong -->
+    <x:Double x:Key="AuraFontSubtitleStrongFontSize">16</x:Double>
+    <FontWeight x:Key="AuraFontSubtitleStrongFontWeight">SemiBold</FontWeight>
+
+    <!-- Title -->
+    <x:Double x:Key="AuraFontTitleFontSize">20</x:Double>
+    <FontWeight x:Key="AuraFontTitleFontWeight">SemiBold</FontWeight>
+
+    <!-- Title Large -->
+    <x:Double x:Key="AuraFontTitleLargeFontSize">28</x:Double>
+    <FontWeight x:Key="AuraFontTitleLargeFontWeight">SemiBold</FontWeight>
+
+    <!-- Display -->
+    <x:Double x:Key="AuraFontDisplayFontSize">40</x:Double>
+    <FontWeight x:Key="AuraFontDisplayFontWeight">Bold</FontWeight>
+
+</ResourceDictionary>

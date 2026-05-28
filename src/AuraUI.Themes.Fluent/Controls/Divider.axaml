@@ -1,0 +1,42 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Divider — Fluent Style
+         ============================================================ -->
+    <Style Selector="Border.divider">
+        <Setter Property="Background" Value="{StaticResource AuraDividerBrush}"/>
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Margin" Value="0,8"/>
+    </Style>
+
+    <!-- Vertical Divider -->
+    <Style Selector="Border.divider.vertical">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Height" Value="NaN"/>
+        <Setter Property="Margin" Value="8,0"/>
+    </Style>
+
+    <!-- Divider with text in center -->
+    <Style Selector="Border.divider.with-content">
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Child">
+            <Panel>
+                <Border Height="1"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource AuraDividerBrush}"/>
+            </Panel>
+        </Setter>
+    </Style>
+
+    <!-- Divider spacing variants -->
+    <Style Selector="Border.divider.compact">
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+
+    <Style Selector="Border.divider.spacious">
+        <Setter Property="Margin" Value="0,16"/>
+    </Style>
+
+</Styles>

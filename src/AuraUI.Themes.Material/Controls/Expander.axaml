@@ -1,0 +1,102 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — Expander
+         ======================================== -->
+
+    <Style Selector="layout|Expander">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyLargeFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:Expander">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <StackPanel>
+                            <!-- Header area -->
+                            <Border Name="PART_HeaderSite"
+                                    Padding="16,12"
+                                    Cursor="Hand">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <!-- Header content -->
+                                    <ContentPresenter Name="PART_HeaderPresenter"
+                                                      Grid.Column="0"
+                                                      Content="{TemplateBinding Header}"
+                                                      VerticalAlignment="Center"/>
+                                    <!-- Expand/collapse chevron -->
+                                    <Border Name="PART_ChevronContainer"
+                                            Grid.Column="1"
+                                            Width="24"
+                                            Height="24"
+                                            CornerRadius="12"
+                                            Background="Transparent"
+                                            VerticalAlignment="Center">
+                                        <Path Name="PART_Chevron"
+                                              Data="M 6,9 L 12,15 L 18,9"
+                                              Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                              StrokeThickness="2"
+                                              StrokeLineJoin="Round"
+                                              Width="12"
+                                              Height="6"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <RotateTransform x:Name="PART_ChevronRotation" Angle="0"/>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Expand content area -->
+                            <ContentControl Name="PART_ExpandSite"
+                                            IsVisible="False">
+                                <Border Padding="16,0,16,16">
+                                    <ContentPresenter Name="PART_ContentPresenter"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Border>
+                            </ContentControl>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover header -->
+    <Style Selector="layout|Expander:pointerover /template/ Border#PART_HeaderSite">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Expanded chevron rotation -->
+    <Style Selector="layout|Expander:expanded /template/ Path#PART_Chevron">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="180"/>
+        </Setter>
+    </Style>
+
+    <!-- Chevron hover state layer -->
+    <Style Selector="layout|Expander:pointerover /template/ Border#PART_ChevronContainer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Resources/Colors.axaml"/>
+                <ResourceInclude Source="/Resources/Spacing.axaml"/>
+                <ResourceInclude Source="/Resources/Typography.axaml"/>
+                <ResourceInclude Source="/Resources/Animations.axaml"/>
+                <ResourceInclude Source="/Resources/Shadows.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <!-- Include all control styles -->
+    <StyleInclude Source="/Controls/Card.axaml"/>
+    <StyleInclude Source="/Controls/Expander.axaml"/>
+    <StyleInclude Source="/Controls/Divider.axaml"/>
+    <StyleInclude Source="/Controls/Badge.axaml"/>
+    <StyleInclude Source="/Controls/Tag.axaml"/>
+    <StyleInclude Source="/Controls/Avatar.axaml"/>
+    <StyleInclude Source="/Controls/Skeleton.axaml"/>
+    <StyleInclude Source="/Controls/Button.axaml"/>
+    <StyleInclude Source="/Controls/ToggleButton.axaml"/>
+    <StyleInclude Source="/Controls/TextBox.axaml"/>
+    <StyleInclude Source="/Controls/PasswordBox.axaml"/>
+    <StyleInclude Source="/Controls/NumericUpDown.axaml"/>
+    <StyleInclude Source="/Controls/SearchBox.axaml"/>
+    <StyleInclude Source="/Controls/ComboBox.axaml"/>
+    <StyleInclude Source="/Controls/MultiComboBox.axaml"/>
+    <StyleInclude Source="/Controls/ListBox.axaml"/>
+    <StyleInclude Source="/Controls/RadioButton.axaml"/>
+    <StyleInclude Source="/Controls/CheckBox.axaml"/>
+    <StyleInclude Source="/Controls/Switch.axaml"/>
+    <StyleInclude Source="/Controls/RateControl.axaml"/>
+    <StyleInclude Source="/Controls/Carousel.axaml"/>
+    <StyleInclude Source="/Controls/Timeline.axaml"/>
+    <StyleInclude Source="/Controls/ProgressRing.axaml"/>
+    <StyleInclude Source="/Controls/ProgressBar.axaml"/>
+    <StyleInclude Source="/Controls/StepIndicator.axaml"/>
+    <StyleInclude Source="/Controls/TabControl.axaml"/>
+    <StyleInclude Source="/Controls/Breadcrumb.axaml"/>
+    <StyleInclude Source="/Controls/NavigationView.axaml"/>
+    <StyleInclude Source="/Controls/Pagination.axaml"/>
+    <StyleInclude Source="/Controls/MessageBox.axaml"/>
+    <StyleInclude Source="/Controls/Toast.axaml"/>
+    <StyleInclude Source="/Controls/Notification.axaml"/>
+    <StyleInclude Source="/Controls/Dialog.axaml"/>
+    <StyleInclude Source="/Controls/Snackbar.axaml"/>
+    <StyleInclude Source="/Controls/WindowX.axaml"/>
+</Styles>

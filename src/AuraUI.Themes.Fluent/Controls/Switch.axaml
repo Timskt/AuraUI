@@ -1,0 +1,145 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         ToggleSwitch — Fluent Style
+         ============================================================ -->
+    <Style Selector="ToggleSwitch">
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <Panel Name="PART_MovingKnobs" Width="40" Height="20">
+                        <!-- Track -->
+                        <Border Name="PART_SwitchTrack"
+                                Width="40" Height="20"
+                                CornerRadius="10"
+                                Background="{StaticResource AuraBorderBrush}"
+                                BorderBrush="{StaticResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                VerticalAlignment="Center">
+                            <Border.Transitions>
+                                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                            </Border.Transitions>
+                        </Border>
+
+                        <!-- Knob -->
+                        <Panel Name="PART_SwitchKnob">
+                            <Border Name="PART_SwitchKnobBorder"
+                                    Width="14" Height="14"
+                                    CornerRadius="7"
+                                    Background="{StaticResource AuraForegroundBrush}"
+                                    Margin="3,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                                <Border.Transitions>
+                                    <DoubleTransition Duration="00:00:00.200" Property="Margin" Easing="{StaticResource AuraEasingStandard}"/>
+                                    <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                                </Border.Transitions>
+                            </Border>
+                        </Panel>
+                    </Panel>
+
+                    <!-- On/Off labels -->
+                    <TextBlock Name="PART_OnText"
+                               Text="On"
+                               VerticalAlignment="Center"
+                               IsVisible="False"/>
+                    <TextBlock Name="PART_OffText"
+                               Text="Off"
+                               VerticalAlignment="Center"
+                               IsVisible="False"/>
+
+                    <!-- Content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      VerticalAlignment="Center"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ToggleSwitch :pointerover on track -->
+    <Style Selector="ToggleSwitch:pointerover /template/ Border#PART_SwitchTrack">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+    </Style>
+
+    <!-- ToggleSwitch :checked -->
+    <Style Selector="ToggleSwitch:checked /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="ToggleSwitch:checked /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Margin" Value="23,0,3,0"/>
+        <Setter Property="Background" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- ToggleSwitch checked + :pointerover -->
+    <Style Selector="ToggleSwitch:checked:pointerover /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+    </Style>
+
+    <!-- ToggleSwitch :pressed -->
+    <Style Selector="ToggleSwitch:pressed /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Width" Value="16"/>
+    </Style>
+
+    <Style Selector="ToggleSwitch:checked:pressed /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Margin" Value="21,0,3,0"/>
+    </Style>
+
+    <!-- ToggleSwitch :focus -->
+    <Style Selector="ToggleSwitch:focus /template/ Border#PART_SwitchTrack">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- ToggleSwitch :disabled -->
+    <Style Selector="ToggleSwitch:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+    <!-- ============================================================
+         ToggleSwitch Variants
+         ============================================================ -->
+
+    <!-- Success color -->
+    <Style Selector="ToggleSwitch.success:checked /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+
+    <!-- Warning color -->
+    <Style Selector="ToggleSwitch.warning:checked /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+
+    <!-- Error color -->
+    <Style Selector="ToggleSwitch.error:checked /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- Size: small -->
+    <Style Selector="ToggleSwitch.sm /template/ Border#PART_SwitchTrack">
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="16"/>
+    </Style>
+    <Style Selector="ToggleSwitch.sm /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+    </Style>
+    <Style Selector="ToggleSwitch.sm:checked /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Margin" Value="18,0,2,0"/>
+    </Style>
+
+</Styles>

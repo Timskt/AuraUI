@@ -1,0 +1,96 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Carousel — Fluent Style
+         ============================================================ -->
+    <Style Selector="Carousel">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <ItemsPresenter Name="PART_ItemsPresenter">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Panel/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Carousel slide transition -->
+    <Style Selector="Carousel /template/ ItemsPresenter">
+        <Setter Property="PageTransition">
+            <PageSlide Duration="00:00:00.300" Orientation="Horizontal"/>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         Carousel Navigation Buttons
+         ============================================================ -->
+
+    <!-- Previous button -->
+    <Style Selector="Button.carousel-prev">
+        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowSm}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.carousel-prev:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraOverlayBrush}"/>
+    </Style>
+
+    <!-- Next button -->
+    <Style Selector="Button.carousel-next">
+        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowSm}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.carousel-next:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraOverlayBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         Carousel Indicators (Dots)
+         ============================================================ -->
+    <Style Selector="StackPanel.carousel-indicators">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Spacing" Value="8"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,16"/>
+    </Style>
+
+    <Style Selector="Border.carousel-dot">
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Height" Value="8"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Background" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Border.carousel-dot:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraBorderHoverBrush}"/>
+    </Style>
+    <Style Selector="Border.carousel-dot.active">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Width" Value="24"/>
+    </Style>
+
+</Styles>

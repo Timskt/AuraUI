@@ -1,0 +1,83 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — ToggleButton
+         ======================================== -->
+
+    <Style Selector="ToggleButton">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraButtonCornerRadius}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraButtonMinHeight}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraButtonMinWidth}"/>
+        <Setter Property="Padding" Value="24,10"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <Border Name="StateLayer"
+                                Background="Transparent"
+                                CornerRadius="{TemplateBinding CornerRadius}"/>
+                        <Border Padding="{TemplateBinding Padding}">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="ToggleButton:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Pressed -->
+    <Style Selector="ToggleButton:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Checked (selected/on) -->
+    <Style Selector="ToggleButton:checked">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+
+    <Style Selector="ToggleButton:checked:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="#14FFFFFF"/>
+    </Style>
+
+    <!-- Checked + Indeterminate (tri-state) -->
+    <Style Selector="ToggleButton:indeterminate">
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="ToggleButton:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

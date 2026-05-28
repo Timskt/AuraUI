@@ -1,0 +1,170 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         ComboBox — Fluent Style
+         ============================================================ -->
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <!-- Selection box area -->
+                        <Border Grid.Column="0"
+                                Padding="8,6">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                        <!-- Dropdown toggle -->
+                        <Border Name="PART_DropdownGlyph"
+                                Grid.Column="1"
+                                Width="32"
+                                Background="Transparent"
+                                VerticalAlignment="Stretch">
+                            <Path Name="Chevron"
+                                  Width="12" Height="12"
+                                  Data="M 1,4 L 6,9 L 11,4"
+                                  Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                  StrokeThickness="1.5"/>
+                                  StrokeLineJoin="Round"
+                                  Stretch="Uniform"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  RenderTransformOrigin="0.5,0.5"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ComboBox placeholder / watermark text -->
+    <Style Selector="ComboBox /template/ TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraPlaceholderBrush}"/>
+    </Style>
+
+    <!-- ComboBox :pointerover -->
+    <Style Selector="ComboBox:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- ComboBox :focus -->
+    <Style Selector="ComboBox:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- ComboBox :disabled -->
+    <Style Selector="ComboBox:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- ComboBox expanded -->
+    <Style Selector="ComboBox:expanded /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+    </Style>
+
+    <!-- ComboBox dropdown toggle hover -->
+    <Style Selector="ComboBox /template/ Border#PART_DropdownGlyph:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         ComboBoxItem — Fluent Style
+         ============================================================ -->
+    <Style Selector="ComboBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{StaticResource AuraRadiusSm}"
+                        Margin="4,1"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                    </Border.Transitions>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:selected /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraSelectedBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:selected:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraSelectedHoverBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- ============================================================
+         ComboBox Size Classes
+         ============================================================ -->
+    <Style Selector="ComboBox.sm">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="ComboBox.lg">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- ============================================================
+         Popup / Dropdown styling
+         ============================================================ -->
+    <Style Selector="ComboBox Popup Border">
+        <Setter Property="Background" Value="{StaticResource AuraFlyoutBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraFlyoutBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="Padding" Value="4"/>
+    </Style>
+
+</Styles>

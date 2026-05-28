@@ -1,0 +1,141 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         NavigationView — Fluent Style (Side Navigation)
+         ============================================================ -->
+    <Style Selector="Border.navigation-view">
+        <Setter Property="Background" Value="{StaticResource AuraSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraDividerBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Setter Property="Width" Value="280"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+
+    <!-- Navigation header -->
+    <Style Selector="Border.navigation-header">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <Style Selector="Border.navigation-header TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         NavigationViewItem — Fluent Style
+         ============================================================ -->
+    <Style Selector="Border.nav-item">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="Margin" Value="4,1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+
+    <Style Selector="Border.nav-item">
+        <Setter Property="Border.Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Nav item layout -->
+    <Style Selector="Border.nav-item StackPanel">
+        <Setter Property="Spacing" Value="12"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
+    <!-- Nav item icon -->
+    <Style Selector="Border.nav-item Path">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Fill" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+    </Style>
+
+    <!-- Nav item text -->
+    <Style Selector="Border.nav-item TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Nav item :pointerover -->
+    <Style Selector="Border.nav-item:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Nav item :pressed -->
+    <Style Selector="Border.nav-item:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Nav item :selected (active) -->
+    <Style Selector="Border.nav-item.selected">
+        <Setter Property="Background" Value="{StaticResource AuraSelectedBrush}"/>
+    </Style>
+    <Style Selector="Border.nav-item.selected Path">
+        <Setter Property="Fill" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+    <Style Selector="Border.nav-item.selected TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Nav item :disabled -->
+    <Style Selector="Border.nav-item:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+    <!-- ============================================================
+         NavigationView Section Header
+         ============================================================ -->
+    <Style Selector="Border.nav-section-header">
+        <Setter Property="Padding" Value="16,16,16,4"/>
+    </Style>
+
+    <Style Selector="Border.nav-section-header TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="TextTransform" Value="Uppercase"/>
+    </Style>
+
+    <!-- ============================================================
+         NavigationView Divider
+         ============================================================ -->
+    <Style Selector="Border.nav-divider">
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource AuraDividerBrush}"/>
+        <Setter Property="Margin" Value="12,8"/>
+    </Style>
+
+    <!-- ============================================================
+         NavigationView Footer
+         ============================================================ -->
+    <Style Selector="Border.navigation-footer">
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="DockPanel.Dock" Value="Bottom"/>
+    </Style>
+
+    <!-- Compact mode (icon only) -->
+    <Style Selector="Border.navigation-view.compact">
+        <Setter Property="Width" Value="64"/>
+    </Style>
+
+    <Style Selector="Border.navigation-view.compact Border.nav-item">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="Border.navigation-view.compact Border.nav-item TextBlock">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+</Styles>

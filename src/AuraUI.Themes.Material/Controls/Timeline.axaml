@@ -1,0 +1,120 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — Timeline
+         ======================================== -->
+
+    <Style Selector="display|AuraTimeline">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ClipToBounds" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="display:AuraTimeline">
+                    <Border Background="{TemplateBinding Background}">
+                        <ItemsPresenter Name="PART_ItemsPresenter"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Vertical timeline layout -->
+    <Style Selector="display|AuraTimeline[Orientation=Vertical] /template/ ItemsPresenter#PART_ItemsPresenter">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Horizontal timeline layout -->
+    <Style Selector="display|AuraTimeline[Orientation=Horizontal] /template/ ItemsPresenter#PART_ItemsPresenter">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==========================================
+         TimelineItem
+         ========================================== -->
+    <Style Selector="display|AuraTimelineItem">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="display:AuraTimelineItem">
+                    <Grid ColumnDefinitions="Auto,16,*">
+                        <!-- Timestamp (left side) -->
+                        <TextBlock Name="PART_Timestamp"
+                                   Grid.Column="0"
+                                   Text="{TemplateBinding Timestamp}"
+                                   Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                   FontSize="12"
+                                   VerticalAlignment="Top"
+                                   Margin="0,4,16,0"
+                                   Width="80"
+                                   TextAlignment="Right"/>
+
+                        <!-- Timeline dot + line -->
+                        <Grid Grid.Column="1"
+                              Width="16"
+                              VerticalAlignment="Stretch">
+                            <!-- Dot -->
+                            <Border Name="PART_Dot"
+                                    Width="12"
+                                    Height="12"
+                                    CornerRadius="6"
+                                    Background="{TemplateBinding DotColor}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Margin="0,4,0,0">
+                                <!-- Icon inside dot if present -->
+                                <ContentPresenter Name="PART_IconPresenter"
+                                                  Content="{TemplateBinding Icon}"
+                                                  Width="8"
+                                                  Height="8"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <!-- Connecting line -->
+                            <Border Name="PART_Line"
+                                    Width="2"
+                                    Background="{DynamicResource AuraDividerBrush}"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,16,0,0"
+                                    VerticalAlignment="Stretch"/>
+                        </Grid>
+
+                        <!-- Content (right side) -->
+                        <Border Grid.Column="2"
+                                Margin="16,0,0,24">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Hide line for last item -->
+    <Style Selector="display|AuraTimelineItem:last /template/ Border#PART_Line">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Default dot color when not set -->
+    <Style Selector="display|AuraTimelineItem /template/ Border#PART_Dot">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+</Styles>

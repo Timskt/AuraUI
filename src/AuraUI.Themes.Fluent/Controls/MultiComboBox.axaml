@@ -1,0 +1,120 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         MultiComboBox — Fluent Style (ListBox with checkboxes in popup)
+         ============================================================ -->
+    <Style Selector="ListBox.multi-combo">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="4"/>
+    </Style>
+
+    <!-- Multi-select ComboBox toggle (uses ToggleButton or custom) -->
+    <Style Selector="ToggleButton.multi-combo-toggle">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <!-- Selected items display -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Grid.Column="0"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center"/>
+
+                        <!-- Chevron -->
+                        <Path Name="Chevron"
+                              Grid.Column="1"
+                              Width="12" Height="12"
+                              Data="M 1,4 L 6,9 L 11,4"
+                              Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                              StrokeThickness="1.5"/>
+                              StrokeLineJoin="Round"
+                              Margin="8,0,0,0"
+                              VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- MultiCombo toggle states -->
+    <Style Selector="ToggleButton.multi-combo-toggle:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <Style Selector="ToggleButton.multi-combo-toggle:checked /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+    </Style>
+
+    <!-- MultiCombo dropdown -->
+    <Style Selector="ListBox.multi-combo ListBoxItem">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="Transparent"
+                        CornerRadius="{StaticResource AuraRadiusSm}"
+                        Margin="2,1"
+                        Padding="4,6">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                    </Border.Transitions>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <CheckBox Name="PART_CheckBox"
+                                  IsChecked="{TemplateBinding IsSelected, Mode=TwoWay}"
+                                  VerticalAlignment="Center"/>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="ListBox.multi-combo ListBoxItem:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="ListBox.multi-combo ListBoxItem:selected /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraSelectedBrush}"/>
+    </Style>
+
+    <!-- Tag display for selected items -->
+    <Style Selector="Border.multi-combo-tag">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraTagRadius}"/>
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="Margin" Value="0,2,4,2"/>
+    </Style>
+
+    <Style Selector="Border.multi-combo-tag TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+</Styles>

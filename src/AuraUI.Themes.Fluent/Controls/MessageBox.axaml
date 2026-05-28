@@ -1,0 +1,88 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         MessageBox / AlertDialog — Fluent Style
+         ============================================================ -->
+    <Style Selector="Window.message-box">
+        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraDialogRadius}"/>
+        <Setter Property="Width" Value="420"/>
+        <Setter Property="SizeToContent" Value="Height"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        BoxShadow="{StaticResource AuraShadowLg}"
+                        ClipToBounds="True">
+                    <DockPanel>
+                        <!-- Header -->
+                        <DockPanel DockPanel.Dock="Top"
+                                   Margin="24,20,24,8">
+                            <TextBlock Name="PART_Title"
+                                       Text="{TemplateBinding Title}"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource AuraForegroundBrush}"/>
+                        </DockPanel>
+
+                        <!-- Content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="24,8"/>
+
+                        <!-- Buttons -->
+                        <StackPanel Name="PART_ButtonArea"
+                                    DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal"
+                                    Spacing="8"
+                                    HorizontalAlignment="Right"
+                                    Margin="24,16,24,20">
+                            <Button Name="PART_CancelButton"
+                                    Classes="ghost"
+                                    Content="Cancel"/>
+                            <Button Name="PART_OkButton"
+                                    Content="OK"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Overlay backdrop -->
+    <Style Selector="Border.message-box-overlay">
+        <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
+    </Style>
+
+    <!-- MessageBox variants -->
+    <Style Selector="Window.message-box.error Border">
+        <Setter Property="BorderTop">
+            <SolidColorBrush Color="{StaticResource AuraErrorBrush}"/>
+        </Setter>
+    </Style>
+
+    <!-- MessageBox icon area -->
+    <Style Selector="Border.message-box-icon">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0,0,0,12"/>
+    </Style>
+
+    <Style Selector="Border.message-box-icon.info">
+        <Setter Property="Background" Value="{StaticResource AuraInfoLightBrush}"/>
+    </Style>
+    <Style Selector="Border.message-box-icon.success">
+        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
+    </Style>
+    <Style Selector="Border.message-box-icon.warning">
+        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
+    </Style>
+    <Style Selector="Border.message-box-icon.error">
+        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+    </Style>
+
+</Styles>

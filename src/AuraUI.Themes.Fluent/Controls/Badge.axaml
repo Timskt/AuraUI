@@ -1,0 +1,79 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Badge — Fluent Style
+         ============================================================ -->
+    <Style Selector="Border.badge">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraBadgeRadius}"/>
+        <Setter Property="MinWidth" Value="20"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Child">
+            <TextBlock TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       Foreground="{StaticResource AuraForegroundOnAccentBrush}"/>
+        </Setter>
+    </Style>
+
+    <!-- Badge size: sm -->
+    <Style Selector="Border.badge.sm">
+        <Setter Property="MinWidth" Value="16"/>
+        <Setter Property="MinHeight" Value="16"/>
+        <Setter Property="Padding" Value="4,1"/>
+    </Style>
+    <Style Selector="Border.badge.sm /template/ TextBlock">
+        <Setter Property="FontSize" Value="10"/>
+    </Style>
+
+    <!-- Badge size: lg -->
+    <Style Selector="Border.badge.lg">
+        <Setter Property="MinWidth" Value="24"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="Padding" Value="8,4"/>
+    </Style>
+    <Style Selector="Border.badge.lg /template/ TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- Badge color variants -->
+    <Style Selector="Border.badge.success">
+        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+    <Style Selector="Border.badge.warning">
+        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+    <Style Selector="Border.badge.error">
+        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="Border.badge.info">
+        <Setter Property="Background" Value="{StaticResource AuraInfoBrush}"/>
+    </Style>
+    <Style Selector="Border.badge.secondary">
+        <Setter Property="Background" Value="{StaticResource AuraSecondaryBrush}"/>
+    </Style>
+
+    <!-- Badge outline variant -->
+    <Style Selector="Border.badge.outline">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style Selector="Border.badge.outline /template/ TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Badge dot variant (no text, just a dot) -->
+    <Style Selector="Border.badge.dot">
+        <Setter Property="MinWidth" Value="8"/>
+        <Setter Property="MinHeight" Value="8"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+</Styles>

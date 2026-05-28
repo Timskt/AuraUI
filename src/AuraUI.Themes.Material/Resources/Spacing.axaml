@@ -1,0 +1,69 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ========================================
+         Material Design 3 — Spacing & Radius
+         ======================================== -->
+
+    <!-- Spacing Scale -->
+    <sys:Double x:Key="AuraSpacingXs">4</sys:Double>
+    <sys:Double x:Key="AuraSpacingSm">8</sys:Double>
+    <sys:Double x:Key="AuraSpacingMd">12</sys:Double>
+    <sys:Double x:Key="AuraSpacingLg">16</sys:Double>
+    <sys:Double x:Key="AuraSpacingXl">24</sys:Double>
+    <sys:Double x:Key="AuraSpacing2Xl">32</sys:Double>
+    <sys:Double x:Key="AuraSpacing3Xl">48</sys:Double>
+    <sys:Double x:Key="AuraSpacing4Xl">64</sys:Double>
+
+    <!-- Corner Radius Scale (M3 uses more rounding than Fluent) -->
+    <CornerRadius x:Key="AuraRadiusNone">0</CornerRadius>
+    <CornerRadius x:Key="AuraRadiusXs">4</CornerRadius>
+    <CornerRadius x:Key="AuraRadiusSm">8</CornerRadius>
+    <CornerRadius x:Key="AuraRadiusMd">12</CornerRadius>
+    <CornerRadius x:Key="AuraRadiusLg">16</CornerRadius>
+    <CornerRadius x:Key="AuraRadiusXl">28</CornerRadius>
+    <CornerRadius x:Key="AuraRadiusFull">9999</CornerRadius>
+
+    <!-- Control-Specific Defaults (Material Design 3) -->
+    <sys:Double x:Key="AuraButtonMinHeight">40</sys:Double>
+    <sys:Double x:Key="AuraButtonMinWidth">64</sys:Double>
+    <sys:Double x:Key="AuraButtonPaddingHorizontal">24</sys:Double>
+    <sys:Double x:Key="AuraButtonPaddingVertical">10</sys:Double>
+    <CornerRadius x:Key="AuraButtonCornerRadius">20</CornerRadius>
+
+    <sys:Double x:Key="AuraIconButtonSize">40</sys:Double>
+    <CornerRadius x:Key="AuraIconButtonCornerRadius">20</CornerRadius>
+
+    <sys:Double x:Key="AuraFABSize">56</sys:Double>
+    <sys:Double x:Key="AuraSmallFABSize">40</sys:Double>
+    <sys:Double x:Key="AuraLargeFABSize">96</sys:Double>
+    <CornerRadius x:Key="AuraFABCornerRadius">16</CornerRadius>
+    <CornerRadius x:Key="AuraLargeFABCornerRadius">28</CornerRadius>
+
+    <sys:Double x:Key="AuraCardCornerRadius">12</sys:Double>
+    <sys:Double x:Key="AuraCardPadding">16</sys:Double>
+
+    <sys:Double x:Key="AuraTextFieldHeight">56</sys:Double>
+    <CornerRadius x:Key="AuraTextFieldCornerRadius">4</CornerRadius>
+
+    <sys:Double x:Key="AuraChipHeight">32</sys:Double>
+    <CornerRadius x:Key="AuraChipCornerRadius">8</CornerRadius>
+
+    <sys:Double x:Key="AuraDialogCornerRadius">28</sys:Double>
+    <sys:Double x:Key="AuraDialogMinWidth">280</sys:Double>
+    <sys:Double x:Key="AuraDialogMaxWidth">560</sys:Double>
+
+    <sys:Double x:Key="AuraSnackbarCornerRadius">4</sys:Double>
+
+    <sys:Double x:Key="AuraNavigationBarHeight">80</sys:Double>
+    <sys:Double x:Key="AuraNavigationRailWidth">80</sys:Double>
+    <sys:Double x:Key="AuraNavigationDrawerWidth">360</sys:Double>
+
+    <sys:Double x:Key="AuraSwitchWidth">52</sys:Double>
+    <sys:Double x:Key="AuraSwitchHeight">32</sys:Double>
+
+    <sys:Double x:Key="AuraCheckboxSize">18</sys:Double>
+    <sys:Double x:Key="AuraRadioSize">20</sys:Double>
+
+</ResourceDictionary>

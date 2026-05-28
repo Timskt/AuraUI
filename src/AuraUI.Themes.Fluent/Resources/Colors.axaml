@@ -1,0 +1,107 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         AuraUI Fluent Theme — Light Color Tokens
+         ============================================================ -->
+
+    <!-- Background Hierarchy -->
+    <SolidColorBrush x:Key="AuraBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraSurfaceBrush" Color="#F9F9F9"/>
+    <SolidColorBrush x:Key="AuraCardBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraOverlayBrush" Color="#F3F3F3"/>
+    <SolidColorBrush x:Key="AuraMutedBrush" Color="#EFEFEF"/>
+    <SolidColorBrush x:Key="AuraAltBackgroundBrush" Color="#FAFAFA"/>
+    <SolidColorBrush x:Key="AuraAcrylicBackgroundBrush" Color="#FCFCFC"/>
+    <SolidColorBrush x:Key="AuraLayerBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraLayerAltBrush" Color="#F5F5F5"/>
+    <SolidColorBrush x:Key="AuraSmokeBrush" Color="#00000040"/>
+
+    <!-- Foreground Hierarchy -->
+    <SolidColorBrush x:Key="AuraForegroundBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="AuraForegroundSecondaryBrush" Color="#616161"/>
+    <SolidColorBrush x:Key="AuraForegroundTertiaryBrush" Color="#9E9E9E"/>
+    <SolidColorBrush x:Key="AuraForegroundDisabledBrush" color="#BDBDBD"/>
+    <SolidColorBrush x:Key="AuraForegroundOnAccentBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraForegroundInverseBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraForegroundLinkBrush" Color="#005FB8"/>
+    <SolidColorBrush x:Key="AuraForegroundLinkHoverBrush" Color="#004E99"/>
+
+    <!-- Primary / Accent -->
+    <SolidColorBrush x:Key="AuraPrimaryBrush" Color="#005FB8"/>
+    <SolidColorBrush x:Key="AuraPrimaryHoverBrush" Color="#004E99"/>
+    <SolidColorBrush x:Key="AuraPrimaryPressedBrush" Color="#003D7A"/>
+    <SolidColorBrush x:Key="AuraPrimaryLightBrush" Color="#E8F0FE"/>
+    <SolidColorBrush x:Key="AuraPrimaryMutedBrush" Color="#D0E0F8"/>
+
+    <!-- Secondary -->
+    <SolidColorBrush x:Key="AuraSecondaryBrush" Color="#6B6B6B"/>
+    <SolidColorBrush x:Key="AuraSecondaryHoverBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="AuraSecondaryPressedBrush" Color="#3F3F3F"/>
+
+    <!-- Semantic — Success -->
+    <SolidColorBrush x:Key="AuraSuccessBrush" Color="#107C10"/>
+    <SolidColorBrush x:Key="AuraSuccessHoverBrush" Color="#0B6A0B"/>
+    <SolidColorBrush x:Key="AuraSuccessPressedBrush" Color="#085C08"/>
+    <SolidColorBrush x:Key="AuraSuccessLightBrush" Color="#E6F4E6"/>
+    <SolidColorBrush x:Key="AuraSuccessForegroundBrush" Color="#FFFFFF"/>
+
+    <!-- Semantic — Warning -->
+    <SolidColorBrush x:Key="AuraWarningBrush" Color="#F7630C"/>
+    <SolidColorBrush x:Key="AuraWarningHoverBrush" Color="#D95700"/>
+    <SolidColorBrush x:Key="AuraWarningPressedBrush" Color="#B84A00"/>
+    <SolidColorBrush x:Key="AuraWarningLightBrush" Color="#FFF4E8"/>
+    <SolidColorBrush x:Key="AuraWarningForegroundBrush" Color="#FFFFFF"/>
+
+    <!-- Semantic — Error -->
+    <SolidColorBrush x:Key="AuraErrorBrush" Color="#C42B1C"/>
+    <SolidColorBrush x:Key="AuraErrorHoverBrush" Color="#A52218"/>
+    <SolidColorBrush x:Key="AuraErrorPressedBrush" Color="#8A1C14"/>
+    <SolidColorBrush x:Key="AuraErrorLightBrush" Color="#FDE7E4"/>
+    <SolidColorBrush x:Key="AuraErrorForegroundBrush" Color="#FFFFFF"/>
+
+    <!-- Semantic — Info -->
+    <SolidColorBrush x:Key="AuraInfoBrush" Color="#0078D4"/>
+    <SolidColorBrush x:Key="AuraInfoHoverBrush" Color="#006CBE"/>
+    <SolidColorBrush x:Key="AuraInfoPressedBrush" Color="#005FA8"/>
+    <SolidColorBrush x:Key="AuraInfoLightBrush" Color="#E5F1FB"/>
+    <SolidColorBrush x:Key="AuraInfoForegroundBrush" Color="#FFFFFF"/>
+
+    <!-- Interaction -->
+    <SolidColorBrush x:Key="AuraHoverBrush" Color="#0A000000"/>
+    <SolidColorBrush x:Key="AuraPressedBrush" Color="#14000000"/>
+    <SolidColorBrush x:Key="AuraFocusBrush" Color="#005FB8"/>
+    <SolidColorBrush x:Key="AuraDisabledBrush" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="AuraSelectedBrush" Color="#005FB81A"/>
+    <SolidColorBrush x:Key="AuraSelectedHoverBrush" Color="#005FB833"/>
+
+    <!-- Borders -->
+    <SolidColorBrush x:Key="AuraBorderBrush" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="AuraBorderHoverBrush" Color="#C0C0C0"/>
+    <SolidColorBrush x:Key="AuraBorderFocusBrush" Color="#005FB8"/>
+    <SolidColorBrush x:Key="AuraBorderDisabledBrush" Color="#E8E8E8"/>
+    <SolidColorBrush x:Key="AuraDividerBrush" Color="#E8E8E8"/>
+    <SolidColorBrush x:Key="AuraDividerLightBrush" Color="#F0F0F0"/>
+
+    <!-- Input specific -->
+    <SolidColorBrush x:Key="AuraInputBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraInputBackgroundHoverBrush" Color="#FAFAFA"/>
+    <SolidColorBrush x:Key="AuraInputBackgroundFocusBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraInputBackgroundDisabledBrush" Color="#F5F5F5"/>
+    <SolidColorBrush x:Key="AuraInputBorderBrush" Color="#D1D1D1"/>
+    <SolidColorBrush x:Key="AuraInputBorderHoverBrush" Color="#A0A0A0"/>
+    <SolidColorBrush x:Key="AuraInputBorderFocusBrush" Color="#005FB8"/>
+    <SolidColorBrush x:Key="AuraPlaceholderBrush" Color="#9E9E9E"/>
+
+    <!-- Scrollbar -->
+    <SolidColorBrush x:Key="AuraScrollBarBrush" Color="#C0C0C0"/>
+    <SolidColorBrush x:Key="AuraScrollBarHoverBrush" Color="#A0A0A0"/>
+    <SolidColorBrush x:Key="AuraScrollBarThumbBrush" Color="#909090"/>
+
+    <!-- Tooltip / Flyout -->
+    <SolidColorBrush x:Key="AuraTooltipBackgroundBrush" Color="#2D2D2D"/>
+    <SolidColorBrush x:Key="AuraTooltipForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraFlyoutBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AuraFlyoutBorderBrush" Color="#E0E0E0"/>
+
+</ResourceDictionary>

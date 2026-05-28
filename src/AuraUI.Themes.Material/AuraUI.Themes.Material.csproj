@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AuraUI.Themes.Material</RootNamespace>
+    <AssemblyName>AuraUI.Themes.Material</AssemblyName>
+    <Description>Material Design theme for AuraUI framework</Description>
+    <PackageTags>avalonia;ui;theme;material;auraui</PackageTags>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuraUI.Controls\AuraUI.Controls.csproj" />
+  </ItemGroup>
+</Project>

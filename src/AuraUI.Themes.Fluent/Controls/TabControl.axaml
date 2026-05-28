@@ -1,0 +1,136 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         TabControl — Fluent Style
+         ============================================================ -->
+    <Style Selector="TabControl">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DockPanel>
+                    <!-- Tab strip -->
+                    <Border DockPanel.Dock="Top"
+                            BorderBrush="{StaticResource AuraDividerBrush}"
+                            BorderThickness="0,0,0,1">
+                        <TabStrip Name="PART_Header"
+                                  Background="Transparent"
+                                  SelectedIndex="{TemplateBinding SelectedIndex}"
+                                  Margin="0,0,0,-1">
+                            <TabStrip.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </TabStrip.ItemsPanel>
+                        </TabStrip>
+                    </Border>
+
+                    <!-- Content area -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding SelectedContent}"
+                                      ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+                                      Margin="0,16,0,0"/>
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         TabItem (TabStripItem) — Fluent Style
+         ============================================================ -->
+    <Style Selector="TabStripItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="0,0,4,0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DockPanel LastChildFill="False">
+                    <!-- Bottom indicator line -->
+                    <Border Name="PART_SelectedPipe"
+                            DockPanel.Dock="Bottom"
+                            Height="3"
+                            CornerRadius="1.5,1.5,0,0"
+                            Background="Transparent"
+                            Margin="0,4,0,-1">
+                        <Border.Transitions>
+                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        </Border.Transitions>
+                    </Border>
+
+                    <!-- Tab content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Padding="{TemplateBinding Padding}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- TabItem :pointerover -->
+    <Style Selector="TabStripItem:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+    </Style>
+    <Style Selector="TabStripItem:pointerover /template/ Border#PART_SelectedPipe">
+        <Setter Property="Background" Value="{StaticResource AuraBorderHoverBrush}"/>
+    </Style>
+
+    <!-- TabItem :selected -->
+    <Style Selector="TabStripItem:selected">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style Selector="TabStripItem:selected /template/ Border#PART_SelectedPipe">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- TabItem :disabled -->
+    <Style Selector="TabStripItem:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+    <!-- ============================================================
+         TabControl Variants
+         ============================================================ -->
+
+    <!-- Pills style -->
+    <Style Selector="TabControl.pills TabStripItem">
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="Transparent"
+                        CornerRadius="{StaticResource AuraRadiusFull}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                    </Border.Transitions>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="TabControl.pills TabStripItem:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+    <Style Selector="TabControl.pills TabStripItem:selected /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
+    </Style>
+
+    <!-- Underline-less / clean -->
+    <Style Selector="TabControl.clean">
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+</Styles>

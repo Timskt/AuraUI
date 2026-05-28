@@ -1,0 +1,66 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — MessageBox
+         ======================================== -->
+
+    <Style Selector="MessageBox">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraDialogCornerRadius}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MessageBox">
+                    <Panel>
+                        <!-- Scrim -->
+                        <Border Name="PART_Scrim"
+                                Background="{DynamicResource AuraScrimBrush}"
+                                Opacity="0.32"/>
+                        <!-- Message box surface -->
+                        <Border Name="PART_MessageBoxBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                MinWidth="280"
+                                MaxWidth="560"
+                                Padding="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Border.BoxShadow>
+                                <BoxShadow BlurRadius="24"
+                                           SpreadRadius="0"
+                                           OffsetX="0"
+                                           OffsetY="8"
+                                           Color="#26000000"/>
+                            </Border.BoxShadow>
+                            <StackPanel Spacing="16">
+                                <!-- Title -->
+                                <TextBlock Name="PART_Title"
+                                           Text="{TemplateBinding Title}"
+                                           FontSize="24"
+                                           FontWeight="Normal"
+                                           FontFamily="{DynamicResource AuraFontHeadlineSmallFamily}"
+                                           Foreground="{TemplateBinding Foreground}"/>
+                                <!-- Message -->
+                                <TextBlock Name="PART_Message"
+                                           Text="{TemplateBinding Message}"
+                                           FontSize="14"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <!-- Buttons -->
+                                <StackPanel Name="PART_ButtonHost"
+                                            Orientation="Horizontal"
+                                            Spacing="8"
+                                            HorizontalAlignment="End"
+                                            Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</Styles>

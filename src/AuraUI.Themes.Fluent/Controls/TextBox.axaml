@@ -1,0 +1,151 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         TextBox — Fluent Style
+         ============================================================ -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="CaretBrush" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource AuraPrimaryMutedBrush}"/>
+        <Setter Property="Watermark" Value=""/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Prefix -->
+                        <ContentPresenter Name="PART_PrefixTextContentPresenter"
+                                          DockPanel.Dock="Left"
+                                          VerticalAlignment="Center"
+                                          Margin="8,0,0,0"
+                                          Content="{TemplateBinding Tag}"/>
+                        <!-- Suffix -->
+                        <ContentPresenter Name="PART_SuffixTextContentPresenter"
+                                          DockPanel.Dock="Right"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,8,0"/>
+                        <!-- Clear button -->
+                        <Button Name="PART_ClearButton"
+                                DockPanel.Dock="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="4,0"
+                                Margin="0,0,4,0"
+                                VerticalAlignment="Center"
+                                IsVisible="False">
+                            <Path Width="10" Height="10"
+                                  Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                  Stroke="{StaticResource AuraForegroundTertiaryBrush}"
+                                  StrokeThickness="1.5"/>
+                        </Button>
+                        <!-- Text input area -->
+                        <ScrollViewer Name="PART_ScrollViewer"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <Panel>
+                                <TextBlock Name="PART_Watermark"
+                                           Text="{TemplateBinding Watermark}"
+                                           Foreground="{StaticResource AuraPlaceholderBrush}"
+                                           Margin="{TemplateBinding Padding}"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"/>
+                                <TextPresenter Name="PART_TextPresenter"
+                                               Margin="{TemplateBinding Padding}"
+                                               VerticalAlignment="Center"
+                                               Text="{TemplateBinding Text, Mode=TwoWay}"
+                                               TextAlignment="{TemplateBinding TextAlignment}"
+                                               SelectionStart="{TemplateBinding SelectionStart}"
+                                               SelectionEnd="{TemplateBinding SelectionEnd}"
+                                               CaretIndex="{TemplateBinding CaretIndex}"
+                                               CaretBrush="{TemplateBinding CaretBrush}"
+                                               SelectionBrush="{TemplateBinding SelectionBrush}"
+                                               PasswordChar="{TemplateBinding PasswordChar}"
+                                               RevealPassword="{TemplateBinding RevealPassword}"/>
+                            </Panel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Watermark visibility based on text -->
+    <Style Selector="TextBox:not(:empty) /template/ TextBlock#PART_Watermark">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- TextBox :pointerover -->
+    <Style Selector="TextBox:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- TextBox :focus -->
+    <Style Selector="TextBox:focus /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- TextBox :disabled -->
+    <Style Selector="TextBox:disabled">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundDisabledBrush}"/>
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- TextBox :readonly -->
+    <Style Selector="TextBox:readonly">
+        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
+    </Style>
+
+    <!-- TextBox error state -->
+    <Style Selector="TextBox:error /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         TextBox Size Classes
+         ============================================================ -->
+    <Style Selector="TextBox.sm">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="TextBox.lg">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- TextBox with underline style -->
+    <Style Selector="TextBox.underline /template/ Border#PART_Border">
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <!-- TextBox with multi-line -->
+    <Style Selector="TextBox.multi-line">
+        <Setter Property="MinHeight" Value="80"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+    </Style>
+
+</Styles>

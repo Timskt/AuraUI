@@ -1,0 +1,92 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Breadcrumb — Fluent Style
+         ============================================================ -->
+    <Style Selector="ItemsControl.breadcrumb">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ItemsPresenter Name="PART_ItemsPresenter">
+                    <ItemsPresenter.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="0"/>
+                        </ItemsPanelTemplate>
+                    </ItemsPresenter.ItemsPanel>
+                </ItemsPresenter>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Breadcrumb item -->
+    <Style Selector="Border.breadcrumb-item">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Breadcrumb item text -->
+    <Style Selector="Border.breadcrumb-item TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Breadcrumb item :pointerover -->
+    <Style Selector="Border.breadcrumb-item:pointerover TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Breadcrumb item: current / active -->
+    <Style Selector="Border.breadcrumb-item.current TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Breadcrumb separator -->
+    <Style Selector="TextBlock.breadcrumb-separator">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="Margin" Value="6,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Breadcrumb separator icon (chevron) -->
+    <Style Selector="Path.breadcrumb-separator">
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="Data" Value="M 4,1 L 8,6 L 4,11"/>
+        <Setter Property="Stroke" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="StrokeThickness" Value="1.5"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="4,0"/>
+    </Style>
+
+    <!-- Breadcrumb collapsed (with ellipsis) -->
+    <Style Selector="Button.breadcrumb-ellipsis">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style Selector="Button.breadcrumb-ellipsis:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Size variants -->
+    <Style Selector="ItemsControl.breadcrumb.sm Border.breadcrumb-item TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    <Style Selector="ItemsControl.breadcrumb.sm TextBlock.breadcrumb-separator">
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="ItemsControl.breadcrumb.lg Border.breadcrumb-item TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+</Styles>

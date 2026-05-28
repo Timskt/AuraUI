@@ -1,0 +1,108 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ========================================
+         Material Design 3 — Type Scale
+         Font Family: Roboto / Inter fallback
+         ======================================== -->
+
+    <FontFamily x:Key="AuraFontFamilyDefault">Roboto, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif</FontFamily>
+    <FontFamily x:Key="AuraFontFamilyMono">"Roboto Mono", "JetBrains Mono", "Cascadia Code", Consolas, monospace</FontFamily>
+
+    <!-- Display -->
+    <FontFamily x:Key="AuraFontDisplaySmallFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontDisplaySmallSize">36</sys:Double>
+    <FontWeight x:Key="AuraFontDisplaySmallWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontDisplaySmallLineHeight">44</sys:Double>
+    <sys:Double x:Key="AuraFontDisplaySmallLetterSpacing">0.25</sys:Double>
+
+    <FontFamily x:Key="AuraFontDisplayMediumFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontDisplayMediumSize">45</sys:Double>
+    <FontWeight x:Key="AuraFontDisplayMediumWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontDisplayMediumLineHeight">52</sys:Double>
+    <sys:Double x:Key="AuraFontDisplayMediumLetterSpacing">0</sys:Double>
+
+    <FontFamily x:Key="AuraFontDisplayLargeFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontDisplayLargeSize">57</sys:Double>
+    <FontWeight x:Key="AuraFontDisplayLargeWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontDisplayLargeLineHeight">64</sys:Double>
+    <sys:Double x:Key="AuraFontDisplayLargeLetterSpacing">-0.25</sys:Double>
+
+    <!-- Headline -->
+    <FontFamily x:Key="AuraFontHeadlineSmallFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontHeadlineSmallSize">24</sys:Double>
+    <FontWeight x:Key="AuraFontHeadlineSmallWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontHeadlineSmallLineHeight">32</sys:Double>
+    <sys:Double x:Key="AuraFontHeadlineSmallLetterSpacing">0</sys:Double>
+
+    <FontFamily x:Key="AuraFontHeadlineMediumFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontHeadlineMediumSize">28</sys:Double>
+    <FontWeight x:Key="AuraFontHeadlineMediumWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontHeadlineMediumLineHeight">36</sys:Double>
+    <sys:Double x:Key="AuraFontHeadlineMediumLetterSpacing">0</sys:Double>
+
+    <FontFamily x:Key="AuraFontHeadlineLargeFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontHeadlineLargeSize">32</sys:Double>
+    <FontWeight x:Key="AuraFontHeadlineLargeWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontHeadlineLargeLineHeight">40</sys:Double>
+    <sys:Double x:Key="AuraFontHeadlineLargeLetterSpacing">0</sys:Double>
+
+    <!-- Title -->
+    <FontFamily x:Key="AuraFontTitleSmallFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontTitleSmallSize">14</sys:Double>
+    <FontWeight x:Key="AuraFontTitleSmallWeight">SemiBold</FontWeight>
+    <sys:Double x:Key="AuraFontTitleSmallLineHeight">20</sys:Double>
+    <sys:Double x:Key="AuraFontTitleSmallLetterSpacing">0.1</sys:Double>
+
+    <FontFamily x:Key="AuraFontTitleMediumFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontTitleMediumSize">16</sys:Double>
+    <FontWeight x:Key="AuraFontTitleMediumWeight">SemiBold</FontWeight>
+    <sys:Double x:Key="AuraFontTitleMediumLineHeight">24</sys:Double>
+    <sys:Double x:Key="AuraFontTitleMediumLetterSpacing">0.15</sys:Double>
+
+    <FontFamily x:Key="AuraFontTitleLargeFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontTitleLargeSize">22</sys:Double>
+    <FontWeight x:Key="AuraFontTitleLargeWeight">SemiBold</FontWeight>
+    <sys:Double x:Key="AuraFontTitleLargeLineHeight">28</sys:Double>
+    <sys:Double x:Key="AuraFontTitleLargeLetterSpacing">0</sys:Double>
+
+    <!-- Body -->
+    <FontFamily x:Key="AuraFontBodySmallFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontBodySmallSize">12</sys:Double>
+    <FontWeight x:Key="AuraFontBodySmallWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontBodySmallLineHeight">16</sys:Double>
+    <sys:Double x:Key="AuraFontBodySmallLetterSpacing">0.4</sys:Double>
+
+    <FontFamily x:Key="AuraFontBodyMediumFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontBodyMediumSize">14</sys:Double>
+    <FontWeight x:Key="AuraFontBodyMediumWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontBodyMediumLineHeight">20</sys:Double>
+    <sys:Double x:Key="AuraFontBodyMediumLetterSpacing">0.25</sys:Double>
+
+    <FontFamily x:Key="AuraFontBodyLargeFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontBodyLargeSize">16</sys:Double>
+    <FontWeight x:Key="AuraFontBodyLargeWeight">Normal</FontWeight>
+    <sys:Double x:Key="AuraFontBodyLargeLineHeight">24</sys:Double>
+    <sys:Double x:Key="AuraFontBodyLargeLetterSpacing">0.5</sys:Double>
+
+    <!-- Label -->
+    <FontFamily x:Key="AuraFontLabelSmallFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontLabelSmallSize">11</sys:Double>
+    <FontWeight x:Key="AuraFontLabelSmallWeight">Medium</FontWeight>
+    <sys:Double x:Key="AuraFontLabelSmallLineHeight">16</sys:Double>
+    <sys:Double x:Key="AuraFontLabelSmallLetterSpacing">0.5</sys:Double>
+
+    <FontFamily x:Key="AuraFontLabelMediumFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontLabelMediumSize">12</sys:Double>
+    <FontWeight x:Key="AuraFontLabelMediumWeight">Medium</FontWeight>
+    <sys:Double x:Key="AuraFontLabelMediumLineHeight">16</sys:Double>
+    <sys:Double x:Key="AuraFontLabelMediumLetterSpacing">0.5</sys:Double>
+
+    <FontFamily x:Key="AuraFontLabelLargeFamily">{StaticResource AuraFontFamilyDefault}</FontFamily>
+    <sys:Double x:Key="AuraFontLabelLargeSize">14</sys:Double>
+    <FontWeight x:Key="AuraFontLabelLargeWeight">Medium</FontWeight>
+    <sys:Double x:Key="AuraFontLabelLargeLineHeight">20</sys:Double>
+    <sys:Double x:Key="AuraFontLabelLargeLetterSpacing">0.1</sys:Double>
+
+</ResourceDictionary>

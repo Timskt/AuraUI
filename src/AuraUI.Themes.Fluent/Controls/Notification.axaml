@@ -1,0 +1,143 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Notification — Fluent Style (Longer persistent notification)
+         ============================================================ -->
+    <Style Selector="Border.notification">
+        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="MinWidth" Value="320"/>
+        <Setter Property="MaxWidth" Value="440"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+
+    <!-- Notification enter animation -->
+    <Style Selector="Border.notification">
+        <Style.Animations>
+            <Animation Duration="00:00:00.300"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="TranslateTransform.X" Value="40"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="TranslateTransform.X" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Notification icon -->
+    <Style Selector="Border.notification-icon">
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style Selector="Border.notification-icon Path">
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Notification header (title + timestamp) -->
+    <Style Selector="DockPanel.notification-header">
+        <Setter Property="Margin" Value="0,0,0,4"/>
+    </Style>
+
+    <!-- Notification title -->
+    <Style Selector="TextBlock.notification-title">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+    </Style>
+
+    <!-- Notification timestamp -->
+    <Style Selector="TextBlock.notification-time">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+    </Style>
+
+    <!-- Notification body -->
+    <Style Selector="TextBlock.notification-body">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Notification actions -->
+    <Style Selector="StackPanel.notification-actions">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Spacing" Value="8"/>
+        <Setter Property="Margin" Value="0,8,0,0"/>
+    </Style>
+
+    <!-- Notification close button -->
+    <Style Selector="Button.notification-close">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Button.notification-close:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         Notification Variants
+         ============================================================ -->
+
+    <Style Selector="Border.notification.success">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.success Border.notification-icon">
+        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.success Border.notification-icon Path">
+        <Setter Property="Fill" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+
+    <Style Selector="Border.notification.warning">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.warning Border.notification-icon">
+        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.warning Border.notification-icon Path">
+        <Setter Property="Fill" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+
+    <Style Selector="Border.notification.error">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.error Border.notification-icon">
+        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.error Border.notification-icon Path">
+        <Setter Property="Fill" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+
+    <Style Selector="Border.notification.info">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInfoBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.info Border.notification-icon">
+        <Setter Property="Background" Value="{StaticResource AuraInfoLightBrush}"/>
+    </Style>
+    <Style Selector="Border.notification.info Border.notification-icon Path">
+        <Setter Property="Fill" Value="{StaticResource AuraInfoBrush}"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,101 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Tag — Fluent Style
+         ============================================================ -->
+    <Style Selector="Border.tag">
+        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraTagRadius}"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Child">
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="12"
+                           Foreground="{StaticResource AuraForegroundBrush}"/>
+            </StackPanel>
+        </Setter>
+    </Style>
+
+    <!-- Tag transitions -->
+    <Style Selector="Border.tag">
+        <Setter Property="Border.Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Tag :pointerover -->
+    <Style Selector="Border.tag:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+    </Style>
+
+    <!-- Tag :pressed -->
+    <Style Selector="Border.tag:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Tag sizes -->
+    <Style Selector="Border.tag.sm">
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="MinHeight" Value="20"/>
+    </Style>
+    <Style Selector="Border.tag.sm TextBlock">
+        <Setter Property="FontSize" Value="11"/>
+    </Style>
+
+    <Style Selector="Border.tag.lg">
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="MinHeight" Value="32"/>
+    </Style>
+    <Style Selector="Border.tag.lg TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- Tag color variants -->
+    <Style Selector="Border.tag.primary">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+    <Style Selector="Border.tag.primary TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="Border.tag.success">
+        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+    <Style Selector="Border.tag.success TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+
+    <Style Selector="Border.tag.warning">
+        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+    <Style Selector="Border.tag.warning TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+
+    <Style Selector="Border.tag.error">
+        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="Border.tag.error TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- Tag closable -->
+    <Style Selector="Border.tag.closable">
+        <Setter Property="Padding" Value="8,4,4,4"/>
+    </Style>
+
+</Styles>

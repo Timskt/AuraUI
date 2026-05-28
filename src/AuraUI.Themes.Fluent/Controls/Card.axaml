@@ -1,0 +1,98 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         Card — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|Card">
+        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraCardRadius}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowSm}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        BoxShadow="{TemplateBinding BoxShadow}"
+                        Padding="{TemplateBinding Padding}"
+                        ClipToBounds="{TemplateBinding ClipToBounds}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                        <BoxShadowsTransition Duration="00:00:00.200" Property="BoxShadow"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Header -->
+                        <ContentPresenter Name="PART_HeaderPresenter"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          DockPanel.Dock="Top"
+                                          Margin="0,0,0,12"
+                                          IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                        <!-- Footer -->
+                        <ContentPresenter Name="PART_FooterPresenter"
+                                          Content="{TemplateBinding Footer}"
+                                          ContentTemplate="{TemplateBinding FooterTemplate}"
+                                          DockPanel.Dock="Bottom"
+                                          Margin="0,12,0,0"
+                                          IsVisible="{TemplateBinding Footer, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                        <!-- Content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Card :pointerover -->
+    <Style Selector="layout|Card:pointerover">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+    </Style>
+
+    <!-- Card with IsHoverable -->
+    <Style Selector="layout|Card[IsHoverable=true]">
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Card Elevation 0 -->
+    <Style Selector="layout|Card[Elevation=0]">
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowNone}"/>
+    </Style>
+
+    <!-- Card Elevation 1 -->
+    <Style Selector="layout|Card[Elevation=1]">
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowSm}"/>
+    </Style>
+
+    <!-- Card Elevation 2 -->
+    <Style Selector="layout|Card[Elevation=2]">
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+    </Style>
+
+    <!-- Card Elevation 3 -->
+    <Style Selector="layout|Card[Elevation=3]">
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowLg}"/>
+    </Style>
+
+    <!-- Card class .flat — no shadow, no border -->
+    <Style Selector="layout|Card.flat">
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowNone}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- Card class .outlined — border only, no shadow -->
+    <Style Selector="layout|Card.outlined">
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowNone}"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+</Styles>

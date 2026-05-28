@@ -1,0 +1,111 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Expander — Fluent Style
+         ============================================================ -->
+    <Style Selector="Expander">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Toggle Button (Header) -->
+                        <ToggleButton Name="PART_ExpandCollapseToggle"
+                                      DockPanel.Dock="Top"
+                                      IsChecked="{TemplateBinding IsExpanded, Mode=TwoWay}"
+                                      Background="Transparent"
+                                      BorderThickness="0,0,0,1"
+                                      BorderBrush="{StaticResource AuraDividerBrush}"
+                                      CornerRadius="{StaticResource AuraRadiusMd}"
+                                      Padding="12,10"
+                                      MinHeight="44"
+                                      HorizontalContentAlignment="Stretch"
+                                      HorizontalAlignment="Stretch">
+                            <ToggleButton.Template>
+                                <ControlTemplate>
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0,0,0,1"
+                                            Padding="{TemplateBinding Padding}">
+                                        <Border.Transitions>
+                                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                                        </Border.Transitions>
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <ContentPresenter Name="PART_ContentPresenter"
+                                                              Content="{TemplateBinding Content}"
+                                                              VerticalAlignment="Center"
+                                                              Grid.Column="0"/>
+                                            <Path Name="Chevron"
+                                                  Grid.Column="1"
+                                                  Width="12"
+                                                  Height="12"
+                                                  Data="M 1,4 L 6,9 L 11,4"
+                                                  Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                                  StrokeThickness="1.5"
+                                                  StrokeLineJoin="Round"
+                                                  Margin="12,0,0,0"
+                                                  VerticalAlignment="Center"
+                                                  RenderTransformOrigin="0.5,0.5">
+                                                <Path.Transitions>
+                                                    <DoubleTransition Duration="00:00:00.200" Property="RotateTransform.Angle"/>
+                                                </Path.Transitions>
+                                            </Path>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+
+                        <!-- Expand Collapse Content -->
+                        <Border Name="PART_ExpandCollapseContent"
+                                ClipToBounds="True">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="16,12"/>
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Expander expanded state -->
+    <Style Selector="Expander /template/ Path#Chevron">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="0"/>
+        </Setter>
+    </Style>
+    <Style Selector="Expander:expanded /template/ Path#Chevron">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="180"/>
+        </Setter>
+    </Style>
+
+    <!-- Expander toggle hover -->
+    <Style Selector="Expander /template/ ToggleButton:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Expander toggle pressed -->
+    <Style Selector="Expander /template/ ToggleButton:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Expander with border -->
+    <Style Selector="Expander.bordered">
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+</Styles>

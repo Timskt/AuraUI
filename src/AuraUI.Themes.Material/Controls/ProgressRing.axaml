@@ -1,0 +1,54 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — ProgressRing (Circular)
+         ======================================== -->
+
+    <Style Selector="ProgressRing">
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressRing">
+                    <Grid Width="{TemplateBinding Width}"
+                          Height="{TemplateBinding Height}">
+                        <!-- Track circle -->
+                        <Ellipse Name="PART_Track"
+                                 Stroke="{TemplateBinding Background}"
+                                 StrokeThickness="4"/>
+                                 Fill="Transparent"/>
+                        <!-- Indicator arc -->
+                        <Path Name="PART_Indicator"
+                              Stroke="{TemplateBinding Foreground}"
+                              StrokeThickness="4"/>
+                              Fill="Transparent"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Indeterminate animation (spinning) -->
+    <Style Selector="ProgressRing:indeterminate /template/ Path#PART_Indicator">
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="RenderTransform">
+            <RotateTransform/>
+        </Setter>
+    </Style>
+
+    <!-- Small size -->
+    <Style Selector="ProgressRing.small">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+    </Style>
+
+    <!-- Large size -->
+    <Style Selector="ProgressRing.large">
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Height" Value="64"/>
+    </Style>
+
+</Styles>

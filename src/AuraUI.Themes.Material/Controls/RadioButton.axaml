@@ -1,0 +1,98 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — RadioButton
+         ======================================== -->
+
+    <Style Selector="RadioButton">
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12"
+                                VerticalAlignment="Center">
+                        <!-- Radio circle -->
+                        <Grid Width="{DynamicResource AuraRadioSize}"
+                              Height="{DynamicResource AuraRadioSize}"
+                              VerticalAlignment="Center">
+                            <!-- Outer circle -->
+                            <Border Name="PART_OuterCircle"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="10"
+                                    BorderThickness="2"
+                                    BorderBrush="{DynamicResource AuraForegroundBrush}"
+                                    Background="Transparent">
+                                <Border Name="StateLayer"
+                                        Background="Transparent"
+                                        CornerRadius="10"/>
+                            </Border>
+                            <!-- Inner circle (checked indicator) -->
+                            <Border Name="PART_InnerCircle"
+                                    Width="10"
+                                    Height="10"
+                                    CornerRadius="5"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsVisible="False"/>
+                        </Grid>
+                        <!-- Content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="RadioButton:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Opacity" Value="0.08"/>
+    </Style>
+
+    <!-- Pressed -->
+    <Style Selector="RadioButton:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Opacity" Value="0.12"/>
+    </Style>
+
+    <!-- Checked -->
+    <Style Selector="RadioButton:checked /template/ Border#PART_OuterCircle">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="RadioButton:checked /template/ Border#PART_InnerCircle">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="RadioButton:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+    <Style Selector="RadioButton:checked:disabled /template/ Border#PART_OuterCircle">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+    </Style>
+
+    <Style Selector="RadioButton:checked:disabled /template/ Border#PART_InnerCircle">
+        <Setter Property="Background" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+    </Style>
+
+</Styles>

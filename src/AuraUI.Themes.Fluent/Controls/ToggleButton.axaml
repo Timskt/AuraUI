@@ -1,0 +1,116 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         ToggleButton — Fluent Style
+         ============================================================ -->
+    <Style Selector="ToggleButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraButtonRadius}"/>
+        <Setter Property="Padding" Value="12,5"/>
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinWidth" Value="{StaticResource AuraControlMinWidthMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ToggleButton :pointerover -->
+    <Style Selector="ToggleButton:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+    </Style>
+
+    <!-- ToggleButton :pressed -->
+    <Style Selector="ToggleButton:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- ToggleButton :checked -->
+    <Style Selector="ToggleButton:checked /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+    <Style Selector="ToggleButton:checked">
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- ToggleButton checked + :pointerover -->
+    <Style Selector="ToggleButton:checked:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+    </Style>
+
+    <!-- ToggleButton checked + :pressed -->
+    <Style Selector="ToggleButton:checked:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+    </Style>
+
+    <!-- ToggleButton :focus -->
+    <Style Selector="ToggleButton:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- ToggleButton :disabled -->
+    <Style Selector="ToggleButton:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+    <!-- ToggleButton variant: outline checked -->
+    <Style Selector="ToggleButton.outline">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+    </Style>
+    <Style Selector="ToggleButton.outline:checked /template/ Border#PART_Border">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+    <Style Selector="ToggleButton.outline:checked">
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- ToggleButton variant: pill -->
+    <Style Selector="ToggleButton.pill">
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+    </Style>
+
+    <!-- ToggleButton sizes -->
+    <Style Selector="ToggleButton.sm">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="Padding" Value="8,3"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="ToggleButton.lg">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="Padding" Value="16,9"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+</Styles>

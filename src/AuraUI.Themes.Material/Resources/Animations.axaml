@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ========================================
+         Material Design 3 — Motion Tokens
+         ======================================== -->
+
+    <!-- Duration — Short -->
+    <sys:TimeSpan x:Key="AuraAnimationShort1">00:00:00.050</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationShort2">00:00:00.100</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationShort3">00:00:00.150</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationShort4">00:00:00.200</sys:TimeSpan>
+
+    <!-- Duration — Medium -->
+    <sys:TimeSpan x:Key="AuraAnimationMedium1">00:00:00.250</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationMedium2">00:00:00.300</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationMedium3">00:00:00.350</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationMedium4">00:00:00.400</sys:TimeSpan>
+
+    <!-- Duration — Long -->
+    <sys:TimeSpan x:Key="AuraAnimationLong1">00:00:00.450</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationLong2">00:00:00.500</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationLong3">00:00:00.550</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationLong4">00:00:00.600</sys:TimeSpan>
+
+    <!-- Easing Curves (Material Standard) -->
+    <!-- Standard: cubic-bezier(0.2, 0, 0, 1) — used for most property changes -->
+    <CubicBezierEase x:Key="AuraEasingStandard"
+                     ControlPoint1="0.2, 0"
+                     ControlPoint2="0, 1"/>
+
+    <!-- Decelerate: cubic-bezier(0, 0, 0, 1) — entering elements -->
+    <CubicBezierEase x:Key="AuraEasingDecelerate"
+                     ControlPoint1="0, 0"
+                     ControlPoint2="0, 1"/>
+
+    <!-- Accelerate: cubic-bezier(0.3, 0, 1, 1) — exiting elements -->
+    <CubicBezierEase x:Key="AuraEasingAccelerate"
+                     ControlPoint1="0.3, 0"
+                     ControlPoint2="1, 1"/>
+
+    <!-- Standard-Emphasized: cubic-bezier(0.2, 0, 0, 1) — shared axis transitions -->
+    <CubicBezierEase x:Key="AuraEasingStandardEmphasized"
+                     ControlPoint1="0.05, 0.7"
+                     ControlPoint2="0.1, 1"/>
+
+    <!-- Default durations used by control transitions -->
+    <sys:TimeSpan x:Key="AuraControlTransitionDuration">00:00:00.200</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraStateLayerDuration">00:00:00.150</sys:TimeSpan>
+
+</ResourceDictionary>

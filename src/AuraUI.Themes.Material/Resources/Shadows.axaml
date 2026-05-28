@@ -1,0 +1,26 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — Elevation Shadows
+         ======================================== -->
+
+    <!-- Level 0: No shadow (flat surface) -->
+    <BoxShadow x:Key="AuraShadowLevel0">none</BoxShadow>
+
+    <!-- Level 1: Resting state cards, buttons -->
+    <BoxShadow x:Key="AuraShadowLevel1">0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15)</BoxShadow>
+
+    <!-- Level 2: Hovered cards, floating action buttons -->
+    <BoxShadow x:Key="AuraShadowLevel2">0 1px 2px 0 rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15)</BoxShadow>
+
+    <!-- Level 3: Navigation drawers, side sheets -->
+    <BoxShadow x:Key="AuraShadowLevel3">0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.3)</BoxShadow>
+
+    <!-- Level 4: Dialogs, modals -->
+    <BoxShadow x:Key="AuraShadowLevel4">0 6px 10px 4px rgba(0,0,0,0.15), 0 2px 3px rgba(0,0,0,0.3)</BoxShadow>
+
+    <!-- Level 5: Top-level surfaces, tooltips -->
+    <BoxShadow x:Key="AuraShadowLevel5">0 8px 12px 6px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.3)</BoxShadow>
+
+</ResourceDictionary>

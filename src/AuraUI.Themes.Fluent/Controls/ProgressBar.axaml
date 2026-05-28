@@ -1,0 +1,105 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         ProgressBar — Fluent Style
+         ============================================================ -->
+    <Style Selector="ProgressBar">
+        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="MinHeight" Value="4"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Track"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Height="{TemplateBinding Height}">
+                    <!-- Progress indicator -->
+                    <Border Name="PART_Indicator"
+                            Background="{TemplateBinding Foreground}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            HorizontalAlignment="Left">
+                        <Border.Transitions>
+                            <DoubleTransition Duration="00:00:00.300" Property="Width"
+                                              Easing="{StaticResource AuraEasingStandard}"/>
+                        </Border.Transitions>
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         ProgressBar Indeterminate Animation
+         ============================================================ -->
+    <Style Selector="ProgressBar:indeterminate /template/ Border#PART_Indicator">
+        <Style.Animations>
+            <Animation Duration="00:00:02.000"
+                       IterationCount="Infinite"
+                       Easing="LinearEasing">
+                <KeyFrame Cue="0%">
+                    <Setter Property="TranslateTransform.X" Value="-200"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="TranslateTransform.X" Value="500"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- ============================================================
+         ProgressBar Size Variants
+         ============================================================ -->
+
+    <!-- Small -->
+    <Style Selector="ProgressBar.sm">
+        <Setter Property="Height" Value="2"/>
+    </Style>
+
+    <!-- Medium (default: 4) -->
+
+    <!-- Large -->
+    <Style Selector="ProgressBar.lg">
+        <Setter Property="Height" Value="8"/>
+    </Style>
+
+    <!-- ============================================================
+         ProgressBar Color Variants
+         ============================================================ -->
+
+    <Style Selector="ProgressBar.success">
+        <Setter Property="Foreground" Value="{StaticResource AuraSuccessBrush}"/>
+    </Style>
+    <Style Selector="ProgressBar.warning">
+        <Setter Property="Foreground" Value="{StaticResource AuraWarningBrush}"/>
+    </Style>
+    <Style Selector="ProgressBar.error">
+        <Setter Property="Foreground" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="ProgressBar.info">
+        <Setter Property="Foreground" Value="{StaticResource AuraInfoBrush}"/>
+    </Style>
+
+    <!-- Striped variant -->
+    <Style Selector="ProgressBar.striped /template/ Border#PART_Indicator">
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#40FFFFFF" Offset="0"/>
+                <GradientStop Color="#20FFFFFF" Offset="0.5"/>
+                <GradientStop Color="#40FFFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Setter>
+    </Style>
+
+    <!-- Rounded (full round) -->
+    <Style Selector="ProgressBar.rounded">
+        <Setter Property="Height" Value="8"/>
+    </Style>
+
+</Styles>

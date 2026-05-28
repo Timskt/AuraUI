@@ -1,0 +1,89 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — Badge
+         ======================================== -->
+
+    <Style Selector="layout|Badge">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:Badge">
+                    <Grid>
+                        <!-- Host content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        <!-- Badge overlay -->
+                        <Border Name="PART_BadgeContainer"
+                                Background="{DynamicResource AuraErrorBrush}"
+                                CornerRadius="8"
+                                MinWidth="16"
+                                MinHeight="16"
+                                Padding="4,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="0,-4,-4,0">
+                            <ContentPresenter Name="PART_BadgeContentPresenter"
+                                              Content="{TemplateBinding BadgeContent}"
+                                              ContentTemplate="{TemplateBinding BadgeContentTemplate}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Standard (numeric) -->
+    <Style Selector="layout|Badge:standard /template/ Border#PART_BadgeContainer">
+        <Setter Property="MinWidth" Value="16"/>
+        <Setter Property="MinHeight" Value="16"/>
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- Dot variant -->
+    <Style Selector="layout|Badge:dot /template/ Border#PART_BadgeContainer">
+        <Setter Property="MinWidth" Value="6"/>
+        <Setter Property="MinHeight" Value="6"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,-2,-2,0"/>
+    </Style>
+
+    <Style Selector="layout|Badge:dot /template/ ContentPresenter#PART_BadgeContentPresenter">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Variant: Primary -->
+    <Style Selector="layout|Badge:primary /template/ Border#PART_BadgeContainer">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Variant: Success -->
+    <Style Selector="layout|Badge:success /template/ Border#PART_BadgeContainer">
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
+    </Style>
+
+    <!-- Variant: Warning -->
+    <Style Selector="layout|Badge:warning /template/ Border#PART_BadgeContainer">
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
+    </Style>
+
+    <!-- Variant: Error -->
+    <Style Selector="layout|Badge:error /template/ Border#PART_BadgeContainer">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- Variant: Default -->
+    <Style Selector="layout|Badge:default /template/ Border#PART_BadgeContainer">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+</Styles>

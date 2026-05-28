@@ -1,0 +1,102 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — ListBox
+         ======================================== -->
+
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <ScrollViewer Name="PART_ScrollViewer"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto">
+                            <ItemsPresenter Name="PART_ItemsPresenter"
+                                            Margin="{TemplateBinding Padding}"/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==========================================
+         ListBoxItem
+         ========================================== -->
+    <Style Selector="ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinHeight" Value="48"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyLargeFamily}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Name="RootBorder"
+                            Background="Transparent"
+                            CornerRadius="{DynamicResource AuraRadiusFull}"
+                            Margin="0,2"
+                            ClipToBounds="True">
+                        <Border Name="StateLayer"
+                                Background="Transparent"
+                                CornerRadius="{DynamicResource AuraRadiusFull}"/>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="ListBoxItem:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Pressed -->
+    <Style Selector="ListBoxItem:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Selected -->
+    <Style Selector="ListBoxItem:selected /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:selected">
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:selected:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="#146750A4"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="ListBoxItem:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

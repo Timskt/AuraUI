@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — ProgressBar (Linear)
+         ======================================== -->
+
+    <Style Selector="ProgressBar">
+        <Setter Property="MinHeight" Value="4"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border Name="PART_Track"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            ClipToBounds="True">
+                        <!-- Indicator bar -->
+                        <Border Name="PART_Indicator"
+                                Background="{TemplateBinding Foreground}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                HorizontalAlignment="Left"
+                                MinHeight="{TemplateBinding MinHeight}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Indeterminate (animated sliding) -->
+    <Style Selector="ProgressBar:indeterminate /template/ Border#PART_Indicator">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Width" Value="100"/>
+    </Style>
+
+    <!-- Thin variant -->
+    <Style Selector="ProgressBar.thin">
+        <Setter Property="MinHeight" Value="2"/>
+    </Style>
+
+</Styles>

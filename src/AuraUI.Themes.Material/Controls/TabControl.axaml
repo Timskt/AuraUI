@@ -1,0 +1,111 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — TabControl
+         ======================================== -->
+
+    <Style Selector="TabControl">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontLabelLargeFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Border Background="{TemplateBinding Background}">
+                        <DockPanel>
+                            <!-- Tab strip -->
+                            <Border Name="PART_TabStripBorder"
+                                    DockPanel.Dock="Top"
+                                    Background="Transparent"
+                                    BorderBrush="{DynamicResource AuraDividerBrush}"
+                                    BorderThickness="0,0,0,1">
+                                <TabStrip Name="PART_TabStrip"
+                                          SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
+                                    <TabStrip.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </TabStrip.ItemsPanel>
+                                </TabStrip>
+                            </Border>
+                            <!-- Content -->
+                            <ContentPresenter Name="PART_SelectedContentHost"
+                                              Content="{TemplateBinding SelectedContent}"
+                                              ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+                                              Margin="0"/>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==========================================
+         TabItem
+         ========================================== -->
+    <Style Selector="TabItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinHeight" Value="48"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontLabelLargeFamily}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="RootBorder"
+                            Background="Transparent"
+                            Padding="{TemplateBinding Padding}"
+                            ClipToBounds="True">
+                        <Border Name="StateLayer"
+                                Background="Transparent"/>
+                        <Grid>
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                            <!-- Active indicator bar (bottom) -->
+                            <Border Name="PART_Indicator"
+                                    Height="3"
+                                    CornerRadius="1.5"
+                                    Background="Transparent"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="0"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="TabItem:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Selected -->
+    <Style Selector="TabItem:selected">
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="TabItem:selected /template/ Border#PART_Indicator">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="TabItem:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

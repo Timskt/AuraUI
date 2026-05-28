@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ============================================================
+         AuraUI Fluent Theme — Animation Tokens
+         ============================================================ -->
+
+    <!-- Duration Values -->
+    <sys:TimeSpan x:Key="AuraAnimationFastDuration">00:00:00.100</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationNormalDuration">00:00:00.200</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationSlowDuration">00:00:00.300</sys:TimeSpan>
+    <sys:TimeSpan x:Key="AuraAnimationExtraSlowDuration">00:00:00.500</sys:TimeSpan>
+
+    <!-- Easing Functions -->
+    <CubicEaseInOut x:Key="AuraEasingStandard"/>
+    <CubicEaseOut x:Key="AuraEasingDecelerate"/>
+    <CubicEaseIn x:Key="AuraEasingAccelerate"/>
+    <SplineDoubleKeyFrame x:Key="AuraEasingStandardSpline"
+                           KeySpline="0.8,0.0,0.2,1.0"/>
+    <SplineDoubleKeyFrame x:Key="AuraEasingDecelerateSpline"
+                           KeySpline="0.0,0.0,0.2,1.0"/>
+    <SplineDoubleKeyFrame x:Key="AuraEasingAccelerateSpline"
+                           KeySpline="0.8,0.0,1.0,1.0"/>
+
+    <!-- Transitions for brushes -->
+    <BrushTransition x:Key="AuraBrushTransitionFast" Duration="00:00:00.100"/>
+    <BrushTransition x:Key="AuraBrushTransitionNormal" Duration="00:00:00.200"/>
+    <BrushTransition x:Key="AuraBrushTransitionSlow" Duration="00:00:00.300"/>
+
+    <!-- Transitions for double values -->
+    <DoubleTransition x:Key="AuraDoubleTransitionFast" Duration="00:00:00.100" Easing="{StaticResource AuraEasingStandard}"/>
+    <DoubleTransition x:Key="AuraDoubleTransitionNormal" Duration="00:00:00.200" Easing="{StaticResource AuraEasingStandard}"/>
+    <DoubleTransition x:Key="AuraDoubleTransitionSlow" Duration="00:00:00.300" Easing="{StaticResource AuraEasingStandard}"/>
+
+    <!-- Transitions for corner radius -->
+    <CornerRadiusTransition x:Key="AuraCornerRadiusTransitionFast" Duration="00:00:00.100"/>
+    <CornerRadiusTransition x:Key="AuraCornerRadiusTransitionNormal" Duration="00:00:00.200"/>
+    <CornerRadiusTransition x:Key="AuraCornerRadiusTransitionSlow" Duration="00:00:00.300"/>
+
+    <!-- Transitions for box shadows -->
+    <BoxShadowsTransition x:Key="AuraBoxShadowTransitionFast" Duration="00:00:00.100"/>
+    <BoxShadowsTransition x:Key="AuraBoxShadowTransitionNormal" Duration="00:00:00.200"/>
+    <BoxShadowsTransition x:Key="AuraBoxShadowTransitionSlow" Duration="00:00:00.300"/>
+
+</ResourceDictionary>

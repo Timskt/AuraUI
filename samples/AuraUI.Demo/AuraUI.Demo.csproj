@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AuraUI.Demo</RootNamespace>
+    <AssemblyName>AuraUI.Demo</AssemblyName>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.1" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AuraUI.Controls\AuraUI.Controls.csproj" />
+    <ProjectReference Include="..\..\src\AuraUI.Themes.Fluent\AuraUI.Themes.Fluent.csproj" />
+    <ProjectReference Include="..\..\src\AuraUI.Themes.Material\AuraUI.Themes.Material.csproj" />
+  </ItemGroup>
+</Project>

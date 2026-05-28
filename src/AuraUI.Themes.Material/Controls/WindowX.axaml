@@ -1,0 +1,103 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — WindowX
+         Custom window chrome with Material styling.
+         ======================================== -->
+
+    <Style Selector="WindowX">
+        <Setter Property="Background" Value="{DynamicResource AuraBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="WindowX">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="0">
+                        <DockPanel>
+                            <!-- Title bar -->
+                            <Border Name="PART_TitleBar"
+                                    DockPanel.Dock="Top"
+                                    Height="48"
+                                    Background="{DynamicResource AuraSurfaceBrush}"
+                                    Padding="16,0">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <!-- Title -->
+                                    <TextBlock Name="PART_Title"
+                                               Text="{TemplateBinding Title}"
+                                               FontSize="14"
+                                               FontWeight="Medium"
+                                               FontFamily="{DynamicResource AuraFontTitleSmallFamily}"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <!-- Window controls -->
+                                    <StackPanel Name="PART_WindowControls"
+                                                Grid.Column="1"
+                                                Orientation="Horizontal"
+                                                Spacing="0"
+                                                VerticalAlignment="Center">
+                                        <!-- Minimize -->
+                                        <Button Name="PART_MinimizeButton"
+                                                Classes="icon"
+                                                Width="48"
+                                                Height="32"
+                                                CornerRadius="0">
+                                            <Path Data="M 6,16 L 18,16"
+                                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                  StrokeThickness="1.5"/>
+                                                  Width="12"
+                                                  Height="1"/>
+                                        </Button>
+                                        <!-- Maximize -->
+                                        <Button Name="PART_MaximizeButton"
+                                                Classes="icon"
+                                                Width="48"
+                                                Height="32"
+                                                CornerRadius="0">
+                                            <Path Data="M 6,6 L 18,6 L 18,18 L 6,18 Z"
+                                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                  StrokeThickness="1.5"/>
+                                                  Fill="Transparent"
+                                                  Width="12"
+                                                  Height="12"/>
+                                        </Button>
+                                        <!-- Close -->
+                                        <Button Name="PART_CloseButton"
+                                                Classes="icon"
+                                                Width="48"
+                                                Height="32"
+                                                CornerRadius="0">
+                                            <Path Data="M 6,6 L 18,18 M 18,6 L 6,18"
+                                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                  StrokeThickness="1.5"/>
+                                                  Width="12"
+                                                  Height="12"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <!-- Content area -->
+                            <Border>
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Close button hover — red background (Material error) -->
+    <Style Selector="WindowX /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <Style Selector="WindowX /template/ Button#PART_CloseButton:pointerover /template/ Path">
+        <Setter Property="Stroke" Value="White"/>
+    </Style>
+
+</Styles>

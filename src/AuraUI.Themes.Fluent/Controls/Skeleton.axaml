@@ -1,0 +1,68 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Skeleton — Fluent Style (Content Placeholder Loading)
+         ============================================================ -->
+    <Style Selector="Border.skeleton">
+        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusSm}"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+
+    <!-- Skeleton shimmer animation -->
+    <Style Selector="Border.skeleton">
+        <Style.Animations>
+            <Animation Duration="00:00:01.500"
+                       IterationCount="Infinite"
+                       Easing="LinearEasing">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="1.0"/>
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1.0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Skeleton line (text placeholder) -->
+    <Style Selector="Border.skeleton.line">
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <!-- Skeleton line.title -->
+    <Style Selector="Border.skeleton.line.title">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="160"/>
+    </Style>
+
+    <!-- Skeleton line.short -->
+    <Style Selector="Border.skeleton.line.short">
+        <Setter Property="Width" Value="100"/>
+    </Style>
+
+    <!-- Skeleton line.long -->
+    <Style Selector="Border.skeleton.line.long">
+        <Setter Property="Width" Value="300"/>
+    </Style>
+
+    <!-- Skeleton circle (avatar placeholder) -->
+    <Style Selector="Border.skeleton.circle">
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+    </Style>
+
+    <!-- Skeleton rectangle (image placeholder) -->
+    <Style Selector="Border.skeleton.rect">
+        <Setter Property="Height" Value="120"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+    </Style>
+
+</Styles>

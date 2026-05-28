@@ -1,0 +1,116 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         NumericUpDown — Fluent Style
+         ============================================================ -->
+    <Style Selector="NumericUpDown">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <!-- Text area -->
+                        <TextBox Name="PART_TextBox"
+                                 Grid.Column="0"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 CornerRadius="0"
+                                 Padding="8,6"
+                                 FontSize="{TemplateBinding FontSize}"
+                                 VerticalAlignment="Stretch"/>
+
+                        <!-- Spin buttons -->
+                        <DockPanel Grid.Column="1"
+                                   LastChildFill="False"
+                                   Margin="0,1"
+                                   Width="30">
+                            <Button Name="PART_IncreaseButton"
+                                    DockPanel.Dock="Top"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="0"
+                                    Padding="0"
+                                    Height="50%"
+                                    VerticalAlignment="Top">
+                                <Path Width="10" Height="6"
+                                      Data="M 1,5 L 5,1 L 9,5"
+                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"/>
+                                      StrokeLineJoin="Round"/>
+                            </Button>
+                            <Border Width="1" Background="{StaticResource AuraDividerBrush}"/>
+                            <Button Name="PART_DecreaseButton"
+                                    DockPanel.Dock="Bottom"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="0"
+                                    Padding="0"
+                                    Height="50%"
+                                    VerticalAlignment="Bottom">
+                                <Path Width="10" Height="6"
+                                      Data="M 1,1 L 5,5 L 9,1"
+                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"/>
+                                      StrokeLineJoin="Round"/>
+                            </Button>
+                        </DockPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- NumericUpDown :pointerover -->
+    <Style Selector="NumericUpDown:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- NumericUpDown :focus-within -->
+    <Style Selector="NumericUpDown:focus-within /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- NumericUpDown :disabled -->
+    <Style Selector="NumericUpDown:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- Spin button styles -->
+    <Style Selector="NumericUpDown /template/ Button:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+    <Style Selector="NumericUpDown /template/ Button:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Size variants -->
+    <Style Selector="NumericUpDown.sm">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="NumericUpDown.lg">
+        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+</Styles>

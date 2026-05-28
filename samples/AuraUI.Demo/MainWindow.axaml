@@ -1,0 +1,802 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls"
+        x:Class="AuraUI.Demo.MainWindow"
+        x:DataType="Window"
+        Title="AuraUI Component Gallery"
+        Width="1100"
+        Height="750"
+        MinWidth="800"
+        MinHeight="600"
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+        <!-- Header -->
+        <Border DockPanel.Dock="Top"
+                Padding="16,12"
+                Background="{DynamicResource SystemAccentColor}">
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <TextBlock Text="AuraUI"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="Component Gallery"
+                           FontSize="14"
+                           Foreground="#CCFFFFFF"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+        </Border>
+
+        <!-- Footer -->
+        <Border DockPanel.Dock="Bottom"
+                Padding="16,8"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                BorderThickness="0,1,0,0">
+            <TextBlock x:Name="StatusText"
+                       Text="Ready"
+                       FontSize="12"
+                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+        </Border>
+
+        <!-- Main content -->
+        <TabControl x:Name="MainTabControl"
+                    Margin="8"
+                    SelectedIndex="0">
+
+            <!-- ============================================================ -->
+            <!-- LAYOUT TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Layout">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <!-- Card section -->
+                        <TextBlock Text="Card" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+
+                        <WrapPanel>
+                            <layout:Card Header="Basic Card"
+                                         Margin="0,0,12,12"
+                                         Width="260"
+                                         Padding="12">
+                                <TextBlock Text="This is a basic card with header and content areas. Cards group related information." TextWrapping="Wrap"/>
+                            </layout:Card>
+
+                            <layout:Card Header="Hoverable Card"
+                                         IsHoverable="True"
+                                         Elevation="2"
+                                         Margin="0,0,12,12"
+                                         Width="260"
+                                         Padding="12">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="This card responds to hover with elevation change." TextWrapping="Wrap"/>
+                                    <TextBlock Text="Elevation: 2" FontSize="12" Foreground="Gray"/>
+                                </StackPanel>
+                            </layout:Card>
+
+                            <layout:Card Header="Card with Footer"
+                                         Margin="0,0,12,12"
+                                         Width="260"
+                                         Padding="12">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Cards support header, content, and footer sections." TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <layout:Card.Footer>
+                                    <TextBlock Text="Footer content" FontSize="11" Foreground="Gray"/>
+                                </layout:Card.Footer>
+                            </layout:Card>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Expander section -->
+                        <TextBlock Text="Expander" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+
+                        <layout:Expander Header="Click to expand (Down)"
+                                         IsExpanded="False"
+                                         ExpandDirection="Down"
+                                         Margin="0,0,0,8">
+                            <TextBlock Text="This content expands downward with a smooth animation. The Expander control supports all four directions." TextWrapping="Wrap" Margin="16,8"/>
+                        </layout:Expander>
+
+                        <layout:Expander Header="Expanded by default"
+                                         IsExpanded="True"
+                                         Margin="0,0,0,8">
+                            <TextBlock Text="This expander starts in the expanded state. Use the IsExpanded property to control initial visibility." TextWrapping="Wrap" Margin="16,8"/>
+                        </layout:Expander>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Divider section -->
+                        <TextBlock Text="Divider" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Above the divider" Margin="0,0,0,4"/>
+                        <layout:Divider/>
+                        <TextBlock Text="Below the divider" Margin="0,4,0,0"/>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Badge section -->
+                        <TextBlock Text="Badge" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,16,12" Spacing="4">
+                                <layout:Badge Value="5" Variant="Primary">
+                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
+                                        <TextBlock Text="M" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                                    </Border>
+                                </layout:Badge>
+                                <TextBlock Text="Primary (count)" FontSize="11" Foreground="Gray"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,16,12" Spacing="4">
+                                <layout:Badge Value="150" MaxValue="99" Variant="Error">
+                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
+                                        <TextBlock Text="N" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                                    </Border>
+                                </layout:Badge>
+                                <TextBlock Text="Error (overflow)" FontSize="11" Foreground="Gray"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,16,12" Spacing="4">
+                                <layout:Badge Variant="Success" IsDot="True">
+                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
+                                        <TextBlock Text="U" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                                    </Border>
+                                </layout:Badge>
+                                <TextBlock Text="Success (dot)" FontSize="11" Foreground="Gray"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,16,12" Spacing="4">
+                                <layout:Badge Variant="Warning" IsDot="True">
+                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
+                                        <TextBlock Text="W" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                                    </Border>
+                                </layout:Badge>
+                                <TextBlock Text="Warning (dot)" FontSize="11" Foreground="Gray"/>
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Tag section -->
+                        <TextBlock Text="Tag" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+
+                        <WrapPanel>
+                            <layout:Badge Content="Default Tag" Variant="Default" Margin="0,0,8,8"/>
+                            <layout:Badge Content="Primary Tag" Variant="Primary" Margin="0,0,8,8"/>
+                            <layout:Badge Content="Success Tag" Variant="Success" Margin="0,0,8,8"/>
+                            <layout:Badge Content="Warning Tag" Variant="Warning" Margin="0,0,8,8"/>
+                            <layout:Badge Content="Error Tag" Variant="Error" Margin="0,0,8,8"/>
+                        </WrapPanel>
+                        <TextBlock Text="Note: Tags use the Badge control with custom content in this demo. A dedicated Tag control is also available."
+                                   FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Avatar section -->
+                        <TextBlock Text="Avatar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Avatar and Skeleton controls are included in the theme. Define Avatar content using Border with initials or an image."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <WrapPanel>
+                            <Border Width="48" Height="48" CornerRadius="24" Background="#0078D4" Margin="0,0,8,8">
+                                <TextBlock Text="SK" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="48" Height="48" CornerRadius="24" Background="#107C10" Margin="0,0,8,8">
+                                <TextBlock Text="AB" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="48" Height="48" CornerRadius="24" Background="#D83B01" Margin="0,0,8,8">
+                                <TextBlock Text="JD" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="48" Height="48" CornerRadius="24" Background="#5C2D91" Margin="0,0,8,8">
+                                <TextBlock Text="MZ" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Skeleton section -->
+                        <TextBlock Text="Skeleton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="The Skeleton control provides a loading placeholder. Styles are defined in the theme resources."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <Border Height="16" CornerRadius="4" Background="{DynamicResource ControlFillColorDefaultBrush}" />
+                            <Border Height="16" CornerRadius="4" Background="{DynamicResource ControlFillColorDefaultBrush}" Width="280"/>
+                            <Border Height="16" CornerRadius="4" Background="{DynamicResource ControlFillColorDefaultBrush}" Width="200"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- INPUT TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Input">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <!-- Button section -->
+                        <TextBlock Text="Button" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+
+                        <TextBlock Text="Standard variants" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Standard" Classes="accent" Margin="0,0,8,8"/>
+                            <Button Content="Primary" Classes="accent" Margin="0,0,8,8"/>
+                            <Button Content="Default" Margin="0,0,8,8"/>
+                            <Button Content="Outline" Classes="outline" Margin="0,0,8,8"/>
+                            <Button Content="Subtle" Classes="subtle" Margin="0,0,8,8"/>
+                            <Button Content="Disabled" IsEnabled="False" Margin="0,0,8,8"/>
+                        </WrapPanel>
+
+                        <TextBlock Text="With icon (using content)" FontWeight="SemiBold" Margin="0,8,0,4"/>
+                        <WrapPanel>
+                            <Button Margin="0,0,8,8">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock Text="&#xE710;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Add Item" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Margin="0,0,8,8" Classes="accent">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock Text="&#xE74E;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Save" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </WrapPanel>
+
+                        <TextBlock Text="Sizes (use theme classes or custom padding)" FontWeight="SemiBold" Margin="0,8,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Small" Padding="8,4" FontSize="12" Margin="0,0,8,8"/>
+                            <Button Content="Medium" Margin="0,0,8,8"/>
+                            <Button Content="Large" Padding="20,12" FontSize="16" Margin="0,0,8,8"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- TextBox section -->
+                        <TextBlock Text="TextBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <TextBox Watermark="Enter your name..." />
+                            <TextBox Watermark="With clear button" Classes="clearButton"/>
+                            <TextBox Watermark="Read-only" IsReadOnly="True" Text="Read-only content"/>
+                            <TextBox Watermark="Multi-line" AcceptsReturn="True" MinHeight="80" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- PasswordBox section -->
+                        <TextBlock Text="PasswordBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <TextBox Watermark="Password" PasswordChar="*" />
+                            <TextBox Watermark="Confirm password" PasswordChar="*" />
+                        </StackPanel>
+                        <TextBlock Text="Note: Avalonia 12 PasswordBox styling is applied via the theme. Use a TextBox with PasswordChar for basic masking."
+                                   FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- NumericUpDown section -->
+                        <TextBlock Text="NumericUpDown" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <NumericUpDown Watermark="Enter a number" Minimum="0" Maximum="100" Increment="1" Value="50"/>
+                            <NumericUpDown Watermark="Decimal" Minimum="0" Maximum="10" Increment="0.5M" Value="3.5M" FormatString="F2"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- SearchBox section -->
+                        <TextBlock Text="SearchBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <TextBox Watermark="Search..." Classes="search"/>
+                        </StackPanel>
+                        <TextBlock Text="Note: The theme provides SearchBox styling via the 'search' class on a standard TextBox."
+                                   FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- SELECTION TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Selection">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <!-- ComboBox section -->
+                        <TextBlock Text="ComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <ComboBox PlaceholderText="Select a fruit" SelectedIndex="0">
+                                <ComboBoxItem>Apple</ComboBoxItem>
+                                <ComboBoxItem>Banana</ComboBoxItem>
+                                <ComboBoxItem>Cherry</ComboBoxItem>
+                                <ComboBoxItem>Date</ComboBoxItem>
+                                <ComboBoxItem>Elderberry</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox PlaceholderText="Disabled combo" IsEnabled="False">
+                                <ComboBoxItem>Option A</ComboBoxItem>
+                                <ComboBoxItem>Option B</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- MultiComboBox section -->
+                        <TextBlock Text="MultiComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Multi-selection ComboBox styling is provided by the AuraUI theme. Use a ListBox with SelectionMode='Multiple' for multi-select."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <ListBox SelectionMode="Multiple" MaxWidth="400" MaxHeight="160">
+                            <ListBoxItem>Angular</ListBoxItem>
+                            <ListBoxItem>React</ListBoxItem>
+                            <ListBoxItem>Vue</ListBoxItem>
+                            <ListBoxItem>Svelte</ListBoxItem>
+                            <ListBoxItem>Avalonia</ListBoxItem>
+                            <ListBoxItem>MAUI</ListBoxItem>
+                        </ListBox>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- ListBox section -->
+                        <TextBlock Text="ListBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <ListBox MaxWidth="400" MaxHeight="160">
+                            <ListBoxItem>Item 1 - Standard list item</ListBoxItem>
+                            <ListBoxItem>Item 2 - Another item</ListBoxItem>
+                            <ListBoxItem>Item 3 - With AuraUI styling</ListBoxItem>
+                            <ListBoxItem>Item 4 - Hover and select effects</ListBoxItem>
+                            <ListBoxItem>Item 5 - Keyboard navigable</ListBoxItem>
+                        </ListBox>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- RadioButton section -->
+                        <TextBlock Text="RadioButton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8">
+                            <RadioButton Content="Option A" GroupName="Options" IsChecked="True"/>
+                            <RadioButton Content="Option B" GroupName="Options"/>
+                            <RadioButton Content="Option C (Disabled)" GroupName="Options" IsEnabled="False"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- CheckBox section -->
+                        <TextBlock Text="CheckBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8">
+                            <CheckBox Content="Checked" IsChecked="True"/>
+                            <CheckBox Content="Unchecked"/>
+                            <CheckBox Content="Three-state" IsThreeState="True" IsChecked="{x:Null}"/>
+                            <CheckBox Content="Disabled" IsEnabled="False"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Switch / ToggleSwitch section -->
+                        <TextBlock Text="Switch" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8">
+                            <ToggleSwitch Content="Enable notifications" IsChecked="True"/>
+                            <ToggleSwitch Content="Dark mode" IsChecked="False"/>
+                            <ToggleSwitch Content="Disabled toggle" IsEnabled="False"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- RateControl section -->
+                        <TextBlock Text="RateControl" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="A star rating control is included in the theme. Use custom visuals or a styled ItemsControl for rating."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;" FontSize="24" Foreground="#FFB900"/>
+                            <TextBlock Text="4.0 / 5" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- DISPLAY TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Display">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <!-- Carousel section -->
+                        <TextBlock Text="Carousel" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <display:AuraCarousel AutoPlay="True"
+                                              ShowIndicators="True"
+                                              ShowNavigation="True"
+                                              Width="500"
+                                              Height="200"
+                                              Margin="0,0,0,8">
+                            <display:AuraCarousel.Items>
+                                <Border Background="#0078D4" CornerRadius="8" Margin="4">
+                                    <TextBlock Text="Slide 1 - Welcome to AuraUI"
+                                               Foreground="White" FontSize="20" FontWeight="Bold"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Background="#107C10" CornerRadius="8" Margin="4">
+                                    <TextBlock Text="Slide 2 - Built with Avalonia 12"
+                                               Foreground="White" FontSize="20" FontWeight="Bold"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Background="#D83B01" CornerRadius="8" Margin="4">
+                                    <TextBlock Text="Slide 3 - Cross-platform UI"
+                                               Foreground="White" FontSize="20" FontWeight="Bold"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Background="#5C2D91" CornerRadius="8" Margin="4">
+                                    <TextBlock Text="Slide 4 - Fluent + Material Themes"
+                                               Foreground="White" FontSize="20" FontWeight="Bold"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </display:AuraCarousel.Items>
+                        </display:AuraCarousel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Timeline section -->
+                        <TextBlock Text="Timeline" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="A vertical or horizontal timeline for displaying sequential events. The theme provides Timeline styling."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <StackPanel Spacing="0" Margin="8,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Border Width="12" Height="12" CornerRadius="6" Background="#0078D4" Margin="0,2,0,0"/>
+                                <StackPanel>
+                                    <TextBlock Text="Project Created" FontWeight="SemiBold"/>
+                                    <TextBlock Text="2026-01-15" FontSize="11" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Border Width="2" Height="24" Background="#0078D4" Margin="5,0,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Border Width="12" Height="12" CornerRadius="6" Background="#107C10" Margin="0,2,0,0"/>
+                                <StackPanel>
+                                    <TextBlock Text="Beta Release" FontWeight="SemiBold"/>
+                                    <TextBlock Text="2026-03-20" FontSize="11" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Border Width="2" Height="24" Background="#107C10" Margin="5,0,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Border Width="12" Height="12" CornerRadius="6" Background="#D83B01" Margin="0,2,0,0"/>
+                                <StackPanel>
+                                    <TextBlock Text="v1.0 Stable Release" FontWeight="SemiBold"/>
+                                    <TextBlock Text="2026-05-29" FontSize="11" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- ProgressRing section -->
+                        <TextBlock Text="ProgressRing" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
+                                <ProgressBar IsIndeterminate="True" Width="48" Height="48" MinWidth="48" MinHeight="48"
+                                             Classes="ring" />
+                                <TextBlock Text="Indeterminate" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
+                                <ProgressBar Value="65" Maximum="100" Width="48" Height="48" MinWidth="48" MinHeight="48"
+                                             Classes="ring"/>
+                                <TextBlock Text="65%" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- ProgressBar section -->
+                        <TextBlock Text="ProgressBar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="12" MaxWidth="500">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Indeterminate" FontSize="12"/>
+                                <ProgressBar IsIndeterminate="True" Height="4"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="25% complete" FontSize="12"/>
+                                <ProgressBar Value="25" Maximum="100" Height="4"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="75% complete" FontSize="12"/>
+                                <ProgressBar Value="75" Maximum="100" Height="4"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="100% complete" FontSize="12"/>
+                                <ProgressBar Value="100" Maximum="100" Height="4"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- StepIndicator section -->
+                        <TextBlock Text="StepIndicator" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Step-by-step progress indicator. The theme provides StepIndicator styling for wizard-like flows."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="0" HorizontalAlignment="Left">
+                            <StackPanel Spacing="4" Width="100" HorizontalAlignment="Center">
+                                <Border Width="32" Height="32" CornerRadius="16" Background="#107C10">
+                                    <TextBlock Text="1" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Details" FontSize="11" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <Border Height="2" Width="40" Background="#107C10" VerticalAlignment="Center" Margin="0,0,0,24"/>
+                            <StackPanel Spacing="4" Width="100" HorizontalAlignment="Center">
+                                <Border Width="32" Height="32" CornerRadius="16" Background="#107C10">
+                                    <TextBlock Text="2" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Review" FontSize="11" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <Border Height="2" Width="40" Background="LightGray" VerticalAlignment="Center" Margin="0,0,0,24"/>
+                            <StackPanel Spacing="4" Width="100" HorizontalAlignment="Center">
+                                <Border Width="32" Height="32" CornerRadius="16" Background="LightGray">
+                                    <TextBlock Text="3" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Confirm" FontSize="11" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- NAVIGATION TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Navigation">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <!-- TabControl section -->
+                        <TextBlock Text="TabControl" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TabControl MaxWidth="600" Height="200">
+                            <TabItem Header="Tab 1">
+                                <TextBlock Text="Content of Tab 1. AuraUI provides enhanced styling for the standard TabControl." Margin="16"/>
+                            </TabItem>
+                            <TabItem Header="Tab 2">
+                                <TextBlock Text="Content of Tab 2. Tabs support smooth transitions and hover effects." Margin="16"/>
+                            </TabItem>
+                            <TabItem Header="Tab 3">
+                                <TextBlock Text="Content of Tab 3. Use TabControl for organizing content into logical sections." Margin="16"/>
+                            </TabItem>
+                        </TabControl>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Breadcrumb section -->
+                        <TextBlock Text="Breadcrumb" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Breadcrumb navigation shows the user's location in a hierarchy. The theme provides Breadcrumb styling."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <Button Content="Home" Classes="subtle" Padding="4,2" FontSize="13"/>
+                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="Gray"/>
+                            <Button Content="Components" Classes="subtle" Padding="4,2" FontSize="13"/>
+                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="Gray"/>
+                            <Button Content="Layout" Classes="subtle" Padding="4,2" FontSize="13"/>
+                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="Gray"/>
+                            <TextBlock Text="Card" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- NavigationView section -->
+                        <TextBlock Text="NavigationView" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="A sidebar navigation pattern common in desktop apps. The theme styles NavigationView for side-panel layouts."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <Border BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Height="250" MaxWidth="600">
+                            <DockPanel>
+                                <Border DockPanel.Dock="Left" Width="200" Background="{DynamicResource LayerFillColorDefaultBrush}" CornerRadius="8,0,0,8">
+                                    <StackPanel Margin="0,8">
+                                        <Border Padding="12,10" Background="Transparent" CornerRadius="4" Margin="4,2">
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <TextBlock Text="&#xE80F;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Home" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Padding="12,10" Background="{DynamicResource ControlFillColorDefaultBrush}" CornerRadius="4" Margin="4,2">
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <TextBlock Text="&#xE8A5;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Components" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Padding="12,10" Background="Transparent" CornerRadius="4" Margin="4,2">
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <TextBlock Text="&#xE713;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Settings" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                                <Panel>
+                                    <TextBlock Text="Navigation content area. Select an item from the sidebar to navigate."
+                                               Margin="20" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                </Panel>
+                            </DockPanel>
+                        </Border>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Pagination section -->
+                        <TextBlock Text="Pagination" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Pagination controls for navigating through multi-page content. The theme provides Pagination styling."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <Button Content="&lt;" Padding="8,4" IsEnabled="False"/>
+                            <Button Content="1" Classes="accent" Padding="8,4"/>
+                            <Button Content="2" Padding="8,4"/>
+                            <Button Content="3" Padding="8,4"/>
+                            <Button Content="4" Padding="8,4"/>
+                            <Button Content="5" Padding="8,4"/>
+                            <Button Content="&gt;" Padding="8,4"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- FEEDBACK TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Feedback">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <!-- MessageBox section -->
+                        <TextBlock Text="MessageBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Show MessageBox" Margin="0,0,8,8" Click="ShowMessageBox_Click"/>
+                            <Button Content="Show Confirmation" Margin="0,0,8,8" Click="ShowConfirmation_Click"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Toast section -->
+                        <TextBlock Text="Toast" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Success Toast" Margin="0,0,8,8" Click="ShowSuccessToast_Click"/>
+                            <Button Content="Warning Toast" Margin="0,0,8,8" Click="ShowWarningToast_Click"/>
+                            <Button Content="Error Toast" Margin="0,0,8,8" Click="ShowErrorToast_Click"/>
+                            <Button Content="Info Toast" Margin="0,0,8,8" Click="ShowInfoToast_Click"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Notification section -->
+                        <TextBlock Text="Notification" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Show Notification" Margin="0,0,8,8" Click="ShowNotification_Click"/>
+                            <Button Content="Persistent Notification" Margin="0,0,8,8" Click="ShowPersistentNotification_Click"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Dialog section -->
+                        <TextBlock Text="Dialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Show Dialog" Margin="0,0,8,8" Click="ShowDialog_Click"/>
+                            <Button Content="Custom Dialog" Margin="0,0,8,8" Click="ShowCustomDialog_Click"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Snackbar section -->
+                        <TextBlock Text="Snackbar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <Button Content="Show Snackbar" Margin="0,0,8,8" Click="ShowSnackbar_Click"/>
+                            <Button Content="Snackbar with Action" Margin="0,0,8,8" Click="ShowSnackbarWithAction_Click"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- PendingDialog section -->
+                        <TextBlock Text="PendingDialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="A dialog that shows progress while an async operation runs. The theme provides PendingDialog styling."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <Button Content="Simulate Pending Operation" Margin="0,0,8,8" Click="ShowPendingDialog_Click"/>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- LoadingOverlay section -->
+                        <TextBlock Text="LoadingOverlay" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="A full or partial overlay that blocks interaction while loading. The theme provides LoadingOverlay styling."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <Button Content="Show Loading Overlay" Margin="0,0,8,8" Click="ShowLoadingOverlay_Click"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- THEMING TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Theming">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+
+                        <TextBlock Text="Theme Switcher" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="AuraUI supports Light and Dark theme variants. Toggle between them below."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+                        <StackPanel Orientation="Horizontal" Spacing="16">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Theme Variant" FontWeight="SemiBold"/>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Button Content="Light" Classes="accent" Click="LightTheme_Click" x:Name="LightThemeButton"/>
+                                    <Button Content="Dark" Click="DarkTheme_Click" x:Name="DarkThemeButton"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <TextBlock Text="Design Tokens" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="AuraUI uses design tokens for consistent theming. Tokens are defined as resource dictionaries and include:"
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+                        <WrapPanel>
+                            <layout:Card Header="Colors" Padding="12" Width="220" Margin="0,0,12,12">
+                                <TextBlock Text="Primary, Secondary, Success, Warning, Error, Surface, Background, and semantic color tokens."
+                                           TextWrapping="Wrap" FontSize="12"/>
+                            </layout:Card>
+                            <layout:Card Header="Spacing" Padding="12" Width="220" Margin="0,0,12,12">
+                                <TextBlock Text="Consistent spacing scale (4px, 8px, 12px, 16px, 24px, 32px, 48px) for margins and padding."
+                                           TextWrapping="Wrap" FontSize="12"/>
+                            </layout:Card>
+                            <layout:Card Header="Typography" Padding="12" Width="220" Margin="0,0,12,12">
+                                <TextBlock Text="Font sizes, weights, and line heights following a consistent type scale."
+                                           TextWrapping="Wrap" FontSize="12"/>
+                            </layout:Card>
+                            <layout:Card Header="Shadows" Padding="12" Width="220" Margin="0,0,12,12">
+                                <TextBlock Text="Elevation shadow tokens (levels 0-3) for depth and layering effects."
+                                           TextWrapping="Wrap" FontSize="12"/>
+                            </layout:Card>
+                            <layout:Card Header="Animations" Padding="12" Width="220" Margin="0,0,12,12">
+                                <TextBlock Text="Duration and easing tokens for consistent motion across all controls."
+                                           TextWrapping="Wrap" FontSize="12"/>
+                            </layout:Card>
+                            <layout:Card Header="Corners" Padding="12" Width="220" Margin="0,0,12,12">
+                                <TextBlock Text="Corner radius tokens (None, Small, Medium, Large, Round) for border radii."
+                                           TextWrapping="Wrap" FontSize="12"/>
+                            </layout:Card>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <TextBlock Text="Theme System" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="AuraUI ships with two complete theme packages:"
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+
+                        <WrapPanel>
+                            <layout:Card Header="AuraUI.Themes.Fluent" Padding="16" Width="350" Margin="0,0,12,12" Elevation="2">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Windows 11 / Fluent Design inspired theme. Clean, modern, and professional. Ships as the default theme."
+                                               TextWrapping="Wrap" FontSize="13"/>
+                                    <TextBlock Text="avares://AuraUI.Themes.Fluent/AuraUITheme.axaml"
+                                               FontFamily="Consolas, monospace" FontSize="11" Foreground="Gray"/>
+                                </StackPanel>
+                            </layout:Card>
+                            <layout:Card Header="AuraUI.Themes.Material" Padding="16" Width="350" Margin="0,0,12,12" Elevation="2">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Google Material Design 3 inspired theme. Rounded corners, bold colors, and tactile surfaces."
+                                               TextWrapping="Wrap" FontSize="13"/>
+                                    <TextBlock Text="avares://AuraUI.Themes.Material/AuraUITheme.axaml"
+                                               FontFamily="Consolas, monospace" FontSize="11" Foreground="Gray"/>
+                                </StackPanel>
+                            </layout:Card>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <TextBlock Text="Customization" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Override design tokens by merging your own resource dictionary after the theme:"
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                Padding="16" CornerRadius="8" MaxWidth="600">
+                            <TextBlock FontFamily="Consolas, monospace" FontSize="12" TextWrapping="Wrap"
+                                       Text="&lt;Application.Styles&gt;&#x0a;    &lt;FluentTheme /&gt;&#x0a;    &lt;StyleInclude Source=&quot;avares://AuraUI.Themes.Fluent/AuraUITheme.axaml&quot;/&gt;&#x0a;&lt;/Application.Styles&gt;&#x0a;&#x0a;&lt;Application.Resources&gt;&#x0a;    &lt;ResourceDictionary&gt;&#x0a;        &lt;SolidColorBrush x:Key=&quot;AuraPrimaryBrush&quot; Color=&quot;#6366F1&quot;/&gt;&#x0a;    &lt;/ResourceDictionary&gt;&#x0a;&lt;/Application.Resources&gt;"/>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+    </DockPanel>
+</Window>

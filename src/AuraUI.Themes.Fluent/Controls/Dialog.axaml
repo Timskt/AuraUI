@@ -1,0 +1,154 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         Dialog — Fluent Style (Modal Dialog)
+         ============================================================ -->
+    <Style Selector="Window.dialog">
+        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraDialogRadius}"/>
+        <Setter Property="MinWidth" Value="400"/>
+        <Setter Property="MaxWidth" Value="680"/>
+        <Setter Property="SizeToContent" Value="Height"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        BoxShadow="{StaticResource AuraShadowLg}"
+                        ClipToBounds="True">
+                    <DockPanel>
+                        <!-- Title bar / Header -->
+                        <DockPanel Name="PART_TitleBar"
+                                   DockPanel.Dock="Top"
+                                   Background="Transparent"
+                                   Padding="24,20,24,0">
+                            <!-- Close button -->
+                            <Button Name="PART_CloseButton"
+                                    DockPanel.Dock="Right"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Padding="4"
+                                    Width="32" Height="32"
+                                    CornerRadius="4"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="8,-4,-4,0"
+                                    Cursor="Hand">
+                                <Path Width="12" Height="12"
+                                      Data="M 1,1 L 11,11 M 11,1 L 1,11"
+                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"/>
+                            </Button>
+
+                            <!-- Title -->
+                            <TextBlock Name="PART_Title"
+                                       Text="{TemplateBinding Title}"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource AuraForegroundBrush}"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"/>
+                        </DockPanel>
+
+                        <!-- Footer buttons -->
+                        <StackPanel Name="PART_ButtonArea"
+                                    DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal"
+                                    Spacing="8"
+                                    HorizontalAlignment="Right"
+                                    Margin="24,16,24,24">
+                            <Button Name="PART_SecondaryButton"
+                                    Classes="ghost"
+                                    Content="Cancel"/>
+                            <Button Name="PART_PrimaryButton"
+                                    Content="OK"/>
+                        </StackPanel>
+
+                        <!-- Content area with scroll -->
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto"
+                                      MaxHeight="500">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="24,16"/>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Dialog close button states -->
+    <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Dialog overlay backdrop -->
+    <Style Selector="Border.dialog-overlay">
+        <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
+    </Style>
+
+    <!-- Dialog variants -->
+    <!-- Small dialog -->
+    <Style Selector="Window.dialog.small">
+        <Setter Property="MinWidth" Value="320"/>
+        <Setter Property="MaxWidth" Value="420"/>
+    </Style>
+
+    <!-- Large dialog -->
+    <Style Selector="Window.dialog.large">
+        <Setter Property="MinWidth" Value="600"/>
+        <Setter Property="MaxWidth" Value="900"/>
+    </Style>
+
+    <!-- Full-screen dialog -->
+    <Style Selector="Window.dialog.fullscreen">
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="MinWidth" Value="100%"/>
+        <Setter Property="MaxWidth" Value="100%"/>
+    </Style>
+
+    <!-- Dialog with no close button -->
+    <Style Selector="Window.dialog.no-close /template/ Button#PART_CloseButton">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Overlay backdrop -->
+    <Style Selector="Border.flyout-overlay">
+        <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         Flyout / Popup Panel Style
+         ============================================================ -->
+    <Style Selector="Border.flyout">
+        <Setter Property="Background" Value="{StaticResource AuraFlyoutBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraFlyoutBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+    </Style>
+
+    <Style Selector="Border.flyout">
+        <Style.Animations>
+            <Animation Duration="00:00:00.150"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+</Styles>

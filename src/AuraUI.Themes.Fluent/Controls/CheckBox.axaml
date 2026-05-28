@@ -1,0 +1,210 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         CheckBox — Fluent Style
+         ============================================================ -->
+    <Style Selector="CheckBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <!-- Checkbox box -->
+                    <Border Name="PART_Border"
+                            Width="20" Height="20"
+                            CornerRadius="4"
+                            Background="{StaticResource AuraInputBackgroundBrush}"
+                            BorderBrush="{StaticResource AuraInputBorderBrush}"
+                            BorderThickness="1.5"
+                            VerticalAlignment="Center">
+                        <Border.Transitions>
+                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                        </Border.Transitions>
+                        <!-- Checkmark -->
+                        <Path Name="PART_CheckMark"
+                              Width="12" Height="12"
+                              Data="M 2,6 L 5,9 L 10,3"
+                              Stroke="Transparent"
+                              StrokeThickness="2"
+                              StrokeLineJoin="Round"
+                              Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                            <Path.Transitions>
+                                <BrushTransition Duration="00:00:00.200" Property="Stroke"/>
+                            </Path.Transitions>
+                        </Path>
+                    </Border>
+
+                    <!-- Content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      VerticalAlignment="Center"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- CheckBox :pointerover -->
+    <Style Selector="CheckBox:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- CheckBox :checked -->
+    <Style Selector="CheckBox:checked /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="CheckBox:checked /template/ Path#PART_CheckMark">
+        <Setter Property="Stroke" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- CheckBox checked + :pointerover -->
+    <Style Selector="CheckBox:checked:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+    </Style>
+
+    <!-- CheckBox checked + :pressed -->
+    <Style Selector="CheckBox:checked:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+    </Style>
+
+    <!-- CheckBox :pressed -->
+    <Style Selector="CheckBox:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundDisabledBrush}"/>
+    </Style>
+
+    <!-- CheckBox :focus -->
+    <Style Selector="CheckBox:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- CheckBox :disabled -->
+    <Style Selector="CheckBox:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+    <!-- CheckBox indeterminate -->
+    <Style Selector="CheckBox:indeterminate /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="CheckBox:indeterminate /template/ Path#PART_CheckMark">
+        <Setter Property="Data" Value="M 3,6 L 9,6"/>
+        <Setter Property="Stroke" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- CheckBox error -->
+    <Style Selector="CheckBox:error /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         CheckBox Variants
+         ============================================================ -->
+
+    <!-- Card style -->
+    <Style Selector="CheckBox.card">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{StaticResource AuraInputBackgroundBrush}"
+                        BorderBrush="{StaticResource AuraInputBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{StaticResource AuraRadiusMd}"
+                        Padding="12">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Border Name="PART_CheckBoxBorder"
+                                Width="20" Height="20"
+                                CornerRadius="4"
+                                Background="{StaticResource AuraInputBackgroundBrush}"
+                                BorderBrush="{StaticResource AuraInputBorderBrush}"
+                                BorderThickness="1.5"
+                                VerticalAlignment="Center">
+                            <Path Name="PART_CheckMark"
+                                  Width="12" Height="12"
+                                  Data="M 2,6 L 5,9 L 10,3"
+                                  Stroke="Transparent"
+                                  StrokeThickness="2"/>
+                                  StrokeLineJoin="Round"
+                                  Stretch="Uniform"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                        </Border>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="CheckBox.card:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+    </Style>
+
+    <Style Selector="CheckBox.card:checked /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Toggle style (Switch-like) -->
+    <Style Selector="CheckBox.toggle">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <Border Name="PART_Border"
+                            Width="40" Height="20"
+                            CornerRadius="10"
+                            Background="{StaticResource AuraBorderBrush}"
+                            VerticalAlignment="Center">
+                        <Border.Transitions>
+                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        </Border.Transitions>
+                        <Border Name="PART_SwitchKnob"
+                                Width="16" Height="16"
+                                CornerRadius="8"
+                                Background="{StaticResource AuraBackgroundBrush}"
+                                Margin="2"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
+                            <Border.Transitions>
+                                <DoubleTransition Duration="00:00:00.200" Property="Margin"/>
+                            </Border.Transitions>
+                        </Border>
+                    </Border>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      VerticalAlignment="Center"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="CheckBox.toggle:checked /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="CheckBox.toggle:checked /template/ Border#PART_SwitchKnob">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+</Styles>

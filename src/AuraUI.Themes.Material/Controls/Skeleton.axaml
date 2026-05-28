@@ -1,0 +1,56 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — Skeleton Loading
+         ======================================== -->
+
+    <Style Selector="Skeleton">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="MinHeight" Value="16"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Skeleton">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            ClipToBounds="True">
+                        <!-- Shimmer effect overlay -->
+                        <Border Name="PART_Shimmer"
+                                Background="#20FFFFFF"
+                                Width="60%"
+                                HorizontalAlignment="Left"
+                                RenderTransformOrigin="0,0.5">
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="PART_ShimmerTransform" X="-100%"/>
+                            </Border.RenderTransform>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Circle skeleton (avatars, icons) -->
+    <Style Selector="Skeleton.circle">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+    </Style>
+
+    <!-- Text skeleton -->
+    <Style Selector="Skeleton.text">
+        <Setter Property="MinHeight" Value="12"/>
+        <Setter Property="CornerRadius" Value="4"/>
+    </Style>
+
+    <!-- Title skeleton -->
+    <Style Selector="Skeleton.title">
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="CornerRadius" Value="4"/>
+    </Style>
+
+</Styles>

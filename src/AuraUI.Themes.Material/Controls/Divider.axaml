@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — Divider
+         ======================================== -->
+
+    <Style Selector="layout|Divider">
+        <Setter Property="Foreground" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+
+    <!-- Vertical divider -->
+    <Style Selector="layout|Divider[Orientation=Vertical]">
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,157 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         WindowX — Fluent Style (Custom Chrome Window)
+         ============================================================ -->
+    <Style Selector="Window.window-x">
+        <Setter Property="Background" Value="{StaticResource AuraBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="ExtendClientAreaToDecorationsHint" Value="True"/>
+        <Setter Property="ExtendClientAreaTitleBarHeightHint" Value="40"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="0">
+                    <DockPanel>
+                        <!-- Custom Title Bar -->
+                        <DockPanel Name="PART_TitleBar"
+                                   DockPanel.Dock="Top"
+                                   Height="40"
+                                   Background="Transparent"
+                                   Margin="0,4,0,0">
+
+                            <!-- Window icon -->
+                            <Image Name="PART_Icon"
+                                   DockPanel.Dock="Left"
+                                   Width="16" Height="16"
+                                   Margin="12,0,8,0"
+                                   VerticalAlignment="Center"
+                                   Source="{TemplateBinding Icon}"/>
+
+                            <!-- Title -->
+                            <TextBlock Name="PART_Title"
+                                       Text="{TemplateBinding Title}"
+                                       DockPanel.Dock="Left"
+                                       FontSize="12"
+                                       Foreground="{StaticResource AuraForegroundSecondaryBrush}"
+                                       VerticalAlignment="Center"
+                                       Margin="4,0"/>
+
+                            <!-- Window control buttons -->
+                            <StackPanel DockPanel.Dock="Right"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Stretch">
+
+                                <!-- Minimize -->
+                                <Button Name="PART_MinimizeButton"
+                                        Width="46"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        CornerRadius="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Cursor="Hand">
+                                    <Path Width="10" Height="1"
+                                          Data="M 0,0.5 L 10,0.5"
+                                          Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                          StrokeThickness="1"/>
+                                </Button>
+
+                                <!-- Maximize -->
+                                <Button Name="PART_MaximizeButton"
+                                        Width="46"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        CornerRadius="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Cursor="Hand">
+                                    <Path Width="10" Height="10"
+                                          Data="M 1,1 L 9,1 L 9,9 L 1,9 Z"
+                                          Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                          StrokeThickness="1"/>
+                                          Fill="Transparent"/>
+                                </Button>
+
+                                <!-- Close -->
+                                <Button Name="PART_CloseButton"
+                                        Width="46"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        CornerRadius="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Cursor="Hand">
+                                    <Path Width="10" Height="10"
+                                          Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                          Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                          StrokeThickness="1.2"/>
+                                </Button>
+                            </StackPanel>
+                        </DockPanel>
+
+                        <!-- Content area -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Window control button hover states -->
+    <Style Selector="Window.window-x /template/ Button#PART_MinimizeButton:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="Window.window-x /template/ Button#PART_MaximizeButton:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pointerover Path">
+        <Setter Property="Stroke" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- Window control button pressed states -->
+    <Style Selector="Window.window-x /template/ Button#PART_MinimizeButton:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <Style Selector="Window.window-x /template/ Button#PART_MaximizeButton:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+    </Style>
+
+    <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pressed">
+        <Setter Property="Background" Value="{StaticResource AuraErrorPressedBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         WindowX Variants
+         ============================================================ -->
+
+    <!-- Mica / immersive background -->
+    <Style Selector="Window.window-x.mica">
+        <Setter Property="Background" Value="{StaticResource AuraAltBackgroundBrush}"/>
+    </Style>
+
+    <!-- Acrylic background -->
+    <Style Selector="Window.window-x.acrylic">
+        <Setter Property="Background" Value="{StaticResource AuraAcrylicBackgroundBrush}"/>
+    </Style>
+
+    <!-- Compact title bar -->
+    <Style Selector="Window.window-x.compact /template/ DockPanel#PART_TitleBar">
+        <Setter Property="Height" Value="32"/>
+    </Style>
+
+    <!-- No title bar (content only, user handles dragging) -->
+    <Style Selector="Window.window-x.no-title-bar /template/ DockPanel#PART_TitleBar">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+</Styles>

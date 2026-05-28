@@ -1,0 +1,121 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================================
+         Material Design 3 — TextBox (Filled & Outlined)
+         ======================================== -->
+
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="SelectionBrush" Value="#296750A4"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyLargeFamily}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraTextFieldHeight}"/>
+        <Setter Property="Padding" Value="16,8"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid>
+                            <!-- State layer (hover/press) -->
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+
+                            <!-- Content area -->
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <!-- Watermark / placeholder -->
+                                <TextBlock Name="PART_Watermark"
+                                           Text="{TemplateBinding Watermark}"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                           FontSize="16"
+                                           VerticalAlignment="Center"
+                                           IsVisible="False"/>
+                                <ScrollViewer Name="PART_ScrollViewer"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden">
+                                    <TextPresenter Name="PART_TextPresenter"
+                                                   Text="{TemplateBinding Text, Mode=TwoWay}"
+                                                   CaretBrush="{TemplateBinding CaretBrush}"
+                                                   SelectionBrush="{TemplateBinding SelectionBrush}"
+                                                   FontSize="{TemplateBinding FontSize}"
+                                                   FontFamily="{TemplateBinding FontFamily}"
+                                                   FontWeight="{TemplateBinding FontWeight}"
+                                                   Foreground="{TemplateBinding Foreground}"/>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Filled style (default Material filled text field) -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+        <Setter Property="CornerRadius" Value="4,4,0,0"/>
+    </Style>
+
+    <!-- Bottom border line (filled style) -->
+    <Style Selector="TextBox /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="TextBox:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Focused -->
+    <Style Selector="TextBox:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="TextBox:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+    </Style>
+
+    <!-- ==========================================
+         Outlined Variant (.outlined)
+         ========================================== -->
+    <Style Selector="TextBox.outlined">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+    </Style>
+
+    <Style Selector="TextBox.outlined:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Error state -->
+    <Style Selector="TextBox:error">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <Style Selector="TextBox:error:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+</Styles>
