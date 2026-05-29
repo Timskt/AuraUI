@@ -97,6 +97,24 @@ public class ChartAxis : AvaloniaObject
     public static readonly StyledProperty<bool> IsInvertedProperty =
         AvaloniaProperty.Register<ChartAxis, bool>(nameof(IsInverted));
 
+    /// <summary>
+    /// Length of tick marks in pixels.
+    /// </summary>
+    public static readonly StyledProperty<double> TickLengthProperty =
+        AvaloniaProperty.Register<ChartAxis, double>(nameof(TickLength), 4.0);
+
+    /// <summary>
+    /// Width of the axis line in pixels.
+    /// </summary>
+    public static readonly StyledProperty<double> AxisLineWidthProperty =
+        AvaloniaProperty.Register<ChartAxis, double>(nameof(AxisLineWidth), 1.0);
+
+    /// <summary>
+    /// Dash pattern for grid lines (null = solid).
+    /// </summary>
+    public static readonly StyledProperty<double[]?> GridLineStyleProperty =
+        AvaloniaProperty.Register<ChartAxis, double[]?>(nameof(GridLineStyle));
+
     // CLR wrappers
     public AxisPosition Position { get => GetValue(PositionProperty); set => SetValue(PositionProperty, value); }
     public AxisScale Scale { get => GetValue(ScaleProperty); set => SetValue(ScaleProperty, value); }
@@ -120,6 +138,9 @@ public class ChartAxis : AvaloniaObject
     public bool RotateLabels { get => GetValue(RotateLabelsProperty); set => SetValue(RotateLabelsProperty, value); }
     public double LabelRotation { get => GetValue(LabelRotationProperty); set => SetValue(LabelRotationProperty, value); }
     public bool IsInverted { get => GetValue(IsInvertedProperty); set => SetValue(IsInvertedProperty, value); }
+    public double TickLength { get => GetValue(TickLengthProperty); set => SetValue(TickLengthProperty, value); }
+    public double AxisLineWidth { get => GetValue(AxisLineWidthProperty); set => SetValue(AxisLineWidthProperty, value); }
+    public double[]? GridLineStyle { get => GetValue(GridLineStyleProperty); set => SetValue(GridLineStyleProperty, value); }
 
     // ────────────────────────────────────────────────
     //  Computed layout (set by Chart during layout pass)

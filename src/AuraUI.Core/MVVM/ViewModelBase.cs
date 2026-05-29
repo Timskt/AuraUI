@@ -41,4 +41,17 @@ public abstract class ViewModelBase : INotifyPropertyChanged
         foreach (var name in propertyNames)
             OnPropertyChanged(name);
     }
+
+    /// <summary>
+    /// Sets a property value and raises PropertyChanged for the property and any dependent properties.
+    /// </summary>
+    protected bool SetProperty<T>(ref T field, T value, params string[] alsoNotify)
+    {
+        if (SetProperty(ref field, value))
+        {
+            OnPropertyChanged(alsoNotify);
+            return true;
+        }
+        return false;
+    }
 }

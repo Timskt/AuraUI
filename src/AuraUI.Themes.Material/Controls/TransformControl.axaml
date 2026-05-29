@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — TransformControl
+         ======================================== -->
+
+    <Style Selector="layout|TransformControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:TransformControl">
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <ContentPresenter.Transitions>
+                            <TransformOperationsTransition Duration="0:0:0.250" Property="RenderTransform"/>
+                        </ContentPresenter.Transitions>
+                    </ContentPresenter>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style Selector="layout|TransformControl:scaled">
+        <!-- Marker pseudo-class -->
+    </Style>
+
+    <Style Selector="layout|TransformControl:rotated">
+        <!-- Marker pseudo-class -->
+    </Style>
+
+    <Style Selector="layout|TransformControl:translated">
+        <!-- Marker pseudo-class -->
+    </Style>
+
+</Styles>

@@ -5,6 +5,7 @@
         xmlns:selection="using:AuraUI.Controls.Selection"
         xmlns:display="using:AuraUI.Controls.Display"
         xmlns:feedback="using:AuraUI.Controls.Feedback"
+        xmlns:charts="using:AuraUI.Controls.Charts"
         xmlns:core="using:AuraUI.Core.Helpers"
         x:Class="AuraUI.Demo.MainWindow"
         x:DataType="Window"
@@ -750,6 +751,46 @@
                                        Text="&lt;Application.Styles&gt;&#x0a;    &lt;FluentTheme /&gt;&#x0a;    &lt;StyleInclude Source=&quot;avares://AuraUI.Themes.Fluent/AuraUITheme.axaml&quot;/&gt;&#x0a;&lt;/Application.Styles&gt;&#x0a;&#x0a;&lt;Application.Resources&gt;&#x0a;    &lt;ResourceDictionary&gt;&#x0a;        &lt;SolidColorBrush x:Key=&quot;AuraPrimaryBrush&quot; Color=&quot;#6366F1&quot;/&gt;&#x0a;    &lt;/ResourceDictionary&gt;&#x0a;&lt;/Application.Resources&gt;"/>
                         </Border>
 
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- CHARTS TAB -->
+            <!-- ============================================================ -->
+            <TabItem Header="Charts">
+                <ScrollViewer>
+                    <StackPanel Spacing="16" Margin="8">
+                        <TextBlock Text="AuraUI Charts" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock Text="High-performance charts powered by custom Rendering" FontSize="14" Foreground="Gray"/>
+
+                        <!-- Line Chart -->
+                        <TextBlock Text="Line Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="LineChart" Width="600" Height="300" Title="Monthly Sales"/>
+
+                        <!-- Bar Chart -->
+                        <TextBlock Text="Bar Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="BarChart" Width="600" Height="300" Title="Revenue by Category"/>
+
+                        <!-- Pie Chart -->
+                        <TextBlock Text="Pie Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="PieChart" Width="400" Height="400" Title="Market Share"/>
+
+                        <!-- Area Chart -->
+                        <TextBlock Text="Area Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="AreaChart" Width="600" Height="300" Title="Website Traffic"/>
+
+                        <!-- Scatter Chart -->
+                        <TextBlock Text="Scatter Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="ScatterChart" Width="600" Height="300" Title="Height vs Weight"/>
+
+                        <!-- Radar Chart -->
+                        <TextBlock Text="Radar Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="RadarChart" Width="400" Height="400" Title="Skill Assessment"/>
+
+                        <!-- Gauge Chart -->
+                        <TextBlock Text="Gauge Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <charts:Chart x:Name="GaugeChart" Width="300" Height="300" Title="Performance Score"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

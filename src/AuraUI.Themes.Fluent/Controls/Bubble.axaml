@@ -1,0 +1,72 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         Bubble — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|Bubble">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BubbleCornerRadius" Value="{DynamicResource AuraCardRadius}"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="BubbleShadow" Value="{DynamicResource AuraShadowSm}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Arrow positioned based on placement -->
+                    <Path Name="PART_Arrow"
+                          Fill="{TemplateBinding Background}"
+                          Stroke="{TemplateBinding BorderBrush}"
+                          StrokeThickness="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Margin="16,0,0,0"/>
+
+                    <!-- Bubble body -->
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding BubbleCornerRadius}"
+                            BoxShadow="{TemplateBinding BubbleShadow}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="0,8,0,8">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Arrow placements -->
+    <Style Selector="layout|Bubble:arrow-top">
+        <Setter Property="Margin" Value="0,8,0,0"/>
+    </Style>
+
+    <Style Selector="layout|Bubble:arrow-bottom">
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <Style Selector="layout|Bubble:arrow-left">
+        <Setter Property="Margin" Value="8,0,0,0"/>
+    </Style>
+
+    <Style Selector="layout|Bubble:arrow-right">
+        <Setter Property="Margin" Value="0,0,8,0"/>
+    </Style>
+
+    <!-- Bubble class .flat — no shadow -->
+    <Style Selector="layout|Bubble.flat">
+        <Setter Property="BubbleShadow" Value="{DynamicResource AuraShadowNone}"/>
+    </Style>
+
+    <!-- Bubble class .accent — primary color -->
+    <Style Selector="layout|Bubble.accent">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         TransformControl — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|TransformControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter Name="PART_ContentPresenter"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <ContentPresenter.Transitions>
+                        <TransformOperationsTransition Duration="0:0:0.200" Property="RenderTransform"/>
+                    </ContentPresenter.Transitions>
+                </ContentPresenter>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- TransformControl :scaled -->
+    <Style Selector="layout|TransformControl:scaled">
+        <!-- Marker pseudo-class; transforms applied in code -->
+    </Style>
+
+    <!-- TransformControl :rotated -->
+    <Style Selector="layout|TransformControl:rotated">
+        <!-- Marker pseudo-class; transforms applied in code -->
+    </Style>
+
+    <!-- TransformControl :translated -->
+    <Style Selector="layout|TransformControl:translated">
+        <!-- Marker pseudo-class; transforms applied in code -->
+    </Style>
+
+</Styles>

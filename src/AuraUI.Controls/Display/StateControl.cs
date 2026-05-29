@@ -27,6 +27,12 @@ public class StateItem : AvaloniaObject
         AvaloniaProperty.Register<StateItem, object?>(nameof(Content));
 
     /// <summary>
+    /// Defines the <see cref="Icon"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<object?> IconProperty =
+        AvaloniaProperty.Register<StateItem, object?>(nameof(Icon));
+
+    /// <summary>
     /// Gets or sets the name of this state (e.g. "Loading", "Error", "Empty", "Content").
     /// </summary>
     public string? StateName
@@ -42,6 +48,15 @@ public class StateItem : AvaloniaObject
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the icon associated with this state.
+    /// </summary>
+    public object? Icon
+    {
+        get => GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
     }
 }
 

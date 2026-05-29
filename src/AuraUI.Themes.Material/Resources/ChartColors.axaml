@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         AuraUI Material Theme — Chart Color Palette
+         10-color palette derived from Material Design 3 tonal system.
+         ============================================================ -->
+
+    <!-- Default chart color palette (10 colors) -->
+    <Color x:Key="AuraChartColor1">#6750A4</Color>
+    <Color x:Key="AuraChartColor2">#625B71</Color>
+    <Color x:Key="AuraChartColor3">#7D5260</Color>
+    <Color x:Key="AuraChartColor4">#2E7D32</Color>
+    <Color x:Key="AuraChartColor5">#ED6C02</Color>
+    <Color x:Key="AuraChartColor6">#D32F2F</Color>
+    <Color x:Key="AuraChartColor7">#0288D1</Color>
+    <Color x:Key="AuraChartColor8">#9C27B0</Color>
+    <Color x:Key="AuraChartColor9">#00695C</Color>
+    <Color x:Key="AuraChartColor10">#5D4037</Color>
+
+    <!-- Chart palette as brushes (for direct binding) -->
+    <SolidColorBrush x:Key="AuraChartPalette1" Color="#6750A4"/>
+    <SolidColorBrush x:Key="AuraChartPalette2" Color="#625B71"/>
+    <SolidColorBrush x:Key="AuraChartPalette3" Color="#7D5260"/>
+    <SolidColorBrush x:Key="AuraChartPalette4" Color="#2E7D32"/>
+    <SolidColorBrush x:Key="AuraChartPalette5" Color="#ED6C02"/>
+    <SolidColorBrush x:Key="AuraChartPalette6" Color="#D32F2F"/>
+    <SolidColorBrush x:Key="AuraChartPalette7" Color="#0288D1"/>
+    <SolidColorBrush x:Key="AuraChartPalette8" Color="#9C27B0"/>
+    <SolidColorBrush x:Key="AuraChartPalette9" Color="#00695C"/>
+    <SolidColorBrush x:Key="AuraChartPalette10" Color="#5D4037"/>
+
+    <!-- Chart semantic colors -->
+    <SolidColorBrush x:Key="AuraChartBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="AuraChartAxisBrush" Color="#BDBDBD"/>
+    <SolidColorBrush x:Key="AuraChartGridBrush" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="AuraChartLabelBrush" Color="#757575"/>
+    <SolidColorBrush x:Key="AuraChartTitleBrush" Color="#212121"/>
+    <SolidColorBrush x:Key="AuraChartSubtitleBrush" Color="#9E9E9E"/>
+    <SolidColorBrush x:Key="AuraChartTooltipBackgroundBrush" Color="#313033"/>
+    <SolidColorBrush x:Key="AuraChartTooltipForegroundBrush" Color="#F4EFF4"/>
+    <SolidColorBrush x:Key="AuraChartLegendBrush" Color="#757575"/>
+
+    <!-- Up/Down colors for financial charts -->
+    <SolidColorBrush x:Key="AuraChartUpBrush" Color="#2E7D32"/>
+    <SolidColorBrush x:Key="AuraChartDownBrush" Color="#D32F2F"/>
+
+    <!-- Heatmap gradient endpoints -->
+    <Color x:Key="AuraChartHeatmapLow">#E8F5E9</Color>
+    <Color x:Key="AuraChartHeatmapHigh">#1B5E20</Color>
+
+</ResourceDictionary>

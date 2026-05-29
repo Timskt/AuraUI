@@ -23,6 +23,16 @@ public static class ChartRendererRegistry
         Register(new RadarRenderer());
         Register(new GaugeRenderer());
         Register(new FunnelRenderer());
+
+        // Register advanced chart renderers
+        Register(new HeatmapRenderer());
+        Register(new TreemapRenderer());
+        Register(new SankeyRenderer());
+        Register(new GraphRenderer());
+        Register(new CandlestickRenderer());
+        Register(new BoxplotRenderer());
+        Register(new ParallelRenderer());
+        Register(new SunburstRenderer());
     }
 
     public static void Register(IChartRenderer renderer)

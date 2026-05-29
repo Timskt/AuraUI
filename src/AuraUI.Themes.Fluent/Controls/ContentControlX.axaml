@@ -1,0 +1,70 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         ContentControlX — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|ContentControlX">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Horizontal layout (Left/Right) -->
+                    <StackPanel Name="PART_HorizontalPanel"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <ContentPresenter Name="PART_IconPresenterLeft"
+                                          Content="{TemplateBinding Icon}"
+                                          ContentTemplate="{TemplateBinding IconTemplate}"
+                                          Width="{TemplateBinding IconSize}"
+                                          Height="{TemplateBinding IconSize}"
+                                          Margin="{TemplateBinding IconMargin}"
+                                          VerticalAlignment="Center"
+                                          IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          VerticalAlignment="Center"/>
+                        <ContentPresenter Name="PART_IconPresenterRight"
+                                          Content="{TemplateBinding Icon}"
+                                          ContentTemplate="{TemplateBinding IconTemplate}"
+                                          Width="{TemplateBinding IconSize}"
+                                          Height="{TemplateBinding IconSize}"
+                                          Margin="{TemplateBinding IconMargin}"
+                                          VerticalAlignment="Center"
+                                          IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                    </StackPanel>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Has icon -->
+    <Style Selector="layout|ContentControlX:has-icon">
+        <!-- Marker for styling hooks -->
+    </Style>
+
+    <!-- No icon -->
+    <Style Selector="layout|ContentControlX:no-icon">
+        <!-- Marker for styling hooks -->
+    </Style>
+
+    <!-- Icon on the left (default) -->
+    <Style Selector="layout|ContentControlX:icon-left /template/ ContentPresenter#PART_IconPresenterLeft">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="layout|ContentControlX:icon-left /template/ ContentPresenter#PART_IconPresenterRight">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Icon on the right -->
+    <Style Selector="layout|ContentControlX:icon-right /template/ ContentPresenter#PART_IconPresenterLeft">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <Style Selector="layout|ContentControlX:icon-right /template/ ContentPresenter#PART_IconPresenterRight">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+</Styles>

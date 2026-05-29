@@ -25,6 +25,7 @@
                 <ResourceInclude Source="/Resources/Typography.axaml"/>
                 <ResourceInclude Source="/Resources/Animations.axaml"/>
                 <ResourceInclude Source="/Resources/Shadows.axaml"/>
+                <ResourceInclude Source="/Resources/ChartColors.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
@@ -81,5 +82,14 @@
     <StyleInclude Source="/Controls/PendingDialog.axaml"/>
     <StyleInclude Source="/Controls/DividerPanel.axaml"/>
     <StyleInclude Source="/Controls/WindowXModalDialog.axaml"/>
+    <StyleInclude Source="/Controls/Chart.axaml"/>
+
+    <!-- V2 controls -->
+    <StyleInclude Source="/Controls/ZoomViewer.axaml"/>
+    <StyleInclude Source="/Controls/TransformControl.axaml"/>
+    <StyleInclude Source="/Controls/AnimationStackPanel.axaml"/>
+    <StyleInclude Source="/Controls/Bubble.axaml"/>
+    <StyleInclude Source="/Controls/ContentControlX.axaml"/>
+    <StyleInclude Source="/Controls/GridX.axaml"/>
 
 </Styles>

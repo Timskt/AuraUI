@@ -1,0 +1,23 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         GridX — Fluent Style
+         ============================================================ -->
+    <!-- GridX inherits Grid and renders lines via Render override.
+         No Template needed; styles set default property values. -->
+    <Style Selector="layout|GridX">
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="GridLineThickness" Value="1"/>
+    </Style>
+
+    <!-- Debug class — high-visibility lines -->
+    <Style Selector="layout|GridX.debug">
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraErrorBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="GridLineThickness" Value="1"/>
+    </Style>
+
+</Styles>

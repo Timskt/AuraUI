@@ -33,6 +33,7 @@ public interface IChartRenderer
     /// <param name="yAxis">The Y axis configuration (null for non-XY charts).</param>
     /// <param name="progress">Animation progress 0..1 (1 = final state).</param>
     /// <param name="allSeries">All series in the chart (for stacking calculations).</param>
+    /// <param name="renderContext">Optional render context for caching, benchmarking, and memory pooling.</param>
     void Render(
         DrawingContext context,
         ChartSeries series,
@@ -40,7 +41,8 @@ public interface IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries);
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null);
 
     /// <summary>
     /// Perform hit testing to find the data point nearest to the pointer position.

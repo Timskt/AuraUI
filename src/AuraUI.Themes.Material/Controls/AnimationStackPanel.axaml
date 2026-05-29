@@ -1,0 +1,13 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — AnimationStackPanel
+         ======================================== -->
+
+    <Style Selector="layout|AnimationStackPanel">
+        <Setter Property="AnimationDuration" Value="0:0:0.250"/>
+    </Style>
+
+</Styles>

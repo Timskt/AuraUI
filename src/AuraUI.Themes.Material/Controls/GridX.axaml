@@ -1,0 +1,22 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — GridX
+         ======================================== -->
+
+    <Style Selector="layout|GridX">
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="GridLineThickness" Value="1"/>
+    </Style>
+
+    <!-- Debug class — high-visibility lines -->
+    <Style Selector="layout|GridX.debug">
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraErrorBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="GridLineThickness" Value="1"/>
+    </Style>
+
+</Styles>

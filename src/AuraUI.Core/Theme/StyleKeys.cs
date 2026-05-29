@@ -153,4 +153,35 @@ public static class ResourceKeys
     public const string EasingDefault = "AuraEasingDefault";
     public const string EasingEnter = "AuraEasingEnter";
     public const string EasingExit = "AuraEasingExit";
+
+    // Chart palette colors
+    public const string ChartPalette1 = "AuraChartPalette1";
+    public const string ChartPalette2 = "AuraChartPalette2";
+    public const string ChartPalette3 = "AuraChartPalette3";
+    public const string ChartPalette4 = "AuraChartPalette4";
+    public const string ChartPalette5 = "AuraChartPalette5";
+    public const string ChartPalette6 = "AuraChartPalette6";
+    public const string ChartPalette7 = "AuraChartPalette7";
+    public const string ChartPalette8 = "AuraChartPalette8";
+    public const string ChartPalette9 = "AuraChartPalette9";
+    public const string ChartPalette10 = "AuraChartPalette10";
+
+    // Chart semantic brushes
+    public const string ChartBackgroundBrush = "AuraChartBackgroundBrush";
+    public const string ChartAxisBrush = "AuraChartAxisBrush";
+    public const string ChartGridBrush = "AuraChartGridBrush";
+    public const string ChartLabelBrush = "AuraChartLabelBrush";
+    public const string ChartTitleBrush = "AuraChartTitleBrush";
+    public const string ChartSubtitleBrush = "AuraChartSubtitleBrush";
+    public const string ChartTooltipBackgroundBrush = "AuraChartTooltipBackgroundBrush";
+    public const string ChartTooltipForegroundBrush = "AuraChartTooltipForegroundBrush";
+    public const string ChartLegendBrush = "AuraChartLegendBrush";
+
+    // Chart financial colors
+    public const string ChartUpBrush = "AuraChartUpBrush";
+    public const string ChartDownBrush = "AuraChartDownBrush";
+
+    // Chart heatmap gradient
+    public const string ChartHeatmapLow = "AuraChartHeatmapLow";
+    public const string ChartHeatmapHigh = "AuraChartHeatmapHigh";
 }

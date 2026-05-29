@@ -1,0 +1,66 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:charts="clr-namespace:AuraUI.Controls.Charts;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Chart — Material Design 3 Style
+         Default styling for the AuraUI Chart control and its
+         sub-components (axes, grid, legend, tooltip).
+         ============================================================ -->
+
+    <!-- Chart base defaults -->
+    <Style Selector="charts|Chart">
+        <Setter Property="ChartBackground" Value="{DynamicResource AuraChartBackgroundBrush}"/>
+        <Setter Property="TitleBrush" Value="{DynamicResource AuraChartTitleBrush}"/>
+        <Setter Property="TitleFontSize" Value="16"/>
+        <Setter Property="ChartPadding" Value="16"/>
+        <Setter Property="IsAnimated" Value="True"/>
+        <Setter Property="AnimationDuration" Value="0:0:0.3"/>
+    </Style>
+
+    <!-- Tooltip defaults -->
+    <Style Selector="charts|Chart /template/ charts|ChartTooltip">
+        <Setter Property="Background" Value="{DynamicResource AuraChartTooltipBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraChartTooltipForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="ShadowBlurRadius" Value="6"/>
+    </Style>
+
+    <!-- Legend defaults -->
+    <Style Selector="charts|Chart /template/ charts|ChartLegend">
+        <Setter Property="LabelBrush" Value="{DynamicResource AuraChartLegendBrush}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="SwatchSize" Value="12"/>
+        <Setter Property="ItemSpacing" Value="16"/>
+        <Setter Property="SwatchCornerRadius" Value="4"/>
+    </Style>
+
+    <!-- Axis defaults -->
+    <Style Selector="charts|Chart /template/ charts|ChartAxis">
+        <Setter Property="AxisLineBrush" Value="{DynamicResource AuraChartAxisBrush}"/>
+        <Setter Property="LabelBrush" Value="{DynamicResource AuraChartLabelBrush}"/>
+        <Setter Property="LabelFontSize" Value="11"/>
+        <Setter Property="ShowLabels" Value="True"/>
+        <Setter Property="ShowTicks" Value="True"/>
+        <Setter Property="ShowAxisLine" Value="True"/>
+        <Setter Property="GridLineThickness" Value="0.5"/>
+    </Style>
+
+    <!-- Grid defaults -->
+    <Style Selector="charts|Chart /template/ charts|ChartGrid">
+        <Setter Property="GridLineBrush" Value="{DynamicResource AuraChartGridBrush}"/>
+        <Setter Property="GridLineThickness" Value="0.5"/>
+        <Setter Property="ShowHorizontalLines" Value="True"/>
+        <Setter Property="ShowVerticalLines" Value="False"/>
+    </Style>
+
+    <!-- Hover state -->
+    <Style Selector="charts|Chart:pointerover">
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+</Styles>

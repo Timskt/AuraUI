@@ -1,0 +1,14 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         AnimationStackPanel — Fluent Style
+         ============================================================ -->
+    <!-- AnimationStackPanel is a Panel and does not use a Template.
+         Styles here configure default property values. -->
+    <Style Selector="layout|AnimationStackPanel">
+        <Setter Property="AnimationDuration" Value="0:0:0.300"/>
+    </Style>
+
+</Styles>

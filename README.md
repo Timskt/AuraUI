@@ -1,7 +1,7 @@
 # AuraUI
 
 [![.NET](https://img.shields.io/badge/.NET-10-purple)](https://dotnet.microsoft.com/)
-[![Avalonia](https://img.shields.io/badge/Avalonia-12-blue)](https://avaloniaui.net/)
+[![Avalonia](https://img.shields.io/badge/Avalonia-11.3-blue)](https://avaloniaui.net/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/AuraUI.Controls.svg)](https://www.nuget.org/packages/AuraUI.Controls)
 
@@ -241,13 +241,14 @@ Google Material Design 3 inspired. Rounded corners, bold colors, and tactile sur
 ### Switching at Runtime
 
 ```csharp
-// Use IAuraThemeService for advanced theming
-public interface IAuraThemeService
+// Use IThemeService for advanced theming
+public interface IThemeService
 {
-    ThemeVariant CurrentTheme { get; }
-    void SetTheme(ThemeVariant variant);
+    ThemeMode CurrentTheme { get; }
+    void SetTheme(ThemeMode mode);
     void ToggleTheme();
-    event EventHandler<ThemeVariant>? ThemeChanged;
+    void SetCustomTheme(string themeName);
+    event EventHandler<ThemeChangedEventArgs>? ThemeChanged;
 }
 ```
 

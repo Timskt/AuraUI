@@ -13,7 +13,7 @@ public class DefaultToastService : IToastService
         => AuraToast.Show(message, duration);
 
     public void Show(string title, string message, TimeSpan? duration = null)
-        => AuraToast.Show(message, duration);
+        => AuraToast.Info(message, title, duration);
 
     public void Success(string message, TimeSpan? duration = null)
         => AuraToast.Success(message, duration: duration);

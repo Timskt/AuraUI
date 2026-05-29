@@ -1,0 +1,59 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         ZoomViewer — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|ZoomViewer">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Cursor" Value="SizeAll"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Panel>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"/>
+                        <!-- Zoom Level Indicator -->
+                        <Border Name="PART_ZoomIndicator"
+                                Background="{DynamicResource AuraOverlayBrush}"
+                                CornerRadius="{DynamicResource AuraRadiusSm}"
+                                Padding="8,4"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Margin="8"
+                                Opacity="0.8">
+                            <TextBlock Text="{Binding ZoomLevel, RelativeSource={RelativeSource TemplatedParent}, StringFormat={0:P0}}"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                        </Border>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ZoomViewer :panning — show move cursor -->
+    <Style Selector="display|ZoomViewer:panning">
+        <Setter Property="Cursor" Value="SizeAll"/>
+    </Style>
+
+    <!-- ZoomViewer :can-zoom -->
+    <Style Selector="display|ZoomViewer:can-zoom">
+        <Setter Property="Cursor" Value="ZoomIn"/>
+    </Style>
+
+    <!-- ZoomViewer :can-pan -->
+    <Style Selector="display|ZoomViewer:can-pan">
+        <Setter Property="Cursor" Value="SizeAll"/>
+    </Style>
+
+</Styles>
