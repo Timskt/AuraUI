@@ -196,11 +196,11 @@ public class WindowX : Window
     }
 
     /// <summary>
-    /// Configures the window to use fully custom chrome by disabling system decorations.
+    /// Configures the window to use fully custom chrome by disabling window decorations.
     /// </summary>
     public void UseCustomChrome()
     {
-        SystemDecorations = SystemDecorations.None;
+        WindowDecorations = WindowDecorations.None;
     }
 
     /// <summary>

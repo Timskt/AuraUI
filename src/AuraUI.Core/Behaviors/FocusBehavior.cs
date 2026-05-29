@@ -123,7 +123,7 @@ public class FocusBehavior : Behavior<Control>
         }
     }
 
-    private void OnGotFocus(object? sender, GotFocusEventArgs e)
+    private void OnGotFocus(object? sender, FocusChangedEventArgs e)
     {
         if (_isUpdatingFocus)
             return;

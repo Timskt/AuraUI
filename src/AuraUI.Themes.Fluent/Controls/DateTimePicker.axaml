@@ -63,7 +63,6 @@
     <!-- Calendar dropdown popup -->
     <Style Selector="selection|DateTimePicker /template/ Popup">
         <Setter Property="Placement" Value="BottomEdgeAlignedLeft"/>
-        <Setter Property="PlacementTarget" Value="{Binding $parent}"/>
     </Style>
 
     <!-- Hover state -->

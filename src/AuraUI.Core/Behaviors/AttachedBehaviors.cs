@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 
 namespace AuraUI.Core.Behaviors;
@@ -136,7 +137,7 @@ public static partial class InputBehavior
         if (clipboard == null)
             return;
 
-        var text = await clipboard.GetTextAsync();
+        var text = await clipboard.TryGetTextAsync();
         if (string.IsNullOrEmpty(text))
             return;
 
@@ -205,7 +206,7 @@ public static partial class InputBehavior
         }
     }
 
-    private static void OnSelectAllGotFocus(object? sender, GotFocusEventArgs e)
+    private static void OnSelectAllGotFocus(object? sender, FocusChangedEventArgs e)
     {
         if (sender is TextBox textBox)
         {

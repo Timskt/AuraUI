@@ -116,7 +116,7 @@ public class WatermarkBehavior : Behavior<TextBox>
         UpdateWatermarkVisibility();
     }
 
-    private void OnGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    private void OnGotFocus(object? sender, Avalonia.Input.FocusChangedEventArgs e)
     {
         UpdateWatermarkVisibility();
     }

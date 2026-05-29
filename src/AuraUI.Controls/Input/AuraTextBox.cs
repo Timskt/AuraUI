@@ -185,13 +185,13 @@ public class AuraTextBox : TextBox
         UpdateEmptyPseudoClass();
     }
 
-    protected override void OnGotFocus(GotFocusEventArgs e)
+    protected override void OnGotFocus(FocusChangedEventArgs e)
     {
         base.OnGotFocus(e);
         PseudoClasses.Set("focus", true);
     }
 
-    protected override void OnLostFocus(RoutedEventArgs e)
+    protected override void OnLostFocus(FocusChangedEventArgs e)
     {
         base.OnLostFocus(e);
         PseudoClasses.Set("focus", false);
@@ -302,7 +302,7 @@ public class AuraTextBox : TextBox
 
     private void UpdateAutomationName()
     {
-        var watermark = Watermark;
+        var watermark = PlaceholderText;
         if (!string.IsNullOrEmpty(watermark))
         {
             SetValue(AutomationProperties.NameProperty, watermark);

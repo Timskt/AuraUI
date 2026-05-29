@@ -152,9 +152,9 @@ public class SearchBox : TextBox
         }
 
         // Apply default watermark if not already set
-        if (string.IsNullOrEmpty(Watermark) && !string.IsNullOrEmpty(SearchWatermark))
+        if (string.IsNullOrEmpty(PlaceholderText) && !string.IsNullOrEmpty(SearchWatermark))
         {
-            Watermark = SearchWatermark;
+            PlaceholderText = SearchWatermark;
         }
 
         SetValue(AutomationProperties.NameProperty, "Search");
@@ -163,13 +163,13 @@ public class SearchBox : TextBox
         UpdateHasSearchText();
     }
 
-    protected override void OnGotFocus(GotFocusEventArgs e)
+    protected override void OnGotFocus(FocusChangedEventArgs e)
     {
         base.OnGotFocus(e);
         PseudoClasses.Set("focus", true);
     }
 
-    protected override void OnLostFocus(RoutedEventArgs e)
+    protected override void OnLostFocus(FocusChangedEventArgs e)
     {
         base.OnLostFocus(e);
         PseudoClasses.Set("focus", false);

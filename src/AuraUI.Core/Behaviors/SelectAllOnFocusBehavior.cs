@@ -48,7 +48,7 @@ public class SelectAllOnFocusBehavior : Behavior<TextBox>
         base.OnDetaching();
     }
 
-    private void OnGotFocus(object? sender, GotFocusEventArgs e)
+    private void OnGotFocus(object? sender, FocusChangedEventArgs e)
     {
         if (!IsEnabled || AssociatedObject == null)
             return;
