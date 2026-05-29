@@ -54,9 +54,7 @@ public static class BindingExtensions
 
     /// <summary>
     /// Binds an <see cref="ICommand"/> to a control. For <see cref="Button"/>
-    /// this binds <see cref="Button.Command"/>; for other controls the
-    /// <see cref="InteractionCommandBehavior"/> approach may be needed.
-    /// Returns the control for chaining.
+    /// this binds <see cref="Button.Command"/>. Returns the control for chaining.
     /// </summary>
     /// <typeparam name="T">The control type.</typeparam>
     /// <param name="control">The target control.</param>

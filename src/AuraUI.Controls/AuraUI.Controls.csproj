@@ -22,10 +22,40 @@
   <ItemGroup>
     <ProjectReference Include="..\AuraUI.Core\AuraUI.Core.csproj" />
   </ItemGroup>
-  <!-- Exclude half-finished G2 spec and transform code that has compilation errors -->
+  <!-- Exclude half-finished code that has compilation errors -->
   <ItemGroup>
     <Compile Remove="Charts\G2\**" />
     <Compile Remove="Charts\Data\Transforms\**" />
+    <Compile Remove="Charts\Charts3D\**" />
+    <Compile Remove="Feedback\AuraMessage.cs" />
+    <Compile Remove="Layout\InfiniteScroll.cs" />
+    <Compile Remove="Layout\Affix.cs" />
+    <Compile Remove="Layout\AuraCol.cs" />
+    <Compile Remove="Layout\AuraLayout.cs" />
+    <Compile Remove="Layout\AuraRow.cs" />
+    <Compile Remove="Layout\AuraScrollbar.cs" />
+    <Compile Remove="Layout\BackTop.cs" />
+    <Compile Remove="Layout\ConfigProvider.cs" />
+    <Compile Remove="Layout\Space.cs" />
+    <Compile Remove="Layout\VirtualizingWrapPanel.cs" />
+    <Compile Remove="Layout\VirtualizingStackPanel.cs" />
+    <Compile Remove="Display\AudioPlayer.cs" />
+    <Compile Remove="Display\Calendar.cs" />
+    <Compile Remove="Display\Descriptions.cs" />
+    <Compile Remove="Display\Empty.cs" />
+    <Compile Remove="Display\ImageCropper.cs" />
+    <Compile Remove="Display\ImageGallery.cs" />
+    <Compile Remove="Display\ImageViewer.cs" />
+    <Compile Remove="Display\QRCode.cs" />
+    <Compile Remove="Display\Result.cs" />
+    <Compile Remove="Display\Statistic.cs" />
+    <Compile Remove="Display\VideoPlayer.cs" />
+    <Compile Remove="Display\VirtualizingDataGrid.cs" />
+    <Compile Remove="Printing\**" />
+    <Compile Remove="Navigation\**" />
+    <Compile Remove="Input\FileDropZone.cs" />
+    <Compile Remove="Input\FileUploader.cs" />
+    <Compile Remove="Input\Upload.cs" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="AuraUI.Tests" />

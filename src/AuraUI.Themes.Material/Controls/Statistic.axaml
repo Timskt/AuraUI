@@ -1,0 +1,40 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <Style Selector="display|Statistic">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="4">
+                    <TextBlock Text="{TemplateBinding Title}"
+                               FontSize="{DynamicResource AuraFontSizeCaption}"
+                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                               IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <ContentPresenter Content="{TemplateBinding Prefix}"
+                                          ContentTemplate="{TemplateBinding PrefixTemplate}"
+                                          IsVisible="{TemplateBinding Prefix, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          VerticalAlignment="Bottom"/>
+                        <TextBlock Text="{TemplateBinding FormattedValue}"
+                                   FontSize="{DynamicResource AuraFontSizeTitleLarge}"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <ContentPresenter Content="{TemplateBinding Suffix}"
+                                          ContentTemplate="{TemplateBinding SuffixTemplate}"
+                                          IsVisible="{TemplateBinding Suffix, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|Statistic[ValueStyle=Large] /template/ StackPanel > TextBlock:nth-child(2)">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeDisplay}"/>
+    </Style>
+
+    <Style Selector="display|Statistic[ValueStyle=Small] /template/ StackPanel > TextBlock:nth-child(2)">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeSubtitle}"/>
+    </Style>
+
+</Styles>

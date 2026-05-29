@@ -1,0 +1,21 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         ConfigProvider — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|ConfigProvider">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <!-- When DisabledGlobal is true, apply opacity to all children -->
+    <Style Selector="layout|ConfigProvider[DisabledGlobal=true]">
+        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+
+    <!-- When AnimationDisabled is true, remove all transitions from descendants -->
+    <!-- Note: This is handled at the theme level; controls check the ConfigProvider ancestor -->
+
+</Styles>

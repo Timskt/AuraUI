@@ -1,0 +1,47 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         Descriptions — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|Descriptions">
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <!-- Descriptions item labels -->
+    <Style Selector="display|Descriptions TextBlock.descriptions-label">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeCaption}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
+    </Style>
+
+    <!-- Descriptions item values -->
+    <Style Selector="display|Descriptions TextBlock.descriptions-value">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeBody}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <!-- Descriptions title -->
+    <Style Selector="display|Descriptions TextBlock.descriptions-title">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeSubtitle}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+    </Style>
+
+    <!-- Bordered descriptions cell -->
+    <Style Selector="Border.descriptions-cell">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="Padding" Value="12"/>
+    </Style>
+
+    <!-- Compact mode -->
+    <Style Selector="display|Descriptions[Compact=true] Border.descriptions-cell">
+        <Setter Property="Padding" Value="8"/>
+    </Style>
+
+</Styles>

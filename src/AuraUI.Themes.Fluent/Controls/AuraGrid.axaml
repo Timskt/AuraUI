@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         AuraRow / AuraCol — Fluent Style (24-column grid)
+         ============================================================ -->
+
+    <!-- Row defaults -->
+    <Style Selector="layout|AuraRow">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Wrap" Value="True"/>
+    </Style>
+
+    <!-- Column defaults: percentage width based on Span -->
+    <Style Selector="layout|AuraCol">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- Span classes (percentage widths) -->
+    <Style Selector="layout|AuraCol.AuraCol-span-1">
+        <Setter Property="MaxWidth" Value="4.1667%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-2">
+        <Setter Property="MaxWidth" Value="8.3333%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-3">
+        <Setter Property="MaxWidth" Value="12.5%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-4">
+        <Setter Property="MaxWidth" Value="16.6667%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-5">
+        <Setter Property="MaxWidth" Value="20.8333%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-6">
+        <Setter Property="MaxWidth" Value="25%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-8">
+        <Setter Property="MaxWidth" Value="33.3333%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-12">
+        <Setter Property="MaxWidth" Value="50%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-16">
+        <Setter Property="MaxWidth" Value="66.6667%"/>
+    </Style>
+    <Style Selector="layout|AuraCol.AuraCol-span-24">
+        <Setter Property="MaxWidth" Value="100%"/>
+    </Style>
+
+</Styles>

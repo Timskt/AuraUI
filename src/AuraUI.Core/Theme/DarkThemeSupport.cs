@@ -6,7 +6,7 @@ namespace AuraUI.Core.Theme;
 /// <summary>
 /// Provides helpers for enabling automatic light/dark theme switching in AuraUI applications.
 /// When enabled, the application's theme variant follows the system preference, and
-/// <see cref="ThemeDictionaries"/> in AuraUITheme.axaml automatically resolve the correct
+/// theme dictionaries in AuraUITheme.axaml automatically resolve the correct
 /// color tokens for the active variant.
 /// </summary>
 /// <remarks>

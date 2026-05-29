@@ -1,0 +1,53 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         AuraLayout — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|AuraLayout">
+        <Setter Property="Background" Value="{DynamicResource AuraBackgroundBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <!-- Header -->
+                    <ContentPresenter Grid.Row="0"
+                                      Content="{TemplateBinding Header}"
+                                      IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                    <!-- Body: Sider + Content -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Left Sider -->
+                        <Border Grid.Column="0"
+                                Width="{TemplateBinding SiderWidth}"
+                                ClipToBounds="True"
+                                IsVisible="{TemplateBinding HasSider}">
+                            <ContentPresenter Content="{TemplateBinding Sider}"/>
+                        </Border>
+                        <!-- Content -->
+                        <ContentPresenter Grid.Column="1"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </Grid>
+                    <!-- Footer -->
+                    <ContentPresenter Grid.Row="2"
+                                      Content="{TemplateBinding Footer}"
+                                      IsVisible="{TemplateBinding Footer, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- AuraLayout header default styling -->
+    <Style Selector="layout|AuraLayout /template/ ContentPresenter:first-child">
+        <Setter Property="Height" Value="64"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+
+</Styles>

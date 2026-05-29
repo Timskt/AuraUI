@@ -1,0 +1,14 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <Style Selector="layout|ConfigProvider">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style Selector="layout|ConfigProvider[DisabledGlobal=true]">
+        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+
+</Styles>

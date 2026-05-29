@@ -4,7 +4,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
-using Avalonia.Threading;
 using AuraUI.Controls.Charts.Graph.Behaviors;
 using AuraUI.Controls.Charts.Graph.Layouts;
 

@@ -1,0 +1,60 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <Style Selector="display|Result">
+        <Setter Property="Padding" Value="32"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="16"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Border Width="72"
+                            Height="72"
+                            CornerRadius="{DynamicResource AuraRadiusFull}"
+                            HorizontalAlignment="Center">
+                        <ContentPresenter Content="{TemplateBinding Icon}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="{TemplateBinding Title}"
+                               FontSize="{DynamicResource AuraFontSizeTitleLarge}"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource AuraForegroundBrush}"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               MaxWidth="500"
+                               TextAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding SubTitle}"
+                               FontSize="{DynamicResource AuraFontSizeBody}"
+                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               MaxWidth="500"
+                               TextAlignment="Center"
+                               IsVisible="{TemplateBinding SubTitle, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                    <ContentPresenter Content="{TemplateBinding Extra}"
+                                      HorizontalAlignment="Center"
+                                      Margin="0,8,0,0"
+                                      IsVisible="{TemplateBinding Extra, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|Result:success /template/ Border:first-child">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+    </Style>
+    <Style Selector="display|Result:error /template/ Border:first-child">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorContainerBrush}"/>
+    </Style>
+    <Style Selector="display|Result:warning /template/ Border:first-child">
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
+    </Style>
+    <Style Selector="display|Result:info /template/ Border:first-child">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+    </Style>
+
+</Styles>

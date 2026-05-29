@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <Style Selector="layout|Affix">
+        <Setter Property="ZIndex" Value="100"/>
+    </Style>
+
+    <Style Selector="layout|Affix:affixed-top">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
+    </Style>
+    <Style Selector="layout|Affix:affixed-bottom">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
+    </Style>
+
+</Styles>

@@ -2,36 +2,198 @@
 
 [![.NET](https://img.shields.io/badge/.NET-10-purple)](https://dotnet.microsoft.com/)
 [![Avalonia](https://img.shields.io/badge/Avalonia-11.3-blue)](https://avaloniaui.net/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/AuraUI.Controls.svg)](https://www.nuget.org/packages/AuraUI.Controls)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
 
-**A comprehensive, production-ready UI component library for Avalonia.** 35+ professionally styled controls with Fluent and Material design themes, built for cross-platform .NET desktop applications.
+**A comprehensive, production-ready UI framework for Avalonia.** 50+ controls, 22 chart types, two theme engines, built-in MVVM, validation, and services -- all in a single, cohesive framework.
+
+<!-- Replace with actual hero image -->
+<!-- ![AuraUI Hero](docs/screenshots/hero.png) -->
 
 ---
 
-## Features
+## Highlights
 
-- **35+ Controls** -- Layout, input, selection, display, navigation, and feedback controls
-- **Two Theme Engines** -- Fluent (Windows 11 style) and Material Design 3 themes
-- **Design Tokens** -- Consistent colors, spacing, typography, shadows, animations, and corner radii
-- **Light & Dark Mode** -- Built-in theme switching with smooth transitions
+- **50+ Controls** -- Layout, input, selection, display, navigation, feedback, and windowing controls
+- **22 Chart Types** -- Line, Bar, Pie, Scatter, Radar, Funnel, Gauge, Heatmap, Candlestick, Boxplot, Tree, Treemap, Sunburst, Sankey, Graph, Violin, ThemeRiver, Parallel, Histogram, Map, and more
+- **Two Theme Engines** -- Fluent (Windows 11) and Material Design 3
+- **70+ Design Tokens** -- Consistent colors, spacing, typography, shadows, animations, and corner radii
+- **Built-in MVVM** -- ViewModelBase, RelayCommand, Messenger, NavigableViewModelBase
+- **Validation System** -- 10+ rules, FormValidator, FluentValidator, FormField integration
+- **Service Layer** -- IToastService, IDialogService, IThemeService, INavigationService
+- **State Management** -- Redux-inspired Store<T> with middleware support
+- **Router / Navigation** -- View-model-first routing with guards and history
+- **Module System** -- Pluggable IAuraModule architecture
+- **Responsive Layout** -- ResponsivePanel, ResponsiveGrid, StackPanelResponsive
+- **Light & Dark Mode** -- Instant switching with smooth transitions
 - **Cross-Platform** -- Windows, macOS, Linux via Avalonia
 - **Compiled Bindings** -- Full support for `x:DataType` compiled bindings
-- **Accessible** -- Keyboard navigation, screen reader support, focus management
-- **Avalonia 11 & 12** -- Branches for both Avalonia 11.3.x and 12.x
 
 ---
 
-## Screenshots
+## Quick Start
 
-<!-- Replace with actual screenshots -->
-| Light Theme | Dark Theme |
-|:-----------:|:----------:|
-| ![Light](docs/screenshots/light.png) | ![Dark](docs/screenshots/dark.png) |
+```bash
+dotnet new avalonia.app -n MyApp
+cd MyApp
+dotnet add package AuraUI.Controls
+dotnet add package AuraUI.Themes.Fluent
+```
 
-| Component Gallery | Theming |
-|:-----------------:|:-------:|
-| ![Gallery](docs/screenshots/gallery.png) | ![Theming](docs/screenshots/theming.png) |
+**App.axaml:**
+```xml
+<Application.Styles>
+    <FluentTheme />
+    <StyleInclude Source="avares://AuraUI.Themes.Fluent/AuraUITheme.axaml"/>
+</Application.Styles>
+```
+
+**MainWindow.axaml:**
+```xml
+<StackPanel Spacing="16" Margin="24">
+    <layout:Card Header="Hello AuraUI" IsHoverable="True" Padding="16">
+        <TextBlock Text="It works!"/>
+    </layout:Card>
+    <input:AuraButton Content="Click Me" Variant="Accent"/>
+</StackPanel>
+```
+
+---
+
+## Component Overview
+
+### Layout (17 controls)
+
+| Control | Description |
+|---------|-------------|
+| **Card** | Container with header, content, footer; elevation and hover effects |
+| **Expander** | Collapsible container with animated expand/collapse |
+| **Divider** | Horizontal or vertical separator with dash patterns |
+| **Badge** | Status indicator (dot, count, custom) with variants |
+| **Tag** | Inline label with 6 visual variants |
+| **Avatar** | User avatar with initials or image |
+| **Skeleton** | Loading placeholder with shimmer animation |
+| **FormField** | Label + content + helper text + error display |
+| **FormGroup** | Groups FormFields with shared layout |
+| **Drawer** | Slide-in panel from any edge |
+| **DropDown** | Generic dropdown container |
+| **Bubble** | Speech bubble with arrow |
+| **ResponsivePanel** | Auto-flowing responsive grid |
+| **DividerPanel** | Panel with dividers between children |
+| **AnimationStackPanel** | Animated item enter/exit |
+| **TransformControl** | Rotate/scale/translate transforms |
+| **ContentControlX** | Enhanced content control with transitions |
+
+### Input (8 controls)
+
+| Control | Description |
+|---------|-------------|
+| **AuraButton** | Accent, Outline, Subtle variants; loading state |
+| **AuraToggleButton** | Two-state button with variants |
+| **AuraTextBox** | Text input with watermark and clear button |
+| **AuraPasswordBox** | Masked input with reveal toggle |
+| **AuraNumericUpDown** | Numeric input with min/max/format |
+| **SearchBox** | Search-styled input with icon |
+| **MaskedTextBox** | Input with format mask |
+| **AuraRepeatButton** | Button that fires repeatedly while pressed |
+
+### Selection (11 controls)
+
+| Control | Description |
+|---------|-------------|
+| **AuraComboBox** | Drop-down selection with placeholder |
+| **MultiComboBox** | Multi-select drop-down with checkboxes |
+| **AuraListBox** | Scrollable list with selection modes |
+| **AuraRadioButton** | Mutually exclusive options with variants |
+| **AuraCheckBox** | Binary and three-state toggle with variants |
+| **Switch** | Toggle switch for on/off state |
+| **RateControl** | Star rating with half-star support |
+| **ColorPicker** | Color selection (Hex/RGB/HSV) |
+| **DateTimePicker** | Date and time selection |
+| **RangeSlider** | Dual-thumb range selection |
+| **ToggleButtonGroup** | Group of toggle buttons |
+
+### Display (12 controls)
+
+| Control | Description |
+|---------|-------------|
+| **AuraCarousel** | Item carousel with auto-play and transitions |
+| **AuraTimeline** | Vertical/horizontal event sequence |
+| **ProgressRing** | Circular progress indicator |
+| **AuraProgressBar** | Linear progress with percentage |
+| **StepIndicator** | Step-by-step progress display |
+| **StateControl** | Empty/loading/error/success state |
+| **ZoomViewer** | Zoomable and pannable content |
+| **AuraDataGrid** | Data grid with columns and sorting |
+| **AuraTreeView** | Hierarchical tree display |
+| **Statistic** | Prominent numerical value display |
+| **Result** | Operation result with status icon |
+| **Empty** | Empty state placeholder |
+
+### Navigation (9 controls)
+
+| Control | Description |
+|---------|-------------|
+| **AuraTabControl** | Enhanced tabbed interface |
+| **Breadcrumb** | Hierarchical navigation path |
+| **NavigationView** | Sidebar navigation panel |
+| **Pagination** | Page navigation control |
+| **Frame** | Navigation frame for page content |
+| **AuraMenu** | Application menu bar |
+| **AuraContextMenu** | Right-click context menu |
+| **ToolBar** | Toolbar container |
+| **StatusBar** | Status bar at window bottom |
+
+### Feedback (7 controls)
+
+| Control | Description |
+|---------|-------------|
+| **AuraMessageBox** | Modal dialog for alerts/confirmations |
+| **AuraToast** | Lightweight temporary notification |
+| **AuraNotification** | Rich notification with actions |
+| **AuraDialog** | Modal overlay dialog |
+| **Snackbar** | Bottom-aligned notification with action |
+| **PendingDialog** | Progress dialog for async operations |
+| **LoadingOverlay** | Full or partial loading overlay |
+
+### Windowing (2 controls)
+
+| Control | Description |
+|---------|-------------|
+| **WindowX** | Enhanced window with custom title bar |
+| **WindowXModalDialog** | Modal dialog window |
+
+---
+
+## Chart Overview (22 types)
+
+| Type | Series Class | Description |
+|------|-------------|-------------|
+| **Line** | `LineSeries` | Connected lines with smoothing, markers, gradient fill |
+| **Area** | `AreaSeries` | Filled area below a line |
+| **Bar** | `BarSeries` | Grouped, stacked, waterfall, horizontal bars |
+| **Pie** | `PieSeries` | Pie, donut, nightingale rose charts |
+| **Scatter** | `ScatterSeries` | XY scatter with regression lines |
+| **Radar** | `RadarSeries` | Spider/radar for multi-dimensional data |
+| **Funnel** | `FunnelSeries` | Pipeline/conversion visualization |
+| **Gauge** | `GaugeSeries` | Half/three-quarter/full gauge |
+| **Heatmap** | `HeatmapSeries` | Grid-based color heatmap |
+| **Candlestick** | `CandlestickSeries` | OHLC financial chart |
+| **Boxplot** | `BoxplotSeries` | Box-and-whisker statistical plot |
+| **Histogram** | `HistogramSeries` | Frequency distribution |
+| **Tree** | `TreeSeries` | Hierarchical tree (orthogonal/radial) |
+| **Treemap** | `TreemapSeries` | Nested rectangle hierarchy |
+| **Sunburst** | `SunburstSeries` | Radial hierarchy |
+| **Sankey** | `SankeySeries` | Flow diagram between nodes |
+| **Graph** | `GraphSeries` | Network graph with force layout |
+| **Violin** | `ViolinSeries` | Distribution shape plot |
+| **ThemeRiver** | `ThemeRiverSeries` | Stacked area for themes over time |
+| **Parallel** | `ParallelSeries` | Parallel coordinates |
+| **Map** | `ChartMap` | Geographic map visualization |
+| **Custom** | `CustomSeries` | User-defined rendering |
+
+Features: DataZoom, Tooltip (item/axis), Legend (toggle), Zoom/Pan, Brush Selection, Toolbox, Real-time streaming, Export (PNG/SVG/PDF), Print support, LTTB downsampling, geometry caching, presets.
 
 ---
 
@@ -41,284 +203,54 @@
 
 ```bash
 dotnet add package AuraUI.Controls
-dotnet add package AuraUI.Themes.Fluent
+dotnet add package AuraUI.Themes.Fluent    # or AuraUI.Themes.Material
 ```
 
-For Material theme:
+Or the meta-package:
+
 ```bash
-dotnet add package AuraUI.Controls
-dotnet add package AuraUI.Themes.Material
+dotnet add package AuraUI
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/user/auraui.git
-cd auraui
+git clone https://github.com/Timskt/AuraUI.git
+cd AuraUI
 dotnet build
 ```
 
 ---
 
-## Quick Start
+## Documentation
 
-### 1. Add the theme to your `App.axaml`:
-
-```xml
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="MyApp.App"
-             RequestedThemeVariant="Light">
-    <Application.Styles>
-        <FluentTheme />
-        <StyleInclude Source="avares://AuraUI.Themes.Fluent/AuraUITheme.axaml"/>
-    </Application.Styles>
-</Application>
-```
-
-### 2. Use controls in your views:
-
-```xml
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls"
-        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls"
-        x:Class="MyApp.MainWindow">
-
-    <StackPanel Spacing="16" Margin="24">
-        <layout:Card Header="Welcome" IsHoverable="True" Padding="16">
-            <TextBlock Text="Hello from AuraUI!" />
-        </layout:Card>
-
-        <layout:Badge Value="5" Variant="Primary">
-            <TextBlock Text="Notifications" />
-        </layout:Badge>
-
-        <display:AuraCarousel AutoPlay="True">
-            <display:AuraCarousel.Items>
-                <Border Background="#0078D4"><TextBlock Text="Slide 1" Foreground="White"/></Border>
-                <Border Background="#107C10"><TextBlock Text="Slide 2" Foreground="White"/></Border>
-            </display:AuraCarousel.Items>
-        </display:AuraCarousel>
-    </StackPanel>
-</Window>
-```
-
-### 3. Switch themes at runtime:
-
-```csharp
-using Avalonia.Styling;
-
-// Switch to dark mode
-Application.Current!.RequestedThemeVariant = ThemeVariant.Dark;
-
-// Switch to light mode
-Application.Current!.RequestedThemeVariant = ThemeVariant.Light;
-```
-
----
-
-## Component Catalog
-
-### Layout Controls
-
-| Control | Description |
-|---------|-------------|
-| **Card** | Container with header, content, and footer areas; supports elevation shadow and hover effects |
-| **Expander** | Collapsible container with animated expand/collapse in all four directions |
-| **Divider** | Horizontal or vertical separator line with customizable dash patterns and line caps |
-| **Badge** | Status indicator; dot, count, or custom content modes with Primary/Success/Warning/Error variants |
-| **Tag** | Inline label for categorization; multiple visual variants (Default, Primary, Success, Warning, Error, Outlined) |
-| **Avatar** | User avatar placeholder with initials or image support |
-| **Skeleton** | Loading placeholder with shimmer animation |
-
-### Input Controls
-
-| Control | Description |
-|---------|-------------|
-| **Button** | Standard, Accent, Outline, and Subtle variants with multiple sizes |
-| **ToggleButton** | Two-state button with checked/unchecked styling |
-| **TextBox** | Text input with watermark, clear button, and multi-line support |
-| **PasswordBox** | Masked text input with reveal toggle |
-| **NumericUpDown** | Numeric input with increment/decrement buttons, min/max, and format strings |
-| **SearchBox** | Search-styled text input with icon and clear functionality |
-
-### Selection Controls
-
-| Control | Description |
-|---------|-------------|
-| **ComboBox** | Drop-down selection list with placeholder text support |
-| **MultiComboBox** | Multi-select drop-down with checkbox items |
-| **ListBox** | Scrollable list with single and multiple selection modes |
-| **RadioButton** | Mutually exclusive option selection with grouped behavior |
-| **CheckBox** | Binary and three-state toggle with label support |
-| **Switch** | Toggle switch for on/off state with header label |
-| **RateControl** | Star rating input with half-star support |
-
-### Display Controls
-
-| Control | Description |
-|---------|-------------|
-| **Carousel** | Item carousel with navigation arrows, dot indicators, auto-play, and transition effects |
-| **Timeline** | Vertical or horizontal sequence display for events and milestones |
-| **ProgressRing** | Circular progress indicator (determinate and indeterminate) |
-| **ProgressBar** | Linear progress indicator with determinate and indeterminate modes |
-| **StepIndicator** | Step-by-step progress display for wizard-like flows |
-
-### Navigation Controls
-
-| Control | Description |
-|---------|-------------|
-| **TabControl** | Enhanced tabbed interface with smooth transitions |
-| **Breadcrumb** | Hierarchical navigation path display |
-| **NavigationView** | Sidebar navigation panel with menu items and content area |
-| **Pagination** | Page navigation control for multi-page content |
-
-### Feedback Controls
-
-| Control | Description |
-|---------|-------------|
-| **MessageBox** | Modal dialog for alerts and confirmations |
-| **Toast** | Lightweight temporary notification with auto-dismiss |
-| **Notification** | Rich notification with title, message, and persistent mode |
-| **Dialog** | Modal overlay dialog with custom content |
-| **Snackbar** | Bottom-aligned notification with optional action button |
-| **PendingDialog** | Progress dialog for async operations |
-| **LoadingOverlay** | Full or partial loading overlay that blocks interaction |
-
-### Utility Controls
-
-| Control | Description |
-|---------|-------------|
-| **WindowX** | Enhanced window with custom title bar support |
-
----
-
-## Design Tokens
-
-AuraUI uses a design token system for consistent theming. Tokens are defined as XAML resource dictionaries:
-
-| Token Category | Description |
-|----------------|-------------|
-| **Colors** | Primary, secondary, success, warning, error, surface, background, and semantic color brushes |
-| **Spacing** | Consistent scale: 4px, 8px, 12px, 16px, 24px, 32px, 48px |
-| **Typography** | Font sizes, weights, and line heights following a type scale |
-| **Shadows** | Elevation levels 0-3 for depth and layering |
-| **Animations** | Duration and easing tokens for consistent motion |
-| **Corners** | Corner radius values: None, Small, Medium, Large, Round |
-
-Override tokens by merging a resource dictionary after the theme:
-
-```xml
-<Application.Resources>
-    <ResourceDictionary>
-        <SolidColorBrush x:Key="AuraPrimaryBrush" Color="#6366F1"/>
-        <SolidColorBrush x:Key="AuraPrimaryForegroundBrush" Color="#FFFFFF"/>
-    </ResourceDictionary>
-</Application.Resources>
-```
-
----
-
-## Theme System
-
-### Fluent Theme (Default)
-
-Windows 11 / Fluent Design inspired. Clean, modern, and professional.
-
-```xml
-<StyleInclude Source="avares://AuraUI.Themes.Fluent/AuraUITheme.axaml"/>
-```
-
-### Material Theme
-
-Google Material Design 3 inspired. Rounded corners, bold colors, and tactile surfaces.
-
-```xml
-<StyleInclude Source="avares://AuraUI.Themes.Material/AuraUITheme.axaml"/>
-```
-
-### Switching at Runtime
-
-```csharp
-// Use IThemeService for advanced theming
-public interface IThemeService
-{
-    ThemeMode CurrentTheme { get; }
-    void SetTheme(ThemeMode mode);
-    void ToggleTheme();
-    void SetCustomTheme(string themeName);
-    event EventHandler<ThemeChangedEventArgs>? ThemeChanged;
-}
-```
-
----
-
-## Theming & Customization
-
-### Custom Colors
-
-```xml
-<Application.Resources>
-    <ResourceDictionary>
-        <!-- Override primary color -->
-        <SolidColorBrush x:Key="AuraPrimaryBrush" Color="#6366F1"/>
-        <SolidColorBrush x:Key="AuraPrimaryHoverBrush" Color="#818CF8"/>
-        <SolidColorBrush x:Key="AuraPrimaryPressedBrush" Color="#4F46E5"/>
-
-        <!-- Override semantic colors -->
-        <SolidColorBrush x:Key="AuraSuccessBrush" Color="#059669"/>
-        <SolidColorBrush x:Key="AuraWarningBrush" Color="#D97706"/>
-        <SolidColorBrush x:Key="AuraErrorBrush" Color="#DC2626"/>
-    </ResourceDictionary>
-</Application.Resources>
-```
-
-### Custom Spacing
-
-```xml
-<Application.Resources>
-    <ResourceDictionary>
-        <x:Double x:Key="AuraSpacingSmall">8</x:Double>
-        <x:Double x:Key="AuraSpacingMedium">16</x:Double>
-        <x:Double x:Key="AuraSpacingLarge">24</x:Double>
-    </ResourceDictionary>
-</Application.Resources>
-```
+| Guide | Description |
+|-------|-------------|
+| [Getting Started](docs/getting-started.md) | Installation, setup, first app |
+| [Component Catalog](docs/components/README.md) | All 50+ controls with examples |
+| [Chart System](docs/charts/README.md) | 22 chart types, real-time, export |
+| [Theming](docs/theming/README.md) | Design tokens, custom themes, dark mode |
+| [MVVM](docs/mvvm/README.md) | ViewModelBase, RelayCommand, Messenger |
+| [Validation](docs/validation/README.md) | Rules, FormValidator, FluentValidator |
+| [Services](docs/services/README.md) | Toast, Dialog, Theme, Navigation services |
+| [Migration from Panuon](docs/PANUON-MIGRATION.md) | Control mapping, style differences |
+| [Full Documentation Index](docs/README.md) | Complete documentation table of contents |
 
 ---
 
 ## Branches
 
-| Branch | Avalonia Version | .NET Version | Status |
-|--------|-----------------|--------------|--------|
-| `main` | Avalonia 12.x | .NET 10 | Active development |
-| `avalonia-11` | Avalonia 11.3.x | .NET 8+ | Maintenance mode |
-
----
-
-## Project Structure
-
-```
-AuraUI/
-  src/
-    AuraUI.Core/              -- Converters, helpers, contracts, interfaces
-    AuraUI.Controls/           -- Custom control classes (Card, Expander, Badge, Carousel...)
-    AuraUI.Themes.Fluent/      -- Fluent theme resources and control styles
-    AuraUI.Themes.Material/    -- Material theme resources and control styles
-  samples/
-    AuraUI.Demo/               -- Component gallery demo application
-  tests/
-    AuraUI.Tests/              -- Unit and integration tests
-  docs/
-    README.md                  -- Documentation index
-```
+| Branch | Avalonia | .NET | Status |
+|--------|----------|------|--------|
+| `main` | 12.x | .NET 10 | Active development |
+| `feat/auraui-initial` | 11.3.x | .NET 10 | Stable |
+| `avalonia-11` | 11.3.x | .NET 8+ | Maintenance |
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Here's how to get started:
+Contributions are welcome!
 
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/my-control`

@@ -111,7 +111,7 @@ public static class DataVirtualizer
     }
 
     /// <summary>
-    /// Find the index of the last point whose X coordinate is <= the threshold.
+    /// Find the index of the last point whose X coordinate is less than or equal to the threshold.
     /// </summary>
     private static int FindLastVisibleIndex(ReadOnlySpan<Point> points, double xThreshold)
     {

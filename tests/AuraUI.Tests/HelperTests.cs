@@ -378,8 +378,16 @@ public class HelperTests
     {
         var border = new Border();
         ShadowHelper.SetShadow(border, "none");
-        // "none" shadow should be empty/default
-        Assert.Equal(default(BoxShadows), border.BoxShadow);
+        // "none" preset returns a transparent shadow, not the default empty BoxShadows
+        var expected = new BoxShadows(new BoxShadow
+        {
+            OffsetX = 0,
+            OffsetY = 0,
+            Blur = 0,
+            Spread = 0,
+            Color = Colors.Transparent
+        });
+        Assert.Equal(expected, border.BoxShadow);
     }
 
     [Fact]

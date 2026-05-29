@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         Empty — Fluent Style (Empty state placeholder)
+         ============================================================ -->
+    <Style Selector="display|Empty">
+        <Setter Property="Padding" Value="32"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="12"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MinHeight="160">
+                    <!-- Image/Icon area -->
+                    <Panel Width="{TemplateBinding ImageSize}"
+                           Height="{TemplateBinding ImageSize}"
+                           HorizontalAlignment="Center">
+                        <!-- Default empty state icon (simple circle) -->
+                        <Border Width="{TemplateBinding ImageSize}"
+                                Height="{TemplateBinding ImageSize}"
+                                CornerRadius="{DynamicResource AuraRadiusFull}"
+                                Background="{DynamicResource AuraMutedBrush}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <TextBlock Text="---"
+                                       FontSize="24"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Panel>
+                    <!-- Description -->
+                    <TextBlock Text="{TemplateBinding Description}"
+                               FontSize="{DynamicResource AuraFontSizeBody}"
+                               Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                    <!-- Action content -->
+                    <ContentPresenter Content="{TemplateBinding ActionContent}"
+                                      HorizontalAlignment="Center"
+                                      Margin="0,8,0,0"
+                                      IsVisible="{TemplateBinding ActionContent, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

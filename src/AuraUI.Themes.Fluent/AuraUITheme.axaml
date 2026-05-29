@@ -92,4 +92,18 @@
     <StyleInclude Source="/Controls/DataGrid.axaml"/>
     <StyleInclude Source="/Controls/Menu.axaml"/>
     <StyleInclude Source="/Controls/StatusBar.axaml"/>
+
+    <!-- V4 controls — Ant Design / Element Plus / AtomUI patterns -->
+    <StyleInclude Source="/Controls/Space.axaml"/>
+    <StyleInclude Source="/Controls/AuraLayout.axaml"/>
+    <StyleInclude Source="/Controls/AuraGrid.axaml"/>
+    <StyleInclude Source="/Controls/Descriptions.axaml"/>
+    <StyleInclude Source="/Controls/Statistic.axaml"/>
+    <StyleInclude Source="/Controls/Result.axaml"/>
+    <StyleInclude Source="/Controls/Empty.axaml"/>
+    <StyleInclude Source="/Controls/Affix.axaml"/>
+    <StyleInclude Source="/Controls/BackTop.axaml"/>
+    <StyleInclude Source="/Controls/ConfigProvider.axaml"/>
+    <StyleInclude Source="/Controls/AuraMessage.axaml"/>
+    <StyleInclude Source="/Controls/AuraScrollbar.axaml"/>
 </Styles>
