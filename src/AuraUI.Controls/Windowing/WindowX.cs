@@ -31,7 +31,6 @@ public class WindowX : Window
     private Button? _backButton;
     private ContentPresenter? _headerPresenter;
     private ContentPresenter? _footerPresenter;
-    private bool _isPointerDownOnTitleBar;
     private Point _pointerDownPosition;
 
     /// <summary>
@@ -97,7 +96,7 @@ public class WindowX : Window
     /// <summary>
     /// Defines the routed event for back button click.
     /// </summary>
-    public static readonly RoutedEvent<RoutedEventArgs> BackRequestedEvent =
+    public new static readonly RoutedEvent<RoutedEventArgs> BackRequestedEvent =
         RoutedEvent.Register<WindowX, RoutedEventArgs>(nameof(BackRequested), RoutingStrategies.Bubble);
 
     static WindowX()
@@ -199,7 +198,7 @@ public class WindowX : Window
     /// <summary>
     /// Occurs when the back button is clicked.
     /// </summary>
-    public event EventHandler<RoutedEventArgs>? BackRequested
+    public new event EventHandler<RoutedEventArgs>? BackRequested
     {
         add => AddHandler(BackRequestedEvent, value);
         remove => RemoveHandler(BackRequestedEvent, value);
@@ -275,7 +274,6 @@ public class WindowX : Window
     {
         if (e.GetCurrentPoint(_titleBar).Properties.IsLeftButtonPressed)
         {
-            _isPointerDownOnTitleBar = true;
             _pointerDownPosition = e.GetPosition(_titleBar);
             BeginMoveDrag(e);
         }
@@ -283,7 +281,6 @@ public class WindowX : Window
 
     private void OnTitleBarPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        _isPointerDownOnTitleBar = false;
     }
 
     private void OnTitleBarDoubleTapped(object? sender, TappedEventArgs e)

@@ -121,7 +121,7 @@ public class AuraListBox : ListBox
 
         if (container is AuraListBoxItem listBoxItem)
         {
-            listBoxItem.UpdateSelectedPseudoClass(SelectedItems.Contains(item));
+            listBoxItem.UpdateSelectedPseudoClass(SelectedItems?.Contains(item) == true);
         }
     }
 

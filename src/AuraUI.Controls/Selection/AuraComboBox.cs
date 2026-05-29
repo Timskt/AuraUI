@@ -44,7 +44,7 @@ public class AuraComboBox : ComboBox
     /// <summary>
     /// Defines the <see cref="PlaceholderText"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<string?> PlaceholderTextProperty =
+    public new static readonly StyledProperty<string?> PlaceholderTextProperty =
         AvaloniaProperty.Register<AuraComboBox, string?>(nameof(PlaceholderText));
 
     /// <summary>
@@ -96,7 +96,7 @@ public class AuraComboBox : ComboBox
     /// <summary>
     /// Gets or sets the placeholder text shown when no item is selected.
     /// </summary>
-    public string? PlaceholderText
+    public new string? PlaceholderText
     {
         get => GetValue(PlaceholderTextProperty);
         set => SetValue(PlaceholderTextProperty, value);

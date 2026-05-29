@@ -80,7 +80,7 @@ public class AuraMessageBox : Window
     /// <summary>
     /// Defines the <see cref="Icon"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<MessageBoxIcon> IconProperty =
+    public new static readonly StyledProperty<MessageBoxIcon> IconProperty =
         AvaloniaProperty.Register<AuraMessageBox, MessageBoxIcon>(nameof(Icon));
 
     /// <summary>
@@ -118,7 +118,7 @@ public class AuraMessageBox : Window
     /// <summary>
     /// Gets or sets the icon type.
     /// </summary>
-    public MessageBoxIcon Icon
+    public new MessageBoxIcon Icon
     {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);

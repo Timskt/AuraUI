@@ -32,7 +32,6 @@ public class AuraToast : ContentControl
     private static readonly List<AuraToast> _activeToasts = new();
     private DispatcherTimer? _dismissTimer;
     private DateTime _showTime;
-    private double _progress;
 
     /// <summary>
     /// Defines the <see cref="Message"/> styled property.

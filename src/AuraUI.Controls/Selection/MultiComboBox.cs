@@ -52,7 +52,7 @@ public class MultiComboBox : AuraComboBox
     /// <summary>
     /// Defines the <see cref="SelectedItems"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<IList?> SelectedItemsProperty =
+    public new static readonly StyledProperty<IList?> SelectedItemsProperty =
         AvaloniaProperty.Register<MultiComboBox, IList?>(nameof(SelectedItems));
 
     /// <summary>
@@ -110,7 +110,7 @@ public class MultiComboBox : AuraComboBox
     /// <summary>
     /// Gets or sets the list of currently selected items.
     /// </summary>
-    public IList? SelectedItems
+    public new IList? SelectedItems
     {
         get => GetValue(SelectedItemsProperty);
         set => SetValue(SelectedItemsProperty, value);
@@ -408,10 +408,10 @@ public class MultiComboBox : AuraComboBox
         _isSyncingSelection = true;
         try
         {
-            _dropdownItemsList.SelectedItems.Clear();
+            _dropdownItemsList?.SelectedItems?.Clear();
             foreach (var item in _selectedItems)
             {
-                _dropdownItemsList.SelectedItems.Add(item);
+                _dropdownItemsList?.SelectedItems?.Add(item);
             }
         }
         finally
