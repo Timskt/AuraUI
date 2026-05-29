@@ -1,13 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AuraUI.Themes.Material</RootNamespace>
     <AssemblyName>AuraUI.Themes.Material</AssemblyName>
-    <Description>Material Design theme for AuraUI framework</Description>
-    <PackageTags>avalonia;ui;theme;material;auraui</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>AuraUI.Themes.Material</PackageId>
     <Version>1.0.0</Version>
+    <Authors>AuraUI</Authors>
+    <Description>Material Design 3 theme for AuraUI framework</Description>
+    <PackageTags>avalonia;ui;theme;material;auraui</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Timskt/AuraUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Timskt/AuraUI</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

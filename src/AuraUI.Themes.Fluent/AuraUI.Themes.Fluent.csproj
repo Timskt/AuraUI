@@ -1,13 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AuraUI.Themes.Fluent</RootNamespace>
     <AssemblyName>AuraUI.Themes.Fluent</AssemblyName>
-    <Description>Fluent theme (Windows 11 style) for AuraUI framework</Description>
-    <PackageTags>avalonia;ui;theme;fluent;auraui</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>AuraUI.Themes.Fluent</PackageId>
     <Version>1.0.0</Version>
+    <Authors>AuraUI</Authors>
+    <Description>Fluent (Windows 11) theme for AuraUI framework</Description>
+    <PackageTags>avalonia;ui;theme;fluent;auraui</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Timskt/AuraUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Timskt/AuraUI</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

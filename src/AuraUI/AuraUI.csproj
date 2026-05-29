@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackageId>AuraUI</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>AuraUI</Authors>
+    <Description>Complete UI framework for Avalonia — controls, charts, themes, MVVM, validation</Description>
+    <PackageTags>avalonia;ui;controls;charts;theme;mvvm;framework;auraui</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Timskt/AuraUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Timskt/AuraUI</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuraUI.Core\AuraUI.Core.csproj" />
+    <ProjectReference Include="..\AuraUI.Controls\AuraUI.Controls.csproj" />
+    <ProjectReference Include="..\AuraUI.Themes.Fluent\AuraUI.Themes.Fluent.csproj" />
+    <ProjectReference Include="..\AuraUI.Themes.Material\AuraUI.Themes.Material.csproj" />
+  </ItemGroup>
+</Project>
