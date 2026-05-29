@@ -77,4 +77,18 @@
     <!-- Common transparent -->
     <SolidColorBrush x:Key="AuraTransparentBrush" Color="#00000000"/>
 
+    <!-- Chart Palette -->
+    <SolidColorBrush x:Key="AuraChartPalette1" Color="#6750A4"/>
+    <SolidColorBrush x:Key="AuraChartPalette2" Color="#625B71"/>
+    <SolidColorBrush x:Key="AuraChartPalette3" Color="#7D5260"/>
+    <SolidColorBrush x:Key="AuraChartPalette4" Color="#2E7D32"/>
+    <SolidColorBrush x:Key="AuraChartPalette5" Color="#ED6C02"/>
+    <SolidColorBrush x:Key="AuraChartPalette6" Color="#D32F2F"/>
+    <SolidColorBrush x:Key="AuraChartPalette7" Color="#0288D1"/>
+    <SolidColorBrush x:Key="AuraChartPalette8" Color="#9C27B0"/>
+    <SolidColorBrush x:Key="AuraChartGridLineBrush" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="AuraChartAxisBrush" Color="#BDBDBD"/>
+    <SolidColorBrush x:Key="AuraChartTooltipBackground" Color="#313033"/>
+    <SolidColorBrush x:Key="AuraChartTooltipForeground" Color="#F4EFF4"/>
+
 </ResourceDictionary>

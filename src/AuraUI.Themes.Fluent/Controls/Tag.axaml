@@ -13,13 +13,6 @@
         <Setter Property="MinHeight" Value="24"/>
         <Setter Property="ClipToBounds" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Child">
-            <StackPanel Orientation="Horizontal" Spacing="4">
-                <TextBlock VerticalAlignment="Center"
-                           FontSize="12"
-                           Foreground="{DynamicResource AuraForegroundBrush}"/>
-            </StackPanel>
-        </Setter>
     </Style>
 
     <!-- Tag transitions -->

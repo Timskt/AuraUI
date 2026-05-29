@@ -12,14 +12,6 @@
         <Setter Property="Padding" Value="6,2"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="ClipToBounds" Value="True"/>
-        <Setter Property="Child">
-            <TextBlock TextAlignment="Center"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="12"
-                       FontWeight="SemiBold"
-                       Foreground="{DynamicResource AuraForegroundOnAccentBrush}"/>
-        </Setter>
     </Style>
 
     <!-- Badge size: sm -->

@@ -17,19 +17,6 @@
         <Setter Property="Margin" Value="8,0"/>
     </Style>
 
-    <!-- Divider with text in center -->
-    <Style Selector="Border.divider.with-content">
-        <Setter Property="Height" Value="NaN"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Child">
-            <Panel>
-                <Border Height="1"
-                        VerticalAlignment="Center"
-                        Background="{DynamicResource AuraDividerBrush}"/>
-            </Panel>
-        </Setter>
-    </Style>
-
     <!-- Divider spacing variants -->
     <Style Selector="Border.divider.compact">
         <Setter Property="Margin" Value="0,4"/>

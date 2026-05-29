@@ -66,4 +66,16 @@
     <sys:Double x:Key="AuraCheckboxSize">18</sys:Double>
     <sys:Double x:Key="AuraRadioSize">20</sys:Double>
 
+    <!-- Chart Defaults -->
+    <sys:Double x:Key="AuraChartMinWidth">200</sys:Double>
+    <sys:Double x:Key="AuraChartMinHeight">150</sys:Double>
+    <sys:Double x:Key="AuraChartPadding">16</sys:Double>
+    <sys:Double x:Key="AuraChartAxisLabelSize">11</sys:Double>
+    <sys:Double x:Key="AuraChartTitleSize">16</sys:Double>
+    <sys:Double x:Key="AuraChartTooltipFontSize">12</sys:Double>
+    <sys:Double x:Key="AuraChartLegendFontSize">12</sys:Double>
+    <sys:Double x:Key="AuraChartMarkerSize">6</sys:Double>
+    <sys:Double x:Key="AuraChartStrokeWidth">2</sys:Double>
+    <CornerRadius x:Key="AuraChartTooltipCornerRadius">6</CornerRadius>
+
 </ResourceDictionary>

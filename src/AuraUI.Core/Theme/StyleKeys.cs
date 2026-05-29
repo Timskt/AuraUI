@@ -43,6 +43,17 @@ public static class StyleKeys
     public const string ProgressBarStyle = "AuraProgressBarStyle";
     public const string StepIndicatorStyle = "AuraStepIndicatorStyle";
 
+    // Charts
+    public const string ChartStyle = "AuraChartStyle";
+    public const string LineSeriesStyle = "AuraLineSeriesStyle";
+    public const string BarSeriesStyle = "AuraBarSeriesStyle";
+    public const string PieSeriesStyle = "AuraPieSeriesStyle";
+    public const string AreaSeriesStyle = "AuraAreaSeriesStyle";
+    public const string ScatterSeriesStyle = "AuraScatterSeriesStyle";
+    public const string RadarSeriesStyle = "AuraRadarSeriesStyle";
+    public const string GaugeSeriesStyle = "AuraGaugeSeriesStyle";
+    public const string FunnelSeriesStyle = "AuraFunnelSeriesStyle";
+
     // Navigation
     public const string TabControlStyle = "AuraTabControlStyle";
     public const string BreadcrumbStyle = "AuraBreadcrumbStyle";
