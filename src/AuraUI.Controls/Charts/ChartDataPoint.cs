@@ -303,6 +303,192 @@ public class ChartParallelData
 }
 
 /// <summary>
+/// A data item for theme river charts. Represents a value for a category at a point in time.
+/// </summary>
+public class ChartThemeRiverData
+{
+    /// <summary>The time/date position on the horizontal axis.</summary>
+    public double X { get; set; }
+
+    /// <summary>The category name (each category is a separate "river" layer).</summary>
+    public string? Category { get; set; }
+
+    /// <summary>The value (thickness of the river layer).</summary>
+    public double Value { get; set; }
+
+    public IBrush? Color { get; set; }
+    public object? Tag { get; set; }
+
+    public ChartThemeRiverData() { }
+
+    public ChartThemeRiverData(double x, string? category, double value)
+    {
+        X = x;
+        Category = category;
+        Value = value;
+    }
+}
+
+/// <summary>
+/// A node in a tree (dendrogram) chart.
+/// </summary>
+public class ChartTreeNode
+{
+    public string? Name { get; set; }
+    public double Value { get; set; }
+    public IBrush? Color { get; set; }
+    public List<ChartTreeNode> Children { get; set; } = new();
+    public object? Tag { get; set; }
+
+    /// <summary>Computed layout position (set by renderer).</summary>
+    internal double LayoutX { get; set; }
+    internal double LayoutY { get; set; }
+
+    public ChartTreeNode() { }
+
+    public ChartTreeNode(string? name, double value)
+    {
+        Name = name;
+        Value = value;
+    }
+}
+
+/// <summary>
+/// A ring definition for multi-ring gauge charts.
+/// </summary>
+public class GaugeRingData
+{
+    /// <summary>Current value of this ring.</summary>
+    public double Value { get; set; }
+
+    /// <summary>Minimum value for this ring.</summary>
+    public double Minimum { get; set; }
+
+    /// <summary>Maximum value for this ring.</summary>
+    public double Maximum { get; set; } = 100;
+
+    /// <summary>Color of the value arc for this ring.</summary>
+    public IBrush? Color { get; set; }
+
+    /// <summary>Label shown for this ring.</summary>
+    public string? Label { get; set; }
+
+    public GaugeRingData() { }
+
+    public GaugeRingData(double value, double minimum, double maximum)
+    {
+        Value = value;
+        Minimum = minimum;
+        Maximum = maximum;
+    }
+}
+
+/// <summary>
+/// A mark point annotation (highlights a specific data point).
+/// </summary>
+public class ChartMarkPoint
+{
+    /// <summary>The type of mark (max, min, average, or explicit).</summary>
+    public MarkType Type { get; set; }
+
+    /// <summary>Explicit X value (used when Type is not set or for custom points).</summary>
+    public double? X { get; set; }
+
+    /// <summary>Explicit Y value.</summary>
+    public double? Y { get; set; }
+
+    /// <summary>Label text for the mark.</summary>
+    public string? Label { get; set; }
+
+    /// <summary>Color of the mark symbol.</summary>
+    public IBrush? Color { get; set; }
+
+    /// <summary>Size of the mark symbol in pixels.</summary>
+    public double Size { get; set; } = 8;
+
+    public ChartMarkPoint() { }
+}
+
+/// <summary>
+/// A mark line annotation (horizontal or vertical reference line).
+/// </summary>
+public class ChartMarkLine
+{
+    /// <summary>The type of mark (average, or explicit).</summary>
+    public MarkType Type { get; set; }
+
+    /// <summary>Explicit start value for the line.</summary>
+    public double? Value { get; set; }
+
+    /// <summary>Second value for range lines.</summary>
+    public double? Value2 { get; set; }
+
+    /// <summary>Label text for the line.</summary>
+    public string? Label { get; set; }
+
+    /// <summary>Color of the line.</summary>
+    public IBrush? Color { get; set; }
+
+    /// <summary>Dash pattern for the line.</summary>
+    public double[]? DashStyle { get; set; }
+
+    /// <summary>Thickness of the line.</summary>
+    public double Thickness { get; set; } = 1.0;
+
+    public ChartMarkLine() { }
+}
+
+/// <summary>
+/// A mark area annotation (highlights a region between two values).
+/// </summary>
+public class ChartMarkArea
+{
+    /// <summary>Start value of the area.</summary>
+    public double Value { get; set; }
+
+    /// <summary>End value of the area.</summary>
+    public double Value2 { get; set; }
+
+    /// <summary>Label text for the area.</summary>
+    public string? Label { get; set; }
+
+    /// <summary>Fill color of the area.</summary>
+    public IBrush? Color { get; set; }
+
+    /// <summary>Opacity of the area fill.</summary>
+    public double Opacity { get; set; } = 0.15;
+
+    public ChartMarkArea() { }
+}
+
+/// <summary>
+/// A visual map piece definition for piecewise mapping.
+/// </summary>
+public class VisualMapPiece
+{
+    /// <summary>Start value for this piece.</summary>
+    public double Min { get; set; }
+
+    /// <summary>End value for this piece.</summary>
+    public double Max { get; set; }
+
+    /// <summary>Color for this piece.</summary>
+    public IBrush? Color { get; set; }
+
+    /// <summary>Label for this piece.</summary>
+    public string? Label { get; set; }
+
+    public VisualMapPiece() { }
+
+    public VisualMapPiece(double min, double max, IBrush? color)
+    {
+        Min = min;
+        Max = max;
+        Color = color;
+    }
+}
+
+/// <summary>
 /// A node in a sunburst (radial treemap) chart.
 /// </summary>
 public class ChartSunburstNode

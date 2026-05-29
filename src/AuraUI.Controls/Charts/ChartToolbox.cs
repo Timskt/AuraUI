@@ -36,6 +36,38 @@ public class ChartToolbox : AvaloniaObject
     public static readonly StyledProperty<bool> ShowResetProperty =
         AvaloniaProperty.Register<ChartToolbox, bool>(nameof(ShowReset), true);
 
+    /// <summary>Show the "Restore" button (reset all changes including data zoom, brush, etc.).</summary>
+    public static readonly StyledProperty<bool> ShowRestoreProperty =
+        AvaloniaProperty.Register<ChartToolbox, bool>(nameof(ShowRestore));
+
+    /// <summary>Show the "Data Zoom" button (enable zoom via toolbox).</summary>
+    public static readonly StyledProperty<bool> ShowDataZoomProperty =
+        AvaloniaProperty.Register<ChartToolbox, bool>(nameof(ShowDataZoom));
+
+    /// <summary>Show the "Magic Type" button (switch between line/bar/stack).</summary>
+    public static readonly StyledProperty<bool> ShowMagicTypeProperty =
+        AvaloniaProperty.Register<ChartToolbox, bool>(nameof(ShowMagicType));
+
+    /// <summary>Show the "Brush" button (enable brush selection).</summary>
+    public static readonly StyledProperty<bool> ShowBrushProperty =
+        AvaloniaProperty.Register<ChartToolbox, bool>(nameof(ShowBrush));
+
+    /// <summary>Image format for the save-as-image feature.</summary>
+    public static readonly StyledProperty<SaveAsImageFormat> SaveFormatProperty =
+        AvaloniaProperty.Register<ChartToolbox, SaveAsImageFormat>(nameof(SaveFormat), SaveAsImageFormat.Png);
+
+    /// <summary>Pixel ratio for saved images (2 = retina).</summary>
+    public static readonly StyledProperty<double> SavePixelRatioProperty =
+        AvaloniaProperty.Register<ChartToolbox, double>(nameof(SavePixelRatio), 2.0);
+
+    /// <summary>Whether the data view is read-only.</summary>
+    public static readonly StyledProperty<bool> DataViewReadOnlyProperty =
+        AvaloniaProperty.Register<ChartToolbox, bool>(nameof(DataViewReadOnly), true);
+
+    /// <summary>The currently active magic chart type.</summary>
+    public static readonly StyledProperty<MagicChartType> ActiveMagicTypeProperty =
+        AvaloniaProperty.Register<ChartToolbox, MagicChartType>(nameof(ActiveMagicType), MagicChartType.Line);
+
     /// <summary>Size of each toolbar button in pixels.</summary>
     public static readonly StyledProperty<double> ButtonSizeProperty =
         AvaloniaProperty.Register<ChartToolbox, double>(nameof(ButtonSize), 24.0);
@@ -72,6 +104,14 @@ public class ChartToolbox : AvaloniaObject
     public IBrush? HoverBrush { get => GetValue(HoverBrushProperty); set => SetValue(HoverBrushProperty, value); }
     public IBrush? PressedBrush { get => GetValue(PressedBrushProperty); set => SetValue(PressedBrushProperty, value); }
     public double ButtonCornerRadius { get => GetValue(ButtonCornerRadiusProperty); set => SetValue(ButtonCornerRadiusProperty, value); }
+    public bool ShowRestore { get => GetValue(ShowRestoreProperty); set => SetValue(ShowRestoreProperty, value); }
+    public bool ShowDataZoom { get => GetValue(ShowDataZoomProperty); set => SetValue(ShowDataZoomProperty, value); }
+    public bool ShowMagicType { get => GetValue(ShowMagicTypeProperty); set => SetValue(ShowMagicTypeProperty, value); }
+    public bool ShowBrush { get => GetValue(ShowBrushProperty); set => SetValue(ShowBrushProperty, value); }
+    public SaveAsImageFormat SaveFormat { get => GetValue(SaveFormatProperty); set => SetValue(SaveFormatProperty, value); }
+    public double SavePixelRatio { get => GetValue(SavePixelRatioProperty); set => SetValue(SavePixelRatioProperty, value); }
+    public bool DataViewReadOnly { get => GetValue(DataViewReadOnlyProperty); set => SetValue(DataViewReadOnlyProperty, value); }
+    public MagicChartType ActiveMagicType { get => GetValue(ActiveMagicTypeProperty); set => SetValue(ActiveMagicTypeProperty, value); }
 
     /// <summary>
     /// Raised when the "Save as Image" button is clicked.
@@ -99,6 +139,30 @@ public class ChartToolbox : AvaloniaObject
     /// Raised when the "Reset Zoom" button is clicked.
     /// </summary>
     public event Action? ResetZoomRequested;
+
+    /// <summary>
+    /// Raised when the "Restore" button is clicked.
+    /// Should reset all chart state (zoom, brush, data transforms).
+    /// </summary>
+    public event Action? RestoreRequested;
+
+    /// <summary>
+    /// Raised when the "Data Zoom" button is clicked.
+    /// Should enable/disable the data zoom control.
+    /// </summary>
+    public event Action? DataZoomRequested;
+
+    /// <summary>
+    /// Raised when the "Magic Type" button is clicked.
+    /// Cycles through line/bar/stack chart types.
+    /// </summary>
+    public event Action<MagicChartType>? MagicTypeRequested;
+
+    /// <summary>
+    /// Raised when the "Brush" button is clicked.
+    /// Should enable/disable brush selection mode.
+    /// </summary>
+    public event Action? BrushRequested;
 
     // Internal state for hover tracking
     private int _hoveredButtonIndex = -1;
@@ -241,11 +305,15 @@ public class ChartToolbox : AvaloniaObject
                 {
                     return buttons[i] switch
                     {
-                        ToolboxButton.SaveAsImage => "Save as PNG",
-                        ToolboxButton.DataView => "View Data",
+                        ToolboxButton.SaveAsImage => $"Save as {SaveFormat}",
+                        ToolboxButton.DataView => DataViewReadOnly ? "View Data" : "Edit Data",
                         ToolboxButton.ZoomIn => "Zoom In",
                         ToolboxButton.ZoomOut => "Zoom Out",
                         ToolboxButton.ResetZoom => "Reset Zoom",
+                        ToolboxButton.Restore => "Restore",
+                        ToolboxButton.DataZoom => "Data Zoom",
+                        ToolboxButton.MagicType => $"Switch to {GetNextMagicType()}",
+                        ToolboxButton.Brush => "Brush Selection",
                         _ => null
                     };
                 }
@@ -266,6 +334,10 @@ public class ChartToolbox : AvaloniaObject
         if (ShowDataView) buttons.Add(ToolboxButton.DataView);
         if (ShowZoom) { buttons.Add(ToolboxButton.ZoomIn); buttons.Add(ToolboxButton.ZoomOut); }
         if (ShowReset) buttons.Add(ToolboxButton.ResetZoom);
+        if (ShowRestore) buttons.Add(ToolboxButton.Restore);
+        if (ShowDataZoom) buttons.Add(ToolboxButton.DataZoom);
+        if (ShowMagicType) buttons.Add(ToolboxButton.MagicType);
+        if (ShowBrush) buttons.Add(ToolboxButton.Brush);
         return buttons.ToArray();
     }
 
@@ -288,7 +360,36 @@ public class ChartToolbox : AvaloniaObject
             case ToolboxButton.ResetZoom:
                 ResetZoomRequested?.Invoke();
                 break;
+            case ToolboxButton.Restore:
+                RestoreRequested?.Invoke();
+                break;
+            case ToolboxButton.DataZoom:
+                DataZoomRequested?.Invoke();
+                break;
+            case ToolboxButton.MagicType:
+                CycleMagicType();
+                break;
+            case ToolboxButton.Brush:
+                BrushRequested?.Invoke();
+                break;
         }
+    }
+
+    private MagicChartType GetNextMagicType()
+    {
+        return ActiveMagicType switch
+        {
+            MagicChartType.Line => MagicChartType.Bar,
+            MagicChartType.Bar => MagicChartType.Stack,
+            MagicChartType.Stack => MagicChartType.Line,
+            _ => MagicChartType.Line
+        };
+    }
+
+    private void CycleMagicType()
+    {
+        ActiveMagicType = GetNextMagicType();
+        MagicTypeRequested?.Invoke(ActiveMagicType);
     }
 
     /// <summary>
@@ -351,6 +452,46 @@ public class ChartToolbox : AvaloniaObject
                 context.DrawLine(pen, new Point(cx, cy - radius - s * 0.2), new Point(cx + s * 0.3, cy - radius + s * 0.1));
                 context.DrawLine(pen, new Point(cx, cy - radius - s * 0.2), new Point(cx - s * 0.3, cy - radius + s * 0.1));
                 break;
+
+            case ToolboxButton.Restore:
+                // Restore icon: counter-clockwise circular arrow
+                var rRadius = s * 0.6;
+                context.DrawEllipse(null, new Pen(color, 1.5), new Point(cx, cy), rRadius, rRadius);
+                // Arrow at bottom-left (counter-clockwise)
+                var arrowAngle = Math.PI * 0.75;
+                var arrowX = cx + rRadius * Math.Cos(arrowAngle);
+                var arrowY = cy + rRadius * Math.Sin(arrowAngle);
+                context.DrawLine(pen, new Point(arrowX, arrowY), new Point(arrowX - s * 0.3, arrowY + s * 0.2));
+                context.DrawLine(pen, new Point(arrowX, arrowY), new Point(arrowX + s * 0.1, arrowY + s * 0.3));
+                break;
+
+            case ToolboxButton.DataZoom:
+                // Data zoom icon: magnifying glass with range bars
+                context.DrawEllipse(null, pen, new Point(cx - s * 0.1, cy - s * 0.2), s * 0.45, s * 0.45);
+                context.DrawLine(pen, new Point(cx + s * 0.2, cy + s * 0.1), new Point(cx + s * 0.5, cy + s * 0.4));
+                // Small bars inside
+                context.DrawLine(pen, new Point(cx - s * 0.3, cy - s * 0.1), new Point(cx + s * 0.1, cy - s * 0.1));
+                context.DrawLine(pen, new Point(cx - s * 0.2, cy + s * 0.05), new Point(cx + s * 0.0, cy + s * 0.05));
+                break;
+
+            case ToolboxButton.MagicType:
+                // Magic type icon: bar chart with line overlay
+                // Bar chart
+                context.DrawRectangle(null, pen, new Rect(cx - s * 0.6, cy - s * 0.2, s * 0.3, s * 0.7));
+                context.DrawRectangle(null, pen, new Rect(cx - s * 0.2, cy - s * 0.5, s * 0.3, s * 1.0));
+                context.DrawRectangle(null, pen, new Rect(cx + s * 0.2, cy - s * 0.3, s * 0.3, s * 0.8));
+                // Line overlay
+                context.DrawLine(new Pen(color, 1.5), new Point(cx - s * 0.45, cy + s * 0.1), new Point(cx - s * 0.05, cy - s * 0.3));
+                context.DrawLine(new Pen(color, 1.5), new Point(cx - s * 0.05, cy - s * 0.3), new Point(cx + s * 0.35, cy - s * 0.1));
+                break;
+
+            case ToolboxButton.Brush:
+                // Brush icon: paintbrush shape
+                // Handle
+                context.DrawLine(new Pen(color, 2), new Point(cx - s * 0.5, cy + s * 0.5), new Point(cx, cy));
+                // Bristles
+                context.DrawRectangle(color, null, new Rect(cx - s * 0.15, cy - s * 0.5, s * 0.3, s * 0.5), 2, 2);
+                break;
         }
     }
 
@@ -372,6 +513,10 @@ public class ChartToolbox : AvaloniaObject
         DataView,
         ZoomIn,
         ZoomOut,
-        ResetZoom
+        ResetZoom,
+        Restore,
+        DataZoom,
+        MagicType,
+        Brush
     }
 }

@@ -309,6 +309,10 @@ public class LineRenderer : IChartRenderer
                         ctx.LineTo(points[i]);
                     }
                     break;
+
+                case ChartInterpolation.CatmullRom:
+                    AddCatmullRomToStream(ctx, points, tension);
+                    break;
             }
 
             ctx.EndFigure(false);
@@ -345,6 +349,10 @@ public class LineRenderer : IChartRenderer
 
                 case ChartInterpolation.MonotoneCubic:
                     AddMonotoneCubicToStream(ctx, points, tension);
+                    break;
+
+                case ChartInterpolation.CatmullRom:
+                    AddCatmullRomToStream(ctx, points, tension);
                     break;
 
                 default:
@@ -455,6 +463,10 @@ public class LineRenderer : IChartRenderer
                     figure.Segments!.Add(new LineSegment { Point = points[i] });
                 }
                 break;
+
+            case ChartInterpolation.CatmullRom:
+                AddCatmullRomSegments(figure, points, tension);
+                break;
         }
 
         geometry.Figures!.Add(figure);
@@ -489,6 +501,10 @@ public class LineRenderer : IChartRenderer
 
             case ChartInterpolation.MonotoneCubic:
                 AddMonotoneCubicSegments(figure, points, tension);
+                break;
+
+            case ChartInterpolation.CatmullRom:
+                AddCatmullRomSegments(figure, points, tension);
                 break;
 
             default:
@@ -552,6 +568,81 @@ public class LineRenderer : IChartRenderer
             var cp2 = new Point(p1.X - dx / 3, p1.Y - tangents[i + 1] * dx / 3 * tension);
 
             figure.Segments!.Add(new BezierSegment { Point1 = cp1, Point2 = cp2, Point3 = p1 });
+        }
+    }
+
+    /// <summary>
+    /// Add Catmull-Rom spline segments to a StreamGeometryContext.
+    /// The Catmull-Rom spline passes through all control points and uses
+    /// neighboring points to compute tangent directions.
+    /// </summary>
+    private static void AddCatmullRomToStream(
+        Avalonia.Media.StreamGeometryContext ctx,
+        ReadOnlySpan<Point> points,
+        double tension)
+    {
+        if (points.Length < 3)
+        {
+            for (int i = 1; i < points.Length; i++)
+                ctx.LineTo(points[i]);
+            return;
+        }
+
+        var n = points.Length;
+        var alpha = tension; // tension parameter [0,1], 0.5 = standard Catmull-Rom
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            var p0 = i > 0 ? points[i - 1] : points[i];
+            var p1 = points[i];
+            var p2 = points[i + 1];
+            var p3 = i + 2 < n ? points[i + 2] : points[i + 1];
+
+            // Compute tangent vectors scaled by tension
+            var cp1 = new Point(
+                p1.X + (p2.X - p0.X) * alpha / 3,
+                p1.Y + (p2.Y - p0.Y) * alpha / 3);
+            var cp2 = new Point(
+                p2.X - (p3.X - p1.X) * alpha / 3,
+                p2.Y - (p3.Y - p1.Y) * alpha / 3);
+
+            ctx.CubicBezierTo(cp1, cp2, p2);
+        }
+    }
+
+    /// <summary>
+    /// Add Catmull-Rom spline segments to a PathFigure.
+    /// </summary>
+    private static void AddCatmullRomSegments(
+        PathFigure figure,
+        ReadOnlySpan<Point> points,
+        double tension)
+    {
+        if (points.Length < 3)
+        {
+            for (int i = 1; i < points.Length; i++)
+                figure.Segments!.Add(new LineSegment { Point = points[i] });
+            return;
+        }
+
+        var n = points.Length;
+        var alpha = tension;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            var p0 = i > 0 ? points[i - 1] : points[i];
+            var p1 = points[i];
+            var p2 = points[i + 1];
+            var p3 = i + 2 < n ? points[i + 2] : points[i + 1];
+
+            var cp1 = new Point(
+                p1.X + (p2.X - p0.X) * alpha / 3,
+                p1.Y + (p2.Y - p0.Y) * alpha / 3);
+            var cp2 = new Point(
+                p2.X - (p3.X - p1.X) * alpha / 3,
+                p2.Y - (p3.Y - p1.Y) * alpha / 3);
+
+            figure.Segments!.Add(new BezierSegment { Point1 = cp1, Point2 = cp2, Point3 = p2 });
         }
     }
 

@@ -1,0 +1,60 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- Material Design 3 — StatusBar -->
+    <!-- StatusBar inherits from Panel; styling is applied via attached properties and child styles -->
+
+    <!-- StatusBarItem — Material Style -->
+    <Style Selector="Border.status-bar-item">
+        <Setter Property="Padding" Value="16,8"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style Selector="Border.status-bar-item TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodySmallFamily}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- StatusBarItem separator -->
+    <Style Selector="Border.status-bar-separator">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="Margin" Value="0,6"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- ============================================================
+         ToolBar — Material Style
+         ============================================================ -->
+    <!-- ToolBar inherits from Panel; styling is applied via attached properties and child styles -->
+
+    <!-- ToolBar separator — Material Style -->
+    <Style Selector="Border.tool-bar-separator">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="Margin" Value="4,8"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- ToolBar overflow button — Material Style -->
+    <Style Selector="Button.tool-bar-overflow">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="8,8"/>
+        <Setter Property="MinWidth" Value="32"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+    </Style>
+
+    <Style Selector="Button.tool-bar-overflow:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="Button.tool-bar-overflow:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+</Styles>

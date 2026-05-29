@@ -39,12 +39,53 @@ public class ParallelSeries : ChartSeries
     public static readonly StyledProperty<bool> ShowAxisLabelsProperty =
         AvaloniaProperty.Register<ParallelSeries, bool>(nameof(ShowAxisLabels), true);
 
+    /// <summary>
+    /// Defines the <see cref="ColorEncodingIndex"/> styled property.
+    /// Index of the axis used for color encoding (-1 = no color encoding).
+    /// Values on this axis are mapped to a color gradient.
+    /// </summary>
+    public static readonly StyledProperty<int> ColorEncodingIndexProperty =
+        AvaloniaProperty.Register<ParallelSeries, int>(nameof(ColorEncodingIndex), -1);
+
+    /// <summary>
+    /// Defines the <see cref="ColorRangeStart"/> styled property.
+    /// Start color for the color encoding gradient.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ColorRangeStartProperty =
+        AvaloniaProperty.Register<ParallelSeries, IBrush?>(nameof(ColorRangeStart));
+
+    /// <summary>
+    /// Defines the <see cref="ColorRangeEnd"/> styled property.
+    /// End color for the color encoding gradient.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ColorRangeEndProperty =
+        AvaloniaProperty.Register<ParallelSeries, IBrush?>(nameof(ColorRangeEnd));
+
+    /// <summary>
+    /// Defines the <see cref="BrushRanges"/> styled property.
+    /// Active brush ranges for each axis (min, max pairs). Null = no brushing on that axis.
+    /// </summary>
+    public static readonly StyledProperty<double[]?> BrushRangesProperty =
+        AvaloniaProperty.Register<ParallelSeries, double[]?>(nameof(BrushRanges));
+
+    /// <summary>
+    /// Defines the <see cref="UnselectedOpacity"/> styled property.
+    /// Opacity for polylines outside the brush selection.
+    /// </summary>
+    public static readonly StyledProperty<double> UnselectedOpacityProperty =
+        AvaloniaProperty.Register<ParallelSeries, double>(nameof(UnselectedOpacity), 0.05);
+
     public string[]? AxisLabels { get => GetValue(AxisLabelsProperty); set => SetValue(AxisLabelsProperty, value); }
     public double[]? AxisMinValues { get => GetValue(AxisMinValuesProperty); set => SetValue(AxisMinValuesProperty, value); }
     public double[]? AxisMaxValues { get => GetValue(AxisMaxValuesProperty); set => SetValue(AxisMaxValuesProperty, value); }
     public double LineThickness { get => GetValue(LineThicknessProperty); set => SetValue(LineThicknessProperty, value); }
     public double LineOpacity { get => GetValue(LineOpacityProperty); set => SetValue(LineOpacityProperty, value); }
     public bool ShowAxisLabels { get => GetValue(ShowAxisLabelsProperty); set => SetValue(ShowAxisLabelsProperty, value); }
+    public int ColorEncodingIndex { get => GetValue(ColorEncodingIndexProperty); set => SetValue(ColorEncodingIndexProperty, value); }
+    public IBrush? ColorRangeStart { get => GetValue(ColorRangeStartProperty); set => SetValue(ColorRangeStartProperty, value); }
+    public IBrush? ColorRangeEnd { get => GetValue(ColorRangeEndProperty); set => SetValue(ColorRangeEndProperty, value); }
+    public double[]? BrushRanges { get => GetValue(BrushRangesProperty); set => SetValue(BrushRangesProperty, value); }
+    public double UnselectedOpacity { get => GetValue(UnselectedOpacityProperty); set => SetValue(UnselectedOpacityProperty, value); }
 
     private AvaloniaList<ChartParallelData>? _dataItems;
 

@@ -60,14 +60,24 @@
                                IsLightDismissEnabled="True"
                                Placement="BottomEdgeAlignedLeft"
                                MaxHeight="300">
-                            <Border Background="{DynamicResource AuraFlyoutBackgroundBrush}"
+                            <Border Name="PART_DropdownBorder"
+                                    Background="{DynamicResource AuraFlyoutBackgroundBrush}"
                                     BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
                                     BorderThickness="1"
                                     CornerRadius="{DynamicResource AuraRadiusMd}"
                                     Padding="4">
-                                <ScrollViewer>
-                                    <ItemsPresenter Name="PART_ItemsPresenter"/>
-                                </ScrollViewer>
+                                <DockPanel>
+                                    <!-- Search box (shown when IsSearchable) -->
+                                    <TextBox Name="PART_SearchBox"
+                                             DockPanel.Dock="Top"
+                                             Margin="4,4,4,8"
+                                             FontSize="13"
+                                             Watermark="Search..."
+                                             IsVisible="False"/>
+                                    <ScrollViewer>
+                                        <ItemsPresenter Name="PART_ItemsPresenter"/>
+                                    </ScrollViewer>
+                                </DockPanel>
                             </Border>
                         </Popup>
                     </Panel>

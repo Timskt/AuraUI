@@ -1,28 +1,62 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
 
     <!-- ============================================================
-         TabControl — Fluent Style
+         navigation|AuraTabControl — Fluent Style (Enhanced)
          ============================================================ -->
-    <Style Selector="TabControl">
+    <Style Selector="navigation|AuraTabControl">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <DockPanel>
-                    <!-- Tab strip -->
+                    <!-- Tab strip with scroll support -->
                     <Border DockPanel.Dock="Top"
                             BorderBrush="{DynamicResource AuraDividerBrush}"
                             BorderThickness="0,0,0,1">
-                        <TabStrip Name="PART_Header"
-                                  Background="Transparent"
-                                  SelectedIndex="{TemplateBinding SelectedIndex}"
-                                  Margin="0,0,0,-1">
-                            <TabStrip.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </TabStrip.ItemsPanel>
-                        </TabStrip>
+                        <DockPanel>
+                            <!-- Scroll left button -->
+                            <Button Name="PART_ScrollLeftButton"
+                                    DockPanel.Dock="Left"
+                                    Classes="tab-scroll-button"
+                                    Content="&#xE76B;"
+                                    IsVisible="False"
+                                    VerticalAlignment="Stretch"/>
+
+                            <!-- Scroll right button -->
+                            <Button Name="PART_ScrollRightButton"
+                                    DockPanel.Dock="Right"
+                                    Classes="tab-scroll-button"
+                                    Content="&#xE76C;"
+                                    IsVisible="False"
+                                    VerticalAlignment="Stretch"/>
+
+                            <!-- Add tab button -->
+                            <Button Name="PART_AddTabButton"
+                                    DockPanel.Dock="Right"
+                                    Classes="add-tab-button"
+                                    Content="+"
+                                    IsVisible="False"
+                                    VerticalAlignment="Stretch"
+                                    Margin="4,0"/>
+
+                            <!-- Tab strip scroll viewer -->
+                            <ScrollViewer Name="PART_TabStripScrollViewer"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Disabled"
+                                          Background="Transparent">
+                                <TabStrip Name="PART_Header"
+                                          Background="Transparent"
+                                          SelectedIndex="{TemplateBinding SelectedIndex}"
+                                          Margin="0,0,0,-1">
+                                    <TabStrip.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </TabStrip.ItemsPanel>
+                                </TabStrip>
+                            </ScrollViewer>
+                        </DockPanel>
                     </Border>
 
                     <!-- Content area -->
@@ -97,11 +131,59 @@
     </Style>
 
     <!-- ============================================================
+         Tab Scroll Buttons — Fluent Style
+         ============================================================ -->
+    <Style Selector="Button.tab-scroll-button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="4,8"/>
+        <Setter Property="MinWidth" Value="28"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style Selector="Button.tab-scroll-button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <Style Selector="Button.tab-scroll-button:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         Add Tab Button — Fluent Style
+         ============================================================ -->
+    <Style Selector="Button.add-tab-button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="6,6"/>
+        <Setter Property="MinWidth" Value="28"/>
+        <Setter Property="MinHeight" Value="28"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="Button.add-tab-button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="Button.add-tab-button:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- ============================================================
          TabControl Variants
          ============================================================ -->
 
     <!-- Pills style -->
-    <Style Selector="TabControl.pills TabStripItem">
+    <Style Selector="navigation|AuraTabControl.pills TabStripItem">
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
@@ -121,15 +203,15 @@
             </ControlTemplate>
         </Setter>
     </Style>
-    <Style Selector="TabControl.pills TabStripItem:pointerover /template/ Border#PART_Border">
+    <Style Selector="navigation|AuraTabControl.pills TabStripItem:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
-    <Style Selector="TabControl.pills TabStripItem:selected /template/ Border#PART_Border">
+    <Style Selector="navigation|AuraTabControl.pills TabStripItem:selected /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
     </Style>
 
     <!-- Underline-less / clean -->
-    <Style Selector="TabControl.clean">
+    <Style Selector="navigation|AuraTabControl.clean">
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 

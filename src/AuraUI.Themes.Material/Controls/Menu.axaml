@@ -1,0 +1,203 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- Material Design 3 — AuraMenu -->
+
+    <Style Selector="navigation|AuraMenu">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontLabelLargeFamily}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+                    <ItemsPresenter Name="PART_ItemsPresenter">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- AuraMenuItem — Material Style -->
+    <Style Selector="navigation|AuraMenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="RootBorder"
+                        Background="Transparent"
+                        CornerRadius="{DynamicResource AuraRadiusFull}"
+                        Margin="2,1"
+                        ClipToBounds="True">
+                    <Panel>
+                        <Border Name="StateLayer"
+                                Background="Transparent"
+                                CornerRadius="{DynamicResource AuraRadiusFull}"/>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto"
+                              Margin="{TemplateBinding Padding}">
+                            <!-- Icon -->
+                            <Image Name="PART_Icon"
+                                   Grid.Column="0"
+                                   Width="20" Height="20"
+                                   Stretch="Uniform"
+                                   Margin="0,0,12,0"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"/>
+
+                            <!-- Header text -->
+                            <ContentPresenter Name="PART_HeaderPresenter"
+                                              Grid.Column="1"
+                                              Content="{TemplateBinding Header}"
+                                              VerticalAlignment="Center"/>
+
+                            <!-- Input gesture text (shortcut) -->
+                            <TextBlock Name="PART_InputGestureText"
+                                       Grid.Column="2"
+                                       Text="{TemplateBinding InputGestureText}"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                       FontSize="12"
+                                       FontFamily="{DynamicResource AuraFontBodySmallFamily}"
+                                       VerticalAlignment="Center"
+                                       Margin="24,0,0,0"/>
+
+                            <!-- Submenu arrow -->
+                            <Path Name="PART_SubmenuArrow"
+                                  Grid.Column="3"
+                                  Width="10" Height="10"
+                                  Stretch="Uniform"
+                                  Fill="{DynamicResource AuraForegroundSecondaryBrush}"
+                                  Data="M 0 0 L 5 5 L 0 10"
+                                  VerticalAlignment="Center"
+                                  Margin="8,0,0,0"
+                                  IsVisible="False"/>
+                        </Grid>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.150"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover (state layer) -->
+    <Style Selector="navigation|AuraMenuItem:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Pressed -->
+    <Style Selector="navigation|AuraMenuItem:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Selected -->
+    <Style Selector="navigation|AuraMenuItem:selected /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
+    </Style>
+
+    <!-- With icon -->
+    <Style Selector="navigation|AuraMenuItem:has-icon /template/ Image#PART_Icon">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- With submenu -->
+    <Style Selector="navigation|AuraMenuItem:hassubmenu /template/ Path#PART_SubmenuArrow">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="navigation|AuraMenuItem:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+    <!-- ============================================================
+         Separator — Material Style
+         ============================================================ -->
+    <Style Selector="Separator">
+        <Setter Property="Background" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Margin" Value="12,4"/>
+    </Style>
+
+    <!-- ============================================================
+         AuraContextMenu — Material Style
+         ============================================================ -->
+    <Style Selector="navigation|AuraContextMenu">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="MinWidth" Value="180"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding MenuCornerRadius}"
+                        BoxShadow="{DynamicResource AuraShadowLevel2}"
+                        Padding="{TemplateBinding Padding}">
+                    <ScrollViewer>
+                        <ItemsPresenter Name="PART_ItemsPresenter">
+                            <ItemsPresenter.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         MenuFlyoutPresenter — Material Style
+         ============================================================ -->
+    <Style Selector="MenuFlyoutPresenter">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="MinWidth" Value="180"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="12"
+                        BoxShadow="{DynamicResource AuraShadowLevel2}"
+                        Padding="{TemplateBinding Padding}">
+                    <ScrollViewer>
+                        <ItemsPresenter Name="PART_ItemsPresenter">
+                            <ItemsPresenter.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

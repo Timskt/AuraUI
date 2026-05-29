@@ -115,6 +115,58 @@ public class ChartAxis : AvaloniaObject
     public static readonly StyledProperty<double[]?> GridLineStyleProperty =
         AvaloniaProperty.Register<ChartAxis, double[]?>(nameof(GridLineStyle));
 
+    /// <summary>Whether to align tick marks with labels (for category axis).</summary>
+    public static readonly StyledProperty<bool> AlignWithLabelProperty =
+        AvaloniaProperty.Register<ChartAxis, bool>(nameof(AlignWithLabel));
+
+    /// <summary>Interval between tick marks (0 = auto, 1 = every category, 2 = every other).</summary>
+    public static readonly StyledProperty<int> TickMarkIntervalProperty =
+        AvaloniaProperty.Register<ChartAxis, int>(nameof(TickMarkInterval));
+
+    /// <summary>Axis name (displayed as axis title in ECharts style).</summary>
+    public static readonly StyledProperty<string?> NameProperty =
+        AvaloniaProperty.Register<ChartAxis, string?>(nameof(Name));
+
+    /// <summary>Location of the axis name label.</summary>
+    public static readonly StyledProperty<AxisNameLocation> NameLocationProperty =
+        AvaloniaProperty.Register<ChartAxis, AxisNameLocation>(nameof(NameLocation), AxisNameLocation.End);
+
+    /// <summary>Gap between the axis name and the axis line in pixels.</summary>
+    public static readonly StyledProperty<double> NameGapProperty =
+        AvaloniaProperty.Register<ChartAxis, double>(nameof(NameGap), 15);
+
+    /// <summary>Font size for the axis name.</summary>
+    public static readonly StyledProperty<double> NameFontSizeProperty =
+        AvaloniaProperty.Register<ChartAxis, double>(nameof(NameFontSize), 12.0);
+
+    /// <summary>Font weight for the axis name.</summary>
+    public static readonly StyledProperty<FontWeight> NameFontWeightProperty =
+        AvaloniaProperty.Register<ChartAxis, FontWeight>(nameof(NameFontWeight), FontWeight.SemiBold);
+
+    /// <summary>Color for the axis name text.</summary>
+    public static readonly StyledProperty<IBrush?> NameColorProperty =
+        AvaloniaProperty.Register<ChartAxis, IBrush?>(nameof(NameColor));
+
+    /// <summary>Whether to show the split area (alternating colored bands between grid lines).</summary>
+    public static readonly StyledProperty<bool> ShowSplitAreaProperty =
+        AvaloniaProperty.Register<ChartAxis, bool>(nameof(ShowSplitArea));
+
+    /// <summary>Brush for the split area alternating bands.</summary>
+    public static readonly StyledProperty<IBrush?> SplitAreaBrushProperty =
+        AvaloniaProperty.Register<ChartAxis, IBrush?>(nameof(SplitAreaBrush));
+
+    /// <summary>Font family for axis labels.</summary>
+    public static readonly StyledProperty<string?> LabelFontFamilyProperty =
+        AvaloniaProperty.Register<ChartAxis, string?>(nameof(LabelFontFamily));
+
+    /// <summary>Minimum interval between labels (for time axis formatting).</summary>
+    public static readonly StyledProperty<string?> MinIntervalProperty =
+        AvaloniaProperty.Register<ChartAxis, string?>(nameof(MinInterval));
+
+    /// <summary>Maximum interval between labels.</summary>
+    public static readonly StyledProperty<string?> MaxIntervalProperty =
+        AvaloniaProperty.Register<ChartAxis, string?>(nameof(MaxInterval));
+
     // CLR wrappers
     public AxisPosition Position { get => GetValue(PositionProperty); set => SetValue(PositionProperty, value); }
     public AxisScale Scale { get => GetValue(ScaleProperty); set => SetValue(ScaleProperty, value); }
@@ -141,6 +193,19 @@ public class ChartAxis : AvaloniaObject
     public double TickLength { get => GetValue(TickLengthProperty); set => SetValue(TickLengthProperty, value); }
     public double AxisLineWidth { get => GetValue(AxisLineWidthProperty); set => SetValue(AxisLineWidthProperty, value); }
     public double[]? GridLineStyle { get => GetValue(GridLineStyleProperty); set => SetValue(GridLineStyleProperty, value); }
+    public bool AlignWithLabel { get => GetValue(AlignWithLabelProperty); set => SetValue(AlignWithLabelProperty, value); }
+    public int TickMarkInterval { get => GetValue(TickMarkIntervalProperty); set => SetValue(TickMarkIntervalProperty, value); }
+    public string? Name { get => GetValue(NameProperty); set => SetValue(NameProperty, value); }
+    public AxisNameLocation NameLocation { get => GetValue(NameLocationProperty); set => SetValue(NameLocationProperty, value); }
+    public double NameGap { get => GetValue(NameGapProperty); set => SetValue(NameGapProperty, value); }
+    public double NameFontSize { get => GetValue(NameFontSizeProperty); set => SetValue(NameFontSizeProperty, value); }
+    public FontWeight NameFontWeight { get => GetValue(NameFontWeightProperty); set => SetValue(NameFontWeightProperty, value); }
+    public IBrush? NameColor { get => GetValue(NameColorProperty); set => SetValue(NameColorProperty, value); }
+    public bool ShowSplitArea { get => GetValue(ShowSplitAreaProperty); set => SetValue(ShowSplitAreaProperty, value); }
+    public IBrush? SplitAreaBrush { get => GetValue(SplitAreaBrushProperty); set => SetValue(SplitAreaBrushProperty, value); }
+    public string? LabelFontFamily { get => GetValue(LabelFontFamilyProperty); set => SetValue(LabelFontFamilyProperty, value); }
+    public string? MinInterval { get => GetValue(MinIntervalProperty); set => SetValue(MinIntervalProperty, value); }
+    public string? MaxInterval { get => GetValue(MaxIntervalProperty); set => SetValue(MaxIntervalProperty, value); }
 
     // ────────────────────────────────────────────────
     //  Computed layout (set by Chart during layout pass)

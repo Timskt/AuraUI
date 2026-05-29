@@ -1,0 +1,163 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         AuraDataGrid — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|AuraDataGrid">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="SelectionMode" Value="Extended"/>
+        <Setter Property="AreRowGroupHeadersFrozen" Value="True"/>
+        <Setter Property="CanUserResizeColumns" Value="True"/>
+        <Setter Property="AutoGenerateColumns" Value="True"/>
+    </Style>
+
+    <!-- ============================================================
+         DataGridColumnHeader — Fluent Style
+         ============================================================ -->
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                    </Border.Transitions>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <ContentPresenter Grid.Column="0"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center"/>
+                        <!-- Sort indicator -->
+                        <Path Name="PART_SortIcon"
+                              Grid.Column="1"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Fill="{DynamicResource AuraForegroundSecondaryBrush}"
+                              IsVisible="False"
+                              Margin="8,0,0,0"
+                              VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ColumnHeader :pointerover -->
+    <Style Selector="DataGridColumnHeader:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraOverlayBrush}"/>
+    </Style>
+
+    <!-- ColumnHeader :pressed -->
+    <Style Selector="DataGridColumnHeader:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+    </Style>
+
+    <!-- ColumnHeader :sorted -->
+    <Style Selector="DataGridColumnHeader:sorted /template/ Path#PART_SortIcon">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- ============================================================
+         DataGridRow — Fluent Style
+         ============================================================ -->
+    <Style Selector="DataGridRow">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinHeight" Value="36"/>
+    </Style>
+
+    <!-- DataGridRow :pointerover -->
+    <Style Selector="DataGridRow:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- DataGridRow :selected -->
+    <Style Selector="DataGridRow:selected">
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedBrush}"/>
+    </Style>
+
+    <!-- DataGridRow selected + :pointerover -->
+    <Style Selector="DataGridRow:selected:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedHoverBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         DataGridCell — Fluent Style
+         ============================================================ -->
+    <Style Selector="DataGridCell">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Padding" Value="12,0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- DataGridCell :selected -->
+    <Style Selector="DataGridCell:selected">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <!-- DataGridCell :focus -->
+    <Style Selector="DataGridCell:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- ============================================================
+         DataGridRowHeader — Fluent Style
+         ============================================================ -->
+    <Style Selector="DataGridRowHeader">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+    </Style>
+
+    <!-- ============================================================
+         AuraDataGrid Variants
+         ============================================================ -->
+
+    <!-- Striped rows (alternating) -->
+    <Style Selector="display|AuraDataGrid.striped">
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource AuraSurfaceBrush}"/>
+    </Style>
+
+    <!-- Bordered variant -->
+    <Style Selector="display|AuraDataGrid.bordered">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="GridLinesVisibility" Value="All"/>
+    </Style>
+
+    <!-- Compact variant -->
+    <Style Selector="display|AuraDataGrid.compact DataGridRow">
+        <Setter Property="MinHeight" Value="28"/>
+    </Style>
+    <Style Selector="display|AuraDataGrid.compact DataGridCell">
+        <Setter Property="MinHeight" Value="28"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+    <Style Selector="display|AuraDataGrid.compact DataGridColumnHeader">
+        <Setter Property="Padding" Value="8,8"/>
+        <Setter Property="MinHeight" Value="32"/>
+    </Style>
+
+</Styles>

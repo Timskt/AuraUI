@@ -7,6 +7,11 @@ namespace AuraUI.Controls.Charts.Rendering;
 /// <summary>
 /// Renders FunnelSeries as trapezoidal segments stacked vertically.
 /// Each segment width is proportional to its value relative to the maximum.
+///
+/// Enhanced with:
+///   - Conversion rate labels (percentage drop from previous stage)
+///   - Value labels inside or beside each segment
+///   - Configurable neck ratio
 /// </summary>
 public class FunnelRenderer : IChartRenderer
 {
@@ -70,16 +75,41 @@ public class FunnelRenderer : IChartRenderer
             if (funnel.ShowLabels && progress >= 1.0)
             {
                 var labelText = item.Label ?? "";
+
+                // Build label with value and conversion rate
                 if (funnel.ShowValues)
                     labelText += $"  {item.Value}";
 
+                // Add conversion rate from previous stage
+                if (funnel.ShowConversionRate && i > 0)
+                {
+                    var prevValue = items[i - 1].Value;
+                    if (prevValue > 0)
+                    {
+                        var conversionRate = (item.Value / prevValue) * 100;
+                        labelText += $"  ({conversionRate:F1}%)";
+                    }
+                }
+
+                // Add overall conversion rate from first stage
+                if (funnel.ShowOverallConversion && i > 0)
+                {
+                    var firstValue = items[0].Value;
+                    if (firstValue > 0)
+                    {
+                        var overallRate = (item.Value / firstValue) * 100;
+                        labelText += $"  [{overallRate:F1}%]";
+                    }
+                }
+
                 if (!string.IsNullOrWhiteSpace(labelText))
                 {
+                    var labelFontSize = funnel.LabelFontSize > 0 ? funnel.LabelFontSize : 12.0;
                     var formattedText = new FormattedText(labelText,
                         System.Globalization.CultureInfo.CurrentCulture,
                         FlowDirection.LeftToRight,
                         new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
-                        12.0,
+                        labelFontSize,
                         Brushes.White);
 
                     var labelX = funnel.LabelPosition switch
@@ -91,6 +121,35 @@ public class FunnelRenderer : IChartRenderer
                     var labelY = currentY + (segmentHeight - formattedText.Height) / 2;
 
                     context.DrawText(formattedText, new Point(labelX, labelY));
+                }
+            }
+
+            // Conversion rate between stages (drawn in the gap)
+            if (funnel.ShowConversionRate && i > 0 && progress >= 1.0)
+            {
+                var prevValue = items[i - 1].Value;
+                if (prevValue > 0)
+                {
+                    var conversionRate = (item.Value / prevValue) * 100;
+                    var rateText = $"-{100 - conversionRate:F0}%";
+                    var rateFormatted = new FormattedText(rateText,
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        FlowDirection.LeftToRight,
+                        new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
+                        9.0,
+                        new SolidColorBrush(Colors.Gray, 0.7));
+
+                    // Draw rate indicator in the gap between segments
+                    var rateX = centerX + currentWidth / 2 + 8;
+                    var rateY = currentY - funnel.Gap / 2 - rateFormatted.Height / 2;
+
+                    // Draw small arrow indicating drop
+                    var arrowPen = new Pen(new SolidColorBrush(Colors.Gray, 0.5), 1.0);
+                    context.DrawLine(arrowPen,
+                        new Point(rateX - 4, rateY + rateFormatted.Height / 2),
+                        new Point(rateX - 2, rateY + rateFormatted.Height / 2 + 3));
+
+                    context.DrawText(rateFormatted, new Point(rateX, rateY));
                 }
             }
 

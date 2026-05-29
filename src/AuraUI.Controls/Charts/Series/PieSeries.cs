@@ -71,6 +71,50 @@ public class PieSeries : ChartSeries
     public static readonly StyledProperty<double> LabelLineLengthProperty =
         AvaloniaProperty.Register<PieSeries, double>(nameof(LabelLineLength), 20.0);
 
+    /// <summary>
+    /// Defines the <see cref="Mode"/> styled property.
+    /// Controls whether this is a standard pie/donut or a nightingale rose chart.
+    /// </summary>
+    public static readonly StyledProperty<PieMode> ModeProperty =
+        AvaloniaProperty.Register<PieSeries, PieMode>(nameof(Mode), PieMode.Standard);
+
+    /// <summary>
+    /// Defines the <see cref="EmphasisScale"/> styled property.
+    /// Scale factor applied to a slice on hover (1.0 = no effect).
+    /// </summary>
+    public static readonly StyledProperty<double> EmphasisScaleProperty =
+        AvaloniaProperty.Register<PieSeries, double>(nameof(EmphasisScale), 1.05,
+            coerce: (_, v) => Math.Clamp(v, 1.0, 1.5));
+
+    /// <summary>
+    /// Defines the <see cref="ShowLeaderLines"/> styled property.
+    /// Whether to draw leader lines from slice to label.
+    /// </summary>
+    public static readonly StyledProperty<bool> ShowLeaderLinesProperty =
+        AvaloniaProperty.Register<PieSeries, bool>(nameof(ShowLeaderLines), true);
+
+    /// <summary>
+    /// Defines the <see cref="RoseRadiusRatio"/> styled property.
+    /// In rose mode, controls the minimum radius as a fraction of the maximum (0-1).
+    /// </summary>
+    public static readonly StyledProperty<double> RoseRadiusRatioProperty =
+        AvaloniaProperty.Register<PieSeries, double>(nameof(RoseRadiusRatio), 0.3,
+            coerce: (_, v) => Math.Clamp(v, 0.0, 1.0));
+
+    /// <summary>
+    /// Defines the <see cref="MaxVisibleSlices"/> styled property.
+    /// When set, small slices are grouped into "Other". 0 = show all.
+    /// </summary>
+    public static readonly StyledProperty<int> MaxVisibleSlicesProperty =
+        AvaloniaProperty.Register<PieSeries, int>(nameof(MaxVisibleSlices));
+
+    /// <summary>
+    /// Defines the <see cref="SortOrder"/> styled property.
+    /// Sort slices by value: None, Ascending, or Descending.
+    /// </summary>
+    public static readonly StyledProperty<PieSortOrder> SortOrderProperty =
+        AvaloniaProperty.Register<PieSeries, PieSortOrder>(nameof(SortOrder), PieSortOrder.None);
+
     public double InnerRadius
     {
         get => GetValue(InnerRadiusProperty);
@@ -118,6 +162,48 @@ public class PieSeries : ChartSeries
         get => GetValue(LabelLineLengthProperty);
         set => SetValue(LabelLineLengthProperty, value);
     }
+
+    public PieMode Mode
+    {
+        get => GetValue(ModeProperty);
+        set => SetValue(ModeProperty, value);
+    }
+
+    public double EmphasisScale
+    {
+        get => GetValue(EmphasisScaleProperty);
+        set => SetValue(EmphasisScaleProperty, value);
+    }
+
+    public bool ShowLeaderLines
+    {
+        get => GetValue(ShowLeaderLinesProperty);
+        set => SetValue(ShowLeaderLinesProperty, value);
+    }
+
+    public double RoseRadiusRatio
+    {
+        get => GetValue(RoseRadiusRatioProperty);
+        set => SetValue(RoseRadiusRatioProperty, value);
+    }
+
+    public int MaxVisibleSlices
+    {
+        get => GetValue(MaxVisibleSlicesProperty);
+        set => SetValue(MaxVisibleSlicesProperty, value);
+    }
+
+    public PieSortOrder SortOrder
+    {
+        get => GetValue(SortOrderProperty);
+        set => SetValue(SortOrderProperty, value);
+    }
+
+    /// <summary>
+    /// Index of the currently hovered slice. Set by the chart on hover.
+    /// Used by PieRenderer to apply emphasis (pull-out) effect.
+    /// </summary>
+    internal int HoveredSliceIndex { get; set; } = -1;
 
     // ────────────────────────────────────────────────
     //  Data

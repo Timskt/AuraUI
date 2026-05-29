@@ -147,6 +147,52 @@ public class ChartTooltip : AvaloniaObject
     public static readonly StyledProperty<string?> XValueFormatProperty =
         AvaloniaProperty.Register<ChartTooltip, string?>(nameof(XValueFormat), "F2");
 
+    /// <summary>
+    /// The type of axis pointer crosshair indicator.
+    /// </summary>
+    public static readonly StyledProperty<AxisPointerType> AxisPointerTypeProperty =
+        AvaloniaProperty.Register<ChartTooltip, AxisPointerType>(nameof(AxisPointerType), AxisPointerType.Line);
+
+    /// <summary>
+    /// Whether to keep the tooltip within the chart bounds.
+    /// When true, the tooltip will be repositioned if it would extend outside the chart area.
+    /// </summary>
+    public static readonly StyledProperty<bool> ConfineProperty =
+        AvaloniaProperty.Register<ChartTooltip, bool>(nameof(Confine), true);
+
+    /// <summary>
+    /// Whether the mouse can enter the tooltip area without it disappearing.
+    /// Useful for interactive tooltips with clickable links.
+    /// </summary>
+    public static readonly StyledProperty<bool> EnterableProperty =
+        AvaloniaProperty.Register<ChartTooltip, bool>(nameof(Enterable));
+
+    /// <summary>
+    /// Render mode for the tooltip content.
+    /// </summary>
+    public static readonly StyledProperty<TooltipRenderMode> RenderModeProperty =
+        AvaloniaProperty.Register<ChartTooltip, TooltipRenderMode>(nameof(RenderMode), TooltipRenderMode.Canvas);
+
+    /// <summary>
+    /// CSS-like class name for custom tooltip styling.
+    /// Can be used to apply different styles to different tooltips in the same chart.
+    /// </summary>
+    public static readonly StyledProperty<string?> ClassNameProperty =
+        AvaloniaProperty.Register<ChartTooltip, string?>(nameof(ClassName));
+
+    /// <summary>
+    /// Whether to show the axis pointer line when the tooltip is visible.
+    /// This is separate from ShowCrosshair for finer control.
+    /// </summary>
+    public static readonly StyledProperty<bool> ShowAxisPointerProperty =
+        AvaloniaProperty.Register<ChartTooltip, bool>(nameof(ShowAxisPointer), true);
+
+    /// <summary>
+    /// Extra offset from the cursor position in pixels.
+    /// </summary>
+    public static readonly StyledProperty<Point> OffsetProperty =
+        AvaloniaProperty.Register<ChartTooltip, Point>(nameof(Offset), new Point(12, -8));
+
     // CLR wrappers
     public TooltipTrigger Trigger { get => GetValue(TriggerProperty); set => SetValue(TriggerProperty, value); }
     public bool IsEnabled { get => GetValue(IsEnabledProperty); set => SetValue(IsEnabledProperty, value); }
@@ -170,6 +216,13 @@ public class ChartTooltip : AvaloniaObject
     public double ColorSwatchSize { get => GetValue(ColorSwatchSizeProperty); set => SetValue(ColorSwatchSizeProperty, value); }
     public string? ValueFormat { get => GetValue(ValueFormatProperty); set => SetValue(ValueFormatProperty, value); }
     public string? XValueFormat { get => GetValue(XValueFormatProperty); set => SetValue(XValueFormatProperty, value); }
+    public AxisPointerType AxisPointerType { get => GetValue(AxisPointerTypeProperty); set => SetValue(AxisPointerTypeProperty, value); }
+    public bool Confine { get => GetValue(ConfineProperty); set => SetValue(ConfineProperty, value); }
+    public bool Enterable { get => GetValue(EnterableProperty); set => SetValue(EnterableProperty, value); }
+    public TooltipRenderMode RenderMode { get => GetValue(RenderModeProperty); set => SetValue(RenderModeProperty, value); }
+    public string? ClassName { get => GetValue(ClassNameProperty); set => SetValue(ClassNameProperty, value); }
+    public bool ShowAxisPointer { get => GetValue(ShowAxisPointerProperty); set => SetValue(ShowAxisPointerProperty, value); }
+    public Point Offset { get => GetValue(OffsetProperty); set => SetValue(OffsetProperty, value); }
 
     /// <summary>
     /// Rich custom tooltip formatter. When set, this delegate controls the tooltip content

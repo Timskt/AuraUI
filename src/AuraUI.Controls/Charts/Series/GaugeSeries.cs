@@ -89,6 +89,56 @@ public class GaugeSeries : ChartSeries
     public static readonly StyledProperty<GaugeSegment[]?> SegmentsProperty =
         AvaloniaProperty.Register<GaugeSeries, GaugeSegment[]?>(nameof(Segments));
 
+    /// <summary>
+    /// Defines the <see cref="GaugeType"/> styled property.
+    /// Controls the gauge rendering variant.
+    /// </summary>
+    public static readonly StyledProperty<GaugeType> GaugeTypeProperty =
+        AvaloniaProperty.Register<GaugeSeries, GaugeType>(nameof(GaugeType), GaugeType.Standard);
+
+    /// <summary>
+    /// Defines the <see cref="StartAngle"/> styled property.
+    /// Custom start angle in degrees (overrides Mode when set).
+    /// </summary>
+    public static readonly StyledProperty<double> StartAngleProperty =
+        AvaloniaProperty.Register<GaugeSeries, double>(nameof(StartAngle), double.NaN);
+
+    /// <summary>
+    /// Defines the <see cref="EndAngle"/> styled property.
+    /// Custom end angle in degrees (overrides Mode when set).
+    /// </summary>
+    public static readonly StyledProperty<double> EndAngleProperty =
+        AvaloniaProperty.Register<GaugeSeries, double>(nameof(EndAngle), double.NaN);
+
+    /// <summary>
+    /// Defines the <see cref="PointerLength"/> styled property.
+    /// Length of the needle as a fraction of the radius (0-1).
+    /// </summary>
+    public static readonly StyledProperty<double> PointerLengthProperty =
+        AvaloniaProperty.Register<GaugeSeries, double>(nameof(PointerLength), 0.8,
+            coerce: (_, v) => Math.Clamp(v, 0.1, 1.0));
+
+    /// <summary>
+    /// Defines the <see cref="Rings"/> styled property.
+    /// Data for multi-ring gauge (each ring is a separate arc).
+    /// </summary>
+    public static readonly StyledProperty<GaugeRingData[]?> RingsProperty =
+        AvaloniaProperty.Register<GaugeSeries, GaugeRingData[]?>(nameof(Rings));
+
+    /// <summary>
+    /// Defines the <see cref="RingSpacing"/> styled property.
+    /// Spacing between concentric rings in pixels.
+    /// </summary>
+    public static readonly StyledProperty<double> RingSpacingProperty =
+        AvaloniaProperty.Register<GaugeSeries, double>(nameof(RingSpacing), 8.0);
+
+    /// <summary>
+    /// Defines the <see cref="PointerColor"/> styled property.
+    /// Color of the needle pointer.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> PointerColorProperty =
+        AvaloniaProperty.Register<GaugeSeries, IBrush?>(nameof(PointerColor));
+
     public double Value
     {
         get => GetValue(ValueProperty);
@@ -159,6 +209,48 @@ public class GaugeSeries : ChartSeries
     {
         get => GetValue(SegmentsProperty);
         set => SetValue(SegmentsProperty, value);
+    }
+
+    public GaugeType GaugeType
+    {
+        get => GetValue(GaugeTypeProperty);
+        set => SetValue(GaugeTypeProperty, value);
+    }
+
+    public double StartAngle
+    {
+        get => GetValue(StartAngleProperty);
+        set => SetValue(StartAngleProperty, value);
+    }
+
+    public double EndAngle
+    {
+        get => GetValue(EndAngleProperty);
+        set => SetValue(EndAngleProperty, value);
+    }
+
+    public double PointerLength
+    {
+        get => GetValue(PointerLengthProperty);
+        set => SetValue(PointerLengthProperty, value);
+    }
+
+    public GaugeRingData[]? Rings
+    {
+        get => GetValue(RingsProperty);
+        set => SetValue(RingsProperty, value);
+    }
+
+    public double RingSpacing
+    {
+        get => GetValue(RingSpacingProperty);
+        set => SetValue(RingSpacingProperty, value);
+    }
+
+    public IBrush? PointerColor
+    {
+        get => GetValue(PointerColorProperty);
+        set => SetValue(PointerColorProperty, value);
     }
 
     internal override bool UsesCategoryAxis => false;

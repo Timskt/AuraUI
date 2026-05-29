@@ -1,14 +1,16 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Styling;
 using AuraUI.Controls.Charts;
 using AuraUI.Controls.Charts.Series;
 using AuraUI.Controls.Feedback;
-using AuraUI.Controls.Input;
+using AuraUI.Controls.Layout;
+using AuraUI.Controls.Selection;
+using AuraUI.Core.Validation;
 using System;
+using System.Collections.Generic;
 
 namespace AuraUI.Demo;
 
@@ -17,31 +19,12 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-
-        // Wire up closable tag close events
-        if (ClosableTag1 != null) ClosableTag1.Closed += (_, _) => { ClosableTag1.IsVisible = false; UpdateStatus("Tag 'React' closed"); };
-        if (ClosableTag2 != null) ClosableTag2.Closed += (_, _) => { ClosableTag2.IsVisible = false; UpdateStatus("Tag 'Avalonia' closed"); };
-        if (ClosableTag3 != null) ClosableTag3.Closed += (_, _) => { ClosableTag3.IsVisible = false; UpdateStatus("Tag 'TypeScript' closed"); };
-
-        // Wire up search box
-        if (DemoSearchBox != null)
-        {
-            DemoSearchBox.Search += (_, text) => UpdateStatus($"Search fired: \"{text}\"");
-        }
-
-        // Wire up rate control
-        if (DemoRateControl != null)
-        {
-            DemoRateControl.ValueChanged += (_, e) => UpdateStatus($"Rating changed: {e.OldValue:F1} -> {e.NewValue:F1}");
-        }
-
-        // Initialize chart demo data
         InitializeCharts();
     }
 
-    // ----------------------------------------------------------------
-    // Charts
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  CHARTS — Initialize all chart data with realistic sample data
+    // ================================================================
 
     private void InitializeCharts()
     {
@@ -52,6 +35,12 @@ public partial class MainWindow : Window
         InitializeScatterChart();
         InitializeRadarChart();
         InitializeGaugeChart();
+        InitializeFunnelChart();
+        InitializeHeatmapChart();
+        InitializeCandlestickChart();
+        InitializeTreemapChart();
+        InitializeSankeyChart();
+        InitializeBoxplotChart();
     }
 
     private void InitializeLineChart()
@@ -157,7 +146,6 @@ public partial class MainWindow : Window
             SmoothTension = 0.3
         };
 
-        // 30 days of website traffic data
         var traffic = new double[]
         {
             1200, 1350, 1100, 1450, 1600, 1800, 1750,
@@ -189,12 +177,11 @@ public partial class MainWindow : Window
             MarkerShape = MarkerShape.Circle
         };
 
-        // 50 height/weight data points with realistic correlation
         var rng = new Random(42);
         for (int i = 0; i < 50; i++)
         {
-            var height = 150 + rng.NextDouble() * 45; // 150-195 cm
-            var weight = height * 0.6 + rng.NextDouble() * 30 - 15; // correlated
+            var height = 150 + rng.NextDouble() * 45;
+            var weight = height * 0.6 + rng.NextDouble() * 30 - 15;
             scatterSeries.DataPoints.Add(new ChartDataPoint(Math.Round(height, 1), Math.Round(weight, 1)));
         }
 
@@ -269,9 +256,284 @@ public partial class MainWindow : Window
         GaugeChart.Series.Add(gaugeSeries);
     }
 
-    // ----------------------------------------------------------------
-    // Theme switching
-    // ----------------------------------------------------------------
+    private void InitializeFunnelChart()
+    {
+        var funnelSeries = new FunnelSeries
+        {
+            ShowLabels = true,
+            ShowValues = true,
+            ShowConversionRate = true
+        };
+
+        var stages = new (string label, double value)[]
+        {
+            ("Visited Site", 15000),
+            ("Viewed Product", 8500),
+            ("Added to Cart", 4200),
+            ("Started Checkout", 2100),
+            ("Completed Purchase", 1200)
+        };
+
+        foreach (var (label, value) in stages)
+        {
+            funnelSeries.Items.Add(new ChartSliceData(label, value)
+            {
+                Color = new SolidColorBrush(Color.Parse(label switch
+                {
+                    "Visited Site" => "#0078D4",
+                    "Viewed Product" => "#5C2D91",
+                    "Added to Cart" => "#FFB900",
+                    "Started Checkout" => "#D83B01",
+                    _ => "#107C10"
+                }))
+            });
+        }
+
+        FunnelChart.Series.Add(funnelSeries);
+    }
+
+    private void InitializeHeatmapChart()
+    {
+        var heatmapSeries = new HeatmapSeries
+        {
+            ShowLabels = true,
+            CellGap = 2,
+            MinColor = Color.Parse("#f7fbff"),
+            MaxColor = Color.Parse("#08519c")
+        };
+
+        heatmapSeries.XLabels = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+        heatmapSeries.YLabels = new[] { "9 AM", "12 PM", "3 PM", "6 PM", "9 PM" };
+
+        var rng = new Random(42);
+        for (int y = 0; y < 5; y++)
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                // Simulate higher activity on weekdays and midday
+                var baseValue = (x < 5) ? 60 : 20;
+                var timeBonus = (y == 1 || y == 2) ? 30 : 0;
+                var noise = rng.Next(-15, 16);
+                var value = Math.Clamp(baseValue + timeBonus + noise, 0, 100);
+                heatmapSeries.DataPoints.Add(new ChartHeatmapData(x, y, value));
+            }
+        }
+
+        HeatmapChart.XAxis.Categories = heatmapSeries.XLabels;
+        HeatmapChart.XAxis.Scale = AxisScale.Category;
+        HeatmapChart.Series.Add(heatmapSeries);
+    }
+
+    private void InitializeCandlestickChart()
+    {
+        var candlestickSeries = new CandlestickSeries
+        {
+            UpColor = new SolidColorBrush(Color.Parse("#107C10")),
+            DownColor = new SolidColorBrush(Color.Parse("#D83B01")),
+            WickThickness = 1,
+            ShowWick = true
+        };
+
+        // Simulated stock data: 20 trading days
+        var ohlcData = new (double open, double high, double low, double close)[]
+        {
+            (150, 155, 148, 153),
+            (153, 158, 151, 156),
+            (156, 157, 149, 150),
+            (150, 154, 147, 152),
+            (152, 160, 151, 159),
+            (159, 162, 155, 157),
+            (157, 158, 150, 151),
+            (151, 156, 149, 155),
+            (155, 163, 154, 161),
+            (161, 165, 158, 160),
+            (160, 162, 154, 155),
+            (155, 159, 152, 158),
+            (158, 166, 157, 164),
+            (164, 168, 162, 163),
+            (163, 165, 157, 158),
+            (158, 161, 155, 160),
+            (160, 167, 159, 165),
+            (165, 170, 163, 168),
+            (168, 172, 166, 167),
+            (167, 169, 161, 164)
+        };
+
+        var dates = new string[20];
+        for (int i = 0; i < 20; i++)
+        {
+            dates[i] = $"Day {i + 1}";
+            var (open, high, low, close) = ohlcData[i];
+            candlestickSeries.DataPoints.Add(new OhlcDataPoint(i, open, high, low, close)
+            {
+                Label = dates[i]
+            });
+        }
+
+        CandlestickChart.XAxis.Title = "Trading Day";
+        CandlestickChart.YAxis.Title = "Price ($)";
+        CandlestickChart.YAxis.ShowGridLines = true;
+        CandlestickChart.Series.Add(candlestickSeries);
+    }
+
+    private void InitializeTreemapChart()
+    {
+        var treemapSeries = new TreemapSeries
+        {
+            Gap = 2,
+            ShowLabels = true
+        };
+
+        treemapSeries.Nodes.Add(new ChartTreemapNode("Technology", 2500)
+        {
+            Color = new SolidColorBrush(Color.Parse("#0078D4")),
+            Children =
+            {
+                new ChartTreemapNode("Apple", 900) { Color = new SolidColorBrush(Color.Parse("#0078D4")) },
+                new ChartTreemapNode("Microsoft", 750) { Color = new SolidColorBrush(Color.Parse("#5C2D91")) },
+                new ChartTreemapNode("Google", 500) { Color = new SolidColorBrush(Color.Parse("#107C10")) },
+                new ChartTreemapNode("NVIDIA", 350) { Color = new SolidColorBrush(Color.Parse("#107C10")) }
+            }
+        });
+
+        treemapSeries.Nodes.Add(new ChartTreemapNode("Healthcare", 1200)
+        {
+            Color = new SolidColorBrush(Color.Parse("#D83B01")),
+            Children =
+            {
+                new ChartTreemapNode("J&J", 450) { Color = new SolidColorBrush(Color.Parse("#D83B01")) },
+                new ChartTreemapNode("Pfizer", 400) { Color = new SolidColorBrush(Color.Parse("#FFB900")) },
+                new ChartTreemapNode("UNH", 350) { Color = new SolidColorBrush(Color.Parse("#D83B01")) }
+            }
+        });
+
+        treemapSeries.Nodes.Add(new ChartTreemapNode("Finance", 900)
+        {
+            Color = new SolidColorBrush(Color.Parse("#FFB900")),
+            Children =
+            {
+                new ChartTreemapNode("JPMorgan", 350) { Color = new SolidColorBrush(Color.Parse("#FFB900")) },
+                new ChartTreemapNode("Berkshire", 300) { Color = new SolidColorBrush(Color.Parse("#FFB900")) },
+                new ChartTreemapNode("Visa", 250) { Color = new SolidColorBrush(Color.Parse("#FFB900")) }
+            }
+        });
+
+        treemapSeries.Nodes.Add(new ChartTreemapNode("Consumer", 700)
+        {
+            Color = new SolidColorBrush(Color.Parse("#E3008C")),
+            Children =
+            {
+                new ChartTreemapNode("Amazon", 400) { Color = new SolidColorBrush(Color.Parse("#E3008C")) },
+                new ChartTreemapNode("Tesla", 300) { Color = new SolidColorBrush(Color.Parse("#E3008C")) }
+            }
+        });
+
+        TreemapChart.Series.Add(treemapSeries);
+    }
+
+    private void InitializeSankeyChart()
+    {
+        var sankeySeries = new SankeySeries
+        {
+            ShowLabels = true,
+            LinkOpacity = 0.35
+        };
+
+        // Nodes: Coal, Gas, Nuclear, Solar, Wind -> Electricity, Heat, Transport -> Residential, Commercial, Industrial
+        var nodeColors = new string[]
+        {
+            "#5C2D91", "#0078D4", "#107C10", "#FFB900", "#D83B01",
+            "#0078D4", "#E3008C", "#5C2D91",
+            "#107C10", "#FFB900", "#D83B01"
+        };
+
+        var nodeNames = new[]
+        {
+            "Coal", "Gas", "Nuclear", "Solar", "Wind",
+            "Electricity", "Heat", "Transport",
+            "Residential", "Commercial", "Industrial"
+        };
+
+        foreach (var name in nodeNames)
+        {
+            sankeySeries.Nodes.Add(new ChartSankeyNode
+            {
+                Name = name
+            });
+        }
+
+        // Source -> Target, Value
+        var links = new (int source, int target, double value)[]
+        {
+            (0, 5, 30), (1, 5, 25), (1, 6, 15), (2, 5, 20),
+            (3, 5, 10), (4, 5, 8), (1, 7, 12),
+            (5, 8, 40), (5, 9, 30), (5, 10, 23),
+            (6, 8, 10), (6, 9, 3), (6, 10, 2),
+            (7, 8, 5), (7, 9, 3), (7, 10, 4)
+        };
+
+        foreach (var (source, target, value) in links)
+        {
+            sankeySeries.Links.Add(new ChartSankeyLink
+            {
+                Source = source,
+                Target = target,
+                Value = value
+            });
+        }
+
+        SankeyChart.Series.Add(sankeySeries);
+    }
+
+    private void InitializeBoxplotChart()
+    {
+        var boxplotSeries = new BoxplotSeries
+        {
+            Title = "API Response Times",
+            Color = new SolidColorBrush(Color.Parse("#0078D4")),
+            BoxWidth = 0.4,
+            FillOpacity = 0.3
+        };
+
+        // Boxplot data: (X, Min, Q1, Median, Q3, Max)
+        var endpoints = new[] { "/api/users", "/api/orders", "/api/products", "/api/auth", "/api/search" };
+        var boxData = new (double min, double q1, double median, double q3, double max, double[] outliers)[]
+        {
+            (12, 25, 45, 65, 95, new double[] { 120, 145 }),
+            (8, 18, 30, 48, 70, new double[] { 95 }),
+            (15, 30, 50, 72, 110, new double[] { 150, 180 }),
+            (5, 12, 20, 35, 55, new double[] { }),
+            (20, 45, 75, 120, 200, new double[] { 280, 350 })
+        };
+
+        for (int i = 0; i < endpoints.Length; i++)
+        {
+            var (min, q1, median, q3, max, outliers) = boxData[i];
+            boxplotSeries.BoxData.Add(new ChartBoxplotData(i, min, q1, median, q3, max)
+            {
+                Label = endpoints[i],
+                Color = new SolidColorBrush(Color.Parse(i switch
+                {
+                    0 => "#0078D4",
+                    1 => "#107C10",
+                    2 => "#FFB900",
+                    3 => "#5C2D91",
+                    _ => "#D83B01"
+                })),
+                Outliers = outliers
+            });
+        }
+
+        BoxplotChart.XAxis.Categories = endpoints;
+        BoxplotChart.XAxis.Scale = AxisScale.Category;
+        BoxplotChart.YAxis.Title = "Response Time (ms)";
+        BoxplotChart.YAxis.ShowGridLines = true;
+        BoxplotChart.Series.Add(boxplotSeries);
+    }
+
+    // ================================================================
+    //  THEME SWITCHING
+    // ================================================================
 
     private void LightTheme_Click(object? sender, RoutedEventArgs e)
     {
@@ -291,27 +553,57 @@ public partial class MainWindow : Window
         }
     }
 
-    // ----------------------------------------------------------------
-    // Loading button demo
-    // ----------------------------------------------------------------
+    private void ThemeToggle_Click(object? sender, RoutedEventArgs e)
+    {
+        if (Application.Current is { } app)
+        {
+            app.RequestedThemeVariant = app.RequestedThemeVariant == ThemeVariant.Light
+                ? ThemeVariant.Dark
+                : ThemeVariant.Light;
+            UpdateStatus($"Switched to {app.RequestedThemeVariant} theme");
+        }
+    }
+
+    // ================================================================
+    //  LOADING BUTTON DEMO
+    // ================================================================
 
     private async void LoadingButton_Click(object? sender, RoutedEventArgs e)
     {
-        if (sender is AuraButton button)
+        if (sender is Button button)
         {
-            button.IsLoading = true;
+            button.Classes.Add("loading");
+            button.Content = "Loading...";
             UpdateStatus("Button loading...");
 
             await System.Threading.Tasks.Task.Delay(2000);
 
-            button.IsLoading = false;
+            button.Classes.Remove("loading");
+            button.Content = "Click to Load";
             UpdateStatus("Button loading complete");
         }
     }
 
-    // ----------------------------------------------------------------
-    // AuraToast
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  COLOR PICKER
+    // ================================================================
+
+    private void ColorPicker_ColorChanged(object? sender, AuraUI.Controls.Selection.ColorChangedEventArgs e)
+    {
+        if (ColorPreview != null)
+        {
+            ColorPreview.Background = new SolidColorBrush(e.NewColor);
+        }
+        if (ColorHexText != null)
+        {
+            ColorHexText.Text = $"#{e.NewColor.R:X2}{e.NewColor.G:X2}{e.NewColor.B:X2}";
+        }
+        UpdateStatus($"Color changed to #{e.NewColor.R:X2}{e.NewColor.G:X2}{e.NewColor.B:X2}");
+    }
+
+    // ================================================================
+    //  TOAST NOTIFICATIONS
+    // ================================================================
 
     private void ShowSuccessToast_Click(object? sender, RoutedEventArgs e)
     {
@@ -337,9 +629,9 @@ public partial class MainWindow : Window
         UpdateStatus("Info toast shown");
     }
 
-    // ----------------------------------------------------------------
-    // AuraMessageBox
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  MESSAGE BOX
+    // ================================================================
 
     private async void ShowMessageBox_Click(object? sender, RoutedEventArgs e)
     {
@@ -365,9 +657,9 @@ public partial class MainWindow : Window
         UpdateStatus(result == MessageBoxResult.Yes ? "User confirmed" : "User cancelled");
     }
 
-    // ----------------------------------------------------------------
-    // Snackbar
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  SNACKBAR
+    // ================================================================
 
     private void ShowSnackbar_Click(object? sender, RoutedEventArgs e)
     {
@@ -384,9 +676,9 @@ public partial class MainWindow : Window
         UpdateStatus("Snackbar with action shown");
     }
 
-    // ----------------------------------------------------------------
-    // AuraNotification
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  NOTIFICATION
+    // ================================================================
 
     private void ShowNotification_Click(object? sender, RoutedEventArgs e)
     {
@@ -411,13 +703,12 @@ public partial class MainWindow : Window
         UpdateStatus("Persistent notification shown (10s timeout)");
     }
 
-    // ----------------------------------------------------------------
-    // AuraDialog
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  DIALOG
+    // ================================================================
 
     private void ShowDialog_Click(object? sender, RoutedEventArgs e)
     {
-        // Use the inline XAML-declared AuraDialog
         if (DemoDialog != null)
         {
             DemoDialog.Show();
@@ -427,7 +718,6 @@ public partial class MainWindow : Window
 
     private void ShowCustomDialog_Click(object? sender, RoutedEventArgs e)
     {
-        // Show the same dialog but with different title
         if (DemoDialog != null)
         {
             DemoDialog.DialogTitle = "Custom Dialog";
@@ -454,9 +744,9 @@ public partial class MainWindow : Window
         }
     }
 
-    // ----------------------------------------------------------------
-    // PendingDialog
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  PENDING DIALOG
+    // ================================================================
 
     private async void ShowPendingDialog_Click(object? sender, RoutedEventArgs e)
     {
@@ -465,9 +755,9 @@ public partial class MainWindow : Window
         UpdateStatus("Pending operation completed");
     }
 
-    // ----------------------------------------------------------------
-    // LoadingOverlay
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  LOADING OVERLAY
+    // ================================================================
 
     private void ShowLoadingOverlay_Click(object? sender, RoutedEventArgs e)
     {
@@ -476,7 +766,6 @@ public partial class MainWindow : Window
             LoadingOverlay.SetIsLoading(LoadingOverlayTarget, true);
             LoadingOverlay.SetMessage(LoadingOverlayTarget, "Loading data...");
 
-            // Remove after 3 seconds
             var timer = new Avalonia.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             timer.Tick += (_, _) =>
             {
@@ -490,9 +779,200 @@ public partial class MainWindow : Window
         }
     }
 
-    // ----------------------------------------------------------------
-    // Helpers
-    // ----------------------------------------------------------------
+    // ================================================================
+    //  FORM VALIDATION
+    // ================================================================
+
+    private void SubmitForm_Click(object? sender, RoutedEventArgs e)
+    {
+        var errors = new List<string>();
+
+        // Validate Full Name (required)
+        if (NameField != null)
+        {
+            var nameValue = FindChildText(NameField);
+            if (string.IsNullOrWhiteSpace(nameValue))
+            {
+                NameField.HasError = true;
+                NameField.ErrorText = "Full name is required.";
+                NameField.IsValid = false;
+                errors.Add("Full Name: required field is empty.");
+            }
+            else
+            {
+                NameField.HasError = false;
+                NameField.ErrorText = null;
+                NameField.IsValid = true;
+            }
+        }
+
+        // Validate Email (required + format)
+        if (EmailField != null)
+        {
+            var emailValue = FindChildText(EmailField);
+            if (string.IsNullOrWhiteSpace(emailValue))
+            {
+                EmailField.HasError = true;
+                EmailField.ErrorText = "Email address is required.";
+                EmailField.IsValid = false;
+                errors.Add("Email: required field is empty.");
+            }
+            else if (!emailValue.Contains("@") || !emailValue.Contains("."))
+            {
+                EmailField.HasError = true;
+                EmailField.ErrorText = "Please enter a valid email address.";
+                EmailField.IsValid = false;
+                errors.Add("Email: invalid format.");
+            }
+            else
+            {
+                EmailField.HasError = false;
+                EmailField.ErrorText = null;
+                EmailField.IsValid = true;
+            }
+        }
+
+        // Validate Username (required + length)
+        if (UsernameField != null)
+        {
+            var usernameValue = FindChildText(UsernameField);
+            if (string.IsNullOrWhiteSpace(usernameValue))
+            {
+                UsernameField.HasError = true;
+                UsernameField.ErrorText = "Username is required.";
+                UsernameField.IsValid = false;
+                errors.Add("Username: required field is empty.");
+            }
+            else if (usernameValue.Length < 3)
+            {
+                UsernameField.HasError = true;
+                UsernameField.ErrorText = "Username must be at least 3 characters.";
+                UsernameField.IsValid = false;
+                errors.Add("Username: too short (min 3).");
+            }
+            else if (usernameValue.Length > 20)
+            {
+                UsernameField.HasError = true;
+                UsernameField.ErrorText = "Username must be at most 20 characters.";
+                UsernameField.IsValid = false;
+                errors.Add("Username: too long (max 20).");
+            }
+            else
+            {
+                UsernameField.HasError = false;
+                UsernameField.ErrorText = null;
+                UsernameField.IsValid = true;
+            }
+        }
+
+        // Validate Password (required + min length)
+        if (PasswordField != null)
+        {
+            var passwordValue = FindChildText(PasswordField);
+            if (string.IsNullOrWhiteSpace(passwordValue))
+            {
+                PasswordField.HasError = true;
+                PasswordField.ErrorText = "Password is required.";
+                PasswordField.IsValid = false;
+                errors.Add("Password: required field is empty.");
+            }
+            else if (passwordValue.Length < 8)
+            {
+                PasswordField.HasError = true;
+                PasswordField.ErrorText = "Password must be at least 8 characters.";
+                PasswordField.IsValid = false;
+                errors.Add("Password: too short (min 8).");
+            }
+            else
+            {
+                PasswordField.HasError = false;
+                PasswordField.ErrorText = null;
+                PasswordField.IsValid = true;
+            }
+        }
+
+        // Bio is optional, validate max length only
+        if (BioField != null)
+        {
+            var bioValue = FindChildText(BioField);
+            if (bioValue != null && bioValue.Length > 200)
+            {
+                BioField.HasError = true;
+                BioField.ErrorText = $"Bio exceeds 200 characters ({bioValue.Length}).";
+                BioField.IsValid = false;
+                errors.Add("Bio: exceeds 200 characters.");
+            }
+            else
+            {
+                BioField.HasError = false;
+                BioField.ErrorText = null;
+                BioField.IsValid = true;
+            }
+        }
+
+        // Show validation summary or success
+        if (errors.Count > 0)
+        {
+            if (ValidationSummary != null) ValidationSummary.IsVisible = true;
+            if (ValidationSummaryText != null) ValidationSummaryText.Text = string.Join("\n", errors);
+            if (SuccessMessage != null) SuccessMessage.IsVisible = false;
+            UpdateStatus($"Form has {errors.Count} validation error(s).");
+        }
+        else
+        {
+            if (ValidationSummary != null) ValidationSummary.IsVisible = false;
+            if (SuccessMessage != null) SuccessMessage.IsVisible = true;
+            UpdateStatus("Form submitted successfully!");
+        }
+    }
+
+    private void ResetForm_Click(object? sender, RoutedEventArgs e)
+    {
+        // Clear all field errors
+        ClearFieldError(NameField);
+        ClearFieldError(EmailField);
+        ClearFieldError(UsernameField);
+        ClearFieldError(PasswordField);
+        ClearFieldError(BioField);
+
+        // Clear text boxes inside each field
+        ClearChildTextBox(NameField);
+        ClearChildTextBox(EmailField);
+        ClearChildTextBox(UsernameField);
+        ClearChildTextBox(PasswordField);
+        ClearChildTextBox(BioField);
+
+        // Hide summary/success
+        if (ValidationSummary != null) ValidationSummary.IsVisible = false;
+        if (SuccessMessage != null) SuccessMessage.IsVisible = false;
+
+        UpdateStatus("Form reset.");
+    }
+
+    private static void ClearFieldError(AuraUI.Controls.Layout.FormField? field)
+    {
+        if (field == null) return;
+        field.HasError = false;
+        field.ErrorText = null;
+        field.IsValid = true;
+    }
+
+    private static string? FindChildText(AuraUI.Controls.Layout.FormField field)
+    {
+        if (field.Content is TextBox tb)
+            return tb.Text;
+        return null;
+    }
+
+    private static void ClearChildTextBox(AuraUI.Controls.Layout.FormField? field)
+    {
+        if (field?.Content is TextBox tb)
+            tb.Text = string.Empty;
+    }
+
+    // ================================================================
+    //  HELPERS
+    // ================================================================
 
     private void UpdateStatus(string message)
     {

@@ -48,6 +48,27 @@ public class FunnelSeries : ChartSeries
         AvaloniaProperty.Register<FunnelSeries, double>(nameof(NeckRatio), 0.3,
             coerce: (_, v) => Math.Clamp(v, 0.0, 1.0));
 
+    /// <summary>
+    /// Defines the <see cref="ShowConversionRate"/> styled property.
+    /// Whether to show the conversion rate (percentage drop) between consecutive stages.
+    /// </summary>
+    public static readonly StyledProperty<bool> ShowConversionRateProperty =
+        AvaloniaProperty.Register<FunnelSeries, bool>(nameof(ShowConversionRate), true);
+
+    /// <summary>
+    /// Defines the <see cref="ShowOverallConversion"/> styled property.
+    /// Whether to show the overall conversion rate from the first stage.
+    /// </summary>
+    public static readonly StyledProperty<bool> ShowOverallConversionProperty =
+        AvaloniaProperty.Register<FunnelSeries, bool>(nameof(ShowOverallConversion));
+
+    /// <summary>
+    /// Defines the <see cref="LabelFontSize"/> styled property.
+    /// Font size for funnel labels.
+    /// </summary>
+    public static readonly StyledProperty<double> LabelFontSizeProperty =
+        AvaloniaProperty.Register<FunnelSeries, double>(nameof(LabelFontSize), 12.0);
+
     public double Gap
     {
         get => GetValue(GapProperty);
@@ -76,6 +97,24 @@ public class FunnelSeries : ChartSeries
     {
         get => GetValue(NeckRatioProperty);
         set => SetValue(NeckRatioProperty, value);
+    }
+
+    public bool ShowConversionRate
+    {
+        get => GetValue(ShowConversionRateProperty);
+        set => SetValue(ShowConversionRateProperty, value);
+    }
+
+    public bool ShowOverallConversion
+    {
+        get => GetValue(ShowOverallConversionProperty);
+        set => SetValue(ShowOverallConversionProperty, value);
+    }
+
+    public double LabelFontSize
+    {
+        get => GetValue(LabelFontSizeProperty);
+        set => SetValue(LabelFontSizeProperty, value);
     }
 
     // ────────────────────────────────────────────────

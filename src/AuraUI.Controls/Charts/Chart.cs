@@ -115,6 +115,13 @@ public class Chart : Control
     /// <summary>Primary Y axis (left).</summary>
     public ChartAxis YAxis { get; } = new() { Position = AxisPosition.Left };
 
+    /// <summary>Secondary Y axis (right). Used for multi-axis charts where
+    /// series can be assigned to different axes with independent scales.</summary>
+    public ChartAxis YAxisRight { get; } = new() { Position = AxisPosition.Right, ShowAxisLine = true, ShowLabels = true };
+
+    /// <summary>Whether the right Y axis is active (has series assigned to it).</summary>
+    public bool HasRightAxis { get; private set; }
+
     /// <summary>Chart legend configuration.</summary>
     public ChartLegend Legend { get; } = new();
 
@@ -361,6 +368,8 @@ public class Chart : Control
         // 4. Axes
         RenderAxis(context, XAxis);
         RenderAxis(context, YAxis);
+        if (HasRightAxis)
+            RenderAxis(context, YAxisRight);
 
         // 5. Series (with dirty tracking — only rebuild geometry for changed series)
         var progress = _animation.IsAnimating ? _animation.GetEasedProgress() : 1.0;
@@ -371,7 +380,12 @@ public class Chart : Control
             var renderer = ChartRendererRegistry.GetRenderer(series.RendererKey);
             if (renderer == null) continue;
 
-            renderer.Render(context, series, _plotArea, XAxis, YAxis, progress, Series, _renderContext);
+            // Select the correct Y axis based on the series' YAxisIndex
+            var seriesYAxis = series is XYChartSeries xySeries && xySeries.YAxisIndex > 0 && HasRightAxis
+                ? YAxisRight
+                : YAxis;
+
+            renderer.Render(context, series, _plotArea, XAxis, seriesYAxis, progress, Series, _renderContext);
         }
 
         // 6. Plot area border
@@ -984,6 +998,15 @@ public class Chart : Control
         if (!string.IsNullOrEmpty(YAxis.Title))
             left += axisTitleHeight;
 
+        // Reserve space for right Y axis if active
+        if (HasRightAxis)
+        {
+            if (YAxisRight.ShowLabels)
+                right -= axisLabelWidth;
+            if (!string.IsNullOrEmpty(YAxisRight.Title))
+                right -= axisTitleHeight;
+        }
+
         // Reserve space for DataZoom slider (only for Slider type, not Inside)
         if (DataZoom.IsVisible && DataZoom.ZoomType == DataZoomType.Slider)
         {
@@ -996,6 +1019,7 @@ public class Chart : Control
         // Update axis layout rects
         XAxis.PlotArea = _plotArea;
         YAxis.PlotArea = _plotArea;
+        YAxisRight.PlotArea = _plotArea;
     }
 
     // ────────────────────────────────────────────────
@@ -1006,6 +1030,23 @@ public class Chart : Control
     {
         XAxis.ComputeAutoRange(Series);
         YAxis.ComputeAutoRange(Series);
+
+        // Check if any series uses YAxisIndex > 0 (right axis)
+        HasRightAxis = false;
+        foreach (var s in Series)
+        {
+            if (s is XYChartSeries xy && xy.YAxisIndex > 0 && s.IsVisible)
+            {
+                HasRightAxis = true;
+                break;
+            }
+        }
+
+        if (HasRightAxis)
+        {
+            YAxisRight.PlotArea = _plotArea;
+            YAxisRight.ComputeAutoRange(Series);
+        }
     }
 
     private void OnSeriesDataChanged(object? sender, EventArgs e)

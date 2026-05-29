@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Collections;
+using Avalonia.Media;
 
 namespace AuraUI.Controls.Charts.Series;
 
@@ -33,6 +34,34 @@ public class RadarSeries : ChartSeries
     public static readonly StyledProperty<bool> AreaSmoothingProperty =
         AvaloniaProperty.Register<RadarSeries, bool>(nameof(AreaSmoothing));
 
+    /// <summary>
+    /// Defines the <see cref="Shape"/> styled property.
+    /// Shape of the radar grid (polygon or circle).
+    /// </summary>
+    public static readonly StyledProperty<RadarShape> ShapeProperty =
+        AvaloniaProperty.Register<RadarSeries, RadarShape>(nameof(Shape), RadarShape.Polygon);
+
+    /// <summary>
+    /// Defines the <see cref="ShowArea"/> styled property.
+    /// Whether to fill the radar polygon area.
+    /// </summary>
+    public static readonly StyledProperty<bool> ShowAreaProperty =
+        AvaloniaProperty.Register<RadarSeries, bool>(nameof(ShowArea), true);
+
+    /// <summary>
+    /// Defines the <see cref="AreaGradientColor"/> styled property.
+    /// When set, the fill uses a radial gradient from center to edge.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> AreaGradientColorProperty =
+        AvaloniaProperty.Register<RadarSeries, IBrush?>(nameof(AreaGradientColor));
+
+    /// <summary>
+    /// Defines the <see cref="StrokeDashStyle"/> styled property.
+    /// Dash pattern for the radar polygon outline.
+    /// </summary>
+    public static readonly StyledProperty<double[]?> StrokeDashStyleProperty =
+        AvaloniaProperty.Register<RadarSeries, double[]?>(nameof(StrokeDashStyle));
+
     public double FillOpacity
     {
         get => GetValue(FillOpacityProperty);
@@ -49,6 +78,30 @@ public class RadarSeries : ChartSeries
     {
         get => GetValue(AreaSmoothingProperty);
         set => SetValue(AreaSmoothingProperty, value);
+    }
+
+    public RadarShape Shape
+    {
+        get => GetValue(ShapeProperty);
+        set => SetValue(ShapeProperty, value);
+    }
+
+    public bool ShowArea
+    {
+        get => GetValue(ShowAreaProperty);
+        set => SetValue(ShowAreaProperty, value);
+    }
+
+    public IBrush? AreaGradientColor
+    {
+        get => GetValue(AreaGradientColorProperty);
+        set => SetValue(AreaGradientColorProperty, value);
+    }
+
+    public double[]? StrokeDashStyle
+    {
+        get => GetValue(StrokeDashStyleProperty);
+        set => SetValue(StrokeDashStyleProperty, value);
     }
 
     // ────────────────────────────────────────────────

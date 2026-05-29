@@ -26,15 +26,16 @@
                     </Border.Transitions>
                     <DockPanel>
                         <!-- Search icon -->
-                        <Path Name="SearchIcon"
-                              DockPanel.Dock="Left"
-                              Width="16" Height="16"
-                              Margin="10,0,4,0"
-                              VerticalAlignment="Center"
-                              Data="M 7,1 A 6,6 0 1,1 7,13 A 6,6 0 1,1 7,1 M 11.5,11.5 L 15,15"
-                              Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
-                              StrokeThickness="1.5"
-                              Stretch="Uniform"/>
+                        <Panel Name="PART_SearchIconPresenter"
+                               DockPanel.Dock="Left"
+                               Margin="10,0,4,0"
+                               VerticalAlignment="Center">
+                            <Path Width="16" Height="16"
+                                  Data="M 7,1 A 6,6 0 1,1 7,13 A 6,6 0 1,1 7,1 M 11.5,11.5 L 15,15"
+                                  Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
+                                  StrokeThickness="1.5"
+                                  Stretch="Uniform"/>
+                        </Panel>
 
                         <!-- Clear button -->
                         <Button Name="PART_ClearButton"

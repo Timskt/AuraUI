@@ -33,6 +33,16 @@ public static class ChartRendererRegistry
         Register(new BoxplotRenderer());
         Register(new ParallelRenderer());
         Register(new SunburstRenderer());
+
+        // Register new statistical and specialized renderers
+        Register(new HistogramRenderer());
+        Register(new ViolinRenderer());
+
+        // Register ECharts chart type renderers
+        Register(new ThemeRiverRenderer());
+        Register(new CustomRenderer());
+        Register(new TreeRenderer());
+        Register(new ChartMapRenderer());
     }
 
     public static void Register(IChartRenderer renderer)

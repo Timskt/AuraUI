@@ -1,0 +1,145 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- Material Design 3 — AuraTreeView -->
+
+    <Style Selector="display|AuraTreeView">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ScrollViewer Name="PART_ScrollViewer"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        Margin="{TemplateBinding Padding}"/>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Material Design 3 — AuraTreeViewItem -->
+
+    <Style Selector="display|AuraTreeViewItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel>
+                    <!-- Item header row -->
+                    <Border Name="RootBorder"
+                            Background="Transparent"
+                            CornerRadius="{DynamicResource AuraRadiusFull}"
+                            Margin="4,2"
+                            ClipToBounds="True">
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{DynamicResource AuraRadiusFull}"/>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="12"
+                                        Margin="{TemplateBinding Padding}">
+                                <!-- Expand/Collapse chevron -->
+                                <Border Name="PART_ExpanderArrow"
+                                        Width="24" Height="24"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        CornerRadius="12">
+                                    <Path Name="PART_ExpanderPath"
+                                          Width="10" Height="10"
+                                          Stretch="Uniform"
+                                          Fill="{DynamicResource AuraForegroundSecondaryBrush}"
+                                          Data="M 0 0 L 5 5 L 0 10"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <RotateTransform Angle="0"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Border>
+
+                                <!-- Icon -->
+                                <Image Name="PART_Icon"
+                                       Width="20" Height="20"
+                                       Stretch="Uniform"
+                                       VerticalAlignment="Center"
+                                       IsVisible="False"/>
+
+                                <!-- Content -->
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Header}"
+                                                  VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Panel>
+                    </Border>
+
+                    <!-- Child items with indent -->
+                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                    Margin="32,0,0,0">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover (state layer) -->
+    <Style Selector="display|AuraTreeViewItem:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Pressed -->
+    <Style Selector="display|AuraTreeViewItem:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Selected -->
+    <Style Selector="display|AuraTreeViewItem:selected /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
+    </Style>
+
+    <Style Selector="display|AuraTreeViewItem:selected">
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
+    </Style>
+
+    <!-- Expanded — rotate chevron -->
+    <Style Selector="display|AuraTreeViewItem:expanded /template/ Path#PART_ExpanderPath">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="90"/>
+        </Setter>
+    </Style>
+
+    <!-- Leaf — hide expander -->
+    <Style Selector="display|AuraTreeViewItem:leaf /template/ Border#PART_ExpanderArrow">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|AuraTreeViewItem:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

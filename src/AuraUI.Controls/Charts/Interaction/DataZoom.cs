@@ -76,6 +76,27 @@ public class DataZoom
     /// <summary>Whether this zoom is for the X axis (true) or Y axis (false).</summary>
     public bool IsXAxis { get; set; } = true;
 
+    /// <summary>
+    /// Lock the current zoom level. When true, the user cannot change the zoom range
+    /// via the slider (but programmatic changes still work).
+    /// </summary>
+    public bool ZoomLock { get; set; }
+
+    /// <summary>
+    /// Fill color for the selected range area (overrides SelectionBrush for slider track fill).
+    /// </summary>
+    public IBrush? FillerColor { get; set; }
+
+    /// <summary>
+    /// Style configuration for the drag handles.
+    /// </summary>
+    public DataZoomHandleStyle? HandleStyle { get; set; }
+
+    /// <summary>
+    /// Background configuration for the data preview area (mini chart in the slider).
+    /// </summary>
+    public DataZoomDataBackground? DataBackground { get; set; }
+
     /// <summary>The pixel rect allocated to this zoom control (set by chart layout).</summary>
     internal Rect LayoutRect { get; set; }
 
@@ -101,23 +122,36 @@ public class DataZoom
     {
         if (!IsVisible) return;
 
-        Rect barRect;
-        if (ZoomType == DataZoomType.Inside)
+        // Render slider type (or Both)
+        if (ZoomType == DataZoomType.Slider || ZoomType == DataZoomType.Both)
         {
-            barRect = plotArea;
+            var sliderRect = new Rect(plotArea.Left, plotArea.Bottom + 8, plotArea.Width, Height);
+            LayoutRect = sliderRect;
+            RenderSlider(context, sliderRect, dataPoints);
         }
-        else
+
+        // Render inside type (or Both)
+        if (ZoomType == DataZoomType.Inside || ZoomType == DataZoomType.Both)
         {
-            barRect = new Rect(plotArea.Left, plotArea.Bottom + 8, plotArea.Width, Height);
+            RenderInsideOverlay(context, plotArea);
         }
-        LayoutRect = barRect;
+    }
+
+    private void RenderSlider(DrawingContext context, Rect barRect, IList<ChartDataPoint>? dataPoints)
+    {
+        // Data background
+        if (DataBackground != null)
+        {
+            var dataBgBrush = DataBackground.BackgroundColor ?? new SolidColorBrush(Colors.LightGray, 0.15);
+            context.DrawRectangle(dataBgBrush, null, barRect);
+        }
 
         // Background
         var bgBrush = Background ?? new SolidColorBrush(Colors.LightGray, 0.3);
         context.DrawRectangle(bgBrush, null, barRect);
 
-        // Optional: draw mini chart preview (for Slider type with data)
-        if (ZoomType == DataZoomType.Slider && dataPoints != null && dataPoints.Count > 1)
+        // Optional: draw mini chart preview
+        if (dataPoints != null && dataPoints.Count > 1)
         {
             RenderMiniChart(context, barRect, dataPoints);
         }
@@ -127,30 +161,13 @@ public class DataZoom
         var selRight = barRect.Left + End * barRect.Width;
         var selRect = new Rect(selLeft, barRect.Top, selRight - selLeft, barRect.Height);
 
-        var selBrush = SelectionBrush ?? new SolidColorBrush(Color.Parse("#6750A4"), 0.2);
+        var selBrush = FillerColor ?? SelectionBrush ?? new SolidColorBrush(Color.Parse("#6750A4"), 0.2);
         context.DrawRectangle(selBrush, null, selRect);
 
-        // Mask unselected areas for Inside mode
-        if (ZoomType == DataZoomType.Inside)
-        {
-            var maskBrush = MaskBrush ?? new SolidColorBrush(Colors.Black, 0.35);
-            // Left mask
-            if (Start > 0)
-            {
-                var leftMask = new Rect(barRect.Left, barRect.Top, selLeft - barRect.Left, barRect.Height);
-                context.DrawRectangle(maskBrush, null, leftMask);
-            }
-            // Right mask
-            if (End < 1)
-            {
-                var rightMask = new Rect(selRight, barRect.Top, barRect.Right - selRight, barRect.Height);
-                context.DrawRectangle(maskBrush, null, rightMask);
-            }
-        }
-
-        // Handle borders
-        var handleBrush = HandleBrush ?? new SolidColorBrush(Color.Parse("#6750A4"));
-        var handlePen = new Pen(handleBrush, 2);
+        // Handle style
+        var handleBrush = HandleStyle?.Color ?? HandleBrush ?? new SolidColorBrush(Color.Parse("#6750A4"));
+        var handleWidth = HandleStyle?.Width ?? 2.0;
+        var handlePen = new Pen(handleBrush, handleWidth);
 
         // Left handle
         context.DrawLine(handlePen,
@@ -162,16 +179,46 @@ public class DataZoom
             new Point(selRight, barRect.Top),
             new Point(selRight, barRect.Bottom));
 
-        // Handle grip indicators (small dots for better UX)
+        // Handle grip indicators
         var dotY = barRect.Center.Y;
-        context.DrawEllipse(handleBrush, null, new Point(selLeft, dotY), 3, 3);
-        context.DrawEllipse(handleBrush, null, new Point(selRight, dotY), 3, 3);
+        var dotSize = 3.0;
+        context.DrawEllipse(handleBrush, null, new Point(selLeft, dotY), dotSize, dotSize);
+        context.DrawEllipse(handleBrush, null, new Point(selRight, dotY), dotSize, dotSize);
+
+        // Lock indicator
+        if (ZoomLock)
+        {
+            var lockBrush = new SolidColorBrush(Colors.Gray, 0.5);
+            var lockRect = new Rect(barRect.Center.X - 6, barRect.Center.Y - 6, 12, 12);
+            context.DrawRectangle(lockBrush, null, lockRect, 2, 2);
+        }
 
         // Border
         if (BorderBrush is IBrush border)
         {
             var borderPen = new Pen(border, 1.0);
             context.DrawRectangle(null, borderPen, barRect);
+        }
+    }
+
+    private void RenderInsideOverlay(DrawingContext context, Rect plotArea)
+    {
+        // Mask unselected areas
+        var maskBrush = MaskBrush ?? new SolidColorBrush(Colors.Black, 0.35);
+        var selLeft = plotArea.Left + Start * plotArea.Width;
+        var selRight = plotArea.Left + End * plotArea.Width;
+
+        // Left mask
+        if (Start > 0)
+        {
+            var leftMask = new Rect(plotArea.Left, plotArea.Top, selLeft - plotArea.Left, plotArea.Height);
+            context.DrawRectangle(maskBrush, null, leftMask);
+        }
+        // Right mask
+        if (End < 1)
+        {
+            var rightMask = new Rect(selRight, plotArea.Top, plotArea.Right - selRight, plotArea.Height);
+            context.DrawRectangle(maskBrush, null, rightMask);
         }
     }
 
@@ -220,7 +267,7 @@ public class DataZoom
     /// </summary>
     public bool HandlePointerPressed(Point position, Rect plotArea)
     {
-        if (!IsVisible) return false;
+        if (!IsVisible || ZoomLock) return false;
 
         var barRect = ZoomType == DataZoomType.Inside
             ? plotArea
@@ -341,4 +388,46 @@ public class DataZoom
         Start = Math.Clamp((rangeMin - dataMin) / totalRange, 0, 1);
         End = Math.Clamp((rangeMax - dataMin) / totalRange, 0, 1);
     }
+}
+
+/// <summary>
+/// Style configuration for data zoom drag handles.
+/// </summary>
+public class DataZoomHandleStyle
+{
+    /// <summary>Handle color.</summary>
+    public Avalonia.Media.IBrush? Color { get; set; }
+
+    /// <summary>Handle width in pixels.</summary>
+    public double Width { get; set; } = 4;
+
+    /// <summary>Handle border color.</summary>
+    public Avalonia.Media.IBrush? BorderColor { get; set; }
+
+    /// <summary>Handle border width.</summary>
+    public double BorderWidth { get; set; }
+
+    /// <summary>Handle opacity.</summary>
+    public double Opacity { get; set; } = 1.0;
+}
+
+/// <summary>
+/// Background configuration for the data preview area in a data zoom slider.
+/// </summary>
+public class DataZoomDataBackground
+{
+    /// <summary>Background color for the data preview area.</summary>
+    public Avalonia.Media.IBrush? BackgroundColor { get; set; }
+
+    /// <summary>Fill color for the mini chart area.</summary>
+    public Avalonia.Media.IBrush? FillColor { get; set; }
+
+    /// <summary>Stroke color for the mini chart line.</summary>
+    public Avalonia.Media.IBrush? StrokeColor { get; set; }
+
+    /// <summary>Stroke width for the mini chart line.</summary>
+    public double StrokeWidth { get; set; } = 1.0;
+
+    /// <summary>Fill opacity for the mini chart area.</summary>
+    public double FillOpacity { get; set; } = 0.3;
 }

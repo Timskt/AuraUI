@@ -15,7 +15,10 @@ public enum ChartInterpolation
     StepBefore,
 
     /// <summary>Step function (vertical then horizontal).</summary>
-    StepAfter
+    StepAfter,
+
+    /// <summary>Catmull-Rom spline interpolation (passes through all points).</summary>
+    CatmullRom
 }
 
 /// <summary>
@@ -205,7 +208,10 @@ public enum DataZoomType
     Slider,
 
     /// <summary>Overlay on the chart area (transparent mask outside selection).</summary>
-    Inside
+    Inside,
+
+    /// <summary>Both slider and inside zoom controls active simultaneously.</summary>
+    Both
 }
 
 /// <summary>
@@ -224,6 +230,202 @@ public enum BrushType
 
     /// <summary>Polygon area selection.</summary>
     Polygon
+}
+
+/// <summary>
+/// Bar grouping mode when multiple bar series are present.
+/// </summary>
+public enum BarMode
+{
+    /// <summary>Bars are placed side by side (default grouped behavior).</summary>
+    Grouped,
+
+    /// <summary>Bars are stacked on top of each other.</summary>
+    Stacked,
+
+    /// <summary>Bars are stacked and normalized to 100%.</summary>
+    StackedPercent
+}
+
+/// <summary>
+/// Mode for pie chart rendering.
+/// </summary>
+public enum PieMode
+{
+    /// <summary>Standard pie or donut chart.</summary>
+    Standard,
+
+    /// <summary>Nightingale rose chart — all slices have equal angle, radius varies by value.</summary>
+    Rose,
+
+    /// <summary>Nightingale area mode — angle varies by value, but radius also scales.</summary>
+    RoseArea
+}
+
+/// <summary>
+/// Tree chart layout direction.
+/// </summary>
+public enum TreeLayout
+{
+    /// <summary>Left-to-right orthogonal layout.</summary>
+    LR,
+
+    /// <summary>Right-to-left orthogonal layout.</summary>
+    RL,
+
+    /// <summary>Top-to-bottom orthogonal layout.</summary>
+    TB,
+
+    /// <summary>Bottom-to-top orthogonal layout.</summary>
+    BT
+}
+
+/// <summary>
+/// Tree chart rendering mode.
+/// </summary>
+public enum TreeMode
+{
+    /// <summary>Orthogonal (right-angle) branches.</summary>
+    Orthogonal,
+
+    /// <summary>Radial layout (branches radiate from center).</summary>
+    Radial
+}
+
+/// <summary>
+/// Gauge rendering type for multi-ring and special gauges.
+/// </summary>
+public enum GaugeType
+{
+    /// <summary>Standard single-ring gauge.</summary>
+    Standard,
+
+    /// <summary>Progress gauge (filled arc showing percentage).</summary>
+    Progress,
+
+    /// <summary>Temperature gauge with colored segments.</summary>
+    Temperature,
+
+    /// <summary>Clock gauge showing time.</summary>
+    Clock,
+
+    /// <summary>Multi-ring gauge with concentric arcs.</summary>
+    MultiRing
+}
+
+/// <summary>
+/// Step line position mode.
+/// </summary>
+public enum StepPosition
+{
+    /// <summary>Step before the data point.</summary>
+    Before,
+
+    /// <summary>Step after the data point.</summary>
+    After,
+
+    /// <summary>Step at the midpoint between data points.</summary>
+    Middle
+}
+
+/// <summary>
+/// Regression line type for scatter charts.
+/// </summary>
+public enum RegressionType
+{
+    /// <summary>No regression line.</summary>
+    None,
+
+    /// <summary>Linear regression (least squares fit).</summary>
+    Linear,
+
+    /// <summary>Polynomial regression (quadratic).</summary>
+    Polynomial,
+
+    /// <summary>Exponential regression.</summary>
+    Exponential,
+
+    /// <summary>Logarithmic regression.</summary>
+    Logarithmic
+}
+
+/// <summary>
+/// Axis pointer mode for crosshair interaction.
+/// </summary>
+public enum AxisPointerMode
+{
+    /// <summary>Line mode (thin crosshair line).</summary>
+    Line,
+
+    /// <summary>Shadow mode (shaded area at the axis position).</summary>
+    Shadow,
+
+    /// <summary>Cross mode (both X and Y crosshair lines).</summary>
+    Cross
+}
+
+/// <summary>
+/// Visual map type for color/size/opacity mapping.
+/// </summary>
+public enum VisualMapType
+{
+    /// <summary>Continuous gradient mapping.</summary>
+    Continuous,
+
+    /// <summary>Piecewise (discrete ranges) mapping.</summary>
+    Piecewise
+}
+
+/// <summary>
+/// Mark type for annotations.
+/// </summary>
+public enum MarkType
+{
+    /// <summary>Maximum value in the series.</summary>
+    Max,
+
+    /// <summary>Minimum value in the series.</summary>
+    Min,
+
+    /// <summary>Average value in the series.</summary>
+    Average
+}
+
+/// <summary>
+/// Shape of radar grid lines.
+/// </summary>
+public enum RadarShape
+{
+    /// <summary>Polygon (straight edges between axes).</summary>
+    Polygon,
+
+    /// <summary>Circle (curved grid lines).</summary>
+    Circle
+}
+
+/// <summary>
+/// Sort order for pie chart slices.
+/// </summary>
+public enum PieSortOrder
+{
+    /// <summary>No sorting — use data insertion order.</summary>
+    None,
+
+    /// <summary>Sort slices by value, smallest first.</summary>
+    Ascending,
+
+    /// <summary>Sort slices by value, largest first.</summary>
+    Descending
+}
+
+/// <summary>
+/// Export format for chart export operations.
+/// </summary>
+public enum ChartExportFormat
+{
+    Png,
+    Svg,
+    Clipboard
 }
 
 /// <summary>
@@ -269,4 +471,106 @@ public enum ChartEasingPreset
 
     /// <summary>Back ease-out (overshoot then settle).</summary>
     BackEaseOut
+}
+
+/// <summary>
+/// Icon shape for legend items (ECharts legend.icon).
+/// </summary>
+public enum LegendIcon
+{
+    /// <summary>Circle icon.</summary>
+    Circle,
+
+    /// <summary>Rectangle icon.</summary>
+    Rect,
+
+    /// <summary>Rounded rectangle icon.</summary>
+    RoundRect,
+
+    /// <summary>Triangle icon.</summary>
+    Triangle,
+
+    /// <summary>Diamond icon.</summary>
+    Diamond,
+
+    /// <summary>Pin (teardrop) icon.</summary>
+    Pin,
+
+    /// <summary>No icon (text only).</summary>
+    None,
+
+    /// <summary>Use a custom path for the icon.</summary>
+    Custom
+}
+
+/// <summary>
+/// Image format for save-as-image toolbox feature.
+/// </summary>
+public enum SaveAsImageFormat
+{
+    /// <summary>PNG format (lossless, supports transparency).</summary>
+    Png,
+
+    /// <summary>JPEG format (lossy, smaller file size).</summary>
+    Jpeg,
+
+    /// <summary>SVG format (vector, scalable).</summary>
+    Svg
+}
+
+/// <summary>
+/// Location of the axis name label.
+/// </summary>
+public enum AxisNameLocation
+{
+    /// <summary>Name at the start of the axis.</summary>
+    Start,
+
+    /// <summary>Name at the center of the axis.</summary>
+    Middle,
+
+    /// <summary>Name at the end of the axis.</summary>
+    End
+}
+
+/// <summary>
+/// Render mode for the tooltip.
+/// </summary>
+public enum TooltipRenderMode
+{
+    /// <summary>Render tooltip using DrawingContext calls (native).</summary>
+    Canvas,
+
+    /// <summary>Render tooltip as styled text (lightweight).</summary>
+    Html
+}
+
+/// <summary>
+/// Type of axis pointer crosshair indicator.
+/// </summary>
+public enum AxisPointerType
+{
+    /// <summary>Thin line at the cursor position.</summary>
+    Line,
+
+    /// <summary>Shaded band at the nearest category/interval.</summary>
+    Shadow,
+
+    /// <summary>Cross-shaped cursor (both X and Y lines).</summary>
+    Cross
+}
+
+/// <summary>
+/// Magic type for toolbox series type switching.
+/// </summary>
+public enum MagicChartType
+{
+    /// <summary>Line chart.</summary>
+    Line,
+
+    /// <summary>Bar chart.</summary>
+    Bar,
+
+    /// <summary>Stacked mode (combined with Line or Bar).</summary>
+    Stack
 }

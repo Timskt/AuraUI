@@ -29,13 +29,12 @@
                     </Border.Transitions>
                     <DockPanel>
                         <!-- Prefix -->
-                        <ContentPresenter Name="PART_PrefixTextContentPresenter"
+                        <ContentPresenter Name="PART_PrefixPresenter"
                                           DockPanel.Dock="Left"
                                           VerticalAlignment="Center"
-                                          Margin="8,0,0,0"
-                                          Content="{TemplateBinding Tag}"/>
+                                          Margin="8,0,0,0"/>
                         <!-- Suffix -->
-                        <ContentPresenter Name="PART_SuffixTextContentPresenter"
+                        <ContentPresenter Name="PART_SuffixPresenter"
                                           DockPanel.Dock="Right"
                                           VerticalAlignment="Center"
                                           Margin="0,0,8,0"/>
@@ -53,6 +52,14 @@
                                   Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
                                   StrokeThickness="1.5"/>
                         </Button>
+                        <!-- Character count -->
+                        <TextBlock Name="PART_CharacterCount"
+                                   DockPanel.Dock="Bottom"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                   HorizontalAlignment="Right"
+                                   Margin="8,2,8,4"
+                                   IsVisible="False"/>
                         <!-- Text input area -->
                         <ScrollViewer Name="PART_ScrollViewer"
                                       HorizontalScrollBarVisibility="Hidden"

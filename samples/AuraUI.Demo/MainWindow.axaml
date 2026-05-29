@@ -1,437 +1,368 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:layout="using:AuraUI.Controls.Layout"
-        xmlns:input="using:AuraUI.Controls.Input"
-        xmlns:selection="using:AuraUI.Controls.Selection"
-        xmlns:display="using:AuraUI.Controls.Display"
         xmlns:feedback="using:AuraUI.Controls.Feedback"
         xmlns:charts="using:AuraUI.Controls.Charts"
-        xmlns:core="using:AuraUI.Core.Helpers"
+        xmlns:input="using:AuraUI.Controls.Input"
+        xmlns:selection="using:AuraUI.Controls.Selection"
+        xmlns:layout="using:AuraUI.Controls.Layout"
         x:Class="AuraUI.Demo.MainWindow"
-        x:DataType="Window"
         Title="AuraUI Component Gallery"
-        Width="1100"
-        Height="750"
-        MinWidth="800"
-        MinHeight="600"
+        Width="1200"
+        Height="800"
+        MinWidth="900"
+        MinHeight="650"
         WindowStartupLocation="CenterScreen">
 
     <DockPanel>
         <!-- Header -->
         <Border DockPanel.Dock="Top"
-                Padding="16,12"
-                Background="{DynamicResource SystemAccentColor}">
-            <StackPanel Orientation="Horizontal" Spacing="12">
-                <TextBlock Text="AuraUI"
-                           FontSize="22"
-                           FontWeight="Bold"
-                           Foreground="White"
-                           VerticalAlignment="Center" />
-                <TextBlock Text="Component Gallery"
-                           FontSize="14"
-                           Foreground="#CCFFFFFF"
-                           VerticalAlignment="Center" />
-            </StackPanel>
+                Padding="20,14"
+                Background="{DynamicResource AuraPrimaryBrush}">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" Spacing="12" DockPanel.Dock="Left">
+                    <TextBlock Text="AuraUI"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="Component Gallery"
+                               FontSize="14"
+                               Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                               Opacity="0.85"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                    <Button x:Name="ThemeToggleButton"
+                            Content="Toggle Dark/Light"
+                            Classes="outline"
+                            Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                            BorderBrush="{DynamicResource AuraForegroundOnAccentBrush}"
+                            Click="ThemeToggle_Click" />
+                </StackPanel>
+            </DockPanel>
         </Border>
 
         <!-- Footer -->
         <Border DockPanel.Dock="Bottom"
-                Padding="16,8"
-                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                Padding="20,8"
+                BorderBrush="{DynamicResource AuraDividerBrush}"
                 BorderThickness="0,1,0,0">
             <TextBlock x:Name="StatusText"
                        Text="Ready"
                        FontSize="12"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}" />
         </Border>
 
         <!-- Main content -->
-        <TabControl x:Name="MainTabControl"
-                    Margin="8"
-                    SelectedIndex="0">
+        <TabControl Margin="8" SelectedIndex="0">
 
             <!-- ============================================================ -->
-            <!-- LAYOUT TAB -->
+            <!-- TAB 1: BUTTONS & INPUT -->
             <!-- ============================================================ -->
-            <TabItem Header="Layout">
+            <TabItem Header="Buttons &amp; Input">
                 <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
+                    <StackPanel Spacing="20" Margin="12">
 
-                        <!-- Card section -->
-                        <TextBlock Text="Card" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-
+                        <!-- Button Variants -->
+                        <TextBlock Text="Button Variants"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <WrapPanel>
-                            <layout:Card Header="Basic Card"
-                                         Margin="0,0,12,12"
-                                         Width="260"
-                                         Padding="12">
-                                <TextBlock Text="This is a basic card with header and content areas. Cards group related information." TextWrapping="Wrap"/>
-                            </layout:Card>
-
-                            <layout:Card Header="Hoverable Card"
-                                         IsHoverable="True"
-                                         Elevation="2"
-                                         Margin="0,0,12,12"
-                                         Width="260"
-                                         Padding="12">
-                                <StackPanel Spacing="8">
-                                    <TextBlock Text="This card responds to hover with elevation change." TextWrapping="Wrap"/>
-                                    <TextBlock Text="Elevation: 2" FontSize="12" Foreground="Gray"/>
-                                </StackPanel>
-                            </layout:Card>
-
-                            <layout:Card Header="Card with Footer"
-                                         Margin="0,0,12,12"
-                                         Width="260"
-                                         Padding="12">
-                                <StackPanel Spacing="8">
-                                    <TextBlock Text="Cards support header, content, and footer sections." TextWrapping="Wrap"/>
-                                </StackPanel>
-                                <layout:Card.Footer>
-                                    <TextBlock Text="Footer content" FontSize="11" Foreground="Gray"/>
-                                </layout:Card.Footer>
-                            </layout:Card>
+                            <Button Content="Default" Margin="0,0,8,8"/>
+                            <Button Content="Primary" Classes="primary" Margin="0,0,8,8"/>
+                            <Button Content="Accent" Classes="accent" Margin="0,0,8,8"/>
+                            <Button Content="Outline" Classes="outline" Margin="0,0,8,8"/>
+                            <Button Content="Ghost" Classes="ghost" Margin="0,0,8,8"/>
+                            <Button Content="Destructive" Classes="destructive" Margin="0,0,8,8"/>
+                            <Button Content="Success" Classes="success" Margin="0,0,8,8"/>
+                            <Button Content="Warning" Classes="warning" Margin="0,0,8,8"/>
+                            <Button Content="Disabled" IsEnabled="False" Margin="0,0,8,8"/>
                         </WrapPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- Expander section -->
-                        <TextBlock Text="Expander" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-
-                        <layout:Expander Header="Click to expand (Down)"
-                                         IsExpanded="False"
-                                         ExpandDirection="Down"
-                                         Margin="0,0,0,8">
-                            <TextBlock Text="This content expands downward with a smooth animation. The Expander control supports all four directions." TextWrapping="Wrap" Margin="16,8"/>
-                        </layout:Expander>
-
-                        <layout:Expander Header="Expanded by default"
-                                         IsExpanded="True"
-                                         Margin="0,0,0,8">
-                            <TextBlock Text="This expander starts in the expanded state. Use the IsExpanded property to control initial visibility." TextWrapping="Wrap" Margin="16,8"/>
-                        </layout:Expander>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- Divider section -->
-                        <TextBlock Text="Divider" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Above the divider" Margin="0,0,0,4"/>
-                        <layout:Divider/>
-                        <TextBlock Text="Below the divider" Margin="0,4,0,0"/>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- Badge section -->
-                        <TextBlock Text="Badge" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-
-                        <WrapPanel>
-                            <StackPanel Margin="0,0,16,12" Spacing="4">
-                                <layout:Badge Value="5" Variant="Primary">
-                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
-                                        <TextBlock Text="M" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-                                    </Border>
-                                </layout:Badge>
-                                <TextBlock Text="Primary (count)" FontSize="11" Foreground="Gray"/>
-                            </StackPanel>
-
-                            <StackPanel Margin="0,0,16,12" Spacing="4">
-                                <layout:Badge Value="150" MaxValue="99" Variant="Error">
-                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
-                                        <TextBlock Text="N" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-                                    </Border>
-                                </layout:Badge>
-                                <TextBlock Text="Error (overflow)" FontSize="11" Foreground="Gray"/>
-                            </StackPanel>
-
-                            <StackPanel Margin="0,0,16,12" Spacing="4">
-                                <layout:Badge Variant="Success" IsDot="True">
-                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
-                                        <TextBlock Text="U" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-                                    </Border>
-                                </layout:Badge>
-                                <TextBlock Text="Success (dot)" FontSize="11" Foreground="Gray"/>
-                            </StackPanel>
-
-                            <StackPanel Margin="0,0,16,12" Spacing="4">
-                                <layout:Badge Variant="Warning" IsDot="True">
-                                    <Border Width="40" Height="40" Background="LightGray" CornerRadius="8">
-                                        <TextBlock Text="W" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-                                    </Border>
-                                </layout:Badge>
-                                <TextBlock Text="Warning (dot)" FontSize="11" Foreground="Gray"/>
-                            </StackPanel>
+                        <!-- Button Sizes -->
+                        <TextBlock Text="Button Sizes"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel VerticalAlignment="Center">
+                            <Button Content="Small" Classes="primary sm" Margin="0,0,8,8"/>
+                            <Button Content="Medium" Classes="primary" Margin="0,0,8,8"/>
+                            <Button Content="Large" Classes="primary lg" Margin="0,0,8,8"/>
+                            <Button Content="Rounded Pill" Classes="primary rounded" Margin="0,0,8,8"/>
                         </WrapPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- Tag section -->
-                        <TextBlock Text="Tag" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- Loading Button -->
+                        <TextBlock Text="Loading State"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="Click to simulate a 2-second loading state."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   Margin="0,0,0,8"/>
+                        <Button x:Name="DemoLoadingButton"
+                                Content="Click to Load"
+                                Classes="primary"
+                                Click="LoadingButton_Click"/>
 
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Toggle Buttons -->
+                        <TextBlock Text="Toggle Buttons"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <WrapPanel>
-                            <layout:Tag Content="Default Tag" Variant="Default" Margin="0,0,8,8"/>
-                            <layout:Tag Content="Primary Tag" Variant="Primary" Margin="0,0,8,8"/>
-                            <layout:Tag Content="Success Tag" Variant="Success" Margin="0,0,8,8"/>
-                            <layout:Tag Content="Warning Tag" Variant="Warning" Margin="0,0,8,8"/>
-                            <layout:Tag Content="Error Tag" Variant="Error" Margin="0,0,8,8"/>
-                            <layout:Tag Content="Outlined Tag" Variant="Outlined" Margin="0,0,8,8"/>
+                            <ToggleButton Content="Toggle Me" Margin="0,0,8,8"/>
+                            <ToggleButton Content="Initially Checked" IsChecked="True" Margin="0,0,8,8"/>
+                            <ToggleButton Content="Disabled" IsEnabled="False" Margin="0,0,8,8"/>
                         </WrapPanel>
 
-                        <TextBlock Text="Closable tags" FontWeight="SemiBold" Margin="0,4,0,4"/>
-                        <WrapPanel>
-                            <layout:Tag Content="React" Variant="Primary" IsClosable="True" Margin="0,0,8,8" x:Name="ClosableTag1"/>
-                            <layout:Tag Content="Avalonia" Variant="Success" IsClosable="True" Margin="0,0,8,8" x:Name="ClosableTag2"/>
-                            <layout:Tag Content="TypeScript" Variant="Outlined" IsClosable="True" Margin="0,0,8,8" x:Name="ClosableTag3"/>
-                        </WrapPanel>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <layout:Divider Margin="0,4"/>
+                        <!-- TextBox -->
+                        <TextBlock Text="TextBox"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="420">
+                            <TextBox Watermark="Enter your name..."/>
+                            <TextBox Watermark="Underline style" Classes="underline"/>
+                            <TextBox Watermark="Multi-line (auto-expand)"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     MinHeight="80"/>
+                            <TextBox Watermark="Read-only text"
+                                     Text="This field is read-only"
+                                     IsReadOnly="True"/>
+                            <TextBox Watermark="Disabled input" IsEnabled="False"/>
+                        </StackPanel>
 
-                        <!-- Avatar section -->
-                        <TextBlock Text="Avatar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
-                                <layout:Avatar FallbackText="SK" Size="Large" FallbackBackground="#0078D4"/>
-                                <TextBlock Text="Large" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
-                                <layout:Avatar FallbackText="AB" Size="Medium" FallbackBackground="#107C10"/>
-                                <TextBlock Text="Medium" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
-                                <layout:Avatar FallbackText="JD" Size="Small" FallbackBackground="#D83B01"/>
-                                <TextBlock Text="Small" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
-                                <layout:Avatar FallbackText="MZ" Size="XL" FallbackBackground="#5C2D91"/>
-                                <TextBlock Text="XL" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
-                                <layout:Avatar FallbackText="SQ" Size="Medium" Shape="Square" FallbackBackground="#0078D4"/>
-                                <TextBlock Text="Square" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </WrapPanel>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <layout:Divider Margin="0,4"/>
+                        <!-- NumericUpDown -->
+                        <TextBlock Text="NumericUpDown"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="420">
+                            <NumericUpDown Watermark="Enter a number"
+                                           Minimum="0" Maximum="100"
+                                           Increment="1" Value="50"/>
+                            <NumericUpDown Watermark="Decimal values"
+                                           Minimum="0" Maximum="10"
+                                           Increment="0.5" Value="3.5"
+                                           FormatString="F2"/>
+                        </StackPanel>
 
-                        <!-- Skeleton section -->
-                        <TextBlock Text="Skeleton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Animated loading placeholders with shimmer effect."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <WrapPanel>
-                            <StackPanel Spacing="8" Width="300" Margin="0,0,16,12">
-                                <TextBlock Text="Text variant" FontSize="12" FontWeight="SemiBold"/>
-                                <layout:Skeleton Variant="Text" Rows="3"/>
-                            </StackPanel>
-                            <StackPanel Spacing="8" Width="300" Margin="0,0,16,12">
-                                <TextBlock Text="Circle variant" FontSize="12" FontWeight="SemiBold"/>
-                                <layout:Skeleton Variant="Circle" Width="60" Height="60"/>
-                            </StackPanel>
-                            <StackPanel Spacing="8" Width="300" Margin="0,0,16,12">
-                                <TextBlock Text="Image variant" FontSize="12" FontWeight="SemiBold"/>
-                                <layout:Skeleton Variant="Image" Width="300"/>
-                            </StackPanel>
-                        </WrapPanel>
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- PasswordBox -->
+                        <TextBlock Text="PasswordBox"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="420">
+                            <TextBox Watermark="Password"
+                                     PasswordChar="*"
+                                     MaxLength="32"/>
+                            <TextBox Watermark="Confirm password"
+                                     PasswordChar="*"
+                                     MaxLength="32"/>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- SearchBox -->
+                        <TextBlock Text="SearchBox"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="420">
+                            <input:SearchBox Watermark="Search products..."
+                                             SearchDelay="300"/>
+                        </StackPanel>
 
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
             <!-- ============================================================ -->
-            <!-- INPUT TAB -->
-            <!-- ============================================================ -->
-            <TabItem Header="Input">
-                <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
-
-                        <!-- AuraButton section -->
-                        <TextBlock Text="AuraButton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-
-                        <TextBlock Text="Variant classes" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <input:AuraButton Content="Default" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Primary" Classes="primary" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Secondary" Classes="secondary" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Destructive" Classes="destructive" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Outline" Classes="outline" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Ghost" Classes="ghost" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Link" Classes="link" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Disabled" IsEnabled="False" Margin="0,0,8,8"/>
-                        </WrapPanel>
-
-                        <TextBlock Text="Size classes" FontWeight="SemiBold" Margin="0,8,0,4"/>
-                        <WrapPanel>
-                            <input:AuraButton Content="Small" Classes="sm" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Medium" Classes="md" Margin="0,0,8,8"/>
-                            <input:AuraButton Content="Large" Classes="lg" Margin="0,0,8,8"/>
-                        </WrapPanel>
-
-                        <TextBlock Text="Loading state" FontWeight="SemiBold" Margin="0,8,0,4"/>
-                        <WrapPanel>
-                            <input:AuraButton Content="Click to load" Classes="primary" Margin="0,0,8,8" Click="LoadingButton_Click" x:Name="DemoLoadingButton"/>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraTextBox section -->
-                        <TextBlock Text="AuraTextBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <input:AuraTextBox Watermark="Enter your name..." />
-                            <input:AuraTextBox Watermark="With clear button" IsClearable="True"/>
-                            <input:AuraTextBox Watermark="With prefix and suffix" Prefix="$" Suffix=".00"/>
-                            <input:AuraTextBox Watermark="Character count" ShowCount="True" MaxLengthDisplay="50"/>
-                            <input:AuraTextBox Watermark="Filled variant" Variant="Filled" IsClearable="True"/>
-                            <input:AuraTextBox Watermark="Underlined variant" Variant="Underlined"/>
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraPasswordBox section -->
-                        <TextBlock Text="AuraPasswordBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <input:AuraPasswordBox Watermark="Enter password..." />
-                            <input:AuraPasswordBox Watermark="Confirm password..." />
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraNumericUpDown section -->
-                        <TextBlock Text="AuraNumericUpDown" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <input:AuraNumericUpDown Watermark="Enter a number" Minimum="0" Maximum="100" Increment="1" Value="50"/>
-                            <input:AuraNumericUpDown Watermark="Decimal" Minimum="0" Maximum="10" Increment="0.5" Value="3.5" FormatString="F2"/>
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- SearchBox section -->
-                        <TextBlock Text="SearchBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <input:SearchBox Watermark="Search components..." SearchDelay="300" x:Name="DemoSearchBox"/>
-                        </StackPanel>
-                        <TextBlock Text="Press Escape to clear. Search fires after 300ms debounce."
-                                   FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
-
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-
-            <!-- ============================================================ -->
-            <!-- SELECTION TAB -->
+            <!-- TAB 2: SELECTION -->
             <!-- ============================================================ -->
             <TabItem Header="Selection">
                 <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
+                    <StackPanel Spacing="20" Margin="12">
 
-                        <!-- AuraComboBox section -->
-                        <TextBlock Text="AuraComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <selection:AuraComboBox PlaceholderText="Select a fruit" SelectedIndex="0">
+                        <!-- ComboBox -->
+                        <TextBlock Text="ComboBox"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="420">
+                            <ComboBox PlaceholderText="Select a fruit" SelectedIndex="0">
                                 <ComboBoxItem>Apple</ComboBoxItem>
                                 <ComboBoxItem>Banana</ComboBoxItem>
                                 <ComboBoxItem>Cherry</ComboBoxItem>
                                 <ComboBoxItem>Date</ComboBoxItem>
                                 <ComboBoxItem>Elderberry</ComboBoxItem>
-                            </selection:AuraComboBox>
-                            <selection:AuraComboBox PlaceholderText="Searchable combo" IsSearchable="True">
+                            </ComboBox>
+                            <ComboBox PlaceholderText="Select a framework">
                                 <ComboBoxItem>Angular</ComboBoxItem>
                                 <ComboBoxItem>React</ComboBoxItem>
                                 <ComboBoxItem>Vue</ComboBoxItem>
                                 <ComboBoxItem>Svelte</ComboBoxItem>
                                 <ComboBoxItem>Avalonia</ComboBoxItem>
                                 <ComboBoxItem>MAUI</ComboBoxItem>
-                            </selection:AuraComboBox>
-                            <selection:AuraComboBox PlaceholderText="Filled variant" Variant="Filled">
+                            </ComboBox>
+                            <ComboBox PlaceholderText="Disabled" IsEnabled="False">
                                 <ComboBoxItem>Option A</ComboBoxItem>
                                 <ComboBoxItem>Option B</ComboBoxItem>
-                                <ComboBoxItem>Option C</ComboBoxItem>
-                            </selection:AuraComboBox>
-                            <selection:AuraComboBox PlaceholderText="Disabled combo" IsEnabled="False">
-                                <ComboBoxItem>Option A</ComboBoxItem>
-                                <ComboBoxItem>Option B</ComboBoxItem>
-                            </selection:AuraComboBox>
+                            </ComboBox>
                         </StackPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- MultiComboBox section -->
-                        <TextBlock Text="MultiComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Select multiple items and see them rendered as tags above the dropdown."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <selection:MultiComboBox PlaceholderText="Select frameworks" IsSearchable="True" ShowSelectAll="True">
-                                <ComboBoxItem>Angular</ComboBoxItem>
-                                <ComboBoxItem>React</ComboBoxItem>
-                                <ComboBoxItem>Vue</ComboBoxItem>
-                                <ComboBoxItem>Svelte</ComboBoxItem>
-                                <ComboBoxItem>Avalonia</ComboBoxItem>
-                                <ComboBoxItem>MAUI</ComboBoxItem>
-                            </selection:MultiComboBox>
-                        </StackPanel>
+                        <!-- Multi-select ListBox -->
+                        <TextBlock Text="Multi-select ListBox"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <ListBox MaxWidth="420" Height="140"
+                                 SelectionMode="Multiple">
+                            <ListBoxItem>JavaScript</ListBoxItem>
+                            <ListBoxItem>TypeScript</ListBoxItem>
+                            <ListBoxItem>C#</ListBoxItem>
+                            <ListBoxItem>Python</ListBoxItem>
+                            <ListBoxItem>Rust</ListBoxItem>
+                            <ListBoxItem>Go</ListBoxItem>
+                            <ListBoxItem>Swift</ListBoxItem>
+                        </ListBox>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- AuraRadioButton section -->
-                        <TextBlock Text="AuraRadioButton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Default variant" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- CheckBox group -->
+                        <TextBlock Text="CheckBox Group"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <StackPanel Spacing="8">
-                            <selection:AuraRadioButton Content="Option A" GroupName="Options" IsChecked="True"/>
-                            <selection:AuraRadioButton Content="Option B" GroupName="Options"/>
-                            <selection:AuraRadioButton Content="Option C (Disabled)" GroupName="Options" IsEnabled="False"/>
+                            <CheckBox Content="Read documentation" IsChecked="True"/>
+                            <CheckBox Content="Complete tutorial"/>
+                            <CheckBox Content="Build sample app" IsChecked="True"/>
+                            <CheckBox Content="Write tests"/>
+                            <CheckBox Content="Disabled option" IsEnabled="False"/>
                         </StackPanel>
 
-                        <TextBlock Text="Button variant" FontWeight="SemiBold" Margin="0,8,0,4"/>
-                        <StackPanel Orientation="Horizontal" Spacing="4">
-                            <selection:AuraRadioButton Content="Daily" GroupName="TimeRange" Variant="Button" IsChecked="True"/>
-                            <selection:AuraRadioButton Content="Weekly" GroupName="TimeRange" Variant="Button"/>
-                            <selection:AuraRadioButton Content="Monthly" GroupName="TimeRange" Variant="Button"/>
-                            <selection:AuraRadioButton Content="Yearly" GroupName="TimeRange" Variant="Button"/>
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraCheckBox section -->
-                        <TextBlock Text="AuraCheckBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Toggle-style CheckBox"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"
+                                   Margin="0,8,0,4"/>
                         <StackPanel Spacing="8">
-                            <selection:AuraCheckBox Content="Checked" IsChecked="True"/>
-                            <selection:AuraCheckBox Content="Unchecked"/>
-                            <selection:AuraCheckBox Content="Three-state" IsThreeState="True" IsChecked="{x:Null}"/>
-                            <selection:AuraCheckBox Content="Disabled" IsEnabled="False"/>
+                            <CheckBox Content="Enable notifications" Classes="toggle" IsChecked="True"/>
+                            <CheckBox Content="Dark mode" Classes="toggle"/>
+                            <CheckBox Content="Auto-save" Classes="toggle"/>
                         </StackPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- Switch section -->
-                        <TextBlock Text="Switch" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="12">
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <selection:Switch IsChecked="True" Size="Small"/>
-                                <TextBlock Text="Small" VerticalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <selection:Switch IsChecked="True" Size="Medium"/>
-                                <TextBlock Text="Medium (default)" VerticalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <selection:Switch IsChecked="False" Size="Large"/>
-                                <TextBlock Text="Large" VerticalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <selection:Switch IsEnabled="False"/>
-                                <TextBlock Text="Disabled" VerticalAlignment="Center"/>
-                            </StackPanel>
+                        <!-- RadioButton group -->
+                        <TextBlock Text="RadioButton Group"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8">
+                            <RadioButton Content="Standard Plan" GroupName="Plan" IsChecked="True"/>
+                            <RadioButton Content="Pro Plan" GroupName="Plan"/>
+                            <RadioButton Content="Enterprise Plan" GroupName="Plan"/>
+                            <RadioButton Content="Disabled Plan" GroupName="Plan" IsEnabled="False"/>
                         </StackPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- RateControl section -->
-                        <TextBlock Text="RateControl" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="12">
+                        <!-- Slider -->
+                        <TextBlock Text="Slider"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="16" MaxWidth="420">
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Star rating (clickable)" FontSize="12" FontWeight="SemiBold"/>
-                                <selection:RateControl Value="3.5" Max="5" AllowHalf="True" ShowValue="True" x:Name="DemoRateControl"/>
+                                <TextBlock Text="Volume" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Minimum="0" Maximum="100" Value="65" TickFrequency="10"/>
                             </StackPanel>
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Read-only rating" FontSize="12" FontWeight="SemiBold"/>
-                                <selection:RateControl Value="4" Max="5" IsReadOnly="True" ShowValue="True"/>
+                                <TextBlock Text="Temperature (-20 to 50)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Minimum="-20" Maximum="50" Value="22"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- ToggleSwitch -->
+                        <TextBlock Text="ToggleSwitch"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="12">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <selection:Switch IsChecked="True"/>
+                                <TextBlock Text="Wi-Fi enabled" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <selection:Switch/>
+                                <TextBlock Text="Bluetooth" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Rating -->
+                        <TextBlock Text="Rating"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Star rating" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <selection:RateControl x:Name="StarRating"
+                                                       Value="3.5"
+                                                       Max="5"
+                                                       AllowHalf="True"
+                                                       ShowValue="True"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Read-only rating (4.2 / 5)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <selection:RateControl Value="4.2" Max="5" AllowHalf="True" IsReadOnly="True"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- ColorPicker -->
+                        <TextBlock Text="ColorPicker"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="Select a color using the AuraUI color picker control."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   Margin="0,0,0,8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="16">
+                            <selection:ColorPicker x:Name="DemoColorPicker"
+                                                   Color="#0078D4"
+                                                   IsCompact="True"
+                                                   SpectrumWidth="256"
+                                                   SpectrumHeight="160"
+                                                   ColorChanged="ColorPicker_ColorChanged"/>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Preview:" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Border x:Name="ColorPreview"
+                                        Width="80" Height="80"
+                                        CornerRadius="8"
+                                        Background="#0078D4"
+                                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                                        BorderThickness="1"/>
+                                <TextBlock x:Name="ColorHexText"
+                                           Text="#0078D4"
+                                           FontFamily="Consolas, monospace"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
                             </StackPanel>
                         </StackPanel>
 
@@ -440,179 +371,511 @@
             </TabItem>
 
             <!-- ============================================================ -->
-            <!-- DISPLAY TAB -->
+            <!-- TAB 3: DISPLAY -->
             <!-- ============================================================ -->
             <TabItem Header="Display">
                 <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
+                    <StackPanel Spacing="20" Margin="12">
 
-                        <!-- ProgressRing section -->
-                        <TextBlock Text="ProgressRing" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
-                                <display:ProgressRing IsIndeterminate="True" Size="Large"/>
-                                <TextBlock Text="Indeterminate" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
-                                <display:ProgressRing Value="65" Maximum="100" Size="Large"/>
-                                <TextBlock Text="65%" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
-                                <display:ProgressRing IsIndeterminate="True" Size="Medium"/>
-                                <TextBlock Text="Medium" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
-                                <display:ProgressRing IsIndeterminate="True" Size="Small"/>
-                                <TextBlock Text="Small" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraProgressBar section -->
-                        <TextBlock Text="AuraProgressBar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- ProgressBar -->
+                        <TextBlock Text="ProgressBar"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <StackPanel Spacing="12" MaxWidth="500">
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Indeterminate" FontSize="12"/>
-                                <display:AuraProgressBar IsIndeterminate="True" Height="6"/>
+                                <TextBlock Text="Indeterminate" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <ProgressBar IsIndeterminate="True" Height="6"/>
                             </StackPanel>
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Primary (default)" FontSize="12"/>
-                                <display:AuraProgressBar Value="25" Maximum="100" Height="6" ShowLabel="True"/>
+                                <TextBlock Text="Primary (25%)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <ProgressBar Value="25" Maximum="100" Height="6"/>
                             </StackPanel>
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Success variant" FontSize="12"/>
-                                <display:AuraProgressBar Value="75" Maximum="100" Height="6" Variant="Success" ShowLabel="True"/>
+                                <TextBlock Text="Success (75%)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <ProgressBar Value="75" Maximum="100" Height="6" Classes="success"/>
                             </StackPanel>
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Warning variant" FontSize="12"/>
-                                <display:AuraProgressBar Value="50" Maximum="100" Height="6" Variant="Warning" ShowLabel="True"/>
+                                <TextBlock Text="Warning (50%)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <ProgressBar Value="50" Maximum="100" Height="6" Classes="warning"/>
                             </StackPanel>
                             <StackPanel Spacing="4">
-                                <TextBlock Text="Error variant" FontSize="12"/>
-                                <display:AuraProgressBar Value="90" Maximum="100" Height="6" Variant="Error" ShowLabel="True"/>
+                                <TextBlock Text="Error (90%)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <ProgressBar Value="90" Maximum="100" Height="6" Classes="error"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Large Striped" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <ProgressBar Value="60" Maximum="100" Classes="lg striped"
+                                             Foreground="{DynamicResource AuraInfoBrush}"/>
                             </StackPanel>
                         </StackPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- AuraCarousel section -->
-                        <TextBlock Text="AuraCarousel" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <display:AuraCarousel AutoPlay="True"
-                                              ShowIndicators="True"
-                                              ShowNavigation="True"
-                                              Width="500"
-                                              Height="200"
-                                              Margin="0,0,0,8">
-                            <display:AuraCarousel.Items>
-                                <Border Background="#0078D4" CornerRadius="8" Margin="4">
-                                    <TextBlock Text="Slide 1 - Welcome to AuraUI"
-                                               Foreground="White" FontSize="20" FontWeight="Bold"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <Border Background="#107C10" CornerRadius="8" Margin="4">
-                                    <TextBlock Text="Slide 2 - Built with Avalonia 12"
-                                               Foreground="White" FontSize="20" FontWeight="Bold"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <Border Background="#D83B01" CornerRadius="8" Margin="4">
-                                    <TextBlock Text="Slide 3 - Cross-platform UI"
-                                               Foreground="White" FontSize="20" FontWeight="Bold"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <Border Background="#5C2D91" CornerRadius="8" Margin="4">
-                                    <TextBlock Text="Slide 4 - Fluent + Material Themes"
-                                               Foreground="White" FontSize="20" FontWeight="Bold"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </display:AuraCarousel.Items>
-                        </display:AuraCarousel>
+                        <!-- Typography -->
+                        <TextBlock Text="Typography"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Heading 1 -- Bold 32px"
+                                       FontSize="32" FontWeight="Bold"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <TextBlock Text="Heading 2 -- SemiBold 24px"
+                                       FontSize="24" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <TextBlock Text="Heading 3 -- SemiBold 18px"
+                                       FontSize="18" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <TextBlock Text="Body -- Regular 14px. Standard body text used throughout."
+                                       FontSize="14"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <TextBlock Text="Secondary -- 14px for descriptions and secondary information."
+                                       FontSize="14"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            <TextBlock Text="Caption -- 12px for labels, metadata, and small text."
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                            <TextBlock Text="Link -- 14px for clickable text"
+                                       FontSize="14"
+                                       Foreground="{DynamicResource AuraForegroundLinkBrush}"
+                                       TextDecorations="Underline"/>
+                        </StackPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- AuraTimeline section -->
-                        <TextBlock Text="AuraTimeline" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <display:AuraTimeline Orientation="Vertical" MaxWidth="500">
-                            <display:AuraTimelineItem Timestamp="2026-01-15" DotColor="#0078D4">
-                                <TextBlock Text="Project Created" FontWeight="SemiBold"/>
-                            </display:AuraTimelineItem>
-                            <display:AuraTimelineItem Timestamp="2026-03-20" DotColor="#107C10">
-                                <TextBlock Text="Beta Release" FontWeight="SemiBold"/>
-                            </display:AuraTimelineItem>
-                            <display:AuraTimelineItem Timestamp="2026-05-29" DotColor="#D83B01">
-                                <TextBlock Text="v1.0 Stable Release" FontWeight="SemiBold"/>
-                            </display:AuraTimelineItem>
-                        </display:AuraTimeline>
+                        <!-- Cards -->
+                        <TextBlock Text="Card Layouts"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <layout:Card Header="Basic Card"
+                                         IsHoverable="True"
+                                         Elevation="1"
+                                         Width="260"
+                                         Margin="0,0,12,12">
+                                <TextBlock Text="A card with hover effect and elevation shadow. Uses the AuraUI Card control."
+                                           TextWrapping="Wrap"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </layout:Card>
+                            <layout:Card Header="Elevated Card"
+                                         Elevation="2"
+                                         Width="260"
+                                         Margin="0,0,12,12">
+                                <TextBlock Text="Higher elevation card for emphasis and layering."
+                                           TextWrapping="Wrap"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </layout:Card>
+                            <Border Background="{DynamicResource AuraPrimaryBrush}"
+                                    CornerRadius="{DynamicResource AuraCardRadius}"
+                                    BoxShadow="{DynamicResource AuraShadowLg}"
+                                    Padding="16"
+                                    Width="260"
+                                    Margin="0,0,12,12">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Colored Card"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AuraForegroundOnAccentBrush}"/>
+                                    <TextBlock Text="Cards can use any AuraUI brush for backgrounds."
+                                               TextWrapping="Wrap"
+                                               FontSize="13"
+                                               Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                                               Opacity="0.85"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- StepIndicator section -->
-                        <TextBlock Text="StepIndicator" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <display:StepIndicator CurrentStep="1" Orientation="Horizontal" MaxWidth="500">
-                            <display:StepIndicatorItem Title="Details" Description="Enter your information"/>
-                            <display:StepIndicatorItem Title="Review" Description="Review and confirm"/>
-                            <display:StepIndicatorItem Title="Confirm" Description="Final confirmation"/>
-                        </display:StepIndicator>
+                        <!-- Badges -->
+                        <TextBlock Text="Badge Overlays"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <layout:Badge Value="5" Variant="Primary" Margin="0,0,16,8">
+                                <Border Width="36" Height="36"
+                                        CornerRadius="8"
+                                        Background="{DynamicResource AuraMutedBrush}"/>
+                            </layout:Badge>
+                            <layout:Badge Value="128" MaxValue="99" Variant="Error" Margin="0,0,16,8">
+                                <Border Width="36" Height="36"
+                                        CornerRadius="8"
+                                        Background="{DynamicResource AuraMutedBrush}"/>
+                            </layout:Badge>
+                            <layout:Badge IsDot="True" Variant="Success" Margin="0,0,16,8">
+                                <Border Width="36" Height="36"
+                                        CornerRadius="8"
+                                        Background="{DynamicResource AuraMutedBrush}"/>
+                            </layout:Badge>
+                            <layout:Badge BadgeContent="New" Variant="Warning" Margin="0,0,16,8">
+                                <Border Width="36" Height="36"
+                                        CornerRadius="8"
+                                        Background="{DynamicResource AuraMutedBrush}"/>
+                            </layout:Badge>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Tags -->
+                        <TextBlock Text="Tag / Chip Collection"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <layout:Tag Content="Default" Margin="0,0,6,6"/>
+                            <layout:Tag Content="Primary" Variant="Primary" Margin="0,0,6,6"/>
+                            <layout:Tag Content="Success" Variant="Success" Margin="0,0,6,6"/>
+                            <layout:Tag Content="Warning" Variant="Warning" Margin="0,0,6,6"/>
+                            <layout:Tag Content="Error" Variant="Error" Margin="0,0,6,6"/>
+                            <layout:Tag Content="Outlined" Variant="Outlined" Margin="0,0,6,6"/>
+                            <layout:Tag Content="Closable" Variant="Primary" IsClosable="True" Margin="0,0,6,6"/>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Avatar -->
+                        <TextBlock Text="Avatar with Initials"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel VerticalAlignment="Center">
+                            <layout:Avatar FallbackText="JD" Shape="Circle" Size="Small"
+                                           FallbackBackground="{DynamicResource AuraPrimaryBrush}"
+                                           Margin="0,0,8,8"/>
+                            <layout:Avatar FallbackText="AB" Shape="Circle" Size="Medium"
+                                           FallbackBackground="{DynamicResource AuraSuccessBrush}"
+                                           Margin="0,0,8,8"/>
+                            <layout:Avatar FallbackText="MK" Shape="Circle" Size="Large"
+                                           FallbackBackground="{DynamicResource AuraWarningBrush}"
+                                           Margin="0,0,8,8"/>
+                            <layout:Avatar FallbackText="TS" Shape="Square" Size="Large"
+                                           FallbackBackground="{DynamicResource AuraErrorBrush}"
+                                           Margin="0,0,8,8"/>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Skeleton -->
+                        <TextBlock Text="Skeleton Loading Placeholders"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="16" MaxWidth="420">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Text skeleton (3 rows)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <layout:Skeleton Variant="Text" Rows="3"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Circle + Text skeleton" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <layout:Skeleton Variant="Circle" Width="48" Height="48"/>
+                                    <layout:Skeleton Variant="Text" Rows="2" Width="200"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Image skeleton (16:9)" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <layout:Skeleton Variant="Image" Width="400"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Expander -->
+                        <TextBlock Text="Expander Panels"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="500">
+                            <layout:Expander Header="Click to expand" IsExpanded="False">
+                                <TextBlock Text="This content expands and collapses using the AuraUI Expander with smooth animation."
+                                           TextWrapping="Wrap"
+                                           Margin="16,8"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </layout:Expander>
+                            <layout:Expander Header="Expanded by default" IsExpanded="True">
+                                <TextBlock Text="Use the IsExpanded property to control initial visibility of the expanded content area."
+                                           TextWrapping="Wrap"
+                                           Margin="16,8"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </layout:Expander>
+                        </StackPanel>
 
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
             <!-- ============================================================ -->
-            <!-- FEEDBACK TAB -->
+            <!-- TAB 4: LAYOUT -->
+            <!-- ============================================================ -->
+            <TabItem Header="Layout">
+                <ScrollViewer>
+                    <StackPanel Spacing="20" Margin="12">
+
+                        <!-- Grid -->
+                        <TextBlock Text="Grid Layout"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" MaxWidth="600">
+                            <Border Grid.Column="0" Grid.Row="0"
+                                    Background="{DynamicResource AuraPrimaryLightBrush}"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="16" Margin="4">
+                                <TextBlock Text="Col 1, Row 1"
+                                           Foreground="{DynamicResource AuraPrimaryBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border Grid.Column="1" Grid.Row="0"
+                                    Background="{DynamicResource AuraSuccessLightBrush}"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="16" Margin="4">
+                                <TextBlock Text="Col 2, Row 1"
+                                           Foreground="{DynamicResource AuraSuccessBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border Grid.Column="2" Grid.Row="0"
+                                    Background="{DynamicResource AuraWarningLightBrush}"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="16" Margin="4">
+                                <TextBlock Text="Col 3, Row 1"
+                                           Foreground="{DynamicResource AuraWarningBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+                                    Background="{DynamicResource AuraErrorLightBrush}"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="16" Margin="4">
+                                <TextBlock Text="Spanning 2 columns"
+                                           Foreground="{DynamicResource AuraErrorBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border Grid.Column="2" Grid.Row="1"
+                                    Background="{DynamicResource AuraInfoLightBrush}"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="16" Margin="4">
+                                <TextBlock Text="Col 3, Row 2"
+                                           Foreground="{DynamicResource AuraInfoBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- StackPanel -->
+                        <TextBlock Text="StackPanel with Spacing"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8" MaxWidth="300">
+                            <Border Background="{DynamicResource AuraPrimaryLightBrush}"
+                                    CornerRadius="6" Padding="12">
+                                <TextBlock Text="Item 1" Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                            </Border>
+                            <Border Background="{DynamicResource AuraSuccessLightBrush}"
+                                    CornerRadius="6" Padding="12">
+                                <TextBlock Text="Item 2" Foreground="{DynamicResource AuraSuccessBrush}"/>
+                            </Border>
+                            <Border Background="{DynamicResource AuraWarningLightBrush}"
+                                    CornerRadius="6" Padding="12">
+                                <TextBlock Text="Item 3" Foreground="{DynamicResource AuraWarningBrush}"/>
+                            </Border>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- WrapPanel -->
+                        <TextBlock Text="WrapPanel"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel MaxWidth="500">
+                            <Border Background="{DynamicResource AuraPrimaryBrush}"
+                                    CornerRadius="6" Padding="16,10" Margin="0,0,8,8">
+                                <TextBlock Text="Tag A" Foreground="White"/>
+                            </Border>
+                            <Border Background="{DynamicResource AuraSuccessBrush}"
+                                    CornerRadius="6" Padding="16,10" Margin="0,0,8,8">
+                                <TextBlock Text="Tag B" Foreground="White"/>
+                            </Border>
+                            <Border Background="{DynamicResource AuraWarningBrush}"
+                                    CornerRadius="6" Padding="16,10" Margin="0,0,8,8">
+                                <TextBlock Text="Tag C" Foreground="White"/>
+                            </Border>
+                            <Border Background="{DynamicResource AuraErrorBrush}"
+                                    CornerRadius="6" Padding="16,10" Margin="0,0,8,8">
+                                <TextBlock Text="Tag D" Foreground="White"/>
+                            </Border>
+                            <Border Background="{DynamicResource AuraInfoBrush}"
+                                    CornerRadius="6" Padding="16,10" Margin="0,0,8,8">
+                                <TextBlock Text="Tag E" Foreground="White"/>
+                            </Border>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- DockPanel -->
+                        <TextBlock Text="DockPanel"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <Border BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Height="180" MaxWidth="500">
+                            <DockPanel>
+                                <Border DockPanel.Dock="Top"
+                                        Background="{DynamicResource AuraPrimaryLightBrush}"
+                                        Padding="12,8">
+                                    <TextBlock Text="Top Dock" Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                                </Border>
+                                <Border DockPanel.Dock="Bottom"
+                                        Background="{DynamicResource AuraWarningLightBrush}"
+                                        Padding="12,8">
+                                    <TextBlock Text="Bottom Dock" Foreground="{DynamicResource AuraWarningBrush}"/>
+                                </Border>
+                                <Border DockPanel.Dock="Left"
+                                        Background="{DynamicResource AuraSuccessLightBrush}"
+                                        Padding="12,8" Width="120">
+                                    <TextBlock Text="Left" Foreground="{DynamicResource AuraSuccessBrush}"/>
+                                </Border>
+                                <Border Background="{DynamicResource AuraMutedBrush}"
+                                        Padding="12">
+                                    <TextBlock Text="Fill (remaining space)"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                </Border>
+                            </DockPanel>
+                        </Border>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- ScrollViewer -->
+                        <TextBlock Text="ScrollViewer"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <Border BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Height="150" MaxWidth="500">
+                            <ScrollViewer>
+                                <StackPanel Spacing="4" Margin="12">
+                                    <TextBlock Text="Scrollable content area. This content overflows the container."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 2: AuraUI provides styled ScrollViewer with custom scrollbars."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 3: Scroll bars appear on hover and fade when idle."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 4: Supports both vertical and horizontal scrolling."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 5: Touch scrolling and smooth animation are built in."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 6: The scrollbar track uses AuraUI design tokens."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 7: ..."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                    <TextBlock Text="Line 8: End of scrollable content."
+                                               Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Border>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Nested TabControl -->
+                        <TextBlock Text="Nested TabControl"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TabControl MaxWidth="500" Height="160">
+                            <TabItem Header="Tab A">
+                                <TextBlock Text="Content of Tab A. TabControl can be nested for complex layouts."
+                                           Margin="16"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </TabItem>
+                            <TabItem Header="Tab B">
+                                <TextBlock Text="Content of Tab B. Each tab can contain any Avalonia content."
+                                           Margin="16"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </TabItem>
+                            <TabItem Header="Tab C">
+                                <TextBlock Text="Content of Tab C. Tabs support lazy loading and virtualization."
+                                           Margin="16"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </TabItem>
+                        </TabControl>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Separator styles -->
+                        <TextBlock Text="Separator (Divider) Styles"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Above the divider"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <Border Classes="divider"/>
+                            <TextBlock Text="Below the divider"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <TextBlock Text="Compact divider:"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                       Margin="0,8,0,0"/>
+                            <Border Classes="divider compact"/>
+                            <TextBlock Text="Spacious divider:"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                       Margin="0,8,0,0"/>
+                            <Border Classes="divider spacious"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- TAB 5: FEEDBACK -->
             <!-- ============================================================ -->
             <TabItem Header="Feedback">
                 <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
+                    <StackPanel Spacing="20" Margin="12">
 
-                        <!-- Toast section -->
-                        <TextBlock Text="AuraToast" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Toast notifications appear in the overlay layer with auto-dismiss. Uses static methods to show."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <!-- Toast -->
+                        <TextBlock Text="Toast Notifications"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="Toast notifications appear in the overlay layer with auto-dismiss."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,8"/>
                         <WrapPanel>
-                            <input:AuraButton Content="Success Toast" Classes="primary" Margin="0,0,8,8" Click="ShowSuccessToast_Click"/>
-                            <input:AuraButton Content="Warning Toast" Classes="outline" Margin="0,0,8,8" Click="ShowWarningToast_Click"/>
-                            <input:AuraButton Content="Error Toast" Classes="destructive" Margin="0,0,8,8" Click="ShowErrorToast_Click"/>
-                            <input:AuraButton Content="Info Toast" Margin="0,0,8,8" Click="ShowInfoToast_Click"/>
+                            <Button Content="Success Toast" Classes="success" Margin="0,0,8,8" Click="ShowSuccessToast_Click"/>
+                            <Button Content="Warning Toast" Classes="warning" Margin="0,0,8,8" Click="ShowWarningToast_Click"/>
+                            <Button Content="Error Toast" Classes="destructive" Margin="0,0,8,8" Click="ShowErrorToast_Click"/>
+                            <Button Content="Info Toast" Classes="outline" Margin="0,0,8,8" Click="ShowInfoToast_Click"/>
                         </WrapPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- AuraMessageBox section -->
-                        <TextBlock Text="AuraMessageBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- MessageBox -->
+                        <TextBlock Text="MessageBox"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <WrapPanel>
-                            <input:AuraButton Content="Show MessageBox" Classes="primary" Margin="0,0,8,8" Click="ShowMessageBox_Click"/>
-                            <input:AuraButton Content="Show Confirmation" Classes="outline" Margin="0,0,8,8" Click="ShowConfirmation_Click"/>
+                            <Button Content="Show MessageBox" Classes="primary" Margin="0,0,8,8" Click="ShowMessageBox_Click"/>
+                            <Button Content="Show Confirmation" Classes="outline" Margin="0,0,8,8" Click="ShowConfirmation_Click"/>
                         </WrapPanel>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- Snackbar section -->
-                        <TextBlock Text="Snackbar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- Dialog -->
+                        <TextBlock Text="Dialog (Modal)"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <WrapPanel>
-                            <input:AuraButton Content="Show Snackbar" Classes="primary" Margin="0,0,8,8" Click="ShowSnackbar_Click"/>
-                            <input:AuraButton Content="Snackbar with Action" Classes="outline" Margin="0,0,8,8" Click="ShowSnackbarWithAction_Click"/>
+                            <Button Content="Show Dialog" Classes="primary" Margin="0,0,8,8" Click="ShowDialog_Click"/>
+                            <Button Content="Custom Dialog" Classes="outline" Margin="0,0,8,8" Click="ShowCustomDialog_Click"/>
                         </WrapPanel>
 
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraNotification section -->
-                        <TextBlock Text="AuraNotification" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <input:AuraButton Content="Show Notification" Classes="primary" Margin="0,0,8,8" Click="ShowNotification_Click"/>
-                            <input:AuraButton Content="Persistent Notification" Classes="outline" Margin="0,0,8,8" Click="ShowPersistentNotification_Click"/>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- AuraDialog section -->
-                        <TextBlock Text="AuraDialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <input:AuraButton Content="Show Dialog" Classes="primary" Margin="0,0,8,8" Click="ShowDialog_Click"/>
-                            <input:AuraButton Content="Custom Dialog" Classes="outline" Margin="0,0,8,8" Click="ShowCustomDialog_Click"/>
-                        </WrapPanel>
-
-                        <!-- Inline AuraDialog for custom dialog demo -->
                         <feedback:AuraDialog x:Name="DemoDialog"
                                               DialogTitle="Custom Dialog"
                                               IsModal="True"
@@ -620,40 +883,82 @@
                                               DialogWidth="480"
                                               Placement="Center">
                             <StackPanel Spacing="16" Margin="24">
-                                <TextBlock Text="This dialog is declared inline in XAML and toggled via IsOpen binding."
-                                           TextWrapping="Wrap" FontSize="14"/>
-                                <input:AuraTextBox Watermark="Enter a value..." />
+                                <TextBlock Text="This dialog is declared inline in XAML and toggled via Show/Hide."
+                                           TextWrapping="Wrap"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                <TextBox Watermark="Enter a value..."/>
                                 <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-                                    <input:AuraButton Content="Cancel" Click="DialogCancel_Click"/>
-                                    <input:AuraButton Content="Submit" Classes="primary" Click="DialogSubmit_Click"/>
+                                    <Button Content="Cancel" Click="DialogCancel_Click"/>
+                                    <Button Content="Submit" Classes="primary" Click="DialogSubmit_Click"/>
                                 </StackPanel>
                             </StackPanel>
                         </feedback:AuraDialog>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- PendingDialog section -->
-                        <TextBlock Text="PendingDialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- Snackbar -->
+                        <TextBlock Text="Snackbar"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <Button Content="Show Snackbar" Classes="primary" Margin="0,0,8,8" Click="ShowSnackbar_Click"/>
+                            <Button Content="Snackbar with Action" Classes="outline" Margin="0,0,8,8" Click="ShowSnackbarWithAction_Click"/>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Notification -->
+                        <TextBlock Text="Notification"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <Button Content="Show Notification" Classes="primary" Margin="0,0,8,8" Click="ShowNotification_Click"/>
+                            <Button Content="Persistent Notification" Classes="outline" Margin="0,0,8,8" Click="ShowPersistentNotification_Click"/>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Pending Dialog -->
+                        <TextBlock Text="Pending Dialog"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <TextBlock Text="Shows a spinner while an async operation runs. Auto-closes when work completes."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <input:AuraButton Content="Simulate Pending Operation" Classes="primary" Margin="0,0,8,8" Click="ShowPendingDialog_Click"/>
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,8"/>
+                        <Button Content="Simulate Pending Operation (3s)"
+                                Classes="primary"
+                                Click="ShowPendingDialog_Click"/>
 
-                        <layout:Divider Margin="0,4"/>
+                        <Border Classes="divider" Margin="0,4"/>
 
-                        <!-- LoadingOverlay section -->
-                        <TextBlock Text="LoadingOverlay" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Attached property that shows a semi-transparent overlay with spinner over any control."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <!-- Loading Overlay -->
+                        <TextBlock Text="Loading Overlay"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="Shows a semi-transparent overlay with spinner over any control."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,8"/>
                         <Border x:Name="LoadingOverlayTarget"
-                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
                                 Padding="24"
                                 MaxWidth="400"
                                 Height="120">
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Text="This content will be covered by a loading overlay." HorizontalAlignment="Center"/>
-                                <input:AuraButton Content="Show Loading Overlay" Classes="primary" Margin="0,12,0,0" Click="ShowLoadingOverlay_Click" HorizontalAlignment="Center"/>
+                                <TextBlock Text="This content will be covered by a loading overlay."
+                                           HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                                <Button Content="Show Loading Overlay"
+                                        Classes="primary"
+                                        Margin="0,12,0,0"
+                                        Click="ShowLoadingOverlay_Click"
+                                        HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -662,135 +967,532 @@
             </TabItem>
 
             <!-- ============================================================ -->
-            <!-- THEMING TAB -->
-            <!-- ============================================================ -->
-            <TabItem Header="Theming">
-                <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
-
-                        <TextBlock Text="Theme Switcher" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="AuraUI supports Light and Dark theme variants. Toggle between them below."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-
-                        <StackPanel Orientation="Horizontal" Spacing="16">
-                            <StackPanel Spacing="8">
-                                <TextBlock Text="Theme Variant" FontWeight="SemiBold"/>
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <input:AuraButton Content="Light" Classes="primary" Click="LightTheme_Click" x:Name="LightThemeButton"/>
-                                    <input:AuraButton Content="Dark" Click="DarkTheme_Click" x:Name="DarkThemeButton"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <TextBlock Text="Design Tokens" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="AuraUI uses design tokens for consistent theming. Tokens are defined as resource dictionaries and include:"
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-
-                        <WrapPanel>
-                            <layout:Card Header="Colors" Padding="12" Width="220" Margin="0,0,12,12">
-                                <TextBlock Text="Primary, Secondary, Success, Warning, Error, Surface, Background, and semantic color tokens."
-                                           TextWrapping="Wrap" FontSize="12"/>
-                            </layout:Card>
-                            <layout:Card Header="Spacing" Padding="12" Width="220" Margin="0,0,12,12">
-                                <TextBlock Text="Consistent spacing scale (4px, 8px, 12px, 16px, 24px, 32px, 48px) for margins and padding."
-                                           TextWrapping="Wrap" FontSize="12"/>
-                            </layout:Card>
-                            <layout:Card Header="Typography" Padding="12" Width="220" Margin="0,0,12,12">
-                                <TextBlock Text="Font sizes, weights, and line heights following a consistent type scale."
-                                           TextWrapping="Wrap" FontSize="12"/>
-                            </layout:Card>
-                            <layout:Card Header="Shadows" Padding="12" Width="220" Margin="0,0,12,12">
-                                <TextBlock Text="Elevation shadow tokens (levels 0-3) for depth and layering effects."
-                                           TextWrapping="Wrap" FontSize="12"/>
-                            </layout:Card>
-                            <layout:Card Header="Animations" Padding="12" Width="220" Margin="0,0,12,12">
-                                <TextBlock Text="Duration and easing tokens for consistent motion across all controls."
-                                           TextWrapping="Wrap" FontSize="12"/>
-                            </layout:Card>
-                            <layout:Card Header="Corners" Padding="12" Width="220" Margin="0,0,12,12">
-                                <TextBlock Text="Corner radius tokens (None, Small, Medium, Large, Round) for border radii."
-                                           TextWrapping="Wrap" FontSize="12"/>
-                            </layout:Card>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <TextBlock Text="Theme System" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="AuraUI ships with two complete theme packages:"
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-
-                        <WrapPanel>
-                            <layout:Card Header="AuraUI.Themes.Fluent" Padding="16" Width="350" Margin="0,0,12,12" Elevation="2">
-                                <StackPanel Spacing="8">
-                                    <TextBlock Text="Windows 11 / Fluent Design inspired theme. Clean, modern, and professional. Ships as the default theme."
-                                               TextWrapping="Wrap" FontSize="13"/>
-                                    <TextBlock Text="avares://AuraUI.Themes.Fluent/AuraUITheme.axaml"
-                                               FontFamily="Consolas, monospace" FontSize="11" Foreground="Gray"/>
-                                </StackPanel>
-                            </layout:Card>
-                            <layout:Card Header="AuraUI.Themes.Material" Padding="16" Width="350" Margin="0,0,12,12" Elevation="2">
-                                <StackPanel Spacing="8">
-                                    <TextBlock Text="Google Material Design 3 inspired theme. Rounded corners, bold colors, and tactile surfaces."
-                                               TextWrapping="Wrap" FontSize="13"/>
-                                    <TextBlock Text="avares://AuraUI.Themes.Material/AuraUITheme.axaml"
-                                               FontFamily="Consolas, monospace" FontSize="11" Foreground="Gray"/>
-                                </StackPanel>
-                            </layout:Card>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <TextBlock Text="Customization" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Override design tokens by merging your own resource dictionary after the theme:"
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                Padding="16" CornerRadius="8" MaxWidth="600">
-                            <TextBlock FontFamily="Consolas, monospace" FontSize="12" TextWrapping="Wrap"
-                                       Text="&lt;Application.Styles&gt;&#x0a;    &lt;FluentTheme /&gt;&#x0a;    &lt;StyleInclude Source=&quot;avares://AuraUI.Themes.Fluent/AuraUITheme.axaml&quot;/&gt;&#x0a;&lt;/Application.Styles&gt;&#x0a;&#x0a;&lt;Application.Resources&gt;&#x0a;    &lt;ResourceDictionary&gt;&#x0a;        &lt;SolidColorBrush x:Key=&quot;AuraPrimaryBrush&quot; Color=&quot;#6366F1&quot;/&gt;&#x0a;    &lt;/ResourceDictionary&gt;&#x0a;&lt;/Application.Resources&gt;"/>
-                        </Border>
-
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-
-            <!-- ============================================================ -->
-            <!-- CHARTS TAB -->
+            <!-- TAB 6: CHARTS -->
             <!-- ============================================================ -->
             <TabItem Header="Charts">
                 <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
-                        <TextBlock Text="AuraUI Charts" FontSize="22" FontWeight="Bold"/>
-                        <TextBlock Text="High-performance charts powered by custom Rendering" FontSize="14" Foreground="Gray"/>
+                    <StackPanel Spacing="20" Margin="12">
+
+                        <TextBlock Text="AuraUI Charts"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="High-performance charts powered by custom rendering with zero child controls."
+                                   FontSize="14"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
 
                         <!-- Line Chart -->
-                        <TextBlock Text="Line Chart" FontSize="18" FontWeight="SemiBold"/>
-                        <charts:Chart x:Name="LineChart" Width="600" Height="300" Title="Monthly Sales"/>
+                        <TextBlock Text="Line Chart -- Monthly Sales (2 series)"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="LineChart" Width="650" Height="300" Title="Monthly Sales"/>
 
                         <!-- Bar Chart -->
-                        <TextBlock Text="Bar Chart" FontSize="18" FontWeight="SemiBold"/>
-                        <charts:Chart x:Name="BarChart" Width="600" Height="300" Title="Revenue by Category"/>
+                        <TextBlock Text="Bar Chart -- Revenue by Category"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="BarChart" Width="650" Height="300" Title="Revenue by Category"/>
 
                         <!-- Pie Chart -->
-                        <TextBlock Text="Pie Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock Text="Pie Chart -- Market Share (Donut)"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <charts:Chart x:Name="PieChart" Width="400" Height="400" Title="Market Share"/>
 
                         <!-- Area Chart -->
-                        <TextBlock Text="Area Chart" FontSize="18" FontWeight="SemiBold"/>
-                        <charts:Chart x:Name="AreaChart" Width="600" Height="300" Title="Website Traffic"/>
+                        <TextBlock Text="Area Chart -- Traffic Over Time"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="AreaChart" Width="650" Height="300" Title="Website Traffic"/>
 
                         <!-- Scatter Chart -->
-                        <TextBlock Text="Scatter Chart" FontSize="18" FontWeight="SemiBold"/>
-                        <charts:Chart x:Name="ScatterChart" Width="600" Height="300" Title="Height vs Weight"/>
+                        <TextBlock Text="Scatter Chart -- Height vs Weight Correlation"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="ScatterChart" Width="650" Height="300" Title="Height vs Weight"/>
 
                         <!-- Radar Chart -->
-                        <TextBlock Text="Radar Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock Text="Radar Chart -- Skill Assessment"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <charts:Chart x:Name="RadarChart" Width="400" Height="400" Title="Skill Assessment"/>
 
                         <!-- Gauge Chart -->
-                        <TextBlock Text="Gauge Chart" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock Text="Gauge Chart -- Performance Score"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
                         <charts:Chart x:Name="GaugeChart" Width="300" Height="300" Title="Performance Score"/>
+
+                        <!-- Funnel Chart -->
+                        <TextBlock Text="Funnel Chart -- Conversion Funnel"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="FunnelChart" Width="500" Height="350" Title="Conversion Funnel"/>
+
+                        <!-- Heatmap -->
+                        <TextBlock Text="Heatmap -- Activity Matrix"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="HeatmapChart" Width="650" Height="300" Title="Weekly Activity"/>
+
+                        <!-- Candlestick -->
+                        <TextBlock Text="Candlestick -- Stock Prices"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="CandlestickChart" Width="650" Height="300" Title="Stock Prices"/>
+
+                        <!-- Treemap -->
+                        <TextBlock Text="Treemap -- Market Cap"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="TreemapChart" Width="650" Height="350" Title="Market Cap by Sector"/>
+
+                        <!-- Sankey -->
+                        <TextBlock Text="Sankey -- Energy Flow"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="SankeyChart" Width="650" Height="350" Title="Energy Flow"/>
+
+                        <!-- Boxplot -->
+                        <TextBlock Text="Boxplot -- Statistical Distribution"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <charts:Chart x:Name="BoxplotChart" Width="650" Height="300" Title="Response Time Distribution"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- TAB 7: FORMS & VALIDATION -->
+            <!-- ============================================================ -->
+            <TabItem Header="Forms &amp; Validation">
+                <ScrollViewer>
+                    <StackPanel Spacing="20" Margin="12">
+
+                        <TextBlock Text="Form System"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="FormField wraps content with label, helper text, error display, and validation rules."
+                                   FontSize="14"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"/>
+
+                        <!-- Required field -->
+                        <layout:FormField x:Name="NameField"
+                                          Label="Full Name"
+                                          IsRequired="True"
+                                          HelperText="Enter your full name.">
+                            <TextBox Watermark="John Doe"/>
+                        </layout:FormField>
+
+                        <!-- Email validation -->
+                        <layout:FormField x:Name="EmailField"
+                                          Label="Email Address"
+                                          IsRequired="True"
+                                          HelperText="We will never share your email.">
+                            <TextBox Watermark="user@example.com"/>
+                        </layout:FormField>
+
+                        <!-- Min/Max length -->
+                        <layout:FormField x:Name="UsernameField"
+                                          Label="Username"
+                                          IsRequired="True"
+                                          HelperText="3-20 characters, alphanumeric only.">
+                            <TextBox Watermark="cooluser123"/>
+                        </layout:FormField>
+
+                        <!-- Password -->
+                        <layout:FormField x:Name="PasswordField"
+                                          Label="Password"
+                                          IsRequired="True"
+                                          HelperText="Minimum 8 characters.">
+                            <TextBox Watermark="Enter password" PasswordChar="*"/>
+                        </layout:FormField>
+
+                        <!-- Bio (optional) -->
+                        <layout:FormField x:Name="BioField"
+                                          Label="Bio"
+                                          HelperText="Optional. Max 200 characters.">
+                            <TextBox Watermark="Tell us about yourself..."
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     MinHeight="60"/>
+                        </layout:FormField>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Submit button -->
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="SubmitFormButton"
+                                    Content="Submit Form"
+                                    Classes="primary"
+                                    Click="SubmitForm_Click"/>
+                            <Button Content="Reset"
+                                    Click="ResetForm_Click"/>
+                        </StackPanel>
+
+                        <!-- Validation summary -->
+                        <Border x:Name="ValidationSummary"
+                                IsVisible="False"
+                                Background="{DynamicResource AuraErrorLightBrush}"
+                                BorderBrush="{DynamicResource AuraErrorBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="16"
+                                MaxWidth="500">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Validation Errors"
+                                           FontWeight="SemiBold"
+                                           FontSize="15"
+                                           Foreground="{DynamicResource AuraErrorBrush}"/>
+                                <TextBlock x:Name="ValidationSummaryText"
+                                           TextWrapping="Wrap"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Success message -->
+                        <Border x:Name="SuccessMessage"
+                                IsVisible="False"
+                                Background="{DynamicResource AuraSuccessLightBrush}"
+                                BorderBrush="{DynamicResource AuraSuccessBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="16"
+                                MaxWidth="500">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Form Submitted Successfully!"
+                                           FontWeight="SemiBold"
+                                           FontSize="15"
+                                           Foreground="{DynamicResource AuraSuccessBrush}"/>
+                                <TextBlock Text="All fields passed validation."
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================================================ -->
+            <!-- TAB 8: THEME & DARK MODE -->
+            <!-- ============================================================ -->
+            <TabItem Header="Theme &amp; Dark Mode">
+                <ScrollViewer>
+                    <StackPanel Spacing="20" Margin="12">
+
+                        <!-- Theme toggle -->
+                        <TextBlock Text="Theme Switcher"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="AuraUI supports Light and Dark theme variants. Toggle between them below."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="LightThemeButton"
+                                    Content="Light"
+                                    Classes="primary"
+                                    Click="LightTheme_Click"/>
+                            <Button x:Name="DarkThemeButton"
+                                    Content="Dark"
+                                    Click="DarkTheme_Click"/>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Color palette -->
+                        <TextBlock Text="Color Palette"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <TextBlock Text="Semantic color tokens used across all controls."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   Margin="0,0,0,8"/>
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Primary" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraSecondaryBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Secondary" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraSuccessBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Success" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraWarningBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Warning" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraErrorBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Error" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraInfoBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Info" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Surface Colors -->
+                        <TextBlock Text="Surface Colors"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraBackgroundBrush}"
+                                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Background" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraSurfaceBrush}"
+                                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Surface" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraCardBrush}"
+                                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Card" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraMutedBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Muted" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4">
+                                <Border Background="{DynamicResource AuraOverlayBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Width="80" Height="40"/>
+                                <TextBlock Text="Overlay" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Typography Scale -->
+                        <TextBlock Text="Typography Scale"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="2">
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                <TextBlock Text="32px" Width="50" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <TextBlock Text="Display" FontSize="32" FontWeight="Bold"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                <TextBlock Text="24px" Width="50" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <TextBlock Text="Heading" FontSize="24" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                <TextBlock Text="18px" Width="50" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <TextBlock Text="Subheading" FontSize="18" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                <TextBlock Text="14px" Width="50" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <TextBlock Text="Body" FontSize="14"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                <TextBlock Text="12px" Width="50" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <TextBlock Text="Caption" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Spacing Scale -->
+                        <TextBlock Text="Spacing Scale"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <StackPanel Spacing="8">
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="4px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="4" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="8px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="8" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="12px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="12" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="16px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="16" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="24px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="24" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="32px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="32" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <TextBlock Text="48px" Width="30" FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                                <Border Width="48" Height="16"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        CornerRadius="2"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Corner Radius Samples -->
+                        <TextBlock Text="Corner Radius Samples"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,16,16" Spacing="4" HorizontalAlignment="Center">
+                                <Border Width="60" Height="60"
+                                        Background="{DynamicResource AuraPrimaryLightBrush}"
+                                        CornerRadius="0"/>
+                                <TextBlock Text="None" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,16,16" Spacing="4" HorizontalAlignment="Center">
+                                <Border Width="60" Height="60"
+                                        Background="{DynamicResource AuraPrimaryLightBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusSm}"/>
+                                <TextBlock Text="Small" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,16,16" Spacing="4" HorizontalAlignment="Center">
+                                <Border Width="60" Height="60"
+                                        Background="{DynamicResource AuraPrimaryLightBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"/>
+                                <TextBlock Text="Medium" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,16,16" Spacing="4" HorizontalAlignment="Center">
+                                <Border Width="60" Height="60"
+                                        Background="{DynamicResource AuraPrimaryLightBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusLg}"/>
+                                <TextBlock Text="Large" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,16,16" Spacing="4" HorizontalAlignment="Center">
+                                <Border Width="60" Height="60"
+                                        Background="{DynamicResource AuraPrimaryLightBrush}"
+                                        CornerRadius="30"/>
+                                <TextBlock Text="Full" FontSize="11" HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <Border Classes="divider" Margin="0,4"/>
+
+                        <!-- Shadow Samples -->
+                        <TextBlock Text="Shadow Samples"
+                                   FontSize="18" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,20,20" Spacing="4">
+                                <Border Width="120" Height="70"
+                                        Background="{DynamicResource AuraCardBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        BoxShadow="{DynamicResource AuraShadowSm}"
+                                        Padding="8">
+                                    <TextBlock Text="Shadow Sm" FontSize="11"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,20,20" Spacing="4">
+                                <Border Width="120" Height="70"
+                                        Background="{DynamicResource AuraCardBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        BoxShadow="{DynamicResource AuraShadowMd}"
+                                        Padding="8">
+                                    <TextBlock Text="Shadow Md" FontSize="11"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,20,20" Spacing="4">
+                                <Border Width="120" Height="70"
+                                        Background="{DynamicResource AuraCardBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        BoxShadow="{DynamicResource AuraShadowLg}"
+                                        Padding="8">
+                                    <TextBlock Text="Shadow Lg" FontSize="11"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                </Border>
+                            </StackPanel>
+                        </WrapPanel>
+
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

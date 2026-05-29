@@ -29,11 +29,24 @@
                         <BrushTransition Duration="00:00:00.200" Property="Background"/>
                         <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
                     </Border.Transitions>
-                    <ContentPresenter Name="PART_ContentPresenter"
-                                      Content="{TemplateBinding Content}"
-                                      ContentTemplate="{TemplateBinding ContentTemplate}"
-                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Panel>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter Name="PART_IconPresenter"
+                                              VerticalAlignment="Center"
+                                              IsVisible="False"/>
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </StackPanel>
+                        <ContentPresenter Name="PART_LoadingPresenter"
+                                          IsVisible="False"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Panel>
                 </Border>
             </ControlTemplate>
         </Setter>

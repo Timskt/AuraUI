@@ -86,4 +86,10 @@
     <StyleInclude Source="/Controls/Bubble.axaml"/>
     <StyleInclude Source="/Controls/ContentControlX.axaml"/>
     <StyleInclude Source="/Controls/GridX.axaml"/>
+
+    <!-- V3 controls -->
+    <StyleInclude Source="/Controls/TreeView.axaml"/>
+    <StyleInclude Source="/Controls/DataGrid.axaml"/>
+    <StyleInclude Source="/Controls/Menu.axaml"/>
+    <StyleInclude Source="/Controls/StatusBar.axaml"/>
 </Styles>

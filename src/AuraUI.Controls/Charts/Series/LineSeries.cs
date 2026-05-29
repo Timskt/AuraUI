@@ -45,6 +45,26 @@ public class LineSeries : XYChartSeries
     public static readonly StyledProperty<bool> ShowMarkersProperty =
         AvaloniaProperty.Register<LineSeries, bool>(nameof(ShowMarkers));
 
+    /// <summary>
+    /// Defines the <see cref="StepPosition"/> styled property.
+    /// Controls where the step occurs for step interpolation modes.
+    /// </summary>
+    public static readonly StyledProperty<StepPosition> StepPositionProperty =
+        AvaloniaProperty.Register<LineSeries, StepPosition>(nameof(StepPosition), StepPosition.After);
+
+    /// <summary>
+    /// Defines the <see cref="GradientFill"/> styled property.
+    /// When set, the area fill uses a gradient from this color to transparent.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> GradientFillColorProperty =
+        AvaloniaProperty.Register<LineSeries, IBrush?>(nameof(GradientFillColor));
+
+    /// <summary>
+    /// Defines the <see cref="GradientFillOpacity"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> GradientFillOpacityProperty =
+        AvaloniaProperty.Register<LineSeries, double>(nameof(GradientFillOpacity), 0.3);
+
     public double SmoothTension
     {
         get => GetValue(SmoothTensionProperty);
@@ -61,6 +81,24 @@ public class LineSeries : XYChartSeries
     {
         get => GetValue(ShowMarkersProperty);
         set => SetValue(ShowMarkersProperty, value);
+    }
+
+    public StepPosition StepPosition
+    {
+        get => GetValue(StepPositionProperty);
+        set => SetValue(StepPositionProperty, value);
+    }
+
+    public IBrush? GradientFillColor
+    {
+        get => GetValue(GradientFillColorProperty);
+        set => SetValue(GradientFillColorProperty, value);
+    }
+
+    public double GradientFillOpacity
+    {
+        get => GetValue(GradientFillOpacityProperty);
+        set => SetValue(GradientFillOpacityProperty, value);
     }
 
     internal override string RendererKey => "Line";

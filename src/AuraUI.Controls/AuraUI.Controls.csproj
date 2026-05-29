@@ -26,4 +26,7 @@
     <Compile Remove="Charts\G2\**" />
     <Compile Remove="Charts\Data\Transforms\**" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="AuraUI.Tests" />
+  </ItemGroup>
 </Project>

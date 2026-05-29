@@ -85,6 +85,8 @@ public class AuraComboBox : ComboBox
         AvaloniaProperty.Register<AuraComboBox, string?>(
             nameof(FilterMemberPath));
 
+    protected override Type StyleKeyOverride => typeof(ComboBox);
+
     static AuraComboBox()
     {
         IsDropDownOpenProperty.Changed.AddClassHandler<AuraComboBox>((x, e) => x.OnIsDropDownOpenChanged(e));
