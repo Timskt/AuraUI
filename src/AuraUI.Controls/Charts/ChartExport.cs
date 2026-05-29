@@ -126,18 +126,6 @@ public class ChartExport
             (int)Math.Max(_chart.Bounds.Width, 800),
             (int)Math.Max(_chart.Bounds.Height, 600));
 
-#if AVALONIA_12
-        // Use Avalonia 12 data transfer API
-        var dataTransfer = TopLevel.GetTopLevel(_chart)?.DataTransfer;
-        if (dataTransfer != null)
-        {
-            // Note: Clipboard image support depends on the platform.
-            // On some platforms, we may need to save to a temp file and copy the path.
-            // For now, we copy as text (the chart title).
-            await dataTransfer.SetTextAsync(_chart.Title ?? "Chart");
-        }
-#else
-        // Use Avalonia 11 clipboard API
         var clipboard = TopLevel.GetTopLevel(_chart)?.Clipboard;
         if (clipboard != null)
         {
@@ -146,7 +134,6 @@ public class ChartExport
             // For now, we copy as text (the chart title).
             await clipboard.SetTextAsync(_chart.Title ?? "Chart");
         }
-#endif
     }
 
     /// <summary>

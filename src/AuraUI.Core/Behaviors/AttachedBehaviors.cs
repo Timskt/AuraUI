@@ -132,19 +132,11 @@ public static partial class InputBehavior
         if (sender is not TextBox textBox)
             return;
 
-#if AVALONIA_12
-        var dataTransfer = TopLevel.GetTopLevel(textBox)?.DataTransfer;
-        if (dataTransfer == null)
-            return;
-
-        var text = await dataTransfer.TryGetTextAsync();
-#else
         var clipboard = TopLevel.GetTopLevel(textBox)?.Clipboard;
         if (clipboard == null)
             return;
 
         var text = await clipboard.GetTextAsync();
-#endif
         if (string.IsNullOrEmpty(text))
             return;
 
@@ -213,11 +205,7 @@ public static partial class InputBehavior
         }
     }
 
-#if AVALONIA_12
-    private static void OnSelectAllGotFocus(object? sender, FocusChangedEventArgs e)
-#else
     private static void OnSelectAllGotFocus(object? sender, GotFocusEventArgs e)
-#endif
     {
         if (sender is TextBox textBox)
         {

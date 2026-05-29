@@ -163,11 +163,7 @@ public class SearchBox : TextBox
         UpdateHasSearchText();
     }
 
-#if AVALONIA_12
-    protected override void OnGotFocus(FocusChangedEventArgs e)
-#else
     protected override void OnGotFocus(GotFocusEventArgs e)
-#endif
     {
         base.OnGotFocus(e);
         PseudoClasses.Set("focus", true);

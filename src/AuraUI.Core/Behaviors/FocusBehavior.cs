@@ -123,11 +123,7 @@ public class FocusBehavior : Behavior<Control>
         }
     }
 
-#if AVALONIA_12
-    private void OnGotFocus(object? sender, FocusChangedEventArgs e)
-#else
     private void OnGotFocus(object? sender, GotFocusEventArgs e)
-#endif
     {
         if (_isUpdatingFocus)
             return;

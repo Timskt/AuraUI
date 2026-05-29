@@ -1,38 +1,17 @@
-using System.Runtime.CompilerServices;
-
 namespace AuraUI.Core.Compatibility;
 
 /// <summary>
-/// Provides runtime detection of the Avalonia version in use and compatibility helpers.
-/// Use the static properties to branch behavior at runtime, or use #if AVALONIA_12
-/// for compile-time branching in source files.
-///
-/// To build against Avalonia 12, set the MSBuild property:
-///   dotnet build -p:AvaloniaVersion=12
-/// or add to Directory.Build.props:
-///   &lt;PropertyGroup&gt;
-///     &lt;AvaloniaVersion&gt;12&lt;/AvaloniaVersion&gt;
-///   &lt;/PropertyGroup&gt;
+/// Provides the Avalonia major version this build targets.
 /// </summary>
 public static class AvaloniaVersion
 {
     /// <summary>
-    /// Returns true when compiled with the AVALONIA_12 constant (Avalonia 12+ APIs available).
+    /// The major Avalonia version this build targets.
     /// </summary>
-    public static bool IsAvalonia12 { get; }
-#if AVALONIA_12
-        = true;
-#else
-        = false;
-#endif
+    public static int MajorVersion => 11;
 
     /// <summary>
-    /// Returns the major version number (11 or 12) based on compile-time configuration.
+    /// A human-readable version string for diagnostics.
     /// </summary>
-    public static int MajorVersion => IsAvalonia12 ? 12 : 11;
-
-    /// <summary>
-    /// Returns a human-readable version string for diagnostics.
-    /// </summary>
-    public static string VersionString => IsAvalonia12 ? "Avalonia 12" : "Avalonia 11";
+    public static string VersionString => "Avalonia 11";
 }
