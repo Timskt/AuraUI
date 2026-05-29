@@ -4,6 +4,12 @@ using Avalonia.Media;
 
 namespace AuraUI.Core.Helpers;
 
+/// <summary>
+/// Provides an attached property that applies a named or custom box shadow to a
+/// <see cref="Border"/>. Accepts preset names (<c>"sm"</c>, <c>"md"</c>, <c>"lg"</c>,
+/// <c>"xl"</c>, <c>"2xl"</c>, <c>"inner"</c>, <c>"none"</c>) or a custom string in
+/// the format <c>"x y blur spread color"</c>.
+/// </summary>
 public static class ShadowHelper
 {
     public static readonly AttachedProperty<string?> ShadowProperty =

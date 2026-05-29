@@ -6,7 +6,7 @@
          ============================================================ -->
     <Style Selector="RadioButton">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -17,8 +17,8 @@
                     <Border Name="PART_RadioOuter"
                             Width="20" Height="20"
                             CornerRadius="10"
-                            Background="{StaticResource AuraInputBackgroundBrush}"
-                            BorderBrush="{StaticResource AuraInputBorderBrush}"
+                            Background="{DynamicResource AuraInputBackgroundBrush}"
+                            BorderBrush="{DynamicResource AuraInputBorderBrush}"
                             BorderThickness="1.5"
                             VerticalAlignment="Center">
                         <Border.Transitions>
@@ -52,36 +52,36 @@
 
     <!-- RadioButton :pointerover -->
     <Style Selector="RadioButton:pointerover /template/ Border#PART_RadioOuter">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
     </Style>
 
     <!-- RadioButton :checked -->
     <Style Selector="RadioButton:checked /template/ Border#PART_RadioOuter">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
     </Style>
 
     <Style Selector="RadioButton:checked /template/ Border#PART_RadioInner">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- RadioButton checked + :pointerover -->
     <Style Selector="RadioButton:checked:pointerover /template/ Border#PART_RadioOuter">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
     <Style Selector="RadioButton:checked:pointerover /template/ Border#PART_RadioInner">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- RadioButton :pressed -->
     <Style Selector="RadioButton:pressed /template/ Border#PART_RadioOuter">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundDisabledBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
     </Style>
 
     <!-- RadioButton :focus -->
     <Style Selector="RadioButton:focus /template/ Border#PART_RadioOuter">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
@@ -93,7 +93,7 @@
 
     <!-- RadioButton error -->
     <Style Selector="RadioButton:error /template/ Border#PART_RadioOuter">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -105,10 +105,10 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
-                        Background="{StaticResource AuraInputBackgroundBrush}"
-                        BorderBrush="{StaticResource AuraInputBorderBrush}"
+                        Background="{DynamicResource AuraInputBackgroundBrush}"
+                        BorderBrush="{DynamicResource AuraInputBorderBrush}"
                         BorderThickness="1"
-                        CornerRadius="{StaticResource AuraRadiusMd}"
+                        CornerRadius="{DynamicResource AuraRadiusMd}"
                         Padding="12">
                     <Border.Transitions>
                         <BrushTransition Duration="00:00:00.200" Property="Background"/>
@@ -118,8 +118,8 @@
                         <Border Name="PART_RadioOuter"
                                 Width="20" Height="20"
                                 CornerRadius="10"
-                                Background="{StaticResource AuraInputBackgroundBrush}"
-                                BorderBrush="{StaticResource AuraInputBorderBrush}"
+                                Background="{DynamicResource AuraInputBackgroundBrush}"
+                                BorderBrush="{DynamicResource AuraInputBorderBrush}"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Center">
                             <Border Name="PART_RadioInner"
@@ -139,12 +139,12 @@
     </Style>
 
     <Style Selector="RadioButton.card:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
     <Style Selector="RadioButton.card:checked /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
 </Styles>

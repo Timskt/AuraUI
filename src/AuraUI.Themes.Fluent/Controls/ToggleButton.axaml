@@ -6,13 +6,13 @@
          ============================================================ -->
     <Style Selector="ToggleButton">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraButtonRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraButtonRadius}"/>
         <Setter Property="Padding" Value="12,5"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
-        <Setter Property="MinWidth" Value="{StaticResource AuraControlMinWidthMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraControlMinWidthMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -40,39 +40,39 @@
 
     <!-- ToggleButton :pointerover -->
     <Style Selector="ToggleButton:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
     <!-- ToggleButton :pressed -->
     <Style Selector="ToggleButton:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- ToggleButton :checked -->
     <Style Selector="ToggleButton:checked /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="ToggleButton:checked">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- ToggleButton checked + :pointerover -->
     <Style Selector="ToggleButton:checked:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- ToggleButton checked + :pressed -->
     <Style Selector="ToggleButton:checked:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryPressedBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
     </Style>
 
     <!-- ToggleButton :focus -->
     <Style Selector="ToggleButton:focus /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
@@ -85,30 +85,30 @@
     <!-- ToggleButton variant: outline checked -->
     <Style Selector="ToggleButton.outline">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
     </Style>
     <Style Selector="ToggleButton.outline:checked /template/ Border#PART_Border">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="ToggleButton.outline:checked">
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- ToggleButton variant: pill -->
     <Style Selector="ToggleButton.pill">
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- ToggleButton sizes -->
     <Style Selector="ToggleButton.sm">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightSm}"/>
         <Setter Property="Padding" Value="8,3"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style Selector="ToggleButton.lg">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightLg}"/>
         <Setter Property="Padding" Value="16,9"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>

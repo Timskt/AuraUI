@@ -5,7 +5,7 @@
          ToggleSwitch — Fluent Style
          ============================================================ -->
     <Style Selector="ToggleSwitch">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -17,8 +17,8 @@
                         <Border Name="PART_SwitchTrack"
                                 Width="40" Height="20"
                                 CornerRadius="10"
-                                Background="{StaticResource AuraBorderBrush}"
-                                BorderBrush="{StaticResource AuraBorderBrush}"
+                                Background="{DynamicResource AuraBorderBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
                                 BorderThickness="1"
                                 VerticalAlignment="Center">
                             <Border.Transitions>
@@ -32,12 +32,12 @@
                             <Border Name="PART_SwitchKnobBorder"
                                     Width="14" Height="14"
                                     CornerRadius="7"
-                                    Background="{StaticResource AuraForegroundBrush}"
+                                    Background="{DynamicResource AuraForegroundBrush}"
                                     Margin="3,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                 <Border.Transitions>
-                                    <DoubleTransition Duration="00:00:00.200" Property="Margin" Easing="{StaticResource AuraEasingStandard}"/>
+                                    <DoubleTransition Duration="00:00:00.200" Property="Margin" Easing="{DynamicResource AuraEasingStandard}"/>
                                     <BrushTransition Duration="00:00:00.200" Property="Background"/>
                                 </Border.Transitions>
                             </Border>
@@ -66,24 +66,24 @@
 
     <!-- ToggleSwitch :pointerover on track -->
     <Style Selector="ToggleSwitch:pointerover /template/ Border#PART_SwitchTrack">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
     <!-- ToggleSwitch :checked -->
     <Style Selector="ToggleSwitch:checked /template/ Border#PART_SwitchTrack">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <Style Selector="ToggleSwitch:checked /template/ Border#PART_SwitchKnobBorder">
         <Setter Property="Margin" Value="23,0,3,0"/>
-        <Setter Property="Background" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- ToggleSwitch checked + :pointerover -->
     <Style Selector="ToggleSwitch:checked:pointerover /template/ Border#PART_SwitchTrack">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- ToggleSwitch :pressed -->
@@ -97,7 +97,7 @@
 
     <!-- ToggleSwitch :focus -->
     <Style Selector="ToggleSwitch:focus /template/ Border#PART_SwitchTrack">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
@@ -113,20 +113,20 @@
 
     <!-- Success color -->
     <Style Selector="ToggleSwitch.success:checked /template/ Border#PART_SwitchTrack">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
 
     <!-- Warning color -->
     <Style Selector="ToggleSwitch.warning:checked /template/ Border#PART_SwitchTrack">
-        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
 
     <!-- Error color -->
     <Style Selector="ToggleSwitch.error:checked /template/ Border#PART_SwitchTrack">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- Size: small -->

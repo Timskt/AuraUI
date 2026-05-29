@@ -4,6 +4,15 @@ using Avalonia.Media;
 
 namespace AuraUI.Core.Helpers;
 
+/// <summary>
+/// Provides an attached property that applies a Gaussian blur effect to any <see cref="Control"/>.
+/// Set <c>BlurHelper.Blur</c> to a positive radius value in XAML to blur the element.
+/// </summary>
+/// <example>
+/// <code>
+/// &lt;Border BlurHelper.Blur="8"&gt; ... &lt;/Border&gt;
+/// </code>
+/// </example>
 public static class BlurHelper
 {
     public static readonly AttachedProperty<double> BlurProperty =

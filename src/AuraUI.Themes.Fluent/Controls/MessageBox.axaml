@@ -5,15 +5,15 @@
          MessageBox / AlertDialog — Fluent Style
          ============================================================ -->
     <Style Selector="Window.message-box">
-        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraDialogRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraDialogRadius}"/>
         <Setter Property="Width" Value="420"/>
         <Setter Property="SizeToContent" Value="Height"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        BoxShadow="{StaticResource AuraShadowLg}"
+                        BoxShadow="{DynamicResource AuraShadowLg}"
                         ClipToBounds="True">
                     <DockPanel>
                         <!-- Header -->
@@ -23,7 +23,7 @@
                                        Text="{TemplateBinding Title}"
                                        FontSize="20"
                                        FontWeight="SemiBold"
-                                       Foreground="{StaticResource AuraForegroundBrush}"/>
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
                         </DockPanel>
 
                         <!-- Content -->
@@ -53,12 +53,12 @@
 
     <!-- Overlay backdrop -->
     <Style Selector="Border.message-box-overlay">
-        <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSmokeBrush}"/>
     </Style>
 
     <!-- MessageBox error variant — highlight top border -->
     <Style Selector="Window.message-box.error /template/ Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
         <Setter Property="BorderThickness" Value="2,2,2,2"/>
     </Style>
 
@@ -66,22 +66,22 @@
     <Style Selector="Border.message-box-icon">
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Margin" Value="0,0,0,12"/>
     </Style>
 
     <Style Selector="Border.message-box-icon.info">
-        <Setter Property="Background" Value="{StaticResource AuraInfoLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoLightBrush}"/>
     </Style>
     <Style Selector="Border.message-box-icon.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessLightBrush}"/>
     </Style>
     <Style Selector="Border.message-box-icon.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningLightBrush}"/>
     </Style>
     <Style Selector="Border.message-box-icon.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
     </Style>
 
 </Styles>

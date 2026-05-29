@@ -2,6 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -179,6 +180,7 @@ public class Switch : ToggleButton
 
         UpdatePseudoClasses();
         UpdateThumbPosition(false);
+        SetValue(AutomationProperties.NameProperty, "Toggle Switch");
     }
 
     protected override void OnPointerEntered(PointerEventArgs e)

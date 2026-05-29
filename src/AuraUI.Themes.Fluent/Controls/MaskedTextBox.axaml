@@ -1,0 +1,117 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         MaskedTextBox — Fluent Style
+         Extends TextBox styling with mask-specific adjustments.
+         Note: MaskedTextBox overrides StyleKeyOverride to typeof(TextBox),
+         so base TextBox styles also apply. These styles target the
+         MaskedTextBox type for mask-specific overrides.
+         ============================================================ -->
+    <Style Selector="input|MaskedTextBox">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Consolas, monospace"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="SelectionBrush" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="input:MaskedTextBox">
+                    <Border Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.Transitions>
+                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                        </Border.Transitions>
+                        <DockPanel>
+                            <!-- Prefix -->
+                            <ContentPresenter Name="PART_PrefixTextContentPresenter"
+                                              DockPanel.Dock="Left"
+                                              VerticalAlignment="Center"
+                                              Margin="8,0,0,0"
+                                              Content="{TemplateBinding Tag}"/>
+                            <!-- Suffix -->
+                            <ContentPresenter Name="PART_SuffixTextContentPresenter"
+                                              DockPanel.Dock="Right"
+                                              VerticalAlignment="Center"
+                                              Margin="0,0,8,0"/>
+                            <!-- Clear button -->
+                            <Button Name="PART_ClearButton"
+                                    DockPanel.Dock="Right"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Padding="4,0"
+                                    Margin="0,0,4,0"
+                                    VerticalAlignment="Center"
+                                    IsVisible="False">
+                                <Path Width="10" Height="10"
+                                      Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                      Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
+                                      StrokeThickness="1.5"/>
+                            </Button>
+                            <!-- Text input area -->
+                            <ScrollViewer Name="PART_ScrollViewer"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden">
+                                <Panel>
+                                    <TextBlock Name="PART_Watermark"
+                                               Text="{TemplateBinding Watermark}"
+                                               Foreground="{DynamicResource AuraPlaceholderBrush}"
+                                               Margin="{TemplateBinding Padding}"
+                                               VerticalAlignment="Center"
+                                               IsHitTestVisible="False"/>
+                                    <TextPresenter Name="PART_TextPresenter"
+                                                   Margin="{TemplateBinding Padding}"
+                                                   VerticalAlignment="Center"
+                                                   Text="{TemplateBinding Text, Mode=TwoWay}"
+                                                   TextAlignment="{TemplateBinding TextAlignment}"
+                                                   SelectionStart="{TemplateBinding SelectionStart}"
+                                                   SelectionEnd="{TemplateBinding SelectionEnd}"
+                                                   CaretIndex="{TemplateBinding CaretIndex}"
+                                                   CaretBrush="{TemplateBinding CaretBrush}"
+                                                   SelectionBrush="{TemplateBinding SelectionBrush}"/>
+                                </Panel>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Hover state -->
+    <Style Selector="input|MaskedTextBox:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- Focus state -->
+    <Style Selector="input|MaskedTextBox:focus /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- Disabled state -->
+    <Style Selector="input|MaskedTextBox:disabled">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- Readonly state -->
+    <Style Selector="input|MaskedTextBox:readonly">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+    </Style>
+
+</Styles>

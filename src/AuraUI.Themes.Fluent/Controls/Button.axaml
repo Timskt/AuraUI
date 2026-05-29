@@ -5,14 +5,14 @@
          Button — Fluent Style
          ============================================================ -->
     <Style Selector="Button">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraButtonRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraButtonRadius}"/>
         <Setter Property="Padding" Value="12,5"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
-        <Setter Property="MinWidth" Value="{StaticResource AuraControlMinWidthMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraControlMinWidthMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -46,24 +46,24 @@
 
     <!-- Button :pointerover -->
     <Style Selector="Button:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- Button :pressed -->
     <Style Selector="Button:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
     </Style>
 
     <!-- Button :focus -->
     <Style Selector="Button:focus /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Button :disabled -->
     <Style Selector="Button:disabled">
-        <Setter Property="Background" Value="{StaticResource AuraDisabledBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundDisabledBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Opacity" Value="0.4"/>
         <Setter Property="Cursor" Value="Arrow"/>
     </Style>
@@ -74,83 +74,83 @@
 
     <!-- Secondary -->
     <Style Selector="Button.secondary">
-        <Setter Property="Background" Value="{StaticResource AuraSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
     </Style>
     <Style Selector="Button.secondary:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSecondaryHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryHoverBrush}"/>
     </Style>
     <Style Selector="Button.secondary:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSecondaryPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryPressedBrush}"/>
     </Style>
 
     <!-- Outline -->
     <Style Selector="Button.outline">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="Button.outline:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
     </Style>
     <Style Selector="Button.outline:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryMutedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
     </Style>
 
     <!-- Ghost -->
     <Style Selector="Button.ghost">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Button.ghost:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
     <Style Selector="Button.ghost:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Danger / Destructive -->
     <Style Selector="Button.danger">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Button.danger:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraErrorHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorHoverBrush}"/>
     </Style>
     <Style Selector="Button.danger:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraErrorPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorPressedBrush}"/>
     </Style>
 
     <!-- Danger Outline -->
     <Style Selector="Button.danger-outline">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraErrorBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Button.danger-outline:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
     </Style>
 
     <!-- Success -->
     <Style Selector="Button.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Button.success:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessHoverBrush}"/>
     </Style>
     <Style Selector="Button.success:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessPressedBrush}"/>
     </Style>
 
     <!-- Warning -->
     <Style Selector="Button.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Button.warning:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraWarningHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningHoverBrush}"/>
     </Style>
     <Style Selector="Button.warning:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraWarningPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningPressedBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -159,23 +159,23 @@
 
     <!-- Small -->
     <Style Selector="Button.sm">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightSm}"/>
         <Setter Property="Padding" Value="8,3"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="MinWidth" Value="{StaticResource AuraControlMinWidthSm}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraControlMinWidthSm}"/>
     </Style>
 
     <!-- Large -->
     <Style Selector="Button.lg">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightLg}"/>
         <Setter Property="Padding" Value="16,9"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="MinWidth" Value="{StaticResource AuraControlMinWidthLg}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraControlMinWidthLg}"/>
     </Style>
 
     <!-- Icon only (square) -->
     <Style Selector="Button.icon-only">
-        <Setter Property="MinWidth" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="Padding" Value="6,5"/>
     </Style>
 
@@ -187,7 +187,7 @@
 
     <!-- Rounded pill -->
     <Style Selector="Button.rounded">
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- Loading state -->

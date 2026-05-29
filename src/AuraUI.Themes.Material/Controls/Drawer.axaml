@@ -1,0 +1,110 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — Drawer
+         ======================================== -->
+
+    <Style Selector="layout|Drawer">
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="DrawerCornerRadius" Value="0"/>
+        <Setter Property="DrawerShadow" Value="0 8 24 0 #20000000"/>
+        <Setter Property="OverlayBrush" Value="{DynamicResource AuraOverlayBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:Drawer">
+                    <Panel>
+                        <!-- Overlay -->
+                        <Border Name="PART_Overlay"
+                                Background="{TemplateBinding OverlayBrush}"
+                                IsHitTestVisible="True">
+                            <Border.Transitions>
+                                <BrushTransition Duration="0:0:0.250" Property="Background"/>
+                            </Border.Transitions>
+                        </Border>
+
+                        <!-- Drawer Panel -->
+                        <Border Name="PART_DrawerPanel"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding DrawerCornerRadius}"
+                                BoxShadow="{TemplateBinding DrawerShadow}"
+                                ClipToBounds="True"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Stretch"
+                                Width="{TemplateBinding DrawerWidth}">
+                            <Border.Transitions>
+                                <ThicknessTransition Duration="0:0:0.250" Property="Margin"/>
+                            </Border.Transitions>
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="16"/>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="layout|Drawer:open /template/ Border#PART_Overlay">
+        <Setter Property="Background" Value="{DynamicResource AuraOverlayBrush}"/>
+    </Style>
+    <Style Selector="layout|Drawer:closed /template/ Border#PART_Overlay">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+
+    <!-- Right (default) -->
+    <Style Selector="layout|Drawer:right /template/ Border#PART_DrawerPanel">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    <Style Selector="layout|Drawer:right:closed /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0,0,-320,0"/>
+    </Style>
+    <Style Selector="layout|Drawer:right:open /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <!-- Left -->
+    <Style Selector="layout|Drawer:left /template/ Border#PART_DrawerPanel">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    <Style Selector="layout|Drawer:left:closed /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="-320,0,0,0"/>
+    </Style>
+    <Style Selector="layout|Drawer:left:open /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <!-- Top -->
+    <Style Selector="layout|Drawer:top /template/ Border#PART_DrawerPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Width" Value="NaN"/>
+        <Setter Property="Height" Value="{Binding $parent[layout|Drawer].DrawerHeight}"/>
+    </Style>
+    <Style Selector="layout|Drawer:top:closed /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0,-320,0,0"/>
+    </Style>
+    <Style Selector="layout|Drawer:top:open /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <!-- Bottom -->
+    <Style Selector="layout|Drawer:bottom /template/ Border#PART_DrawerPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Width" Value="NaN"/>
+        <Setter Property="Height" Value="{Binding $parent[layout|Drawer].DrawerHeight}"/>
+    </Style>
+    <Style Selector="layout|Drawer:bottom:closed /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0,0,0,-320"/>
+    </Style>
+    <Style Selector="layout|Drawer:bottom:open /template/ Border#PART_DrawerPanel">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+</Styles>

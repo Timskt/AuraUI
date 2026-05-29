@@ -1,0 +1,74 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="clr-namespace:AuraUI.Controls.Feedback;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — PendingDialog -->
+
+    <Style Selector="feedback|PendingDialog">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="feedback:PendingDialog">
+                    <Panel>
+                        <!-- Scrim / overlay -->
+                        <Border Name="PART_Overlay"
+                                Background="{DynamicResource AuraScrimBrush}"
+                                Opacity="0.32"/>
+
+                        <!-- Dialog surface -->
+                        <Border Name="PART_DialogBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{DynamicResource AuraDialogCornerRadius}"
+                                MinWidth="320"
+                                MaxWidth="420"
+                                Padding="32"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <StackPanel Spacing="24"
+                                        HorizontalAlignment="Center">
+                                <!-- Spinner -->
+                                <ProgressBar Name="PART_Spinner"
+                                             IsIndeterminate="True"
+                                             Width="48"
+                                             Height="4"
+                                             MinWidth="48"
+                                             HorizontalAlignment="Center"/>
+
+                                <!-- Message -->
+                                <TextBlock Name="PART_Message"
+                                           Text="{TemplateBinding PendingMessage}"
+                                           FontSize="16"
+                                           FontFamily="{DynamicResource AuraFontBodyLargeFamily}"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+
+                                <!-- Cancel button -->
+                                <Button Name="PART_CancelButton"
+                                        Classes="text"
+                                        Content="Cancel"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Hide cancel button when not cancellable -->
+    <Style Selector="feedback|PendingDialog:not(:cancellable) /template/ Button#PART_CancelButton">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Cancel button hover state layer -->
+    <Style Selector="feedback|PendingDialog /template/ Button#PART_CancelButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+</Styles>

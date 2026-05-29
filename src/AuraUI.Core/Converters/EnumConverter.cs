@@ -6,6 +6,11 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// Converts an <see cref="Enum"/> value to its <see cref="ComponentModel.DescriptionAttribute"/>
+/// display text (falling back to the member name), and converts a display string back to the
+/// corresponding enum value. Use the static <see cref="Instance"/> property for XAML bindings.
+/// </summary>
 public class EnumConverter : IValueConverter
 {
     public static EnumConverter Instance { get; } = new();

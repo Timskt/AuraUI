@@ -3,6 +3,11 @@ using Avalonia.Controls;
 
 namespace AuraUI.Core.Helpers;
 
+/// <summary>
+/// Provides an attached property to set the <see cref="Border.CornerRadius"/> of a
+/// <see cref="Border"/> from XAML. Useful for applying consistent radius values across
+/// templated controls.
+/// </summary>
 public static class CornerRadiusHelper
 {
     public static readonly AttachedProperty<CornerRadius> CornerRadiusProperty =

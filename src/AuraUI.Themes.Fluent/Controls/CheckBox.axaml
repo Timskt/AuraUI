@@ -6,7 +6,7 @@
          ============================================================ -->
     <Style Selector="CheckBox">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -17,8 +17,8 @@
                     <Border Name="PART_Border"
                             Width="20" Height="20"
                             CornerRadius="4"
-                            Background="{StaticResource AuraInputBackgroundBrush}"
-                            BorderBrush="{StaticResource AuraInputBorderBrush}"
+                            Background="{DynamicResource AuraInputBackgroundBrush}"
+                            BorderBrush="{DynamicResource AuraInputBorderBrush}"
                             BorderThickness="1.5"
                             VerticalAlignment="Center">
                         <Border.Transitions>
@@ -52,40 +52,40 @@
 
     <!-- CheckBox :pointerover -->
     <Style Selector="CheckBox:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
     <!-- CheckBox :checked -->
     <Style Selector="CheckBox:checked /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <Style Selector="CheckBox:checked /template/ Path#PART_CheckMark">
-        <Setter Property="Stroke" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- CheckBox checked + :pointerover -->
     <Style Selector="CheckBox:checked:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- CheckBox checked + :pressed -->
     <Style Selector="CheckBox:checked:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryPressedBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
     </Style>
 
     <!-- CheckBox :pressed -->
     <Style Selector="CheckBox:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundDisabledBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
     </Style>
 
     <!-- CheckBox :focus -->
     <Style Selector="CheckBox:focus /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
@@ -97,18 +97,18 @@
 
     <!-- CheckBox indeterminate -->
     <Style Selector="CheckBox:indeterminate /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <Style Selector="CheckBox:indeterminate /template/ Path#PART_CheckMark">
         <Setter Property="Data" Value="M 3,6 L 9,6"/>
-        <Setter Property="Stroke" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- CheckBox error -->
     <Style Selector="CheckBox:error /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -120,10 +120,10 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
-                        Background="{StaticResource AuraInputBackgroundBrush}"
-                        BorderBrush="{StaticResource AuraInputBorderBrush}"
+                        Background="{DynamicResource AuraInputBackgroundBrush}"
+                        BorderBrush="{DynamicResource AuraInputBorderBrush}"
                         BorderThickness="1"
-                        CornerRadius="{StaticResource AuraRadiusMd}"
+                        CornerRadius="{DynamicResource AuraRadiusMd}"
                         Padding="12">
                     <Border.Transitions>
                         <BrushTransition Duration="00:00:00.200" Property="Background"/>
@@ -133,8 +133,8 @@
                         <Border Name="PART_CheckBoxBorder"
                                 Width="20" Height="20"
                                 CornerRadius="4"
-                                Background="{StaticResource AuraInputBackgroundBrush}"
-                                BorderBrush="{StaticResource AuraInputBorderBrush}"
+                                Background="{DynamicResource AuraInputBackgroundBrush}"
+                                BorderBrush="{DynamicResource AuraInputBorderBrush}"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Center">
                             <Path Name="PART_CheckMark"
@@ -156,12 +156,12 @@
     </Style>
 
     <Style Selector="CheckBox.card:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
     <Style Selector="CheckBox.card:checked /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Toggle style (Switch-like) -->
@@ -172,7 +172,7 @@
                     <Border Name="PART_Border"
                             Width="40" Height="20"
                             CornerRadius="10"
-                            Background="{StaticResource AuraBorderBrush}"
+                            Background="{DynamicResource AuraBorderBrush}"
                             VerticalAlignment="Center">
                         <Border.Transitions>
                             <BrushTransition Duration="00:00:00.200" Property="Background"/>
@@ -180,7 +180,7 @@
                         <Border Name="PART_SwitchKnob"
                                 Width="16" Height="16"
                                 CornerRadius="8"
-                                Background="{StaticResource AuraBackgroundBrush}"
+                                Background="{DynamicResource AuraBackgroundBrush}"
                                 Margin="2"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
@@ -198,7 +198,7 @@
     </Style>
 
     <Style Selector="CheckBox.toggle:checked /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <Style Selector="CheckBox.toggle:checked /template/ Border#PART_SwitchKnob">

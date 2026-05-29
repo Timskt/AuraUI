@@ -5,6 +5,12 @@ using Avalonia.Threading;
 
 namespace AuraUI.Core.Helpers;
 
+/// <summary>
+/// Provides an attached property <c>IsLoading</c> that overlays a semi-transparent loading
+/// indicator on any <see cref="Control"/>. When set to <c>true</c>, an indeterminate
+/// progress bar overlay is displayed; setting it back to <c>false</c> removes the overlay.
+/// Works with <see cref="Panel"/>, <see cref="ContentControl"/>, and <see cref="Border"/> hosts.
+/// </summary>
 public static class LoadingHelper
 {
     public static readonly AttachedProperty<bool> IsLoadingProperty =

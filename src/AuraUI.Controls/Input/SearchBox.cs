@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
@@ -147,6 +148,7 @@ public class SearchBox : TextBox
         if (_clearButton is not null)
         {
             _clearButton.Click += OnClearButtonClick;
+            _clearButton.SetValue(AutomationProperties.NameProperty, "Clear search");
         }
 
         // Apply default watermark if not already set
@@ -154,6 +156,8 @@ public class SearchBox : TextBox
         {
             Watermark = SearchWatermark;
         }
+
+        SetValue(AutomationProperties.NameProperty, "Search");
 
         UpdateClearButtonVisibility();
         UpdateHasSearchText();

@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
@@ -174,6 +175,7 @@ public class AuraTextBox : TextBox
         if (_clearButton is not null)
         {
             _clearButton.Click += OnClearButtonClick;
+            _clearButton.SetValue(AutomationProperties.NameProperty, "Clear");
         }
 
         UpdateClearButtonVisibility();
@@ -199,6 +201,7 @@ public class AuraTextBox : TextBox
     {
         base.OnAttachedToVisualTree(e);
         UpdateEmptyPseudoClass();
+        UpdateAutomationName();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -294,6 +297,15 @@ public class AuraTextBox : TextBox
         {
             _suffixPresenter.IsVisible = !string.IsNullOrEmpty(Suffix);
             _suffixPresenter.Content = Suffix;
+        }
+    }
+
+    private void UpdateAutomationName()
+    {
+        var watermark = Watermark;
+        if (!string.IsNullOrEmpty(watermark))
+        {
+            SetValue(AutomationProperties.NameProperty, watermark);
         }
     }
 }

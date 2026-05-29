@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -55,7 +56,7 @@ public class ProgressRing : RangeBase
 
     static ProgressRing()
     {
-        IsIndeterminateProperty.Changed.AddClassHandler<ProgressRing>((x, _) => x.UpdatePseudoClasses());
+        IsIndeterminateProperty.Changed.AddClassHandler<ProgressRing>((x, _) => { x.UpdatePseudoClasses(); x.UpdateAutomationName(); });
         SizeProperty.Changed.AddClassHandler<ProgressRing>((x, _) => x.UpdatePseudoClasses());
         ValueProperty.Changed.AddClassHandler<ProgressRing>((x, _) => x.InvalidateVisual());
         MaximumProperty.Changed.AddClassHandler<ProgressRing>((x, _) => x.InvalidateVisual());
@@ -112,6 +113,7 @@ public class ProgressRing : RangeBase
     {
         base.OnApplyTemplate(e);
         UpdatePseudoClasses();
+        UpdateAutomationName();
     }
 
     public override void Render(DrawingContext context)
@@ -205,6 +207,11 @@ public class ProgressRing : RangeBase
         PseudoClasses.Set(":medium", Size == ProgressRingSize.Medium);
         PseudoClasses.Set(":large", Size == ProgressRingSize.Large);
         InvalidateVisual();
+    }
+
+    private void UpdateAutomationName()
+    {
+        SetValue(AutomationProperties.NameProperty, IsIndeterminate ? "Loading" : "Progress");
     }
 
     protected override Size MeasureOverride(Size availableSize)

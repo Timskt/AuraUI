@@ -27,8 +27,8 @@
     <Style Selector="Border.timeline-dot">
         <Setter Property="Width" Value="12"/>
         <Setter Property="Height" Value="12"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Margin" Value="0,4,0,0"/>
@@ -37,7 +37,7 @@
     <!-- Timeline line -->
     <Style Selector="Border.timeline-line">
         <Setter Property="Width" Value="2"/>
-        <Setter Property="Background" Value="{StaticResource AuraDividerBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraDividerBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
@@ -49,31 +49,31 @@
     <!-- Timeline timestamp -->
     <Style Selector="TextBlock.timeline-timestamp">
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
         <Setter Property="Margin" Value="12,0,0,4"/>
     </Style>
 
     <!-- Timeline dot variants -->
     <Style Selector="Border.timeline-dot.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Border.timeline-dot.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Border.timeline-dot.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Border.timeline-dot.info">
-        <Setter Property="Background" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
     <Style Selector="Border.timeline-dot.secondary">
-        <Setter Property="Background" Value="{StaticResource AuraSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
     </Style>
 
     <!-- Timeline dot: pending (outline only) -->
     <Style Selector="Border.timeline-dot.pending">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 

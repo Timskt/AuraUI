@@ -1,0 +1,141 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:windowing="clr-namespace:AuraUI.Controls.Windowing;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         WindowXModalDialog — Fluent Style
+         A modal dialog rendered as an overlay within a WindowX.
+         ============================================================ -->
+    <Style Selector="windowing|WindowXModalDialog">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="windowing:WindowXModalDialog">
+                    <Panel>
+                        <!-- Overlay background -->
+                        <Border Name="PART_Overlay"
+                                Background="{DynamicResource AuraSmokeBrush}"
+                                IsVisible="True"/>
+
+                        <!-- Dialog container -->
+                        <Border Name="PART_DialogContainer"
+                                Background="{DynamicResource AuraCardBrush}"
+                                CornerRadius="{DynamicResource AuraDialogRadius}"
+                                MinWidth="400"
+                                MaxWidth="680"
+                                Width="{TemplateBinding DialogWidth}"
+                                Height="{TemplateBinding DialogHeight}"
+                                Padding="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                BoxShadow="{DynamicResource AuraShadowLg}"
+                                ClipToBounds="True">
+                            <DockPanel>
+                                <!-- Title bar -->
+                                <DockPanel DockPanel.Dock="Top"
+                                           Margin="24,20,24,0">
+                                    <!-- Close button -->
+                                    <Button Name="PART_CloseButton"
+                                            DockPanel.Dock="Right"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Padding="4"
+                                            Width="32" Height="32"
+                                            CornerRadius="4"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Margin="8,-4,-4,0"
+                                            Cursor="Hand">
+                                        <Path Width="12" Height="12"
+                                              Data="M 1,1 L 11,11 M 11,1 L 1,11"
+                                              Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                              StrokeThickness="1.5"/>
+                                    </Button>
+
+                                    <!-- Title -->
+                                    <TextBlock Name="PART_Title"
+                                               Text="{TemplateBinding DialogTitle}"
+                                               FontSize="20"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AuraForegroundBrush}"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"/>
+                                </DockPanel>
+
+                                <!-- Footer -->
+                                <ContentPresenter Name="PART_FooterPresenter"
+                                                  DockPanel.Dock="Bottom"
+                                                  Content="{TemplateBinding DialogFooter}"
+                                                  ContentTemplate="{TemplateBinding DialogFooterTemplate}"
+                                                  Margin="24,16,24,24"/>
+
+                                <!-- Header content -->
+                                <ContentPresenter Name="PART_HeaderPresenter"
+                                                  DockPanel.Dock="Top"
+                                                  Content="{TemplateBinding DialogHeader}"
+                                                  ContentTemplate="{TemplateBinding DialogHeaderTemplate}"
+                                                  Margin="24,16,24,0"/>
+
+                                <!-- Main content -->
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto"
+                                              MaxHeight="500">
+                                    <ContentPresenter Name="PART_ContentPresenter"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      Margin="24,16"/>
+                                </ScrollViewer>
+                            </DockPanel>
+                        </Border>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Close button hover -->
+    <Style Selector="windowing|WindowXModalDialog /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Close button pressed -->
+    <Style Selector="windowing|WindowXModalDialog /template/ Button#PART_CloseButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Hide overlay when ShowOverlay is false -->
+    <Style Selector="windowing|WindowXModalDialog:not(:modal) /template/ Border#PART_Overlay">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Dialog open animation -->
+    <Style Selector="windowing|WindowXModalDialog:open /template/ Border#PART_DialogContainer">
+        <Style.Animations>
+            <Animation Duration="00:00:00.200"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Closed state — hide dialog -->
+    <Style Selector="windowing|WindowXModalDialog:closed /template/ Border#PART_DialogContainer">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <Style Selector="windowing|WindowXModalDialog:closed /template/ Border#PART_Overlay">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+</Styles>

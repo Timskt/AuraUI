@@ -5,10 +5,10 @@
          Snackbar — Fluent Style (Bottom notification bar)
          ============================================================ -->
     <Style Selector="Border.snackbar">
-        <Setter Property="Background" Value="{StaticResource AuraTooltipBackgroundBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraTooltipBackgroundBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="16,12"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
         <Setter Property="MinWidth" Value="300"/>
         <Setter Property="MaxWidth" Value="560"/>
         <Setter Property="ClipToBounds" Value="True"/>
@@ -34,14 +34,14 @@
     <!-- Snackbar message -->
     <Style Selector="Border.snackbar TextBlock.snackbar-message">
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraTooltipForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraTooltipForegroundBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <!-- Snackbar action button -->
     <Style Selector="Border.snackbar Button.snackbar-action">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="8,4"/>
         <Setter Property="FontSize" Value="14"/>
@@ -50,7 +50,7 @@
     </Style>
 
     <Style Selector="Border.snackbar Button.snackbar-action:pointerover">
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- Snackbar close button -->
@@ -80,32 +80,32 @@
 
     <!-- Success snackbar -->
     <Style Selector="Border.snackbar.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
 
     <!-- Warning snackbar -->
     <Style Selector="Border.snackbar.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
 
     <!-- Error snackbar -->
     <Style Selector="Border.snackbar.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- Info snackbar -->
     <Style Selector="Border.snackbar.info">
-        <Setter Property="Background" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
 
     <!-- Light / surface snackbar -->
     <Style Selector="Border.snackbar.light">
-        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.snackbar.light TextBlock.snackbar-message">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 
 </Styles>

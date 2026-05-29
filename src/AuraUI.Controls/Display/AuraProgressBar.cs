@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -51,7 +52,7 @@ public class AuraProgressBar : ProgressBar
         ShowLabelProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => x.UpdateLabel());
         VariantProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => x.UpdatePseudoClasses());
         IsCircularProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => x.UpdatePseudoClasses());
-        ValueProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => x.UpdateLabel());
+        ValueProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => { x.UpdateLabel(); x.UpdateAutomationHelpText(); });
         IsIndeterminateProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => x.UpdatePseudoClasses());
     }
 
@@ -105,6 +106,8 @@ public class AuraProgressBar : ProgressBar
         _label = e.NameScope.Find<TextBlock>("PART_Label");
         UpdatePseudoClasses();
         UpdateLabel();
+        SetValue(AutomationProperties.NameProperty, "Progress");
+        UpdateAutomationHelpText();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -123,6 +126,11 @@ public class AuraProgressBar : ProgressBar
             _label.Text = PercentageText;
             _label.IsVisible = ShowLabel;
         }
+    }
+
+    private void UpdateAutomationHelpText()
+    {
+        SetValue(AutomationProperties.HelpTextProperty, PercentageText);
     }
 
     private void UpdatePseudoClasses()

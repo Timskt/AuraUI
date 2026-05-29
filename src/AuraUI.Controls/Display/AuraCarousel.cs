@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
@@ -203,13 +204,20 @@ public class AuraCarousel : TemplatedControl
         _itemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_ItemsPresenter");
 
         if (_previousButton != null)
+        {
             _previousButton.Click += OnPreviousClick;
+            _previousButton.SetValue(AutomationProperties.NameProperty, "Previous");
+        }
         if (_nextButton != null)
+        {
             _nextButton.Click += OnNextClick;
+            _nextButton.SetValue(AutomationProperties.NameProperty, "Next");
+        }
 
         UpdateNavigationPseudoClasses();
         UpdateIndicators();
         ConfigureAutoPlay();
+        SetValue(AutomationProperties.NameProperty, "Carousel");
     }
 
     protected override void OnPointerEntered(PointerEventArgs e)

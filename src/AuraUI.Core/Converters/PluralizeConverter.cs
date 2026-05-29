@@ -4,6 +4,13 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// A multi-value converter that produces a count-and-word string such as <c>"3 items"</c>.
+/// Expects two bindings: the first is the numeric count, the second is the singular form
+/// of the word. Pass an explicit plural form as the converter parameter to override the
+/// automatic English pluralization. Use the static <see cref="Instance"/> property for
+/// XAML bindings.
+/// </summary>
 public class PluralizeConverter : IMultiValueConverter
 {
     public static PluralizeConverter Instance { get; } = new();

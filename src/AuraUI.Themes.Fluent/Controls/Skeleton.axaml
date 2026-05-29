@@ -5,8 +5,8 @@
          Skeleton — Fluent Style (Content Placeholder Loading)
          ============================================================ -->
     <Style Selector="Border.skeleton">
-        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusSm}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
         <Setter Property="ClipToBounds" Value="True"/>
     </Style>
 
@@ -54,7 +54,7 @@
 
     <!-- Skeleton circle (avatar placeholder) -->
     <Style Selector="Border.skeleton.circle">
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
     </Style>
@@ -62,7 +62,7 @@
     <!-- Skeleton rectangle (image placeholder) -->
     <Style Selector="Border.skeleton.rect">
         <Setter Property="Height" Value="120"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
     </Style>
 
 </Styles>

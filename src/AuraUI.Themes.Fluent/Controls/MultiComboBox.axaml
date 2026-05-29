@@ -5,22 +5,22 @@
          MultiComboBox — Fluent Style (ListBox with checkboxes in popup)
          ============================================================ -->
     <Style Selector="ListBox.multi-combo">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
         <Setter Property="Padding" Value="4"/>
     </Style>
 
     <!-- Multi-select ComboBox toggle (uses ToggleButton or custom) -->
     <Style Selector="ToggleButton.multi-combo-toggle">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
         <Setter Property="Padding" Value="8,6"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -50,7 +50,7 @@
                               Grid.Column="1"
                               Width="12" Height="12"
                               Data="M 1,4 L 6,9 L 11,4"
-                              Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                              Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                               StrokeThickness="1.5"
                               Margin="8,0,0,0"
                               VerticalAlignment="Center"/>
@@ -62,12 +62,12 @@
 
     <!-- MultiCombo toggle states -->
     <Style Selector="ToggleButton.multi-combo-toggle:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
     <Style Selector="ToggleButton.multi-combo-toggle:checked /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
     </Style>
 
     <!-- MultiCombo dropdown -->
@@ -76,7 +76,7 @@
             <ControlTemplate>
                 <Border Name="PART_Border"
                         Background="Transparent"
-                        CornerRadius="{StaticResource AuraRadiusSm}"
+                        CornerRadius="{DynamicResource AuraRadiusSm}"
                         Margin="2,1"
                         Padding="4,6">
                     <Border.Transitions>
@@ -96,24 +96,24 @@
     </Style>
 
     <Style Selector="ListBox.multi-combo ListBoxItem:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="ListBox.multi-combo ListBoxItem:selected /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSelectedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedBrush}"/>
     </Style>
 
     <!-- Tag display for selected items -->
     <Style Selector="Border.multi-combo-tag">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraTagRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraTagRadius}"/>
         <Setter Property="Padding" Value="6,2"/>
         <Setter Property="Margin" Value="0,2,4,2"/>
     </Style>
 
     <Style Selector="Border.multi-combo-tag TextBlock">
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
 </Styles>

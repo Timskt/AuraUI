@@ -5,8 +5,8 @@
          Badge — Fluent Style
          ============================================================ -->
     <Style Selector="Border.badge">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraBadgeRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraBadgeRadius}"/>
         <Setter Property="MinWidth" Value="20"/>
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="Padding" Value="6,2"/>
@@ -18,7 +18,7 @@
                        HorizontalAlignment="Center"
                        FontSize="12"
                        FontWeight="SemiBold"
-                       Foreground="{StaticResource AuraForegroundOnAccentBrush}"/>
+                       Foreground="{DynamicResource AuraForegroundOnAccentBrush}"/>
         </Setter>
     </Style>
 
@@ -44,29 +44,29 @@
 
     <!-- Badge color variants -->
     <Style Selector="Border.badge.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Border.badge.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Border.badge.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Border.badge.info">
-        <Setter Property="Background" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
     <Style Selector="Border.badge.secondary">
-        <Setter Property="Background" Value="{StaticResource AuraSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
     </Style>
 
     <!-- Badge outline variant -->
     <Style Selector="Border.badge.outline">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.badge.outline /template/ TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Badge dot variant (no text, just a dot) -->

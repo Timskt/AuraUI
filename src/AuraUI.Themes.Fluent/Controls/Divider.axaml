@@ -5,7 +5,7 @@
          Divider — Fluent Style
          ============================================================ -->
     <Style Selector="Border.divider">
-        <Setter Property="Background" Value="{StaticResource AuraDividerBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraDividerBrush}"/>
         <Setter Property="Height" Value="1"/>
         <Setter Property="Margin" Value="0,8"/>
     </Style>
@@ -25,7 +25,7 @@
             <Panel>
                 <Border Height="1"
                         VerticalAlignment="Center"
-                        Background="{StaticResource AuraDividerBrush}"/>
+                        Background="{DynamicResource AuraDividerBrush}"/>
             </Panel>
         </Setter>
     </Style>

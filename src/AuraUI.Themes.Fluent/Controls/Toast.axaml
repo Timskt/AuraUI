@@ -5,12 +5,12 @@
          Toast — Fluent Style (Small notification popup)
          ============================================================ -->
     <Style Selector="Border.toast">
-        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="16,12"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
         <Setter Property="MinWidth" Value="300"/>
         <Setter Property="MaxWidth" Value="420"/>
         <Setter Property="ClipToBounds" Value="True"/>
@@ -42,20 +42,20 @@
     <Style Selector="Border.toast-icon">
         <Setter Property="Width" Value="24"/>
         <Setter Property="Height" Value="24"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- Toast title -->
     <Style Selector="Border.toast TextBlock.toast-title">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 
     <!-- Toast message -->
     <Style Selector="Border.toast TextBlock.toast-message">
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
@@ -71,7 +71,7 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
     <Style Selector="Button.toast-close:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -80,34 +80,34 @@
 
     <!-- Success toast -->
     <Style Selector="Border.toast.success">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Border.toast.success Border.toast-icon">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessLightBrush}"/>
     </Style>
 
     <!-- Warning toast -->
     <Style Selector="Border.toast.warning">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Border.toast.warning Border.toast-icon">
-        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningLightBrush}"/>
     </Style>
 
     <!-- Error toast -->
     <Style Selector="Border.toast.error">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Border.toast.error Border.toast-icon">
-        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
     </Style>
 
     <!-- Info toast -->
     <Style Selector="Border.toast.info">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
     <Style Selector="Border.toast.info Border.toast-icon">
-        <Setter Property="Background" Value="{StaticResource AuraInfoLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoLightBrush}"/>
     </Style>
 
 </Styles>

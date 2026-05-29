@@ -1,0 +1,59 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         DropDown — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|DropDown">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="DropDownCornerRadius" Value="{DynamicResource AuraCardRadius}"/>
+        <Setter Property="DropDownShadow" Value="{DynamicResource AuraShadowMd}"/>
+        <Setter Property="OverlayBrush" Value="{DynamicResource AuraSmokeBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Anchor content (the trigger area) -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                    <!-- Popup -->
+                    <Popup Name="PART_Popup"
+                           IsLightDismissEnabled="{Binding !StaysOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                           IsOpen="{TemplateBinding IsOpen}"
+                           Placement="BottomEdgeAlignedLeft"
+                           MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border Name="PART_DropdownBorder"
+                                Background="{DynamicResource AuraFlyoutBackgroundBrush}"
+                                BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{TemplateBinding DropDownCornerRadius}"
+                                BoxShadow="{TemplateBinding DropDownShadow}"
+                                Padding="4"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                            <Border.Transitions>
+                                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                                <BoxShadowsTransition Duration="00:00:00.200" Property="BoxShadow"/>
+                            </Border.Transitions>
+                            <ScrollViewer>
+                                <ContentPresenter Content="{TemplateBinding DropDownContent}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover state for the anchor -->
+    <Style Selector="layout|DropDown:pointerover">
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Open state — elevate shadow -->
+    <Style Selector="layout|DropDown:open /template/ Popup Border">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLg}"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="clr-namespace:AuraUI.Controls.Feedback;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         LoadingOverlay — Fluent Style
+         LoadingOverlay is an attached property provider (AvaloniaObject).
+         It programmatically creates an overlay Border with a ProgressBar
+         spinner and TextBlock message. These styles define the visual
+         appearance using class-based selectors.
+         ============================================================ -->
+
+    <!-- Loading overlay background -->
+    <Style Selector="Border.loading-overlay">
+        <Setter Property="Background" Value="{DynamicResource AuraSmokeBrush}"/>
+        <Setter Property="ZIndex" Value="10000"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- Loading spinner container -->
+    <Style Selector="StackPanel.loading-overlay-content">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Spacing" Value="8"/>
+    </Style>
+
+    <!-- Loading spinner (indeterminate ProgressBar) -->
+    <Style Selector="ProgressBar.loading-spinner">
+        <Setter Property="IsIndeterminate" Value="True"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="5"/>
+        <Setter Property="MinWidth" Value="40"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Loading message text -->
+    <Style Selector="TextBlock.loading-message">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,12,0,0"/>
+    </Style>
+
+    <!-- Control with loading state -->
+    <Style Selector="Control.loading">
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+
+</Styles>

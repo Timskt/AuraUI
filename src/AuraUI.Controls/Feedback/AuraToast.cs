@@ -1,4 +1,6 @@
+using System.Collections.Concurrent;
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -18,8 +20,11 @@ namespace AuraUI.Controls.Feedback;
 public class AuraToast : ContentControl
 {
     private static readonly List<AuraToast> _activeToasts = new();
+    private static readonly object _toastsLock = new();
     private DispatcherTimer? _dismissTimer;
     private DateTime _showTime;
+    private EventHandler<Avalonia.Interactivity.RoutedEventArgs>? _closeButtonClickHandler;
+    private Button? _closeButton;
 
     /// <summary>
     /// Defines the <see cref="Message"/> styled property.
@@ -182,7 +187,12 @@ public class AuraToast : ContentControl
     /// </summary>
     public static void DismissAll()
     {
-        foreach (var toast in _activeToasts.ToList())
+        List<AuraToast> snapshot;
+        lock (_toastsLock)
+        {
+            snapshot = _activeToasts.ToList();
+        }
+        foreach (var toast in snapshot)
         {
             toast.Dismiss();
         }
@@ -203,7 +213,10 @@ public class AuraToast : ContentControl
 
         toast.ShowInAdorner();
         toast.StartDismissTimer();
-        _activeToasts.Add(toast);
+        lock (_toastsLock)
+        {
+            _activeToasts.Add(toast);
+        }
 
         return toast;
     }
@@ -232,7 +245,10 @@ public class AuraToast : ContentControl
     public void Dismiss()
     {
         StopDismissTimer();
-        _activeToasts.Remove(this);
+        lock (_toastsLock)
+        {
+            _activeToasts.Remove(this);
+        }
 
         // Remove from parent
         if (Parent is Panel panel)
@@ -249,12 +265,26 @@ public class AuraToast : ContentControl
     {
         base.OnApplyTemplate(e);
 
+        // Unsubscribe from previous button to prevent handler accumulation
+        if (_closeButton != null && _closeButtonClickHandler != null)
+        {
+            _closeButton.Click -= _closeButtonClickHandler;
+        }
+
         if (e.NameScope.Find<Button>("PART_CloseButton") is { } closeButton)
         {
-            closeButton.Click += (_, _) => Dismiss();
+            _closeButtonClickHandler = (_, _) => Dismiss();
+            _closeButton = closeButton;
+            closeButton.Click += _closeButtonClickHandler;
+        }
+        else
+        {
+            _closeButton = null;
+            _closeButtonClickHandler = null;
         }
 
         UpdatePseudoClasses();
+        SetValue(AutomationProperties.NameProperty, "Notification");
     }
 
     private void StartDismissTimer()
@@ -306,6 +336,9 @@ public class AuraToast : ContentControl
     {
         base.OnDetachedFromVisualTree(e);
         StopDismissTimer();
-        _activeToasts.Remove(this);
+        lock (_toastsLock)
+        {
+            _activeToasts.Remove(this);
+        }
     }
 }

@@ -5,10 +5,10 @@
          Tag — Fluent Style
          ============================================================ -->
     <Style Selector="Border.tag">
-        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraTagRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraTagRadius}"/>
         <Setter Property="Padding" Value="8,4"/>
         <Setter Property="MinHeight" Value="24"/>
         <Setter Property="ClipToBounds" Value="True"/>
@@ -17,7 +17,7 @@
             <StackPanel Orientation="Horizontal" Spacing="4">
                 <TextBlock VerticalAlignment="Center"
                            FontSize="12"
-                           Foreground="{StaticResource AuraForegroundBrush}"/>
+                           Foreground="{DynamicResource AuraForegroundBrush}"/>
             </StackPanel>
         </Setter>
     </Style>
@@ -34,13 +34,13 @@
 
     <!-- Tag :pointerover -->
     <Style Selector="Border.tag:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
     <!-- Tag :pressed -->
     <Style Selector="Border.tag:pressed">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Tag sizes -->
@@ -62,35 +62,35 @@
 
     <!-- Tag color variants -->
     <Style Selector="Border.tag.primary">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="Border.tag.primary TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <Style Selector="Border.tag.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Border.tag.success TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
 
     <Style Selector="Border.tag.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Border.tag.warning TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
 
     <Style Selector="Border.tag.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Border.tag.error TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- Tag closable -->

@@ -2,6 +2,10 @@ using System.Globalization;
 
 namespace AuraUI.Core.Extensions;
 
+/// <summary>
+/// Common string extension methods for truncation, null/whitespace checks, and
+/// culture-aware title-casing.
+/// </summary>
 public static class StringExtensions
 {
     /// <summary>

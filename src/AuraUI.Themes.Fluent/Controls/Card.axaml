@@ -6,13 +6,13 @@
          Card — Fluent Style
          ============================================================ -->
     <Style Selector="layout|Card">
-        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraCardRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraCardRadius}"/>
         <Setter Property="Padding" Value="16"/>
         <Setter Property="ClipToBounds" Value="True"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowSm}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
@@ -54,8 +54,8 @@
 
     <!-- Card :pointerover -->
     <Style Selector="layout|Card:pointerover">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderHoverBrush}"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
     </Style>
 
     <!-- Card with IsHoverable -->
@@ -65,33 +65,33 @@
 
     <!-- Card Elevation 0 -->
     <Style Selector="layout|Card[Elevation=0]">
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowNone}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowNone}"/>
     </Style>
 
     <!-- Card Elevation 1 -->
     <Style Selector="layout|Card[Elevation=1]">
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowSm}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
     </Style>
 
     <!-- Card Elevation 2 -->
     <Style Selector="layout|Card[Elevation=2]">
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
     </Style>
 
     <!-- Card Elevation 3 -->
     <Style Selector="layout|Card[Elevation=3]">
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowLg}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLg}"/>
     </Style>
 
     <!-- Card class .flat — no shadow, no border -->
     <Style Selector="layout|Card.flat">
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowNone}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowNone}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <!-- Card class .outlined — border only, no shadow -->
     <Style Selector="layout|Card.outlined">
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowNone}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowNone}"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
 

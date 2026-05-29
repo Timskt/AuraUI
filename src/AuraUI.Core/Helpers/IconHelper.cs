@@ -4,6 +4,11 @@ using Avalonia.Media;
 
 namespace AuraUI.Core.Helpers;
 
+/// <summary>
+/// Provides attached properties (<c>Icon</c>, <c>Size</c>, <c>Color</c>) for declaratively
+/// specifying an icon on any <see cref="Control"/>. The values are stored as attached
+/// properties so that data templates or an icon-provider service can read and render them.
+/// </summary>
 public static class IconHelper
 {
     public static readonly AttachedProperty<string?> IconProperty =

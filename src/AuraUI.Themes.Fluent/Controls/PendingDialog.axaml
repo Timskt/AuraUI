@@ -1,0 +1,95 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="clr-namespace:AuraUI.Controls.Feedback;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         PendingDialog — Fluent Style
+         A dialog with spinner content and optional cancel button.
+         Inherits from AuraDialog.
+         ============================================================ -->
+    <Style Selector="feedback|PendingDialog">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="feedback:PendingDialog">
+                    <Panel>
+                        <!-- Overlay / scrim -->
+                        <Border Name="PART_Overlay"
+                                Background="{DynamicResource AuraSmokeBrush}"
+                                IsVisible="True"/>
+
+                        <!-- Dialog surface -->
+                        <Border Name="PART_DialogBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{DynamicResource AuraDialogRadius}"
+                                MinWidth="320"
+                                MaxWidth="420"
+                                Padding="32"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                BoxShadow="{DynamicResource AuraShadowLg}">
+                            <StackPanel Spacing="20"
+                                        HorizontalAlignment="Center">
+                                <!-- Spinner -->
+                                <ProgressBar Name="PART_Spinner"
+                                             IsIndeterminate="True"
+                                             Width="48"
+                                             Height="5"
+                                             MinWidth="48"
+                                             HorizontalAlignment="Center"/>
+
+                                <!-- Message -->
+                                <TextBlock Name="PART_Message"
+                                           Text="{TemplateBinding PendingMessage}"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+
+                                <!-- Cancel button -->
+                                <Button Name="PART_CancelButton"
+                                        Classes="ghost"
+                                        Content="Cancel"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Hide cancel button when not cancellable -->
+    <Style Selector="feedback|PendingDialog:not(:cancellable) /template/ Button#PART_CancelButton">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Close button hover -->
+    <Style Selector="feedback|PendingDialog /template/ Button#PART_CancelButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Dialog open animation -->
+    <Style Selector="feedback|PendingDialog /template/ Border#PART_DialogBorder">
+        <Style.Animations>
+            <Animation Duration="00:00:00.200"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+</Styles>

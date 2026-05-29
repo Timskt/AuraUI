@@ -37,6 +37,9 @@ public class LoadingOverlay : AvaloniaObject
     private static readonly AttachedProperty<Border?> OverlayBorderProperty =
         AvaloniaProperty.RegisterAttached<LoadingOverlay, Control, Border?>("OverlayBorder");
 
+    private static readonly AttachedProperty<object?> OriginalContentProperty =
+        AvaloniaProperty.RegisterAttached<LoadingOverlay, Control, object?>("OriginalContent");
+
     static LoadingOverlay()
     {
         IsLoadingProperty.Changed.AddClassHandler<Control>(OnIsLoadingChanged);
@@ -162,6 +165,9 @@ public class LoadingOverlay : AvaloniaObject
         }
         else if (control is ContentControl contentControl)
         {
+            // Store original content so we can restore it when hiding
+            control.SetValue(OriginalContentProperty, contentControl.Content);
+
             // Wrap existing content
             var existingContent = contentControl.Content;
             var grid = new Grid();
@@ -189,6 +195,13 @@ public class LoadingOverlay : AvaloniaObject
         if (control is Panel panel)
         {
             panel.Children.Remove(overlay);
+        }
+        else if (control is ContentControl contentControl)
+        {
+            // Restore original content
+            var originalContent = control.GetValue(OriginalContentProperty);
+            contentControl.Content = originalContent;
+            control.ClearValue(OriginalContentProperty);
         }
     }
 }

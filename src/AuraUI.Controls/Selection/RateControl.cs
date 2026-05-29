@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -100,7 +101,7 @@ public class RateControl : TemplatedControl
 
     static RateControl()
     {
-        ValueProperty.Changed.AddClassHandler<RateControl>((x, _) => x.OnValueChanged());
+        ValueProperty.Changed.AddClassHandler<RateControl>((x, _) => { x.OnValueChanged(); x.UpdateAutomationHelpText(); });
         MaxProperty.Changed.AddClassHandler<RateControl>((x, _) => x.RebuildItems());
         AllowHalfProperty.Changed.AddClassHandler<RateControl>((x, _) => x.RebuildItems());
         VariantProperty.Changed.AddClassHandler<RateControl>((x, _) => x.OnVariantChanged());
@@ -219,8 +220,10 @@ public class RateControl : TemplatedControl
 
         _ratingPanel = e.NameScope.Find<Panel>("PART_RatingPanel");
 
+        SetValue(AutomationProperties.NameProperty, "Rating");
         RebuildItems();
         UpdatePseudoClasses();
+        UpdateAutomationHelpText();
     }
 
     protected override void OnPointerEntered(PointerEventArgs e)
@@ -392,6 +395,11 @@ public class RateControl : TemplatedControl
         PseudoClasses.Set(":heart", Variant == RateVariant.Heart);
         PseudoClasses.Set(":custom", Variant == RateVariant.Custom);
         PseudoClasses.Set(":readonly", IsReadOnly);
+    }
+
+    private void UpdateAutomationHelpText()
+    {
+        SetValue(AutomationProperties.HelpTextProperty, $"{Value} out of {Max}");
     }
 
     /// <summary>

@@ -4,6 +4,12 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// Converts a string to upper-case, lower-case, or title-case. Pass <c>"upper"</c>,
+/// <c>"lower"</c>, or <c>"title"</c> as the converter parameter; defaults to <c>"lower"</c>.
+/// This converter is one-way only. Use the static <see cref="Instance"/> property for
+/// XAML bindings.
+/// </summary>
 public class StringCaseConverter : IValueConverter
 {
     public static StringCaseConverter Instance { get; } = new();

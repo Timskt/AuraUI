@@ -1,0 +1,158 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         ColorPicker — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|ColorPicker">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="MinWidth" Value="280"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="selection:ColorPicker">
+                    <Border Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <Border.Transitions>
+                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                        </Border.Transitions>
+                        <StackPanel Spacing="12">
+                            <!-- Color spectrum -->
+                            <Border Name="PART_Spectrum"
+                                    Width="256"
+                                    Height="200"
+                                    CornerRadius="{DynamicResource AuraRadiusSm}"
+                                    ClipToBounds="True"
+                                    Cursor="Crosshair"
+                                    Background="{DynamicResource AuraMutedBrush}"/>
+
+                            <!-- Color preview and hex input row -->
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border Name="PART_ColorPreview"
+                                        Width="40"
+                                        Height="40"
+                                        CornerRadius="{DynamicResource AuraRadiusSm}"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        BorderBrush="{DynamicResource AuraDividerBrush}"
+                                        BorderThickness="1"/>
+                                <TextBox Name="PART_HexInput"
+                                         Grid.Column="1"
+                                         Watermark="#RRGGBB"
+                                         FontFamily="Consolas, monospace"
+                                         VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Hue slider -->
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Hue"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Name="PART_HueSlider"
+                                        Minimum="0"
+                                        Maximum="360"
+                                        Value="0"/>
+                            </StackPanel>
+
+                            <!-- Alpha slider -->
+                            <StackPanel Name="PART_AlphaSection"
+                                        Spacing="4">
+                                <TextBlock Text="Alpha"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Name="PART_AlphaSlider"
+                                        Minimum="0"
+                                        Maximum="255"
+                                        Value="255"/>
+                            </StackPanel>
+
+                            <!-- RGB sliders -->
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Red"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Name="PART_RedSlider"
+                                        Minimum="0"
+                                        Maximum="255"
+                                        Value="0"/>
+                            </StackPanel>
+
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Green"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Name="PART_GreenSlider"
+                                        Minimum="0"
+                                        Maximum="255"
+                                        Value="0"/>
+                            </StackPanel>
+
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Blue"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <Slider Name="PART_BlueSlider"
+                                        Minimum="0"
+                                        Maximum="255"
+                                        Value="0"/>
+                            </StackPanel>
+
+                            <!-- Preset colors -->
+                            <ItemsControl Name="PART_PresetPanel"
+                                          Margin="0,4,0,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="24"
+                                                Height="24"
+                                                CornerRadius="4"
+                                                Margin="2"
+                                                Cursor="Hand"
+                                                BorderBrush="{DynamicResource AuraDividerBrush}"
+                                                BorderThickness="1"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Spectrum hover effect -->
+    <Style Selector="selection|ColorPicker /template/ Border#PART_Spectrum:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Hide alpha section when ShowAlpha is false -->
+    <Style Selector="selection|ColorPicker:not(:has-alpha) /template/ StackPanel#PART_AlphaSection">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Compact mode — hide sliders, show only preview and hex input -->
+    <Style Selector="selection|ColorPicker:compact /template/ Border#PART_Spectrum">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Disabled state -->
+    <Style Selector="selection|ColorPicker:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="IsEnabled" Value="False"/>
+    </Style>
+
+</Styles>

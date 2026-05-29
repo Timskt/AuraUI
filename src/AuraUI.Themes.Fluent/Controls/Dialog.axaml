@@ -5,8 +5,8 @@
          Dialog — Fluent Style (Modal Dialog)
          ============================================================ -->
     <Style Selector="Window.dialog">
-        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraDialogRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraDialogRadius}"/>
         <Setter Property="MinWidth" Value="400"/>
         <Setter Property="MaxWidth" Value="680"/>
         <Setter Property="SizeToContent" Value="Height"/>
@@ -14,7 +14,7 @@
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        BoxShadow="{StaticResource AuraShadowLg}"
+                        BoxShadow="{DynamicResource AuraShadowLg}"
                         ClipToBounds="True">
                     <DockPanel>
                         <!-- Title bar / Header -->
@@ -37,7 +37,7 @@
                                     Cursor="Hand">
                                 <Path Width="12" Height="12"
                                       Data="M 1,1 L 11,11 M 11,1 L 1,11"
-                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                       StrokeThickness="1.5"/>
                             </Button>
 
@@ -46,7 +46,7 @@
                                        Text="{TemplateBinding Title}"
                                        FontSize="20"
                                        FontWeight="SemiBold"
-                                       Foreground="{StaticResource AuraForegroundBrush}"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"
                                        VerticalAlignment="Center"
                                        TextTrimming="CharacterEllipsis"/>
                         </DockPanel>
@@ -83,16 +83,16 @@
 
     <!-- Dialog close button states -->
     <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pressed">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Dialog overlay backdrop -->
     <Style Selector="Border.dialog-overlay">
-        <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSmokeBrush}"/>
     </Style>
 
     <!-- Dialog variants -->
@@ -121,19 +121,19 @@
 
     <!-- Overlay backdrop -->
     <Style Selector="Border.flyout-overlay">
-        <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSmokeBrush}"/>
     </Style>
 
     <!-- ============================================================
          Flyout / Popup Panel Style
          ============================================================ -->
     <Style Selector="Border.flyout">
-        <Setter Property="Background" Value="{StaticResource AuraFlyoutBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFlyoutBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraFlyoutBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFlyoutBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="4"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
     </Style>
 
     <Style Selector="Border.flyout">

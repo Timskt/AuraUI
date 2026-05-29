@@ -18,7 +18,13 @@ namespace AuraUI.Controls.Feedback;
 public class Snackbar : ContentControl
 {
     private static readonly List<Snackbar> _activeSnackbars = new();
+    private static readonly object _snackbarsLock = new();
     private DispatcherTimer? _dismissTimer;
+    private EventHandler<Avalonia.Interactivity.RoutedEventArgs>? _actionButtonClickHandler;
+    private EventHandler<Avalonia.Interactivity.RoutedEventArgs>? _closeButtonClickHandler;
+    private Button? _actionButton;
+    private Button? _closeButton;
+    private EventHandler? _dismissTickHandler;
 
     /// <summary>
     /// Defines the <see cref="Message"/> styled property.
@@ -135,7 +141,10 @@ public class Snackbar : ContentControl
         }
 
         snackbar.AttachToOverlay();
-        _activeSnackbars.Add(snackbar);
+        lock (_snackbarsLock)
+        {
+            _activeSnackbars.Add(snackbar);
+        }
         return snackbar;
     }
 
@@ -144,7 +153,12 @@ public class Snackbar : ContentControl
     /// </summary>
     public static void DismissAll()
     {
-        foreach (var s in _activeSnackbars.ToList())
+        List<Snackbar> snapshot;
+        lock (_snackbarsLock)
+        {
+            snapshot = _activeSnackbars.ToList();
+        }
+        foreach (var s in snapshot)
             s.Dismiss();
     }
 
@@ -160,18 +174,42 @@ public class Snackbar : ContentControl
     {
         base.OnApplyTemplate(e);
 
+        // Unsubscribe from previous buttons to prevent handler accumulation
+        if (_actionButton != null && _actionButtonClickHandler != null)
+        {
+            _actionButton.Click -= _actionButtonClickHandler;
+        }
+        if (_closeButton != null && _closeButtonClickHandler != null)
+        {
+            _closeButton.Click -= _closeButtonClickHandler;
+        }
+
         if (e.NameScope.Find<Button>("PART_ActionButton") is { } actionButton)
         {
-            actionButton.Click += (_, _) =>
+            _actionButtonClickHandler = (_, _) =>
             {
                 RaiseEvent(new RoutedEventArgs(ActionClickedEvent));
                 Dismiss();
             };
+            _actionButton = actionButton;
+            actionButton.Click += _actionButtonClickHandler;
+        }
+        else
+        {
+            _actionButton = null;
+            _actionButtonClickHandler = null;
         }
 
         if (e.NameScope.Find<Button>("PART_CloseButton") is { } closeButton)
         {
-            closeButton.Click += (_, _) => Dismiss();
+            _closeButtonClickHandler = (_, _) => Dismiss();
+            _closeButton = closeButton;
+            closeButton.Click += _closeButtonClickHandler;
+        }
+        else
+        {
+            _closeButton = null;
+            _closeButtonClickHandler = null;
         }
 
         UpdatePseudoClasses();
@@ -210,7 +248,10 @@ public class Snackbar : ContentControl
 
     private void DetachFromOverlay()
     {
-        _activeSnackbars.Remove(this);
+        lock (_snackbarsLock)
+        {
+            _activeSnackbars.Remove(this);
+        }
         if (Parent is OverlayLayer overlay)
         {
             overlay.Children.Remove(this);
@@ -221,7 +262,8 @@ public class Snackbar : ContentControl
     {
         StopDismissTimer();
         _dismissTimer = new DispatcherTimer { Interval = Duration };
-        _dismissTimer.Tick += (_, _) => Dismiss();
+        _dismissTickHandler = (_, _) => Dismiss();
+        _dismissTimer.Tick += _dismissTickHandler;
         _dismissTimer.Start();
     }
 
@@ -229,7 +271,11 @@ public class Snackbar : ContentControl
     {
         if (_dismissTimer != null)
         {
-            _dismissTimer.Tick -= (_, _) => Dismiss();
+            if (_dismissTickHandler != null)
+            {
+                _dismissTimer.Tick -= _dismissTickHandler;
+                _dismissTickHandler = null;
+            }
             _dismissTimer.Stop();
             _dismissTimer = null;
         }
@@ -245,6 +291,9 @@ public class Snackbar : ContentControl
     {
         base.OnDetachedFromVisualTree(e);
         StopDismissTimer();
-        _activeSnackbars.Remove(this);
+        lock (_snackbarsLock)
+        {
+            _activeSnackbars.Remove(this);
+        }
     }
 }

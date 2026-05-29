@@ -5,6 +5,11 @@ using Avalonia.Media;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// Converts a <see cref="Color"/> or color string (e.g. <c>"#FF0000"</c>) to a
+/// <see cref="SolidColorBrush"/> and back. Use the static <see cref="Instance"/>
+/// property for XAML bindings.
+/// </summary>
 public class ColorToBrushConverter : IValueConverter
 {
     public static ColorToBrushConverter Instance { get; } = new();

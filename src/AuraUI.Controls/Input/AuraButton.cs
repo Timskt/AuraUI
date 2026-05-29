@@ -1,5 +1,6 @@
 using System.Windows.Input;
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
@@ -30,7 +31,6 @@ public class AuraButton : Button
 {
     private ContentPresenter? _iconPresenter;
     private ContentPresenter? _loadingPresenter;
-    private IDisposable? _loadingCancellation;
 
     /// <summary>
     /// Defines the <see cref="Icon"/> property.
@@ -125,6 +125,7 @@ public class AuraButton : Button
         IconPositionProperty.Changed.AddClassHandler<AuraButton>((x, _) => x.UpdateIconPosition());
         IsLoadingProperty.Changed.AddClassHandler<AuraButton>((x, e) => x.OnIsLoadingChanged(e));
         LoadingContentProperty.Changed.AddClassHandler<AuraButton>((x, _) => x.UpdateLoadingState());
+        ContentProperty.Changed.AddClassHandler<AuraButton>((x, _) => x.UpdateAutomationName());
     }
 
     protected override Type StyleKeyOverride => typeof(Button);
@@ -138,6 +139,15 @@ public class AuraButton : Button
 
         UpdateIconPosition();
         UpdateLoadingState();
+        UpdateAutomationName();
+    }
+
+    private void UpdateAutomationName()
+    {
+        if (Content is string text && !string.IsNullOrEmpty(text))
+        {
+            SetValue(AutomationProperties.NameProperty, text);
+        }
     }
 
     protected virtual void OnIconChanged(AvaloniaPropertyChangedEventArgs e)
@@ -199,7 +209,5 @@ public class AuraButton : Button
     protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromLogicalTree(e);
-        _loadingCancellation?.Dispose();
-        _loadingCancellation = null;
     }
 }

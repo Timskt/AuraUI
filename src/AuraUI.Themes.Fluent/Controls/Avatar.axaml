@@ -5,18 +5,18 @@
          Avatar — Fluent Style
          ============================================================ -->
     <Style Selector="Border.avatar">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraAvatarRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraAvatarRadius}"/>
         <Setter Property="Width" Value="36"/>
         <Setter Property="Height" Value="36"/>
         <Setter Property="ClipToBounds" Value="True"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <!-- Avatar content (text initials) -->
     <Style Selector="Border.avatar TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -63,27 +63,27 @@
 
     <!-- Avatar shape: square -->
     <Style Selector="Border.avatar.square">
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
     </Style>
 
     <!-- Avatar ring (with border) -->
     <Style Selector="Border.avatar.ring">
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Avatar color variants -->
     <Style Selector="Border.avatar.secondary">
-        <Setter Property="Background" Value="{StaticResource AuraSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
     </Style>
     <Style Selector="Border.avatar.success">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Border.avatar.warning">
-        <Setter Property="Background" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Border.avatar.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- Avatar group (stacked) -->
@@ -92,7 +92,7 @@
     </Style>
     <Style Selector="StackPanel.avatar-group Border.avatar">
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBackgroundBrush}"/>
     </Style>
 
 </Styles>

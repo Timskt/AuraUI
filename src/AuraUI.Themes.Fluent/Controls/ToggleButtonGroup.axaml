@@ -1,0 +1,58 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ============================================================
+         ToggleButtonGroup — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|ToggleButtonGroup">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <ItemsPresenter Name="PART_ItemsPresenter">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Group border styling -->
+    <Style Selector="selection|ToggleButtonGroup">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraButtonRadius}"/>
+    </Style>
+
+    <!-- Child toggle buttons in group — remove individual borders -->
+    <Style Selector="selection|ToggleButtonGroup /template/ ItemsPresenter ToggleButton">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+
+    <!-- First button gets left radius -->
+    <Style Selector="selection|ToggleButtonGroup /template/ ItemsPresenter ToggleButton:nth-child(1)">
+        <Setter Property="CornerRadius" Value="4,0,0,4"/>
+    </Style>
+
+    <!-- Last button gets right radius -->
+    <Style Selector="selection|ToggleButtonGroup /template/ ItemsPresenter ToggleButton:last-child">
+        <Setter Property="CornerRadius" Value="0,4,4,0"/>
+    </Style>
+
+    <!-- Separators between items (all non-first buttons get left border) -->
+    <Style Selector="selection|ToggleButtonGroup /template/ ItemsPresenter ToggleButton:nth-child(n+2)">
+        <Setter Property="BorderThickness" Value="1,0,0,0"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraDividerBrush}"/>
+    </Style>
+
+</Styles>

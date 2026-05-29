@@ -5,16 +5,16 @@
          TextBox — Fluent Style
          ============================================================ -->
     <Style Selector="TextBox">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
         <Setter Property="Padding" Value="8,6"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="CaretBrush" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="SelectionBrush" Value="{StaticResource AuraPrimaryMutedBrush}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="SelectionBrush" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
         <Setter Property="Watermark" Value=""/>
         <Setter Property="Template">
             <ControlTemplate>
@@ -50,7 +50,7 @@
                                 IsVisible="False">
                             <Path Width="10" Height="10"
                                   Data="M 1,1 L 9,9 M 9,1 L 1,9"
-                                  Stroke="{StaticResource AuraForegroundTertiaryBrush}"
+                                  Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
                                   StrokeThickness="1.5"/>
                         </Button>
                         <!-- Text input area -->
@@ -60,7 +60,7 @@
                             <Panel>
                                 <TextBlock Name="PART_Watermark"
                                            Text="{TemplateBinding Watermark}"
-                                           Foreground="{StaticResource AuraPlaceholderBrush}"
+                                           Foreground="{DynamicResource AuraPlaceholderBrush}"
                                            Margin="{TemplateBinding Padding}"
                                            VerticalAlignment="Center"
                                            IsHitTestVisible="False"/>
@@ -91,45 +91,45 @@
 
     <!-- TextBox :pointerover -->
     <Style Selector="TextBox:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
     <!-- TextBox :focus -->
     <Style Selector="TextBox:focus /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundFocusBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
     <!-- TextBox :disabled -->
     <Style Selector="TextBox:disabled">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundDisabledBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundDisabledBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Opacity" Value="0.4"/>
     </Style>
 
     <!-- TextBox :readonly -->
     <Style Selector="TextBox:readonly">
-        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
     </Style>
 
     <!-- TextBox error state -->
     <Style Selector="TextBox:error /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <!-- ============================================================
          TextBox Size Classes
          ============================================================ -->
     <Style Selector="TextBox.sm">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightSm}"/>
         <Setter Property="Padding" Value="6,4"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style Selector="TextBox.lg">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightLg}"/>
         <Setter Property="Padding" Value="12,10"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>

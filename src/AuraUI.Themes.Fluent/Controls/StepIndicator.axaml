@@ -28,9 +28,9 @@
     <Style Selector="Border.step-circle">
         <Setter Property="Width" Value="32"/>
         <Setter Property="Height" Value="32"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
-        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
@@ -38,7 +38,7 @@
     <Style Selector="Border.step-circle TextBlock">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
@@ -46,7 +46,7 @@
     <!-- Step connector line -->
     <Style Selector="Border.step-connector">
         <Setter Property="Height" Value="2"/>
-        <Setter Property="Background" Value="{StaticResource AuraDividerBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraDividerBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
@@ -54,7 +54,7 @@
     <!-- Step label -->
     <Style Selector="TextBlock.step-label">
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,8,0,0"/>
     </Style>
@@ -65,45 +65,45 @@
 
     <!-- Completed step -->
     <Style Selector="Border.step-circle.completed">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="Border.step-circle.completed TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Active step -->
     <Style Selector="Border.step-circle.active">
-        <Setter Property="Background" Value="{StaticResource AuraBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="Border.step-circle.active TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Upcoming step (default) -->
     <Style Selector="Border.step-circle.upcoming">
-        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
     </Style>
 
     <!-- Error step -->
     <Style Selector="Border.step-circle.error">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Border.step-circle.error TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Completed connector -->
     <Style Selector="Border.step-connector.completed">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Active connector -->
     <Style Selector="Border.step-connector.active">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- ============================================================

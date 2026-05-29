@@ -3,6 +3,12 @@ using Avalonia.Controls;
 
 namespace AuraUI.Core.Helpers;
 
+/// <summary>
+/// Provides attached properties for configuring tooltip behavior: <c>ShowDelay</c>
+/// (milliseconds before the tooltip appears) and <c>HasArrow</c> (read by custom
+/// tooltip templates to decide whether to render an arrow). These complement the
+/// built-in <see cref="Avalonia.Controls.ToolTip"/> attached properties.
+/// </summary>
 public static class TooltipHelper
 {
     public static readonly AttachedProperty<int> ShowDelayProperty =

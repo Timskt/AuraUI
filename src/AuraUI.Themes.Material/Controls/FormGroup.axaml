@@ -1,0 +1,131 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ========================================
+         Material Design 3 — FormGroup
+         ======================================== -->
+
+    <!-- Top placement (default) -->
+    <Style Selector="layout|FormGroup">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:FormGroup">
+                    <StackPanel Spacing="4">
+                        <!-- Header -->
+                        <StackPanel Orientation="Horizontal" Spacing="2">
+                            <TextBlock Name="PART_HeaderTextBlock"
+                                       Text="{TemplateBinding Header}"
+                                       FontSize="12"
+                                       FontWeight="Medium"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                            <TextBlock Name="PART_RequiredIndicator"
+                                       Text=" *"
+                                       Foreground="{DynamicResource AuraErrorBrush}"
+                                       FontSize="12"
+                                       FontWeight="Medium"
+                                       IsVisible="False"/>
+                        </StackPanel>
+
+                        <!-- Field content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                        <!-- Helper text -->
+                        <TextBlock Name="PART_HelperTextBlock"
+                                   Text="{TemplateBinding HelperText}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   Margin="16,0,0,0"
+                                   TextWrapping="Wrap"
+                                   IsVisible="False"/>
+
+                        <!-- Error text -->
+                        <TextBlock Name="PART_ErrorTextBlock"
+                                   Text="{TemplateBinding ErrorText}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraErrorBrush}"
+                                   Margin="16,0,0,0"
+                                   TextWrapping="Wrap"
+                                   IsVisible="False"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Required state -->
+    <Style Selector="layout|FormGroup:required /template/ TextBlock#PART_RequiredIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Helper text visible -->
+    <Style Selector="layout|FormGroup:has-helper /template/ TextBlock#PART_HelperTextBlock">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Left placement -->
+    <Style Selector="layout|FormGroup:left">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:FormGroup">
+                    <DockPanel>
+                        <!-- Header on the left -->
+                        <DockPanel DockPanel.Dock="Left"
+                                   Width="120"
+                                   Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        Spacing="2">
+                                <TextBlock Text="{TemplateBinding Header}"
+                                           FontSize="12"
+                                           FontWeight="Medium"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                <TextBlock Name="PART_RequiredIndicator"
+                                           Text=" *"
+                                           Foreground="{DynamicResource AuraErrorBrush}"
+                                           FontSize="12"
+                                           FontWeight="Medium"
+                                           IsVisible="False"/>
+                            </StackPanel>
+                        </DockPanel>
+
+                        <!-- Field + helper on the right -->
+                        <StackPanel DockPanel.Dock="Right"
+                                    Spacing="4">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            <TextBlock Name="PART_HelperTextBlock"
+                                       Text="{TemplateBinding HelperText}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                       Margin="16,0,0,0"
+                                       TextWrapping="Wrap"
+                                       IsVisible="False"/>
+                            <TextBlock Name="PART_ErrorTextBlock"
+                                       Text="{TemplateBinding ErrorText}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AuraErrorBrush}"
+                                       Margin="16,0,0,0"
+                                       TextWrapping="Wrap"
+                                       IsVisible="False"/>
+                        </StackPanel>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Left + required -->
+    <Style Selector="layout|FormGroup:left:required /template/ TextBlock#PART_RequiredIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Left + has-helper -->
+    <Style Selector="layout|FormGroup:left:has-helper /template/ TextBlock#PART_HelperTextBlock">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+</Styles>

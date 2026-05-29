@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Windows.Input;
 
 namespace AuraUI.Core.MVVM;
@@ -66,7 +67,7 @@ public class AsyncRelayCommand : ICommand
 {
     private readonly Func<Task> _execute;
     private readonly Func<bool>? _canExecute;
-    private bool _isExecuting;
+    private int _isExecuting;
 
     public AsyncRelayCommand(Func<Task> execute, Func<bool>? canExecute = null)
     {
@@ -76,13 +77,12 @@ public class AsyncRelayCommand : ICommand
 
     public event EventHandler? CanExecuteChanged;
 
-    public bool CanExecute(object? parameter) => !_isExecuting && (_canExecute?.Invoke() ?? true);
+    public bool CanExecute(object? parameter) => _isExecuting == 0 && (_canExecute?.Invoke() ?? true);
 
     public async void Execute(object? parameter)
     {
-        if (_isExecuting) return;
+        if (Interlocked.CompareExchange(ref _isExecuting, 1, 0) != 0) return;
 
-        _isExecuting = true;
         RaiseCanExecuteChanged();
 
         try
@@ -91,7 +91,7 @@ public class AsyncRelayCommand : ICommand
         }
         finally
         {
-            _isExecuting = false;
+            Interlocked.Exchange(ref _isExecuting, 0);
             RaiseCanExecuteChanged();
         }
     }
@@ -106,7 +106,7 @@ public class AsyncRelayCommand<T> : ICommand
 {
     private readonly Func<T?, Task> _execute;
     private readonly Func<T?, bool>? _canExecute;
-    private bool _isExecuting;
+    private int _isExecuting;
 
     public AsyncRelayCommand(Func<T?, Task> execute, Func<T?, bool>? canExecute = null)
     {
@@ -118,7 +118,7 @@ public class AsyncRelayCommand<T> : ICommand
 
     public bool CanExecute(object? parameter)
     {
-        if (_isExecuting) return false;
+        if (_isExecuting != 0) return false;
         if (parameter is T typed)
             return _canExecute?.Invoke(typed) ?? true;
         return _canExecute?.Invoke(default) ?? true;
@@ -126,9 +126,8 @@ public class AsyncRelayCommand<T> : ICommand
 
     public async void Execute(object? parameter)
     {
-        if (_isExecuting) return;
+        if (Interlocked.CompareExchange(ref _isExecuting, 1, 0) != 0) return;
 
-        _isExecuting = true;
         RaiseCanExecuteChanged();
 
         try
@@ -138,7 +137,7 @@ public class AsyncRelayCommand<T> : ICommand
         }
         finally
         {
-            _isExecuting = false;
+            Interlocked.Exchange(ref _isExecuting, 0);
             RaiseCanExecuteChanged();
         }
     }

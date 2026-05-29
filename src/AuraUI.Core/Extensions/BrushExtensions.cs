@@ -2,6 +2,11 @@ using Avalonia.Media;
 
 namespace AuraUI.Core.Extensions;
 
+/// <summary>
+/// Extension methods for <see cref="IBrush"/> and <see cref="Color"/> that return new
+/// instances with adjusted opacity, lightness, or darkness. All methods are non-mutating;
+/// the original brush or color is never modified.
+/// </summary>
 public static class BrushExtensions
 {
     /// <summary>

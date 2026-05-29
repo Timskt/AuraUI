@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -104,6 +105,7 @@ public class AuraMessageBox : Window
     static AuraMessageBox()
     {
         IconProperty.Changed.AddClassHandler<AuraMessageBox>((x, _) => x.UpdatePseudoClasses());
+        TitleProperty.Changed.AddClassHandler<AuraMessageBox>((x, _) => x.UpdateAutomationName());
     }
 
     /// <summary>
@@ -256,6 +258,7 @@ public class AuraMessageBox : Window
         SubscribeButtons();
         ConfigureButtons();
         UpdatePseudoClasses();
+        UpdateAutomationName();
     }
 
     private void UnsubscribeButtons()
@@ -340,5 +343,14 @@ public class AuraMessageBox : Window
         PseudoClasses.Set(":error", Icon == MessageBoxIcon.Error);
         PseudoClasses.Set(":success", Icon == MessageBoxIcon.Success);
         PseudoClasses.Set(":question", Icon == MessageBoxIcon.Question);
+    }
+
+    private void UpdateAutomationName()
+    {
+        var title = Title;
+        if (!string.IsNullOrEmpty(title))
+        {
+            SetValue(AutomationProperties.NameProperty, title);
+        }
     }
 }

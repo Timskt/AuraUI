@@ -5,13 +5,13 @@
          ComboBox — Fluent Style
          ============================================================ -->
     <Style Selector="ComboBox">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -47,7 +47,7 @@
                                 <Path Name="Chevron"
                                       Width="12" Height="12"
                                       Data="M 1,4 L 6,9 L 11,4"
-                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                       StrokeThickness="1.5"
                                       Stretch="Uniform"
                                       HorizontalAlignment="Center"
@@ -60,10 +60,10 @@
                                IsLightDismissEnabled="True"
                                Placement="BottomEdgeAlignedLeft"
                                MaxHeight="300">
-                            <Border Background="{StaticResource AuraFlyoutBackgroundBrush}"
-                                    BorderBrush="{StaticResource AuraFlyoutBorderBrush}"
+                            <Border Background="{DynamicResource AuraFlyoutBackgroundBrush}"
+                                    BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
                                     BorderThickness="1"
-                                    CornerRadius="{StaticResource AuraRadiusMd}"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
                                     Padding="4">
                                 <ScrollViewer>
                                     <ItemsPresenter Name="PART_ItemsPresenter"/>
@@ -78,18 +78,18 @@
 
     <!-- ComboBox placeholder / watermark text -->
     <Style Selector="ComboBox /template/ TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource AuraPlaceholderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPlaceholderBrush}"/>
     </Style>
 
     <!-- ComboBox :pointerover -->
     <Style Selector="ComboBox:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
     <!-- ComboBox :focus -->
     <Style Selector="ComboBox:focus /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
@@ -100,12 +100,12 @@
 
     <!-- ComboBox expanded -->
     <Style Selector="ComboBox:expanded /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
     </Style>
 
     <!-- ComboBox dropdown toggle hover -->
     <Style Selector="ComboBox /template/ Border#PART_DropdownGlyph:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -113,7 +113,7 @@
          ============================================================ -->
     <Style Selector="ComboBoxItem">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="Padding" Value="12,8"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="36"/>
@@ -122,7 +122,7 @@
             <ControlTemplate>
                 <Border Name="PART_Border"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="{StaticResource AuraRadiusSm}"
+                        CornerRadius="{DynamicResource AuraRadiusSm}"
                         Margin="4,1"
                         Padding="{TemplateBinding Padding}">
                     <Border.Transitions>
@@ -139,19 +139,19 @@
     </Style>
 
     <Style Selector="ComboBoxItem:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="ComboBoxItem:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <Style Selector="ComboBoxItem:selected /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSelectedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedBrush}"/>
     </Style>
 
     <Style Selector="ComboBoxItem:selected:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraSelectedHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedHoverBrush}"/>
     </Style>
 
     <Style Selector="ComboBoxItem:disabled">
@@ -162,12 +162,12 @@
          ComboBox Size Classes
          ============================================================ -->
     <Style Selector="ComboBox.sm">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightSm}"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style Selector="ComboBox.lg">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightLg}"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
 
@@ -175,11 +175,11 @@
          Popup / Dropdown styling
          ============================================================ -->
     <Style Selector="ComboBox Popup Border">
-        <Setter Property="Background" Value="{StaticResource AuraFlyoutBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraFlyoutBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraFlyoutBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFlyoutBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
         <Setter Property="Padding" Value="4"/>
     </Style>
 

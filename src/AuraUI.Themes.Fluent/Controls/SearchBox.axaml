@@ -5,13 +5,13 @@
          SearchBox — Fluent Style (TextBox with search icon)
          ============================================================ -->
     <Style Selector="TextBox.search">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="Padding" Value="8,6"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Template">
             <ControlTemplate>
@@ -32,7 +32,7 @@
                               Margin="10,0,4,0"
                               VerticalAlignment="Center"
                               Data="M 7,1 A 6,6 0 1,1 7,13 A 6,6 0 1,1 7,1 M 11.5,11.5 L 15,15"
-                              Stroke="{StaticResource AuraForegroundTertiaryBrush}"
+                              Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
                               StrokeThickness="1.5"
                               Stretch="Uniform"/>
 
@@ -47,7 +47,7 @@
                                 IsVisible="False">
                             <Path Width="10" Height="10"
                                   Data="M 1,1 L 9,9 M 9,1 L 1,9"
-                                  Stroke="{StaticResource AuraForegroundTertiaryBrush}"
+                                  Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
                                   StrokeThickness="1.5"/>
                         </Button>
 
@@ -57,7 +57,7 @@
                             <Panel>
                                 <TextBlock Name="PART_Watermark"
                                            Text="{TemplateBinding Watermark}"
-                                           Foreground="{StaticResource AuraPlaceholderBrush}"
+                                           Foreground="{DynamicResource AuraPlaceholderBrush}"
                                            Margin="4,0"
                                            VerticalAlignment="Center"
                                            IsHitTestVisible="False"/>
@@ -81,14 +81,14 @@
 
     <!-- SearchBox :pointerover -->
     <Style Selector="TextBox.search:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
     <!-- SearchBox :focus -->
     <Style Selector="TextBox.search:focus /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundFocusBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
@@ -99,13 +99,13 @@
 
     <!-- Size variants -->
     <Style Selector="TextBox.search.sm">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightSm}"/>
         <Setter Property="Padding" Value="6,4"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style Selector="TextBox.search.lg">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightLg}"/>
         <Setter Property="Padding" Value="12,10"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>

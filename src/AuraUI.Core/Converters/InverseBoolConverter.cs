@@ -4,6 +4,11 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// Negates a <see cref="bool"/> value: <c>true</c> becomes <c>false</c> and vice versa.
+/// Supports both forward and backward conversion. Use the static <see cref="Instance"/>
+/// property for XAML bindings.
+/// </summary>
 public class InverseBoolConverter : IValueConverter
 {
     public static InverseBoolConverter Instance { get; } = new();

@@ -5,12 +5,12 @@
          Notification — Fluent Style (Longer persistent notification)
          ============================================================ -->
     <Style Selector="Border.notification">
-        <Setter Property="Background" Value="{StaticResource AuraCardBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="16"/>
-        <Setter Property="BoxShadow" Value="{StaticResource AuraShadowMd}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
         <Setter Property="MinWidth" Value="320"/>
         <Setter Property="MaxWidth" Value="440"/>
         <Setter Property="ClipToBounds" Value="True"/>
@@ -37,7 +37,7 @@
     <Style Selector="Border.notification-icon">
         <Setter Property="Width" Value="36"/>
         <Setter Property="Height" Value="36"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
     </Style>
 
@@ -58,19 +58,19 @@
     <Style Selector="TextBlock.notification-title">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 
     <!-- Notification timestamp -->
     <Style Selector="TextBlock.notification-time">
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
     </Style>
 
     <!-- Notification body -->
     <Style Selector="TextBlock.notification-body">
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
@@ -93,7 +93,7 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
     <Style Selector="Button.notification-close:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -101,43 +101,43 @@
          ============================================================ -->
 
     <Style Selector="Border.notification.success">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="Border.notification.success Border.notification-icon">
-        <Setter Property="Background" Value="{StaticResource AuraSuccessLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessLightBrush}"/>
     </Style>
     <Style Selector="Border.notification.success Border.notification-icon Path">
-        <Setter Property="Fill" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
 
     <Style Selector="Border.notification.warning">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="Border.notification.warning Border.notification-icon">
-        <Setter Property="Background" Value="{StaticResource AuraWarningLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningLightBrush}"/>
     </Style>
     <Style Selector="Border.notification.warning Border.notification-icon Path">
-        <Setter Property="Fill" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
 
     <Style Selector="Border.notification.error">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Border.notification.error Border.notification-icon">
-        <Setter Property="Background" Value="{StaticResource AuraErrorLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
     </Style>
     <Style Selector="Border.notification.error Border.notification-icon Path">
-        <Setter Property="Fill" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
     <Style Selector="Border.notification.info">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
     <Style Selector="Border.notification.info Border.notification-icon">
-        <Setter Property="Background" Value="{StaticResource AuraInfoLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoLightBrush}"/>
     </Style>
     <Style Selector="Border.notification.info Border.notification-icon Path">
-        <Setter Property="Fill" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
 
 </Styles>

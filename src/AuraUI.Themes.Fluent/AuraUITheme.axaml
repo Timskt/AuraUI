@@ -2,8 +2,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Styles.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceInclude Source="/Resources/Colors.axaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceInclude Source="/Resources/Colors.Dark.axaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/Resources/Colors.axaml"/>
                 <ResourceInclude Source="/Resources/Spacing.axaml"/>
                 <ResourceInclude Source="/Resources/Typography.axaml"/>
                 <ResourceInclude Source="/Resources/Animations.axaml"/>
@@ -48,4 +59,20 @@
     <StyleInclude Source="/Controls/Dialog.axaml"/>
     <StyleInclude Source="/Controls/Snackbar.axaml"/>
     <StyleInclude Source="/Controls/WindowX.axaml"/>
+
+    <!-- New controls -->
+    <StyleInclude Source="/Controls/Drawer.axaml"/>
+    <StyleInclude Source="/Controls/DateTimePicker.axaml"/>
+    <StyleInclude Source="/Controls/RangeSlider.axaml"/>
+    <StyleInclude Source="/Controls/StateControl.axaml"/>
+    <StyleInclude Source="/Controls/DropDown.axaml"/>
+    <StyleInclude Source="/Controls/ToggleButtonGroup.axaml"/>
+    <StyleInclude Source="/Controls/FormGroup.axaml"/>
+    <StyleInclude Source="/Controls/ColorPicker.axaml"/>
+    <StyleInclude Source="/Controls/MaskedTextBox.axaml"/>
+    <StyleInclude Source="/Controls/RepeatButton.axaml"/>
+    <StyleInclude Source="/Controls/LoadingOverlay.axaml"/>
+    <StyleInclude Source="/Controls/PendingDialog.axaml"/>
+    <StyleInclude Source="/Controls/DividerPanel.axaml"/>
+    <StyleInclude Source="/Controls/WindowXModalDialog.axaml"/>
 </Styles>

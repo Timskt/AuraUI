@@ -1,0 +1,105 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ============================================================
+         DateTimePicker — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|DateTimePicker">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <!-- Text display -->
+                        <TextBox Name="PART_TextBox"
+                                 Grid.Column="0"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Watermark="{TemplateBinding PlaceholderText}"
+                                 IsReadOnly="True"
+                                 VerticalAlignment="Center"
+                                 Padding="12,0"
+                                 MinHeight="{DynamicResource AuraControlHeightMd}"/>
+
+                        <!-- Dropdown button -->
+                        <Button Name="PART_DropdownButton"
+                                Grid.Column="1"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8"
+                                VerticalAlignment="Center"
+                                Cursor="Hand"
+                                MinWidth="36"
+                                MinHeight="{DynamicResource AuraControlHeightMd}">
+                            <Path Data="M 3,6 L 8,11 L 13,6"
+                                  Width="10"
+                                  Height="10"
+                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                  StrokeThickness="1.5"
+                                  Stretch="Uniform"/>
+                        </Button>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Calendar dropdown popup -->
+    <Style Selector="selection|DateTimePicker /template/ Popup">
+        <Setter Property="PlacementMode" Value="BottomEdgeAlignedLeft"/>
+        <Setter Property="PlacementTarget" Value="{Binding $parent}"/>
+    </Style>
+
+    <!-- Hover state -->
+    <Style Selector="selection|DateTimePicker:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- Focus / Open state -->
+    <Style Selector="selection|DateTimePicker:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="selection|DateTimePicker:open">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+    </Style>
+
+    <!-- Selected state -->
+    <Style Selector="selection|DateTimePicker:selected /template/ TextBox">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <!-- Placeholder (no selection) -->
+    <Style Selector="selection|DateTimePicker /template/ TextBox">
+        <Setter Property="Foreground" Value="{DynamicResource AuraPlaceholderBrush}"/>
+    </Style>
+
+    <!-- Dropdown button hover -->
+    <Style Selector="selection|DateTimePicker /template/ Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|DateTimePicker:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
+    </Style>
+
+</Styles>

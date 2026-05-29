@@ -11,7 +11,7 @@
                 <DockPanel>
                     <!-- Tab strip -->
                     <Border DockPanel.Dock="Top"
-                            BorderBrush="{StaticResource AuraDividerBrush}"
+                            BorderBrush="{DynamicResource AuraDividerBrush}"
                             BorderThickness="0,0,0,1">
                         <TabStrip Name="PART_Header"
                                   Background="Transparent"
@@ -40,7 +40,7 @@
          ============================================================ -->
     <Style Selector="TabStripItem">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="Padding" Value="12,10"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Normal"/>
@@ -75,19 +75,19 @@
 
     <!-- TabItem :pointerover -->
     <Style Selector="TabStripItem:pointerover">
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
     <Style Selector="TabStripItem:pointerover /template/ Border#PART_SelectedPipe">
-        <Setter Property="Background" Value="{StaticResource AuraBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
     <!-- TabItem :selected -->
     <Style Selector="TabStripItem:selected">
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     <Style Selector="TabStripItem:selected /template/ Border#PART_SelectedPipe">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- TabItem :disabled -->
@@ -102,13 +102,13 @@
 
     <!-- Pills style -->
     <Style Selector="TabControl.pills TabStripItem">
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
                         Background="Transparent"
-                        CornerRadius="{StaticResource AuraRadiusFull}"
+                        CornerRadius="{DynamicResource AuraRadiusFull}"
                         Padding="{TemplateBinding Padding}">
                     <Border.Transitions>
                         <BrushTransition Duration="00:00:00.200" Property="Background"/>
@@ -122,10 +122,10 @@
         </Setter>
     </Style>
     <Style Selector="TabControl.pills TabStripItem:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
     <Style Selector="TabControl.pills TabStripItem:selected /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraPrimaryLightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
     </Style>
 
     <!-- Underline-less / clean -->

@@ -4,6 +4,12 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// Converts <see cref="DateTime"/>, <see cref="DateTimeOffset"/>, <see cref="DateOnly"/>,
+/// and <see cref="TimeOnly"/> values to formatted strings. Pass a format string as the
+/// converter parameter; defaults to <c>"g"</c> (general short). Use the static
+/// <see cref="Instance"/> property for XAML bindings.
+/// </summary>
 public class DateTimeFormatConverter : IValueConverter
 {
     public static DateTimeFormatConverter Instance { get; } = new();

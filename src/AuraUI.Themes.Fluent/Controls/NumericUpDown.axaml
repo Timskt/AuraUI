@@ -5,13 +5,13 @@
          NumericUpDown — Fluent Style
          ============================================================ -->
     <Style Selector="NumericUpDown">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraInputRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightMd}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Template">
             <ControlTemplate>
@@ -50,10 +50,10 @@
                                     VerticalAlignment="Top">
                                 <Path Width="10" Height="6"
                                       Data="M 1,5 L 5,1 L 9,5"
-                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                       StrokeThickness="1.5"/>
                             </Button>
-                            <Border Width="1" Background="{StaticResource AuraDividerBrush}"/>
+                            <Border Width="1" Background="{DynamicResource AuraDividerBrush}"/>
                             <Button Name="PART_DecreaseButton"
                                     DockPanel.Dock="Bottom"
                                     Background="Transparent"
@@ -63,7 +63,7 @@
                                     VerticalAlignment="Bottom">
                                 <Path Width="10" Height="6"
                                       Data="M 1,1 L 5,5 L 9,1"
-                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                       StrokeThickness="1.5"/>
                             </Button>
                         </DockPanel>
@@ -75,13 +75,13 @@
 
     <!-- NumericUpDown :pointerover -->
     <Style Selector="NumericUpDown:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{StaticResource AuraInputBackgroundHoverBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
     <!-- NumericUpDown :focus-within -->
     <Style Selector="NumericUpDown:focus-within /template/ Border#PART_Border">
-        <Setter Property="BorderBrush" Value="{StaticResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
@@ -92,20 +92,20 @@
 
     <!-- Spin button styles -->
     <Style Selector="NumericUpDown /template/ Button:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
     <Style Selector="NumericUpDown /template/ Button:pressed">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Size variants -->
     <Style Selector="NumericUpDown.sm">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightSm}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightSm}"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style Selector="NumericUpDown.lg">
-        <Setter Property="MinHeight" Value="{StaticResource AuraControlHeightLg}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightLg}"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
 

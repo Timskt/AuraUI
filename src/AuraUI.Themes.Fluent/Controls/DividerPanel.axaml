@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         DividerPanel — Fluent Style
+         A panel that inserts dividers between children.
+         ============================================================ -->
+    <Style Selector="layout|DividerPanel">
+        <Setter Property="DividerThickness" Value="1"/>
+        <Setter Property="DividerBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="DividerMargin" Value="0,8"/>
+        <Setter Property="Orientation" Value="Vertical"/>
+    </Style>
+
+    <!-- Horizontal orientation -->
+    <Style Selector="layout|DividerPanel[Orientation=Horizontal]">
+        <Setter Property="DividerMargin" Value="8,0"/>
+    </Style>
+
+    <!-- Compact dividers -->
+    <Style Selector="layout|DividerPanel.compact">
+        <Setter Property="DividerMargin" Value="0,4"/>
+    </Style>
+
+    <Style Selector="layout|DividerPanel.compact[Orientation=Horizontal]">
+        <Setter Property="DividerMargin" Value="4,0"/>
+    </Style>
+
+    <!-- Spacious dividers -->
+    <Style Selector="layout|DividerPanel.spacious">
+        <Setter Property="DividerMargin" Value="0,16"/>
+    </Style>
+
+    <Style Selector="layout|DividerPanel.spacious[Orientation=Horizontal]">
+        <Setter Property="DividerMargin" Value="16,0"/>
+    </Style>
+
+</Styles>

@@ -35,8 +35,11 @@ public class NotificationAction
 public class AuraNotification : ContentControl
 {
     private static readonly List<AuraNotification> _activeNotifications = new();
+    private static readonly object _notificationsLock = new();
     private DispatcherTimer? _dismissTimer;
     private DateTime _showTime;
+    private EventHandler<Avalonia.Interactivity.RoutedEventArgs>? _closeButtonClickHandler;
+    private Button? _closeButton;
 
     /// <summary>
     /// Defines the <see cref="NotificationTitle"/> styled property.
@@ -185,7 +188,10 @@ public class AuraNotification : ContentControl
 
         notification.ShowInOverlay();
         notification.StartDismissTimer();
-        _activeNotifications.Add(notification);
+        lock (_notificationsLock)
+        {
+            _activeNotifications.Add(notification);
+        }
         return notification;
     }
 
@@ -222,7 +228,12 @@ public class AuraNotification : ContentControl
     /// </summary>
     public static void DismissAll()
     {
-        foreach (var n in _activeNotifications.ToList())
+        List<AuraNotification> snapshot;
+        lock (_notificationsLock)
+        {
+            snapshot = _activeNotifications.ToList();
+        }
+        foreach (var n in snapshot)
             n.Dismiss();
     }
 
@@ -232,7 +243,10 @@ public class AuraNotification : ContentControl
     public void Dismiss()
     {
         StopDismissTimer();
-        _activeNotifications.Remove(this);
+        lock (_notificationsLock)
+        {
+            _activeNotifications.Remove(this);
+        }
 
         if (Parent is Panel panel)
             panel.Children.Remove(this);
@@ -244,9 +258,22 @@ public class AuraNotification : ContentControl
     {
         base.OnApplyTemplate(e);
 
+        // Unsubscribe from previous button to prevent handler accumulation
+        if (_closeButton != null && _closeButtonClickHandler != null)
+        {
+            _closeButton.Click -= _closeButtonClickHandler;
+        }
+
         if (e.NameScope.Find<Button>("PART_CloseButton") is { } closeButton)
         {
-            closeButton.Click += (_, _) => Dismiss();
+            _closeButtonClickHandler = (_, _) => Dismiss();
+            _closeButton = closeButton;
+            closeButton.Click += _closeButtonClickHandler;
+        }
+        else
+        {
+            _closeButton = null;
+            _closeButtonClickHandler = null;
         }
 
         // Wire up action buttons
@@ -320,6 +347,9 @@ public class AuraNotification : ContentControl
     {
         base.OnDetachedFromVisualTree(e);
         StopDismissTimer();
-        _activeNotifications.Remove(this);
+        lock (_notificationsLock)
+        {
+            _activeNotifications.Remove(this);
+        }
     }
 }

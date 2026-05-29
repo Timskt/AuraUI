@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -91,6 +92,7 @@ public class AuraComboBox : ComboBox
         MaxDropdownHeightProperty.Changed.AddClassHandler<AuraComboBox>((x, _) => x.OnMaxDropdownHeightChanged());
         VariantProperty.Changed.AddClassHandler<AuraComboBox>((x, _) => x.UpdateVariantPseudoClasses());
         SelectedItemProperty.Changed.AddClassHandler<AuraComboBox>((x, _) => x.UpdateSelectedPseudoClass());
+        PlaceholderTextProperty.Changed.AddClassHandler<AuraComboBox>((x, _) => x.UpdateAutomationName());
     }
 
     /// <summary>
@@ -160,6 +162,7 @@ public class AuraComboBox : ComboBox
         AttachSearchBox();
         UpdateVariantPseudoClasses();
         UpdateSelectedPseudoClass();
+        UpdateAutomationName();
 
         // Apply max dropdown height to the base.
         OnMaxDropdownHeightChanged();
@@ -389,5 +392,14 @@ public class AuraComboBox : ComboBox
     private void UpdateSelectedPseudoClass()
     {
         PseudoClasses.Set(":selected", SelectedItem != null);
+    }
+
+    private void UpdateAutomationName()
+    {
+        var placeholder = PlaceholderText;
+        if (!string.IsNullOrEmpty(placeholder))
+        {
+            SetValue(AutomationProperties.NameProperty, placeholder);
+        }
     }
 }

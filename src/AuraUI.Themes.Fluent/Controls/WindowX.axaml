@@ -5,8 +5,8 @@
          WindowX — Fluent Style (Custom Chrome Window)
          ============================================================ -->
     <Style Selector="Window.window-x">
-        <Setter Property="Background" Value="{StaticResource AuraBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraForegroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="ExtendClientAreaToDecorationsHint" Value="True"/>
         <Setter Property="ExtendClientAreaTitleBarHeightHint" Value="40"/>
         <Setter Property="Template">
@@ -34,7 +34,7 @@
                                        Text="{TemplateBinding Title}"
                                        DockPanel.Dock="Left"
                                        FontSize="12"
-                                       Foreground="{StaticResource AuraForegroundSecondaryBrush}"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
                                        VerticalAlignment="Center"
                                        Margin="4,0"/>
 
@@ -54,7 +54,7 @@
                                         Cursor="Hand">
                                     <Path Width="10" Height="1"
                                           Data="M 0,0.5 L 10,0.5"
-                                          Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                          Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                           StrokeThickness="1"/>
                                 </Button>
 
@@ -69,7 +69,7 @@
                                         Cursor="Hand">
                                     <Path Width="10" Height="10"
                                           Data="M 1,1 L 9,1 L 9,9 L 1,9 Z"
-                                          Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                          Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                           StrokeThickness="1"
                                           Fill="Transparent"/>
                                 </Button>
@@ -85,7 +85,7 @@
                                         Cursor="Hand">
                                     <Path Width="10" Height="10"
                                           Data="M 1,1 L 9,9 M 9,1 L 1,9"
-                                          Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                          Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                           StrokeThickness="1.2"/>
                                 </Button>
                             </StackPanel>
@@ -103,31 +103,31 @@
 
     <!-- Window control button hover states -->
     <Style Selector="Window.window-x /template/ Button#PART_MinimizeButton:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Window.window-x /template/ Button#PART_MaximizeButton:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pointerover Path">
-        <Setter Property="Stroke" Value="{StaticResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Window control button pressed states -->
     <Style Selector="Window.window-x /template/ Button#PART_MinimizeButton:pressed">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <Style Selector="Window.window-x /template/ Button#PART_MaximizeButton:pressed">
-        <Setter Property="Background" Value="{StaticResource AuraPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pressed">
-        <Setter Property="Background" Value="{StaticResource AuraErrorPressedBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorPressedBrush}"/>
     </Style>
 
     <!-- ============================================================
@@ -136,12 +136,12 @@
 
     <!-- Mica / immersive background -->
     <Style Selector="Window.window-x.mica">
-        <Setter Property="Background" Value="{StaticResource AuraAltBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraAltBackgroundBrush}"/>
     </Style>
 
     <!-- Acrylic background -->
     <Style Selector="Window.window-x.acrylic">
-        <Setter Property="Background" Value="{StaticResource AuraAcrylicBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraAcrylicBackgroundBrush}"/>
     </Style>
 
     <!-- Compact title bar -->

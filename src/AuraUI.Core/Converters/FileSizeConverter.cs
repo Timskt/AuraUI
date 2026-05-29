@@ -4,6 +4,12 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// Converts a numeric byte count to a human-readable file size string (e.g. <c>"1.5 MB"</c>).
+/// Supports <see cref="long"/>, <see cref="int"/>, <see cref="ulong"/>, <see cref="double"/>,
+/// and <see cref="float"/> inputs. This converter is one-way only. Use the static
+/// <see cref="Instance"/> property for XAML bindings.
+/// </summary>
 public class FileSizeConverter : IValueConverter
 {
     public static FileSizeConverter Instance { get; } = new();

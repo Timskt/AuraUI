@@ -1,0 +1,100 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ============================================================
+         RangeSlider — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|RangeSlider">
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Track background -->
+                    <Border Name="PART_Track"
+                            Background="{DynamicResource AuraMutedBrush}"
+                            Height="4"
+                            CornerRadius="2"
+                            VerticalAlignment="Center"
+                            Margin="10,0"/>
+
+                    <!-- Range fill -->
+                    <Border Name="PART_RangeFill"
+                            Background="{DynamicResource AuraPrimaryBrush}"
+                            Height="4"
+                            CornerRadius="2"
+                            VerticalAlignment="Center"
+                            IsHitTestVisible="False">
+                        <Border.Transitions>
+                            <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                        </Border.Transitions>
+                    </Border>
+
+                    <!-- Lower Thumb -->
+                    <Thumb Name="PART_LowerThumb"
+                           Width="20"
+                           Height="20"
+                           Cursor="Hand">
+                        <Thumb.Template>
+                            <ControlTemplate>
+                                <Border Name="ThumbBorder"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        BorderBrush="White"
+                                        BorderThickness="2"
+                                        CornerRadius="10"
+                                        Width="20"
+                                        Height="20">
+                                    <Border.Transitions>
+                                        <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                                        <BoxShadowsTransition Duration="00:00:00.150" Property="BoxShadow"/>
+                                    </Border.Transitions>
+                                </Border>
+                            </ControlTemplate>
+                        </Thumb.Template>
+                    </Thumb>
+
+                    <!-- Upper Thumb -->
+                    <Thumb Name="PART_UpperThumb"
+                           Width="20"
+                           Height="20"
+                           Cursor="Hand">
+                        <Thumb.Template>
+                            <ControlTemplate>
+                                <Border Name="ThumbBorder"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        BorderBrush="White"
+                                        BorderThickness="2"
+                                        CornerRadius="10"
+                                        Width="20"
+                                        Height="20">
+                                    <Border.Transitions>
+                                        <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                                        <BoxShadowsTransition Duration="00:00:00.150" Property="BoxShadow"/>
+                                    </Border.Transitions>
+                                </Border>
+                            </ControlTemplate>
+                        </Thumb.Template>
+                    </Thumb>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Thumb hover -->
+    <Style Selector="selection|RangeSlider /template/ Thumb:pointerover /template/ Border#ThumbBorder">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="BoxShadow" Value="0 0 0 4 #20005FB8"/>
+    </Style>
+
+    <!-- Thumb pressed -->
+    <Style Selector="selection|RangeSlider:pressed /template/ Thumb /template/ Border#ThumbBorder">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="BoxShadow" Value="0 0 0 6 #30005FB8"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|RangeSlider:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

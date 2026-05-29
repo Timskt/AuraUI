@@ -30,7 +30,7 @@
 
     <!-- Rate star path -->
     <Style Selector="Border.rate-item Path">
-        <Setter Property="Fill" Value="{StaticResource AuraBorderBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="Width" Value="16"/>
         <Setter Property="Height" Value="16"/>
         <Setter Property="Stretch" Value="Uniform"/>
@@ -40,17 +40,17 @@
 
     <!-- Rate item :pointerover -->
     <Style Selector="Border.rate-item:pointerover">
-        <Setter Property="Background" Value="{StaticResource AuraHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Rate item active (selected) -->
     <Style Selector="Border.rate-item.active Path">
-        <Setter Property="Fill" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
 
     <!-- Rate item half -->
     <Style Selector="Border.rate-item.half Path">
-        <Setter Property="Fill" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraWarningBrush}"/>
         <Setter Property="Opacity" Value="0.5"/>
     </Style>
 
@@ -73,7 +73,7 @@
 
     <!-- Rate with primary color -->
     <Style Selector="ItemsControl.rate.primary Border.rate-item.active Path">
-        <Setter Property="Fill" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
 </Styles>

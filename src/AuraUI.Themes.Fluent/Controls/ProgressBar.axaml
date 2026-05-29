@@ -5,11 +5,11 @@
          ProgressBar — Fluent Style
          ============================================================ -->
     <Style Selector="ProgressBar">
-        <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="CornerRadius" Value="{StaticResource AuraRadiusFull}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="Height" Value="4"/>
         <Setter Property="MinHeight" Value="4"/>
         <Setter Property="Template">
@@ -27,7 +27,7 @@
                             HorizontalAlignment="Left">
                         <Border.Transitions>
                             <DoubleTransition Duration="00:00:00.300" Property="Width"
-                                              Easing="{StaticResource AuraEasingStandard}"/>
+                                              Easing="{DynamicResource AuraEasingStandard}"/>
                         </Border.Transitions>
                     </Border>
                 </Border>
@@ -74,16 +74,16 @@
          ============================================================ -->
 
     <Style Selector="ProgressBar.success">
-        <Setter Property="Foreground" Value="{StaticResource AuraSuccessBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
     <Style Selector="ProgressBar.warning">
-        <Setter Property="Foreground" Value="{StaticResource AuraWarningBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
     <Style Selector="ProgressBar.error">
-        <Setter Property="Foreground" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
     <Style Selector="ProgressBar.info">
-        <Setter Property="Foreground" Value="{StaticResource AuraInfoBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
 
     <!-- Striped variant -->

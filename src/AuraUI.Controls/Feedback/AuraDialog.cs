@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -120,6 +121,7 @@ public class AuraDialog : ContentControl
         IsOpenProperty.Changed.AddClassHandler<AuraDialog>((x, e) => x.OnIsOpenChanged(e));
         PlacementProperty.Changed.AddClassHandler<AuraDialog>((x, _) => x.UpdatePseudoClasses());
         IsModalProperty.Changed.AddClassHandler<AuraDialog>((x, _) => x.UpdatePseudoClasses());
+        DialogTitleProperty.Changed.AddClassHandler<AuraDialog>((x, _) => x.UpdateAutomationName());
     }
 
     /// <summary>
@@ -271,9 +273,13 @@ public class AuraDialog : ContentControl
         if (_overlay != null)
             _overlay.PointerPressed += OnOverlayPointerPressed;
         if (_closeButton != null)
+        {
             _closeButton.Click += OnCloseButtonClick;
+            _closeButton.SetValue(AutomationProperties.NameProperty, "Close");
+        }
 
         UpdatePseudoClasses();
+        UpdateAutomationName();
 
         if (IsOpen)
             AttachToOverlay();
@@ -343,6 +349,15 @@ public class AuraDialog : ContentControl
         PseudoClasses.Set(":drawer-right", Placement == DialogPlacement.DrawerRight);
         PseudoClasses.Set(":drawer-top", Placement == DialogPlacement.DrawerTop);
         PseudoClasses.Set(":drawer-bottom", Placement == DialogPlacement.DrawerBottom);
+    }
+
+    private void UpdateAutomationName()
+    {
+        var title = DialogTitle;
+        if (!string.IsNullOrEmpty(title))
+        {
+            SetValue(AutomationProperties.NameProperty, title);
+        }
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
