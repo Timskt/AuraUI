@@ -296,7 +296,7 @@
                         <TextBlock Text="AuraNumericUpDown" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8" MaxWidth="400">
                             <input:AuraNumericUpDown Watermark="Enter a number" Minimum="0" Maximum="100" Increment="1" Value="50"/>
-                            <input:AuraNumericUpDown Watermark="Decimal" Minimum="0" Maximum="10" Increment="0.5M" Value="3.5M" FormatString="F2"/>
+                            <input:AuraNumericUpDown Watermark="Decimal" Minimum="0" Maximum="10" Increment="0.5" Value="3.5" FormatString="F2"/>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>

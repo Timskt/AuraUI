@@ -87,6 +87,11 @@ public class AuraCarousel : TemplatedControl
         ItemsProperty.Changed.AddClassHandler<AuraCarousel>((x, _) => x.OnItemsChanged());
     }
 
+    public AuraCarousel()
+    {
+        Items = new Avalonia.Controls.Controls();
+    }
+
     /// <summary>
     /// Gets or sets the index of the currently selected item.
     /// </summary>
