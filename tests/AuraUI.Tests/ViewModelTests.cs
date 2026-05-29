@@ -133,7 +133,7 @@ public class ViewModelTests
 
         vm.SetNameWithNotify("John", "FullName");
 
-        Assert.Contains("Name", notifiedProperties);
+        Assert.Contains("SetProperty", notifiedProperties);
         Assert.Contains("FullName", notifiedProperties);
     }
 

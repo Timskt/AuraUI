@@ -5,49 +5,144 @@
     <!-- Material Design 3 — Dialog -->
 
     <Style Selector="feedback|AuraDialog">
+        <Setter Property="IsVisible" Value="False"/>
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="OverlayBrush" Value="{DynamicResource AuraScrimBrush}"/>
+        <Setter Property="OverlayOpacity" Value="0.32"/>
+        <Setter Property="DialogBackground" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="DialogCornerRadius" Value="{DynamicResource AuraDialogCornerRadius}"/>
+        <Setter Property="DialogPadding" Value="24"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="feedback:AuraDialog">
                     <Panel>
                         <!-- Scrim / overlay -->
                         <Border Name="PART_Overlay"
-                                Background="{DynamicResource AuraScrimBrush}"
-                                Opacity="0.32"/>
+                                Background="{TemplateBinding OverlayBrush}"
+                                Opacity="{TemplateBinding OverlayOpacity}"
+                                IsVisible="False"/>
+
                         <!-- Dialog surface -->
                         <Border Name="PART_DialogBorder"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="{DynamicResource AuraDialogCornerRadius}"
+                                Background="{TemplateBinding DialogBackground}"
+                                CornerRadius="{TemplateBinding DialogCornerRadius}"
                                 MinWidth="{DynamicResource AuraDialogMinWidth}"
                                 MaxWidth="{DynamicResource AuraDialogMaxWidth}"
-                                Padding="24"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            <StackPanel Spacing="16">
-                                <!-- Title -->
-                                <TextBlock Name="PART_Title"
-                                           Text="{TemplateBinding DialogTitle}"
-                                           FontSize="24"
-                                           FontWeight="Normal"
-                                           FontFamily="{DynamicResource AuraFontHeadlineSmallFamily}"
-                                           Foreground="{TemplateBinding Foreground}"/>
-                                <!-- Content -->
-                                <ContentPresenter Name="PART_ContentPresenter"
-                                                  Content="{TemplateBinding Content}"
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
-                                <!-- Footer -->
-                                <ContentPresenter Name="PART_FooterPresenter"
-                                                  Content="{TemplateBinding DialogFooter}"
-                                                  ContentTemplate="{TemplateBinding DialogFooterTemplate}"/>
-                            </StackPanel>
+                                VerticalAlignment="Center"
+                                IsVisible="False">
+                            <Panel>
+                                <Border Name="StateLayer"
+                                        Background="Transparent"
+                                        CornerRadius="{DynamicResource AuraDialogCornerRadius}"/>
+                                <StackPanel Spacing="16" Margin="24">
+                                    <!-- Title row with close button -->
+                                    <DockPanel>
+                                        <!-- Close button -->
+                                        <Button Name="PART_CloseButton"
+                                                DockPanel.Dock="Right"
+                                                Classes="icon"
+                                                Width="40"
+                                                Height="40"
+                                                Margin="8,-4,-4,0"
+                                                VerticalAlignment="Top"
+                                                Cursor="Hand">
+                                            <Path Data="M 8,8 L 16,16 M 16,8 L 8,16"
+                                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                  StrokeThickness="1.5"
+                                                  Width="12"
+                                                  Height="12"/>
+                                        </Button>
+
+                                        <!-- Title -->
+                                        <TextBlock Name="PART_Title"
+                                                   Text="{TemplateBinding DialogTitle}"
+                                                   FontSize="24"
+                                                   FontWeight="Normal"
+                                                   FontFamily="{DynamicResource AuraFontHeadlineSmallFamily}"
+                                                   Foreground="{TemplateBinding Foreground}"
+                                                   VerticalAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </DockPanel>
+
+                                    <!-- Content -->
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                  VerticalScrollBarVisibility="Auto"
+                                                  MaxHeight="500">
+                                        <ContentPresenter Name="PART_ContentPresenter"
+                                                          Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                    </ScrollViewer>
+
+                                    <!-- Footer -->
+                                    <ContentPresenter Name="PART_FooterPresenter"
+                                                      Content="{TemplateBinding DialogFooter}"
+                                                      ContentTemplate="{TemplateBinding DialogFooterTemplate}"/>
+                                </StackPanel>
+                            </Panel>
                         </Border>
                     </Panel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Dialog open state -->
+    <Style Selector="feedback|AuraDialog:open">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_Overlay">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_DialogBorder">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Close button hover -->
+    <Style Selector="feedback|AuraDialog /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Close button pressed -->
+    <Style Selector="feedback|AuraDialog /template/ Button#PART_CloseButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Dialog open animation -->
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_DialogBorder">
+        <Style.Animations>
+            <Animation Duration="00:00:00.300"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Overlay fade-in -->
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_Overlay">
+        <Style.Animations>
+            <Animation Duration="00:00:00.250"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="0.32"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
     </Style>
 
 </Styles>

@@ -4,6 +4,7 @@ using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
+using Avalonia.Media;
 
 namespace AuraUI.Controls.Layout;
 
@@ -53,6 +54,56 @@ public class Badge : ContentControl
     /// </summary>
     public static readonly StyledProperty<IDataTemplate?> BadgeContentTemplateProperty =
         AvaloniaProperty.Register<Badge, IDataTemplate?>(nameof(BadgeContentTemplate));
+
+    /// <summary>
+    /// Defines the <see cref="BadgeBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> BadgeBackgroundProperty =
+        AvaloniaProperty.Register<Badge, IBrush?>(nameof(BadgeBackground));
+
+    /// <summary>
+    /// Defines the <see cref="BadgeForeground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> BadgeForegroundProperty =
+        AvaloniaProperty.Register<Badge, IBrush?>(nameof(BadgeForeground));
+
+    /// <summary>
+    /// Defines the <see cref="BadgeCornerRadius"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<CornerRadius> BadgeCornerRadiusProperty =
+        AvaloniaProperty.Register<Badge, CornerRadius>(
+            nameof(BadgeCornerRadius),
+            new CornerRadius(999));
+
+    /// <summary>
+    /// Defines the <see cref="BadgeMinWidth"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> BadgeMinWidthProperty =
+        AvaloniaProperty.Register<Badge, double>(nameof(BadgeMinWidth), 20);
+
+    /// <summary>
+    /// Defines the <see cref="BadgeMinHeight"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> BadgeMinHeightProperty =
+        AvaloniaProperty.Register<Badge, double>(nameof(BadgeMinHeight), 20);
+
+    /// <summary>
+    /// Defines the <see cref="DotSize"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> DotSizeProperty =
+        AvaloniaProperty.Register<Badge, double>(nameof(DotSize), 10);
+
+    /// <summary>
+    /// Defines the <see cref="OffsetX"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> OffsetXProperty =
+        AvaloniaProperty.Register<Badge, double>(nameof(OffsetX), -6);
+
+    /// <summary>
+    /// Defines the <see cref="OffsetY"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> OffsetYProperty =
+        AvaloniaProperty.Register<Badge, double>(nameof(OffsetY), -6);
 
     private Border? _badgeContainer;
     private ContentPresenter? _badgeContentPresenter;
@@ -120,6 +171,78 @@ public class Badge : ContentControl
     {
         get => GetValue(BadgeContentTemplateProperty);
         set => SetValue(BadgeContentTemplateProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush for the badge overlay.
+    /// </summary>
+    public IBrush? BadgeBackground
+    {
+        get => GetValue(BadgeBackgroundProperty);
+        set => SetValue(BadgeBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for the badge text.
+    /// </summary>
+    public IBrush? BadgeForeground
+    {
+        get => GetValue(BadgeForegroundProperty);
+        set => SetValue(BadgeForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the corner radius of the badge.
+    /// </summary>
+    public CornerRadius BadgeCornerRadius
+    {
+        get => GetValue(BadgeCornerRadiusProperty);
+        set => SetValue(BadgeCornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the minimum width of the badge.
+    /// </summary>
+    public double BadgeMinWidth
+    {
+        get => GetValue(BadgeMinWidthProperty);
+        set => SetValue(BadgeMinWidthProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the minimum height of the badge.
+    /// </summary>
+    public double BadgeMinHeight
+    {
+        get => GetValue(BadgeMinHeightProperty);
+        set => SetValue(BadgeMinHeightProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the size of the dot badge.
+    /// </summary>
+    public double DotSize
+    {
+        get => GetValue(DotSizeProperty);
+        set => SetValue(DotSizeProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the horizontal offset of the badge overlay.
+    /// </summary>
+    public double OffsetX
+    {
+        get => GetValue(OffsetXProperty);
+        set => SetValue(OffsetXProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the vertical offset of the badge overlay.
+    /// </summary>
+    public double OffsetY
+    {
+        get => GetValue(OffsetYProperty);
+        set => SetValue(OffsetYProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

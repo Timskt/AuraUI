@@ -52,18 +52,26 @@
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
                 <BrushTransition Property="Foreground" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleX" Easing="{StaticResource AuraEasingStandard}"/>
+                <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleY" Easing="{StaticResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
 
     <!-- Hover state layer (8% primary overlay) -->
     <Style Selector="Button:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#14FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Pressed state layer (12% primary overlay) -->
     <Style Selector="Button:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1EFFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+    <!-- Pressed scale effect -->
+    <Style Selector="Button:pressed">
+        <Setter Property="ScaleTransform.ScaleX" Value="0.97"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.97"/>
     </Style>
 
     <!-- Focus state layer -->
@@ -89,11 +97,11 @@
     </Style>
 
     <Style Selector="Button.outlined:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Button.outlined:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1E6750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Text / Ghost Variant (.text) -->
@@ -107,11 +115,11 @@
     </Style>
 
     <Style Selector="Button.text:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Button.text:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1E6750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Tonal Variant (.tonal) -->
@@ -123,11 +131,11 @@
     </Style>
 
     <Style Selector="Button.tonal:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Button.tonal:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1E6750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Elevated Variant (.elevated) -->
@@ -139,11 +147,11 @@
     </Style>
 
     <Style Selector="Button.elevated:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Button.elevated:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1E6750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- FAB Variant (.fab) -->
@@ -161,11 +169,11 @@
     </Style>
 
     <Style Selector="Button.fab:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Button.fab:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1E6750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Small FAB -->

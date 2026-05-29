@@ -48,6 +48,7 @@ public class AnimationStackPanel : Panel
 
     private readonly Dictionary<Control, TranslateTransform> _transforms = new();
     private readonly Dictionary<Control, double> _previousPositions = new();
+    private readonly HashSet<Control> _currentChildrenSet = new();
 
     static AnimationStackPanel()
     {
@@ -165,13 +166,19 @@ public class AnimationStackPanel : Panel
             offset += childSize + spacing;
         }
 
-        // Cleanup removed children
-        var currentChildren = new HashSet<Control>(Children);
-        var toRemove = _previousPositions.Keys.Where(c => !currentChildren.Contains(c)).ToList();
-        foreach (var key in toRemove)
+        // Cleanup removed children (avoid LINQ allocation)
+        _currentChildrenSet.Clear();
+        foreach (var c in Children)
+            _currentChildrenSet.Add(c);
+
+        // Remove stale entries without LINQ
+        foreach (var key in _previousPositions.Keys.ToList())
         {
-            _previousPositions.Remove(key);
-            _transforms.Remove(key);
+            if (!_currentChildrenSet.Contains(key))
+            {
+                _previousPositions.Remove(key);
+                _transforms.Remove(key);
+            }
         }
 
         return finalSize;

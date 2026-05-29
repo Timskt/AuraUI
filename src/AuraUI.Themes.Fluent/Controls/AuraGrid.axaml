@@ -1,0 +1,20 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         AuraRow / AuraCol — Fluent Style (24-column grid)
+         ============================================================ -->
+
+    <!-- Row defaults -->
+    <Style Selector="layout|AuraRow">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Wrap" Value="True"/>
+    </Style>
+
+    <!-- Column defaults -->
+    <Style Selector="layout|AuraCol">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+</Styles>

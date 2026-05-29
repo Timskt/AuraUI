@@ -123,6 +123,7 @@ public static class StateBinding
     /// <summary>
     /// Creates a one-way binding from store state to multiple properties on a control.
     /// </summary>
+    /// <typeparam name="TControl">The control type.</typeparam>
     /// <typeparam name="TState">The state type.</typeparam>
     /// <param name="control">The control to bind.</param>
     /// <param name="store">The state store to observe.</param>

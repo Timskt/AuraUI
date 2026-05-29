@@ -98,7 +98,7 @@
 
     <!-- Selected -->
     <Style Selector="ComboBoxItem:selected /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedBrush}"/>
     </Style>
 
     <Style Selector="ComboBoxItem:selected">

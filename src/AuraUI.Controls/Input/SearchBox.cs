@@ -252,30 +252,38 @@ public class SearchBox : TextBox
         HasSearchText = !string.IsNullOrEmpty(Text);
     }
 
+    private string? _pendingSearchText;
+
     private void StartDebounce(string searchText)
     {
         CancelDebounce();
 
+        _pendingSearchText = searchText;
         _debounceTimer = new DispatcherTimer
         {
             Interval = TimeSpan.FromMilliseconds(SearchDelay)
         };
 
-        var capturedText = searchText;
-        _debounceTimer.Tick += (s, e) =>
-        {
-            CancelDebounce();
-            FireSearch(capturedText);
-        };
-
+        _debounceTimer.Tick += OnDebounceTick;
         _isDebounceActive = true;
         _debounceTimer.Start();
+    }
+
+    private void OnDebounceTick(object? sender, EventArgs e)
+    {
+        CancelDebounce();
+        if (_pendingSearchText != null)
+        {
+            FireSearch(_pendingSearchText);
+            _pendingSearchText = null;
+        }
     }
 
     private void CancelDebounce()
     {
         if (_debounceTimer is not null)
         {
+            _debounceTimer.Tick -= OnDebounceTick;
             _debounceTimer.Stop();
             _debounceTimer = null;
         }

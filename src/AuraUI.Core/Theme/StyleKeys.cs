@@ -68,6 +68,23 @@ public static class StyleKeys
     public const string SnackbarStyle = "AuraSnackbarStyle";
     public const string PendingDialogStyle = "AuraPendingDialogStyle";
     public const string LoadingOverlayStyle = "AuraLoadingOverlayStyle";
+    public const string MessageStyle = "AuraMessageStyle";
+
+    // Display
+    public const string DescriptionsStyle = "AuraDescriptionsStyle";
+    public const string StatisticStyle = "AuraStatisticStyle";
+    public const string ResultStyle = "AuraResultStyle";
+    public const string EmptyStyle = "AuraEmptyStyle";
+
+    // Layout
+    public const string SpaceStyle = "AuraSpaceStyle";
+    public const string LayoutStyle = "AuraLayoutStyle";
+    public const string RowStyle = "AuraRowStyle";
+    public const string ColStyle = "AuraColStyle";
+    public const string AffixStyle = "AuraAffixStyle";
+    public const string BackTopStyle = "AuraBackTopStyle";
+    public const string ConfigProviderStyle = "AuraConfigProviderStyle";
+    public const string ScrollbarStyle = "AuraScrollbarStyle";
 
     // Windowing
     public const string WindowXStyle = "AuraWindowXStyle";

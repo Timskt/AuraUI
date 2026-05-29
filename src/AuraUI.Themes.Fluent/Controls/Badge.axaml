@@ -6,6 +6,14 @@
          Badge — Fluent Style
          ============================================================ -->
     <Style Selector="layout|Badge">
+        <Setter Property="BadgeBackground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BadgeForeground" Value="White"/>
+        <Setter Property="BadgeCornerRadius" Value="999"/>
+        <Setter Property="BadgeMinWidth" Value="20"/>
+        <Setter Property="BadgeMinHeight" Value="20"/>
+        <Setter Property="DotSize" Value="10"/>
+        <Setter Property="OffsetX" Value="-6"/>
+        <Setter Property="OffsetY" Value="-6"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel>
@@ -16,18 +24,18 @@
 
                     <!-- Badge overlay -->
                     <Border Name="PART_BadgeContainer"
-                            Background="{DynamicResource AuraPrimaryBrush}"
-                            CornerRadius="999"
-                            MinWidth="20"
-                            MinHeight="20"
+                            Background="{TemplateBinding BadgeBackground}"
+                            CornerRadius="{TemplateBinding BadgeCornerRadius}"
+                            MinWidth="{TemplateBinding BadgeMinWidth}"
+                            MinHeight="{TemplateBinding BadgeMinHeight}"
                             Padding="6,2"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Margin="0,-6,-6,0"
+                            Margin="0,0,0,0"
                             ZIndex="1"
                             ClipToBounds="True">
                         <TextBlock Name="PART_BadgeText"
-                                   Foreground="White"
+                                   Foreground="{TemplateBinding BadgeForeground}"
                                    FontSize="11"
                                    FontWeight="SemiBold"
                                    HorizontalAlignment="Center"

@@ -1,10 +1,12 @@
 using Avalonia;
 using Avalonia.Automation;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 
 namespace AuraUI.Controls.Input;
@@ -33,6 +35,10 @@ public enum TextBoxVariant
 ///   PART_SuffixPresenter  - ContentPresenter for the suffix
 ///   PART_CharacterCount   - TextBlock displaying character count
 /// </summary>
+[TemplatePart("PART_ClearButton", typeof(Avalonia.Controls.Button))]
+[TemplatePart("PART_PrefixPresenter", typeof(Avalonia.Controls.Presenters.ContentPresenter))]
+[TemplatePart("PART_SuffixPresenter", typeof(Avalonia.Controls.Presenters.ContentPresenter))]
+[TemplatePart("PART_CharacterCount", typeof(Avalonia.Controls.TextBlock))]
 public class AuraTextBox : TextBox
 {
     private Button? _clearButton;
@@ -85,6 +91,26 @@ public class AuraTextBox : TextBox
         AvaloniaProperty.Register<AuraTextBox, int>(
             nameof(MaxLengthDisplay),
             defaultValue: 0);
+
+    /// <summary>
+    /// Defines the <see cref="PlaceholderForeground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> PlaceholderForegroundProperty =
+        AvaloniaProperty.Register<AuraTextBox, IBrush?>(nameof(PlaceholderForeground));
+
+    /// <summary>
+    /// Defines the <see cref="PlaceholderFontStyle"/> property.
+    /// </summary>
+    public static readonly StyledProperty<FontStyle> PlaceholderFontStyleProperty =
+        AvaloniaProperty.Register<AuraTextBox, FontStyle>(
+            nameof(PlaceholderFontStyle),
+            defaultValue: FontStyle.Italic);
+
+    /// <summary>
+    /// Defines the <see cref="ClearButtonForeground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ClearButtonForegroundProperty =
+        AvaloniaProperty.Register<AuraTextBox, IBrush?>(nameof(ClearButtonForeground));
 
     /// <summary>
     /// Gets or sets the prefix text displayed before the input area.
@@ -140,6 +166,33 @@ public class AuraTextBox : TextBox
     {
         get => GetValue(MaxLengthDisplayProperty);
         set => SetValue(MaxLengthDisplayProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for the placeholder text.
+    /// </summary>
+    public IBrush? PlaceholderForeground
+    {
+        get => GetValue(PlaceholderForegroundProperty);
+        set => SetValue(PlaceholderForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the font style for the placeholder text.
+    /// </summary>
+    public FontStyle PlaceholderFontStyle
+    {
+        get => GetValue(PlaceholderFontStyleProperty);
+        set => SetValue(PlaceholderFontStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for the clear button.
+    /// </summary>
+    public IBrush? ClearButtonForeground
+    {
+        get => GetValue(ClearButtonForegroundProperty);
+        set => SetValue(ClearButtonForegroundProperty, value);
     }
 
     static AuraTextBox()

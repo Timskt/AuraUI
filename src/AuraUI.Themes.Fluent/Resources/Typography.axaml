@@ -22,6 +22,7 @@
 
     <!-- Font Weights -->
     <FontWeight x:Key="AuraFontWeightNormal">Normal</FontWeight>
+    <FontWeight x:Key="AuraFontWeightMedium">Medium</FontWeight>
     <FontWeight x:Key="AuraFontWeightSemiBold">SemiBold</FontWeight>
     <FontWeight x:Key="AuraFontWeightBold">Bold</FontWeight>
 

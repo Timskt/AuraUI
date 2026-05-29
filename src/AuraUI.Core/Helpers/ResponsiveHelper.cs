@@ -72,7 +72,7 @@ public static class ResponsiveHelper
     public static void SetCollapseWhenHidden(Control element, bool value) => element.SetValue(CollapseWhenHiddenProperty, value);
 
     /// <summary>
-    /// Registers a named breakpoint range. Controls with a matching <see cref="BreakpointName"/>
+    /// Registers a named breakpoint range. Controls with a matching <see cref="BreakpointNameProperty"/>
     /// will be visible when the window width is between <paramref name="minWidth"/> and <paramref name="maxWidth"/>.
     /// </summary>
     /// <param name="name">The breakpoint name (e.g., "mobile", "tablet", "desktop").</param>

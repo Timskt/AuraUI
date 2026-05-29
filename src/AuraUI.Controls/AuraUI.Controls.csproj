@@ -22,11 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AuraUI.Core\AuraUI.Core.csproj" />
   </ItemGroup>
-  <!-- Exclude half-finished G2 spec and transform code that has compilation errors -->
-  <ItemGroup>
-    <Compile Remove="Charts\G2\**" />
-    <Compile Remove="Charts\Data\Transforms\**" />
-  </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="AuraUI.Tests" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
 
@@ -18,122 +19,44 @@ public class DragDropBehavior : Behavior<Control>
     private const double DragThreshold = 5.0;
     private IBrush? _originalBackground;
 
-    #region IsDragSource
-
-    public static readonly StyledProperty<bool> IsDragSourceProperty =
-        AvaloniaProperty.Register<DragDropBehavior, bool>(nameof(IsDragSource));
-
     /// <summary>
     /// Gets or sets whether the control acts as a drag source.
     /// </summary>
-    public bool IsDragSource
-    {
-        get => GetValue(IsDragSourceProperty);
-        set => SetValue(IsDragSourceProperty, value);
-    }
-
-    #endregion
-
-    #region IsDropTarget
-
-    public static readonly StyledProperty<bool> IsDropTargetProperty =
-        AvaloniaProperty.Register<DragDropBehavior, bool>(nameof(IsDropTarget));
+    public bool IsDragSource { get; set; }
 
     /// <summary>
     /// Gets or sets whether the control acts as a drop target.
     /// </summary>
-    public bool IsDropTarget
-    {
-        get => GetValue(IsDropTargetProperty);
-        set => SetValue(IsDropTargetProperty, value);
-    }
-
-    #endregion
-
-    #region DataFormat
-
-    public static readonly StyledProperty<string> DataFormatProperty =
-        AvaloniaProperty.Register<DragDropBehavior, string>(
-            nameof(DataFormat), "AuraUI.DragDrop.Data");
+    public bool IsDropTarget { get; set; }
 
     /// <summary>
     /// Gets or sets the custom data format identifier for the drag-drop data.
     /// </summary>
-    public string DataFormat
-    {
-        get => GetValue(DataFormatProperty);
-        set => SetValue(DataFormatProperty, value);
-    }
-
-    #endregion
-
-    #region DragStartCommand
-
-    public static readonly StyledProperty<ICommand?> DragStartCommandProperty =
-        AvaloniaProperty.Register<DragDropBehavior, ICommand?>(nameof(DragStartCommand));
+    public string DataFormat { get; set; } = "AuraUI.DragDrop.Data";
 
     /// <summary>
     /// Gets or sets the command to execute when a drag operation starts.
     /// The command parameter is the control being dragged.
     /// Return a DataObject or the data to be dragged from the command.
     /// </summary>
-    public ICommand? DragStartCommand
-    {
-        get => GetValue(DragStartCommandProperty);
-        set => SetValue(DragStartCommandProperty, value);
-    }
-
-    #endregion
-
-    #region DropCommand
-
-    public static readonly StyledProperty<ICommand?> DropCommandProperty =
-        AvaloniaProperty.Register<DragDropBehavior, ICommand?>(nameof(DropCommand));
+    public ICommand? DragStartCommand { get; set; }
 
     /// <summary>
     /// Gets or sets the command to execute when data is dropped on the control.
     /// The command parameter contains the dropped data.
     /// </summary>
-    public ICommand? DropCommand
-    {
-        get => GetValue(DropCommandProperty);
-        set => SetValue(DropCommandProperty, value);
-    }
-
-    #endregion
-
-    #region DragOverBrush
-
-    public static readonly StyledProperty<IBrush?> DragOverBrushProperty =
-        AvaloniaProperty.Register<DragDropBehavior, IBrush?>(nameof(DragOverBrush));
+    public ICommand? DropCommand { get; set; }
 
     /// <summary>
     /// Gets or sets the brush to apply to the control's background when a drag operation is over it.
     /// </summary>
-    public IBrush? DragOverBrush
-    {
-        get => GetValue(DragOverBrushProperty);
-        set => SetValue(DragOverBrushProperty, value);
-    }
-
-    #endregion
-
-    #region DragDataFunc
-
-    public static readonly StyledProperty<Func<object?>?> DragDataFuncProperty =
-        AvaloniaProperty.Register<DragDropBehavior, Func<object?>?>(nameof(DragDataFunc));
+    public IBrush? DragOverBrush { get; set; }
 
     /// <summary>
     /// Gets or sets a function that returns the data to be dragged.
     /// Used when DragStartCommand is not set.
     /// </summary>
-    public Func<object?>? DragDataFunc
-    {
-        get => GetValue(DragDataFuncProperty);
-        set => SetValue(DragDataFuncProperty, value);
-    }
-
-    #endregion
+    public Func<object?>? DragDataFunc { get; set; }
 
     protected override void OnAttached()
     {
@@ -192,7 +115,7 @@ public class DragDropBehavior : Behavior<Control>
         }
     }
 
-    private async void OnPointerMoved(object? sender, PointerEventArgs e)
+    private void OnPointerMoved(object? sender, PointerEventArgs e)
     {
         if (AssociatedObject == null || _isDragging)
             return;
@@ -205,7 +128,7 @@ public class DragDropBehavior : Behavior<Control>
             return;
 
         _isDragging = true;
-        await StartDragAsync();
+        StartDrag();
     }
 
     private void OnPointerReleased(object? sender, PointerReleasedEventArgs e)
@@ -213,20 +136,20 @@ public class DragDropBehavior : Behavior<Control>
         _isDragging = false;
     }
 
-    private async Task StartDragAsync()
+    private void StartDrag()
     {
         if (AssociatedObject == null)
             return;
 
         object? dragData = null;
 
-        // Try to get data from command
+        // Try to get data from command (command may populate data via side-effect)
         var dragCommand = DragStartCommand;
         if (dragCommand != null)
         {
             if (dragCommand.CanExecute(AssociatedObject))
             {
-                dragData = dragCommand.Execute(AssociatedObject);
+                dragCommand.Execute(AssociatedObject);
             }
         }
 
@@ -250,7 +173,7 @@ public class DragDropBehavior : Behavior<Control>
 
         if (_lastPointerPressedArgs != null)
         {
-            await DragDrop.DoDragDropAsync(_lastPointerPressedArgs, dataObject, effects);
+            DragDrop.DoDragDrop(_lastPointerPressedArgs, dataObject, effects);
         }
     }
 

@@ -196,6 +196,21 @@ public class AuraTimelineItem : ContentControl
         set => SetValue(PositionIndexProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets the title text for this timeline item.
+    /// </summary>
+    public string? Title { get; set; }
+
+    /// <summary>
+    /// Gets or sets the description text for this timeline item.
+    /// </summary>
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Gets or sets the status of this timeline item.
+    /// </summary>
+    public TimelineStatus Status { get; set; }
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -209,4 +224,19 @@ public class AuraTimelineItem : ContentControl
         PseudoClasses.Set(":left", IsAlternate);
         PseudoClasses.Set(":right", !IsAlternate);
     }
+}
+
+/// <summary>
+/// Status values for timeline items.
+/// </summary>
+public enum TimelineStatus
+{
+    /// <summary>Success/complete status.</summary>
+    Success,
+    /// <summary>Informational status.</summary>
+    Info,
+    /// <summary>Warning status.</summary>
+    Warning,
+    /// <summary>Error status.</summary>
+    Error
 }

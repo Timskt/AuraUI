@@ -111,7 +111,7 @@ public class MapTransform : IDataTransform
         var totals = new Dictionary<string, double>();
         foreach (var mapping in _mappings.Where(m => m.PercentageOfTotal))
         {
-            totals[m.SourceField] = rowList.Sum(r => r.GetDouble(mapping.SourceField));
+            totals[mapping.SourceField] = rowList.Sum(r => r.GetDouble(mapping.SourceField));
         }
 
         var results = new List<DataRow>();

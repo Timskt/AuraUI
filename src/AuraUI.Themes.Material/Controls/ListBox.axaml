@@ -89,7 +89,7 @@
     </Style>
 
     <Style Selector="ListBoxItem:selected:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Disabled -->

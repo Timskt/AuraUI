@@ -1,0 +1,54 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <Style Selector="layout|BackTop">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="ZIndex" Value="1000"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Width="48"
+                        Height="48"
+                        CornerRadius="{DynamicResource AuraRadiusFull}"
+                        Background="{DynamicResource AuraSurfaceTintBrush}"
+                        BoxShadow="{DynamicResource AuraShadowMd}"
+                        Cursor="Hand"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                    </Border.Transitions>
+                    <TextBlock Text="&#x2191;"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="layout|BackTop /template/ Border:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
+    </Style>
+
+    <Style Selector="layout|BackTop:visible">
+        <Style.Animations>
+            <Animation Duration="00:00:00.300"
+                       Easing="CubicEaseOut"
+                       FillMode="Forward">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="TranslateTransform.Y" Value="20"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="TranslateTransform.Y" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+</Styles>

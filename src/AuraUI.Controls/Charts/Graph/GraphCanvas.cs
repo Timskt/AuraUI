@@ -4,7 +4,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
-using Avalonia.Threading;
 using AuraUI.Controls.Charts.Graph.Behaviors;
 using AuraUI.Controls.Charts.Graph.Layouts;
 
@@ -309,29 +308,41 @@ public class GraphCanvas : Control
             Dispatcher.UIThread.Post(InvalidateVisual, DispatcherPriority.Render);
     }
 
+    // Cached combo brushes to avoid per-render allocations
+    private static readonly SolidColorBrush s_comboFill = new(Colors.LightBlue, 0.1);
+    private static readonly Pen s_comboPen = new(new SolidColorBrush(Colors.LightBlue, 0.3), 1, new DashStyle(new double[] { 4, 2 }, 0));
+    private static readonly Typeface s_comboLabelTypeface = new("Segoe UI", FontStyle.Normal, FontWeight.SemiBold);
+
     private void RenderCombos(DrawingContext context)
     {
         foreach (var combo in Data.Combos)
         {
-            var comboNodes = combo.NodeIds
-                .Select(id => Data.GetNode(id))
-                .Where(n => n != null)
-                .Cast<GraphNode>()
-                .ToList();
+            // Avoid LINQ: iterate manually to find combo nodes and compute bounds
+            double minX = double.MaxValue, maxX = double.MinValue;
+            double minY = double.MaxValue, maxY = double.MinValue;
+            int nodeCount = 0;
 
-            if (comboNodes.Count == 0) continue;
+            foreach (var id in combo.NodeIds)
+            {
+                var node = Data.GetNode(id);
+                if (node == null) continue;
+                nodeCount++;
+                if (node.Position.X < minX) minX = node.Position.X;
+                if (node.Position.X > maxX) maxX = node.Position.X;
+                if (node.Position.Y < minY) minY = node.Position.Y;
+                if (node.Position.Y > maxY) maxY = node.Position.Y;
+            }
 
-            var minX = comboNodes.Min(n => n.Position.X) - combo.Padding;
-            var maxX = comboNodes.Max(n => n.Position.X) + combo.Padding;
-            var minY = comboNodes.Min(n => n.Position.Y) - combo.Padding;
-            var maxY = comboNodes.Max(n => n.Position.Y) + combo.Padding;
+            if (nodeCount == 0) continue;
+
+            minX -= combo.Padding;
+            maxX += combo.Padding;
+            minY -= combo.Padding;
+            maxY += combo.Padding;
 
             var rect = new Rect(minX, minY, maxX - minX, maxY - minY);
-            var fill = combo.Color ?? new SolidColorBrush(Colors.LightBlue, 0.1);
-            var pen = new Pen(new SolidColorBrush(Colors.LightBlue, 0.3), 1,
-                new DashStyle(new double[] { 4, 2 }, 0));
 
-            context.DrawRectangle(fill, pen, rect, combo.CornerRadius, combo.CornerRadius);
+            context.DrawRectangle(s_comboFill, s_comboPen, rect, combo.CornerRadius, combo.CornerRadius);
 
             // Combo label
             if (!string.IsNullOrEmpty(combo.Label))
@@ -339,7 +350,7 @@ public class GraphCanvas : Control
                 var ft = new FormattedText(combo.Label,
                     System.Globalization.CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
-                    new Typeface("Segoe UI", FontStyle.Normal, FontWeight.SemiBold),
+                    s_comboLabelTypeface,
                     12,
                     Brushes.Gray);
                 context.DrawText(ft, new Point(rect.X + 4, rect.Y + 4));

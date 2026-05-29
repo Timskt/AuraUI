@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 
 namespace AuraUI.Core.Behaviors;
 
@@ -14,56 +15,20 @@ public class WatermarkBehavior : Behavior<TextBox>
     private TextBlock? _watermarkTextBlock;
     private bool _isWatermarkVisible;
 
-    #region WatermarkText
-
-    public static readonly StyledProperty<string?> WatermarkTextProperty =
-        AvaloniaProperty.RegisterAttached<TextBox, string?>(
-            "WatermarkBehavior_WatermarkText", typeof(WatermarkBehavior));
-
     /// <summary>
     /// Gets or sets the watermark text to display when the TextBox is empty and unfocused.
     /// </summary>
-    public string? WatermarkText
-    {
-        get => GetValue(WatermarkTextProperty);
-        set => SetValue(WatermarkTextProperty, value);
-    }
-
-    #endregion
-
-    #region WatermarkForeground
-
-    public static readonly StyledProperty<IBrush?> WatermarkForegroundProperty =
-        AvaloniaProperty.RegisterAttached<TextBox, IBrush?>(
-            "WatermarkBehavior_WatermarkForeground", typeof(WatermarkBehavior));
+    public string? WatermarkText { get; set; }
 
     /// <summary>
     /// Gets or sets the brush used to render the watermark text.
     /// </summary>
-    public IBrush? WatermarkForeground
-    {
-        get => GetValue(WatermarkForegroundProperty);
-        set => SetValue(WatermarkForegroundProperty, value);
-    }
-
-    #endregion
-
-    #region WatermarkFontStyle
-
-    public static readonly StyledProperty<FontStyle> WatermarkFontStyleProperty =
-        AvaloniaProperty.RegisterAttached<TextBox, FontStyle>(
-            "WatermarkBehavior_WatermarkFontStyle", typeof(WatermarkBehavior), FontStyle.Italic);
+    public IBrush? WatermarkForeground { get; set; }
 
     /// <summary>
     /// Gets or sets the font style for the watermark text.
     /// </summary>
-    public FontStyle WatermarkFontStyle
-    {
-        get => GetValue(WatermarkFontStyleProperty);
-        set => SetValue(WatermarkFontStyleProperty, value);
-    }
-
-    #endregion
+    public FontStyle WatermarkFontStyle { get; set; } = FontStyle.Italic;
 
     protected override void OnAttached()
     {
@@ -78,11 +43,7 @@ public class WatermarkBehavior : Behavior<TextBox>
         AssociatedObject.AttachedToVisualTree += OnAttachedToVisualTree;
         AssociatedObject.DetachedFromVisualTree += OnDetachedFromVisualTree;
 
-        if (AssociatedObject.IsAttachedToVisualTree)
-        {
-            CreateWatermark();
-            UpdateWatermarkVisibility();
-        }
+        // Watermark will be created when AttachedToVisualTree fires
     }
 
     protected override void OnDetaching()
@@ -143,9 +104,7 @@ public class WatermarkBehavior : Behavior<TextBox>
                 AssociatedObject.Padding.Right,
                 AssociatedObject.Padding.Bottom),
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
-            HorizontalAlignment = Avalonia.Layout.VerticalAlignment.Left == Avalonia.Layout.VerticalAlignment.Left
-                ? Avalonia.Layout.HorizontalAlignment.Left
-                : Avalonia.Layout.HorizontalAlignment.Left,
+            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Left,
             Opacity = 0,
         };
 
@@ -214,23 +173,4 @@ public class WatermarkBehavior : Behavior<TextBox>
         }
     }
 
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static string? GetWatermarkText(TextBox element) => element.GetValue(WatermarkTextProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetWatermarkText(TextBox element, string? value) => element.SetValue(WatermarkTextProperty, value);
-
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static IBrush? GetWatermarkForeground(TextBox element) => element.GetValue(WatermarkForegroundProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetWatermarkForeground(TextBox element, IBrush? value) => element.SetValue(WatermarkForegroundProperty, value);
 }

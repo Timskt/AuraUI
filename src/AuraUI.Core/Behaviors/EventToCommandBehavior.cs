@@ -4,7 +4,6 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
-using Avalonia.Interactivity;
 using Avalonia.Threading;
 
 namespace AuraUI.Core.Behaviors;
@@ -30,102 +29,36 @@ public class EventToCommandBehavior : Behavior<Control>
     private Delegate? _eventHandler;
     private EventInfo? _eventInfo;
 
-    #region EventName
-
-    public static readonly StyledProperty<string?> EventNameProperty =
-        AvaloniaProperty.Register<EventToCommandBehavior, string?>(nameof(EventName));
-
     /// <summary>
     /// The name of the event to subscribe to (e.g. "Click", "TextChanged", "SelectionChanged").
     /// </summary>
-    public string? EventName
-    {
-        get => GetValue(EventNameProperty);
-        set => SetValue(EventNameProperty, value);
-    }
-
-    #endregion
-
-    #region Command
-
-    public static readonly StyledProperty<ICommand?> CommandProperty =
-        AvaloniaProperty.Register<EventToCommandBehavior, ICommand?>(nameof(Command));
+    public string? EventName { get; set; }
 
     /// <summary>
     /// The command to execute when the event fires.
     /// </summary>
-    public ICommand? Command
-    {
-        get => GetValue(CommandProperty);
-        set => SetValue(CommandProperty, value);
-    }
-
-    #endregion
-
-    #region CommandParameter
-
-    public static readonly StyledProperty<object?> CommandParameterProperty =
-        AvaloniaProperty.Register<EventToCommandBehavior, object?>(nameof(CommandParameter));
+    public ICommand? Command { get; set; }
 
     /// <summary>
     /// An optional parameter to pass to the command.
     /// </summary>
-    public object? CommandParameter
-    {
-        get => GetValue(CommandParameterProperty);
-        set => SetValue(CommandParameterProperty, value);
-    }
-
-    #endregion
-
-    #region EventArgsConverter
-
-    public static readonly StyledProperty<IValueConverter?> EventArgsConverterProperty =
-        AvaloniaProperty.Register<EventToCommandBehavior, IValueConverter?>(nameof(EventArgsConverter));
+    public object? CommandParameter { get; set; }
 
     /// <summary>
     /// An optional value converter that converts the EventArgs into a command parameter.
     /// When set, the converted value is used instead of CommandParameter.
     /// </summary>
-    public IValueConverter? EventArgsConverter
-    {
-        get => GetValue(EventArgsConverterProperty);
-        set => SetValue(EventArgsConverterProperty, value);
-    }
-
-    #endregion
-
-    #region EventArgsConverterParameter
-
-    public static readonly StyledProperty<object?> EventArgsConverterParameterProperty =
-        AvaloniaProperty.Register<EventToCommandBehavior, object?>(nameof(EventArgsConverterParameter));
+    public IValueConverter? EventArgsConverter { get; set; }
 
     /// <summary>
     /// An optional parameter to pass to the EventArgsConverter.
     /// </summary>
-    public object? EventArgsConverterParameter
-    {
-        get => GetValue(EventArgsConverterParameterProperty);
-        set => SetValue(EventArgsConverterParameterProperty, value);
-    }
-
-    #endregion
-
-    #region PassEventArgsToCommand
-
-    public static readonly StyledProperty<bool> PassEventArgsToCommandProperty =
-        AvaloniaProperty.Register<EventToCommandBehavior, bool>(nameof(PassEventArgsToCommand));
+    public object? EventArgsConverterParameter { get; set; }
 
     /// <summary>
     /// When true and no CommandParameter or Converter is set, passes the raw EventArgs to the command.
     /// </summary>
-    public bool PassEventArgsToCommand
-    {
-        get => GetValue(PassEventArgsToCommandProperty);
-        set => SetValue(PassEventArgsToCommandProperty, value);
-    }
-
-    #endregion
+    public bool PassEventArgsToCommand { get; set; }
 
     protected override void OnAttached()
     {
@@ -162,8 +95,6 @@ public class EventToCommandBehavior : Behavior<Control>
 
         var parameters = invokeMethod.GetParameters();
 
-        // Create a dynamic method that matches the event handler signature
-        var method = new Action<object?, object?>(OnEventFired);
         var delegateParams = new Type[parameters.Length];
         for (int i = 0; i < parameters.Length; i++)
             delegateParams[i] = parameters[i].ParameterType;
@@ -172,9 +103,7 @@ public class EventToCommandBehavior : Behavior<Control>
         _eventInfo.AddEventHandler(AssociatedObject,
             handlerType == typeof(EventHandler)
                 ? new EventHandler(OnEventFired)
-                : handlerType == typeof(RoutedEventHandler)
-                    ? new RoutedEventHandler(OnRoutedEventFired)
-                    : CreateCompatibleDelegate(handlerType));
+                : CreateCompatibleDelegate(handlerType));
     }
 
     private Delegate CreateCompatibleDelegate(Type handlerType)
@@ -207,11 +136,6 @@ public class EventToCommandBehavior : Behavior<Control>
     }
 
     private void OnEventFired(object? sender, EventArgs e)
-    {
-        ExecuteCommand(e);
-    }
-
-    private void OnRoutedEventFired(object? sender, RoutedEventArgs e)
     {
         ExecuteCommand(e);
     }

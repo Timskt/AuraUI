@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -16,6 +17,9 @@ namespace AuraUI.Controls.Feedback;
 /// A toast notification displayed in the adorner layer with auto-dismiss,
 /// progress indicator, position control, and a toast queue/stack.
 /// </summary>
+[TemplatePart("PART_CloseButton", typeof(Button))]
+[TemplatePart("PART_IconPresenter", typeof(ContentPresenter))]
+[TemplatePart("PART_ProgressBar", typeof(Border))]
 [PseudoClasses(":top-left", ":top-center", ":top-right", ":bottom-left", ":bottom-center", ":bottom-right")]
 public class AuraToast : ContentControl
 {
@@ -67,6 +71,24 @@ public class AuraToast : ContentControl
     /// </summary>
     public static readonly StyledProperty<MessageBoxIcon> ToastIconProperty =
         AvaloniaProperty.Register<AuraToast, MessageBoxIcon>(nameof(ToastIcon));
+
+    /// <summary>
+    /// Defines the <see cref="Icon"/> styled property for custom icon content.
+    /// </summary>
+    public static readonly StyledProperty<object?> IconProperty =
+        AvaloniaProperty.Register<AuraToast, object?>(nameof(Icon));
+
+    /// <summary>
+    /// Defines the <see cref="ProgressBarBrush"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ProgressBarBrushProperty =
+        AvaloniaProperty.Register<AuraToast, IBrush?>(nameof(ProgressBarBrush));
+
+    /// <summary>
+    /// Defines the <see cref="CloseButtonForeground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> CloseButtonForegroundProperty =
+        AvaloniaProperty.Register<AuraToast, IBrush?>(nameof(CloseButtonForeground));
 
     static AuraToast()
     {
@@ -134,6 +156,34 @@ public class AuraToast : ContentControl
     {
         get => GetValue(ToastIconProperty);
         set => SetValue(ToastIconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets custom icon content for the toast.
+    /// When set, takes precedence over <see cref="ToastIcon"/>.
+    /// </summary>
+    public object? Icon
+    {
+        get => GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the brush for the auto-dismiss progress bar.
+    /// </summary>
+    public IBrush? ProgressBarBrush
+    {
+        get => GetValue(ProgressBarBrushProperty);
+        set => SetValue(ProgressBarBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for the close button.
+    /// </summary>
+    public IBrush? CloseButtonForeground
+    {
+        get => GetValue(CloseButtonForegroundProperty);
+        set => SetValue(CloseButtonForegroundProperty, value);
     }
 
     /// <summary>
@@ -292,7 +342,7 @@ public class AuraToast : ContentControl
         StopDismissTimer();
         _showTime = DateTime.UtcNow;
 
-        _dismissTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
+        _dismissTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
         _dismissTimer.Tick += OnTimerTick;
         _dismissTimer.Start();
     }

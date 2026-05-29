@@ -7,6 +7,7 @@ using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Controls.Templates;
 
+
 namespace AuraUI.Controls.Layout;
 
 /// <summary>
@@ -60,6 +61,18 @@ public class Card : ContentControl
     /// </summary>
     public static readonly StyledProperty<IDataTemplate?> FooterTemplateProperty =
         AvaloniaProperty.Register<Card, IDataTemplate?>(nameof(FooterTemplate));
+
+    /// <summary>
+    /// Defines the <see cref="HeaderBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> HeaderBackgroundProperty =
+        AvaloniaProperty.Register<Card, IBrush?>(nameof(HeaderBackground));
+
+    /// <summary>
+    /// Defines the <see cref="FooterBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> FooterBackgroundProperty =
+        AvaloniaProperty.Register<Card, IBrush?>(nameof(FooterBackground));
 
     static Card()
     {
@@ -134,6 +147,24 @@ public class Card : ContentControl
     {
         get => GetValue(FooterTemplateProperty);
         set => SetValue(FooterTemplateProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush for the header area.
+    /// </summary>
+    public IBrush? HeaderBackground
+    {
+        get => GetValue(HeaderBackgroundProperty);
+        set => SetValue(HeaderBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush for the footer area.
+    /// </summary>
+    public IBrush? FooterBackground
+    {
+        get => GetValue(FooterBackgroundProperty);
+        set => SetValue(FooterBackgroundProperty, value);
     }
 
     private static int CoerceElevation(Card sender, int value)

@@ -14,57 +14,21 @@ public class FocusBehavior : Behavior<Control>
 {
     private bool _isUpdatingFocus;
 
-    #region IsFocused
-
-    public static readonly StyledProperty<bool> IsFocusedProperty =
-        AvaloniaProperty.RegisterAttached<Control, bool>(
-            "FocusBehavior_IsFocused", typeof(FocusBehavior));
-
     /// <summary>
     /// Gets or sets whether the control is focused.
     /// Supports two-way binding.
     /// </summary>
-    public bool IsFocused
-    {
-        get => GetValue(IsFocusedProperty);
-        set => SetValue(IsFocusedProperty, value);
-    }
-
-    #endregion
-
-    #region FocusOnLoaded
-
-    public static readonly StyledProperty<bool> FocusOnLoadedProperty =
-        AvaloniaProperty.RegisterAttached<Control, bool>(
-            "FocusBehavior_FocusOnLoaded", typeof(FocusBehavior));
+    public bool IsFocused { get; set; }
 
     /// <summary>
     /// When true, the control automatically receives focus when it is loaded.
     /// </summary>
-    public bool FocusOnLoaded
-    {
-        get => GetValue(FocusOnLoadedProperty);
-        set => SetValue(FocusOnLoadedProperty, value);
-    }
-
-    #endregion
-
-    #region SelectAllOnFocus
-
-    public static readonly StyledProperty<bool> SelectAllOnFocusProperty =
-        AvaloniaProperty.RegisterAttached<Control, bool>(
-            "FocusBehavior_SelectAllOnFocus", typeof(FocusBehavior));
+    public bool FocusOnLoaded { get; set; }
 
     /// <summary>
     /// When true and the control is a TextBox, selects all text when focused.
     /// </summary>
-    public bool SelectAllOnFocus
-    {
-        get => GetValue(SelectAllOnFocusProperty);
-        set => SetValue(SelectAllOnFocusProperty, value);
-    }
-
-    #endregion
+    public bool SelectAllOnFocus { get; set; }
 
     protected override void OnAttached()
     {
@@ -77,12 +41,6 @@ public class FocusBehavior : Behavior<Control>
         AssociatedObject.LostFocus += OnLostFocus;
         AssociatedObject.AttachedToVisualTree += OnAttachedToVisualTree;
         AssociatedObject.DetachedFromVisualTree += OnDetachedFromVisualTree;
-
-        // React to property changes
-        IsFocusedProperty.Changed.AddClassHandler<Control>((c, e) =>
-        {
-            // Only react on the actual associated object
-        });
     }
 
     protected override void OnDetaching()
@@ -165,28 +123,7 @@ public class FocusBehavior : Behavior<Control>
     {
         if (AssociatedObject != null)
         {
-            // This allows two-way binding by setting the attached property on the target control
-            AssociatedObject.SetValue(IsFocusedProperty, value);
+            IsFocused = value;
         }
     }
-
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static bool GetIsFocused(Control element) => element.GetValue(IsFocusedProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetIsFocused(Control element, bool value) => element.SetValue(IsFocusedProperty, value);
-
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static bool GetFocusOnLoaded(Control element) => element.GetValue(FocusOnLoadedProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetFocusOnLoaded(Control element, bool value) => element.SetValue(FocusOnLoadedProperty, value);
 }

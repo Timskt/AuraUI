@@ -9,6 +9,9 @@
         <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="13"/>
+        <Setter Property="CloseIconForeground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="CloseButtonSize" Value="10"/>
+        <Setter Property="CloseButtonHoverBackground" Value="{DynamicResource AuraPressedBrush}"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
@@ -42,9 +45,10 @@
                                 VerticalAlignment="Center"
                                 Cursor="Hand"
                                 IsVisible="False">
-                            <Path Width="10" Height="10"
+                            <Path Width="{TemplateBinding CloseButtonSize}"
+                                  Height="{TemplateBinding CloseButtonSize}"
                                   Data="M 1,1 L 9,9 M 9,1 L 1,9"
-                                  Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
+                                  Stroke="{TemplateBinding CloseIconForeground}"
                                   StrokeThickness="1.5"/>
                         </Button>
                     </StackPanel>

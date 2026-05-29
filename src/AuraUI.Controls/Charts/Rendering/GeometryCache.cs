@@ -95,7 +95,7 @@ public sealed class GeometryCache
         foreach (var kvp in _cache)
         {
             // Extract series hash from the combined key
-            if ((int)(kvp.Key & 0xFFFFFFFF) == seriesHash)
+            if ((int)((kvp.Key >> 16) & 0xFFFF) == seriesHash)
             {
                 keysToRemove.Add(kvp.Key);
             }

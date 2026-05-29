@@ -1,0 +1,65 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         Statistic — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|Statistic">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="4">
+                    <!-- Title -->
+                    <TextBlock Text="{TemplateBinding Title}"
+                               FontSize="{DynamicResource AuraFontSizeCaption}"
+                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                               IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                    <!-- Value row -->
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <!-- Prefix -->
+                        <ContentPresenter Content="{TemplateBinding Prefix}"
+                                          ContentTemplate="{TemplateBinding PrefixTemplate}"
+                                          IsVisible="{TemplateBinding Prefix, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          VerticalAlignment="Bottom"/>
+                        <!-- Value -->
+                        <TextBlock Text="{Binding FormattedValue}"
+                                   FontSize="{DynamicResource AuraFontSizeTitleLarge}"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"/>
+                        <!-- Suffix -->
+                        <ContentPresenter Content="{TemplateBinding Suffix}"
+                                          ContentTemplate="{TemplateBinding SuffixTemplate}"
+                                          IsVisible="{TemplateBinding Suffix, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Statistic Large variant -->
+    <Style Selector="display|Statistic[ValueStyle=Large] /template/ StackPanel > TextBlock:nth-child(2)">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeDisplay}"/>
+    </Style>
+
+    <!-- Statistic Small variant -->
+    <Style Selector="display|Statistic[ValueStyle=Small] /template/ StackPanel > TextBlock:nth-child(2)">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeSubtitle}"/>
+    </Style>
+
+    <!-- Prefix/Suffix text styling -->
+    <Style Selector="display|Statistic TextBlock.statistic-prefix">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeBody}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="0,0,2,0"/>
+    </Style>
+
+    <Style Selector="display|Statistic TextBlock.statistic-suffix">
+        <Setter Property="FontSize" Value="{DynamicResource AuraFontSizeBody}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="2,0,0,0"/>
+    </Style>
+
+</Styles>

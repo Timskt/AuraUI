@@ -10,6 +10,7 @@ using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 
 namespace AuraUI.Controls.Selection;
@@ -41,6 +42,11 @@ public class AuraComboBox : ComboBox
     private Border? _dropdownBorder;
     private object? _originalItemsSource;
     private bool _isFiltering;
+
+    // Cached reflection for FilterMemberPath to avoid per-item GetProperty calls
+    private System.Reflection.PropertyInfo? _cachedFilterProperty;
+    private string? _cachedFilterMemberPath;
+    private Type? _cachedFilterPropertyType;
 
     /// <summary>
     /// Defines the <see cref="PlaceholderText"/> styled property.
@@ -84,6 +90,32 @@ public class AuraComboBox : ComboBox
     public static readonly StyledProperty<string?> FilterMemberPathProperty =
         AvaloniaProperty.Register<AuraComboBox, string?>(
             nameof(FilterMemberPath));
+
+    /// <summary>
+    /// Defines the <see cref="DropdownBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> DropdownBackgroundProperty =
+        AvaloniaProperty.Register<AuraComboBox, IBrush?>(nameof(DropdownBackground));
+
+    /// <summary>
+    /// Defines the <see cref="DropdownCornerRadius"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<CornerRadius> DropdownCornerRadiusProperty =
+        AvaloniaProperty.Register<AuraComboBox, CornerRadius>(
+            nameof(DropdownCornerRadius),
+            new CornerRadius(8));
+
+    /// <summary>
+    /// Defines the <see cref="DropdownShadow"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<BoxShadows> DropdownShadowProperty =
+        AvaloniaProperty.Register<AuraComboBox, BoxShadows>(nameof(DropdownShadow));
+
+    /// <summary>
+    /// Defines the <see cref="ItemHoverBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ItemHoverBackgroundProperty =
+        AvaloniaProperty.Register<AuraComboBox, IBrush?>(nameof(ItemHoverBackground));
 
     protected override Type StyleKeyOverride => typeof(ComboBox);
 
@@ -150,6 +182,42 @@ public class AuraComboBox : ComboBox
     {
         get => GetValue(FilterMemberPathProperty);
         set => SetValue(FilterMemberPathProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush of the dropdown popup.
+    /// </summary>
+    public IBrush? DropdownBackground
+    {
+        get => GetValue(DropdownBackgroundProperty);
+        set => SetValue(DropdownBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the corner radius of the dropdown popup.
+    /// </summary>
+    public CornerRadius DropdownCornerRadius
+    {
+        get => GetValue(DropdownCornerRadiusProperty);
+        set => SetValue(DropdownCornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the box shadow of the dropdown popup.
+    /// </summary>
+    public BoxShadows DropdownShadow
+    {
+        get => GetValue(DropdownShadowProperty);
+        set => SetValue(DropdownShadowProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush when hovering over a dropdown item.
+    /// </summary>
+    public IBrush? ItemHoverBackground
+    {
+        get => GetValue(ItemHoverBackgroundProperty);
+        set => SetValue(ItemHoverBackgroundProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -357,6 +425,7 @@ public class AuraComboBox : ComboBox
 
     /// <summary>
     /// Gets the display text for an item, using FilterMemberPath if set, otherwise ToString.
+    /// Caches the PropertyInfo reflection lookup to avoid repeated GetProperty calls.
     /// </summary>
     protected virtual string? GetItemDisplayText(object? item)
     {
@@ -366,10 +435,18 @@ public class AuraComboBox : ComboBox
         var memberPath = FilterMemberPath;
         if (!string.IsNullOrEmpty(memberPath))
         {
-            var prop = item.GetType().GetProperty(memberPath);
-            if (prop != null)
+            var itemType = item.GetType();
+            // Cache the PropertyInfo if the member path or item type changed
+            if (_cachedFilterMemberPath != memberPath || _cachedFilterPropertyType != itemType)
             {
-                return prop.GetValue(item)?.ToString();
+                _cachedFilterMemberPath = memberPath;
+                _cachedFilterPropertyType = itemType;
+                _cachedFilterProperty = itemType.GetProperty(memberPath);
+            }
+
+            if (_cachedFilterProperty != null)
+            {
+                return _cachedFilterProperty.GetValue(item)?.ToString();
             }
         }
 

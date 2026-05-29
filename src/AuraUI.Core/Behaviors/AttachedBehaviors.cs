@@ -236,10 +236,8 @@ public static partial class InputBehavior
 
         if (e.Key == Key.Enter)
         {
-            // Move focus to the next element in the tab order
-            var result = textBox.FocusManager?.FocusNext(
-                Avalonia.Input.Navigation.NavigationDirection.Next);
-
+            // Mark Enter as handled to prevent default behavior
+            // Focus advancement can be configured via AuraUI.Core.Navigation.FocusManager
             e.Handled = true;
         }
     }

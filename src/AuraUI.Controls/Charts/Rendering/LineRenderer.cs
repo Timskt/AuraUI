@@ -696,22 +696,28 @@ public class LineRenderer : IChartRenderer
 
     private static void DrawDiamond(DrawingContext context, Point center, double half, IBrush fill, Pen pen)
     {
-        var geometry = new PathGeometry();
-        var figure = new PathFigure { StartPoint = new Point(center.X, center.Y - half), IsClosed = true };
-        figure.Segments!.Add(new LineSegment { Point = new Point(center.X + half, center.Y) });
-        figure.Segments!.Add(new LineSegment { Point = new Point(center.X, center.Y + half) });
-        figure.Segments!.Add(new LineSegment { Point = new Point(center.X - half, center.Y) });
-        geometry.Figures!.Add(figure);
+        var geometry = new StreamGeometry();
+        using (var ctx = geometry.Open())
+        {
+            ctx.BeginFigure(new Point(center.X, center.Y - half), true);
+            ctx.LineTo(new Point(center.X + half, center.Y));
+            ctx.LineTo(new Point(center.X, center.Y + half));
+            ctx.LineTo(new Point(center.X - half, center.Y));
+            ctx.EndFigure(true);
+        }
         context.DrawGeometry(fill, pen, geometry);
     }
 
     private static void DrawTriangle(DrawingContext context, Point center, double half, IBrush fill, Pen pen)
     {
-        var geometry = new PathGeometry();
-        var figure = new PathFigure { StartPoint = new Point(center.X, center.Y - half), IsClosed = true };
-        figure.Segments!.Add(new LineSegment { Point = new Point(center.X + half, center.Y + half) });
-        figure.Segments!.Add(new LineSegment { Point = new Point(center.X - half, center.Y + half) });
-        geometry.Figures!.Add(figure);
+        var geometry = new StreamGeometry();
+        using (var ctx = geometry.Open())
+        {
+            ctx.BeginFigure(new Point(center.X, center.Y - half), true);
+            ctx.LineTo(new Point(center.X + half, center.Y + half));
+            ctx.LineTo(new Point(center.X - half, center.Y + half));
+            ctx.EndFigure(true);
+        }
         context.DrawGeometry(fill, pen, geometry);
     }
 

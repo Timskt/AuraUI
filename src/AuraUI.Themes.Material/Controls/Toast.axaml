@@ -18,7 +18,8 @@
                             Background="{TemplateBinding Background}"
                             CornerRadius="{DynamicResource AuraRadiusSm}"
                             Padding="{TemplateBinding Padding}"
-                            MaxWidth="{TemplateBinding MaxWidth}">
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000">
                         <Panel>
                             <StackPanel Orientation="Horizontal"
                                         Spacing="12"

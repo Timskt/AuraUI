@@ -105,6 +105,46 @@ public class AuraDialog : ContentControl
         AvaloniaProperty.Register<AuraDialog, IDataTemplate?>(nameof(DialogFooterTemplate));
 
     /// <summary>
+    /// Defines the <see cref="OverlayBrush"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> OverlayBrushProperty =
+        AvaloniaProperty.Register<AuraDialog, IBrush?>(nameof(OverlayBrush));
+
+    /// <summary>
+    /// Defines the <see cref="OverlayOpacity"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> OverlayOpacityProperty =
+        AvaloniaProperty.Register<AuraDialog, double>(nameof(OverlayOpacity), 0.5);
+
+    /// <summary>
+    /// Defines the <see cref="DialogBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> DialogBackgroundProperty =
+        AvaloniaProperty.Register<AuraDialog, IBrush?>(nameof(DialogBackground));
+
+    /// <summary>
+    /// Defines the <see cref="DialogCornerRadius"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<CornerRadius> DialogCornerRadiusProperty =
+        AvaloniaProperty.Register<AuraDialog, CornerRadius>(
+            nameof(DialogCornerRadius),
+            new CornerRadius(12));
+
+    /// <summary>
+    /// Defines the <see cref="DialogShadow"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<BoxShadows> DialogShadowProperty =
+        AvaloniaProperty.Register<AuraDialog, BoxShadows>(nameof(DialogShadow));
+
+    /// <summary>
+    /// Defines the <see cref="DialogPadding"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<Thickness> DialogPaddingProperty =
+        AvaloniaProperty.Register<AuraDialog, Thickness>(
+            nameof(DialogPadding),
+            new Thickness(24));
+
+    /// <summary>
     /// Defines the routed event for dialog opened.
     /// </summary>
     public static readonly RoutedEvent<RoutedEventArgs> OpenedEvent =
@@ -221,6 +261,60 @@ public class AuraDialog : ContentControl
     {
         get => GetValue(DialogFooterTemplateProperty);
         set => SetValue(DialogFooterTemplateProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the overlay backdrop brush.
+    /// </summary>
+    public IBrush? OverlayBrush
+    {
+        get => GetValue(OverlayBrushProperty);
+        set => SetValue(OverlayBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the overlay backdrop opacity.
+    /// </summary>
+    public double OverlayOpacity
+    {
+        get => GetValue(OverlayOpacityProperty);
+        set => SetValue(OverlayOpacityProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the dialog background brush.
+    /// </summary>
+    public IBrush? DialogBackground
+    {
+        get => GetValue(DialogBackgroundProperty);
+        set => SetValue(DialogBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the dialog corner radius.
+    /// </summary>
+    public CornerRadius DialogCornerRadius
+    {
+        get => GetValue(DialogCornerRadiusProperty);
+        set => SetValue(DialogCornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the dialog box shadow.
+    /// </summary>
+    public BoxShadows DialogShadow
+    {
+        get => GetValue(DialogShadowProperty);
+        set => SetValue(DialogShadowProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the dialog content padding.
+    /// </summary>
+    public Thickness DialogPadding
+    {
+        get => GetValue(DialogPaddingProperty);
+        set => SetValue(DialogPaddingProperty, value);
     }
 
     /// <summary>

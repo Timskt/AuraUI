@@ -13,40 +13,16 @@ public class AutoScrollBehavior : Behavior<ScrollViewer>
     private bool _isAutoScrollEnabled = true;
     private bool _isSubscribed;
 
-    #region IsEnabled
-
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.RegisterAttached<ScrollViewer, bool>(
-            "AutoScrollBehavior_IsEnabled", typeof(AutoScrollBehavior), true);
-
     /// <summary>
     /// Gets or sets whether auto-scrolling is enabled.
     /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
-
-    #endregion
-
-    #region Threshold
-
-    public static readonly StyledProperty<double> ThresholdProperty =
-        AvaloniaProperty.RegisterAttached<ScrollViewer, double>(
-            "AutoScrollBehavior_Threshold", typeof(AutoScrollBehavior), 50.0);
+    public bool IsEnabled { get; set; } = true;
 
     /// <summary>
     /// Gets or sets the threshold (in pixels) from the bottom to consider "at bottom".
     /// When the user is within this distance from the bottom, auto-scrolling will be active.
     /// </summary>
-    public double Threshold
-    {
-        get => GetValue(ThresholdProperty);
-        set => SetValue(ThresholdProperty, value);
-    }
-
-    #endregion
+    public double Threshold { get; set; } = 50.0;
 
     protected override void OnAttached()
     {
@@ -58,11 +34,7 @@ public class AutoScrollBehavior : Behavior<ScrollViewer>
         AssociatedObject.AttachedToVisualTree += OnAttachedToVisualTree;
         AssociatedObject.DetachedFromVisualTree += OnDetachedFromVisualTree;
 
-        // If already in tree, subscribe now
-        if (AssociatedObject.IsAttachedToVisualTree)
-        {
-            Subscribe();
-        }
+        // If already in tree, subscribe via AttachedToVisualTree handler
     }
 
     protected override void OnDetaching()
@@ -122,7 +94,7 @@ public class AutoScrollBehavior : Behavior<ScrollViewer>
         var extent = AssociatedObject.Extent;
         var viewport = AssociatedObject.Viewport;
 
-        double distanceFromBottom = extent.Y - offset.Y - viewport.Y;
+        double distanceFromBottom = extent.Height - offset.Y - viewport.Height;
 
         // If the extent changed (content was added), scroll to bottom if auto-scroll is active
         if (e.ExtentDelta.Y > 0)
@@ -149,26 +121,7 @@ public class AutoScrollBehavior : Behavior<ScrollViewer>
             {
                 AssociatedObject.ScrollToEnd();
             }
-        }, Avalonia.Threading.DispatcherPriority.Layout);
+        }, Avalonia.Threading.DispatcherPriority.Render);
     }
 
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static bool GetIsEnabled(ScrollViewer element) => element.GetValue(IsEnabledProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetIsEnabled(ScrollViewer element, bool value) => element.SetValue(IsEnabledProperty, value);
-
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static double GetThreshold(ScrollViewer element) => element.GetValue(ThresholdProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetThreshold(ScrollViewer element, double value) => element.SetValue(ThresholdProperty, value);
 }

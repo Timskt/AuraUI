@@ -307,7 +307,7 @@ public class AuraNotification : ContentControl
         StopDismissTimer();
         _showTime = DateTime.UtcNow;
 
-        _dismissTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
+        _dismissTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
         _dismissTimer.Tick += OnTimerTick;
         _dismissTimer.Start();
     }

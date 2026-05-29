@@ -49,6 +49,11 @@ public class MultiComboBox : AuraComboBox
     private readonly AvaloniaList<object> _selectedItems = new();
     private bool _isSyncingSelection;
 
+    // Cached reflection for TagMemberPath
+    private System.Reflection.PropertyInfo? _cachedTagProperty;
+    private string? _cachedTagMemberPath;
+    private Type? _cachedTagPropertyType;
+
     /// <summary>
     /// Defines the <see cref="SelectedItems"/> styled property.
     /// </summary>
@@ -352,24 +357,28 @@ public class MultiComboBox : AuraComboBox
         UpdateSelectionPseudoClasses();
     }
 
+    // Reusable list to avoid per-call allocations
+    private readonly List<object> _tagDataListBuffer = new();
+
     private void RefreshTagDisplay()
     {
         if (_tagContainer == null)
             return;
 
         var displayLimit = SelectionDisplayLimit;
-        var tagDataList = new List<object>();
-        var selected = _selectedItems.ToList();
+        _tagDataListBuffer.Clear();
+        var tagDataList = _tagDataListBuffer;
+        var selectedCount = _selectedItems.Count;
 
-        if (displayLimit > 0 && selected.Count > displayLimit)
+        if (displayLimit > 0 && selectedCount > displayLimit)
         {
             // Show limited tags plus a "+N more" indicator.
             for (var i = 0; i < displayLimit; i++)
             {
                 tagDataList.Add(new TagData
                 {
-                    Content = GetTagDisplayText(selected[i]),
-                    Item = selected[i],
+                    Content = GetTagDisplayText(_selectedItems[i]),
+                    Item = _selectedItems[i],
                     IsClosable = true,
                     Variant = TagVariant
                 });
@@ -377,7 +386,7 @@ public class MultiComboBox : AuraComboBox
 
             tagDataList.Add(new TagData
                 {
-                    Content = $"+{selected.Count - displayLimit} more",
+                    Content = $"+{selectedCount - displayLimit} more",
                     Item = null,
                     IsClosable = false,
                     Variant = Layout.TagVariant.Outlined
@@ -385,7 +394,7 @@ public class MultiComboBox : AuraComboBox
         }
         else
         {
-            foreach (var item in selected)
+            foreach (var item in _selectedItems)
             {
                 tagDataList.Add(new TagData
                 {
@@ -397,6 +406,7 @@ public class MultiComboBox : AuraComboBox
             }
         }
 
+        _tagContainer.ItemsSource = null; // force refresh
         _tagContainer.ItemsSource = tagDataList;
     }
 
@@ -440,9 +450,11 @@ public class MultiComboBox : AuraComboBox
             _isSyncingSelection = false;
         }
 
+        // Create a snapshot for the event args (unavoidable allocation for external consumers)
+        var snapshot = new List<object>(_selectedItems);
         SelectedItemsChanged?.Invoke(this, new SelectedItemsChangedEventArgs(
             Array.Empty<object>(),
-            _selectedItems.ToList()));
+            snapshot));
     }
 
     private string GetTagDisplayText(object item)
@@ -450,10 +462,18 @@ public class MultiComboBox : AuraComboBox
         var memberPath = TagMemberPath;
         if (!string.IsNullOrEmpty(memberPath))
         {
-            var prop = item.GetType().GetProperty(memberPath);
-            if (prop != null)
+            var itemType = item.GetType();
+            // Cache the PropertyInfo if the member path or item type changed
+            if (_cachedTagMemberPath != memberPath || _cachedTagPropertyType != itemType)
             {
-                return prop.GetValue(item)?.ToString() ?? string.Empty;
+                _cachedTagMemberPath = memberPath;
+                _cachedTagPropertyType = itemType;
+                _cachedTagProperty = itemType.GetProperty(memberPath);
+            }
+
+            if (_cachedTagProperty != null)
+            {
+                return _cachedTagProperty.GetValue(item)?.ToString() ?? string.Empty;
             }
         }
 

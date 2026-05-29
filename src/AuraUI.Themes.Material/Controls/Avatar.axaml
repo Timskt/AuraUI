@@ -14,15 +14,21 @@
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontTitleMediumFamily}"/>
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="AvatarForeground" Value="{DynamicResource AuraOnPrimaryContainerBrush}"/>
+        <Setter Property="AvatarBorderBrush" Value="Transparent"/>
+        <Setter Property="AvatarBorderThickness" Value="0"/>
+        <Setter Property="FallbackBackground" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="layout:Avatar">
                     <Border Name="RootBorder"
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
-                            Background="{TemplateBinding Background}"
+                            Background="{TemplateBinding FallbackBackground}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            ClipToBounds="True">
+                            ClipToBounds="True"
+                            BorderBrush="{TemplateBinding AvatarBorderBrush}"
+                            BorderThickness="{TemplateBinding AvatarBorderThickness}">
                         <Panel>
                             <!-- Image (shown when Source is set) -->
                             <Image Name="PART_Image"
@@ -32,7 +38,7 @@
                             <!-- Fallback text (shown when no image) -->
                             <TextBlock Name="PART_Fallback"
                                        Text="{TemplateBinding FallbackText}"
-                                       Foreground="{TemplateBinding Foreground}"
+                                       Foreground="{TemplateBinding AvatarForeground}"
                                        FontSize="{TemplateBinding FontSize}"
                                        FontWeight="{TemplateBinding FontWeight}"
                                        FontFamily="{TemplateBinding FontFamily}"

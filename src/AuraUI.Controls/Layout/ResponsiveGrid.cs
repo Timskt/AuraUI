@@ -33,26 +33,26 @@ public class ResponsiveGrid : Grid
     /// Defines the <see cref="ColumnSpacing"/> styled property.
     /// Uniform spacing between columns.
     /// </summary>
-    public static readonly StyledProperty<double> ColumnSpacingProperty =
+    public static new readonly StyledProperty<double> ColumnSpacingProperty =
         AvaloniaProperty.Register<ResponsiveGrid, double>(nameof(ColumnSpacing), 0.0);
 
     /// <summary>
     /// Defines the <see cref="RowSpacing"/> styled property.
     /// Uniform spacing between rows.
     /// </summary>
-    public static readonly StyledProperty<double> RowSpacingProperty =
+    public static new readonly StyledProperty<double> RowSpacingProperty =
         AvaloniaProperty.Register<ResponsiveGrid, double>(nameof(RowSpacing), 0.0);
 
     /// <summary>
-    /// Defines the <see cref="BreakpointColumns"/> attached property.
-    /// Allows setting a comma-separated column count for a specific breakpoint width on a child.
+    /// Defines the <see cref="BreakpointColumnSpanProperty"/> attached property.
+    /// Allows setting a column span for a specific breakpoint width on a child.
     /// </summary>
     public static readonly AttachedProperty<int> BreakpointColumnSpanProperty =
         AvaloniaProperty.RegisterAttached<ResponsiveGrid, Control, int>("BreakpointColumnSpan", 1);
 
     /// <summary>
-    /// Defines the <see cref="BreakpointRowSpan"/> attached property.
-    /// Allows setting a comma-separated row span for a specific breakpoint width on a child.
+    /// Defines the <see cref="BreakpointRowSpanProperty"/> attached property.
+    /// Allows setting a row span for a specific breakpoint width on a child.
     /// </summary>
     public static readonly AttachedProperty<int> BreakpointRowSpanProperty =
         AvaloniaProperty.RegisterAttached<ResponsiveGrid, Control, int>("BreakpointRowSpan", 1);
@@ -76,7 +76,7 @@ public class ResponsiveGrid : Grid
     /// <summary>
     /// Gets or sets uniform spacing between columns.
     /// </summary>
-    public double ColumnSpacing
+    public new double ColumnSpacing
     {
         get => GetValue(ColumnSpacingProperty);
         set => SetValue(ColumnSpacingProperty, value);
@@ -85,7 +85,7 @@ public class ResponsiveGrid : Grid
     /// <summary>
     /// Gets or sets uniform spacing between rows.
     /// </summary>
-    public double RowSpacing
+    public new double RowSpacing
     {
         get => GetValue(RowSpacingProperty);
         set => SetValue(RowSpacingProperty, value);
