@@ -158,7 +158,7 @@ public class FileDropZone : ContentControl
         AddHandler(DragDrop.DragLeaveEvent, OnDragLeave);
         AddHandler(DragDrop.DragOverEvent, OnDragOver);
         AddHandler(DragDrop.DropEvent, OnDrop);
-        DragDrop.SetDrop(this, DropOperation.Copy);
+        DragDrop.SetAllowDrop(this, true);
     }
 
     private void OnDragEnter(object? sender, DragEventArgs e)

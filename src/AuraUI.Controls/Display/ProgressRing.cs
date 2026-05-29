@@ -116,6 +116,12 @@ public class ProgressRing : RangeBase
         UpdateAutomationName();
     }
 
+    // Cached geometry state to avoid per-frame allocations
+    private StreamGeometry? _cachedArcGeometry;
+    private double _cachedRadius;
+    private double _cachedStartAngle;
+    private double _cachedSweepAngle;
+
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -159,32 +165,38 @@ public class ProgressRing : RangeBase
 
     private void DrawArc(DrawingContext context, Pen pen, Point center, double radius, double startAngleDeg, double sweepAngleDeg)
     {
-        var startAngleRad = startAngleDeg * Math.PI / 180.0;
-        var endAngleRad = (startAngleDeg + sweepAngleDeg) * Math.PI / 180.0;
-
-        var startX = center.X + radius * Math.Cos(startAngleRad);
-        var startY = center.Y + radius * Math.Sin(startAngleRad);
-        var endX = center.X + radius * Math.Cos(endAngleRad);
-        var endY = center.Y + radius * Math.Sin(endAngleRad);
-
-        var startPoint = new Point(startX, startY);
-        var endPoint = new Point(endX, endY);
-
-        var isLargeArc = sweepAngleDeg > 180.0;
-        var sweepDirection = SweepDirection.Clockwise;
-
-        var figure = new PathFigure { StartPoint = startPoint, IsClosed = false };
-        figure.Segments!.Add(new ArcSegment
+        // Only rebuild geometry if parameters changed
+        if (_cachedArcGeometry == null ||
+            Math.Abs(_cachedRadius - radius) > 0.001 ||
+            Math.Abs(_cachedStartAngle - startAngleDeg) > 0.001 ||
+            Math.Abs(_cachedSweepAngle - sweepAngleDeg) > 0.001)
         {
-            Point = endPoint,
-            Size = new Size(radius, radius),
-            IsLargeArc = isLargeArc,
-            SweepDirection = sweepDirection
-        });
+            var startAngleRad = startAngleDeg * Math.PI / 180.0;
+            var endAngleRad = (startAngleDeg + sweepAngleDeg) * Math.PI / 180.0;
 
-        var geometry = new PathGeometry();
-        geometry.Figures!.Add(figure);
-        context.DrawGeometry(null, pen, geometry);
+            var startX = center.X + radius * Math.Cos(startAngleRad);
+            var startY = center.Y + radius * Math.Sin(startAngleRad);
+            var endX = center.X + radius * Math.Cos(endAngleRad);
+            var endY = center.Y + radius * Math.Sin(endAngleRad);
+
+            var isLargeArc = sweepAngleDeg > 180.0;
+
+            var geometry = new StreamGeometry();
+            using (var ctx = geometry.Open())
+            {
+                ctx.BeginFigure(new Point(startX, startY), false);
+                ctx.ArcTo(new Point(endX, endY), new Size(radius, radius), 0, isLargeArc, SweepDirection.Clockwise);
+                ctx.EndFigure(false);
+            }
+
+            // _cachedArcGeometry is replaced (no Dispose needed in Avalonia 11)
+            _cachedArcGeometry = geometry;
+            _cachedRadius = radius;
+            _cachedStartAngle = startAngleDeg;
+            _cachedSweepAngle = sweepAngleDeg;
+        }
+
+        context.DrawGeometry(null, pen, _cachedArcGeometry);
     }
 
     private IBrush FindResourceOrDefault(string key, IBrush fallback)

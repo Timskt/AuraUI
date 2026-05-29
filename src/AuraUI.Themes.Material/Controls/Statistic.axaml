@@ -15,7 +15,7 @@
                                           ContentTemplate="{TemplateBinding PrefixTemplate}"
                                           IsVisible="{TemplateBinding Prefix, Converter={x:Static ObjectConverters.IsNotNull}}"
                                           VerticalAlignment="Bottom"/>
-                        <TextBlock Text="{TemplateBinding FormattedValue}"
+                        <TextBlock Text="{Binding FormattedValue}"
                                    FontSize="{DynamicResource AuraFontSizeTitleLarge}"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource AuraForegroundBrush}"/>

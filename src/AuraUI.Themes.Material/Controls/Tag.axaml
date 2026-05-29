@@ -19,6 +19,9 @@
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="MinHeight" Value="{DynamicResource AuraChipHeight}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="CloseIconForeground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="CloseButtonSize" Value="10"/>
+        <Setter Property="CloseButtonHoverBackground" Value="{DynamicResource AuraPressedBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="layout:Tag">

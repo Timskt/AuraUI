@@ -49,6 +49,24 @@ public class Avatar : ContentControl
     public static readonly StyledProperty<IBrush?> FallbackBackgroundProperty =
         AvaloniaProperty.Register<Avatar, IBrush?>(nameof(FallbackBackground));
 
+    /// <summary>
+    /// Defines the <see cref="AvatarBorderBrush"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> AvatarBorderBrushProperty =
+        AvaloniaProperty.Register<Avatar, IBrush?>(nameof(AvatarBorderBrush));
+
+    /// <summary>
+    /// Defines the <see cref="AvatarBorderThickness"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<Thickness> AvatarBorderThicknessProperty =
+        AvaloniaProperty.Register<Avatar, Thickness>(nameof(AvatarBorderThickness));
+
+    /// <summary>
+    /// Defines the <see cref="AvatarForeground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> AvatarForegroundProperty =
+        AvaloniaProperty.Register<Avatar, IBrush?>(nameof(AvatarForeground));
+
     private Image? _image;
     private TextBlock? _fallback;
 
@@ -103,6 +121,33 @@ public class Avatar : ContentControl
     {
         get => GetValue(FallbackBackgroundProperty);
         set => SetValue(FallbackBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the border brush of the avatar.
+    /// </summary>
+    public IBrush? AvatarBorderBrush
+    {
+        get => GetValue(AvatarBorderBrushProperty);
+        set => SetValue(AvatarBorderBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the border thickness of the avatar.
+    /// </summary>
+    public Thickness AvatarBorderThickness
+    {
+        get => GetValue(AvatarBorderThicknessProperty);
+        set => SetValue(AvatarBorderThicknessProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for the fallback text.
+    /// </summary>
+    public IBrush? AvatarForeground
+    {
+        get => GetValue(AvatarForegroundProperty);
+        set => SetValue(AvatarForegroundProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

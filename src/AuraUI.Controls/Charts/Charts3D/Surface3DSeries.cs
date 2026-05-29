@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Media;
+using AvaloniaColor = Avalonia.Media.Color;
 
 namespace AuraUI.Controls.Charts.Charts3D;
 
@@ -69,7 +70,7 @@ public class Surface3DSeries : Chart3DSeries
     public double[]? XValues { get => GetValue(XValuesProperty); set => SetValue(XValuesProperty, value); }
     public double[]? ZValues { get => GetValue(ZValuesProperty); set => SetValue(ZValuesProperty, value); }
     public double[,]? YValues { get => GetValue(YValuesProperty); set => SetValue(YValuesProperty, value); }
-    public Color[]? ColorMap { get => GetValue(ColorMapProperty); set => SetValue(ColorMapProperty, value); }
+    public AvaloniaColor[]? ColorMap { get => GetValue(ColorMapProperty); set => SetValue(ColorMapProperty, value); }
     public bool IsWireframe { get => GetValue(IsWireframeProperty); set => SetValue(IsWireframeProperty, value); }
     public IBrush? WireframeBrush { get => GetValue(WireframeBrushProperty); set => SetValue(WireframeBrushProperty, value); }
     public double WireframeThickness { get => GetValue(WireframeThicknessProperty); set => SetValue(WireframeThicknessProperty, value); }
@@ -78,13 +79,13 @@ public class Surface3DSeries : Chart3DSeries
     public double FillOpacity { get => GetValue(FillOpacityProperty); set => SetValue(FillOpacityProperty, value); }
 
     /// <summary>Default color map: blue to cyan to green to yellow to red.</summary>
-    private static readonly Color[] DefaultColorMap = new[]
+    private static readonly AvaloniaColor[] DefaultColorMap = new[]
     {
-        Color.Parse("#2196F3"), // Blue
-        Color.Parse("#00BCD4"), // Cyan
-        Color.Parse("#4CAF50"), // Green
-        Color.Parse("#FFEB3B"), // Yellow
-        Color.Parse("#F44336"), // Red
+        AvaloniaColor.Parse("#2196F3"), // Blue
+        AvaloniaColor.Parse("#00BCD4"), // Cyan
+        AvaloniaColor.Parse("#4CAF50"), // Green
+        AvaloniaColor.Parse("#FFEB3B"), // Yellow
+        AvaloniaColor.Parse("#F44336"), // Red
     };
 
     // ────────────────────────────────────────────────
@@ -218,7 +219,7 @@ public class Surface3DSeries : Chart3DSeries
         var c0 = colorMap[idx];
         var c1 = colorMap[idx + 1];
 
-        return Color.FromRgb(
+        return AvaloniaColor.FromRgb(
             (byte)(c0.R + (c1.R - c0.R) * frac),
             (byte)(c0.G + (c1.G - c0.G) * frac),
             (byte)(c0.B + (c1.B - c0.B) * frac));
@@ -247,7 +248,8 @@ public class Surface3DSeries : Chart3DSeries
                 var r0 = Math.Min(r, zVals.Length - 1);
                 var point3d = new Point3D(xVals[c0], yVals[r, c], zVals[r0]);
                 var screenPoint = projection.Project(point3d);
-                var dist = (screenPos - screenPoint).Length;
+                var delta = screenPos - screenPoint;
+                var dist = Math.Sqrt(delta.X * delta.X + delta.Y * delta.Y);
 
                 if (dist < 15 && (!best.HasValue || dist < best.Value.distance))
                 {

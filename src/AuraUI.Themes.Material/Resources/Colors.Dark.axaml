@@ -59,6 +59,25 @@
     <SolidColorBrush x:Key="AuraErrorContainerBrush" Color="#8C1D18"/>
     <SolidColorBrush x:Key="AuraOnErrorContainerBrush" Color="#F9DEDC"/>
 
+    <!-- Success Container -->
+    <SolidColorBrush x:Key="AuraSuccessContainerBrush" Color="#0D330D"/>
+    <SolidColorBrush x:Key="AuraOnSuccessContainerBrush" Color="#A5D6A7"/>
+
+    <!-- Warning Container -->
+    <SolidColorBrush x:Key="AuraWarningContainerBrush" Color="#3D2800"/>
+    <SolidColorBrush x:Key="AuraOnWarningContainerBrush" Color="#FFCC80"/>
+
+    <!-- Info Container -->
+    <SolidColorBrush x:Key="AuraInfoContainerBrush" Color="#0D2D4A"/>
+    <SolidColorBrush x:Key="AuraOnInfoContainerBrush" Color="#81D4FA"/>
+
+    <!-- Primary Light (for tags/labels) -->
+    <SolidColorBrush x:Key="AuraPrimaryLightBrush" Color="#1A1033"/>
+    <SolidColorBrush x:Key="AuraSuccessLightBrush" Color="#0D330D"/>
+    <SolidColorBrush x:Key="AuraWarningLightBrush" Color="#3D2800"/>
+    <SolidColorBrush x:Key="AuraErrorLightBrush" Color="#3D0F0A"/>
+    <SolidColorBrush x:Key="AuraInfoLightBrush" Color="#0D2D4A"/>
+
     <!-- Outline / Outline Variant -->
     <SolidColorBrush x:Key="AuraOutlineBrush" Color="#938F99"/>
     <SolidColorBrush x:Key="AuraOutlineVariantBrush" Color="#49454F"/>
@@ -76,5 +95,30 @@
 
     <!-- Common transparent -->
     <SolidColorBrush x:Key="AuraTransparentBrush" Color="#00000000"/>
+
+    <!-- Border Focus / Disabled -->
+    <SolidColorBrush x:Key="AuraBorderFocusBrush" Color="#D0BCFF"/>
+    <SolidColorBrush x:Key="AuraBorderDisabledBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="AuraDividerLightBrush" Color="#333333"/>
+
+    <!-- Input specific -->
+    <SolidColorBrush x:Key="AuraInputBackgroundBrush" Color="#2B2930"/>
+    <SolidColorBrush x:Key="AuraInputBackgroundHoverBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="AuraInputBackgroundFocusBrush" Color="#2B2930"/>
+    <SolidColorBrush x:Key="AuraInputBackgroundDisabledBrush" Color="#252525"/>
+    <SolidColorBrush x:Key="AuraInputBorderBrush" Color="#49454F"/>
+    <SolidColorBrush x:Key="AuraInputBorderHoverBrush" Color="#938F99"/>
+    <SolidColorBrush x:Key="AuraInputBorderFocusBrush" Color="#D0BCFF"/>
+    <SolidColorBrush x:Key="AuraPlaceholderBrush" Color="#6C6C6C"/>
+
+    <!-- Selected state -->
+    <SolidColorBrush x:Key="AuraSelectedBrush" Color="#D0BCFF1A"/>
+    <SolidColorBrush x:Key="AuraSelectedHoverBrush" Color="#D0BCFF33"/>
+
+    <!-- Flyout / Tooltip -->
+    <SolidColorBrush x:Key="AuraFlyoutBackgroundBrush" Color="#2B2930"/>
+    <SolidColorBrush x:Key="AuraFlyoutBorderBrush" Color="#49454F"/>
+    <SolidColorBrush x:Key="AuraTooltipBackgroundBrush" Color="#E6E1E5"/>
+    <SolidColorBrush x:Key="AuraTooltipForegroundBrush" Color="#313033"/>
 
 </ResourceDictionary>

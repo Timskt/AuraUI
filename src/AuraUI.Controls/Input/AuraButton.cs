@@ -2,6 +2,7 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Automation;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
@@ -27,6 +28,10 @@ public enum IconPosition
 /// Supports variant classes: .primary, .secondary, .destructive, .outline, .ghost, .link
 /// Supports size classes: .sm, .md, .lg
 /// </summary>
+[TemplatePart("PART_Border", typeof(Avalonia.Controls.Border))]
+[TemplatePart("PART_IconPresenter", typeof(Avalonia.Controls.Presenters.ContentPresenter))]
+[TemplatePart("PART_ContentPresenter", typeof(Avalonia.Controls.Presenters.ContentPresenter))]
+[TemplatePart("PART_LoadingPresenter", typeof(Avalonia.Controls.Presenters.ContentPresenter))]
 public class AuraButton : Button
 {
     private ContentPresenter? _iconPresenter;
@@ -68,6 +73,72 @@ public class AuraButton : Button
         AvaloniaProperty.Register<AuraButton, double>(
             nameof(IconSpacing),
             defaultValue: 8.0);
+
+    /// <summary>
+    /// Defines the <see cref="HoverBackground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> HoverBackgroundProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(HoverBackground));
+
+    /// <summary>
+    /// Defines the <see cref="HoverForeground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> HoverForegroundProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(HoverForeground));
+
+    /// <summary>
+    /// Defines the <see cref="HoverBorderBrush"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> HoverBorderBrushProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(HoverBorderBrush));
+
+    /// <summary>
+    /// Defines the <see cref="PressedBackground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> PressedBackgroundProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(PressedBackground));
+
+    /// <summary>
+    /// Defines the <see cref="PressedForeground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> PressedForegroundProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(PressedForeground));
+
+    /// <summary>
+    /// Defines the <see cref="PressedBorderBrush"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> PressedBorderBrushProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(PressedBorderBrush));
+
+    /// <summary>
+    /// Defines the <see cref="FocusBorderBrush"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> FocusBorderBrushProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(FocusBorderBrush));
+
+    /// <summary>
+    /// Defines the <see cref="FocusBorderThickness"/> property.
+    /// </summary>
+    public static readonly StyledProperty<Thickness> FocusBorderThicknessProperty =
+        AvaloniaProperty.Register<AuraButton, Thickness>(nameof(FocusBorderThickness), new Thickness(2));
+
+    /// <summary>
+    /// Defines the <see cref="DisabledBackground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> DisabledBackgroundProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(DisabledBackground));
+
+    /// <summary>
+    /// Defines the <see cref="DisabledForeground"/> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> DisabledForegroundProperty =
+        AvaloniaProperty.Register<AuraButton, IBrush?>(nameof(DisabledForeground));
+
+    /// <summary>
+    /// Defines the <see cref="DisabledOpacity"/> property.
+    /// </summary>
+    public static readonly StyledProperty<double> DisabledOpacityProperty =
+        AvaloniaProperty.Register<AuraButton, double>(nameof(DisabledOpacity), 0.4);
 
     /// <summary>
     /// Gets or sets the icon content displayed alongside the button content.
@@ -114,6 +185,105 @@ public class AuraButton : Button
     {
         get => GetValue(IconSpacingProperty);
         set => SetValue(IconSpacingProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush when the pointer hovers over the button.
+    /// </summary>
+    public IBrush? HoverBackground
+    {
+        get => GetValue(HoverBackgroundProperty);
+        set => SetValue(HoverBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush when the pointer hovers over the button.
+    /// </summary>
+    public IBrush? HoverForeground
+    {
+        get => GetValue(HoverForegroundProperty);
+        set => SetValue(HoverForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the border brush when the pointer hovers over the button.
+    /// </summary>
+    public IBrush? HoverBorderBrush
+    {
+        get => GetValue(HoverBorderBrushProperty);
+        set => SetValue(HoverBorderBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush when the button is pressed.
+    /// </summary>
+    public IBrush? PressedBackground
+    {
+        get => GetValue(PressedBackgroundProperty);
+        set => SetValue(PressedBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush when the button is pressed.
+    /// </summary>
+    public IBrush? PressedForeground
+    {
+        get => GetValue(PressedForegroundProperty);
+        set => SetValue(PressedForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the border brush when the button is pressed.
+    /// </summary>
+    public IBrush? PressedBorderBrush
+    {
+        get => GetValue(PressedBorderBrushProperty);
+        set => SetValue(PressedBorderBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the border brush when the button has focus.
+    /// </summary>
+    public IBrush? FocusBorderBrush
+    {
+        get => GetValue(FocusBorderBrushProperty);
+        set => SetValue(FocusBorderBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the border thickness when the button has focus.
+    /// </summary>
+    public Thickness FocusBorderThickness
+    {
+        get => GetValue(FocusBorderThicknessProperty);
+        set => SetValue(FocusBorderThicknessProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush when the button is disabled.
+    /// </summary>
+    public IBrush? DisabledBackground
+    {
+        get => GetValue(DisabledBackgroundProperty);
+        set => SetValue(DisabledBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush when the button is disabled.
+    /// </summary>
+    public IBrush? DisabledForeground
+    {
+        get => GetValue(DisabledForegroundProperty);
+        set => SetValue(DisabledForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the opacity when the button is disabled.
+    /// </summary>
+    public double DisabledOpacity
+    {
+        get => GetValue(DisabledOpacityProperty);
+        set => SetValue(DisabledOpacityProperty, value);
     }
 
     static AuraButton()

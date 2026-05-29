@@ -1,5 +1,7 @@
 using Avalonia;
 using Avalonia.Media;
+using AvaloniaColor = Avalonia.Media.Color;
+using AvaloniaColors = Avalonia.Media.Colors;
 
 namespace AuraUI.Controls.Charts.Charts3D;
 
@@ -71,11 +73,11 @@ public class Scatter3DSeries : Chart3DSeries
 
     /// <summary>Base color for gradient mode (when Colors is null).</summary>
     public static readonly StyledProperty<Color> ColorLowProperty =
-        AvaloniaProperty.Register<Scatter3DSeries, Color>(nameof(ColorLow), Color.Parse("#66BB6A"));
+        AvaloniaProperty.Register<Scatter3DSeries, AvaloniaColor>(nameof(ColorLow), AvaloniaColor.Parse("#66BB6A"));
 
     /// <summary>Top color for gradient mode.</summary>
     public static readonly StyledProperty<Color> ColorHighProperty =
-        AvaloniaProperty.Register<Scatter3DSeries, Color>(nameof(ColorHigh), Color.Parse("#C62828"));
+        AvaloniaProperty.Register<Scatter3DSeries, AvaloniaColor>(nameof(ColorHigh), AvaloniaColor.Parse("#C62828"));
 
     /// <summary>Fill opacity of markers.</summary>
     public static readonly StyledProperty<double> FillOpacityProperty =
@@ -91,8 +93,8 @@ public class Scatter3DSeries : Chart3DSeries
     public double MinSize { get => GetValue(MinSizeProperty); set => SetValue(MinSizeProperty, value); }
     public double MaxSize { get => GetValue(MaxSizeProperty); set => SetValue(MaxSizeProperty, value); }
     public double DefaultSize { get => GetValue(DefaultSizeProperty); set => SetValue(DefaultSizeProperty, value); }
-    public Color ColorLow { get => GetValue(ColorLowProperty); set => SetValue(ColorLowProperty, value); }
-    public Color ColorHigh { get => GetValue(ColorHighProperty); set => SetValue(ColorHighProperty, value); }
+    public AvaloniaColor ColorLow { get => GetValue(ColorLowProperty); set => SetValue(ColorLowProperty, value); }
+    public AvaloniaColor ColorHigh { get => GetValue(ColorHighProperty); set => SetValue(ColorHighProperty, value); }
     public double FillOpacity { get => GetValue(FillOpacityProperty); set => SetValue(FillOpacityProperty, value); }
 
     // ────────────────────────────────────────────────
@@ -148,7 +150,7 @@ public class Scatter3DSeries : Chart3DSeries
                 var r = (byte)(ColorLow.R + (ColorHigh.R - ColorLow.R) * t);
                 var g = (byte)(ColorLow.G + (ColorHigh.G - ColorLow.G) * t);
                 var b = (byte)(ColorLow.B + (ColorHigh.B - ColorLow.B) * t);
-                brush = new SolidColorBrush(Color.FromRgb(r, g, b), FillOpacity);
+                brush = new SolidColorBrush(AvaloniaColor.FromRgb(r, g, b), FillOpacity);
             }
 
             var idx = i;
@@ -170,7 +172,7 @@ public class Scatter3DSeries : Chart3DSeries
         PointShape3D shape, double opacity)
     {
         var half = size / 2;
-        var borderPen = new Pen(new SolidColorBrush(Colors.White, 0.6), 1.0);
+        var borderPen = new Pen(new SolidColorBrush(AvaloniaColors.White, 0.6), 1.0);
 
         switch (shape)
         {
@@ -178,7 +180,7 @@ public class Scatter3DSeries : Chart3DSeries
                 // Draw as ellipse with highlight
                 ctx.DrawEllipse(brush, borderPen, screen, half, half);
                 // Highlight dot
-                var highlightBrush = new SolidColorBrush(Colors.White, 0.4 * opacity);
+                var highlightBrush = new SolidColorBrush(AvaloniaColors.White, 0.4 * opacity);
                 ctx.DrawEllipse(highlightBrush, null,
                     new Point(screen.X - half * 0.3, screen.Y - half * 0.3),
                     half * 0.3, half * 0.3);
@@ -224,7 +226,8 @@ public class Scatter3DSeries : Chart3DSeries
         {
             var point3d = new Point3D(xVals[i], yVals[i], zVals[i]);
             var screenPoint = projection.Project(point3d);
-            var dist = (screenPos - screenPoint).Length;
+            var diff = new Point(screenPos.X - screenPoint.X, screenPos.Y - screenPoint.Y);
+            var dist = Math.Sqrt(diff.X * diff.X + diff.Y * diff.Y);
 
             if (dist < 15 && (!best.HasValue || dist < best.Value.distance))
             {

@@ -11,7 +11,6 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="16,10"/>
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
         <Setter Property="MinWidth" Value="280"/>
         <Setter Property="MaxWidth" Value="480"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -25,7 +24,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}"
-                        BoxShadow="{TemplateBinding BoxShadow}"
                         ClipToBounds="{TemplateBinding ClipToBounds}">
                     <Border.Transitions>
                         <BrushTransition Duration="00:00:00.200" Property="Background"/>
@@ -57,7 +55,7 @@
     </Style>
 
     <!-- Enter animation (slide down from top) -->
-    <Style Selector="AuraMessage">
+    <Style Selector="feedback|AuraMessage">
         <Style.Animations>
             <Animation Duration="00:00:00.300"
                        Easing="CubicEaseOut">

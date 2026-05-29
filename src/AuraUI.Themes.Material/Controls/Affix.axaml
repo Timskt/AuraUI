@@ -6,11 +6,4 @@
         <Setter Property="ZIndex" Value="100"/>
     </Style>
 
-    <Style Selector="layout|Affix:affixed-top">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
-    </Style>
-    <Style Selector="layout|Affix:affixed-bottom">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
-    </Style>
-
 </Styles>

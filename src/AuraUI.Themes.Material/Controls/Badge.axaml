@@ -5,6 +5,14 @@
     <!-- Material Design 3 — Badge -->
 
     <Style Selector="layout|Badge">
+        <Setter Property="BadgeBackground" Value="{DynamicResource AuraErrorBrush}"/>
+        <Setter Property="BadgeForeground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+        <Setter Property="BadgeCornerRadius" Value="8"/>
+        <Setter Property="BadgeMinWidth" Value="16"/>
+        <Setter Property="BadgeMinHeight" Value="16"/>
+        <Setter Property="DotSize" Value="6"/>
+        <Setter Property="OffsetX" Value="-4"/>
+        <Setter Property="OffsetY" Value="-4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="layout:Badge">
@@ -15,20 +23,20 @@
                                           ContentTemplate="{TemplateBinding ContentTemplate}"/>
                         <!-- Badge overlay -->
                         <Border Name="PART_BadgeContainer"
-                                Background="{DynamicResource AuraErrorBrush}"
-                                CornerRadius="8"
-                                MinWidth="16"
-                                MinHeight="16"
+                                Background="{TemplateBinding BadgeBackground}"
+                                CornerRadius="{TemplateBinding BadgeCornerRadius}"
+                                MinWidth="{TemplateBinding BadgeMinWidth}"
+                                MinHeight="{TemplateBinding BadgeMinHeight}"
                                 Padding="4,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
-                                Margin="0,-4,-4,0">
+                                Margin="0,0,0,0">
                             <ContentPresenter Name="PART_BadgeContentPresenter"
                                               Content="{TemplateBinding BadgeContent}"
                                               ContentTemplate="{TemplateBinding BadgeContentTemplate}"
                                               FontSize="11"
                                               FontWeight="Medium"
-                                              Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                                              Foreground="{TemplateBinding BadgeForeground}"
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>

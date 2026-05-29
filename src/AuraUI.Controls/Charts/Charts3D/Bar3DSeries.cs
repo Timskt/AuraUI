@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Media;
+using AvaloniaColor = Avalonia.Media.Color;
 
 namespace AuraUI.Controls.Charts.Charts3D;
 
@@ -47,12 +48,12 @@ public class Bar3DSeries : Chart3DSeries
         AvaloniaProperty.Register<Bar3DSeries, double>(nameof(BarDepth), 0.08);
 
     /// <summary>Base color for the gradient (low values).</summary>
-    public static readonly StyledProperty<Color> ColorLowProperty =
-        AvaloniaProperty.Register<Bar3DSeries, Color>(nameof(ColorLow), Color.Parse("#4FC3F7"));
+    public static readonly StyledProperty<Avalonia.Media.Color> ColorLowProperty =
+        AvaloniaProperty.Register<Bar3DSeries, Avalonia.Media.Color>(nameof(ColorLow), Avalonia.Media.Color.Parse("#4FC3F7"));
 
     /// <summary>Top color for the gradient (high values).</summary>
-    public static readonly StyledProperty<Color> ColorHighProperty =
-        AvaloniaProperty.Register<Bar3DSeries, Color>(nameof(ColorHigh), Color.Parse("#1565C0"));
+    public static readonly StyledProperty<Avalonia.Media.Color> ColorHighProperty =
+        AvaloniaProperty.Register<Bar3DSeries, Avalonia.Media.Color>(nameof(ColorHigh), Avalonia.Media.Color.Parse("#1565C0"));
 
     // CLR wrappers
     public double[]? XValues { get => GetValue(XValuesProperty); set => SetValue(XValuesProperty, value); }
@@ -61,8 +62,8 @@ public class Bar3DSeries : Chart3DSeries
     public IBrush[]? Colors { get => GetValue(ColorsProperty); set => SetValue(ColorsProperty, value); }
     public double BarWidth { get => GetValue(BarWidthProperty); set => SetValue(BarWidthProperty, value); }
     public double BarDepth { get => GetValue(BarDepthProperty); set => SetValue(BarDepthProperty, value); }
-    public Color ColorLow { get => GetValue(ColorLowProperty); set => SetValue(ColorLowProperty, value); }
-    public Color ColorHigh { get => GetValue(ColorHighProperty); set => SetValue(ColorHighProperty, value); }
+    public AvaloniaColor ColorLow { get => GetValue(ColorLowProperty); set => SetValue(ColorLowProperty, value); }
+    public AvaloniaColor ColorHigh { get => GetValue(ColorHighProperty); set => SetValue(ColorHighProperty, value); }
 
     // ────────────────────────────────────────────────
     //  Rendering
@@ -181,7 +182,7 @@ public class Bar3DSeries : Chart3DSeries
         var r = (byte)(ColorLow.R + (ColorHigh.R - ColorLow.R) * t);
         var g = (byte)(ColorLow.G + (ColorHigh.G - ColorLow.G) * t);
         var b = (byte)(ColorLow.B + (ColorHigh.B - ColorLow.B) * t);
-        return new SolidColorBrush(Color.FromRgb(r, g, b));
+        return new SolidColorBrush(AvaloniaColor.FromRgb(r, g, b));
     }
 
     /// <summary>Adjust brush brightness for 3D face shading.</summary>
@@ -193,7 +194,7 @@ public class Bar3DSeries : Chart3DSeries
             var r = (byte)Math.Clamp(c.R * factor, 0, 255);
             var g = (byte)Math.Clamp(c.G * factor, 0, 255);
             var b = (byte)Math.Clamp(c.B * factor, 0, 255);
-            return new SolidColorBrush(Color.FromRgb(r, g, b), opacity);
+            return new SolidColorBrush(AvaloniaColor.FromRgb(r, g, b), opacity);
         }
         return brush;
     }
@@ -217,7 +218,8 @@ public class Bar3DSeries : Chart3DSeries
             // Project bar center (midpoint of bar height)
             var center = new Point3D(xVals[i], yVals[i] / 2, zVals[i]);
             var screenCenter = projection.Project(center);
-            var dist = (screenPos - screenCenter).Length;
+            var diff = new Point(screenPos.X - screenCenter.X, screenPos.Y - screenCenter.Y);
+            var dist = Math.Sqrt(diff.X * diff.X + diff.Y * diff.Y);
 
             if (dist < 20 && (!best.HasValue || dist < best.Value.distance))
             {

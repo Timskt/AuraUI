@@ -1,5 +1,18 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="using:AuraUI.Controls.Feedback">
+
+    <!-- ============================================================
+         AuraToast Control — Default property values
+         ============================================================ -->
+    <Style Selector="feedback|AuraToast">
+        <Setter Property="ProgressBarBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="CloseButtonForeground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="16,12"/>
+    </Style>
 
     <!-- ============================================================
          Toast — Fluent Style (Small notification popup)
@@ -72,6 +85,9 @@
     </Style>
     <Style Selector="Button.toast-close:pointerover">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+    <Style Selector="Button.toast-close:pressed">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- ============================================================

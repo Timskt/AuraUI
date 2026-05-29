@@ -21,17 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Behaviors\**" />
-    <Compile Remove="Directives\**" />
-    <Compile Remove="Hooks\**" />
-    <Compile Remove="Context\**" />
-    <Compile Remove="MVVM\Watch.cs" />
-    <Compile Remove="MVVM\ComputedProperty.cs" />
-    <Compile Remove="MVVM\Reactive.cs" />
-    <Compile Remove="MVVM\RenderPropControl.cs" />
-    <Compile Remove="MVVM\Signal.cs" />
-    <Compile Remove="Navigation\**" />
-    <Compile Remove="Input\**" />
     <PackageReference Include="Avalonia" Version="11.3.1" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.5" />

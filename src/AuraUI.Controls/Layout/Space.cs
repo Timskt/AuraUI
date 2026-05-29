@@ -121,6 +121,9 @@ public class Space : Panel
         set => SetValue(SeparatorProperty, value);
     }
 
+    // Reusable list to avoid per-measure/arrange allocations
+    private readonly List<Control> _visibleChildrenBuffer = new();
+
     protected override Size MeasureOverride(Size availableSize)
     {
         var isHorizontal = Direction == SpaceDirection.Horizontal;
@@ -131,13 +134,11 @@ public class Space : Panel
 
         double totalMain = 0;
         double maxCross = 0;
-        var desiredSizes = new List<Size>();
 
         foreach (var child in children)
         {
             child.Measure(availableSize);
             var desired = child.DesiredSize;
-            desiredSizes.Add(desired);
 
             if (isHorizontal)
             {
@@ -234,12 +235,12 @@ public class Space : Panel
 
     private List<Control> GetVisibleChildren()
     {
-        var result = new List<Control>();
+        _visibleChildrenBuffer.Clear();
         foreach (var child in Children)
         {
             if (child.IsVisible)
-                result.Add(child);
+                _visibleChildrenBuffer.Add(child);
         }
-        return result;
+        return _visibleChildrenBuffer;
     }
 }

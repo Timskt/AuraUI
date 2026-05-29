@@ -11,6 +11,7 @@ namespace AuraUI.Controls.Layout;
 /// </summary>
 public class Divider : Control
 {
+    private static readonly SolidColorBrush s_defaultBrush = new(Colors.Gray);
     /// <summary>
     /// Defines the <see cref="Orientation"/> styled property.
     /// </summary>
@@ -144,7 +145,7 @@ public class Divider : Control
         if (bounds.Width <= 0 || bounds.Height <= 0)
             return;
 
-        var brush = Foreground ?? new SolidColorBrush(Colors.Gray);
+        var brush = Foreground ?? s_defaultBrush;
 
         IDashStyle? dashStyle = null;
         var dashArray = StrokeDashArray;

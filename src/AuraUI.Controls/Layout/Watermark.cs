@@ -220,16 +220,47 @@ public class Watermark : Decorator
         }
     }
 
+    // Cached watermark text to avoid per-render FormattedText allocation in tile loop
+    private FormattedText? _cachedWatermarkText;
+    private string? _cachedWatermarkString;
+    private double _cachedWatermarkFontSize;
+    private IBrush? _cachedWatermarkForeground;
+
+    private static readonly SolidColorBrush s_defaultWatermarkBrush = new(Colors.Gray);
+
+    private FormattedText GetOrCreateWatermarkText(string text, double fontSize, IBrush foreground)
+    {
+        if (_cachedWatermarkText != null &&
+            _cachedWatermarkString == text &&
+            Math.Abs(_cachedWatermarkFontSize - fontSize) < 0.001 &&
+            _cachedWatermarkForeground == foreground)
+            return _cachedWatermarkText;
+
+        var fontFamily = WatermarkFontFamily ?? FontFamily.Default;
+        var typeface = new Typeface(fontFamily);
+        _cachedWatermarkString = text;
+        _cachedWatermarkFontSize = fontSize;
+        _cachedWatermarkForeground = foreground;
+        _cachedWatermarkText = new FormattedText(
+            text,
+            System.Globalization.CultureInfo.CurrentCulture,
+            FlowDirection.LeftToRight,
+            typeface,
+            fontSize,
+            foreground);
+        return _cachedWatermarkText;
+    }
+
     private void DrawTextWatermark(
         DrawingContext context, string text, Rect bounds,
         double gapX, double gapY, double offsetX, double offsetY)
     {
         var fontSize = WatermarkFontSize;
-        var fontFamily = WatermarkFontFamily ?? FontFamily.Default;
-        var foreground = WatermarkForeground ?? new SolidColorBrush(Colors.Gray);
+        var foreground = WatermarkForeground ?? s_defaultWatermarkBrush;
         var rotate = Rotate;
 
-        var typeface = new Typeface(fontFamily);
+        // Cache the FormattedText (reuse across tiles and frames)
+        var textLayout = GetOrCreateWatermarkText(text, fontSize, foreground);
 
         // Calculate text size for spacing
         var textWidth = text.Length * fontSize * 0.6; // Approximate
@@ -243,14 +274,6 @@ public class Watermark : Decorator
                 using (context.PushTransform(Matrix.CreateTranslation(x, y) *
                                             Matrix.CreateRotation(rotate * Math.PI / 180)))
                 {
-                    var textLayout = new FormattedText(
-                        text,
-                        System.Globalization.CultureInfo.CurrentCulture,
-                        FlowDirection.LeftToRight,
-                        typeface,
-                        fontSize,
-                        foreground);
-
                     context.DrawText(textLayout, new Point(0, 0));
                 }
             }

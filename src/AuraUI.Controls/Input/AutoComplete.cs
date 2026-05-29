@@ -340,17 +340,29 @@ public class AutoComplete : TemplatedControl
 
     private void StartDebounce()
     {
-        _debounceTimer?.Stop();
+        StopDebounce();
         _debounceTimer = new DispatcherTimer
         {
             Interval = TimeSpan.FromMilliseconds(DebounceDelay)
         };
-        _debounceTimer.Tick += (_, _) =>
-        {
-            _debounceTimer.Stop();
-            FilterSuggestions();
-        };
+        _debounceTimer.Tick += OnDebounceTick;
         _debounceTimer.Start();
+    }
+
+    private void OnDebounceTick(object? sender, EventArgs e)
+    {
+        StopDebounce();
+        FilterSuggestions();
+    }
+
+    private void StopDebounce()
+    {
+        if (_debounceTimer != null)
+        {
+            _debounceTimer.Tick -= OnDebounceTick;
+            _debounceTimer.Stop();
+            _debounceTimer = null;
+        }
     }
 
     private void FilterSuggestions()
@@ -413,7 +425,6 @@ public class AutoComplete : TemplatedControl
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        _debounceTimer?.Stop();
-        _debounceTimer = null;
+        StopDebounce();
     }
 }

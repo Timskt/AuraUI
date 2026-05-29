@@ -3,6 +3,7 @@ using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Styling;
+using Avalonia.VisualTree;
 using System.Collections;
 
 namespace AuraUI.Controls.Layout;
@@ -188,7 +189,7 @@ public class VirtualizingStackPanel : Avalonia.Controls.VirtualizingStackPanel
                 _scrollViewer = sv;
                 return;
             }
-            parent = parent is Visual visual ? visual.VisualParent : null;
+            parent = parent is Visual visual ? visual.GetVisualParent() as Control : null;
         }
     }
 

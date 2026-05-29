@@ -60,26 +60,26 @@
 
     <!-- Success variant -->
     <Style Selector="feedback|AuraNotification.success">
-        <Setter Property="Background" Value="#E8F5E9"/>
-        <Setter Property="Foreground" Value="#1B5E20"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSuccessContainerBrush}"/>
     </Style>
 
     <!-- Error variant -->
     <Style Selector="feedback|AuraNotification.error">
-        <Setter Property="Background" Value="#FFEBEE"/>
-        <Setter Property="Foreground" Value="#B71C1C"/>
+        <Setter Property="Background" Value="{DynamicResource AuraErrorContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnErrorContainerBrush}"/>
     </Style>
 
     <!-- Warning variant -->
     <Style Selector="feedback|AuraNotification.warning">
-        <Setter Property="Background" Value="#FFF3E0"/>
-        <Setter Property="Foreground" Value="#E65100"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnWarningContainerBrush}"/>
     </Style>
 
     <!-- Info variant -->
     <Style Selector="feedback|AuraNotification.info">
-        <Setter Property="Background" Value="#E1F5FE"/>
-        <Setter Property="Foreground" Value="#01579B"/>
+        <Setter Property="Background" Value="{DynamicResource AuraInfoContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnInfoContainerBrush}"/>
     </Style>
 
 </Styles>

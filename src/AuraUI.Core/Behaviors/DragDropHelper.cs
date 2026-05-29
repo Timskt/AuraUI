@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
 
@@ -147,7 +148,7 @@ public static class DragDropHelper
         }
     }
 
-    private static async void OnDragPointerMoved(object? sender, PointerEventArgs e)
+    private static void OnDragPointerMoved(object? sender, PointerEventArgs e)
     {
         if (sender is not Control control)
             return;
@@ -187,7 +188,7 @@ public static class DragDropHelper
 
             if (_lastPressedArgs.TryGetValue(control, out var pressedArgs))
             {
-                await DragDrop.DoDragDropAsync(pressedArgs, dataObject, effects);
+                DragDrop.DoDragDrop(pressedArgs, dataObject, effects);
             }
         }
         finally

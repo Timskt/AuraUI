@@ -102,6 +102,19 @@ public class Chart3D : Control
     private Chart3DSeries? _hoveredSeries;
     private int _hoveredIndex = -1;
 
+    // Reusable renderables list to avoid per-render allocation
+    private readonly List<(Chart3DSeries series, int index, double depth, Action<DrawingContext> render)> _renderablesBuffer = new();
+
+    // Cached typefaces
+    private static readonly Typeface s_titleTypeface = new("Segoe UI", FontStyle.Normal, FontWeight.SemiBold);
+    private static readonly Typeface s_labelTypeface = new("Segoe UI", FontStyle.Normal, FontWeight.Normal);
+
+    // Cached grid brushes
+    private static readonly SolidColorBrush s_gridBrush = new(Colors.LightGray, 0.3);
+    private static readonly SolidColorBrush s_wallBrush = new(Colors.LightGray, 0.15);
+    private static readonly Pen s_gridPen = new(new SolidColorBrush(Colors.LightGray, 0.3), 0.5, new DashStyle(new double[] { 2, 2 }, 0));
+    private static readonly Pen s_wallPen = new(new SolidColorBrush(Colors.LightGray, 0.15), 0.5);
+
     /// <summary>The 3D projection engine used for rendering.</summary>
     public Projection3D Projection => _projection;
 
@@ -182,7 +195,7 @@ public class Chart3D : Control
             var titleFormatted = new FormattedText(Title,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.SemiBold),
+                s_titleTypeface,
                 16,
                 titleBrush);
             context.DrawText(titleFormatted, new Point(
@@ -195,8 +208,9 @@ public class Chart3D : Control
         if (ShowGrid)
             RenderGrid(context);
 
-        // Collect all renderable elements from all series and depth-sort
-        var renderables = new List<(Chart3DSeries series, int index, double depth, Action<DrawingContext> render)>();
+        // Collect all renderable elements from all series and depth-sort (reuse buffer)
+        _renderablesBuffer.Clear();
+        var renderables = _renderablesBuffer;
 
         foreach (var series in Series)
         {
@@ -248,18 +262,17 @@ public class Chart3D : Control
 
         // Draw axis labels
         var labelBrush = axisBrush;
-        var labelFont = new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal);
 
         var xLabel = new FormattedText("X", System.Globalization.CultureInfo.CurrentCulture,
-            FlowDirection.LeftToRight, labelFont, 12, labelBrush);
+            FlowDirection.LeftToRight, s_labelTypeface, 12, labelBrush);
         context.DrawText(xLabel, new Point(pX.X + 4, pX.Y - 6));
 
         var yLabel = new FormattedText("Y", System.Globalization.CultureInfo.CurrentCulture,
-            FlowDirection.LeftToRight, labelFont, 12, labelBrush);
+            FlowDirection.LeftToRight, s_labelTypeface, 12, labelBrush);
         context.DrawText(yLabel, new Point(pY.X + 4, pY.Y - 6));
 
         var zLabel = new FormattedText("Z", System.Globalization.CultureInfo.CurrentCulture,
-            FlowDirection.LeftToRight, labelFont, 12, labelBrush);
+            FlowDirection.LeftToRight, s_labelTypeface, 12, labelBrush);
         context.DrawText(zLabel, new Point(pZ.X + 4, pZ.Y - 6));
     }
 
@@ -269,8 +282,8 @@ public class Chart3D : Control
 
     private void RenderGrid(DrawingContext context)
     {
-        var gridBrush = GridBrush ?? new SolidColorBrush(Colors.LightGray, 0.3);
-        var gridPen = new Pen(gridBrush, 0.5, new DashStyle(new double[] { 2, 2 }, 0));
+        var gridPen = GridBrush != null ? new Pen(GridBrush, 0.5, new DashStyle(new double[] { 2, 2 }, 0)) : s_gridPen;
+        var wallPen = s_wallPen;
 
         const int gridLines = 5;
 
@@ -289,8 +302,6 @@ public class Chart3D : Control
         }
 
         // XY plane grid (back wall) - lighter
-        var wallBrush = new SolidColorBrush(Colors.LightGray, 0.15);
-        var wallPen = new Pen(wallBrush, 0.5);
         for (int i = 0; i <= gridLines; i++)
         {
             var t = (double)i / gridLines;
@@ -322,7 +333,7 @@ public class Chart3D : Control
         var ft = new FormattedText(tooltipText,
             System.Globalization.CultureInfo.CurrentCulture,
             FlowDirection.LeftToRight,
-            new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
+            s_labelTypeface,
             12,
             fg);
 

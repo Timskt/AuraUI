@@ -461,7 +461,7 @@ public class Upload : TemplatedControl
             var paths = new List<string>();
             foreach (var file in files)
             {
-                var path = file.TryGetLocalPath();
+                var path = file.Path?.LocalPath;
                 if (path != null) paths.Add(path);
             }
             AddFiles(paths);
@@ -529,7 +529,7 @@ public class Upload : TemplatedControl
             var paths = new List<string>();
             foreach (var file in files)
             {
-                var path = file.TryGetLocalPath();
+                var path = file.Path?.LocalPath;
                 if (path != null) paths.Add(path);
             }
             AddFiles(paths);

@@ -80,6 +80,50 @@ public class Switch : ToggleButton
             nameof(TransitionEasing),
             new CubicEaseOut());
 
+    /// <summary>
+    /// Defines the <see cref="TrackBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> TrackBackgroundProperty =
+        AvaloniaProperty.Register<Switch, IBrush?>(nameof(TrackBackground));
+
+    /// <summary>
+    /// Defines the <see cref="TrackCornerRadius"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<CornerRadius> TrackCornerRadiusProperty =
+        AvaloniaProperty.Register<Switch, CornerRadius>(
+            nameof(TrackCornerRadius),
+            new CornerRadius(10));
+
+    /// <summary>
+    /// Defines the <see cref="ThumbBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ThumbBackgroundProperty =
+        AvaloniaProperty.Register<Switch, IBrush?>(nameof(ThumbBackground));
+
+    /// <summary>
+    /// Defines the <see cref="ThumbSize"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> ThumbSizeProperty =
+        AvaloniaProperty.Register<Switch, double>(nameof(ThumbSize), 14);
+
+    /// <summary>
+    /// Defines the <see cref="ThumbShadow"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<BoxShadow> ThumbShadowProperty =
+        AvaloniaProperty.Register<Switch, BoxShadow>(nameof(ThumbShadow));
+
+    /// <summary>
+    /// Defines the <see cref="CheckedTrackBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> CheckedTrackBackgroundProperty =
+        AvaloniaProperty.Register<Switch, IBrush?>(nameof(CheckedTrackBackground));
+
+    /// <summary>
+    /// Defines the <see cref="CheckedThumbBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> CheckedThumbBackgroundProperty =
+        AvaloniaProperty.Register<Switch, IBrush?>(nameof(CheckedThumbBackground));
+
     static Switch()
     {
         IsCheckedProperty.Changed.AddClassHandler<Switch>((x, _) => x.OnIsCheckedChanged());
@@ -138,6 +182,69 @@ public class Switch : ToggleButton
     {
         get => GetValue(TransitionEasingProperty);
         set => SetValue(TransitionEasingProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush of the switch track (unchecked state).
+    /// </summary>
+    public IBrush? TrackBackground
+    {
+        get => GetValue(TrackBackgroundProperty);
+        set => SetValue(TrackBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the corner radius of the switch track.
+    /// </summary>
+    public CornerRadius TrackCornerRadius
+    {
+        get => GetValue(TrackCornerRadiusProperty);
+        set => SetValue(TrackCornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush of the switch thumb (unchecked state).
+    /// </summary>
+    public IBrush? ThumbBackground
+    {
+        get => GetValue(ThumbBackgroundProperty);
+        set => SetValue(ThumbBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the size (width and height) of the switch thumb.
+    /// </summary>
+    public double ThumbSize
+    {
+        get => GetValue(ThumbSizeProperty);
+        set => SetValue(ThumbSizeProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the box shadow of the switch thumb.
+    /// </summary>
+    public BoxShadow ThumbShadow
+    {
+        get => GetValue(ThumbShadowProperty);
+        set => SetValue(ThumbShadowProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the track background brush when the switch is checked.
+    /// </summary>
+    public IBrush? CheckedTrackBackground
+    {
+        get => GetValue(CheckedTrackBackgroundProperty);
+        set => SetValue(CheckedTrackBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the thumb background brush when the switch is checked.
+    /// </summary>
+    public IBrush? CheckedThumbBackground
+    {
+        get => GetValue(CheckedThumbBackgroundProperty);
+        set => SetValue(CheckedThumbBackgroundProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

@@ -17,6 +17,7 @@ public class Skeleton : Control
 {
     private readonly LinearGradientBrush _shimmerBrush;
     private DispatcherTimer? _animationTimer;
+    private static readonly SolidColorBrush s_defaultBaseBrush = new(Color.FromArgb(40, 128, 128, 128));
     private double _animationOffset;
 
     /// <summary>
@@ -302,7 +303,7 @@ public class Skeleton : Control
         var bounds = Bounds;
         if (bounds.Width <= 0 || bounds.Height <= 0) return;
 
-        var baseBrush = BaseColor ?? new SolidColorBrush(Color.FromArgb(40, 128, 128, 128));
+        var baseBrush = BaseColor ?? s_defaultBaseBrush;
         var cornerRadius = CornerRadius;
 
         switch (Variant)

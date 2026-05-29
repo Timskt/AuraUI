@@ -225,7 +225,7 @@ public class FileUploader : TemplatedControl
 
         if (_dropZone is not null)
         {
-            DragDrop.SetDrop(_dropZone, DropOperation.Copy);
+            DragDrop.SetAllowDrop(_dropZone, true);
             _dropZone.AddHandler(DragDrop.DragEnterEvent, OnDragEnter);
             _dropZone.AddHandler(DragDrop.DragLeaveEvent, OnDragLeave);
             _dropZone.AddHandler(DragDrop.DropEvent, OnDrop);

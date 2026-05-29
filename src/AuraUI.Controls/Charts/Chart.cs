@@ -190,6 +190,15 @@ public class Chart : Control
     private Rect _plotArea;
     private bool _needsDataRecompute = true;
 
+    // Reusable collections to avoid per-render/per-frame allocations
+    private readonly List<TooltipLine> _tooltipLinesBuffer = new();
+    private readonly List<(FormattedText ft, TooltipLine line)> _measuredLinesBuffer = new();
+    private readonly List<TooltipSeriesEntry> _axisEntriesBuffer = new();
+
+    // Cached static typefaces to avoid per-render allocations
+    private static readonly Typeface s_labelTypeface = new("Segoe UI", FontStyle.Normal, FontWeight.Normal);
+    private static readonly Typeface s_boldLabelTypeface = new("Segoe UI", FontStyle.Normal, FontWeight.SemiBold);
+
     /// <summary>
     /// Render context shared across all renderers for this chart.
     /// Provides geometry caching, benchmarking, and memory pooling.
@@ -290,6 +299,10 @@ public class Chart : Control
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
+        _animation.FrameTick -= OnAnimationTick;
+        _animation.Completed -= OnAnimationCompleted;
+        DoubleTapped -= OnChartDoubleTapped;
+        DetachSeries();
         _animation.Dispose();
         _zoomPan.Dispose();
     }
@@ -565,7 +578,7 @@ public class Chart : Control
                 var formattedText = new FormattedText(labelText,
                     System.Globalization.CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
-                    new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
+                    s_labelTypeface,
                     axis.LabelFontSize,
                     labelBrush);
 
@@ -602,7 +615,7 @@ public class Chart : Control
             var titleFormatted = new FormattedText(axis.Title,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.SemiBold),
+                s_boldLabelTypeface,
                 axis.LabelFontSize + 1,
                 labelBrush);
 
@@ -662,7 +675,7 @@ public class Chart : Control
             var formattedText = new FormattedText(series.Title,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
+                s_labelTypeface,
                 fontSize,
                 labelBrush);
 
@@ -694,7 +707,7 @@ public class Chart : Control
         var formattedTitle = new FormattedText(Title,
             System.Globalization.CultureInfo.CurrentCulture,
             FlowDirection.LeftToRight,
-            new Typeface("Segoe UI", FontStyle.Normal, FontWeight.SemiBold),
+            s_boldLabelTypeface,
             TitleFontSize,
             brush);
 
@@ -708,7 +721,7 @@ public class Chart : Control
             var formattedSub = new FormattedText(Subtitle,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
+                s_labelTypeface,
                 TitleFontSize - 3,
                 subBrush);
 
@@ -749,8 +762,9 @@ public class Chart : Control
                 new Point(ts.CrosshairPixelX.Value, _plotArea.Bottom));
         }
 
-        // ─── Build tooltip lines ───
-        var tooltipLines = new List<TooltipLine>();
+        // ─── Build tooltip lines (reuse buffer) ───
+        _tooltipLinesBuffer.Clear();
+        var tooltipLines = _tooltipLinesBuffer;
         var valueFormat = Tooltip.ValueFormat ?? "F2";
         var xFormat = Tooltip.XValueFormat ?? "F2";
 
@@ -850,15 +864,19 @@ public class Chart : Control
         var maxWidth = 0.0;
         var totalHeight = 0.0;
         var lineHeight = 0.0;
-        var measuredLines = new List<(FormattedText ft, TooltipLine line)>();
+        _measuredLinesBuffer.Clear();
+        var measuredLines = _measuredLinesBuffer;
 
         foreach (var tl in tooltipLines)
         {
             var lineFontSize = tl.FontSize > 0 ? tl.FontSize : fontSize;
+            var tooltipTypeface = tl.FontWeight == FontWeight.SemiBold
+                ? s_boldLabelTypeface
+                : s_labelTypeface;
             var ft = new FormattedText(tl.Text,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface(fontFamily, FontStyle.Normal, tl.FontWeight),
+                tooltipTypeface,
                 lineFontSize,
                 fg);
             measuredLines.Add((ft, tl));
@@ -1349,7 +1367,8 @@ public class Chart : Control
     /// </summary>
     private List<TooltipSeriesEntry> FindAxisEntries(double xValue, Point pointerPos)
     {
-        var entries = new List<TooltipSeriesEntry>();
+        _axisEntriesBuffer.Clear();
+        var entries = _axisEntriesBuffer;
 
         foreach (var s in Series)
         {

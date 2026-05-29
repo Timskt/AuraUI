@@ -9,22 +9,10 @@ namespace AuraUI.Core.Behaviors;
 /// </summary>
 public class SelectAllOnFocusBehavior : Behavior<TextBox>
 {
-    #region IsEnabled
-
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.RegisterAttached<TextBox, bool>(
-            "SelectAllOnFocusBehavior_IsEnabled", typeof(SelectAllOnFocusBehavior), true);
-
     /// <summary>
     /// Gets or sets whether the select-all-on-focus behavior is enabled.
     /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
-
-    #endregion
+    public bool IsEnabled { get; set; } = true;
 
     protected override void OnAttached()
     {
@@ -80,13 +68,4 @@ public class SelectAllOnFocusBehavior : Behavior<TextBox>
         }
     }
 
-    /// <summary>
-    /// Static getter for AXAML usage.
-    /// </summary>
-    public static bool GetIsEnabled(TextBox element) => element.GetValue(IsEnabledProperty);
-
-    /// <summary>
-    /// Static setter for AXAML usage.
-    /// </summary>
-    public static void SetIsEnabled(TextBox element, bool value) => element.SetValue(IsEnabledProperty, value);
 }

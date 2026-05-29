@@ -45,7 +45,7 @@
     <!-- Control specific radii -->
     <CornerRadius x:Key="AuraControlRadius">4</CornerRadius>
     <CornerRadius x:Key="AuraCardRadius">8</CornerRadius>
-    <CornerRadius x:Key="AuraDialogRadius">8</CornerRadius>
+    <CornerRadius x:Key="AuraDialogRadius">12</CornerRadius>
     <CornerRadius x:Key="AuraButtonRadius">4</CornerRadius>
     <CornerRadius x:Key="AuraInputRadius">4</CornerRadius>
     <CornerRadius x:Key="AuraBadgeRadius">9999</CornerRadius>

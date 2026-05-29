@@ -20,8 +20,8 @@
     <!-- Extra Large Shadow (full-screen dialogs) -->
     <BoxShadows x:Key="AuraShadowXl">0 20 25 -5 #26000000, 0 8 10 -6 #26000000</BoxShadows>
 
-    <!-- Focus ring shadow -->
-    <BoxShadows x:Key="AuraShadowFocus">0 0 0 2 #005FB8</BoxShadows>
+    <!-- Focus ring shadow (uses accent color via overlay technique) -->
+    <BoxShadows x:Key="AuraShadowFocus">0 0 0 2 #33005FB8</BoxShadows>
 
     <!-- Inner Shadow (inset effect) -->
     <BoxShadows x:Key="AuraShadowInset">inset 0 2 4 0 #0A000000</BoxShadows>

@@ -68,13 +68,19 @@
     </Style>
 
     <Style Selector="ToggleButton:checked:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#14FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Checked + Indeterminate (tri-state) -->
     <Style Selector="ToggleButton:indeterminate">
         <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
+    </Style>
+
+    <!-- Focus -->
+    <Style Selector="ToggleButton:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Disabled -->

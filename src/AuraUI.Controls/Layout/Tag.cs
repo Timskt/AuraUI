@@ -4,6 +4,7 @@ using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Controls.Templates;
 
 namespace AuraUI.Controls.Layout;
@@ -47,6 +48,30 @@ public class Tag : ContentControl
     /// </summary>
     public static readonly StyledProperty<object?> CloseButtonContentProperty =
         AvaloniaProperty.Register<Tag, object?>(nameof(CloseButtonContent));
+
+    /// <summary>
+    /// Defines the <see cref="CloseIcon"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<object?> CloseIconProperty =
+        AvaloniaProperty.Register<Tag, object?>(nameof(CloseIcon));
+
+    /// <summary>
+    /// Defines the <see cref="CloseIconForeground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> CloseIconForegroundProperty =
+        AvaloniaProperty.Register<Tag, IBrush?>(nameof(CloseIconForeground));
+
+    /// <summary>
+    /// Defines the <see cref="CloseButtonSize"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<double> CloseButtonSizeProperty =
+        AvaloniaProperty.Register<Tag, double>(nameof(CloseButtonSize), 10);
+
+    /// <summary>
+    /// Defines the <see cref="CloseButtonHoverBackground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> CloseButtonHoverBackgroundProperty =
+        AvaloniaProperty.Register<Tag, IBrush?>(nameof(CloseButtonHoverBackground));
 
     private Button? _closeButton;
 
@@ -99,6 +124,42 @@ public class Tag : ContentControl
     {
         get => GetValue(CloseButtonContentProperty);
         set => SetValue(CloseButtonContentProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets custom close icon content. When set, overrides the default path glyph.
+    /// </summary>
+    public object? CloseIcon
+    {
+        get => GetValue(CloseIconProperty);
+        set => SetValue(CloseIconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for the close icon.
+    /// </summary>
+    public IBrush? CloseIconForeground
+    {
+        get => GetValue(CloseIconForegroundProperty);
+        set => SetValue(CloseIconForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the size (width and height) of the close icon.
+    /// </summary>
+    public double CloseButtonSize
+    {
+        get => GetValue(CloseButtonSizeProperty);
+        set => SetValue(CloseButtonSizeProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush of the close button on hover.
+    /// </summary>
+    public IBrush? CloseButtonHoverBackground
+    {
+        get => GetValue(CloseButtonHoverBackgroundProperty);
+        set => SetValue(CloseButtonHoverBackgroundProperty, value);
     }
 
     /// <summary>

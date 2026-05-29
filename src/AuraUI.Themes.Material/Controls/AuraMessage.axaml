@@ -8,7 +8,6 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="16,10"/>
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowMd}"/>
         <Setter Property="MinWidth" Value="280"/>
         <Setter Property="MaxWidth" Value="480"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -22,7 +21,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}"
-                        BoxShadow="{TemplateBinding BoxShadow}"
                         ClipToBounds="{TemplateBinding ClipToBounds}">
                     <DockPanel>
                         <Button Name="PART_CloseButton"

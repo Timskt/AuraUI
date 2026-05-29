@@ -47,6 +47,12 @@ public class AuraProgressBar : ProgressBar
 
     private TextBlock? _label;
 
+    // Cached brushes to avoid per-render allocations
+    private static readonly SolidColorBrush s_successBrush = new(Color.Parse("#4CAF50"));
+    private static readonly SolidColorBrush s_warningBrush = new(Color.Parse("#FF9800"));
+    private static readonly SolidColorBrush s_errorBrush = new(Color.Parse("#F44336"));
+    private static readonly SolidColorBrush s_primaryBrush = new(Color.Parse("#2196F3"));
+
     static AuraProgressBar()
     {
         ShowLabelProperty.Changed.AddClassHandler<AuraProgressBar>((x, _) => x.UpdateLabel());
@@ -155,6 +161,11 @@ public class AuraProgressBar : ProgressBar
         return base.MeasureOverride(availableSize);
     }
 
+    // Cached arc geometry for circular mode
+    private StreamGeometry? _cachedArcGeometry;
+    private double _cachedArcRadius;
+    private double _cachedArcSweep;
+
     public override void Render(DrawingContext context)
     {
         if (!IsCircular)
@@ -176,10 +187,10 @@ public class AuraProgressBar : ProgressBar
 
         var ringBrush = Variant switch
         {
-            ProgressVariant.Success => new SolidColorBrush(Color.Parse("#4CAF50")),
-            ProgressVariant.Warning => new SolidColorBrush(Color.Parse("#FF9800")),
-            ProgressVariant.Error => new SolidColorBrush(Color.Parse("#F44336")),
-            _ => new SolidColorBrush(Color.Parse("#2196F3"))
+            ProgressVariant.Success => s_successBrush,
+            ProgressVariant.Warning => s_warningBrush,
+            ProgressVariant.Error => s_errorBrush,
+            _ => s_primaryBrush
         };
         var ringPen = new Pen(ringBrush, strokeWidth);
 
@@ -194,24 +205,32 @@ public class AuraProgressBar : ProgressBar
             var sweepAngle = normalized * 360.0;
             if (sweepAngle > 0.5)
             {
-                var startAngleRad = -90 * Math.PI / 180.0;
-                var endAngleRad = (-90 + sweepAngle) * Math.PI / 180.0;
-
-                var startPoint = new Point(center.X + radius * Math.Cos(startAngleRad), center.Y + radius * Math.Sin(startAngleRad));
-                var endPoint = new Point(center.X + radius * Math.Cos(endAngleRad), center.Y + radius * Math.Sin(endAngleRad));
-
-                var figure = new PathFigure { StartPoint = startPoint, IsClosed = false };
-                figure.Segments!.Add(new ArcSegment
+                // Rebuild geometry only if radius or sweep changed significantly
+                if (_cachedArcGeometry == null ||
+                    Math.Abs(_cachedArcRadius - radius) > 0.001 ||
+                    Math.Abs(_cachedArcSweep - sweepAngle) > 0.1)
                 {
-                    Point = endPoint,
-                    Size = new Size(radius, radius),
-                    IsLargeArc = sweepAngle > 180,
-                    SweepDirection = SweepDirection.Clockwise
-                });
+                    var startAngleRad = -90 * Math.PI / 180.0;
+                    var endAngleRad = (-90 + sweepAngle) * Math.PI / 180.0;
 
-                var geometry = new PathGeometry();
-                geometry.Figures!.Add(figure);
-                context.DrawGeometry(null, ringPen, geometry);
+                    var startPoint = new Point(center.X + radius * Math.Cos(startAngleRad), center.Y + radius * Math.Sin(startAngleRad));
+                    var endPoint = new Point(center.X + radius * Math.Cos(endAngleRad), center.Y + radius * Math.Sin(endAngleRad));
+
+                    var geometry = new StreamGeometry();
+                    using (var ctx = geometry.Open())
+                    {
+                        ctx.BeginFigure(startPoint, false);
+                        ctx.ArcTo(endPoint, new Size(radius, radius), 0, sweepAngle > 180, SweepDirection.Clockwise);
+                        ctx.EndFigure(false);
+                    }
+
+                    // _cachedArcGeometry is replaced (no Dispose needed in Avalonia 11)
+                    _cachedArcGeometry = geometry;
+                    _cachedArcRadius = radius;
+                    _cachedArcSweep = sweepAngle;
+                }
+
+                context.DrawGeometry(null, ringPen, _cachedArcGeometry);
             }
         }
     }

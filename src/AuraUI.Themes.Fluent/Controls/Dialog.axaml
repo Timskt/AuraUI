@@ -7,19 +7,26 @@
          ============================================================ -->
     <Style Selector="feedback|AuraDialog">
         <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="OverlayBrush" Value="{DynamicResource AuraSmokeBrush}"/>
+        <Setter Property="OverlayOpacity" Value="0.5"/>
+        <Setter Property="DialogBackground" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="DialogCornerRadius" Value="{DynamicResource AuraDialogRadius}"/>
+        <Setter Property="DialogShadow" Value="{DynamicResource AuraShadowLg}"/>
+        <Setter Property="DialogPadding" Value="24"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel>
                     <!-- Overlay backdrop -->
                     <Border Name="PART_Overlay"
-                            Background="{DynamicResource AuraSmokeBrush}"
+                            Background="{TemplateBinding OverlayBrush}"
+                            Opacity="{TemplateBinding OverlayOpacity}"
                             IsVisible="False"/>
 
                     <!-- Dialog border -->
                     <Border Name="PART_DialogBorder"
-                            Background="{DynamicResource AuraCardBrush}"
-                            CornerRadius="{DynamicResource AuraDialogRadius}"
-                            BoxShadow="{DynamicResource AuraShadowLg}"
+                            Background="{TemplateBinding DialogBackground}"
+                            CornerRadius="{TemplateBinding DialogCornerRadius}"
+                            BoxShadow="{TemplateBinding DialogShadow}"
                             ClipToBounds="True"
                             MinWidth="320"
                             MaxWidth="680"
@@ -86,6 +93,40 @@
     </Style>
     <Style Selector="feedback|AuraDialog:open /template/ Border#PART_DialogBorder">
         <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Dialog open animation -->
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_DialogBorder">
+        <Style.Animations>
+            <Animation Duration="00:00:00.250"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.96"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.96"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Overlay fade-in -->
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_Overlay">
+        <Style.Animations>
+            <Animation Duration="00:00:00.200"
+                       Easing="CubicEaseOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
     </Style>
 
     <!-- Dialog close button hover -->

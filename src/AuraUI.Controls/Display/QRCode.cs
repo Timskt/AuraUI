@@ -79,6 +79,10 @@ public class QRCode : Control
     public static readonly StyledProperty<int> QuietZoneProperty =
         AvaloniaProperty.Register<QRCode, int>(nameof(QuietZone), 2);
 
+    // Cached QR matrix to avoid regenerating on every render
+    private bool[,]? _cachedMatrix;
+    private string? _cachedValue;
+
     static QRCode()
     {
         AffectsRender<QRCode>(
@@ -185,9 +189,13 @@ public class QRCode : Control
             return;
         }
 
-        // Generate QR matrix from value using a simple encoding approach.
-        // In production, a proper QR encoding library would be used.
-        var modules = GenerateQRMatrix(value);
+        // Use cached QR matrix if value hasn't changed
+        if (_cachedMatrix == null || _cachedValue != value)
+        {
+            _cachedMatrix = GenerateQRMatrix(value);
+            _cachedValue = value;
+        }
+        var modules = _cachedMatrix;
         var moduleCount = modules.GetLength(0);
         var quiet = QuietZone;
         var totalModules = moduleCount + quiet * 2;

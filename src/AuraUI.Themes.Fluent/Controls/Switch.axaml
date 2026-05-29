@@ -10,14 +10,20 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="TrackBackground" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="TrackCornerRadius" Value="10"/>
+        <Setter Property="ThumbBackground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="ThumbSize" Value="14"/>
+        <Setter Property="CheckedTrackBackground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="CheckedThumbBackground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <!-- Track -->
                     <Border Name="PART_Track"
                             Width="40" Height="20"
-                            CornerRadius="10"
-                            Background="{DynamicResource AuraBorderBrush}"
+                            CornerRadius="{TemplateBinding TrackCornerRadius}"
+                            Background="{TemplateBinding TrackBackground}"
                             BorderBrush="{DynamicResource AuraBorderBrush}"
                             BorderThickness="1"
                             VerticalAlignment="Center">
@@ -28,14 +34,16 @@
 
                         <!-- Thumb -->
                         <Border Name="PART_Thumb"
-                                Width="14" Height="14"
-                                CornerRadius="7"
-                                Background="{DynamicResource AuraForegroundBrush}"
+                                Width="{TemplateBinding ThumbSize}"
+                                Height="{TemplateBinding ThumbSize}"
+                                CornerRadius="999"
+                                Background="{TemplateBinding ThumbBackground}"
                                 Margin="2,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                             <Border.Transitions>
                                 <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                                <ThicknessTransition Duration="00:00:00.200" Property="Margin"/>
                             </Border.Transitions>
                         </Border>
                     </Border>
@@ -61,6 +69,17 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
+    <!-- Switch :checked — move thumb to right -->
+    <Style Selector="selection|Switch:checked /template/ Border#PART_Thumb">
+        <Setter Property="Margin" Value="24,0,2,0"/>
+        <Setter Property="Background" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- Switch :pressed -->
+    <Style Selector="selection|Switch:pressed /template/ Border#PART_Thumb">
+        <Setter Property="Width" Value="16"/>
+    </Style>
+
     <!-- Switch :disabled -->
     <Style Selector="selection|Switch:disabled">
         <Setter Property="Opacity" Value="0.4"/>
@@ -76,6 +95,9 @@
         <Setter Property="Width" Value="12"/>
         <Setter Property="Height" Value="12"/>
     </Style>
+    <Style Selector="selection|Switch:small:checked /template/ Border#PART_Thumb">
+        <Setter Property="Margin" Value="18,0,2,0"/>
+    </Style>
 
     <!-- Switch size: large -->
     <Style Selector="selection|Switch:large /template/ Border#PART_Track">
@@ -85,6 +107,9 @@
     <Style Selector="selection|Switch:large /template/ Border#PART_Thumb">
         <Setter Property="Width" Value="18"/>
         <Setter Property="Height" Value="18"/>
+    </Style>
+    <Style Selector="selection|Switch:large:checked /template/ Border#PART_Thumb">
+        <Setter Property="Margin" Value="30,0,2,0"/>
     </Style>
 
 </Styles>

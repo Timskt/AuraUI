@@ -1,6 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
+using Avalonia.Interactivity;
 
 namespace AuraUI.Core.Navigation;
 
@@ -157,7 +160,7 @@ public static class KeyboardNavigationHelper
         if (sender is not Control container)
             return;
 
-        var focused = FocusManager.GetFocusedElement(container);
+        var focused = GetFocusedElement(container);
 
         if (focused is not Control current)
             return;
@@ -228,7 +231,7 @@ public static class KeyboardNavigationHelper
             return;
 
         // Remove focus from the control
-        control.Focus(NavigationMethod.Unmapped);
+        control.Focus(NavigationMethod.Unspecified);
 
         // For popup-like controls, raise a close request
         if (control is Popup popup)
