@@ -37,7 +37,7 @@ public static class ResponsiveHelper
 
     /// <summary>
     /// A named breakpoint. The control is shown when the window width falls within
-    /// the registered breakpoint range. Use <see cref="RegisterBreakpoint"/> to define ranges.
+    /// the registered breakpoint range. Use RegisterBreakpoint to define ranges.
     /// </summary>
     public static readonly AttachedProperty<string?> BreakpointNameProperty =
         AvaloniaProperty.RegisterAttached<Control, string?>("BreakpointName", typeof(ResponsiveHelper));
@@ -50,7 +50,6 @@ public static class ResponsiveHelper
         AvaloniaProperty.RegisterAttached<Control, bool>("CollapseWhenHidden", typeof(ResponsiveHelper), true);
 
     private static readonly Dictionary<string, (double MinWidth, double MaxWidth)> BreakpointRegistry = new();
-    private static bool _isHooked;
 
     static ResponsiveHelper()
     {
@@ -72,7 +71,7 @@ public static class ResponsiveHelper
     public static void SetCollapseWhenHidden(Control element, bool value) => element.SetValue(CollapseWhenHiddenProperty, value);
 
     /// <summary>
-    /// Registers a named breakpoint range. Controls with a matching <see cref="BreakpointName"/>
+    /// Registers a named breakpoint range. Controls with a matching BreakpointName attached property
     /// will be visible when the window width is between <paramref name="minWidth"/> and <paramref name="maxWidth"/>.
     /// </summary>
     /// <param name="name">The breakpoint name (e.g., "mobile", "tablet", "desktop").</param>
@@ -105,8 +104,6 @@ public static class ResponsiveHelper
 
     private static void EnsureWindowHooked(Control control)
     {
-        if (_isHooked) return;
-
         // We hook into the attached-to-visual-tree event on the control
         control.AttachedToVisualTree += OnControlAttachedToVisualTree;
         control.DetachedFromVisualTree += OnControlDetachedFromVisualTree;
