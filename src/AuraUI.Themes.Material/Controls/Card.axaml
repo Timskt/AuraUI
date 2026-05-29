@@ -20,8 +20,14 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
+                            BoxShadow="{TemplateBinding BoxShadow}"
                             Padding="{TemplateBinding Padding}"
                             ClipToBounds="True">
+                        <Border.Transitions>
+                            <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                            <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                            <BoxShadowsTransition Duration="0:0:0.200" Property="BoxShadow"/>
+                        </Border.Transitions>
                         <Panel>
                             <Border Name="StateLayer"
                                     Background="Transparent"
@@ -49,7 +55,8 @@
         </Setter>
         <Setter Property="Transitions">
             <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
             </Transitions>
         </Setter>
     </Style>
@@ -73,6 +80,11 @@
 
     <Style Selector="layout|Card[IsHoverable=True]:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Hoverable elevated: lift on hover -->
+    <Style Selector="layout|Card[IsHoverable=True]:pointerover /template/ Border#RootBorder">
+        <Setter Property="BoxShadow" Value="0 2 8 0 #20000000, 0 1 3 0 #15000000"/>
     </Style>
 
 </Styles>

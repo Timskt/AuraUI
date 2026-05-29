@@ -37,6 +37,11 @@
                 </Border>
             </ControlTemplate>
         </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Foreground"/>
+            </Transitions>
+        </Setter>
     </Style>
 
     <!-- Button :pointerover -->

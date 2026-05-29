@@ -52,8 +52,8 @@
         </Setter>
         <Setter Property="Transitions">
             <Transitions>
-                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
-                <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
             </Transitions>
         </Setter>
     </Style>
@@ -86,6 +86,7 @@
     <Style Selector="TextBox:disabled">
         <Setter Property="Opacity" Value="0.38"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+        <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
     <!-- Outlined Variant (.outlined) -->

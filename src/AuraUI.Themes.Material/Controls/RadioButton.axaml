@@ -29,6 +29,10 @@
                                     BorderThickness="2"
                                     BorderBrush="{DynamicResource AuraForegroundBrush}"
                                     Background="Transparent">
+                                <Border.Transitions>
+                                    <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                                    <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                                </Border.Transitions>
                                 <Border Name="StateLayer"
                                         Background="Transparent"
                                         CornerRadius="10"/>
@@ -72,6 +76,12 @@
         <Setter Property="Opacity" Value="0.12"/>
     </Style>
 
+    <!-- Focus -->
+    <Style Selector="RadioButton:focus /template/ Border#PART_OuterCircle">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2.5"/>
+    </Style>
+
     <!-- Checked -->
     <Style Selector="RadioButton:checked /template/ Border#PART_OuterCircle">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
@@ -85,6 +95,7 @@
     <!-- Disabled -->
     <Style Selector="RadioButton:disabled">
         <Setter Property="Opacity" Value="0.38"/>
+        <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
     <Style Selector="RadioButton:checked:disabled /template/ Border#PART_OuterCircle">

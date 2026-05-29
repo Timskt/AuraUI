@@ -33,7 +33,7 @@
                               VerticalAlignment="Center"
                               Data="M 7,1 A 6,6 0 1,1 7,13 A 6,6 0 1,1 7,1 M 11.5,11.5 L 15,15"
                               Stroke="{StaticResource AuraForegroundTertiaryBrush}"
-                              StrokeThickness="1.5"/>
+                              StrokeThickness="1.5"
                               Stretch="Uniform"/>
 
                         <!-- Clear button -->

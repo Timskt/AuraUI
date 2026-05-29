@@ -101,6 +101,7 @@
     <!-- Disabled -->
     <Style Selector="CheckBox:disabled">
         <Setter Property="Opacity" Value="0.38"/>
+        <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
     <Style Selector="CheckBox:disabled /template/ Border#PART_Box">

@@ -10,21 +10,109 @@
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleSwitch">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Panel Name="PART_MovingKnobs" Width="52" Height="32">
+                            <!-- Track -->
+                            <Border Name="PART_SwitchTrack"
+                                    Width="52" Height="32"
+                                    CornerRadius="16"
+                                    Background="{DynamicResource AuraMutedBrush}"
+                                    BorderBrush="{DynamicResource AuraBorderBrush}"
+                                    BorderThickness="2"
+                                    VerticalAlignment="Center">
+                                <Border.Transitions>
+                                    <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                                    <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                                </Border.Transitions>
+                            </Border>
+
+                            <!-- Knob -->
+                            <Panel Name="PART_SwitchKnob">
+                                <Border Name="PART_SwitchKnobBorder"
+                                        Width="16" Height="16"
+                                        CornerRadius="8"
+                                        Background="{DynamicResource AuraForegroundSecondaryBrush}"
+                                        Margin="8,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                    <Border.Transitions>
+                                        <DoubleTransition Duration="0:0:0.200" Property="Margin" Easing="{StaticResource AuraEasingStandard}"/>
+                                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                                    </Border.Transitions>
+                                </Border>
+                            </Panel>
+                        </Panel>
+
+                        <!-- On/Off labels -->
+                        <TextBlock Name="PART_OnText"
+                                   Text="On"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"/>
+                        <TextBlock Name="PART_OffText"
+                                   Text="Off"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"/>
+
+                        <!-- Content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
-    <!-- Hover state layer -->
-    <Style Selector="ToggleSwitch:pointerover">
-        <Setter Property="Opacity" Value="0.9"/>
+    <!-- Hover: subtle border change -->
+    <Style Selector="ToggleSwitch:pointerover /template/ Border#PART_SwitchTrack">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
     </Style>
 
     <!-- Checked (on) -->
-    <Style Selector="ToggleSwitch:checked">
-        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+    <Style Selector="ToggleSwitch:checked /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="ToggleSwitch:checked /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Margin" Value="28,0,8,0"/>
+        <Setter Property="Background" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+    </Style>
+
+    <!-- Checked + hover -->
+    <Style Selector="ToggleSwitch:checked:pointerover /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Pressed: knob grows slightly (M3 tactile feedback) -->
+    <Style Selector="ToggleSwitch:pressed /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+
+    <Style Selector="ToggleSwitch:checked:pressed /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Margin" Value="24,0,8,0"/>
     </Style>
 
     <!-- Disabled -->
     <Style Selector="ToggleSwitch:disabled">
         <Setter Property="Opacity" Value="0.38"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+    <Style Selector="ToggleSwitch:disabled /template/ Border#PART_SwitchTrack">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+    </Style>
+
+    <Style Selector="ToggleSwitch:disabled /template/ Border#PART_SwitchKnobBorder">
+        <Setter Property="Background" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
     </Style>
 
 </Styles>

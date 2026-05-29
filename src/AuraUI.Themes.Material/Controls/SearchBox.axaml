@@ -71,8 +71,8 @@
         </Setter>
         <Setter Property="Transitions">
             <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.2"/>
-                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
             </Transitions>
         </Setter>
     </Style>
@@ -91,6 +91,7 @@
     <!-- Disabled -->
     <Style Selector="input|SearchBox:disabled">
         <Setter Property="Opacity" Value="0.38"/>
+        <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
 </Styles>
