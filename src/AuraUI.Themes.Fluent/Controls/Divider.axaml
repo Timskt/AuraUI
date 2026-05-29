@@ -19,7 +19,7 @@
 
     <!-- Divider with text in center -->
     <Style Selector="Border.divider.with-content">
-        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Height" Value="NaN"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Child">
             <Panel>

@@ -56,11 +56,10 @@
         <Setter Property="Background" Value="{StaticResource AuraSmokeBrush}"/>
     </Style>
 
-    <!-- MessageBox variants -->
-    <Style Selector="Window.message-box.error Border">
-        <Setter Property="BorderTop">
-            <SolidColorBrush Color="{StaticResource AuraErrorBrush}"/>
-        </Setter>
+    <!-- MessageBox error variant — highlight top border -->
+    <Style Selector="Window.message-box.error /template/ Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AuraErrorBrush}"/>
+        <Setter Property="BorderThickness" Value="2,2,2,2"/>
     </Style>
 
     <!-- MessageBox icon area -->

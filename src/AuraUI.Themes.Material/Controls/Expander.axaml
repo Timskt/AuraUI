@@ -2,9 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — Expander
-         ======================================== -->
+    <!-- Material Design 3 — Expander -->
 
     <Style Selector="layout|Expander">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
@@ -26,9 +24,8 @@
                             ClipToBounds="True">
                         <StackPanel>
                             <!-- Header area -->
-                            <Border Name="PART_HeaderSite"
-                                    Padding="16,12"
-                                    Cursor="Hand">
+                            <ContentControl Name="PART_HeaderSite"
+                                            Cursor="Hand">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <!-- Header content -->
                                     <ContentPresenter Name="PART_HeaderPresenter"
@@ -47,19 +44,13 @@
                                               Data="M 6,9 L 12,15 L 18,9"
                                               Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
                                               StrokeThickness="2"
-                                              StrokeLineJoin="Round"
                                               Width="12"
                                               Height="6"
                                               HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              RenderTransformOrigin="0.5,0.5">
-                                            <Path.RenderTransform>
-                                                <RotateTransform x:Name="PART_ChevronRotation" Angle="0"/>
-                                            </Path.RenderTransform>
-                                        </Path>
+                                              VerticalAlignment="Center"/>
                                     </Border>
                                 </Grid>
-                            </Border>
+                            </ContentControl>
 
                             <!-- Expand content area -->
                             <ContentControl Name="PART_ExpandSite"
@@ -83,15 +74,8 @@
     </Style>
 
     <!-- Hover header -->
-    <Style Selector="layout|Expander:pointerover /template/ Border#PART_HeaderSite">
+    <Style Selector="layout|Expander:pointerover /template/ ContentControl#PART_HeaderSite">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
-
-    <!-- Expanded chevron rotation -->
-    <Style Selector="layout|Expander:expanded /template/ Path#PART_Chevron">
-        <Setter Property="RenderTransform">
-            <RotateTransform Angle="180"/>
-        </Setter>
     </Style>
 
     <!-- Chevron hover state layer -->

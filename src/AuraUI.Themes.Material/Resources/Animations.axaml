@@ -24,26 +24,10 @@
     <sys:TimeSpan x:Key="AuraAnimationLong3">00:00:00.550</sys:TimeSpan>
     <sys:TimeSpan x:Key="AuraAnimationLong4">00:00:00.600</sys:TimeSpan>
 
-    <!-- Easing Curves (Material Standard) -->
-    <!-- Standard: cubic-bezier(0.2, 0, 0, 1) — used for most property changes -->
-    <CubicBezierEase x:Key="AuraEasingStandard"
-                     ControlPoint1="0.2, 0"
-                     ControlPoint2="0, 1"/>
-
-    <!-- Decelerate: cubic-bezier(0, 0, 0, 1) — entering elements -->
-    <CubicBezierEase x:Key="AuraEasingDecelerate"
-                     ControlPoint1="0, 0"
-                     ControlPoint2="0, 1"/>
-
-    <!-- Accelerate: cubic-bezier(0.3, 0, 1, 1) — exiting elements -->
-    <CubicBezierEase x:Key="AuraEasingAccelerate"
-                     ControlPoint1="0.3, 0"
-                     ControlPoint2="1, 1"/>
-
-    <!-- Standard-Emphasized: cubic-bezier(0.2, 0, 0, 1) — shared axis transitions -->
-    <CubicBezierEase x:Key="AuraEasingStandardEmphasized"
-                     ControlPoint1="0.05, 0.7"
-                     ControlPoint2="0.1, 1"/>
+    <!-- Easing Curves -->
+    <CubicEaseInOut x:Key="AuraEasingStandard"/>
+    <CubicEaseOut x:Key="AuraEasingDecelerate"/>
+    <CubicEaseIn x:Key="AuraEasingAccelerate"/>
 
     <!-- Default durations used by control transitions -->
     <sys:TimeSpan x:Key="AuraControlTransitionDuration">00:00:00.200</sys:TimeSpan>

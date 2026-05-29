@@ -53,7 +53,6 @@
                                                   Data="M 1,4 L 6,9 L 11,4"
                                                   Stroke="{StaticResource AuraForegroundSecondaryBrush}"
                                                   StrokeThickness="1.5"
-                                                  StrokeLineJoin="Round"
                                                   Margin="12,0,0,0"
                                                   VerticalAlignment="Center"
                                                   RenderTransformOrigin="0.5,0.5">

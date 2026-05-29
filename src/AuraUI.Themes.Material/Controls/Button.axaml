@@ -30,17 +30,19 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             ClipToBounds="True">
-                        <Border Name="StateLayer"
-                                Background="Transparent"
-                                CornerRadius="{TemplateBinding CornerRadius}"/>
-                        <Border Name="ContentBorder"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter Name="PART_ContentPresenter"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+                            <Border Name="ContentBorder"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -63,7 +65,7 @@
         <Setter Property="Background" Value="#1EFFFFFF"/>
     </Style>
 
-    <!-- Focus state layer (12% primary overlay) -->
+    <!-- Focus state layer -->
     <Style Selector="Button:focus /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
@@ -76,9 +78,7 @@
         <Setter Property="Opacity" Value="0.38"/>
     </Style>
 
-    <!-- ==========================================
-         Outlined Variant (.outlined)
-         ========================================== -->
+    <!-- Outlined Variant (.outlined) -->
     <Style Selector="Button.outlined">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
@@ -94,9 +94,7 @@
         <Setter Property="Background" Value="#0C6750A4"/>
     </Style>
 
-    <!-- ==========================================
-         Text / Ghost Variant (.text)
-         ========================================== -->
+    <!-- Text / Ghost Variant (.text) -->
     <Style Selector="Button.text">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
@@ -114,9 +112,7 @@
         <Setter Property="Background" Value="#0C6750A4"/>
     </Style>
 
-    <!-- ==========================================
-         Tonal Variant (.tonal)
-         ========================================== -->
+    <!-- Tonal Variant (.tonal) -->
     <Style Selector="Button.tonal">
         <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
@@ -132,22 +128,12 @@
         <Setter Property="Background" Value="#0C6750A4"/>
     </Style>
 
-    <!-- ==========================================
-         Elevated Variant (.elevated)
-         ========================================== -->
+    <!-- Elevated Variant (.elevated) -->
     <Style Selector="Button.elevated">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-    </Style>
-
-    <Style Selector="Button.elevated /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel1}"/>
-    </Style>
-
-    <Style Selector="Button.elevated:pointerover /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel2}"/>
     </Style>
 
     <Style Selector="Button.elevated:pointerover /template/ Border#StateLayer">
@@ -158,9 +144,7 @@
         <Setter Property="Background" Value="#0C6750A4"/>
     </Style>
 
-    <!-- ==========================================
-         FAB Variant (.fab)
-         ========================================== -->
+    <!-- FAB Variant (.fab) -->
     <Style Selector="Button.fab">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraOnPrimaryContainerBrush}"/>
@@ -172,14 +156,6 @@
         <Setter Property="Padding" Value="16"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-    </Style>
-
-    <Style Selector="Button.fab /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel3}"/>
-    </Style>
-
-    <Style Selector="Button.fab:pointerover /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel4}"/>
     </Style>
 
     <Style Selector="Button.fab:pointerover /template/ Border#StateLayer">
@@ -218,9 +194,7 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
-    <!-- ==========================================
-         Icon Button Variant (.icon)
-         ========================================== -->
+    <!-- Icon Button Variant (.icon) -->
     <Style Selector="Button.icon">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>

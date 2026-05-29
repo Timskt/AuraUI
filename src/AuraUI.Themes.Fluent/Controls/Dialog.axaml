@@ -18,10 +18,11 @@
                         ClipToBounds="True">
                     <DockPanel>
                         <!-- Title bar / Header -->
-                        <DockPanel Name="PART_TitleBar"
-                                   DockPanel.Dock="Top"
-                                   Background="Transparent"
-                                   Padding="24,20,24,0">
+                        <Border Name="PART_TitleBar"
+                                DockPanel.Dock="Top"
+                                Background="Transparent"
+                                Padding="24,20,24,0">
+                        <DockPanel>
                             <!-- Close button -->
                             <Button Name="PART_CloseButton"
                                     DockPanel.Dock="Right"
@@ -49,6 +50,7 @@
                                        VerticalAlignment="Center"
                                        TextTrimming="CharacterEllipsis"/>
                         </DockPanel>
+                        </Border>
 
                         <!-- Footer buttons -->
                         <StackPanel Name="PART_ButtonArea"
@@ -109,8 +111,7 @@
     <!-- Full-screen dialog -->
     <Style Selector="Window.dialog.fullscreen">
         <Setter Property="CornerRadius" Value="0"/>
-        <Setter Property="MinWidth" Value="100%"/>
-        <Setter Property="MaxWidth" Value="100%"/>
+        <Setter Property="WindowState" Value="Maximized"/>
     </Style>
 
     <!-- Dialog with no close button -->

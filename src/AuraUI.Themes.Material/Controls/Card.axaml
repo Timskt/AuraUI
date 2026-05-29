@@ -2,10 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — Card
-         Variants: .elevated (default), .filled, .outlined
-         ======================================== -->
+    <!-- Material Design 3 — Card -->
 
     <Style Selector="layout|Card">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
@@ -13,6 +10,8 @@
         <Setter Property="CornerRadius" Value="{DynamicResource AuraCardCornerRadius}"/>
         <Setter Property="Padding" Value="{DynamicResource AuraCardPadding}"/>
         <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="layout:Card">
@@ -23,25 +22,27 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="{TemplateBinding Padding}"
                             ClipToBounds="True">
-                        <Border Name="StateLayer"
-                                Background="Transparent"
-                                CornerRadius="{TemplateBinding CornerRadius}"/>
-                        <StackPanel>
-                            <!-- Header -->
-                            <ContentPresenter Name="PART_HeaderPresenter"
-                                              Content="{TemplateBinding Header}"
-                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                              IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"/>
-                            <!-- Content -->
-                            <ContentPresenter Name="PART_ContentPresenter"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
-                            <!-- Footer -->
-                            <ContentPresenter Name="PART_FooterPresenter"
-                                              Content="{TemplateBinding Footer}"
-                                              ContentTemplate="{TemplateBinding FooterTemplate}"
-                                              IsVisible="{TemplateBinding Footer, Converter={x:Static ObjectConverters.IsNotNull}}"/>
-                        </StackPanel>
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+                            <StackPanel>
+                                <!-- Header -->
+                                <ContentPresenter Name="PART_HeaderPresenter"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                  IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                                <!-- Content -->
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                <!-- Footer -->
+                                <ContentPresenter Name="PART_FooterPresenter"
+                                                  Content="{TemplateBinding Footer}"
+                                                  ContentTemplate="{TemplateBinding FooterTemplate}"
+                                                  IsVisible="{TemplateBinding Footer, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                            </StackPanel>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -53,24 +54,9 @@
         </Setter>
     </Style>
 
-    <!-- Elevated card (default — M3 resting elevation) -->
-    <Style Selector="layout|Card">
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-    </Style>
-
-    <Style Selector="layout|Card /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel1}"/>
-    </Style>
-
-    <!-- Filled variant (tonal surface) -->
+    <!-- Filled variant -->
     <Style Selector="layout|Card.filled">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceTintBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
-    </Style>
-
-    <Style Selector="layout|Card.filled /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="none"/>
     </Style>
 
     <!-- Outlined variant -->
@@ -80,17 +66,9 @@
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
-    <Style Selector="layout|Card.outlined /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="none"/>
-    </Style>
-
-    <!-- Hoverable card — elevation increase on hover -->
+    <!-- Hoverable card -->
     <Style Selector="layout|Card[IsHoverable=True]">
         <Setter Property="Cursor" Value="Hand"/>
-    </Style>
-
-    <Style Selector="layout|Card[IsHoverable=True]:pointerover /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel2}"/>
     </Style>
 
     <Style Selector="layout|Card[IsHoverable=True]:pointerover /template/ Border#StateLayer">

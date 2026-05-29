@@ -2,9 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — Carousel
-         ======================================== -->
+    <!-- Material Design 3 — Carousel -->
 
     <Style Selector="display|AuraCarousel">
         <Setter Property="Background" Value="Transparent"/>
@@ -17,9 +15,7 @@
                             ClipToBounds="True">
                         <Grid>
                             <!-- Items -->
-                            <ItemsPresenter Name="PART_ItemsPresenter"
-                                            ItemsSource="{TemplateBinding Items}"
-                                            ItemTemplate="{TemplateBinding ItemTemplate}"/>
+                            <ItemsPresenter Name="PART_ItemsPresenter"/>
 
                             <!-- Navigation arrows -->
                             <Button Name="PART_PreviousButton"
@@ -35,7 +31,7 @@
                                     CornerRadius="20">
                                 <Path Data="M 15,6 L 9,12 L 15,18"
                                       Stroke="White"
-                                      StrokeThickness="2"/>
+                                      StrokeThickness="2"
                                       Width="6"
                                       Height="12"/>
                             </Button>
@@ -53,7 +49,7 @@
                                     CornerRadius="20">
                                 <Path Data="M 9,6 L 15,12 L 9,18"
                                       Stroke="White"
-                                      StrokeThickness="2"/>
+                                      StrokeThickness="2"
                                       Width="6"
                                       Height="12"/>
                             </Button>
@@ -80,11 +76,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <!-- Fade transition class -->
-    <Style Selector="display|AuraCarousel.fade /template/ ItemsPresenter#PART_ItemsPresenter">
-        <Setter Property="Opacity" Value="1"/>
     </Style>
 
 </Styles>

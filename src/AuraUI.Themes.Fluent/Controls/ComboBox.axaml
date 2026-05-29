@@ -27,34 +27,50 @@
                         <BrushTransition Duration="00:00:00.200" Property="Background"/>
                         <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
                     </Border.Transitions>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <!-- Selection box area -->
-                        <Border Grid.Column="0"
-                                Padding="8,6">
-                            <ContentPresenter Name="PART_ContentPresenter"
-                                              Content="{TemplateBinding SelectionBoxItem}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
+                    <Panel>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <!-- Selection box area -->
+                            <Border Grid.Column="0"
+                                    Padding="8,6">
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
 
-                        <!-- Dropdown toggle -->
-                        <Border Name="PART_DropdownGlyph"
-                                Grid.Column="1"
-                                Width="32"
-                                Background="Transparent"
-                                VerticalAlignment="Stretch">
-                            <Path Name="Chevron"
-                                  Width="12" Height="12"
-                                  Data="M 1,4 L 6,9 L 11,4"
-                                  Stroke="{StaticResource AuraForegroundSecondaryBrush}"
-                                  StrokeThickness="1.5"/>
-                                  StrokeLineJoin="Round"
-                                  Stretch="Uniform"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  RenderTransformOrigin="0.5,0.5"/>
-                        </Border>
-                    </Grid>
+                            <!-- Dropdown toggle -->
+                            <Border Name="PART_DropdownGlyph"
+                                    Grid.Column="1"
+                                    Width="32"
+                                    Background="Transparent"
+                                    VerticalAlignment="Stretch">
+                                <Path Name="Chevron"
+                                      Width="12" Height="12"
+                                      Data="M 1,4 L 6,9 L 11,4"
+                                      Stroke="{StaticResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      RenderTransformOrigin="0.5,0.5"/>
+                            </Border>
+                        </Grid>
+                        <!-- Dropdown popup -->
+                        <Popup Name="PART_Popup"
+                               IsLightDismissEnabled="True"
+                               Placement="BottomEdgeAlignedLeft"
+                               MaxHeight="300">
+                            <Border Background="{StaticResource AuraFlyoutBackgroundBrush}"
+                                    BorderBrush="{StaticResource AuraFlyoutBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{StaticResource AuraRadiusMd}"
+                                    Padding="4">
+                                <ScrollViewer>
+                                    <ItemsPresenter Name="PART_ItemsPresenter"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Panel>
                 </Border>
             </ControlTemplate>
         </Setter>

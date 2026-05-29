@@ -1,9 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ========================================
-         Material Design 3 — ComboBox (Dropdown)
-         ======================================== -->
+    <!-- Material Design 3 — ComboBox (Dropdown) -->
 
     <Style Selector="ComboBox">
         <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
@@ -18,41 +16,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ComboBox">
-                    <Border Name="RootBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid>
-                            <Border Name="StateLayer"
-                                    Background="Transparent"
-                                    CornerRadius="{TemplateBinding CornerRadius}"/>
-                            <Grid Margin="{TemplateBinding Padding}"
-                                  ColumnDefinitions="*,Auto">
-                                <ContentPresenter Name="PART_ContentPresenter"
-                                                  Grid.Column="0"
-                                                  Content="{TemplateBinding SelectionBoxItem}"
-                                                  VerticalAlignment="Center"/>
-                                <!-- Dropdown arrow -->
-                                <Path Name="PART_DropDownGlyph"
-                                      Grid.Column="1"
-                                      Data="M 0,0 L 4,4 L 8,0"
-                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
-                                      StrokeThickness="1.5"/>
-                                      StrokeLineJoin="Round"
-                                      Width="8"
-                                      Height="6"
-                                      VerticalAlignment="Center"
-                                      Margin="8,0,0,0"/>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
@@ -62,12 +25,12 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="ComboBox:pointerover /template/ Border#StateLayer">
+    <Style Selector="ComboBox:pointerover">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Focused / Open -->
-    <Style Selector="ComboBox:focus /template/ Border#RootBorder">
+    <Style Selector="ComboBox:focus">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
@@ -85,14 +48,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
     </Style>
 
-    <Style Selector="ComboBox.outlined:focus /template/ Border#RootBorder">
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderThickness" Value="2"/>
-    </Style>
-
-    <!-- ==========================================
-         ComboBoxItem
-         ========================================== -->
+    <!-- ComboBoxItem -->
     <Style Selector="ComboBoxItem">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
@@ -109,13 +65,15 @@
                             Background="Transparent"
                             CornerRadius="{DynamicResource AuraRadiusNone}"
                             ClipToBounds="True">
-                        <Border Name="StateLayer"
-                                Background="Transparent"/>
-                        <ContentPresenter Name="PART_ContentPresenter"
-                                          Margin="{TemplateBinding Padding}"
-                                          Content="{TemplateBinding Content}"
-                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="Center"/>
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"/>
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center"/>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

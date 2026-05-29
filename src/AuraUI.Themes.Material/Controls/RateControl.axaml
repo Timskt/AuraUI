@@ -1,82 +1,28 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — RateControl (Star Rating)
-         ======================================== -->
+    <!-- Material Design 3 — RateControl (Star Rating) -->
 
-    <Style Selector="RateControl">
+    <Style Selector="selection|RateControl">
         <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
         <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RateControl">
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="4"
-                                VerticalAlignment="Center">
-                        <!-- Star 1 -->
-                        <Path Name="PART_Star1"
-                              Data="M12,2L15.09,8.26L22,9.27L17,14.14L18.18,21.02L12,17.77L5.82,21.02L7,14.14L2,9.27L8.91,8.26L12,2Z"
-                              Fill="{DynamicResource AuraMutedBrush}"
-                              Stroke="None"
-                              Width="24"
-                              Height="24"
-                              Stretch="Uniform"/>
-                        <!-- Star 2 -->
-                        <Path Name="PART_Star2"
-                              Data="M12,2L15.09,8.26L22,9.27L17,14.14L18.18,21.02L12,17.77L5.82,21.02L7,14.14L2,9.27L8.91,8.26L12,2Z"
-                              Fill="{DynamicResource AuraMutedBrush}"
-                              Stroke="None"
-                              Width="24"
-                              Height="24"
-                              Stretch="Uniform"/>
-                        <!-- Star 3 -->
-                        <Path Name="PART_Star3"
-                              Data="M12,2L15.09,8.26L22,9.27L17,14.14L18.18,21.02L12,17.77L5.82,21.02L7,14.14L2,9.27L8.91,8.26L12,2Z"
-                              Fill="{DynamicResource AuraMutedBrush}"
-                              Stroke="None"
-                              Width="24"
-                              Height="24"
-                              Stretch="Uniform"/>
-                        <!-- Star 4 -->
-                        <Path Name="PART_Star4"
-                              Data="M12,2L15.09,8.26L22,9.27L17,14.14L18.18,21.02L12,17.77L5.82,21.02L7,14.14L2,9.27L8.91,8.26L12,2Z"
-                              Fill="{DynamicResource AuraMutedBrush}"
-                              Stroke="None"
-                              Width="24"
-                              Height="24"
-                              Stretch="Uniform"/>
-                        <!-- Star 5 -->
-                        <Path Name="PART_Star5"
-                              Data="M12,2L15.09,8.26L22,9.27L17,14.14L18.18,21.02L12,17.77L5.82,21.02L7,14.14L2,9.27L8.91,8.26L12,2Z"
-                              Fill="{DynamicResource AuraMutedBrush}"
-                              Stroke="None"
-                              Width="24"
-                              Height="24"
-                              Stretch="Uniform"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Hover state for interactive rating -->
-    <Style Selector="RateControl:pointerover /template/ Path">
-        <Setter Property="Opacity" Value="0.8"/>
+        <Setter Property="SelectedColor" Value="{DynamicResource AuraWarningBrush}"/>
+        <Setter Property="UnselectedColor" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="ItemSize" Value="24"/>
+        <Setter Property="ItemSpacing" Value="4"/>
     </Style>
 
     <!-- Small size -->
-    <Style Selector="RateControl.small /template/ Path">
-        <Setter Property="Width" Value="16"/>
-        <Setter Property="Height" Value="16"/>
+    <Style Selector="selection|RateControl:small">
+        <Setter Property="ItemSize" Value="16"/>
     </Style>
 
     <!-- Large size -->
-    <Style Selector="RateControl.large /template/ Path">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
+    <Style Selector="selection|RateControl:large">
+        <Setter Property="ItemSize" Value="32"/>
     </Style>
 
 </Styles>

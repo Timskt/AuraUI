@@ -47,13 +47,11 @@
                                     BorderThickness="0"
                                     CornerRadius="0"
                                     Padding="0"
-                                    Height="50%"
                                     VerticalAlignment="Top">
                                 <Path Width="10" Height="6"
                                       Data="M 1,5 L 5,1 L 9,5"
                                       Stroke="{StaticResource AuraForegroundSecondaryBrush}"
                                       StrokeThickness="1.5"/>
-                                      StrokeLineJoin="Round"/>
                             </Button>
                             <Border Width="1" Background="{StaticResource AuraDividerBrush}"/>
                             <Button Name="PART_DecreaseButton"
@@ -62,13 +60,11 @@
                                     BorderThickness="0"
                                     CornerRadius="0"
                                     Padding="0"
-                                    Height="50%"
                                     VerticalAlignment="Bottom">
                                 <Path Width="10" Height="6"
                                       Data="M 1,1 L 5,5 L 9,1"
                                       Stroke="{StaticResource AuraForegroundSecondaryBrush}"
                                       StrokeThickness="1.5"/>
-                                      StrokeLineJoin="Round"/>
                             </Button>
                         </DockPanel>
                     </Grid>

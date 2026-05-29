@@ -1,34 +1,17 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="clr-namespace:AuraUI.Controls.Navigation;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — Breadcrumb
-         ======================================== -->
+    <!-- Material Design 3 — Breadcrumb -->
 
-    <Style Selector="Breadcrumb">
+    <Style Selector="navigation|Breadcrumb">
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Breadcrumb">
-                    <ItemsControl Name="PART_ItemsControl"
-                                  ItemsSource="{TemplateBinding Items}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="0"
-                                            VerticalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <!-- Breadcrumb item -->
-    <Style Selector="BreadcrumbItem">
+    <Style Selector="navigation|BreadcrumbItem">
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
@@ -36,12 +19,12 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="BreadcrumbItem">
+                <ControlTemplate TargetType="navigation:BreadcrumbItem">
                     <StackPanel Orientation="Horizontal"
                                 Spacing="4"
                                 VerticalAlignment="Center">
                         <TextBlock Name="PART_Separator"
-                                   Text="/"
+                                   Text="{TemplateBinding SeparatorText}"
                                    Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
                                    VerticalAlignment="Center"/>
                         <Border Name="StateLayer"
@@ -64,12 +47,12 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="BreadcrumbItem:pointerover /template/ Border#StateLayer">
+    <Style Selector="navigation|BreadcrumbItem:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Active (current page) -->
-    <Style Selector="BreadcrumbItem:selected">
+    <Style Selector="navigation|BreadcrumbItem:selected">
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 

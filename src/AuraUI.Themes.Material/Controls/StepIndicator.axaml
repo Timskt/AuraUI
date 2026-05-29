@@ -1,89 +1,14 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — StepIndicator
-         ======================================== -->
+    <!-- Material Design 3 — StepIndicator -->
 
-    <Style Selector="StepIndicator">
+    <Style Selector="display|StepIndicator">
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontLabelLargeFamily}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="StepIndicator">
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="0"
-                                VerticalAlignment="Center">
-                        <Border Name="PART_Step1"
-                                Width="32"
-                                Height="32"
-                                CornerRadius="16"
-                                Background="{DynamicResource AuraMutedBrush}"
-                                BorderBrush="{DynamicResource AuraOutlineBrush}"
-                                BorderThickness="2"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            <TextBlock Text="1"
-                                       FontSize="14"
-                                       FontWeight="Medium"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
-                        </Border>
-                        <Border Name="PART_Line1"
-                                Height="2"
-                                Width="48"
-                                Background="{DynamicResource AuraOutlineVariantBrush}"
-                                VerticalAlignment="Center"/>
-                        <Border Name="PART_Step2"
-                                Width="32"
-                                Height="32"
-                                CornerRadius="16"
-                                Background="{DynamicResource AuraMutedBrush}"
-                                BorderBrush="{DynamicResource AuraOutlineBrush}"
-                                BorderThickness="2"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            <TextBlock Text="2"
-                                       FontSize="14"
-                                       FontWeight="Medium"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
-                        </Border>
-                        <Border Name="PART_Line2"
-                                Height="2"
-                                Width="48"
-                                Background="{DynamicResource AuraOutlineVariantBrush}"
-                                VerticalAlignment="Center"/>
-                        <Border Name="PART_Step3"
-                                Width="32"
-                                Height="32"
-                                CornerRadius="16"
-                                Background="{DynamicResource AuraMutedBrush}"
-                                BorderBrush="{DynamicResource AuraOutlineBrush}"
-                                BorderThickness="2"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            <TextBlock Text="3"
-                                       FontSize="14"
-                                       FontWeight="Medium"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
-                        </Border>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Transitions">
-            <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.2"/>
-                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
-            </Transitions>
-        </Setter>
     </Style>
 
 </Styles>

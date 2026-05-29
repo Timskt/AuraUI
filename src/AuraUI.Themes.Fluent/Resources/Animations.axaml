@@ -16,12 +16,14 @@
     <CubicEaseInOut x:Key="AuraEasingStandard"/>
     <CubicEaseOut x:Key="AuraEasingDecelerate"/>
     <CubicEaseIn x:Key="AuraEasingAccelerate"/>
-    <SplineDoubleKeyFrame x:Key="AuraEasingStandardSpline"
-                           KeySpline="0.8,0.0,0.2,1.0"/>
-    <SplineDoubleKeyFrame x:Key="AuraEasingDecelerateSpline"
-                           KeySpline="0.0,0.0,0.2,1.0"/>
-    <SplineDoubleKeyFrame x:Key="AuraEasingAccelerateSpline"
-                           KeySpline="0.8,0.0,1.0,1.0"/>
+    <SplineEasing x:Key="AuraEasingStandardSpline">
+        <x:Arguments>
+            <sys:Double>0.8</sys:Double>
+            <sys:Double>0.0</sys:Double>
+            <sys:Double>0.2</sys:Double>
+            <sys:Double>1.0</sys:Double>
+        </x:Arguments>
+    </SplineEasing>
 
     <!-- Transitions for brushes -->
     <BrushTransition x:Key="AuraBrushTransitionFast" Duration="00:00:00.100"/>

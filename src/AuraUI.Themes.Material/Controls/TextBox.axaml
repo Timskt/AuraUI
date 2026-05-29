@@ -1,9 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ========================================
-         Material Design 3 — TextBox (Filled & Outlined)
-         ======================================== -->
+    <!-- Material Design 3 — TextBox (Filled & Outlined) -->
 
     <Style Selector="TextBox">
         <Setter Property="Background" Value="Transparent"/>
@@ -23,7 +21,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid>
+                        <Panel>
                             <!-- State layer (hover/press) -->
                             <Border Name="StateLayer"
                                     Background="Transparent"
@@ -44,14 +42,10 @@
                                     <TextPresenter Name="PART_TextPresenter"
                                                    Text="{TemplateBinding Text, Mode=TwoWay}"
                                                    CaretBrush="{TemplateBinding CaretBrush}"
-                                                   SelectionBrush="{TemplateBinding SelectionBrush}"
-                                                   FontSize="{TemplateBinding FontSize}"
-                                                   FontFamily="{TemplateBinding FontFamily}"
-                                                   FontWeight="{TemplateBinding FontWeight}"
-                                                   Foreground="{TemplateBinding Foreground}"/>
+                                                   SelectionBrush="{TemplateBinding SelectionBrush}"/>
                                 </ScrollViewer>
                             </Grid>
-                        </Grid>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -94,9 +88,7 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
     </Style>
 
-    <!-- ==========================================
-         Outlined Variant (.outlined)
-         ========================================== -->
+    <!-- Outlined Variant (.outlined) -->
     <Style Selector="TextBox.outlined">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>

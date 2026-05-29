@@ -1,104 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="clr-namespace:AuraUI.Controls.Navigation;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — Pagination
-         ======================================== -->
+    <!-- Material Design 3 — Pagination -->
 
-    <Style Selector="Pagination">
+    <Style Selector="navigation|Pagination">
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Pagination">
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="8"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                        <!-- Previous button -->
-                        <Button Name="PART_PreviousButton"
-                                Classes="icon"
-                                Width="36"
-                                Height="36"
-                                CornerRadius="18">
-                            <Path Data="M 15,6 L 9,12 L 15,18"
-                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
-                                  StrokeThickness="2"/>
-                                  Width="6"
-                                  Height="12"/>
-                        </Button>
-                        <!-- Page numbers (ItemsControl) -->
-                        <ItemsControl Name="PART_PageNumbers">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="4"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                        <!-- Next button -->
-                        <Button Name="PART_NextButton"
-                                Classes="icon"
-                                Width="36"
-                                Height="36"
-                                CornerRadius="18">
-                            <Path Data="M 9,6 L 15,12 L 9,18"
-                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
-                                  StrokeThickness="2"/>
-                                  Width="6"
-                                  Height="12"/>
-                        </Button>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Pagination button (page number) -->
-    <Style Selector="PaginationButton">
-        <Setter Property="Width" Value="36"/>
-        <Setter Property="Height" Value="36"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="CornerRadius" Value="18"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="PaginationButton">
-                    <Border Name="RootBorder"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}">
-                        <Border Name="StateLayer"
-                                Background="Transparent"
-                                CornerRadius="{TemplateBinding CornerRadius}"/>
-                        <ContentPresenter Name="PART_ContentPresenter"
-                                          Content="{TemplateBinding Content}"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Transitions">
-            <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.15"/>
-            </Transitions>
-        </Setter>
-    </Style>
-
-    <!-- Hover -->
-    <Style Selector="PaginationButton:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
-
-    <!-- Selected page -->
-    <Style Selector="PaginationButton:selected">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
 </Styles>

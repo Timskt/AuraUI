@@ -1,10 +1,11 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
 
     <!-- ============================================================
          ProgressRing — Fluent Style
          ============================================================ -->
-    <Style Selector="ProgressRing">
+    <Style Selector="display|ProgressRing">
         <Setter Property="Foreground" Value="{StaticResource AuraPrimaryBrush}"/>
         <Setter Property="Background" Value="{StaticResource AuraMutedBrush}"/>
         <Setter Property="Width" Value="32"/>
@@ -34,7 +35,7 @@
     </Style>
 
     <!-- Indeterminate spinning animation -->
-    <Style Selector="ProgressRing:indeterminate /template/ Ellipse#PART_Indicator">
+    <Style Selector="display|ProgressRing:indeterminate /template/ Ellipse#PART_Indicator">
         <Style.Animations>
             <Animation Duration="00:00:01.500"
                        IterationCount="Infinite"
@@ -63,31 +64,31 @@
          ============================================================ -->
 
     <!-- Small -->
-    <Style Selector="ProgressRing.sm">
+    <Style Selector="display|ProgressRing.sm">
         <Setter Property="Width" Value="20"/>
         <Setter Property="Height" Value="20"/>
     </Style>
-    <Style Selector="ProgressRing.sm /template/ Ellipse">
+    <Style Selector="display|ProgressRing.sm /template/ Ellipse">
         <Setter Property="StrokeThickness" Value="2"/>
     </Style>
 
     <!-- Medium (default: 32) -->
 
     <!-- Large -->
-    <Style Selector="ProgressRing.lg">
+    <Style Selector="display|ProgressRing.lg">
         <Setter Property="Width" Value="48"/>
         <Setter Property="Height" Value="48"/>
     </Style>
-    <Style Selector="ProgressRing.lg /template/ Ellipse">
+    <Style Selector="display|ProgressRing.lg /template/ Ellipse">
         <Setter Property="StrokeThickness" Value="4"/>
     </Style>
 
     <!-- Extra Large -->
-    <Style Selector="ProgressRing.xl">
+    <Style Selector="display|ProgressRing.xl">
         <Setter Property="Width" Value="64"/>
         <Setter Property="Height" Value="64"/>
     </Style>
-    <Style Selector="ProgressRing.xl /template/ Ellipse">
+    <Style Selector="display|ProgressRing.xl /template/ Ellipse">
         <Setter Property="StrokeThickness" Value="5"/>
     </Style>
 
@@ -95,16 +96,16 @@
          ProgressRing Color Variants
          ============================================================ -->
 
-    <Style Selector="ProgressRing.success">
+    <Style Selector="display|ProgressRing.success">
         <Setter Property="Foreground" Value="{StaticResource AuraSuccessBrush}"/>
     </Style>
-    <Style Selector="ProgressRing.warning">
+    <Style Selector="display|ProgressRing.warning">
         <Setter Property="Foreground" Value="{StaticResource AuraWarningBrush}"/>
     </Style>
-    <Style Selector="ProgressRing.error">
+    <Style Selector="display|ProgressRing.error">
         <Setter Property="Foreground" Value="{StaticResource AuraErrorBrush}"/>
     </Style>
-    <Style Selector="ProgressRing.info">
+    <Style Selector="display|ProgressRing.info">
         <Setter Property="Foreground" Value="{StaticResource AuraInfoBrush}"/>
     </Style>
 

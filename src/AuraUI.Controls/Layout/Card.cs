@@ -44,6 +44,12 @@ public class Card : ContentControl
         AvaloniaProperty.Register<Card, int>(nameof(Elevation), 1, coerce: (o, v) => CoerceElevation((Card)o, v));
 
     /// <summary>
+    /// Defines the <see cref="BoxShadow"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<BoxShadows> BoxShadowProperty =
+        AvaloniaProperty.Register<Card, BoxShadows>(nameof(BoxShadow));
+
+    /// <summary>
     /// Defines the <see cref="HeaderTemplate"/> styled property.
     /// </summary>
     public static readonly StyledProperty<IDataTemplate?> HeaderTemplateProperty =
@@ -101,6 +107,15 @@ public class Card : ContentControl
     {
         get => GetValue(ElevationProperty);
         set => SetValue(ElevationProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the box shadow effect.
+    /// </summary>
+    public BoxShadows BoxShadow
+    {
+        get => GetValue(BoxShadowProperty);
+        set => SetValue(BoxShadowProperty, value);
     }
 
     /// <summary>

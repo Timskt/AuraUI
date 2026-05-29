@@ -29,6 +29,7 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="{TemplateBinding Padding}"
                             ClipToBounds="True">
+                        <Panel>
                         <Border Name="StateLayer"
                                 Background="Transparent"
                                 CornerRadius="{TemplateBinding CornerRadius}"/>
@@ -54,6 +55,7 @@
                                     FontSize="10"
                                     IsVisible="False"/>
                         </StackPanel>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

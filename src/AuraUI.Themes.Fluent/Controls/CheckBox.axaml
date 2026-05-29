@@ -31,7 +31,6 @@
                               Data="M 2,6 L 5,9 L 10,3"
                               Stroke="Transparent"
                               StrokeThickness="2"
-                              StrokeLineJoin="Round"
                               Stretch="Uniform"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center">
@@ -142,8 +141,7 @@
                                   Width="12" Height="12"
                                   Data="M 2,6 L 5,9 L 10,3"
                                   Stroke="Transparent"
-                                  StrokeThickness="2"/>
-                                  StrokeLineJoin="Round"
+                                  StrokeThickness="2"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>

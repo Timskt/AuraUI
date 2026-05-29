@@ -1,75 +1,57 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="clr-namespace:AuraUI.Controls.Feedback;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — Notification
-         ======================================== -->
+    <!-- Material Design 3 — Notification -->
 
-    <Style Selector="Notification">
+    <Style Selector="feedback|AuraNotification">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
         <Setter Property="Padding" Value="16"/>
         <Setter Property="MaxWidth" Value="400"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Notification">
+                <ControlTemplate TargetType="feedback:AuraNotification">
                     <Border Name="RootBorder"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
+                            CornerRadius="{DynamicResource AuraRadiusMd}"
                             Padding="{TemplateBinding Padding}"
                             MaxWidth="{TemplateBinding MaxWidth}">
-                        <Border.BoxShadow>
-                            <BoxShadow BlurRadius="16"
-                                       SpreadRadius="0"
-                                       OffsetX="0"
-                                       OffsetY="6"
-                                       Color="#26000000"/>
-                        </Border.BoxShadow>
-                        <Grid ColumnDefinitions="Auto,*,Auto">
-                            <!-- Icon -->
-                            <ContentPresenter Name="PART_IconPresenter"
-                                              Grid.Column="0"
-                                              Content="{TemplateBinding Icon}"
-                                              VerticalAlignment="Top"
-                                              Margin="0,0,12,0"
-                                              IsVisible="False"/>
-                            <!-- Content -->
-                            <StackPanel Grid.Column="1"
-                                        Spacing="4">
-                                <ContentPresenter Name="PART_TitlePresenter"
-                                                  Content="{TemplateBinding Title}"
-                                                  FontSize="16"
-                                                  FontWeight="Medium"
-                                                  FontFamily="{DynamicResource AuraFontTitleMediumFamily}"/>
-                                <ContentPresenter Name="PART_MessagePresenter"
-                                                  Content="{TemplateBinding Message}"
-                                                  TextWrapping="Wrap"
-                                                  Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
-                                <!-- Action buttons -->
-                                <StackPanel Name="PART_ButtonHost"
-                                            Orientation="Horizontal"
-                                            Spacing="8"
-                                            Margin="0,8,0,0"/>
-                            </StackPanel>
-                            <!-- Close button -->
-                            <Button Name="PART_CloseButton"
-                                    Grid.Column="2"
-                                    Classes="icon"
-                                    Width="32"
-                                    Height="32"
-                                    Margin="4,-4,-4,0"
-                                    VerticalAlignment="Top"
-                                    IsVisible="False">
-                                <Path Data="M 6,6 L 18,18 M 18,6 L 6,18"
-                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
-                                      StrokeThickness="2"/>
-                                      Width="12"
-                                      Height="12"/>
-                            </Button>
-                        </Grid>
+                        <Panel>
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <!-- Content -->
+                                <StackPanel Grid.Column="0"
+                                            Grid.ColumnSpan="2"
+                                            Spacing="4">
+                                    <TextBlock Name="PART_TitlePresenter"
+                                               Text="{TemplateBinding NotificationTitle}"
+                                               FontSize="16"
+                                               FontWeight="Medium"
+                                               FontFamily="{DynamicResource AuraFontTitleMediumFamily}"/>
+                                    <TextBlock Name="PART_MessagePresenter"
+                                               Text="{TemplateBinding Message}"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                </StackPanel>
+                                <!-- Close button -->
+                                <Button Name="PART_CloseButton"
+                                        Grid.Column="2"
+                                        Classes="icon"
+                                        Width="32"
+                                        Height="32"
+                                        Margin="4,-4,-4,0"
+                                        VerticalAlignment="Top"
+                                        IsVisible="False">
+                                    <Path Data="M 6,6 L 18,18 M 18,6 L 6,18"
+                                          Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                          StrokeThickness="2"
+                                          Width="12"
+                                          Height="12"/>
+                                </Button>
+                            </Grid>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -77,25 +59,25 @@
     </Style>
 
     <!-- Success variant -->
-    <Style Selector="Notification.success">
+    <Style Selector="feedback|AuraNotification.success">
         <Setter Property="Background" Value="#E8F5E9"/>
         <Setter Property="Foreground" Value="#1B5E20"/>
     </Style>
 
     <!-- Error variant -->
-    <Style Selector="Notification.error">
+    <Style Selector="feedback|AuraNotification.error">
         <Setter Property="Background" Value="#FFEBEE"/>
         <Setter Property="Foreground" Value="#B71C1C"/>
     </Style>
 
     <!-- Warning variant -->
-    <Style Selector="Notification.warning">
+    <Style Selector="feedback|AuraNotification.warning">
         <Setter Property="Background" Value="#FFF3E0"/>
         <Setter Property="Foreground" Value="#E65100"/>
     </Style>
 
     <!-- Info variant -->
-    <Style Selector="Notification.info">
+    <Style Selector="feedback|AuraNotification.info">
         <Setter Property="Background" Value="#E1F5FE"/>
         <Setter Property="Foreground" Value="#01579B"/>
     </Style>

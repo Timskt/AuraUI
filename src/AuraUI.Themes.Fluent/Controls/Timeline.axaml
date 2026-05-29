@@ -23,11 +23,6 @@
         <Setter Property="Padding" Value="0,0,0,24"/>
     </Style>
 
-    <!-- Timeline item layout -->
-    <Style Selector="Border.timeline-item Grid">
-        <Setter Property="ColumnDefinitions" Value="24,*,*"/>
-    </Style>
-
     <!-- Timeline dot -->
     <Style Selector="Border.timeline-dot">
         <Setter Property="Width" Value="12"/>

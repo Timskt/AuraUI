@@ -104,7 +104,6 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource AuraForegroundTertiaryBrush}"/>
-        <Setter Property="TextTransform" Value="Uppercase"/>
     </Style>
 
     <!-- ============================================================

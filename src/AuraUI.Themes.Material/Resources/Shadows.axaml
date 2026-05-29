@@ -6,21 +6,21 @@
          ======================================== -->
 
     <!-- Level 0: No shadow (flat surface) -->
-    <BoxShadow x:Key="AuraShadowLevel0">none</BoxShadow>
+    <BoxShadows x:Key="AuraShadowLevel0">none</BoxShadows>
 
     <!-- Level 1: Resting state cards, buttons -->
-    <BoxShadow x:Key="AuraShadowLevel1">0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15)</BoxShadow>
+    <BoxShadows x:Key="AuraShadowLevel1">0 1 2 0 #4D000000, 0 1 3 1 #26000000</BoxShadows>
 
     <!-- Level 2: Hovered cards, floating action buttons -->
-    <BoxShadow x:Key="AuraShadowLevel2">0 1px 2px 0 rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15)</BoxShadow>
+    <BoxShadows x:Key="AuraShadowLevel2">0 1 2 0 #4D000000, 0 2 6 2 #26000000</BoxShadows>
 
     <!-- Level 3: Navigation drawers, side sheets -->
-    <BoxShadow x:Key="AuraShadowLevel3">0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.3)</BoxShadow>
+    <BoxShadows x:Key="AuraShadowLevel3">0 4 8 3 #26000000, 0 1 3 0 #4D000000</BoxShadows>
 
     <!-- Level 4: Dialogs, modals -->
-    <BoxShadow x:Key="AuraShadowLevel4">0 6px 10px 4px rgba(0,0,0,0.15), 0 2px 3px rgba(0,0,0,0.3)</BoxShadow>
+    <BoxShadows x:Key="AuraShadowLevel4">0 6 10 4 #26000000, 0 2 3 0 #4D000000</BoxShadows>
 
     <!-- Level 5: Top-level surfaces, tooltips -->
-    <BoxShadow x:Key="AuraShadowLevel5">0 8px 12px 6px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.3)</BoxShadow>
+    <BoxShadows x:Key="AuraShadowLevel5">0 8 12 6 #26000000, 0 4 4 0 #4D000000</BoxShadows>
 
 </ResourceDictionary>

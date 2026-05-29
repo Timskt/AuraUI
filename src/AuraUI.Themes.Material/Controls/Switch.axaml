@@ -1,9 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ========================================
-         Material Design 3 — Switch
-         ======================================== -->
+    <!-- Material Design 3 — Switch -->
 
     <Style Selector="ToggleSwitch">
         <Setter Property="MinWidth" Value="52"/>
@@ -12,81 +10,16 @@
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ToggleSwitch">
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="12"
-                                VerticalAlignment="Center">
-                        <!-- Track + Thumb -->
-                        <Grid Width="52"
-                              Height="32"
-                              VerticalAlignment="Center">
-                            <!-- Track -->
-                            <Border Name="PART_Track"
-                                    Width="52"
-                                    Height="32"
-                                    CornerRadius="16"
-                                    Background="{DynamicResource AuraSurfaceBrush}"
-                                    BorderBrush="{DynamicResource AuraOutlineBrush}"
-                                    BorderThickness="2">
-                                <Border Name="StateLayer"
-                                        Background="Transparent"
-                                        CornerRadius="16"/>
-                            </Border>
-                            <!-- Thumb container -->
-                            <Border Name="PART_Thumb"
-                                    Width="16"
-                                    Height="16"
-                                    CornerRadius="8"
-                                    Background="{DynamicResource AuraOutlineBrush}"
-                                    HorizontalAlignment="Left"
-                                    Margin="8,0,0,0"
-                                    VerticalAlignment="Center"/>
-                        </Grid>
-                        <!-- Content (on/off labels if any) -->
-                        <ContentPresenter Name="PART_ContentPresenter"
-                                          Content="{TemplateBinding Content}"
-                                          VerticalAlignment="Center"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Transitions">
-            <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.15"/>
-                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
-            </Transitions>
-        </Setter>
     </Style>
 
     <!-- Hover state layer -->
-    <Style Selector="ToggleSwitch:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
-
-    <!-- Pressed (thumb grows slightly) -->
-    <Style Selector="ToggleSwitch:pressed /template/ Border#PART_Thumb">
-        <Setter Property="Width" Value="28"/>
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="CornerRadius" Value="12"/>
+    <Style Selector="ToggleSwitch:pointerover">
+        <Setter Property="Opacity" Value="0.9"/>
     </Style>
 
     <!-- Checked (on) -->
-    <Style Selector="ToggleSwitch:checked /template/ Border#PART_Track">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
-    </Style>
-
-    <Style Selector="ToggleSwitch:checked /template/ Border#PART_Thumb">
-        <Setter Property="Background" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Margin" Value="0,0,8,0"/>
-    </Style>
-
-    <Style Selector="ToggleSwitch:checked:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#14FFFFFF"/>
+    <Style Selector="ToggleSwitch:checked">
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Disabled -->

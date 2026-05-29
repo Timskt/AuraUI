@@ -1,11 +1,10 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — NumericUpDown
-         ======================================== -->
+    <!-- Material Design 3 — NumericUpDown -->
 
-    <Style Selector="NumericUpDown">
+    <Style Selector="input|AuraNumericUpDown">
         <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -15,75 +14,22 @@
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyLargeFamily}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="NumericUpDown">
-                    <Border Name="RootBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid ColumnDefinitions="*,Auto,Auto">
-                            <Border Name="StateLayer"
-                                    Background="Transparent"
-                                    Grid.ColumnSpan="3"
-                                    CornerRadius="{TemplateBinding CornerRadius}"/>
-                            <!-- Value input -->
-                            <TextPresenter Name="PART_TextPresenter"
-                                           Grid.Column="0"
-                                           Margin="16,8"
-                                           VerticalAlignment="Center"/>
-                            <!-- Decrease button -->
-                            <Button Name="PART_DecreaseButton"
-                                    Grid.Column="1"
-                                    Content="&#x2212;"
-                                    Classes="icon"
-                                    Width="32"
-                                    Height="32"
-                                    Padding="0"/>
-                            <!-- Increase button -->
-                            <Button Name="PART_IncreaseButton"
-                                    Grid.Column="2"
-                                    Content="+"
-                                    Classes="icon"
-                                    Width="32"
-                                    Height="32"
-                                    Padding="0"
-                                    Margin="0,0,8,0"/>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Transitions">
-            <Transitions>
-                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
-            </Transitions>
-        </Setter>
     </Style>
 
     <!-- Hover -->
-    <Style Selector="NumericUpDown:pointerover /template/ Border#StateLayer">
+    <Style Selector="input|AuraNumericUpDown:pointerover">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Focused -->
-    <Style Selector="NumericUpDown:focus /template/ Border#RootBorder">
+    <Style Selector="input|AuraNumericUpDown:focus">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
     <!-- Disabled -->
-    <Style Selector="NumericUpDown:disabled">
+    <Style Selector="input|AuraNumericUpDown:disabled">
         <Setter Property="Opacity" Value="0.38"/>
-    </Style>
-
-    <!-- Outlined variant -->
-    <Style Selector="NumericUpDown.outlined">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
     </Style>
 
 </Styles>

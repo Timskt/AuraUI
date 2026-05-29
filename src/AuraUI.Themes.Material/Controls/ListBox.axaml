@@ -1,9 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ========================================
-         Material Design 3 — ListBox
-         ======================================== -->
+    <!-- Material Design 3 — ListBox -->
 
     <Style Selector="ListBox">
         <Setter Property="Background" Value="Transparent"/>
@@ -32,9 +30,7 @@
         </Setter>
     </Style>
 
-    <!-- ==========================================
-         ListBoxItem
-         ========================================== -->
+    <!-- ListBoxItem -->
     <Style Selector="ListBoxItem">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
@@ -52,14 +48,16 @@
                             CornerRadius="{DynamicResource AuraRadiusFull}"
                             Margin="0,2"
                             ClipToBounds="True">
-                        <Border Name="StateLayer"
-                                Background="Transparent"
-                                CornerRadius="{DynamicResource AuraRadiusFull}"/>
-                        <ContentPresenter Name="PART_ContentPresenter"
-                                          Margin="{TemplateBinding Padding}"
-                                          Content="{TemplateBinding Content}"
-                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="Center"/>
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{DynamicResource AuraRadiusFull}"/>
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center"/>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

@@ -1,17 +1,15 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="clr-namespace:AuraUI.Controls.Navigation;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — NavigationView
-         Supports: .rail, .drawer, .bar variants
-         ======================================== -->
+    <!-- Material Design 3 — NavigationView -->
 
-    <Style Selector="NavigationView">
+    <Style Selector="navigation|NavigationView">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="NavigationView">
+                <ControlTemplate TargetType="navigation:NavigationView">
                     <Grid ColumnDefinitions="Auto,*">
                         <!-- Navigation pane -->
                         <Border Name="PART_PaneBorder"
@@ -38,79 +36,8 @@
     </Style>
 
     <!-- Rail variant (narrow, icon + label) -->
-    <Style Selector="NavigationView.rail /template/ Border#PART_PaneBorder">
+    <Style Selector="navigation|NavigationView /template/ Border#PART_PaneBorder">
         <Setter Property="Width" Value="80"/>
-    </Style>
-
-    <!-- Drawer variant (wider, full menu) -->
-    <Style Selector="NavigationView.drawer /template/ Border#PART_PaneBorder">
-        <Setter Property="Width" Value="360"/>
-    </Style>
-
-    <!-- ==========================================
-         NavigationViewItem
-         ========================================== -->
-    <Style Selector="NavigationViewItem">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontFamily" Value="{DynamicResource AuraFontLabelMediumFamily}"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="Padding" Value="0,4"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="NavigationViewItem">
-                    <StackPanel HorizontalAlignment="Center"
-                                Spacing="4">
-                        <Border Name="PART_IconContainer"
-                                Width="56"
-                                Height="32"
-                                CornerRadius="16"
-                                Background="Transparent"
-                                HorizontalAlignment="Center">
-                            <Border Name="StateLayer"
-                                    Background="Transparent"
-                                    CornerRadius="16"/>
-                            <ContentPresenter Name="PART_IconPresenter"
-                                              Content="{TemplateBinding Icon}"
-                                              Width="24"
-                                              Height="24"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ContentPresenter Name="PART_ContentPresenter"
-                                          Content="{TemplateBinding Content}"
-                                          HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Transitions">
-            <Transitions>
-                <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
-                <BrushTransition Property="Background" Duration="0:0:0.15"/>
-            </Transitions>
-        </Setter>
-    </Style>
-
-    <!-- Hover -->
-    <Style Selector="NavigationViewItem:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
-
-    <!-- Pressed -->
-    <Style Selector="NavigationViewItem:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-    </Style>
-
-    <!-- Selected -->
-    <Style Selector="NavigationViewItem:selected">
-        <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
-    </Style>
-
-    <Style Selector="NavigationViewItem:selected /template/ Border#PART_IconContainer">
-        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
     </Style>
 
 </Styles>

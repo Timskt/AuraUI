@@ -70,7 +70,7 @@
                                     <Path Width="10" Height="10"
                                           Data="M 1,1 L 9,1 L 9,9 L 1,9 Z"
                                           Stroke="{StaticResource AuraForegroundSecondaryBrush}"
-                                          StrokeThickness="1"/>
+                                          StrokeThickness="1"
                                           Fill="Transparent"/>
                                 </Button>
 

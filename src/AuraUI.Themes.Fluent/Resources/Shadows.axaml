@@ -6,30 +6,30 @@
          ============================================================ -->
 
     <!-- No Shadow -->
-    <BoxShadows x:Key="AuraShadowNone"/>
+    <BoxShadows x:Key="AuraShadowNone">none</BoxShadows>
 
     <!-- Small Shadow (cards, buttons at rest) -->
-    <BoxShadows x:Key="AuraShadowSm">0 1px 3px 0 #14000000, 0 1px 2px -1px #14000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowSm">0 1 3 0 #14000000, 0 1 2 -1 #14000000</BoxShadows>
 
     <!-- Medium Shadow (elevated cards, dropdowns) -->
-    <BoxShadows x:Key="AuraShadowMd">0 4px 6px -1px #19000000, 0 2px 4px -2px #19000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowMd">0 4 6 -1 #19000000, 0 2 4 -2 #19000000</BoxShadows>
 
     <!-- Large Shadow (modals, popovers) -->
-    <BoxShadows x:Key="AuraShadowLg">0 10px 15px -3px #1F000000, 0 4px 6px -4px #1F000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowLg">0 10 15 -3 #1F000000, 0 4 6 -4 #1F000000</BoxShadows>
 
     <!-- Extra Large Shadow (full-screen dialogs) -->
-    <BoxShadows x:Key="AuraShadowXl">0 20px 25px -5px #26000000, 0 8px 10px -6px #26000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowXl">0 20 25 -5 #26000000, 0 8 10 -6 #26000000</BoxShadows>
 
     <!-- Focus ring shadow -->
-    <BoxShadows x:Key="AuraShadowFocus">0 0 0 2px #005FB8</BoxShadows>
+    <BoxShadows x:Key="AuraShadowFocus">0 0 0 2 #005FB8</BoxShadows>
 
     <!-- Inner Shadow (inset effect) -->
-    <BoxShadows x:Key="AuraShadowInset">inset 0 2px 4px 0 #0A000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowInset">inset 0 2 4 0 #0A000000</BoxShadows>
 
     <!-- Card Elevation Shadows -->
-    <BoxShadows x:Key="AuraShadowElevation0"/>
-    <BoxShadows x:Key="AuraShadowElevation1">0 1px 3px 0 #14000000, 0 1px 2px -1px #14000000</BoxShadows>
-    <BoxShadows x:Key="AuraShadowElevation2">0 4px 6px -1px #19000000, 0 2px 4px -2px #19000000</BoxShadows>
-    <BoxShadows x:Key="AuraShadowElevation3">0 10px 15px -3px #1F000000, 0 4px 6px -4px #1F000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowElevation0">none</BoxShadows>
+    <BoxShadows x:Key="AuraShadowElevation1">0 1 3 0 #14000000, 0 1 2 -1 #14000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowElevation2">0 4 6 -1 #19000000, 0 2 4 -2 #19000000</BoxShadows>
+    <BoxShadows x:Key="AuraShadowElevation3">0 10 15 -3 #1F000000, 0 4 6 -4 #1F000000</BoxShadows>
 
 </ResourceDictionary>

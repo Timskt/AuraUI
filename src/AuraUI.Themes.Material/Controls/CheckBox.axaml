@@ -1,9 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ========================================
-         Material Design 3 — CheckBox
-         ======================================== -->
+    <!-- Material Design 3 — CheckBox -->
 
     <Style Selector="CheckBox">
         <Setter Property="MinHeight" Value="24"/>
@@ -27,26 +25,27 @@
                                 BorderBrush="{DynamicResource AuraForegroundBrush}"
                                 Background="Transparent"
                                 VerticalAlignment="Center">
-                            <Border Name="StateLayer"
-                                    Background="Transparent"
-                                    CornerRadius="2"/>
-                            <!-- Checkmark path -->
-                            <Path Name="PART_CheckMark"
-                                  Data="M 3.5,8.5 L 7,12 L 14.5,4.5"
-                                  Stroke="Transparent"
-                                  StrokeThickness="2"/>
-                                  StrokeLineJoin="Round"
-                                  IsVisible="False"
-                                  Margin="-1,-1,-1,-1"/>
-                            <!-- Indeterminate mark -->
-                            <Border Name="PART_IndeterminateMark"
-                                    Width="10"
-                                    Height="2"
-                                    Background="Transparent"
-                                    CornerRadius="1"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    IsVisible="False"/>
+                            <Panel>
+                                <Border Name="StateLayer"
+                                        Background="Transparent"
+                                        CornerRadius="2"/>
+                                <!-- Checkmark path -->
+                                <Path Name="PART_CheckMark"
+                                      Data="M 3.5,8.5 L 7,12 L 14.5,4.5"
+                                      Stroke="Transparent"
+                                      StrokeThickness="2"
+                                      IsVisible="False"
+                                      Margin="-1,-1,-1,-1"/>
+                                <!-- Indeterminate mark -->
+                                <Border Name="PART_IndeterminateMark"
+                                        Width="10"
+                                        Height="2"
+                                        Background="Transparent"
+                                        CornerRadius="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        IsVisible="False"/>
+                            </Panel>
                         </Border>
                         <!-- Content -->
                         <ContentPresenter Name="PART_ContentPresenter"

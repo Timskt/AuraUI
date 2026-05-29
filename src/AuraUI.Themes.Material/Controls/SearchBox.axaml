@@ -1,11 +1,10 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
 
-    <!-- ========================================
-         Material Design 3 — SearchBox
-         ======================================== -->
+    <!-- Material Design 3 — SearchBox -->
 
-    <Style Selector="SearchBox">
+    <Style Selector="input|SearchBox">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -17,54 +16,55 @@
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyLargeFamily}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="SearchBox">
+                <ControlTemplate TargetType="input:SearchBox">
                     <Border Name="RootBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                        <Border Name="StateLayer"
-                                Background="Transparent"
-                                CornerRadius="{TemplateBinding CornerRadius}"/>
-                        <Grid ColumnDefinitions="Auto,*,Auto"
-                              Margin="{TemplateBinding Padding}">
-                            <!-- Search icon -->
-                            <Path Name="PART_SearchIcon"
-                                  Grid.Column="0"
-                                  Data="M15.5,14H14.71L14.43,13.73C15.41,12.59 16,11.11 16,9.5C16,5.91 13.09,3 9.5,3C5.91,3 3,5.91 3,9.5C3,13.09 5.91,16 9.5,16C11.11,16 12.59,15.41 13.73,14.43L14,14.71V15.5L19,20.49L20.49,19L15.5,14ZM9.5,14C7.01,14 5,11.99 5,9.5C5,7.01 7.01,5 9.5,5C11.99,5 14,7.01 14,9.5C14,11.99 11.99,14 9.5,14Z"
-                                  Fill="{DynamicResource AuraForegroundSecondaryBrush}"
-                                  Width="20"
-                                  Height="20"
-                                  Margin="12,0,8,0"
-                                  VerticalAlignment="Center"/>
-                            <!-- Input area -->
-                            <Grid Grid.Column="1">
-                                <TextBlock Name="PART_Watermark"
-                                           Text="{TemplateBinding Watermark}"
-                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
-                                           FontSize="16"
-                                           VerticalAlignment="Center"
-                                           IsVisible="False"/>
-                                <ScrollViewer Name="PART_ScrollViewer"
-                                              HorizontalScrollBarVisibility="Hidden"
-                                              VerticalScrollBarVisibility="Hidden">
-                                    <TextPresenter Name="PART_TextPresenter"
-                                                   Text="{TemplateBinding Text, Mode=TwoWay}"
-                                                   CaretBrush="{DynamicResource AuraPrimaryBrush}"
-                                                   SelectionBrush="#296750A4"
-                                                   FontSize="16"
-                                                   Foreground="{TemplateBinding Foreground}"/>
-                                </ScrollViewer>
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+                            <Grid ColumnDefinitions="Auto,*,Auto"
+                                  Margin="{TemplateBinding Padding}">
+                                <!-- Search icon -->
+                                <Path Name="PART_SearchIcon"
+                                      Grid.Column="0"
+                                      Data="M15.5,14H14.71L14.43,13.73C15.41,12.59 16,11.11 16,9.5C16,5.91 13.09,3 9.5,3C5.91,3 3,5.91 3,9.5C3,13.09 5.91,16 9.5,16C11.11,16 12.59,15.41 13.73,14.43L14,14.71V15.5L19,20.49L20.49,19L15.5,14ZM9.5,14C7.01,14 5,11.99 5,9.5C5,7.01 7.01,5 9.5,5C11.99,5 14,7.01 14,9.5C14,11.99 11.99,14 9.5,14Z"
+                                      Fill="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      Width="20"
+                                      Height="20"
+                                      Margin="12,0,8,0"
+                                      VerticalAlignment="Center"/>
+                                <!-- Input area -->
+                                <Grid Grid.Column="1">
+                                    <TextBlock Name="PART_Watermark"
+                                               Text="{TemplateBinding SearchWatermark}"
+                                               Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                               FontSize="16"
+                                               VerticalAlignment="Center"
+                                               IsVisible="False"/>
+                                    <ScrollViewer Name="PART_ScrollViewer"
+                                                  HorizontalScrollBarVisibility="Hidden"
+                                                  VerticalScrollBarVisibility="Hidden">
+                                        <TextPresenter Name="PART_TextPresenter"
+                                                       Text="{TemplateBinding Text, Mode=TwoWay}"
+                                                       CaretBrush="{DynamicResource AuraPrimaryBrush}"
+                                                       SelectionBrush="#296750A4"
+                                                       FontSize="16"/>
+                                    </ScrollViewer>
+                                </Grid>
+                                <!-- Clear button -->
+                                <Button Name="PART_ClearButton"
+                                        Grid.Column="2"
+                                        Content="&#x2715;"
+                                        Classes="icon"
+                                        Width="32"
+                                        Height="32"
+                                        IsVisible="False"/>
                             </Grid>
-                            <!-- Clear button -->
-                            <Button Name="PART_ClearButton"
-                                    Grid.Column="2"
-                                    Content="&#x2715;"
-                                    Classes="icon"
-                                    Width="32"
-                                    Height="32"
-                                    IsVisible="False"/>
-                        </Grid>
+                        </Panel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -77,23 +77,19 @@
         </Setter>
     </Style>
 
-    <!-- Elevated search bar (default Material search bar) -->
-    <Style Selector="SearchBox /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel2}"/>
-    </Style>
-
     <!-- Hover -->
-    <Style Selector="SearchBox:pointerover /template/ Border#StateLayer">
+    <Style Selector="input|SearchBox:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Focused -->
-    <Style Selector="SearchBox:focus /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel3}"/>
+    <Style Selector="input|SearchBox:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Disabled -->
-    <Style Selector="SearchBox:disabled">
+    <Style Selector="input|SearchBox:disabled">
         <Setter Property="Opacity" Value="0.38"/>
     </Style>
 
