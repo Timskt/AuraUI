@@ -1,14 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AuraUI.Core</RootNamespace>
     <AssemblyName>AuraUI.Core</AssemblyName>
-    <Description>Core utilities, converters, helpers, and interfaces for AuraUI framework</Description>
-    <PackageTags>avalonia;ui;framework;auraui</PackageTags>
-    <Version>1.0.0</Version>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>AuraUI.Core</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>AuraUI</Authors>
+    <Description>Core utilities, converters, helpers, MVVM, validation, and services for AuraUI framework</Description>
+    <PackageTags>avalonia;ui;framework;mvvm;validation;auraui</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Timskt/AuraUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Timskt/AuraUI</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Behaviors\**" />

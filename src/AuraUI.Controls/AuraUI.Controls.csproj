@@ -1,13 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AuraUI.Controls</RootNamespace>
     <AssemblyName>AuraUI.Controls</AssemblyName>
-    <Description>40+ professional controls for Avalonia UI</Description>
-    <PackageTags>avalonia;ui;controls;framework;auraui</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>AuraUI.Controls</PackageId>
     <Version>1.0.0</Version>
+    <Authors>AuraUI</Authors>
+    <Description>50+ professional controls and 22 chart types for Avalonia UI</Description>
+    <PackageTags>avalonia;ui;controls;charts;framework;auraui</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Timskt/AuraUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Timskt/AuraUI</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
