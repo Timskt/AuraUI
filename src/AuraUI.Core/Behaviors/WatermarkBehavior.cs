@@ -116,7 +116,11 @@ public class WatermarkBehavior : Behavior<TextBox>
         UpdateWatermarkVisibility();
     }
 
+#if AVALONIA_12
+    private void OnGotFocus(object? sender, Avalonia.Input.FocusChangedEventArgs e)
+#else
     private void OnGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+#endif
     {
         UpdateWatermarkVisibility();
     }

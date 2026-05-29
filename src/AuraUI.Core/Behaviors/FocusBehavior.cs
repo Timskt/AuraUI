@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Threading;
 
 namespace AuraUI.Core.Behaviors;
@@ -122,7 +123,11 @@ public class FocusBehavior : Behavior<Control>
         }
     }
 
+#if AVALONIA_12
+    private void OnGotFocus(object? sender, FocusChangedEventArgs e)
+#else
     private void OnGotFocus(object? sender, GotFocusEventArgs e)
+#endif
     {
         if (_isUpdatingFocus)
             return;

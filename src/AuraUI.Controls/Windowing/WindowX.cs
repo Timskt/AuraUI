@@ -196,6 +196,22 @@ public class WindowX : Window
     }
 
     /// <summary>
+    /// Configures the window to use fully custom chrome by disabling system/window decorations.
+    /// In Avalonia 11 this sets SystemDecorations=None; in Avalonia 12 this sets WindowDecorations=None.
+    /// </summary>
+    public void UseCustomChrome()
+    {
+#if AVALONIA_12
+        // Avalonia 12: WindowDecorations enum replaces SystemDecorations
+        // The property name on Window base class is "WindowDecorations"
+        var prop = AvaloniaProperty.Find<Window, WindowDecorations>("WindowDecorations");
+        if (prop != null) SetValue(prop, WindowDecorations.None);
+#else
+        SystemDecorations = SystemDecorations.None;
+#endif
+    }
+
+    /// <summary>
     /// Occurs when the back button is clicked.
     /// </summary>
     public new event EventHandler<RoutedEventArgs>? BackRequested

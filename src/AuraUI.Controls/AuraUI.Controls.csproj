@@ -5,9 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AuraUI.Controls</RootNamespace>
     <AssemblyName>AuraUI.Controls</AssemblyName>
-    <Description>35+ professional controls for Avalonia UI</Description>
+    <Description>40+ professional controls for Avalonia UI</Description>
     <PackageTags>avalonia;ui;controls;framework;auraui</PackageTags>
     <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <!-- Dual Avalonia version support: pass -p:AvaloniaVersion=12 to build against Avalonia 12 -->
+  <PropertyGroup Condition="'$(AvaloniaVersion)' == '12'">
+    <DefineConstants>AVALONIA_12</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.1" />
@@ -15,5 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuraUI.Core\AuraUI.Core.csproj" />
+  </ItemGroup>
+  <!-- Exclude half-finished G2 spec and transform code that has compilation errors -->
+  <ItemGroup>
+    <Compile Remove="Charts\G2\**" />
+    <Compile Remove="Charts\Data\Transforms\**" />
   </ItemGroup>
 </Project>

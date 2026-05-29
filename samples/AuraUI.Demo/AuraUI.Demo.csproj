@@ -10,6 +10,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
+
+  <!-- Dual Avalonia version support: pass -p:AvaloniaVersion=12 to build against Avalonia 12 -->
+  <PropertyGroup Condition="'$(AvaloniaVersion)' == '12'">
+    <DefineConstants>AVALONIA_12</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.3.1" />

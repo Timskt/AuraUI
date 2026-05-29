@@ -48,7 +48,11 @@ public class SelectAllOnFocusBehavior : Behavior<TextBox>
         base.OnDetaching();
     }
 
+#if AVALONIA_12
+    private void OnGotFocus(object? sender, FocusChangedEventArgs e)
+#else
     private void OnGotFocus(object? sender, GotFocusEventArgs e)
+#endif
     {
         if (!IsEnabled || AssociatedObject == null)
             return;
