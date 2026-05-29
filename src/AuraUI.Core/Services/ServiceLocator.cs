@@ -1,12 +1,15 @@
+using System.Collections.Concurrent;
+
 namespace AuraUI.Core.Services;
 
 /// <summary>
-/// Simple service locator for AuraUI services. Can be replaced with DI container.
+/// Thread-safe service locator for AuraUI services. Can be replaced with DI container.
 /// </summary>
 public static class ServiceLocator
 {
-    private static readonly Dictionary<Type, object> _services = new();
-    private static readonly Dictionary<Type, Func<object>> _factories = new();
+    private static readonly ConcurrentDictionary<Type, object> _services = new();
+    private static readonly ConcurrentDictionary<Type, Func<object>> _factories = new();
+    private static readonly object _lock = new();
 
     /// <summary>
     /// Register a singleton service instance.
@@ -72,7 +75,10 @@ public static class ServiceLocator
     /// </summary>
     public static void Clear()
     {
-        _services.Clear();
-        _factories.Clear();
+        lock (_lock)
+        {
+            _services.Clear();
+            _factories.Clear();
+        }
     }
 }

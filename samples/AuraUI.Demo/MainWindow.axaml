@@ -1,7 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls"
-        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls"
+        xmlns:layout="using:AuraUI.Controls.Layout"
+        xmlns:input="using:AuraUI.Controls.Input"
+        xmlns:selection="using:AuraUI.Controls.Selection"
+        xmlns:display="using:AuraUI.Controls.Display"
+        xmlns:feedback="using:AuraUI.Controls.Feedback"
+        xmlns:core="using:AuraUI.Core.Helpers"
         x:Class="AuraUI.Demo.MainWindow"
         x:DataType="Window"
         Title="AuraUI Component Gallery"
@@ -163,47 +167,68 @@
                         <TextBlock Text="Tag" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
 
                         <WrapPanel>
-                            <layout:Badge Content="Default Tag" Variant="Default" Margin="0,0,8,8"/>
-                            <layout:Badge Content="Primary Tag" Variant="Primary" Margin="0,0,8,8"/>
-                            <layout:Badge Content="Success Tag" Variant="Success" Margin="0,0,8,8"/>
-                            <layout:Badge Content="Warning Tag" Variant="Warning" Margin="0,0,8,8"/>
-                            <layout:Badge Content="Error Tag" Variant="Error" Margin="0,0,8,8"/>
+                            <layout:Tag Content="Default Tag" Variant="Default" Margin="0,0,8,8"/>
+                            <layout:Tag Content="Primary Tag" Variant="Primary" Margin="0,0,8,8"/>
+                            <layout:Tag Content="Success Tag" Variant="Success" Margin="0,0,8,8"/>
+                            <layout:Tag Content="Warning Tag" Variant="Warning" Margin="0,0,8,8"/>
+                            <layout:Tag Content="Error Tag" Variant="Error" Margin="0,0,8,8"/>
+                            <layout:Tag Content="Outlined Tag" Variant="Outlined" Margin="0,0,8,8"/>
                         </WrapPanel>
-                        <TextBlock Text="Note: Tags use the Badge control with custom content in this demo. A dedicated Tag control is also available."
-                                   FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
+
+                        <TextBlock Text="Closable tags" FontWeight="SemiBold" Margin="0,4,0,4"/>
+                        <WrapPanel>
+                            <layout:Tag Content="React" Variant="Primary" IsClosable="True" Margin="0,0,8,8" x:Name="ClosableTag1"/>
+                            <layout:Tag Content="Avalonia" Variant="Success" IsClosable="True" Margin="0,0,8,8" x:Name="ClosableTag2"/>
+                            <layout:Tag Content="TypeScript" Variant="Outlined" IsClosable="True" Margin="0,0,8,8" x:Name="ClosableTag3"/>
+                        </WrapPanel>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- Avatar section -->
                         <TextBlock Text="Avatar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Avatar and Skeleton controls are included in the theme. Define Avatar content using Border with initials or an image."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
                         <WrapPanel>
-                            <Border Width="48" Height="48" CornerRadius="24" Background="#0078D4" Margin="0,0,8,8">
-                                <TextBlock Text="SK" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <Border Width="48" Height="48" CornerRadius="24" Background="#107C10" Margin="0,0,8,8">
-                                <TextBlock Text="AB" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <Border Width="48" Height="48" CornerRadius="24" Background="#D83B01" Margin="0,0,8,8">
-                                <TextBlock Text="JD" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <Border Width="48" Height="48" CornerRadius="24" Background="#5C2D91" Margin="0,0,8,8">
-                                <TextBlock Text="MZ" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
+                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
+                                <layout:Avatar FallbackText="SK" Size="Large" FallbackBackground="#0078D4"/>
+                                <TextBlock Text="Large" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
+                                <layout:Avatar FallbackText="AB" Size="Medium" FallbackBackground="#107C10"/>
+                                <TextBlock Text="Medium" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
+                                <layout:Avatar FallbackText="JD" Size="Small" FallbackBackground="#D83B01"/>
+                                <TextBlock Text="Small" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
+                                <layout:Avatar FallbackText="MZ" Size="XL" FallbackBackground="#5C2D91"/>
+                                <TextBlock Text="XL" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,12,12" Spacing="4" HorizontalAlignment="Center">
+                                <layout:Avatar FallbackText="SQ" Size="Medium" Shape="Square" FallbackBackground="#0078D4"/>
+                                <TextBlock Text="Square" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
                         </WrapPanel>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- Skeleton section -->
                         <TextBlock Text="Skeleton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="The Skeleton control provides a loading placeholder. Styles are defined in the theme resources."
+                        <TextBlock Text="Animated loading placeholders with shimmer effect."
                                    FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Spacing="8" MaxWidth="400">
-                            <Border Height="16" CornerRadius="4" Background="{DynamicResource ControlFillColorDefaultBrush}" />
-                            <Border Height="16" CornerRadius="4" Background="{DynamicResource ControlFillColorDefaultBrush}" Width="280"/>
-                            <Border Height="16" CornerRadius="4" Background="{DynamicResource ControlFillColorDefaultBrush}" Width="200"/>
-                        </StackPanel>
+                        <WrapPanel>
+                            <StackPanel Spacing="8" Width="300" Margin="0,0,16,12">
+                                <TextBlock Text="Text variant" FontSize="12" FontWeight="SemiBold"/>
+                                <layout:Skeleton Variant="Text" Rows="3"/>
+                            </StackPanel>
+                            <StackPanel Spacing="8" Width="300" Margin="0,0,16,12">
+                                <TextBlock Text="Circle variant" FontSize="12" FontWeight="SemiBold"/>
+                                <layout:Skeleton Variant="Circle" Width="60" Height="60"/>
+                            </StackPanel>
+                            <StackPanel Spacing="8" Width="300" Margin="0,0,16,12">
+                                <TextBlock Text="Image variant" FontSize="12" FontWeight="SemiBold"/>
+                                <layout:Skeleton Variant="Image" Width="300"/>
+                            </StackPanel>
+                        </WrapPanel>
 
                     </StackPanel>
                 </ScrollViewer>
@@ -216,71 +241,62 @@
                 <ScrollViewer>
                     <StackPanel Spacing="16" Margin="8">
 
-                        <!-- Button section -->
-                        <TextBlock Text="Button" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraButton section -->
+                        <TextBlock Text="AuraButton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
 
-                        <TextBlock Text="Standard variants" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Variant classes" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <WrapPanel>
-                            <Button Content="Standard" Classes="accent" Margin="0,0,8,8"/>
-                            <Button Content="Primary" Classes="accent" Margin="0,0,8,8"/>
-                            <Button Content="Default" Margin="0,0,8,8"/>
-                            <Button Content="Outline" Classes="outline" Margin="0,0,8,8"/>
-                            <Button Content="Subtle" Classes="subtle" Margin="0,0,8,8"/>
-                            <Button Content="Disabled" IsEnabled="False" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Default" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Primary" Classes="primary" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Secondary" Classes="secondary" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Destructive" Classes="destructive" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Outline" Classes="outline" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Ghost" Classes="ghost" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Link" Classes="link" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Disabled" IsEnabled="False" Margin="0,0,8,8"/>
                         </WrapPanel>
 
-                        <TextBlock Text="With icon (using content)" FontWeight="SemiBold" Margin="0,8,0,4"/>
+                        <TextBlock Text="Size classes" FontWeight="SemiBold" Margin="0,8,0,4"/>
                         <WrapPanel>
-                            <Button Margin="0,0,8,8">
-                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                    <TextBlock Text="&#xE710;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" VerticalAlignment="Center"/>
-                                    <TextBlock Text="Add Item" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Button>
-                            <Button Margin="0,0,8,8" Classes="accent">
-                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                    <TextBlock Text="&#xE74E;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" VerticalAlignment="Center"/>
-                                    <TextBlock Text="Save" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Button>
+                            <input:AuraButton Content="Small" Classes="sm" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Medium" Classes="md" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Large" Classes="lg" Margin="0,0,8,8"/>
                         </WrapPanel>
 
-                        <TextBlock Text="Sizes (use theme classes or custom padding)" FontWeight="SemiBold" Margin="0,8,0,4"/>
+                        <TextBlock Text="Loading state" FontWeight="SemiBold" Margin="0,8,0,4"/>
                         <WrapPanel>
-                            <Button Content="Small" Padding="8,4" FontSize="12" Margin="0,0,8,8"/>
-                            <Button Content="Medium" Margin="0,0,8,8"/>
-                            <Button Content="Large" Padding="20,12" FontSize="16" Margin="0,0,8,8"/>
+                            <input:AuraButton Content="Click to load" Classes="primary" Margin="0,0,8,8" Click="LoadingButton_Click" x:Name="DemoLoadingButton"/>
                         </WrapPanel>
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- TextBox section -->
-                        <TextBlock Text="TextBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraTextBox section -->
+                        <TextBlock Text="AuraTextBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8" MaxWidth="400">
-                            <TextBox Watermark="Enter your name..." />
-                            <TextBox Watermark="With clear button" Classes="clearButton"/>
-                            <TextBox Watermark="Read-only" IsReadOnly="True" Text="Read-only content"/>
-                            <TextBox Watermark="Multi-line" AcceptsReturn="True" MinHeight="80" TextWrapping="Wrap"/>
+                            <input:AuraTextBox Watermark="Enter your name..." />
+                            <input:AuraTextBox Watermark="With clear button" IsClearable="True"/>
+                            <input:AuraTextBox Watermark="With prefix and suffix" Prefix="$" Suffix=".00"/>
+                            <input:AuraTextBox Watermark="Character count" ShowCount="True" MaxLengthDisplay="50"/>
+                            <input:AuraTextBox Watermark="Filled variant" Variant="Filled" IsClearable="True"/>
+                            <input:AuraTextBox Watermark="Underlined variant" Variant="Underlined"/>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- PasswordBox section -->
-                        <TextBlock Text="PasswordBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraPasswordBox section -->
+                        <TextBlock Text="AuraPasswordBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8" MaxWidth="400">
-                            <TextBox Watermark="Password" PasswordChar="*" />
-                            <TextBox Watermark="Confirm password" PasswordChar="*" />
+                            <input:AuraPasswordBox Watermark="Enter password..." />
+                            <input:AuraPasswordBox Watermark="Confirm password..." />
                         </StackPanel>
-                        <TextBlock Text="Note: Avalonia 12 PasswordBox styling is applied via the theme. Use a TextBox with PasswordChar for basic masking."
-                                   FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- NumericUpDown section -->
-                        <TextBlock Text="NumericUpDown" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraNumericUpDown section -->
+                        <TextBlock Text="AuraNumericUpDown" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8" MaxWidth="400">
-                            <NumericUpDown Watermark="Enter a number" Minimum="0" Maximum="100" Increment="1" Value="50"/>
-                            <NumericUpDown Watermark="Decimal" Minimum="0" Maximum="10" Increment="0.5M" Value="3.5M" FormatString="F2"/>
+                            <input:AuraNumericUpDown Watermark="Enter a number" Minimum="0" Maximum="100" Increment="1" Value="50"/>
+                            <input:AuraNumericUpDown Watermark="Decimal" Minimum="0" Maximum="10" Increment="0.5M" Value="3.5M" FormatString="F2"/>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>
@@ -288,9 +304,9 @@
                         <!-- SearchBox section -->
                         <TextBlock Text="SearchBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8" MaxWidth="400">
-                            <TextBox Watermark="Search..." Classes="search"/>
+                            <input:SearchBox Watermark="Search components..." SearchDelay="300" x:Name="DemoSearchBox"/>
                         </StackPanel>
-                        <TextBlock Text="Note: The theme provides SearchBox styling via the 'search' class on a standard TextBox."
+                        <TextBlock Text="Press Escape to clear. Search fires after 300ms debounce."
                                    FontSize="11" Foreground="Gray" TextWrapping="Wrap" Margin="0,4,0,0"/>
 
                     </StackPanel>
@@ -304,89 +320,118 @@
                 <ScrollViewer>
                     <StackPanel Spacing="16" Margin="8">
 
-                        <!-- ComboBox section -->
-                        <TextBlock Text="ComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraComboBox section -->
+                        <TextBlock Text="AuraComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8" MaxWidth="400">
-                            <ComboBox PlaceholderText="Select a fruit" SelectedIndex="0">
+                            <selection:AuraComboBox PlaceholderText="Select a fruit" SelectedIndex="0">
                                 <ComboBoxItem>Apple</ComboBoxItem>
                                 <ComboBoxItem>Banana</ComboBoxItem>
                                 <ComboBoxItem>Cherry</ComboBoxItem>
                                 <ComboBoxItem>Date</ComboBoxItem>
                                 <ComboBoxItem>Elderberry</ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox PlaceholderText="Disabled combo" IsEnabled="False">
+                            </selection:AuraComboBox>
+                            <selection:AuraComboBox PlaceholderText="Searchable combo" IsSearchable="True">
+                                <ComboBoxItem>Angular</ComboBoxItem>
+                                <ComboBoxItem>React</ComboBoxItem>
+                                <ComboBoxItem>Vue</ComboBoxItem>
+                                <ComboBoxItem>Svelte</ComboBoxItem>
+                                <ComboBoxItem>Avalonia</ComboBoxItem>
+                                <ComboBoxItem>MAUI</ComboBoxItem>
+                            </selection:AuraComboBox>
+                            <selection:AuraComboBox PlaceholderText="Filled variant" Variant="Filled">
                                 <ComboBoxItem>Option A</ComboBoxItem>
                                 <ComboBoxItem>Option B</ComboBoxItem>
-                            </ComboBox>
+                                <ComboBoxItem>Option C</ComboBoxItem>
+                            </selection:AuraComboBox>
+                            <selection:AuraComboBox PlaceholderText="Disabled combo" IsEnabled="False">
+                                <ComboBoxItem>Option A</ComboBoxItem>
+                                <ComboBoxItem>Option B</ComboBoxItem>
+                            </selection:AuraComboBox>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- MultiComboBox section -->
                         <TextBlock Text="MultiComboBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Multi-selection ComboBox styling is provided by the AuraUI theme. Use a ListBox with SelectionMode='Multiple' for multi-select."
+                        <TextBlock Text="Select multiple items and see them rendered as tags above the dropdown."
                                    FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <ListBox SelectionMode="Multiple" MaxWidth="400" MaxHeight="160">
-                            <ListBoxItem>Angular</ListBoxItem>
-                            <ListBoxItem>React</ListBoxItem>
-                            <ListBoxItem>Vue</ListBoxItem>
-                            <ListBoxItem>Svelte</ListBoxItem>
-                            <ListBoxItem>Avalonia</ListBoxItem>
-                            <ListBoxItem>MAUI</ListBoxItem>
-                        </ListBox>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- ListBox section -->
-                        <TextBlock Text="ListBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <ListBox MaxWidth="400" MaxHeight="160">
-                            <ListBoxItem>Item 1 - Standard list item</ListBoxItem>
-                            <ListBoxItem>Item 2 - Another item</ListBoxItem>
-                            <ListBoxItem>Item 3 - With AuraUI styling</ListBoxItem>
-                            <ListBoxItem>Item 4 - Hover and select effects</ListBoxItem>
-                            <ListBoxItem>Item 5 - Keyboard navigable</ListBoxItem>
-                        </ListBox>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- RadioButton section -->
-                        <TextBlock Text="RadioButton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8">
-                            <RadioButton Content="Option A" GroupName="Options" IsChecked="True"/>
-                            <RadioButton Content="Option B" GroupName="Options"/>
-                            <RadioButton Content="Option C (Disabled)" GroupName="Options" IsEnabled="False"/>
+                        <StackPanel Spacing="8" MaxWidth="400">
+                            <selection:MultiComboBox PlaceholderText="Select frameworks" IsSearchable="True" ShowSelectAll="True">
+                                <ComboBoxItem>Angular</ComboBoxItem>
+                                <ComboBoxItem>React</ComboBoxItem>
+                                <ComboBoxItem>Vue</ComboBoxItem>
+                                <ComboBoxItem>Svelte</ComboBoxItem>
+                                <ComboBoxItem>Avalonia</ComboBoxItem>
+                                <ComboBoxItem>MAUI</ComboBoxItem>
+                            </selection:MultiComboBox>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- CheckBox section -->
-                        <TextBlock Text="CheckBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraRadioButton section -->
+                        <TextBlock Text="AuraRadioButton" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Default variant" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <StackPanel Spacing="8">
-                            <CheckBox Content="Checked" IsChecked="True"/>
-                            <CheckBox Content="Unchecked"/>
-                            <CheckBox Content="Three-state" IsThreeState="True" IsChecked="{x:Null}"/>
-                            <CheckBox Content="Disabled" IsEnabled="False"/>
+                            <selection:AuraRadioButton Content="Option A" GroupName="Options" IsChecked="True"/>
+                            <selection:AuraRadioButton Content="Option B" GroupName="Options"/>
+                            <selection:AuraRadioButton Content="Option C (Disabled)" GroupName="Options" IsEnabled="False"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Button variant" FontWeight="SemiBold" Margin="0,8,0,4"/>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <selection:AuraRadioButton Content="Daily" GroupName="TimeRange" Variant="Button" IsChecked="True"/>
+                            <selection:AuraRadioButton Content="Weekly" GroupName="TimeRange" Variant="Button"/>
+                            <selection:AuraRadioButton Content="Monthly" GroupName="TimeRange" Variant="Button"/>
+                            <selection:AuraRadioButton Content="Yearly" GroupName="TimeRange" Variant="Button"/>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- Switch / ToggleSwitch section -->
+                        <!-- AuraCheckBox section -->
+                        <TextBlock Text="AuraCheckBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="8">
+                            <selection:AuraCheckBox Content="Checked" IsChecked="True"/>
+                            <selection:AuraCheckBox Content="Unchecked"/>
+                            <selection:AuraCheckBox Content="Three-state" IsThreeState="True" IsChecked="{x:Null}"/>
+                            <selection:AuraCheckBox Content="Disabled" IsEnabled="False"/>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- Switch section -->
                         <TextBlock Text="Switch" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="8">
-                            <ToggleSwitch Content="Enable notifications" IsChecked="True"/>
-                            <ToggleSwitch Content="Dark mode" IsChecked="False"/>
-                            <ToggleSwitch Content="Disabled toggle" IsEnabled="False"/>
+                        <StackPanel Spacing="12">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <selection:Switch IsChecked="True" Size="Small"/>
+                                <TextBlock Text="Small" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <selection:Switch IsChecked="True" Size="Medium"/>
+                                <TextBlock Text="Medium (default)" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <selection:Switch IsChecked="False" Size="Large"/>
+                                <TextBlock Text="Large" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <selection:Switch IsEnabled="False"/>
+                                <TextBlock Text="Disabled" VerticalAlignment="Center"/>
+                            </StackPanel>
                         </StackPanel>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- RateControl section -->
                         <TextBlock Text="RateControl" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="A star rating control is included in the theme. Use custom visuals or a styled ItemsControl for rating."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Orientation="Horizontal" Spacing="4">
-                            <TextBlock Text="&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;" FontSize="24" Foreground="#FFB900"/>
-                            <TextBlock Text="4.0 / 5" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <StackPanel Spacing="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Star rating (clickable)" FontSize="12" FontWeight="SemiBold"/>
+                                <selection:RateControl Value="3.5" Max="5" AllowHalf="True" ShowValue="True" x:Name="DemoRateControl"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Read-only rating" FontSize="12" FontWeight="SemiBold"/>
+                                <selection:RateControl Value="4" Max="5" IsReadOnly="True" ShowValue="True"/>
+                            </StackPanel>
                         </StackPanel>
 
                     </StackPanel>
@@ -400,8 +445,58 @@
                 <ScrollViewer>
                     <StackPanel Spacing="16" Margin="8">
 
-                        <!-- Carousel section -->
-                        <TextBlock Text="Carousel" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- ProgressRing section -->
+                        <TextBlock Text="ProgressRing" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
+                                <display:ProgressRing IsIndeterminate="True" Size="Large"/>
+                                <TextBlock Text="Indeterminate" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
+                                <display:ProgressRing Value="65" Maximum="100" Size="Large"/>
+                                <TextBlock Text="65%" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
+                                <display:ProgressRing IsIndeterminate="True" Size="Medium"/>
+                                <TextBlock Text="Medium" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
+                                <display:ProgressRing IsIndeterminate="True" Size="Small"/>
+                                <TextBlock Text="Small" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- AuraProgressBar section -->
+                        <TextBlock Text="AuraProgressBar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <StackPanel Spacing="12" MaxWidth="500">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Indeterminate" FontSize="12"/>
+                                <display:AuraProgressBar IsIndeterminate="True" Height="6"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Primary (default)" FontSize="12"/>
+                                <display:AuraProgressBar Value="25" Maximum="100" Height="6" ShowLabel="True"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Success variant" FontSize="12"/>
+                                <display:AuraProgressBar Value="75" Maximum="100" Height="6" Variant="Success" ShowLabel="True"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Warning variant" FontSize="12"/>
+                                <display:AuraProgressBar Value="50" Maximum="100" Height="6" Variant="Warning" ShowLabel="True"/>
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Error variant" FontSize="12"/>
+                                <display:AuraProgressBar Value="90" Maximum="100" Height="6" Variant="Error" ShowLabel="True"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- AuraCarousel section -->
+                        <TextBlock Text="AuraCarousel" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <display:AuraCarousel AutoPlay="True"
                                               ShowIndicators="True"
                                               ShowNavigation="True"
@@ -434,198 +529,29 @@
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- Timeline section -->
-                        <TextBlock Text="Timeline" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="A vertical or horizontal timeline for displaying sequential events. The theme provides Timeline styling."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Spacing="0" Margin="8,0,0,0">
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <Border Width="12" Height="12" CornerRadius="6" Background="#0078D4" Margin="0,2,0,0"/>
-                                <StackPanel>
-                                    <TextBlock Text="Project Created" FontWeight="SemiBold"/>
-                                    <TextBlock Text="2026-01-15" FontSize="11" Foreground="Gray"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <Border Width="2" Height="24" Background="#0078D4" Margin="5,0,0,0"/>
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <Border Width="12" Height="12" CornerRadius="6" Background="#107C10" Margin="0,2,0,0"/>
-                                <StackPanel>
-                                    <TextBlock Text="Beta Release" FontWeight="SemiBold"/>
-                                    <TextBlock Text="2026-03-20" FontSize="11" Foreground="Gray"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <Border Width="2" Height="24" Background="#107C10" Margin="5,0,0,0"/>
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <Border Width="12" Height="12" CornerRadius="6" Background="#D83B01" Margin="0,2,0,0"/>
-                                <StackPanel>
-                                    <TextBlock Text="v1.0 Stable Release" FontWeight="SemiBold"/>
-                                    <TextBlock Text="2026-05-29" FontSize="11" Foreground="Gray"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- ProgressRing section -->
-                        <TextBlock Text="ProgressRing" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
-                                <ProgressBar IsIndeterminate="True" Width="48" Height="48" MinWidth="48" MinHeight="48"
-                                             Classes="ring" />
-                                <TextBlock Text="Indeterminate" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,24,12" Spacing="8" HorizontalAlignment="Center">
-                                <ProgressBar Value="65" Maximum="100" Width="48" Height="48" MinWidth="48" MinHeight="48"
-                                             Classes="ring"/>
-                                <TextBlock Text="65%" FontSize="11" Foreground="Gray" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- ProgressBar section -->
-                        <TextBlock Text="ProgressBar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <StackPanel Spacing="12" MaxWidth="500">
-                            <StackPanel Spacing="4">
-                                <TextBlock Text="Indeterminate" FontSize="12"/>
-                                <ProgressBar IsIndeterminate="True" Height="4"/>
-                            </StackPanel>
-                            <StackPanel Spacing="4">
-                                <TextBlock Text="25% complete" FontSize="12"/>
-                                <ProgressBar Value="25" Maximum="100" Height="4"/>
-                            </StackPanel>
-                            <StackPanel Spacing="4">
-                                <TextBlock Text="75% complete" FontSize="12"/>
-                                <ProgressBar Value="75" Maximum="100" Height="4"/>
-                            </StackPanel>
-                            <StackPanel Spacing="4">
-                                <TextBlock Text="100% complete" FontSize="12"/>
-                                <ProgressBar Value="100" Maximum="100" Height="4"/>
-                            </StackPanel>
-                        </StackPanel>
+                        <!-- AuraTimeline section -->
+                        <TextBlock Text="AuraTimeline" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <display:AuraTimeline Orientation="Vertical" MaxWidth="500">
+                            <display:AuraTimelineItem Timestamp="2026-01-15" DotColor="#0078D4">
+                                <TextBlock Text="Project Created" FontWeight="SemiBold"/>
+                            </display:AuraTimelineItem>
+                            <display:AuraTimelineItem Timestamp="2026-03-20" DotColor="#107C10">
+                                <TextBlock Text="Beta Release" FontWeight="SemiBold"/>
+                            </display:AuraTimelineItem>
+                            <display:AuraTimelineItem Timestamp="2026-05-29" DotColor="#D83B01">
+                                <TextBlock Text="v1.0 Stable Release" FontWeight="SemiBold"/>
+                            </display:AuraTimelineItem>
+                        </display:AuraTimeline>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- StepIndicator section -->
                         <TextBlock Text="StepIndicator" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Step-by-step progress indicator. The theme provides StepIndicator styling for wizard-like flows."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Orientation="Horizontal" Spacing="0" HorizontalAlignment="Left">
-                            <StackPanel Spacing="4" Width="100" HorizontalAlignment="Center">
-                                <Border Width="32" Height="32" CornerRadius="16" Background="#107C10">
-                                    <TextBlock Text="1" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <TextBlock Text="Details" FontSize="11" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <Border Height="2" Width="40" Background="#107C10" VerticalAlignment="Center" Margin="0,0,0,24"/>
-                            <StackPanel Spacing="4" Width="100" HorizontalAlignment="Center">
-                                <Border Width="32" Height="32" CornerRadius="16" Background="#107C10">
-                                    <TextBlock Text="2" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <TextBlock Text="Review" FontSize="11" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <Border Height="2" Width="40" Background="LightGray" VerticalAlignment="Center" Margin="0,0,0,24"/>
-                            <StackPanel Spacing="4" Width="100" HorizontalAlignment="Center">
-                                <Border Width="32" Height="32" CornerRadius="16" Background="LightGray">
-                                    <TextBlock Text="3" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <TextBlock Text="Confirm" FontSize="11" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </StackPanel>
-
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-
-            <!-- ============================================================ -->
-            <!-- NAVIGATION TAB -->
-            <!-- ============================================================ -->
-            <TabItem Header="Navigation">
-                <ScrollViewer>
-                    <StackPanel Spacing="16" Margin="8">
-
-                        <!-- TabControl section -->
-                        <TextBlock Text="TabControl" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TabControl MaxWidth="600" Height="200">
-                            <TabItem Header="Tab 1">
-                                <TextBlock Text="Content of Tab 1. AuraUI provides enhanced styling for the standard TabControl." Margin="16"/>
-                            </TabItem>
-                            <TabItem Header="Tab 2">
-                                <TextBlock Text="Content of Tab 2. Tabs support smooth transitions and hover effects." Margin="16"/>
-                            </TabItem>
-                            <TabItem Header="Tab 3">
-                                <TextBlock Text="Content of Tab 3. Use TabControl for organizing content into logical sections." Margin="16"/>
-                            </TabItem>
-                        </TabControl>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- Breadcrumb section -->
-                        <TextBlock Text="Breadcrumb" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Breadcrumb navigation shows the user's location in a hierarchy. The theme provides Breadcrumb styling."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Orientation="Horizontal" Spacing="4">
-                            <Button Content="Home" Classes="subtle" Padding="4,2" FontSize="13"/>
-                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="Gray"/>
-                            <Button Content="Components" Classes="subtle" Padding="4,2" FontSize="13"/>
-                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="Gray"/>
-                            <Button Content="Layout" Classes="subtle" Padding="4,2" FontSize="13"/>
-                            <TextBlock Text="/" VerticalAlignment="Center" Foreground="Gray"/>
-                            <TextBlock Text="Card" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="13"/>
-                        </StackPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- NavigationView section -->
-                        <TextBlock Text="NavigationView" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="A sidebar navigation pattern common in desktop apps. The theme styles NavigationView for side-panel layouts."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <Border BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Height="250" MaxWidth="600">
-                            <DockPanel>
-                                <Border DockPanel.Dock="Left" Width="200" Background="{DynamicResource LayerFillColorDefaultBrush}" CornerRadius="8,0,0,8">
-                                    <StackPanel Margin="0,8">
-                                        <Border Padding="12,10" Background="Transparent" CornerRadius="4" Margin="4,2">
-                                            <StackPanel Orientation="Horizontal" Spacing="10">
-                                                <TextBlock Text="&#xE80F;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="Home" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Border>
-                                        <Border Padding="12,10" Background="{DynamicResource ControlFillColorDefaultBrush}" CornerRadius="4" Margin="4,2">
-                                            <StackPanel Orientation="Horizontal" Spacing="10">
-                                                <TextBlock Text="&#xE8A5;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="Components" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Border>
-                                        <Border Padding="12,10" Background="Transparent" CornerRadius="4" Margin="4,2">
-                                            <StackPanel Orientation="Horizontal" Spacing="10">
-                                                <TextBlock Text="&#xE713;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="Settings" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Border>
-                                    </StackPanel>
-                                </Border>
-                                <Panel>
-                                    <TextBlock Text="Navigation content area. Select an item from the sidebar to navigate."
-                                               Margin="20" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                </Panel>
-                            </DockPanel>
-                        </Border>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- Pagination section -->
-                        <TextBlock Text="Pagination" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="Pagination controls for navigating through multi-page content. The theme provides Pagination styling."
-                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <StackPanel Orientation="Horizontal" Spacing="4">
-                            <Button Content="&lt;" Padding="8,4" IsEnabled="False"/>
-                            <Button Content="1" Classes="accent" Padding="8,4"/>
-                            <Button Content="2" Padding="8,4"/>
-                            <Button Content="3" Padding="8,4"/>
-                            <Button Content="4" Padding="8,4"/>
-                            <Button Content="5" Padding="8,4"/>
-                            <Button Content="&gt;" Padding="8,4"/>
-                        </StackPanel>
+                        <display:StepIndicator CurrentStep="1" Orientation="Horizontal" MaxWidth="500">
+                            <display:StepIndicatorItem Title="Details" Description="Enter your information"/>
+                            <display:StepIndicatorItem Title="Review" Description="Review and confirm"/>
+                            <display:StepIndicatorItem Title="Confirm" Description="Final confirmation"/>
+                        </display:StepIndicator>
 
                     </StackPanel>
                 </ScrollViewer>
@@ -638,40 +564,24 @@
                 <ScrollViewer>
                     <StackPanel Spacing="16" Margin="8">
 
-                        <!-- MessageBox section -->
-                        <TextBlock Text="MessageBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <Button Content="Show MessageBox" Margin="0,0,8,8" Click="ShowMessageBox_Click"/>
-                            <Button Content="Show Confirmation" Margin="0,0,8,8" Click="ShowConfirmation_Click"/>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
                         <!-- Toast section -->
-                        <TextBlock Text="Toast" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="AuraToast" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="Toast notifications appear in the overlay layer with auto-dismiss. Uses static methods to show."
+                                   FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
                         <WrapPanel>
-                            <Button Content="Success Toast" Margin="0,0,8,8" Click="ShowSuccessToast_Click"/>
-                            <Button Content="Warning Toast" Margin="0,0,8,8" Click="ShowWarningToast_Click"/>
-                            <Button Content="Error Toast" Margin="0,0,8,8" Click="ShowErrorToast_Click"/>
-                            <Button Content="Info Toast" Margin="0,0,8,8" Click="ShowInfoToast_Click"/>
+                            <input:AuraButton Content="Success Toast" Classes="primary" Margin="0,0,8,8" Click="ShowSuccessToast_Click"/>
+                            <input:AuraButton Content="Warning Toast" Classes="outline" Margin="0,0,8,8" Click="ShowWarningToast_Click"/>
+                            <input:AuraButton Content="Error Toast" Classes="destructive" Margin="0,0,8,8" Click="ShowErrorToast_Click"/>
+                            <input:AuraButton Content="Info Toast" Margin="0,0,8,8" Click="ShowInfoToast_Click"/>
                         </WrapPanel>
 
                         <layout:Divider Margin="0,4"/>
 
-                        <!-- Notification section -->
-                        <TextBlock Text="Notification" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <!-- AuraMessageBox section -->
+                        <TextBlock Text="AuraMessageBox" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <WrapPanel>
-                            <Button Content="Show Notification" Margin="0,0,8,8" Click="ShowNotification_Click"/>
-                            <Button Content="Persistent Notification" Margin="0,0,8,8" Click="ShowPersistentNotification_Click"/>
-                        </WrapPanel>
-
-                        <layout:Divider Margin="0,4"/>
-
-                        <!-- Dialog section -->
-                        <TextBlock Text="Dialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <WrapPanel>
-                            <Button Content="Show Dialog" Margin="0,0,8,8" Click="ShowDialog_Click"/>
-                            <Button Content="Custom Dialog" Margin="0,0,8,8" Click="ShowCustomDialog_Click"/>
+                            <input:AuraButton Content="Show MessageBox" Classes="primary" Margin="0,0,8,8" Click="ShowMessageBox_Click"/>
+                            <input:AuraButton Content="Show Confirmation" Classes="outline" Margin="0,0,8,8" Click="ShowConfirmation_Click"/>
                         </WrapPanel>
 
                         <layout:Divider Margin="0,4"/>
@@ -679,25 +589,72 @@
                         <!-- Snackbar section -->
                         <TextBlock Text="Snackbar" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
                         <WrapPanel>
-                            <Button Content="Show Snackbar" Margin="0,0,8,8" Click="ShowSnackbar_Click"/>
-                            <Button Content="Snackbar with Action" Margin="0,0,8,8" Click="ShowSnackbarWithAction_Click"/>
+                            <input:AuraButton Content="Show Snackbar" Classes="primary" Margin="0,0,8,8" Click="ShowSnackbar_Click"/>
+                            <input:AuraButton Content="Snackbar with Action" Classes="outline" Margin="0,0,8,8" Click="ShowSnackbarWithAction_Click"/>
                         </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- AuraNotification section -->
+                        <TextBlock Text="AuraNotification" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <input:AuraButton Content="Show Notification" Classes="primary" Margin="0,0,8,8" Click="ShowNotification_Click"/>
+                            <input:AuraButton Content="Persistent Notification" Classes="outline" Margin="0,0,8,8" Click="ShowPersistentNotification_Click"/>
+                        </WrapPanel>
+
+                        <layout:Divider Margin="0,4"/>
+
+                        <!-- AuraDialog section -->
+                        <TextBlock Text="AuraDialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <WrapPanel>
+                            <input:AuraButton Content="Show Dialog" Classes="primary" Margin="0,0,8,8" Click="ShowDialog_Click"/>
+                            <input:AuraButton Content="Custom Dialog" Classes="outline" Margin="0,0,8,8" Click="ShowCustomDialog_Click"/>
+                        </WrapPanel>
+
+                        <!-- Inline AuraDialog for custom dialog demo -->
+                        <feedback:AuraDialog x:Name="DemoDialog"
+                                              DialogTitle="Custom Dialog"
+                                              IsModal="True"
+                                              CloseOnOverlay="True"
+                                              DialogWidth="480"
+                                              Placement="Center">
+                            <StackPanel Spacing="16" Margin="24">
+                                <TextBlock Text="This dialog is declared inline in XAML and toggled via IsOpen binding."
+                                           TextWrapping="Wrap" FontSize="14"/>
+                                <input:AuraTextBox Watermark="Enter a value..." />
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                                    <input:AuraButton Content="Cancel" Click="DialogCancel_Click"/>
+                                    <input:AuraButton Content="Submit" Classes="primary" Click="DialogSubmit_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </feedback:AuraDialog>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- PendingDialog section -->
                         <TextBlock Text="PendingDialog" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="A dialog that shows progress while an async operation runs. The theme provides PendingDialog styling."
+                        <TextBlock Text="Shows a spinner while an async operation runs. Auto-closes when work completes."
                                    FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <Button Content="Simulate Pending Operation" Margin="0,0,8,8" Click="ShowPendingDialog_Click"/>
+                        <input:AuraButton Content="Simulate Pending Operation" Classes="primary" Margin="0,0,8,8" Click="ShowPendingDialog_Click"/>
 
                         <layout:Divider Margin="0,4"/>
 
                         <!-- LoadingOverlay section -->
                         <TextBlock Text="LoadingOverlay" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                        <TextBlock Text="A full or partial overlay that blocks interaction while loading. The theme provides LoadingOverlay styling."
+                        <TextBlock Text="Attached property that shows a semi-transparent overlay with spinner over any control."
                                    FontSize="12" Foreground="Gray" TextWrapping="Wrap" Margin="0,0,0,8"/>
-                        <Button Content="Show Loading Overlay" Margin="0,0,8,8" Click="ShowLoadingOverlay_Click"/>
+                        <Border x:Name="LoadingOverlayTarget"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="24"
+                                MaxWidth="400"
+                                Height="120">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="This content will be covered by a loading overlay." HorizontalAlignment="Center"/>
+                                <input:AuraButton Content="Show Loading Overlay" Classes="primary" Margin="0,12,0,0" Click="ShowLoadingOverlay_Click" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
 
                     </StackPanel>
                 </ScrollViewer>
@@ -718,8 +675,8 @@
                             <StackPanel Spacing="8">
                                 <TextBlock Text="Theme Variant" FontWeight="SemiBold"/>
                                 <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <Button Content="Light" Classes="accent" Click="LightTheme_Click" x:Name="LightThemeButton"/>
-                                    <Button Content="Dark" Click="DarkTheme_Click" x:Name="DarkThemeButton"/>
+                                    <input:AuraButton Content="Light" Classes="primary" Click="LightTheme_Click" x:Name="LightThemeButton"/>
+                                    <input:AuraButton Content="Dark" Click="DarkTheme_Click" x:Name="DarkThemeButton"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

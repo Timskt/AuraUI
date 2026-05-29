@@ -7,6 +7,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using AuraUI.Core.Helpers;
 
 namespace AuraUI.Controls.Feedback;
 

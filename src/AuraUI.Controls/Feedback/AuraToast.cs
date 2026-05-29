@@ -6,21 +6,9 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using AuraUI.Core.Helpers;
 
 namespace AuraUI.Controls.Feedback;
-
-/// <summary>
-/// Specifies where the toast appears on screen.
-/// </summary>
-public enum ToastPosition
-{
-    TopLeft,
-    TopCenter,
-    TopRight,
-    BottomLeft,
-    BottomCenter,
-    BottomRight
-}
 
 /// <summary>
 /// A toast notification displayed in the adorner layer with auto-dismiss,
@@ -220,7 +208,7 @@ public class AuraToast : ContentControl
         return toast;
     }
 
-    private void ShowInAdorner()
+    protected virtual void ShowInAdorner()
     {
         var topLevel = TopLevel.GetTopLevel(Application.Current?.ApplicationLifetime is
             Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop

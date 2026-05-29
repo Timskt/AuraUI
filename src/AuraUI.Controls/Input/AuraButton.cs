@@ -140,7 +140,7 @@ public class AuraButton : Button
         UpdateLoadingState();
     }
 
-    private void OnIconChanged(AvaloniaPropertyChangedEventArgs e)
+    protected virtual void OnIconChanged(AvaloniaPropertyChangedEventArgs e)
     {
         if (_iconPresenter is not null)
         {
@@ -158,7 +158,7 @@ public class AuraButton : Button
         }
     }
 
-    private void UpdateIconPosition()
+    protected virtual void UpdateIconPosition()
     {
         if (_iconPresenter is null)
             return;
@@ -180,7 +180,7 @@ public class AuraButton : Button
         };
     }
 
-    private void UpdateLoadingState()
+    protected virtual void UpdateLoadingState()
     {
         var isLoading = IsLoading;
 

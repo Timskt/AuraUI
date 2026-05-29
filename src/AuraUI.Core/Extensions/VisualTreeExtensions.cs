@@ -75,8 +75,9 @@ public static class VisualTreeExtensions
     public static Visual GetVisualRoot(this Visual visual)
     {
         var current = visual;
-        while (current.GetVisualParent() != null)
-            current = current.GetVisualParent();
+        Visual? parent;
+        while ((parent = current.GetVisualParent()) != null)
+            current = parent;
         return current;
     }
 

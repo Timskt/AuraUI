@@ -223,7 +223,7 @@ public class AuraTextBox : TextBox
         Focus();
     }
 
-    private void UpdateClearButtonVisibility()
+    protected virtual void UpdateClearButtonVisibility()
     {
         if (_clearButton is not null)
         {
@@ -232,7 +232,7 @@ public class AuraTextBox : TextBox
         }
     }
 
-    private void UpdateCharacterCount()
+    protected virtual void UpdateCharacterCount()
     {
         if (_characterCountBlock is not null)
         {
@@ -265,7 +265,7 @@ public class AuraTextBox : TextBox
         PseudoClasses.Set("empty", isEmpty);
     }
 
-    private void UpdateVariantClasses()
+    protected virtual void UpdateVariantClasses()
     {
         Classes.Remove("filled");
         Classes.Remove("outlined");

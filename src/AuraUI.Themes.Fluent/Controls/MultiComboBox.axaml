@@ -51,8 +51,7 @@
                               Width="12" Height="12"
                               Data="M 1,4 L 6,9 L 11,4"
                               Stroke="{StaticResource AuraForegroundSecondaryBrush}"
-                              StrokeThickness="1.5"/>
-                              StrokeLineJoin="Round"
+                              StrokeThickness="1.5"
                               Margin="8,0,0,0"
                               VerticalAlignment="Center"/>
                     </Grid>

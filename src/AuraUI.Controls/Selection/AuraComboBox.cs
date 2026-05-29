@@ -298,7 +298,7 @@ public class AuraComboBox : ComboBox
         }
     }
 
-    private void FilterItems(string searchText)
+    protected virtual void FilterItems(string searchText)
     {
         _isFiltering = true;
         try
@@ -353,7 +353,7 @@ public class AuraComboBox : ComboBox
     /// <summary>
     /// Gets the display text for an item, using FilterMemberPath if set, otherwise ToString.
     /// </summary>
-    private string? GetItemDisplayText(object? item)
+    protected virtual string? GetItemDisplayText(object? item)
     {
         if (item == null)
             return null;

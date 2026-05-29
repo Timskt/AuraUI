@@ -89,11 +89,11 @@
     </Style>
 
     <Style Selector="Button.outlined:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#086750A4"/>
+        <Setter Property="Background" Value="#146750A4"/>
     </Style>
 
     <Style Selector="Button.outlined:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#0C6750A4"/>
+        <Setter Property="Background" Value="#1E6750A4"/>
     </Style>
 
     <!-- Text / Ghost Variant (.text) -->
@@ -107,11 +107,11 @@
     </Style>
 
     <Style Selector="Button.text:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#086750A4"/>
+        <Setter Property="Background" Value="#146750A4"/>
     </Style>
 
     <Style Selector="Button.text:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#0C6750A4"/>
+        <Setter Property="Background" Value="#1E6750A4"/>
     </Style>
 
     <!-- Tonal Variant (.tonal) -->
@@ -123,11 +123,11 @@
     </Style>
 
     <Style Selector="Button.tonal:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#086750A4"/>
+        <Setter Property="Background" Value="#146750A4"/>
     </Style>
 
     <Style Selector="Button.tonal:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#0C6750A4"/>
+        <Setter Property="Background" Value="#1E6750A4"/>
     </Style>
 
     <!-- Elevated Variant (.elevated) -->
@@ -139,11 +139,11 @@
     </Style>
 
     <Style Selector="Button.elevated:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#086750A4"/>
+        <Setter Property="Background" Value="#146750A4"/>
     </Style>
 
     <Style Selector="Button.elevated:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#0C6750A4"/>
+        <Setter Property="Background" Value="#1E6750A4"/>
     </Style>
 
     <!-- FAB Variant (.fab) -->
@@ -161,11 +161,11 @@
     </Style>
 
     <Style Selector="Button.fab:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#086750A4"/>
+        <Setter Property="Background" Value="#146750A4"/>
     </Style>
 
     <Style Selector="Button.fab:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#0C6750A4"/>
+        <Setter Property="Background" Value="#1E6750A4"/>
     </Style>
 
     <!-- Small FAB -->

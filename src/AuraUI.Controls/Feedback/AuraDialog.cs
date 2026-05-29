@@ -296,7 +296,7 @@ public class AuraDialog : ContentControl
         }
     }
 
-    private void AttachToOverlay()
+    protected virtual void AttachToOverlay()
     {
         if (Parent != null) return; // Already attached
 
@@ -311,7 +311,7 @@ public class AuraDialog : ContentControl
         }
     }
 
-    private void DetachFromOverlay()
+    protected virtual void DetachFromOverlay()
     {
         if (Parent is OverlayLayer overlay)
         {

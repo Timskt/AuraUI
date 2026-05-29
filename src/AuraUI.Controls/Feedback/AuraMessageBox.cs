@@ -154,6 +154,10 @@ public class AuraMessageBox : Window
     /// <summary>
     /// Shows a message box with the specified parameters (synchronous, blocks the owner).
     /// </summary>
+    /// <remarks>
+    /// This method is obsolete. Use <see cref="ShowAsync"/> instead to avoid potential deadlocks.
+    /// </remarks>
+    [Obsolete("Use ShowAsync instead. The synchronous Show method risks deadlocks on the UI thread.", false)]
     public static MessageBoxResult Show(Window? owner, string title, string message,
         MessageBoxButtons buttons = MessageBoxButtons.OK,
         MessageBoxIcon icon = MessageBoxIcon.None,
@@ -218,6 +222,10 @@ public class AuraMessageBox : Window
     /// <summary>
     /// Shows a confirmation dialog (synchronous).
     /// </summary>
+    /// <remarks>
+    /// This method is obsolete. Use <see cref="ConfirmAsync"/> instead to avoid potential deadlocks.
+    /// </remarks>
+    [Obsolete("Use ConfirmAsync instead. The synchronous Confirm method risks deadlocks on the UI thread.", false)]
     public static bool Confirm(Window? owner, string title, string message,
         MessageBoxIcon icon = MessageBoxIcon.Question)
     {
