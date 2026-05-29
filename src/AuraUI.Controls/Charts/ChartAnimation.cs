@@ -4,16 +4,20 @@ using Avalonia.Threading;
 namespace AuraUI.Controls.Charts;
 
 /// <summary>
-/// Manages frame-based animation for chart transitions. When data changes,
-/// the chart interpolates from old values to new values over a configurable
-/// duration using easing functions.
+/// Manages frame-based animation for chart transitions. Supports:
+///   - Entry animation: data points grow from zero
+///   - Update animation: smooth transition when data changes
+///   - Exit animation: data points shrink to zero
+///   - Configurable duration and easing per animation mode
+///   - Per-series animation delay (staggered entry)
 ///
 /// Architecture:
 ///   - Uses a DispatcherTimer at 60fps (16ms interval) to drive the animation clock
-///   - Each frame, the chart calls <see cref="GetCurrentProgress"/> to get the
+///   - Each frame, the chart calls <see cref="GetEasedProgress"/> to get the
 ///     interpolation factor (0.0 = old state, 1.0 = new state)
 ///   - The chart's Render method uses this factor to lerp between old and new positions
 ///   - When progress reaches 1.0, the timer stops and the final frame is rendered
+///   - Per-series stagger is computed as: delay = seriesIndex * StaggerDelay
 ///
 /// This approach is chosen over Avalonia's built-in Animation system because:
 ///   1. Chart animations need per-frame control of the render pass
@@ -28,6 +32,11 @@ internal sealed class ChartAnimation : IDisposable
     private Easing _easing;
     private double _currentProgress = 1.0;
     private bool _isAnimating;
+    private ChartAnimationMode _currentMode = ChartAnimationMode.None;
+
+    // Stagger support
+    private int _seriesCount;
+    private TimeSpan _staggerDelay;
 
     /// <summary>
     /// Called each animation frame. The parameter is the interpolated progress (0..1).
@@ -42,6 +51,30 @@ internal sealed class ChartAnimation : IDisposable
 
     public bool IsAnimating => _isAnimating;
     public double CurrentProgress => _currentProgress;
+
+    /// <summary>
+    /// The current animation mode (entry, update, exit, or none).
+    /// </summary>
+    public ChartAnimationMode CurrentMode => _currentMode;
+
+    /// <summary>
+    /// Per-series stagger delay. When > 0, each series starts its animation
+    /// after a delay proportional to its index.
+    /// </summary>
+    public TimeSpan StaggerDelay
+    {
+        get => _staggerDelay;
+        set => _staggerDelay = value;
+    }
+
+    /// <summary>
+    /// Number of series (used for stagger calculation).
+    /// </summary>
+    public int SeriesCount
+    {
+        get => _seriesCount;
+        set => _seriesCount = value;
+    }
 
     public ChartAnimation()
     {
@@ -58,18 +91,65 @@ internal sealed class ChartAnimation : IDisposable
         _easing = easing ?? new CubicEaseOut();
         _startTime = DateTime.UtcNow;
         _currentProgress = 0.0;
+        _currentMode = ChartAnimationMode.Update;
         _isAnimating = true;
 
-        if (_timer == null)
-        {
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(16) // ~60fps
-            };
-            _timer.Tick += OnTimerTick;
-        }
+        EnsureTimerRunning();
+    }
 
-        _timer.Start();
+    /// <summary>
+    /// Start an entry animation (data points grow from zero).
+    /// </summary>
+    public void StartEntry(TimeSpan? duration = null, Easing? easing = null, int seriesCount = 1)
+    {
+        _duration = duration ?? TimeSpan.FromMilliseconds(600);
+        _easing = easing ?? new CubicEaseOut();
+        _seriesCount = seriesCount;
+        _startTime = DateTime.UtcNow;
+        _currentProgress = 0.0;
+        _currentMode = ChartAnimationMode.Entry;
+        _isAnimating = true;
+
+        EnsureTimerRunning();
+    }
+
+    /// <summary>
+    /// Start an exit animation (data points shrink to zero).
+    /// </summary>
+    public void StartExit(TimeSpan? duration = null, Easing? easing = null, int seriesCount = 1)
+    {
+        _duration = duration ?? TimeSpan.FromMilliseconds(300);
+        _easing = easing ?? new CubicEaseIn();
+        _seriesCount = seriesCount;
+        _startTime = DateTime.UtcNow;
+        _currentProgress = 0.0;
+        _currentMode = ChartAnimationMode.Exit;
+        _isAnimating = true;
+
+        EnsureTimerRunning();
+    }
+
+    /// <summary>
+    /// Get the eased progress for a specific series index (accounts for stagger delay).
+    /// Returns a value between 0 and 1.
+    /// </summary>
+    public double GetEasedProgressForSeries(int seriesIndex)
+    {
+        if (!_isAnimating) return _currentMode == ChartAnimationMode.Exit ? 0.0 : 1.0;
+
+        var elapsed = DateTime.UtcNow - _startTime;
+        var stagger = TimeSpan.FromTicks(_staggerDelay.Ticks * seriesIndex);
+        var adjustedElapsed = elapsed - stagger;
+
+        if (adjustedElapsed.TotalMilliseconds <= 0)
+            return _currentMode == ChartAnimationMode.Exit ? 1.0 : 0.0;
+
+        var rawProgress = _duration.TotalMilliseconds > 0
+            ? adjustedElapsed.TotalMilliseconds / _duration.TotalMilliseconds
+            : 1.0;
+
+        var clamped = Math.Clamp(rawProgress, 0.0, 1.0);
+        return _easing.Ease(clamped);
     }
 
     /// <summary>
@@ -79,6 +159,7 @@ internal sealed class ChartAnimation : IDisposable
     {
         Stop();
         _currentProgress = 1.0;
+        _currentMode = ChartAnimationMode.None;
         Completed?.Invoke();
     }
 
@@ -89,6 +170,7 @@ internal sealed class ChartAnimation : IDisposable
     {
         Stop();
         _currentProgress = 1.0;
+        _currentMode = ChartAnimationMode.None;
     }
 
     /// <summary>
@@ -101,11 +183,51 @@ internal sealed class ChartAnimation : IDisposable
         return _easing.Ease(_currentProgress);
     }
 
+    /// <summary>
+    /// Get the easing preset for the given configuration.
+    /// </summary>
+    public static Easing GetEasing(ChartEasingPreset preset)
+    {
+        return preset switch
+        {
+            ChartEasingPreset.CubicEaseOut => new CubicEaseOut(),
+            ChartEasingPreset.CubicEaseIn => new CubicEaseIn(),
+            ChartEasingPreset.CubicEaseInOut => new CubicEaseInOut(),
+            ChartEasingPreset.Linear => new LinearEasing(),
+            ChartEasingPreset.ElasticEaseOut => new ElasticEaseOut(),
+            ChartEasingPreset.BackEaseOut => new BackEaseOut(),
+            _ => new CubicEaseOut()
+        };
+    }
+
+    private void EnsureTimerRunning()
+    {
+        if (_timer == null)
+        {
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(16) // ~60fps
+            };
+            _timer.Tick += OnTimerTick;
+        }
+
+        _timer.Start();
+    }
+
     private void OnTimerTick(object? sender, EventArgs e)
     {
         var elapsed = DateTime.UtcNow - _startTime;
-        var rawProgress = _duration.TotalMilliseconds > 0
-            ? elapsed.TotalMilliseconds / _duration.TotalMilliseconds
+
+        // For staggered animations, we need to extend the total duration
+        var totalDuration = _duration;
+        if (_staggerDelay.TotalMilliseconds > 0 && _seriesCount > 1)
+        {
+            totalDuration = TimeSpan.FromMilliseconds(
+                _duration.TotalMilliseconds + _staggerDelay.TotalMilliseconds * (_seriesCount - 1));
+        }
+
+        var rawProgress = totalDuration.TotalMilliseconds > 0
+            ? elapsed.TotalMilliseconds / totalDuration.TotalMilliseconds
             : 1.0;
 
         _currentProgress = Math.Clamp(rawProgress, 0.0, 1.0);
@@ -115,7 +237,12 @@ internal sealed class ChartAnimation : IDisposable
             _currentProgress = 1.0;
             Stop();
             FrameTick?.Invoke(1.0);
+            var mode = _currentMode;
+            _currentMode = ChartAnimationMode.None;
             Completed?.Invoke();
+
+            // If this was an entry animation, we might want to chain into update mode
+            // (the chart handles this via the Completed event)
         }
         else
         {

@@ -1,10 +1,11 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
 
     <!-- ============================================================
-         Timeline — Fluent Style
+         AuraTimeline — Fluent Style
          ============================================================ -->
-    <Style Selector="ItemsControl.timeline">
+    <Style Selector="display|AuraTimeline">
         <Setter Property="Template">
             <ControlTemplate>
                 <ItemsPresenter Name="PART_ItemsPresenter">
@@ -18,63 +19,53 @@
         </Setter>
     </Style>
 
-    <!-- Timeline item container -->
-    <Style Selector="Border.timeline-item">
-        <Setter Property="Padding" Value="0,0,0,24"/>
+    <!-- ============================================================
+         AuraTimelineItem — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|AuraTimelineItem">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Padding="0,0,0,24">
+                    <Grid ColumnDefinitions="Auto,Auto,*" Margin="0,0,0,0">
+                        <!-- Timestamp (left column) -->
+                        <StackPanel Grid.Column="0" Width="100" Margin="0,0,12,0"
+                                    VerticalAlignment="Top">
+                            <TextBlock Text="{TemplateBinding Timestamp}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- Dot and line -->
+                        <Panel Grid.Column="1" Width="20">
+                            <Border Name="PART_Dot"
+                                    Width="12" Height="12"
+                                    CornerRadius="6"
+                                    Background="{TemplateBinding DotColor}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Margin="0,4,0,0"/>
+                            <Border Name="PART_Line"
+                                    Width="2"
+                                    Background="{DynamicResource AuraDividerBrush}"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,20,0,0"/>
+                        </Panel>
+
+                        <!-- Content -->
+                        <ContentPresenter Grid.Column="2"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="12,0,0,0"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
     </Style>
 
-    <!-- Timeline dot -->
-    <Style Selector="Border.timeline-dot">
-        <Setter Property="Width" Value="12"/>
-        <Setter Property="Height" Value="12"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Margin" Value="0,4,0,0"/>
-    </Style>
-
-    <!-- Timeline line -->
-    <Style Selector="Border.timeline-line">
-        <Setter Property="Width" Value="2"/>
-        <Setter Property="Background" Value="{DynamicResource AuraDividerBrush}"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-    </Style>
-
-    <!-- Timeline content area -->
-    <Style Selector="ContentPresenter.timeline-content">
-        <Setter Property="Margin" Value="12,0"/>
-    </Style>
-
-    <!-- Timeline timestamp -->
-    <Style Selector="TextBlock.timeline-timestamp">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
-        <Setter Property="Margin" Value="12,0,0,4"/>
-    </Style>
-
-    <!-- Timeline dot variants -->
-    <Style Selector="Border.timeline-dot.success">
-        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
-    </Style>
-    <Style Selector="Border.timeline-dot.warning">
-        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
-    </Style>
-    <Style Selector="Border.timeline-dot.error">
-        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
-    </Style>
-    <Style Selector="Border.timeline-dot.info">
-        <Setter Property="Background" Value="{DynamicResource AuraInfoBrush}"/>
-    </Style>
-    <Style Selector="Border.timeline-dot.secondary">
-        <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
-    </Style>
-
-    <!-- Timeline dot: pending (outline only) -->
-    <Style Selector="Border.timeline-dot.pending">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
-        <Setter Property="BorderThickness" Value="2"/>
+    <!-- Hide line on last item -->
+    <Style Selector="display|AuraTimelineItem:last /template/ Border#PART_Line">
+        <Setter Property="IsVisible" Value="False"/>
     </Style>
 
 </Styles>

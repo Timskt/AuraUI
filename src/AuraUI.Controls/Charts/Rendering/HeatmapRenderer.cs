@@ -19,7 +19,8 @@ public class HeatmapRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not HeatmapSeries heatmap || !series.IsVisible) return;
 

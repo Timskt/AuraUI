@@ -1,0 +1,236 @@
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
+using Avalonia.Threading;
+
+namespace AuraUI.Core.Behaviors;
+
+/// <summary>
+/// Behavior that shows a watermark (placeholder) text on a TextBox when it is empty and not focused.
+/// Uses a TextBlock overlay via AdornerLayer to display the watermark.
+/// </summary>
+public class WatermarkBehavior : Behavior<TextBox>
+{
+    private TextBlock? _watermarkTextBlock;
+    private bool _isWatermarkVisible;
+
+    #region WatermarkText
+
+    public static readonly StyledProperty<string?> WatermarkTextProperty =
+        AvaloniaProperty.RegisterAttached<TextBox, string?>(
+            "WatermarkBehavior_WatermarkText", typeof(WatermarkBehavior));
+
+    /// <summary>
+    /// Gets or sets the watermark text to display when the TextBox is empty and unfocused.
+    /// </summary>
+    public string? WatermarkText
+    {
+        get => GetValue(WatermarkTextProperty);
+        set => SetValue(WatermarkTextProperty, value);
+    }
+
+    #endregion
+
+    #region WatermarkForeground
+
+    public static readonly StyledProperty<IBrush?> WatermarkForegroundProperty =
+        AvaloniaProperty.RegisterAttached<TextBox, IBrush?>(
+            "WatermarkBehavior_WatermarkForeground", typeof(WatermarkBehavior));
+
+    /// <summary>
+    /// Gets or sets the brush used to render the watermark text.
+    /// </summary>
+    public IBrush? WatermarkForeground
+    {
+        get => GetValue(WatermarkForegroundProperty);
+        set => SetValue(WatermarkForegroundProperty, value);
+    }
+
+    #endregion
+
+    #region WatermarkFontStyle
+
+    public static readonly StyledProperty<FontStyle> WatermarkFontStyleProperty =
+        AvaloniaProperty.RegisterAttached<TextBox, FontStyle>(
+            "WatermarkBehavior_WatermarkFontStyle", typeof(WatermarkBehavior), FontStyle.Italic);
+
+    /// <summary>
+    /// Gets or sets the font style for the watermark text.
+    /// </summary>
+    public FontStyle WatermarkFontStyle
+    {
+        get => GetValue(WatermarkFontStyleProperty);
+        set => SetValue(WatermarkFontStyleProperty, value);
+    }
+
+    #endregion
+
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+
+        if (AssociatedObject == null)
+            return;
+
+        AssociatedObject.TextChanged += OnTextChanged;
+        AssociatedObject.GotFocus += OnGotFocus;
+        AssociatedObject.LostFocus += OnLostFocus;
+        AssociatedObject.AttachedToVisualTree += OnAttachedToVisualTree;
+        AssociatedObject.DetachedFromVisualTree += OnDetachedFromVisualTree;
+
+        if (AssociatedObject.IsAttachedToVisualTree)
+        {
+            CreateWatermark();
+            UpdateWatermarkVisibility();
+        }
+    }
+
+    protected override void OnDetaching()
+    {
+        if (AssociatedObject != null)
+        {
+            AssociatedObject.TextChanged -= OnTextChanged;
+            AssociatedObject.GotFocus -= OnGotFocus;
+            AssociatedObject.LostFocus -= OnLostFocus;
+            AssociatedObject.AttachedToVisualTree -= OnAttachedToVisualTree;
+            AssociatedObject.DetachedFromVisualTree -= OnDetachedFromVisualTree;
+        }
+
+        RemoveWatermark();
+        base.OnDetaching();
+    }
+
+    private void OnAttachedToVisualTree(object? sender, Avalonia.VisualTreeAttachmentEventArgs e)
+    {
+        CreateWatermark();
+        UpdateWatermarkVisibility();
+    }
+
+    private void OnDetachedFromVisualTree(object? sender, Avalonia.VisualTreeAttachmentEventArgs e)
+    {
+        RemoveWatermark();
+    }
+
+    private void OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        UpdateWatermarkVisibility();
+    }
+
+    private void OnGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        UpdateWatermarkVisibility();
+    }
+
+    private void OnLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        UpdateWatermarkVisibility();
+    }
+
+    private void CreateWatermark()
+    {
+        if (_watermarkTextBlock != null || AssociatedObject == null)
+            return;
+
+        _watermarkTextBlock = new TextBlock
+        {
+            Text = WatermarkText ?? string.Empty,
+            Foreground = WatermarkForeground ?? new SolidColorBrush(Colors.Gray) { Opacity = 0.5 },
+            FontStyle = WatermarkFontStyle,
+            IsHitTestVisible = false,
+            Margin = new Thickness(
+                AssociatedObject.Padding.Left + 4,
+                AssociatedObject.Padding.Top + 2,
+                AssociatedObject.Padding.Right,
+                AssociatedObject.Padding.Bottom),
+            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+            HorizontalAlignment = Avalonia.Layout.VerticalAlignment.Left == Avalonia.Layout.VerticalAlignment.Left
+                ? Avalonia.Layout.HorizontalAlignment.Left
+                : Avalonia.Layout.HorizontalAlignment.Left,
+            Opacity = 0,
+        };
+
+        // Add as an overlay inside the TextBox's parent (a common pattern for watermark placement)
+        // We use the adorner layer or add directly to the control's logical tree
+        if (AssociatedObject.Parent is Panel panel)
+        {
+            // Use a Canvas overlay approach - add watermark as sibling in a Grid
+            // For simpler implementation, we add the watermark as a child overlay
+            var parent = AssociatedObject.Parent;
+
+            if (parent is Grid grid)
+            {
+                Grid.SetRow(_watermarkTextBlock, Grid.GetRow(AssociatedObject));
+                Grid.SetColumn(_watermarkTextBlock, Grid.GetColumn(AssociatedObject));
+                grid.Children.Add(_watermarkTextBlock);
+            }
+            else if (parent is Panel hostPanel)
+            {
+                hostPanel.Children.Add(_watermarkTextBlock);
+            }
+        }
+    }
+
+    private void RemoveWatermark()
+    {
+        if (_watermarkTextBlock == null)
+            return;
+
+        var parent = _watermarkTextBlock.Parent;
+        if (parent is Panel panel)
+        {
+            panel.Children.Remove(_watermarkTextBlock);
+        }
+
+        _watermarkTextBlock = null;
+        _isWatermarkVisible = false;
+    }
+
+    private void UpdateWatermarkVisibility()
+    {
+        if (_watermarkTextBlock == null || AssociatedObject == null)
+            return;
+
+        bool isEmpty = string.IsNullOrEmpty(AssociatedObject.Text);
+        bool isFocused = AssociatedObject.IsFocused;
+
+        bool shouldShow = isEmpty && !isFocused;
+
+        if (shouldShow != _isWatermarkVisible)
+        {
+            _isWatermarkVisible = shouldShow;
+            _watermarkTextBlock.Opacity = shouldShow ? 1.0 : 0.0;
+        }
+
+        // Update text if it changed
+        if (_watermarkTextBlock.Text != (WatermarkText ?? string.Empty))
+        {
+            _watermarkTextBlock.Text = WatermarkText ?? string.Empty;
+        }
+
+        // Update foreground if it changed
+        if (WatermarkForeground != null && _watermarkTextBlock.Foreground != WatermarkForeground)
+        {
+            _watermarkTextBlock.Foreground = WatermarkForeground;
+        }
+    }
+
+    /// <summary>
+    /// Static getter for AXAML usage.
+    /// </summary>
+    public static string? GetWatermarkText(TextBox element) => element.GetValue(WatermarkTextProperty);
+
+    /// <summary>
+    /// Static setter for AXAML usage.
+    /// </summary>
+    public static void SetWatermarkText(TextBox element, string? value) => element.SetValue(WatermarkTextProperty, value);
+
+    /// <summary>
+    /// Static getter for AXAML usage.
+    /// </summary>
+    public static IBrush? GetWatermarkForeground(TextBox element) => element.GetValue(WatermarkForegroundProperty);
+
+    /// <summary>
+    /// Static setter for AXAML usage.
+    /// </summary>
+    public static void SetWatermarkForeground(TextBox element, IBrush? value) => element.SetValue(WatermarkForegroundProperty, value);
+}

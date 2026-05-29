@@ -111,7 +111,7 @@ public class GridX : Grid
         set => SetValue(GridLineDashArrayProperty, value);
     }
 
-    public override void Render(DrawingContext context)
+    public new void Render(DrawingContext context)
     {
         base.Render(context);
 

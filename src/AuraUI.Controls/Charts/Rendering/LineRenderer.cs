@@ -1,3 +1,4 @@
+using System.Buffers;
 using Avalonia;
 using Avalonia.Media;
 
@@ -9,16 +10,19 @@ namespace AuraUI.Controls.Charts.Rendering;
 ///
 /// Rendering pipeline:
 ///   1. Map data points to pixel coordinates via axis.ValueToPixel()
-///   2. Build a PathGeometry from the pixel points using the selected interpolation
-///   3. For animation: lerp between old and new pixel positions
-///   4. Draw the line path via context.DrawGeometry()
-///   5. If area fill: build a closed path and draw with semi-transparent brush
-///   6. If markers: draw marker shapes at each data point
+///   2. Apply data virtualization (viewport culling + LTTB downsampling)
+///   3. Check geometry cache — if hit, reuse cached StreamGeometry
+///   4. On cache miss: build PathGeometry from pixel points
+///   5. Store in cache for next frame
+///   6. Draw the line path via context.DrawGeometry()
+///   7. If area fill: build a closed path and draw with semi-transparent brush
+///   8. If markers: draw marker shapes at each data point
 ///
-/// Performance:
-///   - PathGeometry objects are built per-frame (Avalonia caches the GPU tessellation)
-///   - For >10k points, LTTB downsampling reduces point count before geometry building
-///   - Markers are skipped when there are too many points (>500) to maintain 60fps
+/// Performance optimizations:
+///   - GeometryCache: StreamGeometry objects cached per series, invalidated only on data/size change
+///   - DataVirtualizer: LTTB downsampling for >1000 points, viewport culling via binary search
+///   - ArrayPool: Point[] arrays rented from pool, no per-frame allocations
+///   - Benchmark: render time and geometry count tracked for profiling
 /// </summary>
 public class LineRenderer : IChartRenderer
 {
@@ -31,23 +35,14 @@ public class LineRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.LineSeries line || !series.IsVisible) return;
         if (xAxis == null || yAxis == null) return;
 
         var dataPoints = line.DataPoints;
         if (dataPoints.Count == 0) return;
-
-        // Map data to pixel coordinates
-        var points = MapToPixels(dataPoints, xAxis, yAxis, plotArea, line);
-
-        // Apply animation: if animating, we could lerp from previous positions
-        // For now, progress drives the visible portion (draw-in animation)
-        var visibleCount = progress >= 1.0
-            ? points.Length
-            : Math.Max(2, (int)(points.Length * progress));
-        var visiblePoints = points.AsSpan(0, visibleCount);
 
         var color = ResolveColor(line);
         var pen = new Pen(color, line.StrokeThickness);
@@ -59,26 +54,74 @@ public class LineRenderer : IChartRenderer
                 new DashStyle(line.DashStyle, 0));
         }
 
+        // ─── Try geometry cache ───
+        var seriesHash = series.SeriesIndex;
+        var dataHash = ChartRenderContext.HashDataPoints(dataPoints);
+        var sizeHash = renderContext?.PlotAreaSizeHash ?? 0;
+
+        if (renderContext != null &&
+            renderContext.GeometryCache.TryGet(seriesHash, dataHash, sizeHash, progress,
+                out var cachedLinePath, out var cachedAreaPath))
+        {
+            // Cache hit — draw cached geometries directly
+            DrawCachedGeometries(context, cachedLinePath, cachedAreaPath, line, color, pen, plotArea);
+            return;
+        }
+
+        // ─── Cache miss — build geometries ───
+        // Map data to pixel coordinates using pooled array
+        var points = MapToPixelsPooled(dataPoints, xAxis, yAxis, plotArea, line);
+
+        // Apply data virtualization (viewport culling + LTTB downsampling)
+        var visiblePoints = DataVirtualizer.GetVisiblePoints(points, dataPoints, plotArea, progress);
+
+        // Track point counts for benchmarking
+        var originalCount = points.Length;
+        var visibleCount = visiblePoints.Length;
+
+        // Build and cache geometries
+        Avalonia.Media.StreamGeometry? linePath = null;
+        Avalonia.Media.StreamGeometry? areaPath = null;
+
+        if (renderContext != null)
+        {
+            renderContext.Benchmark.BeginGeometryBuild();
+        }
+
         // ─── Area Fill ───
         if (line.ShowArea)
         {
-            var areaPath = BuildAreaPath(visiblePoints, plotArea, line.Interpolation, line.SmoothTension);
-            if (areaPath != null)
+            var areaGeom = BuildAreaPath(visiblePoints, plotArea, line.Interpolation, line.SmoothTension);
+            if (areaGeom != null)
             {
+                areaPath = areaGeom;
                 var areaBrush = new SolidColorBrush(((SolidColorBrush)color).Color)
                 {
                     Opacity = line.AreaOpacity
                 };
-                context.DrawGeometry(areaBrush, null, areaPath);
+                context.DrawGeometry(areaBrush, null, areaGeom);
             }
         }
 
         // ─── Line ───
-        var linePath = BuildLinePath(visiblePoints, line.Interpolation, line.SmoothTension);
-        if (linePath != null)
+        var lineGeom = BuildLinePath(visiblePoints, line.Interpolation, line.SmoothTension);
+        if (lineGeom != null)
         {
-            context.DrawGeometry(null, pen, linePath);
+            linePath = lineGeom;
+            context.DrawGeometry(null, pen, lineGeom);
         }
+
+        if (renderContext != null)
+        {
+            renderContext.Benchmark.EndGeometryBuild();
+            renderContext.Benchmark.RecordPointCounts(visibleCount, Math.Max(0, originalCount - visibleCount));
+        }
+
+        // Store in cache for next frame
+        renderContext?.GeometryCache.Store(seriesHash, dataHash, sizeHash, progress, linePath, areaPath);
+
+        // Return pooled array
+        ChartRenderContext.ReturnPointArray(points);
 
         // ─── Markers ───
         var shape = line.ShowMarkers ? MarkerShape.Circle : line.MarkerShape;
@@ -94,7 +137,8 @@ public class LineRenderer : IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.LineSeries line) return null;
         if (xAxis == null || yAxis == null) return null;
@@ -102,7 +146,7 @@ public class LineRenderer : IChartRenderer
         var dataPoints = line.DataPoints;
         if (dataPoints.Count == 0) return null;
 
-        var points = MapToPixels(dataPoints, xAxis, yAxis, plotArea, line);
+        var points = MapToPixelsPooled(dataPoints, xAxis, yAxis, plotArea, line);
         var hitRadius = Math.Max(line.MarkerSize, 10.0);
 
         int bestIndex = -1;
@@ -121,6 +165,9 @@ public class LineRenderer : IChartRenderer
             }
         }
 
+        // Return pooled array
+        ChartRenderContext.ReturnPointArray(points);
+
         if (bestIndex < 0) return null;
 
         return new ChartHitResult
@@ -128,15 +175,71 @@ public class LineRenderer : IChartRenderer
             Series = series,
             DataPoint = dataPoints[bestIndex],
             DataIndex = bestIndex,
-            HitPosition = points[bestIndex],
+            HitPosition = new Point(
+                xAxis.ValueToPixel(dataPoints[bestIndex].X),
+                yAxis.ValueToPixel(dataPoints[bestIndex].Y)),
             Distance = bestDist
         };
+    }
+
+    // ────────────────────────────────────────────────
+    //  Draw cached geometries (fast path)
+    // ────────────────────────────────────────────────
+
+    private static void DrawCachedGeometries(
+        DrawingContext context,
+        Avalonia.Media.StreamGeometry? cachedLinePath,
+        Avalonia.Media.StreamGeometry? cachedAreaPath,
+        Series.LineSeries line,
+        IBrush color,
+        Pen pen,
+        Rect plotArea)
+    {
+        if (cachedAreaPath != null && line.ShowArea)
+        {
+            var areaBrush = new SolidColorBrush(((SolidColorBrush)color).Color)
+            {
+                Opacity = line.AreaOpacity
+            };
+            context.DrawGeometry(areaBrush, null, cachedAreaPath);
+        }
+
+        if (cachedLinePath != null)
+        {
+            context.DrawGeometry(null, pen, cachedLinePath);
+        }
     }
 
     // ────────────────────────────────────────────────
     //  Internal helpers
     // ────────────────────────────────────────────────
 
+    /// <summary>
+    /// Map data points to pixel coordinates using a pooled Point[] array.
+    /// The caller must return the array via ChartRenderContext.ReturnPointArray().
+    /// </summary>
+    internal static Point[] MapToPixelsPooled(
+        Avalonia.Collections.AvaloniaList<ChartDataPoint> dataPoints,
+        ChartAxis xAxis,
+        ChartAxis yAxis,
+        Rect plotArea,
+        XYChartSeries series)
+    {
+        var points = ChartRenderContext.RentPointArray(dataPoints.Count);
+        for (int i = 0; i < dataPoints.Count; i++)
+        {
+            var dp = dataPoints[i];
+            var x = xAxis.ValueToPixel(dp.X);
+            var y = yAxis.ValueToPixel(dp.Y);
+            points[i] = new Point(x, y);
+        }
+        return points;
+    }
+
+    /// <summary>
+    /// Map data points to pixel coordinates (allocates new array).
+    /// Used by AreaRenderer and other renderers that don't manage pooling.
+    /// </summary>
     internal static Point[] MapToPixels(
         Avalonia.Collections.AvaloniaList<ChartDataPoint> dataPoints,
         ChartAxis xAxis,
@@ -165,9 +268,158 @@ public class LineRenderer : IChartRenderer
     }
 
     /// <summary>
-    /// Build a PathGeometry for the line connecting the given points.
+    /// Build a StreamGeometry for the line connecting the given points.
+    /// Uses StreamGeometry for lower allocation overhead than PathGeometry.
     /// </summary>
-    internal static PathGeometry? BuildLinePath(
+    internal static Avalonia.Media.StreamGeometry? BuildLinePath(
+        ReadOnlySpan<Point> points,
+        ChartInterpolation interpolation,
+        double tension)
+    {
+        if (points.Length < 2) return null;
+
+        var geometry = new Avalonia.Media.StreamGeometry();
+        using (var ctx = geometry.Open())
+        {
+            ctx.BeginFigure(points[0], false);
+
+            switch (interpolation)
+            {
+                case ChartInterpolation.Linear:
+                    for (int i = 1; i < points.Length; i++)
+                        ctx.LineTo(points[i]);
+                    break;
+
+                case ChartInterpolation.MonotoneCubic:
+                    AddMonotoneCubicToStream(ctx, points, tension);
+                    break;
+
+                case ChartInterpolation.StepBefore:
+                    for (int i = 1; i < points.Length; i++)
+                    {
+                        ctx.LineTo(new Point(points[i].X, points[i - 1].Y));
+                        ctx.LineTo(points[i]);
+                    }
+                    break;
+
+                case ChartInterpolation.StepAfter:
+                    for (int i = 1; i < points.Length; i++)
+                    {
+                        ctx.LineTo(new Point(points[i - 1].X, points[i].Y));
+                        ctx.LineTo(points[i]);
+                    }
+                    break;
+            }
+
+            ctx.EndFigure(false);
+        }
+
+        return geometry;
+    }
+
+    /// <summary>
+    /// Build a closed StreamGeometry for area fill (line + baseline).
+    /// </summary>
+    internal static Avalonia.Media.StreamGeometry? BuildAreaPath(
+        ReadOnlySpan<Point> points,
+        Rect plotArea,
+        ChartInterpolation interpolation,
+        double tension)
+    {
+        if (points.Length < 2) return null;
+
+        var geometry = new Avalonia.Media.StreamGeometry();
+        using (var ctx = geometry.Open())
+        {
+            // Start at bottom-left, move up to first point
+            ctx.BeginFigure(new Point(points[0].X, plotArea.Bottom), true);
+            ctx.LineTo(points[0]);
+
+            // Trace the line
+            switch (interpolation)
+            {
+                case ChartInterpolation.Linear:
+                    for (int i = 1; i < points.Length; i++)
+                        ctx.LineTo(points[i]);
+                    break;
+
+                case ChartInterpolation.MonotoneCubic:
+                    AddMonotoneCubicToStream(ctx, points, tension);
+                    break;
+
+                default:
+                    for (int i = 1; i < points.Length; i++)
+                        ctx.LineTo(points[i]);
+                    break;
+            }
+
+            // Close back to baseline
+            ctx.LineTo(new Point(points[^1].X, plotArea.Bottom));
+            ctx.EndFigure(true);
+        }
+
+        return geometry;
+    }
+
+    /// <summary>
+    /// Add monotone cubic Bezier segments to a StreamGeometryContext.
+    /// Uses the Fritsch-Carlson method for monotone interpolation.
+    /// </summary>
+    private static void AddMonotoneCubicToStream(
+        Avalonia.Media.StreamGeometryContext ctx,
+        ReadOnlySpan<Point> points,
+        double tension)
+    {
+        if (points.Length < 3)
+        {
+            for (int i = 1; i < points.Length; i++)
+                ctx.LineTo(points[i]);
+            return;
+        }
+
+        // Compute tangents using Fritsch-Carlson method
+        var n = points.Length;
+
+        // Use stack allocation for small arrays, heap for large
+        Span<double> deltas = n <= 128 ? stackalloc double[n - 1] : new double[n - 1];
+        Span<double> tangents = n <= 128 ? stackalloc double[n] : new double[n];
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            var dx = points[i + 1].X - points[i].X;
+            deltas[i] = dx != 0 ? (points[i + 1].Y - points[i].Y) / dx : 0;
+        }
+
+        tangents[0] = deltas[0];
+        tangents[n - 1] = deltas[n - 2];
+
+        for (int i = 1; i < n - 1; i++)
+        {
+            if (deltas[i - 1] * deltas[i] <= 0)
+                tangents[i] = 0;
+            else
+                tangents[i] = (deltas[i - 1] + deltas[i]) / 2;
+        }
+
+        // Generate Bezier segments
+        for (int i = 0; i < n - 1; i++)
+        {
+            var p0 = points[i];
+            var p1 = points[i + 1];
+            var dx = p1.X - p0.X;
+
+            var cp1 = new Point(p0.X + dx / 3, p0.Y + tangents[i] * dx / 3 * tension);
+            var cp2 = new Point(p1.X - dx / 3, p1.Y - tangents[i + 1] * dx / 3 * tension);
+
+            ctx.CubicBezierTo(cp1, cp2, p1);
+        }
+    }
+
+    /// <summary>
+    /// Build a PathGeometry for the line connecting the given points.
+    /// Used as fallback when StreamGeometry caching is not available.
+    /// </summary>
+    internal static PathGeometry? BuildLinePathLegacy(
         ReadOnlySpan<Point> points,
         ChartInterpolation interpolation,
         double tension)
@@ -211,8 +463,9 @@ public class LineRenderer : IChartRenderer
 
     /// <summary>
     /// Build a closed PathGeometry for area fill (line + baseline).
+    /// Used as fallback when StreamGeometry caching is not available.
     /// </summary>
-    internal static PathGeometry? BuildAreaPath(
+    internal static PathGeometry? BuildAreaPathLegacy(
         ReadOnlySpan<Point> points,
         Rect plotArea,
         ChartInterpolation interpolation,
@@ -266,8 +519,10 @@ public class LineRenderer : IChartRenderer
 
         // Compute tangents using Fritsch-Carlson method
         var n = points.Length;
-        var deltas = new double[n - 1];
-        var tangents = new double[n];
+
+        // Use stack allocation for small arrays, heap for large
+        Span<double> deltas = n <= 128 ? stackalloc double[n - 1] : new double[n - 1];
+        Span<double> tangents = n <= 128 ? stackalloc double[n] : new double[n];
 
         for (int i = 0; i < n - 1; i++)
         {

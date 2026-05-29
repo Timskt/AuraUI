@@ -19,7 +19,8 @@ public class CandlestickRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not CandlestickSeries candle || !series.IsVisible) return;
         if (xAxis == null || yAxis == null) return;

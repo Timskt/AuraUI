@@ -31,7 +31,7 @@
                                 VerticalAlignment="Bottom"
                                 Margin="8"
                                 Opacity="0.8">
-                            <TextBlock Text="{Binding ZoomLevel, RelativeSource={RelativeSource TemplatedParent}, StringFormat={0:P0}}"
+                            <TextBlock Text="{Binding ZoomLevel, RelativeSource={RelativeSource TemplatedParent}, StringFormat='{}{0:P0}'}"
                                        FontSize="11"
                                        Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
                         </Border>
@@ -48,7 +48,7 @@
 
     <!-- ZoomViewer :can-zoom -->
     <Style Selector="display|ZoomViewer:can-zoom">
-        <Setter Property="Cursor" Value="ZoomIn"/>
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
     <!-- ZoomViewer :can-pan -->

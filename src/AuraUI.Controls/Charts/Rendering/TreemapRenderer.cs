@@ -19,7 +19,8 @@ public class TreemapRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not TreemapSeries treemap || !series.IsVisible) return;
         if (treemap.Nodes.Count == 0) return;

@@ -18,7 +18,8 @@ public class GaugeRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.GaugeSeries gauge || !series.IsVisible) return;
 
@@ -128,7 +129,8 @@ public class GaugeRenderer : IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         // Gauge has no meaningful hit test (single value)
         return null;

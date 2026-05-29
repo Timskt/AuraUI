@@ -1,5 +1,6 @@
 using System.Buffers;
 using Avalonia;
+using AuraUI.Controls.Charts;
 
 namespace AuraUI.Controls.Charts.Rendering;
 

@@ -21,7 +21,8 @@ public class RadarRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.RadarSeries radar || !series.IsVisible) return;
 
@@ -100,7 +101,8 @@ public class RadarRenderer : IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         // Radar hit testing checks proximity to each vertex
         if (series is not Series.RadarSeries radar) return null;

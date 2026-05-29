@@ -24,12 +24,12 @@ public class HeatmapSeries : ChartSeries
         AvaloniaProperty.Register<HeatmapSeries, string[]?>(nameof(YLabels));
 
     /// <summary>Color for the minimum value in the gradient.</summary>
-    public static readonly StyledProperty<Color> MinColorProperty =
-        AvaloniaProperty.Register<HeatmapSeries, Color>(nameof(MinColor), Color.Parse("#f7fbff"));
+    public static readonly StyledProperty<Avalonia.Media.Color> MinColorProperty =
+        AvaloniaProperty.Register<HeatmapSeries, Avalonia.Media.Color>(nameof(MinColor), Avalonia.Media.Color.Parse("#f7fbff"));
 
     /// <summary>Color for the maximum value in the gradient.</summary>
-    public static readonly StyledProperty<Color> MaxColorProperty =
-        AvaloniaProperty.Register<HeatmapSeries, Color>(nameof(MaxColor), Color.Parse("#08519c"));
+    public static readonly StyledProperty<Avalonia.Media.Color> MaxColorProperty =
+        AvaloniaProperty.Register<HeatmapSeries, Avalonia.Media.Color>(nameof(MaxColor), Avalonia.Media.Color.Parse("#08519c"));
 
     /// <summary>Whether to show value labels inside cells.</summary>
     public static readonly StyledProperty<bool> ShowLabelsProperty =
@@ -41,8 +41,8 @@ public class HeatmapSeries : ChartSeries
 
     public string[]? XLabels { get => GetValue(XLabelsProperty); set => SetValue(XLabelsProperty, value); }
     public string[]? YLabels { get => GetValue(YLabelsProperty); set => SetValue(YLabelsProperty, value); }
-    public Color MinColor { get => GetValue(MinColorProperty); set => SetValue(MinColorProperty, value); }
-    public Color MaxColor { get => GetValue(MaxColorProperty); set => SetValue(MaxColorProperty, value); }
+    public Avalonia.Media.Color MinColor { get => GetValue(MinColorProperty); set => SetValue(MinColorProperty, value); }
+    public Avalonia.Media.Color MaxColor { get => GetValue(MaxColorProperty); set => SetValue(MaxColorProperty, value); }
     public bool ShowLabels { get => GetValue(ShowLabelsProperty); set => SetValue(ShowLabelsProperty, value); }
     public double CellGap { get => GetValue(CellGapProperty); set => SetValue(CellGapProperty, value); }
 

@@ -19,7 +19,8 @@ public class SankeyRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not SankeySeries sankey || !series.IsVisible) return;
         if (sankey.Nodes.Count == 0 || sankey.Links.Count == 0) return;
@@ -186,13 +187,13 @@ public class SankeyRenderer : IChartRenderer
         foreach (var (col, indices) in colGroups)
         {
             var colX = plotArea.Left + col * (colWidth + sankey.ColumnGap);
-            var totalNodeValue = indices.Sum(idx => Math.Max(totalIn[idx], totalOut[idx], 1));
+            var totalNodeValue = indices.Sum(idx => Math.Max(Math.Max(totalIn[idx], totalOut[idx]), 1));
             var availableHeight = plotArea.Height - sankey.NodeGap * (indices.Count - 1);
             var y = plotArea.Top;
 
             foreach (var idx in indices)
             {
-                var nodeValue = Math.Max(totalIn[idx], totalOut[idx], 1);
+                var nodeValue = Math.Max(Math.Max(totalIn[idx], totalOut[idx]), 1);
                 var nodeHeight = Math.Max(10, availableHeight * (nodeValue / totalNodeValue));
 
                 result.Add(new SankeyNodeLayout

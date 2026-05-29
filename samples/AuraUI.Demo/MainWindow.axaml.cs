@@ -2,7 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Styling;
+using AuraUI.Controls.Charts;
+using AuraUI.Controls.Charts.Series;
 using AuraUI.Controls.Feedback;
 using AuraUI.Controls.Input;
 using System;
@@ -31,6 +34,239 @@ public partial class MainWindow : Window
         {
             DemoRateControl.ValueChanged += (_, e) => UpdateStatus($"Rating changed: {e.OldValue:F1} -> {e.NewValue:F1}");
         }
+
+        // Initialize chart demo data
+        InitializeCharts();
+    }
+
+    // ----------------------------------------------------------------
+    // Charts
+    // ----------------------------------------------------------------
+
+    private void InitializeCharts()
+    {
+        InitializeLineChart();
+        InitializeBarChart();
+        InitializePieChart();
+        InitializeAreaChart();
+        InitializeScatterChart();
+        InitializeRadarChart();
+        InitializeGaugeChart();
+    }
+
+    private void InitializeLineChart()
+    {
+        var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        var sales2024 = new double[] { 42, 48, 55, 52, 68, 75, 82, 78, 90, 95, 88, 102 };
+        var sales2023 = new double[] { 35, 40, 45, 43, 55, 60, 65, 62, 72, 78, 70, 85 };
+
+        var currentSeries = new LineSeries
+        {
+            Title = "Sales 2024",
+            Color = new SolidColorBrush(Color.Parse("#0078D4")),
+            StrokeThickness = 2,
+            ShowMarkers = true,
+            MarkerShape = MarkerShape.Circle,
+            MarkerSize = 5
+        };
+        var lastYearSeries = new LineSeries
+        {
+            Title = "Sales 2023",
+            Color = new SolidColorBrush(Color.Parse("#107C10")),
+            StrokeThickness = 2,
+            DashStyle = new double[] { 6, 3 },
+            ShowMarkers = true,
+            MarkerShape = MarkerShape.Circle,
+            MarkerSize = 4
+        };
+
+        for (int i = 0; i < 12; i++)
+        {
+            currentSeries.DataPoints.Add(new ChartDataPoint(i, sales2024[i], months[i]));
+            lastYearSeries.DataPoints.Add(new ChartDataPoint(i, sales2023[i], months[i]));
+        }
+
+        LineChart.XAxis.Categories = months;
+        LineChart.XAxis.Scale = AxisScale.Category;
+        LineChart.YAxis.Title = "Sales ($K)";
+        LineChart.YAxis.ShowGridLines = true;
+        LineChart.Series.Add(currentSeries);
+        LineChart.Series.Add(lastYearSeries);
+    }
+
+    private void InitializeBarChart()
+    {
+        var categories = new[] { "Electronics", "Clothing", "Food", "Books", "Sports", "Home" };
+        var revenues = new double[] { 245, 180, 320, 95, 150, 210 };
+
+        var barSeries = new BarSeries
+        {
+            Title = "Revenue",
+            Color = new SolidColorBrush(Color.Parse("#5C2D91")),
+            BarRadius = 4
+        };
+
+        for (int i = 0; i < categories.Length; i++)
+        {
+            barSeries.DataPoints.Add(new ChartDataPoint(i, revenues[i], categories[i]));
+        }
+
+        BarChart.XAxis.Categories = categories;
+        BarChart.XAxis.Scale = AxisScale.Category;
+        BarChart.YAxis.Title = "Revenue ($K)";
+        BarChart.YAxis.ShowGridLines = true;
+        BarChart.Series.Add(barSeries);
+    }
+
+    private void InitializePieChart()
+    {
+        var pieSeries = new PieSeries
+        {
+            ShowLabels = true,
+            ShowPercentage = true,
+            InnerRadius = 0.35
+        };
+
+        var slices = new (string label, double value, string color)[]
+        {
+            ("AuraUI", 35, "#0078D4"),
+            ("Competitor A", 25, "#107C10"),
+            ("Competitor B", 20, "#D83B01"),
+            ("Competitor C", 12, "#5C2D91"),
+            ("Others", 8, "#FFB900")
+        };
+
+        foreach (var (label, value, color) in slices)
+        {
+            pieSeries.Slices.Add(new ChartSliceData(label, value)
+            {
+                Color = new SolidColorBrush(Color.Parse(color))
+            });
+        }
+
+        PieChart.Series.Add(pieSeries);
+    }
+
+    private void InitializeAreaChart()
+    {
+        var areaSeries = new AreaSeries
+        {
+            Title = "Page Views",
+            Color = new SolidColorBrush(Color.Parse("#0078D4")),
+            AreaOpacity = 0.25,
+            SmoothTension = 0.3
+        };
+
+        // 30 days of website traffic data
+        var traffic = new double[]
+        {
+            1200, 1350, 1100, 1450, 1600, 1800, 1750,
+            1900, 2100, 1950, 2200, 2400, 2300, 2500,
+            2650, 2400, 2200, 2800, 3000, 3200, 3100,
+            2900, 3300, 3500, 3400, 3600, 3800, 3700,
+            4000, 4200
+        };
+
+        for (int i = 0; i < traffic.Length; i++)
+        {
+            areaSeries.DataPoints.Add(new ChartDataPoint(i + 1, traffic[i], $"Day {i + 1}"));
+        }
+
+        AreaChart.XAxis.Title = "Day";
+        AreaChart.YAxis.Title = "Page Views";
+        AreaChart.YAxis.ShowGridLines = true;
+        AreaChart.Series.Add(areaSeries);
+    }
+
+    private void InitializeScatterChart()
+    {
+        var scatterSeries = new ScatterSeries
+        {
+            Title = "Subjects",
+            Color = new SolidColorBrush(Color.Parse("#E3008C")),
+            MarkerSize = 7,
+            FillOpacity = 0.7,
+            MarkerShape = MarkerShape.Circle
+        };
+
+        // 50 height/weight data points with realistic correlation
+        var rng = new Random(42);
+        for (int i = 0; i < 50; i++)
+        {
+            var height = 150 + rng.NextDouble() * 45; // 150-195 cm
+            var weight = height * 0.6 + rng.NextDouble() * 30 - 15; // correlated
+            scatterSeries.DataPoints.Add(new ChartDataPoint(Math.Round(height, 1), Math.Round(weight, 1)));
+        }
+
+        ScatterChart.XAxis.Title = "Height (cm)";
+        ScatterChart.YAxis.Title = "Weight (kg)";
+        ScatterChart.YAxis.ShowGridLines = true;
+        ScatterChart.Series.Add(scatterSeries);
+    }
+
+    private void InitializeRadarChart()
+    {
+        var radarSeries = new RadarSeries
+        {
+            Title = "Current",
+            FillOpacity = 0.2,
+            ShowMarkers = true
+        };
+
+        radarSeries.DataItems.Add(new ChartRadarData
+        {
+            Label = "Current",
+            Values = new double[] { 85, 90, 70, 80, 75, 88 },
+            Color = new SolidColorBrush(Color.Parse("#0078D4"))
+        });
+
+        var radarSeries2 = new RadarSeries
+        {
+            Title = "Target",
+            FillOpacity = 0.15,
+            ShowMarkers = true
+        };
+
+        radarSeries2.DataItems.Add(new ChartRadarData
+        {
+            Label = "Target",
+            Values = new double[] { 95, 95, 90, 90, 85, 95 },
+            Color = new SolidColorBrush(Color.Parse("#107C10"))
+        });
+
+        RadarChart.XAxis.Categories = new[]
+        {
+            "Communication", "Technical", "Leadership",
+            "Problem Solving", "Creativity", "Teamwork"
+        };
+        RadarChart.Series.Add(radarSeries);
+        RadarChart.Series.Add(radarSeries2);
+    }
+
+    private void InitializeGaugeChart()
+    {
+        var gaugeSeries = new GaugeSeries
+        {
+            Value = 78,
+            Minimum = 0,
+            Maximum = 100,
+            Color = new SolidColorBrush(Color.Parse("#107C10")),
+            TrackColor = new SolidColorBrush(Color.Parse("#E0E0E0")),
+            StrokeWidth = 14,
+            ShowCenterLabel = true,
+            ShowTickMarks = true,
+            TickCount = 10,
+            LabelFormat = "{0:F0}%",
+            Mode = GaugeMode.ThreeQuarter,
+            Segments = new GaugeSegment[]
+            {
+                new() { From = 0, To = 50, Color = new SolidColorBrush(Color.Parse("#D83B01")) },
+                new() { From = 50, To = 80, Color = new SolidColorBrush(Color.Parse("#FFB900")) },
+                new() { From = 80, To = 100, Color = new SolidColorBrush(Color.Parse("#107C10")) }
+            }
+        };
+
+        GaugeChart.Series.Add(gaugeSeries);
     }
 
     // ----------------------------------------------------------------

@@ -1,79 +1,34 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
 
     <!-- ============================================================
          RateControl — Fluent Style (Star Rating)
          ============================================================ -->
-    <Style Selector="ItemsControl.rate">
+    <Style Selector="selection|RateControl">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <ControlTemplate>
-                <ItemsPresenter Name="PART_ItemsPresenter">
-                    <ItemsPresenter.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" Spacing="4"/>
-                        </ItemsPanelTemplate>
-                    </ItemsPresenter.ItemsPanel>
-                </ItemsPresenter>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <!-- Rating panel (stars rendered programmatically) -->
+                    <Panel Name="PART_RatingPanel"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
             </ControlTemplate>
         </Setter>
     </Style>
 
-    <!-- Individual rate item (star) -->
-    <Style Selector="Border.rate-item">
-        <Setter Property="Width" Value="24"/>
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="CornerRadius" Value="2"/>
-    </Style>
-
-    <!-- Rate star path -->
-    <Style Selector="Border.rate-item Path">
-        <Setter Property="Fill" Value="{DynamicResource AuraBorderBrush}"/>
-        <Setter Property="Width" Value="16"/>
-        <Setter Property="Height" Value="16"/>
-        <Setter Property="Stretch" Value="Uniform"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <!-- Rate item :pointerover -->
-    <Style Selector="Border.rate-item:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
-
-    <!-- Rate item active (selected) -->
-    <Style Selector="Border.rate-item.active Path">
-        <Setter Property="Fill" Value="{DynamicResource AuraWarningBrush}"/>
-    </Style>
-
-    <!-- Rate item half -->
-    <Style Selector="Border.rate-item.half Path">
-        <Setter Property="Fill" Value="{DynamicResource AuraWarningBrush}"/>
-        <Setter Property="Opacity" Value="0.5"/>
-    </Style>
-
-    <!-- Rate sizes -->
-    <Style Selector="ItemsControl.rate.sm Border.rate-item">
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
-    </Style>
-
-    <Style Selector="ItemsControl.rate.lg Border.rate-item">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
-    </Style>
-
-    <!-- Rate :disabled -->
-    <Style Selector="ItemsControl.rate:disabled Border.rate-item">
-        <Setter Property="Cursor" Value="Arrow"/>
+    <!-- RateControl :disabled -->
+    <Style Selector="selection|RateControl:disabled">
         <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
-    <!-- Rate with primary color -->
-    <Style Selector="ItemsControl.rate.primary Border.rate-item.active Path">
-        <Setter Property="Fill" Value="{DynamicResource AuraPrimaryBrush}"/>
+    <!-- RateControl :readonly -->
+    <Style Selector="selection|RateControl:readonly">
+        <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
 </Styles>

@@ -1,0 +1,178 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         FormField — Fluent Style (Vertical / Top placement, default)
+         ============================================================ -->
+    <Style Selector="layout|FormField">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="4">
+                    <!-- Label row: icon + label + required indicator -->
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="4"
+                                VerticalAlignment="Center">
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          Content="{TemplateBinding Icon}"
+                                          VerticalAlignment="Center"
+                                          IsVisible="False"/>
+                        <TextBlock Name="PART_LabelText"
+                                   Text="{TemplateBinding Label}"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Name="PART_RequiredIndicator"
+                                   Text="*"
+                                   Foreground="{DynamicResource AuraErrorBrush}"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"/>
+                    </StackPanel>
+
+                    <!-- Field content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                    <!-- Helper text -->
+                    <TextBlock Name="PART_HelperText"
+                               Text="{TemplateBinding HelperText}"
+                               FontSize="12"
+                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                               TextWrapping="Wrap"
+                               IsVisible="False"/>
+
+                    <!-- Error text -->
+                    <TextBlock Name="PART_ErrorText"
+                               Text="{TemplateBinding ErrorText}"
+                               FontSize="12"
+                               Foreground="{DynamicResource AuraErrorBrush}"
+                               TextWrapping="Wrap"
+                               IsVisible="False"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Icon visible when set -->
+    <Style Selector="layout|FormField /template/ ContentPresenter#PART_IconPresenter">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Required indicator -->
+    <Style Selector="layout|FormField:required /template/ TextBlock#PART_RequiredIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Helper text visible when not in error and helper text is set -->
+    <Style Selector="layout|FormField:has-helper:not(:error) /template/ TextBlock#PART_HelperText">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Error text visible when in error state -->
+    <Style Selector="layout|FormField:error /template/ TextBlock#PART_ErrorText">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Hide helper text when error is showing -->
+    <Style Selector="layout|FormField:error:has-helper /template/ TextBlock#PART_HelperText">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- ============================================================
+         FormField — Horizontal / Left placement
+         ============================================================ -->
+    <Style Selector="layout|FormField:horizontal">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DockPanel>
+                    <!-- Label docked left -->
+                    <DockPanel DockPanel.Dock="Left"
+                               Width="120"
+                               Margin="0,0,12,0">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="4"
+                                    VerticalAlignment="Center">
+                            <ContentPresenter Name="PART_IconPresenter"
+                                              Content="{TemplateBinding Icon}"
+                                              VerticalAlignment="Center"
+                                              IsVisible="False"/>
+                            <TextBlock Name="PART_LabelText"
+                                       Text="{TemplateBinding Label}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Name="PART_RequiredIndicator"
+                                       Text="*"
+                                       Foreground="{DynamicResource AuraErrorBrush}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"
+                                       IsVisible="False"/>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <!-- Field + text docked right -->
+                    <StackPanel DockPanel.Dock="Right"
+                                Spacing="4">
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        <TextBlock Name="PART_HelperText"
+                                   Text="{TemplateBinding HelperText}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   IsVisible="False"/>
+                        <TextBlock Name="PART_ErrorText"
+                                   Text="{TemplateBinding ErrorText}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AuraErrorBrush}"
+                                   TextWrapping="Wrap"
+                                   IsVisible="False"/>
+                    </StackPanel>
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Horizontal required indicator -->
+    <Style Selector="layout|FormField:horizontal:required /template/ TextBlock#PART_RequiredIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Horizontal helper text visible -->
+    <Style Selector="layout|FormField:horizontal:has-helper:not(:error) /template/ TextBlock#PART_HelperText">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Horizontal error text visible -->
+    <Style Selector="layout|FormField:horizontal:error /template/ TextBlock#PART_ErrorText">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Hide helper text when error is showing (horizontal) -->
+    <Style Selector="layout|FormField:horizontal:error:has-helper /template/ TextBlock#PART_HelperText">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- ============================================================
+         FormField — Error state border accent on nested controls
+         ============================================================ -->
+    <Style Selector="layout|FormField:error /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <!-- ============================================================
+         FormPanel — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|FormPanel">
+        <Setter Property="Orientation" Value="Vertical"/>
+        <Setter Property="Spacing" Value="16"/>
+    </Style>
+
+</Styles>

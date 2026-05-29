@@ -19,7 +19,8 @@ public class FunnelRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.FunnelSeries funnel || !series.IsVisible) return;
 
@@ -103,7 +104,8 @@ public class FunnelRenderer : IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.FunnelSeries funnel) return null;
         if (funnel.Items.Count == 0) return null;

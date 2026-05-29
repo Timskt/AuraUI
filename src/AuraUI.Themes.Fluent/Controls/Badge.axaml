@@ -1,71 +1,69 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
 
     <!-- ============================================================
          Badge — Fluent Style
          ============================================================ -->
-    <Style Selector="Border.badge">
+    <Style Selector="layout|Badge">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Main content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                    <!-- Badge overlay -->
+                    <Border Name="PART_BadgeContainer"
+                            Background="{DynamicResource AuraPrimaryBrush}"
+                            CornerRadius="999"
+                            MinWidth="20"
+                            MinHeight="20"
+                            Padding="6,2"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,-6,-6,0"
+                            ZIndex="1"
+                            ClipToBounds="True">
+                        <TextBlock Name="PART_BadgeText"
+                                   Foreground="White"
+                                   FontSize="11"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Badge dot mode: hide text, show small dot -->
+    <Style Selector="layout|Badge:dot /template/ Border#PART_BadgeContainer">
+        <Setter Property="MinWidth" Value="10"/>
+        <Setter Property="MinHeight" Value="10"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0,-4,-4,0"/>
+    </Style>
+    <Style Selector="layout|Badge:dot /template/ TextBlock#PART_BadgeText">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Badge variant colors -->
+    <Style Selector="layout|Badge:primary /template/ Border#PART_BadgeContainer">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraBadgeRadius}"/>
-        <Setter Property="MinWidth" Value="20"/>
-        <Setter Property="MinHeight" Value="20"/>
-        <Setter Property="Padding" Value="6,2"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="ClipToBounds" Value="True"/>
     </Style>
-
-    <!-- Badge size: sm -->
-    <Style Selector="Border.badge.sm">
-        <Setter Property="MinWidth" Value="16"/>
-        <Setter Property="MinHeight" Value="16"/>
-        <Setter Property="Padding" Value="4,1"/>
-    </Style>
-    <Style Selector="Border.badge.sm /template/ TextBlock">
-        <Setter Property="FontSize" Value="10"/>
-    </Style>
-
-    <!-- Badge size: lg -->
-    <Style Selector="Border.badge.lg">
-        <Setter Property="MinWidth" Value="24"/>
-        <Setter Property="MinHeight" Value="24"/>
-        <Setter Property="Padding" Value="8,4"/>
-    </Style>
-    <Style Selector="Border.badge.lg /template/ TextBlock">
-        <Setter Property="FontSize" Value="14"/>
-    </Style>
-
-    <!-- Badge color variants -->
-    <Style Selector="Border.badge.success">
+    <Style Selector="layout|Badge:success /template/ Border#PART_BadgeContainer">
         <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
-    <Style Selector="Border.badge.warning">
+    <Style Selector="layout|Badge:warning /template/ Border#PART_BadgeContainer">
         <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
-    <Style Selector="Border.badge.error">
+    <Style Selector="layout|Badge:error /template/ Border#PART_BadgeContainer">
         <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
-    <Style Selector="Border.badge.info">
-        <Setter Property="Background" Value="{DynamicResource AuraInfoBrush}"/>
-    </Style>
-    <Style Selector="Border.badge.secondary">
+    <Style Selector="layout|Badge:default /template/ Border#PART_BadgeContainer">
         <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
-    </Style>
-
-    <!-- Badge outline variant -->
-    <Style Selector="Border.badge.outline">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-    <Style Selector="Border.badge.outline /template/ TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
-    </Style>
-
-    <!-- Badge dot variant (no text, just a dot) -->
-    <Style Selector="Border.badge.dot">
-        <Setter Property="MinWidth" Value="8"/>
-        <Setter Property="MinHeight" Value="8"/>
-        <Setter Property="Padding" Value="0"/>
     </Style>
 
 </Styles>

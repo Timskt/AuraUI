@@ -90,7 +90,7 @@ public class Chart : Control
         AvaloniaProperty.Register<Chart, Color[]?>(nameof(Palette));
 
     /// <summary>Chart theme preset (Light, Dark, Custom).</summary>
-    public static readonly StyledProperty<ChartTheme> ThemeProperty =
+    public static new readonly StyledProperty<ChartTheme> ThemeProperty =
         AvaloniaProperty.Register<Chart, ChartTheme>(nameof(Theme), ChartTheme.Light);
 
     // CLR wrappers
@@ -103,7 +103,7 @@ public class Chart : Control
     public bool IsAnimated { get => GetValue(IsAnimatedProperty); set => SetValue(IsAnimatedProperty, value); }
     public TimeSpan AnimationDuration { get => GetValue(AnimationDurationProperty); set => SetValue(AnimationDurationProperty, value); }
     public Color[]? Palette { get => GetValue(PaletteProperty); set => SetValue(PaletteProperty, value); }
-    public ChartTheme Theme { get => GetValue(ThemeProperty); set => SetValue(ThemeProperty, value); }
+    public new ChartTheme Theme { get => GetValue(ThemeProperty); set => SetValue(ThemeProperty, value); }
 
     // ────────────────────────────────────────────────
     //  Child configuration objects (not controls!)
@@ -123,6 +123,15 @@ public class Chart : Control
 
     /// <summary>Grid/background configuration.</summary>
     public ChartGrid Grid { get; } = new();
+
+    /// <summary>Toolbar with save, data view, and zoom buttons.</summary>
+    public ChartToolbox Toolbox { get; } = new();
+
+    /// <summary>Brush selection for area highlight and filtering.</summary>
+    public ChartBrush BrushSelection { get; } = new();
+
+    /// <summary>DataZoom slider for selecting a data range subset.</summary>
+    public DataZoom DataZoom { get; } = new();
 
     // ────────────────────────────────────────────────
     //  Series collection
@@ -157,6 +166,12 @@ public class Chart : Control
 
     /// <summary>Raised when the pointer leaves a data point.</summary>
     public event EventHandler? PointLeave;
+
+    /// <summary>Raised when the "Save as Image" toolbox button is clicked.</summary>
+    public event EventHandler? SaveAsImageRequested;
+
+    /// <summary>Raised when the "Data View" toolbox button is clicked.</summary>
+    public event EventHandler? DataViewRequested;
 
     // ────────────────────────────────────────────────
     //  Internal state
@@ -214,6 +229,45 @@ public class Chart : Control
             AttachSeries();
             InvalidateMeasure();
         };
+
+        // Wire up toolbox events
+        Toolbox.SaveAsImageRequested += () => SaveAsImageRequested?.Invoke(this, EventArgs.Empty);
+        Toolbox.DataViewRequested += () => DataViewRequested?.Invoke(this, EventArgs.Empty);
+        Toolbox.ZoomInRequested += () =>
+        {
+            ZoomByFactor(1.2);
+        };
+        Toolbox.ZoomOutRequested += () =>
+        {
+            ZoomByFactor(0.8);
+        };
+        Toolbox.ResetZoomRequested += () =>
+        {
+            XAxis.EffectiveMin = double.NaN;
+            XAxis.EffectiveMax = double.NaN;
+            YAxis.EffectiveMin = double.NaN;
+            YAxis.EffectiveMax = double.NaN;
+            _zoomPan.ZoomFactor = 1.0;
+            DataZoom.Start = 0;
+            DataZoom.End = 1.0;
+            _needsDataRecompute = true;
+            InvalidateMeasure();
+        };
+
+        // Wire up data zoom range changes
+        DataZoom.RangeChanged += (start, end) =>
+        {
+            var dataMin = XAxis.EffectiveMin;
+            var dataMax = XAxis.EffectiveMax;
+            var range = dataMax - dataMin;
+            if (range > 0)
+            {
+                XAxis.EffectiveMin = dataMin + start * range;
+                XAxis.EffectiveMax = dataMin + end * range;
+                _needsDataRecompute = true;
+                InvalidateVisual();
+            }
+        };
     }
 
     // ────────────────────────────────────────────────
@@ -230,6 +284,7 @@ public class Chart : Control
     {
         base.OnDetachedFromVisualTree(e);
         _animation.Dispose();
+        _zoomPan.Dispose();
     }
 
     // ────────────────────────────────────────────────
@@ -337,6 +392,18 @@ public class Chart : Control
         // 9. Tooltip (drawn last, on top)
         if (_tooltipState.IsVisible)
             RenderTooltip(context);
+
+        // 10. Brush selection overlay
+        BrushSelection.Render(context, _plotArea);
+
+        // 11. DataZoom slider
+        if (DataZoom.IsVisible)
+        {
+            DataZoom.Render(context, _plotArea);
+        }
+
+        // 12. Toolbox (top-right corner)
+        Toolbox.Render(context, bounds);
 
         // Clear dirty flags and end benchmark frame
         _renderContext.ClearDirtyFlags();
@@ -637,13 +704,15 @@ public class Chart : Control
     }
 
     // ────────────────────────────────────────────────
-    //  Tooltip rendering
+    //  Tooltip rendering (rich: multi-series, color swatches, crosshair)
     // ────────────────────────────────────────────────
 
     private void RenderTooltip(DrawingContext context)
     {
         var ts = _tooltipState;
-        if (ts.Series == null) return;
+
+        // For axis trigger, we need at least one axis entry or a primary series
+        if (ts.Series == null && (ts.AxisEntries == null || ts.AxisEntries.Count == 0)) return;
 
         var bg = Tooltip.Background
             ?? TryFindResource<IBrush>("AuraInverseSurfaceBrush")
@@ -655,70 +724,158 @@ public class Chart : Control
             ?? TryFindResource<IBrush>("AuraOutlineVariantBrush")
             ?? Brushes.LightGray;
 
-        // Build tooltip text
-        var lines = new List<string>();
-        if (!string.IsNullOrEmpty(ts.Title))
-            lines.Add(ts.Title);
-        if (!string.IsNullOrEmpty(ts.Value))
-            lines.Add(ts.Value);
-
-        if (lines.Count == 0)
+        // ─── Render crosshair line (vertical line at hovered X position) ───
+        if (Tooltip.ShowCrosshair && ts.CrosshairPixelX.HasValue)
         {
-            // Auto-generate from data point
-            if (ts.DataPoint != null)
+            var crosshairBrush = Tooltip.CrosshairBrush
+                ?? new SolidColorBrush(Colors.Gray, 0.3);
+            var crosshairPen = new Pen(crosshairBrush, 1.0, new DashStyle(new double[] { 4, 2 }, 0));
+            context.DrawLine(crosshairPen,
+                new Point(ts.CrosshairPixelX.Value, _plotArea.Top),
+                new Point(ts.CrosshairPixelX.Value, _plotArea.Bottom));
+        }
+
+        // ─── Build tooltip lines ───
+        var tooltipLines = new List<TooltipLine>();
+        var valueFormat = Tooltip.ValueFormat ?? "F2";
+        var xFormat = Tooltip.XValueFormat ?? "F2";
+
+        // Try rich formatter first
+        if (Tooltip.RichFormatter != null)
+        {
+            var customLines = Tooltip.RichFormatter(
+                ts.Series ?? ts.AxisEntries![0].Series,
+                ts.DataPoint,
+                ts.SliceData,
+                ts.DataIndex);
+            if (customLines != null)
             {
-                if (!string.IsNullOrEmpty(ts.DataPoint.Label))
-                    lines.Add(ts.DataPoint.Label);
-                lines.Add($"X: {ts.DataPoint.X:F2}  Y: {ts.DataPoint.Y:F2}");
-            }
-            else if (ts.SliceData != null)
-            {
-                if (!string.IsNullOrEmpty(ts.SliceData.Label))
-                    lines.Add(ts.SliceData.Label);
-                lines.Add($"Value: {ts.SliceData.Value:F2}");
+                tooltipLines.AddRange(customLines);
             }
         }
 
-        if (lines.Count == 0) return;
+        // Fall back to auto-generated content
+        if (tooltipLines.Count == 0)
+        {
+            // Axis trigger: show all series at this X position
+            if (ts.AxisEntries != null && ts.AxisEntries.Count > 0)
+            {
+                // Header: X value
+                var xVal = ts.CrosshairXValue ?? ts.AxisEntries[0].DataPoint.X;
+                tooltipLines.Add(new TooltipLine
+                {
+                    Text = $"X: {xVal.ToString(xFormat)}",
+                    IsHeader = true,
+                    FontWeight = FontWeight.SemiBold
+                });
 
-        // Measure tooltip size
+                // Each series entry with color swatch
+                foreach (var entry in ts.AxisEntries)
+                {
+                    var seriesColor = entry.Series.Color is IBrush sc
+                        ? sc
+                        : new SolidColorBrush(LineRenderer.DefaultPalette[entry.Series.SeriesIndex % LineRenderer.DefaultPalette.Length]);
+
+                    var seriesName = entry.Series.Title ?? $"Series {entry.Series.SeriesIndex + 1}";
+                    var yVal = entry.DataPoint.Y.ToString(valueFormat);
+                    tooltipLines.Add(new TooltipLine
+                    {
+                        Text = $"{seriesName}: {yVal}",
+                        ColorSwatch = seriesColor,
+                        FontWeight = FontWeight.Normal
+                    });
+                }
+            }
+            // Item trigger: single data point
+            else if (ts.Series != null)
+            {
+                // Series name as header
+                if (!string.IsNullOrEmpty(ts.Series.Title))
+                {
+                    tooltipLines.Add(new TooltipLine
+                    {
+                        Text = ts.Series.Title,
+                        IsHeader = true,
+                        FontWeight = FontWeight.SemiBold,
+                        ColorSwatch = ts.Series.Color as IBrush
+                    });
+                }
+
+                if (ts.DataPoint != null)
+                {
+                    if (!string.IsNullOrEmpty(ts.DataPoint.Label))
+                    {
+                        tooltipLines.Add(new TooltipLine { Text = ts.DataPoint.Label });
+                    }
+                    tooltipLines.Add(new TooltipLine
+                    {
+                        Text = $"X: {ts.DataPoint.X.ToString(xFormat)}   Y: {ts.DataPoint.Y.ToString(valueFormat)}"
+                    });
+                }
+                else if (ts.SliceData != null)
+                {
+                    if (!string.IsNullOrEmpty(ts.SliceData.Label))
+                    {
+                        tooltipLines.Add(new TooltipLine { Text = ts.SliceData.Label });
+                    }
+                    tooltipLines.Add(new TooltipLine
+                    {
+                        Text = $"Value: {ts.SliceData.Value.ToString(valueFormat)}"
+                    });
+                }
+            }
+        }
+
+        if (tooltipLines.Count == 0) return;
+
+        // ─── Measure tooltip ───
         var fontSize = Tooltip.FontSize;
         var padding = Tooltip.Padding;
+        var swatchSize = Tooltip.ColorSwatchSize;
+        var fontFamily = Tooltip.TextFontFamily ?? "Segoe UI";
         var maxWidth = 0.0;
         var totalHeight = 0.0;
-        var formattedLines = new List<FormattedText>();
+        var lineHeight = 0.0;
+        var measuredLines = new List<(FormattedText ft, TooltipLine line)>();
 
-        foreach (var line in lines)
+        foreach (var tl in tooltipLines)
         {
-            var ft = new FormattedText(line,
+            var lineFontSize = tl.FontSize > 0 ? tl.FontSize : fontSize;
+            var ft = new FormattedText(tl.Text,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
-                fontSize,
+                new Typeface(fontFamily, FontStyle.Normal, tl.FontWeight),
+                lineFontSize,
                 fg);
-            formattedLines.Add(ft);
-            if (ft.Width > maxWidth) maxWidth = ft.Width;
+            measuredLines.Add((ft, tl));
+            if (ft.Height > lineHeight) lineHeight = ft.Height;
+
+            // Account for swatch width
+            var swatchWidth = tl.ColorSwatch != null ? swatchSize + 6 : 0;
+            if (ft.Width + swatchWidth > maxWidth) maxWidth = ft.Width + swatchWidth;
             totalHeight += ft.Height + 2;
         }
 
         var tooltipWidth = maxWidth + padding.Left + padding.Right;
         var tooltipHeight = totalHeight + padding.Top + padding.Bottom;
 
-        // Position tooltip (offset from hit point, clamped to bounds)
+        // ─── Auto-position tooltip to stay within chart bounds ───
         var tipX = ts.Position.X + 12;
         var tipY = ts.Position.Y - tooltipHeight - 8;
 
-        // Clamp to plot area
+        // Clamp to plot area (and chart bounds)
         if (tipX + tooltipWidth > _plotArea.Right)
             tipX = ts.Position.X - tooltipWidth - 12;
         if (tipY < _plotArea.Top)
             tipY = ts.Position.Y + 12;
         if (tipX < _plotArea.Left)
             tipX = _plotArea.Left + 4;
+        if (tipY + tooltipHeight > _plotArea.Bottom)
+            tipY = _plotArea.Bottom - tooltipHeight - 4;
 
         var tooltipRect = new Rect(tipX, tipY, tooltipWidth, tooltipHeight);
 
-        // Shadow
+        // ─── Draw shadow ───
         if (Tooltip.ShadowBlurRadius > 0)
         {
             var shadowBrush = new SolidColorBrush(Colors.Black, 0.15);
@@ -727,25 +884,46 @@ public class Chart : Control
                 Tooltip.CornerRadius.TopLeft, Tooltip.CornerRadius.TopLeft);
         }
 
-        // Background
+        // ─── Draw background ───
         context.DrawRectangle(bg, new Pen(borderBrush, Tooltip.BorderThickness),
             tooltipRect,
             Tooltip.CornerRadius.TopLeft, Tooltip.CornerRadius.TopLeft);
 
-        // Text
+        // ─── Draw text lines with optional color swatches ───
         var textY = tipY + padding.Top;
-        foreach (var ft in formattedLines)
+        foreach (var (ft, tl) in measuredLines)
         {
-            context.DrawText(ft, new Point(tipX + padding.Left, textY));
+            var textX = tipX + padding.Left;
+
+            // Draw color swatch if present
+            if (tl.ColorSwatch != null)
+            {
+                var swatchRect = new Rect(textX, textY + (ft.Height - swatchSize) / 2, swatchSize, swatchSize);
+                context.DrawRectangle(tl.ColorSwatch, null, swatchRect, 2, 2);
+                textX += swatchSize + 6;
+            }
+
+            context.DrawText(ft, new Point(textX, textY));
             textY += ft.Height + 2;
         }
 
-        // Crosshair indicator (small circle at data point)
-        if (ts.DataPoint != null)
+        // ─── Draw data point indicators ───
+        if (ts.DataPoint != null && ts.Series != null)
         {
             var dotBrush = ts.Series.Color is IBrush sc ? sc : Brushes.DodgerBlue;
             context.DrawEllipse(dotBrush, null, ts.Position, 4, 4);
             context.DrawEllipse(Brushes.White, null, ts.Position, 2, 2);
+        }
+
+        // For axis trigger, draw indicators at each series point
+        if (ts.AxisEntries != null)
+        {
+            foreach (var entry in ts.AxisEntries)
+            {
+                var dotBrush = entry.Series.Color is IBrush sc ? sc : Brushes.DodgerBlue;
+                context.DrawEllipse(dotBrush, null, entry.PixelPosition, 4, 4);
+                context.DrawEllipse(Brushes.White, null, entry.PixelPosition, 2, 2);
+            }
         }
     }
 
@@ -805,6 +983,12 @@ public class Chart : Control
             left += axisLabelWidth;
         if (!string.IsNullOrEmpty(YAxis.Title))
             left += axisTitleHeight;
+
+        // Reserve space for DataZoom slider (only for Slider type, not Inside)
+        if (DataZoom.IsVisible && DataZoom.ZoomType == DataZoomType.Slider)
+        {
+            bottom -= DataZoom.Height + 8; // 8px gap between plot and slider
+        }
 
         // Plot area
         _plotArea = new Rect(left, top, right - left, bottom - top);
@@ -899,13 +1083,17 @@ public class Chart : Control
     }
 
     // ────────────────────────────────────────────────
-    //  Input handling (hover, click, zoom/pan)
+    //  Input handling (hover, click, zoom/pan, brush, toolbox, datazoom)
     // ────────────────────────────────────────────────
 
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
 
+        var pos = e.GetPosition(this);
+        var bounds = new Rect(Bounds.Size);
+
+        // Handle zoom pan
         if (_zoomPan.IsPanning)
         {
             _zoomPan.HandlePointerMoved(e, XAxis, YAxis, _plotArea);
@@ -913,10 +1101,42 @@ public class Chart : Control
             return;
         }
 
+        // Handle brush selection
+        if (BrushSelection.IsActive)
+        {
+            BrushSelection.HandlePointerMoved(pos, _plotArea);
+            InvalidateVisual();
+            return;
+        }
+
+        // Handle data zoom slider
+        if (DataZoom.IsVisible)
+        {
+            var zoomBarRect = DataZoom.ZoomType == DataZoomType.Inside
+                ? _plotArea
+                : new Rect(_plotArea.Left, _plotArea.Bottom + 8, _plotArea.Width, DataZoom.Height);
+            if (zoomBarRect.Contains(pos))
+            {
+                DataZoom.HandlePointerMoved(pos, _plotArea);
+                InvalidateVisual();
+                return;
+            }
+        }
+
+        // Handle toolbox hover
+        if (Toolbox.IsVisible)
+        {
+            if (Toolbox.HandlePointerMoved(pos, bounds))
+            {
+                InvalidateVisual();
+                return;
+            }
+        }
+
+        // Handle tooltip
         if (Tooltip.Trigger == TooltipTrigger.None || !Tooltip.IsEnabled)
             return;
 
-        var pos = e.GetPosition(this);
         if (!_plotArea.Contains(pos))
         {
             if (_tooltipState.IsVisible)
@@ -940,6 +1160,15 @@ public class Chart : Control
                 SliceData = hit.SliceData,
                 DataIndex = hit.DataIndex
             };
+
+            // For axis trigger: find all series at this X position
+            if (Tooltip.Trigger == TooltipTrigger.Axis && hit.DataPoint != null)
+            {
+                _tooltipState.CrosshairXValue = hit.DataPoint.X;
+                _tooltipState.CrosshairPixelX = XAxis.ValueToPixel(hit.DataPoint.X);
+                _tooltipState.AxisEntries = FindAxisEntries(hit.DataPoint.X, pos);
+            }
+
             PseudoClasses.Set(":hovering", true);
             InvalidateVisual();
             PointHover?.Invoke(this, new ChartPointHoverEventArgs(hit));
@@ -960,13 +1189,42 @@ public class Chart : Control
     {
         base.OnPointerPressed(e);
 
+        var pos = e.GetPosition(this);
+        var bounds = new Rect(Bounds.Size);
+
+        // Handle zoom pan (middle button or left button in plot area)
         if (_zoomPan.HandlePointerPressed(e, XAxis, YAxis, _plotArea))
         {
             PseudoClasses.Set(":panning", true);
             return;
         }
 
-        var pos = e.GetPosition(this);
+        // Handle toolbox button press
+        if (Toolbox.IsVisible && Toolbox.HandlePointerPressed(pos, bounds))
+        {
+            return;
+        }
+
+        // Handle data zoom slider press
+        if (DataZoom.IsVisible)
+        {
+            var zoomBarRect = DataZoom.ZoomType == DataZoomType.Inside
+                ? _plotArea
+                : new Rect(_plotArea.Left, _plotArea.Bottom + 8, _plotArea.Width, DataZoom.Height);
+            if (zoomBarRect.Contains(pos) && DataZoom.HandlePointerPressed(pos, _plotArea))
+            {
+                return;
+            }
+        }
+
+        // Handle brush selection start
+        if (BrushSelection.IsEnabled && _plotArea.Contains(pos))
+        {
+            if (BrushSelection.HandlePointerPressed(pos, _plotArea))
+            {
+                return;
+            }
+        }
 
         // Check legend click-to-toggle
         if (Legend.EnableToggle && Legend.IsVisible && Legend.LayoutRect.Contains(pos))
@@ -992,9 +1250,33 @@ public class Chart : Control
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
+
+        var pos = e.GetPosition(this);
+        var bounds = new Rect(Bounds.Size);
+
+        // Handle zoom pan release
         if (_zoomPan.HandlePointerReleased(e))
         {
             PseudoClasses.Set(":panning", false);
+        }
+
+        // Handle toolbox button release
+        if (Toolbox.IsVisible)
+        {
+            Toolbox.HandlePointerReleased(pos, bounds);
+        }
+
+        // Handle data zoom slider release
+        if (DataZoom.IsVisible)
+        {
+            DataZoom.HandlePointerReleased();
+        }
+
+        // Handle brush selection release
+        if (BrushSelection.IsActive)
+        {
+            BrushSelection.HandlePointerReleased();
+            InvalidateVisual();
         }
     }
 
@@ -1003,6 +1285,8 @@ public class Chart : Control
         base.OnPointerWheelChanged(e);
         if (_zoomPan.HandleWheel(e, XAxis, YAxis, _plotArea))
         {
+            // Sync data zoom slider with the new zoom range
+            SyncDataZoomFromAxes();
             InvalidateVisual();
         }
     }
@@ -1011,9 +1295,126 @@ public class Chart : Control
     {
         if (_zoomPan.HandleDoubleTapped(e, XAxis, YAxis, _plotArea))
         {
+            // Reset data zoom to full range
+            DataZoom.Start = 0;
+            DataZoom.End = 1.0;
             _needsDataRecompute = true;
             InvalidateMeasure();
         }
+    }
+
+    /// <summary>
+    /// Find all data entries across all series at the given X value (for axis trigger tooltip).
+    /// </summary>
+    private List<TooltipSeriesEntry> FindAxisEntries(double xValue, Point pointerPos)
+    {
+        var entries = new List<TooltipSeriesEntry>();
+
+        foreach (var s in Series)
+        {
+            if (!s.IsVisible) continue;
+            if (s is not XYChartSeries xy) continue;
+            if (xy.DataPoints.Count == 0) continue;
+
+            // Find nearest data point by X value
+            int bestIndex = -1;
+            double bestDist = double.MaxValue;
+            for (int i = 0; i < xy.DataPoints.Count; i++)
+            {
+                var dist = Math.Abs(xy.DataPoints[i].X - xValue);
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    bestIndex = i;
+                }
+            }
+
+            if (bestIndex >= 0)
+            {
+                var dp = xy.DataPoints[bestIndex];
+                var px = XAxis.ValueToPixel(dp.X);
+                var py = YAxis.ValueToPixel(dp.Y);
+                entries.Add(new TooltipSeriesEntry
+                {
+                    Series = s,
+                    DataPoint = dp,
+                    DataIndex = bestIndex,
+                    PixelPosition = new Point(px, py)
+                });
+            }
+        }
+
+        return entries;
+    }
+
+    /// <summary>
+    /// Zoom by a factor at the center of the plot area.
+    /// </summary>
+    private void ZoomByFactor(double factor)
+    {
+        var centerX = _plotArea.Center.X;
+        var centerY = _plotArea.Center.Y;
+
+        // Zoom X axis
+        var xRange = XAxis.EffectiveMax - XAxis.EffectiveMin;
+        if (xRange > 0)
+        {
+            var fraction = (centerX - _plotArea.Left) / _plotArea.Width;
+            var pivotValue = XAxis.EffectiveMin + fraction * xRange;
+            var newRange = xRange / factor;
+            XAxis.EffectiveMin = pivotValue - fraction * newRange;
+            XAxis.EffectiveMax = pivotValue + (1 - fraction) * newRange;
+        }
+
+        // Zoom Y axis
+        var yRange = YAxis.EffectiveMax - YAxis.EffectiveMin;
+        if (yRange > 0)
+        {
+            var fraction = (centerY - _plotArea.Top) / _plotArea.Height;
+            var pivotValue = YAxis.EffectiveMin + fraction * yRange;
+            var newRange = yRange / factor;
+            YAxis.EffectiveMin = pivotValue - fraction * newRange;
+            YAxis.EffectiveMax = pivotValue + (1 - fraction) * newRange;
+        }
+
+        SyncDataZoomFromAxes();
+        InvalidateVisual();
+    }
+
+    /// <summary>
+    /// Sync the DataZoom slider's Start/End from the current axis ranges.
+    /// Called after zoom/pan operations.
+    /// </summary>
+    private void SyncDataZoomFromAxes()
+    {
+        if (!DataZoom.IsVisible) return;
+
+        // We need the original data range to compute normalized positions
+        var xMin = XAxis.MinValue;
+        var xMax = XAxis.MaxValue;
+
+        // If no explicit range, compute from series
+        if (double.IsNaN(xMin) || double.IsNaN(xMax))
+        {
+            xMin = double.MaxValue;
+            xMax = double.MinValue;
+            foreach (var s in Series)
+            {
+                if (s is not XYChartSeries xy || !s.IsVisible) continue;
+                foreach (var pt in xy.DataPoints)
+                {
+                    if (pt.X < xMin) xMin = pt.X;
+                    if (pt.X > xMax) xMax = pt.X;
+                }
+            }
+            if (xMin >= xMax) { xMin = 0; xMax = 1; }
+        }
+
+        var totalRange = xMax - xMin;
+        if (totalRange <= 0) return;
+
+        DataZoom.Start = Math.Clamp((XAxis.EffectiveMin - xMin) / totalRange, 0, 1);
+        DataZoom.End = Math.Clamp((XAxis.EffectiveMax - xMin) / totalRange, 0, 1);
     }
 
     // ────────────────────────────────────────────────
@@ -1056,11 +1457,13 @@ public class Chart : Control
     /// </summary>
     private sealed class PrecomputedGeometry
     {
+#pragma warning disable CS0649 // Fields are assigned by the geometry cache system
         public Avalonia.Media.StreamGeometry? LinePath;
         public Avalonia.Media.StreamGeometry? AreaPath;
         public int DataHash;
         public int SizeHash;
         public double Progress;
+#pragma warning restore CS0649
     }
 
     // ────────────────────────────────────────────────

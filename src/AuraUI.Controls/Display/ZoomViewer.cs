@@ -1,8 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Presenters;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace AuraUI.Controls.Display;
 
@@ -228,7 +231,7 @@ public class ZoomViewer : ContentControl
         }
     }
 
-    protected override void OnPointerMoved(PointerMovedEventArgs e)
+    protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
 
@@ -254,13 +257,21 @@ public class ZoomViewer : ContentControl
         }
     }
 
-    protected override void OnDoubleTapped(TappedEventArgs e)
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
-        base.OnDoubleTapped(e);
+        base.OnAttachedToVisualTree(e);
+        DoubleTapped += OnDoubleTappedHandler;
+    }
 
-        // Reset zoom and pan on double-click
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        DoubleTapped -= OnDoubleTappedHandler;
+    }
+
+    private void OnDoubleTappedHandler(object? sender, TappedEventArgs e)
+    {
         ResetView();
-        e.Handled = true;
     }
 
     /// <summary>

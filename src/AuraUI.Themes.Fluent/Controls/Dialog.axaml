@@ -1,8 +1,100 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="using:AuraUI.Controls.Feedback">
 
     <!-- ============================================================
-         Dialog — Fluent Style (Modal Dialog)
+         AuraDialog — Fluent Style (ContentControl-based dialog)
+         ============================================================ -->
+    <Style Selector="feedback|AuraDialog">
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Overlay backdrop -->
+                    <Border Name="PART_Overlay"
+                            Background="{DynamicResource AuraSmokeBrush}"
+                            IsVisible="False"/>
+
+                    <!-- Dialog border -->
+                    <Border Name="PART_DialogBorder"
+                            Background="{DynamicResource AuraCardBrush}"
+                            CornerRadius="{DynamicResource AuraDialogRadius}"
+                            BoxShadow="{DynamicResource AuraShadowLg}"
+                            ClipToBounds="True"
+                            MinWidth="320"
+                            MaxWidth="680"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsVisible="False">
+                        <DockPanel>
+                            <!-- Title bar -->
+                            <Border DockPanel.Dock="Top"
+                                    Background="Transparent"
+                                    Padding="24,20,24,0">
+                                <DockPanel>
+                                    <!-- Close button -->
+                                    <Button Name="PART_CloseButton"
+                                            DockPanel.Dock="Right"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Padding="4"
+                                            Width="32" Height="32"
+                                            CornerRadius="4"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Margin="8,-4,-4,0"
+                                            Cursor="Hand">
+                                        <Path Width="12" Height="12"
+                                              Data="M 1,1 L 11,11 M 11,1 L 1,11"
+                                              Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                              StrokeThickness="1.5"/>
+                                    </Button>
+
+                                    <!-- Title -->
+                                    <TextBlock Name="PART_Title"
+                                               Text="{TemplateBinding DialogTitle}"
+                                               FontSize="20"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AuraForegroundBrush}"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"/>
+                                </DockPanel>
+                            </Border>
+
+                            <!-- Content area -->
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto"
+                                          MaxHeight="500">
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Margin="24,16"/>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Dialog open state -->
+    <Style Selector="feedback|AuraDialog:open">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_Overlay">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="feedback|AuraDialog:open /template/ Border#PART_DialogBorder">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Dialog close button hover -->
+    <Style Selector="feedback|AuraDialog /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         AuraMessageBox — Window.dialog style (for standalone windows)
          ============================================================ -->
     <Style Selector="Window.dialog">
         <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
@@ -93,30 +185,6 @@
     <!-- Dialog overlay backdrop -->
     <Style Selector="Border.dialog-overlay">
         <Setter Property="Background" Value="{DynamicResource AuraSmokeBrush}"/>
-    </Style>
-
-    <!-- Dialog variants -->
-    <!-- Small dialog -->
-    <Style Selector="Window.dialog.small">
-        <Setter Property="MinWidth" Value="320"/>
-        <Setter Property="MaxWidth" Value="420"/>
-    </Style>
-
-    <!-- Large dialog -->
-    <Style Selector="Window.dialog.large">
-        <Setter Property="MinWidth" Value="600"/>
-        <Setter Property="MaxWidth" Value="900"/>
-    </Style>
-
-    <!-- Full-screen dialog -->
-    <Style Selector="Window.dialog.fullscreen">
-        <Setter Property="CornerRadius" Value="0"/>
-        <Setter Property="WindowState" Value="Maximized"/>
-    </Style>
-
-    <!-- Dialog with no close button -->
-    <Style Selector="Window.dialog.no-close /template/ Button#PART_CloseButton">
-        <Setter Property="IsVisible" Value="False"/>
     </Style>
 
     <!-- Overlay backdrop -->

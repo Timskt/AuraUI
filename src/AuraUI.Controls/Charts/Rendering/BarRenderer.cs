@@ -23,7 +23,8 @@ public class BarRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.BarSeries bar || !series.IsVisible) return;
         if (xAxis == null || yAxis == null) return;
@@ -47,6 +48,11 @@ public class BarRenderer : IChartRenderer
         var categoryWidth = plotArea.Width / dataPoints.Count;
         var totalBarWidth = bar.BarWidth > 0 ? bar.BarWidth : categoryWidth * 0.7;
         var groupBarWidth = totalBarWidth / groupCount;
+
+        if (renderContext != null)
+        {
+            renderContext.Benchmark.BeginGeometryBuild();
+        }
 
         for (int i = 0; i < dataPoints.Count; i++)
         {
@@ -76,6 +82,12 @@ public class BarRenderer : IChartRenderer
                 DrawRoundedRect(context, brush, barRect, radius);
             }
         }
+
+        if (renderContext != null)
+        {
+            renderContext.Benchmark.EndGeometryBuild();
+            renderContext.Benchmark.RecordPointCounts(dataPoints.Count, 0);
+        }
     }
 
     public ChartHitResult? HitTest(
@@ -84,7 +96,8 @@ public class BarRenderer : IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not Series.BarSeries bar) return null;
         if (xAxis == null || yAxis == null) return null;

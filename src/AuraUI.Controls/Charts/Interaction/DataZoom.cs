@@ -193,7 +193,7 @@ public class DataZoom
         var dataRange = dataMax - dataMin;
         if (dataRange <= 0) dataRange = 1;
 
-        var innerRect = barRect.Define(new Thickness(2));
+        var innerRect = new Rect(barRect.X + 2, barRect.Y + 2, barRect.Width - 4, barRect.Height - 4);
         var miniPath = new PathGeometry();
         var figure = new PathFigure { IsClosed = false };
 

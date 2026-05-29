@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Path = Avalonia.Controls.Shapes.Path;
 
 namespace AuraUI.Controls.Layout;
 
@@ -69,7 +71,7 @@ public class Bubble : ContentControl
     public static readonly StyledProperty<IBrush?> ArrowBrushProperty =
         AvaloniaProperty.Register<Bubble, IBrush?>(nameof(ArrowBrush));
 
-    private Path? _arrowPath;
+    private Avalonia.Controls.Shapes.Path? _arrowPath;
 
     static Bubble()
     {
@@ -141,7 +143,7 @@ public class Bubble : ContentControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        _arrowPath = e.NameScope.Find<Path>("PART_Arrow");
+        _arrowPath = e.NameScope.Find<Avalonia.Controls.Shapes.Path>("PART_Arrow");
         UpdatePseudoClasses();
         UpdateArrow();
     }

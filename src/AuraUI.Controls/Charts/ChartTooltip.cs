@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Media;
+using AuraUI.Controls.Charts.Rendering;
 
 namespace AuraUI.Controls.Charts;
 

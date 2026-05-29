@@ -54,7 +54,11 @@ public interface IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries);
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
+    {
+        return null;
+    }
 }
 
 /// <summary>

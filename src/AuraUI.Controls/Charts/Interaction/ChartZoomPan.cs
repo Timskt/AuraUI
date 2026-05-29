@@ -65,7 +65,7 @@ internal sealed class ChartZoomPan : IDisposable
     /// <summary>
     /// Current zoom factor (1.0 = no zoom, 2.0 = zoomed in 2x).
     /// </summary>
-    public double ZoomFactor { get; private set; } = 1.0;
+    public double ZoomFactor { get; set; } = 1.0;
 
     /// <summary>
     /// Raised when the zoom range changes (after animation completes or immediately).

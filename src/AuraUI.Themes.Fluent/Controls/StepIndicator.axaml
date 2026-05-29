@@ -1,10 +1,11 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
 
     <!-- ============================================================
          StepIndicator — Fluent Style
          ============================================================ -->
-    <Style Selector="ItemsControl.step-indicator">
+    <Style Selector="display|StepIndicator">
         <Setter Property="Template">
             <ControlTemplate>
                 <ItemsPresenter Name="PART_ItemsPresenter">
@@ -18,114 +19,92 @@
         </Setter>
     </Style>
 
-    <!-- Step item container -->
-    <Style Selector="Border.step-item">
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-    </Style>
-
-    <!-- Step circle -->
-    <Style Selector="Border.step-circle">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
-        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-    </Style>
-
-    <Style Selector="Border.step-circle TextBlock">
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <!-- Step connector line -->
-    <Style Selector="Border.step-connector">
-        <Setter Property="Height" Value="2"/>
-        <Setter Property="Background" Value="{DynamicResource AuraDividerBrush}"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,0,0,0"/>
-    </Style>
-
-    <!-- Step label -->
-    <Style Selector="TextBlock.step-label">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,8,0,0"/>
-    </Style>
-
     <!-- ============================================================
-         Step States
+         StepIndicatorItem — Fluent Style
          ============================================================ -->
+    <Style Selector="display|StepIndicatorItem">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <StackPanel Orientation="Horizontal" Spacing="0">
+                        <!-- Step circle + label -->
+                        <StackPanel Width="120" Spacing="8" HorizontalAlignment="Center">
+                            <!-- Circle with step number -->
+                            <Border Name="PART_Circle"
+                                    Width="32" Height="32"
+                                    CornerRadius="16"
+                                    Background="{DynamicResource AuraMutedBrush}"
+                                    BorderBrush="{DynamicResource AuraBorderBrush}"
+                                    BorderThickness="2"
+                                    HorizontalAlignment="Center">
+                                <TextBlock Name="PART_StepNumber"
+                                           Text="{TemplateBinding StepIndex}"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Border>
 
-    <!-- Completed step -->
-    <Style Selector="Border.step-circle.completed">
+                            <!-- Title and Description -->
+                            <StackPanel HorizontalAlignment="Center" Spacing="2">
+                                <TextBlock Text="{TemplateBinding Title}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"
+                                           TextAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding Description}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Connector line (not on last item) -->
+                        <Border Name="PART_Connector"
+                                Height="2"
+                                Width="40"
+                                Background="{DynamicResource AuraDividerBrush}"
+                                VerticalAlignment="Top"
+                                Margin="0,16,0,0"/>
+                    </StackPanel>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Step states -->
+    <Style Selector="display|StepIndicatorItem:completed /template/ Border#PART_Circle">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
-    <Style Selector="Border.step-circle.completed TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+    <Style Selector="display|StepIndicatorItem:completed /template/ Border#PART_Circle TextBlock">
+        <Setter Property="Foreground" Value="White"/>
     </Style>
 
-    <!-- Active step -->
-    <Style Selector="Border.step-circle.active">
+    <Style Selector="display|StepIndicatorItem:active /template/ Border#PART_Circle">
         <Setter Property="Background" Value="{DynamicResource AuraBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
-    <Style Selector="Border.step-circle.active TextBlock">
+    <Style Selector="display|StepIndicatorItem:active /template/ Border#PART_Circle TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
-    <!-- Upcoming step (default) -->
-    <Style Selector="Border.step-circle.upcoming">
-        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
-    </Style>
-
-    <!-- Error step -->
-    <Style Selector="Border.step-circle.error">
+    <Style Selector="display|StepIndicatorItem:error /template/ Border#PART_Circle">
         <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
-    <Style Selector="Border.step-circle.error TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
+
+    <!-- Hide connector on last item -->
+    <Style Selector="display|StepIndicatorItem:last /template/ Border#PART_Connector">
+        <Setter Property="IsVisible" Value="False"/>
     </Style>
 
     <!-- Completed connector -->
-    <Style Selector="Border.step-connector.completed">
+    <Style Selector="display|StepIndicatorItem:completed /template/ Border#PART_Connector">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-    </Style>
-
-    <!-- Active connector -->
-    <Style Selector="Border.step-connector.active">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-    </Style>
-
-    <!-- ============================================================
-         Step Indicator Variants
-         ============================================================ -->
-
-    <!-- Compact (small circles) -->
-    <Style Selector="ItemsControl.step-indicator.compact Border.step-circle">
-        <Setter Property="Width" Value="24"/>
-        <Setter Property="Height" Value="24"/>
-    </Style>
-    <Style Selector="ItemsControl.step-indicator.compact Border.step-circle TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-    </Style>
-
-    <!-- Vertical orientation -->
-    <Style Selector="ItemsControl.step-indicator.vertical /template/ ItemsPresenter">
-        <Setter Property="ItemsPanel">
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Vertical"/>
-            </ItemsPanelTemplate>
-        </Setter>
     </Style>
 
 </Styles>

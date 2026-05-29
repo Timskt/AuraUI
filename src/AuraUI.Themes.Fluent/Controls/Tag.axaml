@@ -1,94 +1,101 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
 
     <!-- ============================================================
          Tag — Fluent Style
          ============================================================ -->
-    <Style Selector="Border.tag">
+    <Style Selector="layout|Tag">
         <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraTagRadius}"/>
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="MinHeight" Value="24"/>
-        <Setter Property="ClipToBounds" Value="True"/>
-        <Setter Property="Cursor" Value="Hand"/>
-    </Style>
-
-    <!-- Tag transitions -->
-    <Style Selector="Border.tag">
-        <Setter Property="Border.Transitions">
-            <Transitions>
-                <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-            </Transitions>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource AuraTagRadius}"
+                        Padding="8,4"
+                        MinHeight="24"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <!-- Icon -->
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          Content="{TemplateBinding Icon}"
+                                          VerticalAlignment="Center"/>
+                        <!-- Content -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          VerticalAlignment="Center"/>
+                        <!-- Close button -->
+                        <Button Name="PART_CloseButton"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="2,0"
+                                Margin="2,0,-2,0"
+                                VerticalAlignment="Center"
+                                Cursor="Hand"
+                                IsVisible="False">
+                            <Path Width="10" Height="10"
+                                  Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                  Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
+                                  StrokeThickness="1.5"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
         </Setter>
     </Style>
 
-    <!-- Tag :pointerover -->
-    <Style Selector="Border.tag:pointerover">
+    <!-- Closable: show close button -->
+    <Style Selector="layout|Tag:closable /template/ Button#PART_CloseButton">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="layout|Tag:closable /template/ Border#PART_Border">
+        <Setter Property="Padding" Value="8,4,4,4"/>
+    </Style>
+
+    <!-- Tag hover/press states -->
+    <Style Selector="layout|Tag:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 
-    <!-- Tag :pressed -->
-    <Style Selector="Border.tag:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-    </Style>
-
-    <!-- Tag sizes -->
-    <Style Selector="Border.tag.sm">
-        <Setter Property="Padding" Value="6,2"/>
-        <Setter Property="MinHeight" Value="20"/>
-    </Style>
-    <Style Selector="Border.tag.sm TextBlock">
-        <Setter Property="FontSize" Value="11"/>
-    </Style>
-
-    <Style Selector="Border.tag.lg">
-        <Setter Property="Padding" Value="12,6"/>
-        <Setter Property="MinHeight" Value="32"/>
-    </Style>
-    <Style Selector="Border.tag.lg TextBlock">
-        <Setter Property="FontSize" Value="14"/>
-    </Style>
-
-    <!-- Tag color variants -->
-    <Style Selector="Border.tag.primary">
+    <!-- Tag variant colors -->
+    <Style Selector="layout|Tag:primary /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
-    <Style Selector="Border.tag.primary TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
-    </Style>
 
-    <Style Selector="Border.tag.success">
+    <Style Selector="layout|Tag:success /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraSuccessLightBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
     </Style>
-    <Style Selector="Border.tag.success TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraSuccessBrush}"/>
-    </Style>
 
-    <Style Selector="Border.tag.warning">
+    <Style Selector="layout|Tag:warning /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraWarningLightBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraWarningBrush}"/>
     </Style>
-    <Style Selector="Border.tag.warning TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
-    </Style>
 
-    <Style Selector="Border.tag.error">
+    <Style Selector="layout|Tag:error /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
-    <Style Selector="Border.tag.error TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource AuraErrorBrush}"/>
+
+    <Style Selector="layout|Tag:outlined /template/ Border#PART_Border">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
     </Style>
 
-    <!-- Tag closable -->
-    <Style Selector="Border.tag.closable">
-        <Setter Property="Padding" Value="8,4,4,4"/>
+    <!-- Close button hover -->
+    <Style Selector="layout|Tag /template/ Button#PART_CloseButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
 </Styles>

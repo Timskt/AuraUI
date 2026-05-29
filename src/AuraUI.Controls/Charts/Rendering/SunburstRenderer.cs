@@ -19,7 +19,8 @@ public class SunburstRenderer : IChartRenderer
         ChartAxis? xAxis,
         ChartAxis? yAxis,
         double progress,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not SunburstSeries sunburst || !series.IsVisible) return;
         if (sunburst.Nodes.Count == 0) return;

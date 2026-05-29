@@ -75,6 +75,7 @@
     <StyleInclude Source="/Controls/DropDown.axaml"/>
     <StyleInclude Source="/Controls/ToggleButtonGroup.axaml"/>
     <StyleInclude Source="/Controls/FormGroup.axaml"/>
+    <StyleInclude Source="/Controls/FormField.axaml"/>
     <StyleInclude Source="/Controls/ColorPicker.axaml"/>
     <StyleInclude Source="/Controls/MaskedTextBox.axaml"/>
     <StyleInclude Source="/Controls/RepeatButton.axaml"/>
