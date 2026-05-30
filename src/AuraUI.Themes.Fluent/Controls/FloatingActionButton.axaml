@@ -39,18 +39,16 @@
             <Transitions>
                 <DoubleTransition Duration="00:00:00.100" Property="ScaleTransform.ScaleX" Easing="{DynamicResource AuraEasingStandard}"/>
                 <DoubleTransition Duration="00:00:00.100" Property="ScaleTransform.ScaleY" Easing="{DynamicResource AuraEasingStandard}"/>
+                <DoubleTransition Duration="00:00:00.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
 
 
-    <Style Selector="layout|FloatingActionButton:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
     <Style Selector="layout|FloatingActionButton:pressed">
-        <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>
-        <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <Style Selector="layout|FloatingActionButton.mini">

@@ -58,6 +58,7 @@
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
                 <BrushTransition Property="Foreground" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -66,21 +67,15 @@
 
 
     <!-- Pressed state layer -->
-    <Style Selector="input|AuraRepeatButton:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#1EFFFFFF"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Focus -->
-    <Style Selector="input|AuraRepeatButton:focus /template/ Border#RootBorder">
+    <Style Selector="input|AuraRepeatButton:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Disabled -->
     <Style Selector="input|AuraRepeatButton:disabled">
-        <Setter Property="Background" Value="{DynamicResource AuraDisabledBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Opacity" Value="0.38"/>
         <Setter Property="Cursor" Value="Arrow"/>
     </Style>
@@ -120,5 +115,15 @@
         <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="input|AuraRepeatButton:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+    </Style>
 
 </Styles>

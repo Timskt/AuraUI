@@ -5,8 +5,8 @@
     <!-- Material Design 3 — Toast -->
 
     <Style Selector="feedback|AuraToast">
-        <Setter Property="Background" Value="{DynamicResource AuraInverseSurfaceBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraInverseOnSurfaceBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
         <Setter Property="Padding" Value="16,12"/>
@@ -16,7 +16,9 @@
                 <ControlTemplate TargetType="feedback:AuraToast">
                     <Border Name="RootBorder"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="{DynamicResource AuraRadiusSm}"
+                            BorderBrush="{DynamicResource AuraBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{DynamicResource AuraRadiusMd}"
                             Padding="{TemplateBinding Padding}"
                             MaxWidth="{TemplateBinding MaxWidth}"
                             BoxShadow="{DynamicResource AuraShadowLevel3}"

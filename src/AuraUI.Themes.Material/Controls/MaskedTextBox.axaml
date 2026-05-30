@@ -73,7 +73,7 @@
     </Style>
 
     <!-- Focused -->
-    <Style Selector="input|MaskedTextBox:focus /template/ Border#RootBorder">
+    <Style Selector="input|MaskedTextBox:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
@@ -81,7 +81,6 @@
     <!-- Disabled -->
     <Style Selector="input|MaskedTextBox:disabled">
         <Setter Property="Opacity" Value="0.38"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
@@ -93,7 +92,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
     </Style>
 
-    <Style Selector="input|MaskedTextBox.outlined:focus /template/ Border#RootBorder">
+    <Style Selector="input|MaskedTextBox.outlined:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

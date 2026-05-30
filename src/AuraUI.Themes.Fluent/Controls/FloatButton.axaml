@@ -50,7 +50,6 @@
 
     <!-- FloatButton :pressed -->
     <Style Selector="layout|FloatButton:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
     </Style>
@@ -69,6 +68,16 @@
     <Style Selector="layout|FloatButton.large">
         <Setter Property="Width" Value="56"/>
         <Setter Property="Height" Value="56"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="layout|FloatButton:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

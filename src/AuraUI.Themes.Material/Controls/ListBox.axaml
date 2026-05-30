@@ -65,6 +65,7 @@
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -73,10 +74,6 @@
 
 
     <!-- Pressed -->
-    <Style Selector="ListBoxItem:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
-    </Style>
 
     <!-- Selected -->
     <Style Selector="ListBoxItem:selected /template/ Border#RootBorder">
@@ -92,6 +89,16 @@
     <Style Selector="ListBoxItem:disabled">
         <Setter Property="Opacity" Value="0.38"/>
         <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="ListBoxItem:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

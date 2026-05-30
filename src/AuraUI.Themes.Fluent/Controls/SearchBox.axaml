@@ -82,10 +82,11 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
-    <!-- SearchBox :focus -->
-    <Style Selector="TextBox.search:focus /template/ Border#PART_Border">
+    <!-- SearchBox :focus — 2px accent border -->
+    <Style Selector="TextBox.search:focus-visible /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- SearchBox :disabled -->

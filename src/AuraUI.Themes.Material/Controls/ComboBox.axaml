@@ -94,6 +94,7 @@
             <Transitions>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -104,7 +105,7 @@
     </Style>
 
     <!-- Focused / Open -->
-    <Style Selector="ComboBox:focus /template/ Border#RootBorder">
+    <Style Selector="ComboBox:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
@@ -127,7 +128,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
     </Style>
 
-    <Style Selector="ComboBox.outlined:focus /template/ Border#RootBorder">
+    <Style Selector="ComboBox.outlined:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
@@ -170,16 +171,8 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="ComboBoxItem:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusNone}"/>
-    </Style>
 
     <!-- Pressed -->
-    <Style Selector="ComboBoxItem:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusNone}"/>
-    </Style>
 
     <!-- Selected -->
     <Style Selector="ComboBoxItem:selected /template/ Border#StateLayer">
@@ -189,6 +182,20 @@
 
     <Style Selector="ComboBoxItem:selected">
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="ComboBoxItem:pointerover">
+        <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

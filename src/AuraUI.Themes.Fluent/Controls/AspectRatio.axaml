@@ -1,0 +1,41 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         AspectRatio — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|AspectRatio">
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Empty state -->
+    <Style Selector="layout|AspectRatio.empty">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+    </Style>
+
+    <!-- Ratio visual cues -->
+    <Style Selector="layout|AspectRatio.ratio-video">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+    </Style>
+
+    <Style Selector="layout|AspectRatio.ratio-square">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+    </Style>
+
+</Styles>

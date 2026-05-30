@@ -42,7 +42,7 @@
     </Style>
 
     <!-- Focus state -->
-    <Style Selector="input|ChipInput:focus /template/ Border#PART_Border">
+    <Style Selector="input|ChipInput:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>

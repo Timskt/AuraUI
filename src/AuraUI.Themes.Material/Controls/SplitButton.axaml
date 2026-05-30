@@ -1,0 +1,64 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — SplitButton -->
+    <Style Selector="input|SplitButton">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Button Name="PART_PrimaryAction"
+                                Grid.Column="0"
+                                Content="{TemplateBinding Content}"
+                                Background="Transparent" BorderThickness="0"
+                                CornerRadius="0" Padding="16,10"
+                                HorizontalContentAlignment="Left" Cursor="Hand"/>
+                        <Button Name="PART_MenuTrigger"
+                                Grid.Column="1"
+                                Content="&#x25BC;"
+                                Background="Transparent" BorderThickness="0"
+                                Padding="8" FontSize="10" Cursor="Hand"/>
+                        <Border Name="PART_Surface"
+                                Grid.Column="0" Grid.ColumnSpan="2"
+                                IsVisible="False"
+                                Background="{DynamicResource AuraSurfaceBrush}"
+                                BoxShadow="{DynamicResource AuraShadowMd}"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Margin="0,4,0,0">
+                            <ContentPresenter Content="{TemplateBinding DropDownContent}"
+                                              ContentTemplate="{TemplateBinding DropDownContentTemplate}"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="input|SplitButton.open /template/ Border#PART_Surface">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,44,0,0"/>
+    </Style>
+
+    <Style Selector="input|SplitButton.loading">
+        <Setter Property="Opacity" Value="0.6"/>
+    </Style>
+
+    <Style Selector="input|SplitButton /template/ Button#PART_PrimaryAction:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraStateHoverBrush}"/>
+    </Style>
+    <Style Selector="input|SplitButton /template/ Button#PART_MenuTrigger:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraStateHoverBrush}"/>
+    </Style>
+
+</Styles>

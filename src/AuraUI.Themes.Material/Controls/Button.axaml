@@ -65,6 +65,7 @@
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
                 <BrushTransition Property="Foreground" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{StaticResource AuraEasingStandard}"/>
                 <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleX" Easing="{StaticResource AuraEasingStandard}"/>
                 <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleY" Easing="{StaticResource AuraEasingStandard}"/>
             </Transitions>
@@ -72,33 +73,24 @@
     </Style>
 
     <!-- Hover state layer (8% primary overlay) -->
-    <Style Selector="Button:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Pressed state layer (12% primary overlay) -->
-    <Style Selector="Button:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Pressed scale effect -->
     <Style Selector="Button:pressed">
-        <Setter Property="ScaleTransform.ScaleX" Value="0.97"/>
-        <Setter Property="ScaleTransform.ScaleY" Value="0.97"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <!-- Focus state layer -->
-    <Style Selector="Button:focus /template/ Border#RootBorder">
+    <Style Selector="Button:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Disabled -->
     <Style Selector="Button:disabled">
-        <Setter Property="Background" Value="{DynamicResource AuraDisabledBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Opacity" Value="0.38"/>
         <Setter Property="Cursor" Value="Arrow"/>
     </Style>
@@ -112,10 +104,6 @@
     </Style>
 
 
-    <Style Selector="Button.outlined:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Text / Ghost Variant (.text) -->
     <Style Selector="Button.text">
@@ -128,10 +116,6 @@
     </Style>
 
 
-    <Style Selector="Button.text:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Tonal Variant (.tonal) -->
     <Style Selector="Button.tonal">
@@ -141,15 +125,7 @@
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
-    <Style Selector="Button.tonal:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
-    <Style Selector="Button.tonal:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Elevated Variant (.elevated) -->
     <Style Selector="Button.elevated">
@@ -159,15 +135,7 @@
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
-    <Style Selector="Button.elevated:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
-    <Style Selector="Button.elevated:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- FAB Variant (.fab) -->
     <Style Selector="Button.fab">
@@ -183,15 +151,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <Style Selector="Button.fab:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
-    <Style Selector="Button.fab:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Small FAB -->
     <Style Selector="Button.fab.small">
@@ -236,10 +196,6 @@
     </Style>
 
 
-    <Style Selector="Button.icon:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Icon Filled -->
     <Style Selector="Button.icon.filled">
@@ -259,6 +215,62 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="Button:pointerover">
+        <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+
+    <Style Selector="Button.elevated:pointerover">
+        <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+
+    <Style Selector="Button.fab:pointerover">
+        <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+
+    <Style Selector="Button.tonal:pointerover">
+        <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+
+    <Style Selector="Button.elevated:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+    </Style>
+
+    <Style Selector="Button.fab:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+    </Style>
+
+    <Style Selector="Button.icon:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+    </Style>
+
+    <Style Selector="Button.outlined:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+    </Style>
+
+    <Style Selector="Button.text:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+    </Style>
+
+    <Style Selector="Button.tonal:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

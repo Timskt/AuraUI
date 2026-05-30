@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Resizable — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|Resizable">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Margin="{TemplateBinding Padding}"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Horizontal resize cursor -->
+    <Style Selector="layout|Resizable.horizontal">
+        <Setter Property="Cursor" Value="SizeWestEast"/>
+    </Style>
+
+    <!-- Vertical resize cursor -->
+    <Style Selector="layout|Resizable.vertical">
+        <Setter Property="Cursor" Value="SizeNorthSouth"/>
+    </Style>
+
+    <!-- Dragging state -->
+    <Style Selector="layout|Resizable.dragging">
+        <Setter Property="Opacity" Value="0.95"/>
+    </Style>
+
+    <!-- Disabled state -->
+    <Style Selector="layout|Resizable.disabled">
+        <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+</Styles>

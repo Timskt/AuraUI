@@ -82,7 +82,7 @@
     </Style>
 
     <!-- Focused / Open -->
-    <Style Selector="selection|Cascader:focus /template/ Border#RootBorder">
+    <Style Selector="selection|Cascader:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>

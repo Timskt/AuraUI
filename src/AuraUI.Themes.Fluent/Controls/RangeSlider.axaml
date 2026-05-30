@@ -77,13 +77,22 @@
 
     <!-- Thumb pressed -->
     <Style Selector="selection|RangeSlider:pressed /template/ Thumb /template/ Border#ThumbBorder">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
         <Setter Property="BoxShadow" Value="0 0 0 6 #30005FB8"/>
     </Style>
 
     <!-- Disabled -->
     <Style Selector="selection|RangeSlider:disabled">
         <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="selection|RangeSlider:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

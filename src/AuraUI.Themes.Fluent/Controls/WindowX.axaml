@@ -110,15 +110,15 @@
 
     <!-- Window control button pressed states -->
     <Style Selector="Window.window-x /template/ Button#PART_MinimizeButton:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <Style Selector="Window.window-x /template/ Button#PART_MaximizeButton:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraErrorPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <!-- ============================================================

@@ -22,7 +22,7 @@
 
     <!-- Hover row -->
     <Style Selector="display|VirtualizingDataGrid /template/ DataGridRow:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="Opacity" Value="0.92"/>
     </Style>
 
     <!-- Selected row -->

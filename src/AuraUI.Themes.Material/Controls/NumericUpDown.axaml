@@ -81,6 +81,7 @@
             <Transitions>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -91,7 +92,7 @@
     </Style>
 
     <!-- Focused -->
-    <Style Selector="input|AuraNumericUpDown:focus /template/ Border#RootBorder">
+    <Style Selector="input|AuraNumericUpDown:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
@@ -110,7 +111,7 @@
 
 
     <Style Selector="input|AuraNumericUpDown /template/ Button:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
 </Styles>

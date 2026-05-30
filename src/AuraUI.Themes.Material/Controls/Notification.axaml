@@ -5,7 +5,7 @@
     <!-- Material Design 3 — Notification -->
 
     <Style Selector="feedback|AuraNotification">
-        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
@@ -16,9 +16,12 @@
                 <ControlTemplate TargetType="feedback:AuraNotification">
                     <Border Name="RootBorder"
                             Background="{TemplateBinding Background}"
+                            BorderBrush="{DynamicResource AuraBorderBrush}"
+                            BorderThickness="1"
                             CornerRadius="{DynamicResource AuraRadiusMd}"
                             Padding="{TemplateBinding Padding}"
-                            MaxWidth="{TemplateBinding MaxWidth}">
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            BoxShadow="{DynamicResource AuraShadowLevel3}">
                         <Panel>
                             <Grid ColumnDefinitions="Auto,*,Auto">
                                 <!-- Content -->

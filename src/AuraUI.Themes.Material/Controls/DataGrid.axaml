@@ -72,7 +72,7 @@
 
     <!-- DataGridRow :pointerover -->
     <Style Selector="DataGridRow:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="Opacity" Value="0.92"/>
     </Style>
 
     <!-- DataGridRow :selected -->
@@ -97,7 +97,7 @@
     </Style>
 
     <!-- DataGridCell :focus -->
-    <Style Selector="DataGridCell:focus">
+    <Style Selector="DataGridCell:focus-visible">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

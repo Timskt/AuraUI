@@ -1,0 +1,65 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         DropdownButton — Fluent Style
+         ============================================================ -->
+    <Style Selector="input|DropdownButton">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Panel>
+                        <!-- Trigger button -->
+                        <Button Name="PART_Trigger"
+                                Content="{TemplateBinding Content}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="12,8"
+                                Cursor="Hand"
+                                HorizontalAlignment="Stretch"/>
+
+                        <!-- Dropdown Surface -->
+                        <Border Name="PART_Surface"
+                                IsVisible="False"
+                                Background="{DynamicResource AuraCardBrush}"
+                                BoxShadow="{DynamicResource AuraShadowMd}"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="4"
+                                Margin="0,4,0,0">
+                            <ContentPresenter Content="{TemplateBinding DropDownContent}"
+                                              ContentTemplate="{TemplateBinding DropDownContentTemplate}"/>
+                        </Border>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="input|DropdownButton.open /template/ Border#PART_Surface">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <!-- Loading state -->
+    <Style Selector="input|DropdownButton.loading">
+        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="IsEnabled" Value="False"/>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="input|DropdownButton /template/ Button#PART_Trigger:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+</Styles>

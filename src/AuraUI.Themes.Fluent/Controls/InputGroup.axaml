@@ -1,0 +1,77 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         InputGroup — Fluent Style
+         ============================================================ -->
+    <Style Selector="input|InputGroup">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                        ClipToBounds="True">
+                    <ItemsPresenter Name="PART_ItemsPresenter">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Focus within state -->
+    <Style Selector="input|InputGroup.has-focus-within /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- InputGroupText -->
+    <Style Selector="input|InputGroupText">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- InputGroupAddon -->
+    <Style Selector="input|InputGroupAddon">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Size: Small -->
+    <Style Selector="input|InputGroupText.small">
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    <Style Selector="input|InputGroupAddon.small">
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <!-- Size: Large -->
+    <Style Selector="input|InputGroupText.large">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    <Style Selector="input|InputGroupAddon.large">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- First/Last border merging for group items -->
+    <Style Selector="input|InputGroup.group-first">
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+
+</Styles>

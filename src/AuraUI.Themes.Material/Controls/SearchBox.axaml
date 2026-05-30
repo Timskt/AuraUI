@@ -83,7 +83,7 @@
     </Style>
 
     <!-- Focused -->
-    <Style Selector="input|SearchBox:focus /template/ Border#RootBorder">
+    <Style Selector="input|SearchBox:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 

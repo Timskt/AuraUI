@@ -18,13 +18,13 @@
         <Setter Property="AnimationDuration" Value="0:0:0.3"/>
     </Style>
 
-    <!-- Tooltip defaults -->
+    <!-- Tooltip defaults — AuraCardBrush + shadow -->
     <Style Selector="charts|Chart /template/ charts|ChartTooltip">
-        <Setter Property="Background" Value="{DynamicResource AuraChartTooltipBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraChartTooltipForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="12,8"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="ShadowBlurRadius" Value="6"/>
@@ -39,10 +39,10 @@
         <Setter Property="SwatchCornerRadius" Value="4"/>
     </Style>
 
-    <!-- Axis defaults -->
+    <!-- Axis defaults — use AuraForegroundSecondaryBrush for labels -->
     <Style Selector="charts|Chart /template/ charts|ChartAxis">
-        <Setter Property="AxisLineBrush" Value="{DynamicResource AuraChartAxisBrush}"/>
-        <Setter Property="LabelBrush" Value="{DynamicResource AuraChartLabelBrush}"/>
+        <Setter Property="AxisLineBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="LabelBrush" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
         <Setter Property="LabelFontSize" Value="11"/>
         <Setter Property="ShowLabels" Value="True"/>
         <Setter Property="ShowTicks" Value="True"/>
@@ -50,9 +50,9 @@
         <Setter Property="GridLineThickness" Value="0.5"/>
     </Style>
 
-    <!-- Grid defaults -->
+    <!-- Grid defaults — use AuraDividerBrush for consistency -->
     <Style Selector="charts|Chart /template/ charts|ChartGrid">
-        <Setter Property="GridLineBrush" Value="{DynamicResource AuraChartGridBrush}"/>
+        <Setter Property="GridLineBrush" Value="{DynamicResource AuraDividerBrush}"/>
         <Setter Property="GridLineThickness" Value="0.5"/>
         <Setter Property="ShowHorizontalLines" Value="True"/>
         <Setter Property="ShowVerticalLines" Value="False"/>

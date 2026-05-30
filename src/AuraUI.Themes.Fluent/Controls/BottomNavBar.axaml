@@ -61,6 +61,7 @@
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Duration="00:00:00.200" Property="Foreground"/>
+                <DoubleTransition Duration="00:00:00.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -74,9 +75,15 @@
 
 
     <!-- Item pressed -->
-    <Style Selector="navigation|BottomNavBarItem:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="navigation|BottomNavBarItem:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

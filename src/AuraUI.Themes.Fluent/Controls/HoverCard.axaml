@@ -1,0 +1,46 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         HoverCard — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|HoverCard">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Trigger -->
+                    <ContentPresenter Name="PART_TriggerPresenter"
+                                      Content="{TemplateBinding Trigger}"
+                                      ContentTemplate="{TemplateBinding TriggerTemplate}"/>
+
+                    <!-- Hover Card Popup -->
+                    <Border Name="PART_Popup"
+                            Background="{DynamicResource AuraCardBrush}"
+                            BorderBrush="{DynamicResource AuraBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{DynamicResource AuraRadiusMd}"
+                            BoxShadow="{DynamicResource AuraShadowMd}"
+                            Padding="16"
+                            MinWidth="200"
+                            MaxWidth="400"
+                            IsVisible="False">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="display|HoverCard.open /template/ Border#PART_Popup">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Arrow styling -->
+    <Style Selector="display|HoverCard:not(.has-arrow) /template/ Border#PART_Popup">
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+
+</Styles>

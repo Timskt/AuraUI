@@ -80,12 +80,21 @@
         <Setter Property="Width" Value="28"/>
         <Setter Property="Height" Value="28"/>
         <Setter Property="CornerRadius" Value="14"/>
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- Disabled -->
     <Style Selector="selection|RangeSlider:disabled">
         <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="selection|RangeSlider:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

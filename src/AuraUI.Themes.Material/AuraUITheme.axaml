@@ -189,4 +189,23 @@
     <StyleInclude Source="/Controls/Splitter.axaml"/>
     <StyleInclude Source="/Controls/TimePicker.axaml"/>
 
+    <!-- V8 controls — CodexSwitchUI parity: Alert, Spinner, InputGroup, SplitButton,
+         DropdownButton, HoverCard, Resizable, ScrollArea, NativeSelect, Textarea,
+         Kbd, AuraLabel, AspectRatio, AvatarGroup, ButtonGroup -->
+    <StyleInclude Source="/Controls/Alert.axaml"/>
+    <StyleInclude Source="/Controls/Spinner.axaml"/>
+    <StyleInclude Source="/Controls/InputGroup.axaml"/>
+    <StyleInclude Source="/Controls/SplitButton.axaml"/>
+    <StyleInclude Source="/Controls/DropdownButton.axaml"/>
+    <StyleInclude Source="/Controls/HoverCard.axaml"/>
+    <StyleInclude Source="/Controls/Resizable.axaml"/>
+    <StyleInclude Source="/Controls/ScrollArea.axaml"/>
+    <StyleInclude Source="/Controls/NativeSelect.axaml"/>
+    <StyleInclude Source="/Controls/Textarea.axaml"/>
+    <StyleInclude Source="/Controls/Kbd.axaml"/>
+    <StyleInclude Source="/Controls/AuraLabel.axaml"/>
+    <StyleInclude Source="/Controls/AspectRatio.axaml"/>
+    <StyleInclude Source="/Controls/AvatarGroup.axaml"/>
+    <StyleInclude Source="/Controls/ButtonGroup.axaml"/>
+
 </Styles>

@@ -100,7 +100,7 @@
 
     <!-- Close button pressed -->
     <Style Selector="windowing|WindowXModalDialog /template/ Button#PART_CloseButton:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <!-- Hide overlay when ShowOverlay is false -->

@@ -67,7 +67,7 @@
     </Style>
 
     <!-- Focus / Open state -->
-    <Style Selector="selection|DateTimePicker:focus">
+    <Style Selector="selection|DateTimePicker:focus-visible">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
@@ -92,7 +92,6 @@
     <!-- Disabled -->
     <Style Selector="selection|DateTimePicker:disabled">
         <Setter Property="Opacity" Value="0.4"/>
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
     </Style>
 
 </Styles>

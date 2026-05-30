@@ -8,8 +8,8 @@
     <Style Selector="ProgressBar">
         <Setter Property="MinHeight" Value="4"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
-        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ProgressBar">

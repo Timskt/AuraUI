@@ -93,21 +93,14 @@
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Property="Background" Duration="0:0:0.150"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
 
     <!-- Hover (state layer) -->
-    <Style Selector="navigation|AuraMenuItem:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
-    </Style>
 
     <!-- Pressed -->
-    <Style Selector="navigation|AuraMenuItem:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
-    </Style>
 
     <!-- Selected -->
     <Style Selector="navigation|AuraMenuItem:selected /template/ Border#RootBorder">
@@ -200,6 +193,20 @@
                 </Border>
             </ControlTemplate>
         </Setter>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="navigation|AuraMenuItem:pointerover">
+        <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+
+    <Style Selector="navigation|AuraMenuItem:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

@@ -17,6 +17,7 @@
             <Transitions>
                 <BrushTransition Duration="00:00:00.200" Property="Background"/>
                 <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                <DoubleTransition Duration="00:00:00.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
         <Setter Property="Template">
@@ -81,9 +82,10 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
-    <!-- NumericUpDown :focus-within -->
+    <!-- NumericUpDown :focus-within — 2px accent border -->
     <Style Selector="NumericUpDown:focus-within /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- NumericUpDown :disabled -->
@@ -94,7 +96,7 @@
     <!-- Spin button styles -->
 
     <Style Selector="NumericUpDown /template/ Button:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <!-- Size variants -->

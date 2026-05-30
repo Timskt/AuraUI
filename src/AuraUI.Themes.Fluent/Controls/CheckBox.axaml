@@ -14,6 +14,7 @@
             <Transitions>
                 <BrushTransition Duration="00:00:00.150" Property="Background"/>
                 <BrushTransition Duration="00:00:00.150" Property="BorderBrush"/>
+                <DoubleTransition Duration="00:00:00.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
         <Setter Property="Template">
@@ -73,19 +74,14 @@
 
     <!-- CheckBox checked + :pressed -->
     <Style Selector="CheckBox:checked:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
     </Style>
 
     <!-- CheckBox :pressed -->
-    <Style Selector="CheckBox:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
-        <Setter Property="CornerRadius" Value="10"/>
-    </Style>
 
     <!-- CheckBox :focus -->
-    <Style Selector="CheckBox:focus /template/ Border#PART_Border">
+    <Style Selector="CheckBox:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
@@ -194,6 +190,16 @@
 
     <Style Selector="CheckBox.toggle:checked /template/ Border#PART_SwitchKnob">
         <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="CheckBox:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

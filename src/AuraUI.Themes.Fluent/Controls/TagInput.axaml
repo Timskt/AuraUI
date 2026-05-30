@@ -63,7 +63,7 @@
     </Style>
 
     <!-- Focus -->
-    <Style Selector="input|TagInput:focused /template/ Border#PART_Border">
+    <Style Selector="input|TagInput:focus-visibleed /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

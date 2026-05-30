@@ -90,6 +90,7 @@
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -98,9 +99,6 @@
 
 
     <!-- Pressed header -->
-    <Style Selector="layout|AccordionItem:pressed /template/ ContentControl#PART_HeaderSite">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-    </Style>
 
     <!-- Chevron hover -->
 
@@ -122,6 +120,16 @@
     <Style Selector="layout|AccordionItem:last-child">
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
         <Setter Property="CornerRadius" Value="0,0,12,12"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="layout|AccordionItem:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

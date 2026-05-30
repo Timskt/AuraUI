@@ -60,6 +60,7 @@
             <Transitions>
                 <BrushTransition Property="Background" Duration="0:0:0.15"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -72,7 +73,6 @@
 
     <!-- Pressed state layer -->
     <Style Selector="CheckBox:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Opacity" Value="0.12"/>
         <Setter Property="CornerRadius" Value="2"/>
     </Style>
@@ -112,6 +112,16 @@
     <Style Selector="CheckBox:checked:disabled /template/ Border#PART_Box">
         <Setter Property="Background" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="CheckBox:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>
