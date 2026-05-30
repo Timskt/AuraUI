@@ -67,7 +67,60 @@ public class FormFieldPage : ComponentPageBase
 <layout:FormField Label=""Email"" HasError=""True""
     ErrorText=""Please enter a valid email address"">
     <TextBox Watermark=""user@example.com""/>
-</layout:FormField>");
+</layout:FormField>",
+            @"// Create form fields in C#
+var nameField = new FormField
+{
+    Label = ""Full Name"",
+    HelperText = ""Enter your first and last name"",
+    IsRequired = true,
+    Content = new TextBox { Watermark = ""John Doe"" }
+};
+
+// Set validation error
+var emailField = new FormField
+{
+    Label = ""Email"",
+    HasError = true,
+    ErrorText = ""Please enter a valid email address"",
+    Content = new TextBox { Watermark = ""user@example.com"" }
+};",
+            @"public partial class FormViewModel : ViewModelBase
+{
+    private string _fullName = """";
+    public string FullName
+    {
+        get => _fullName;
+        set
+        {
+            SetProperty(ref _fullName, value);
+            ValidateName();
+        }
+    }
+
+    private string _email = """";
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            SetProperty(ref _email, value);
+            ValidateEmail();
+        }
+    }
+
+    private bool _hasEmailError;
+    public bool HasEmailError
+    {
+        get => _hasEmailError;
+        set => SetProperty(ref _hasEmailError, value);
+    }
+
+    private void ValidateEmail()
+    {
+        HasEmailError = !Email.Contains(""@"");
+    }
+}");
     }
 
     private Control BuildPlacementExample()
@@ -104,7 +157,15 @@ public class FormFieldPage : ComponentPageBase
 <layout:FormField Label=""Label on Left""
     LabelPlacement=""Left"" LabelWidth=""120"">
     <TextBox Watermark=""Left label placement""/>
-</layout:FormField>");
+</layout:FormField>",
+            @"// Set label placement in code
+var field = new FormField
+{
+    Label = ""Label on Left"",
+    LabelPlacement = FormFieldLabelPlacement.Left,
+    LabelWidth = 120,
+    Content = new TextBox { Watermark = ""Left label"" }
+};");
     }
 
     private static IReadOnlyList<ApiProperty> GetApiProperties() => new[]

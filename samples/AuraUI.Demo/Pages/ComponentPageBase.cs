@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
@@ -43,7 +44,23 @@ public abstract class ComponentPageBase : UserControl
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        Content = BuildPageLayout();
+        try
+        {
+            Content = BuildPageLayout();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ComponentPageBase] Error building page '{ComponentName}': {ex}");
+            Content = new TextBlock
+            {
+                Text = $"Error building page: {ex.Message}\n\n{ex.StackTrace}",
+                Margin = new Thickness(32),
+                TextWrapping = TextWrapping.Wrap,
+                Foreground = Brushes.Red,
+                FontFamily = new FontFamily("Consolas,Menlo,Monaco,monospace"),
+                FontSize = 12
+            };
+        }
     }
 
     private Control BuildPageLayout()
@@ -175,9 +192,9 @@ public abstract class ComponentPageBase : UserControl
     }
 
     /// <summary>
-    /// Creates a tabbed example section with Preview/AXAML/C# tabs.
+    /// Creates a tabbed example section with Preview/AXAML/C#/ViewModel tabs.
     /// </summary>
-    protected Control CreateExampleSection(string title, Control example, string axamlCode, string? csharpCode = null)
+    protected Control CreateExampleSection(string title, Control example, string axamlCode, string? csharpCode = null, string? viewModelCode = null)
     {
         var tabControl = new TabControl { MaxWidth = 800 };
 
@@ -217,6 +234,20 @@ public abstract class ComponentPageBase : UserControl
                 Content = new CodeBlock
                 {
                     Code = csharpCode,
+                    Language = "csharp",
+                    Margin = new Thickness(0, -4, 0, 0)
+                }
+            });
+        }
+
+        if (viewModelCode != null)
+        {
+            tabControl.Items.Add(new TabItem
+            {
+                Header = "ViewModel",
+                Content = new CodeBlock
+                {
+                    Code = viewModelCode,
                     Language = "csharp",
                     Margin = new Thickness(0, -4, 0, 0)
                 }

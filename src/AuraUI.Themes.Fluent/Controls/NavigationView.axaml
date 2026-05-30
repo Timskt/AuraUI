@@ -1,8 +1,90 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
 
     <!-- ============================================================
          NavigationView — Fluent Style (Side Navigation)
+         ============================================================ -->
+
+    <!-- NavigationView ControlTemplate -->
+    <Style Selector="navigation|NavigationView">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="navigation:NavigationView">
+                <Grid ColumnDefinitions="Auto,*">
+                    <!-- Navigation pane -->
+                    <Border Name="PART_PaneBorder"
+                            Grid.Column="0"
+                            Background="{DynamicResource AuraSurfaceBrush}"
+                            BorderBrush="{DynamicResource AuraDividerBrush}"
+                            BorderThickness="0,0,1,0"
+                            Width="280"
+                            ClipToBounds="True">
+                        <DockPanel>
+                            <!-- Toggle / Hamburger button -->
+                            <Button Name="PART_ToggleButton"
+                                    DockPanel.Dock="Top"
+                                    Classes="ghost"
+                                    Width="36"
+                                    Height="36"
+                                    Margin="12,12,12,4"
+                                    HorizontalAlignment="Left"
+                                    Cursor="Hand">
+                                <Path Width="18" Height="18"
+                                      Data="M 3,6 L 21,6 M 3,12 L 21,12 M 3,18 L 21,18"
+                                      Stroke="{DynamicResource AuraForegroundBrush}"
+                                      StrokeThickness="1.5"/>
+                            </Button>
+
+                            <!-- Back button -->
+                            <Button Name="PART_BackButton"
+                                    DockPanel.Dock="Top"
+                                    Classes="ghost"
+                                    Width="36"
+                                    Height="36"
+                                    Margin="12,4,12,8"
+                                    HorizontalAlignment="Left"
+                                    Cursor="Hand"
+                                    IsVisible="False">
+                                <Path Width="16" Height="16"
+                                      Data="M 15,3 L 7,12 L 15,21"
+                                      Stroke="{DynamicResource AuraForegroundBrush}"
+                                      StrokeThickness="1.5"
+                                      Stretch="Uniform"/>
+                            </Button>
+
+                            <!-- Footer items -->
+                            <ItemsControl Name="PART_FooterItemsControl"
+                                          DockPanel.Dock="Bottom"
+                                          Margin="12,0,12,12"/>
+
+                            <!-- Settings item -->
+                            <Control Name="PART_SettingsItem"
+                                     DockPanel.Dock="Bottom"
+                                     Margin="12,0,12,8"/>
+
+                            <!-- Menu items -->
+                            <ScrollViewer>
+                                <ItemsControl Name="PART_MenuItemsControl"
+                                              Margin="12,8"/>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                    <!-- Content area -->
+                    <Border Grid.Column="1"
+                            Background="{DynamicResource AuraBackgroundBrush}">
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          Margin="24"/>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         NavigationView Class-based Styles (legacy)
          ============================================================ -->
     <Style Selector="Border.navigation-view">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>

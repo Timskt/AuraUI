@@ -49,7 +49,28 @@ public class TextBoxPage : ComponentPageBase
 <TextBox Watermark=""Multi-line""
          AcceptsReturn=""True""
          TextWrapping=""Wrap""
-         MinHeight=""80""/>");
+         MinHeight=""80""/>",
+            @"// Access text value in C#
+private void OnTextChanged(object? sender, TextChangedEventArgs e)
+{
+    if (sender is TextBox textBox)
+    {
+        var value = textBox.Text;
+        Console.WriteLine($""Text changed: {value}"");
+    }
+}
+
+// Programmatically set text
+textBox.Text = ""New value"";",
+            @"public partial class MyViewModel : ViewModelBase
+{
+    private string _name = """";
+    public string Name
+    {
+        get => _name;
+        set => SetProperty(ref _name, value);
+    }
+}");
     }
 
     private Control BuildStylesExample()
@@ -65,7 +86,10 @@ public class TextBoxPage : ComponentPageBase
                 }
             },
             @"<TextBox Watermark=""Default style""/>
-<TextBox Watermark=""Underline style"" Classes=""underline""/>");
+<TextBox Watermark=""Underline style"" Classes=""underline""/>",
+            @"// Apply style classes in code
+var textBox = new TextBox { Watermark = ""Styled"" };
+textBox.Classes.Add(""underline"");");
     }
 
     private Control BuildStatesExample()
@@ -85,7 +109,12 @@ public class TextBoxPage : ComponentPageBase
             @"<TextBox Watermark=""Normal""/>
 <TextBox Watermark=""Read-only"" Text=""Read-only content"" IsReadOnly=""True""/>
 <TextBox Watermark=""Disabled"" IsEnabled=""False""/>
-<TextBox Watermark=""Password"" PasswordChar=""*"" MaxLength=""32""/>");
+<TextBox Watermark=""Password"" PasswordChar=""*"" MaxLength=""32""/>",
+            @"// Toggle states in code
+textBox.IsReadOnly = true;    // make read-only
+textBox.IsEnabled = false;    // disable
+textBox.PasswordChar = '*';   // mask input
+textBox.MaxLength = 32;       // limit characters");
     }
 
     private static IReadOnlyList<ApiProperty> GetApiProperties() => new[]

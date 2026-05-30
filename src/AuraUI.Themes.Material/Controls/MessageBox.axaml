@@ -11,4 +11,63 @@
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
     </Style>
 
+    <!-- MessageBox window style -->
+    <Style Selector="Window.message-box">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraDialogCornerRadius}"/>
+        <Setter Property="Width" Value="420"/>
+        <Setter Property="SizeToContent" Value="Height"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <DockPanel>
+                            <!-- Header -->
+                            <DockPanel DockPanel.Dock="Top"
+                                       Margin="24,20,24,8">
+                                <TextBlock Name="PART_Title"
+                                           Text="{TemplateBinding Title}"
+                                           FontSize="24"
+                                           FontWeight="Normal"
+                                           FontFamily="{DynamicResource AuraFontHeadlineSmallFamily}"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"
+                                           VerticalAlignment="Center"/>
+                            </DockPanel>
+
+                            <!-- Content -->
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="24,8"/>
+
+                            <!-- Buttons -->
+                            <StackPanel Name="PART_ButtonArea"
+                                        DockPanel.Dock="Bottom"
+                                        Orientation="Horizontal"
+                                        Spacing="8"
+                                        HorizontalAlignment="Right"
+                                        Margin="24,16,24,20">
+                                <Button Name="PART_NoButton"
+                                        Classes="text"
+                                        Content="No"
+                                        IsVisible="False"/>
+                                <Button Name="PART_CancelButton"
+                                        Classes="text"
+                                        Content="Cancel"
+                                        IsVisible="False"/>
+                                <Button Name="PART_YesButton"
+                                        Content="Yes"
+                                        IsVisible="False"/>
+                                <Button Name="PART_OKButton"
+                                        Content="OK"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </Styles>

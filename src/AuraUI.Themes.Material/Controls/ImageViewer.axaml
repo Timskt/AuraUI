@@ -8,6 +8,47 @@
         <Setter Property="Background" Value="#1A000000"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="display:ImageViewer">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{DynamicResource AuraRadiusMd}"
+                            ClipToBounds="True">
+                        <Panel>
+                            <!-- Main image area -->
+                            <Image Name="PART_Image"
+                                   Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                            <!-- Toolbar -->
+                            <Panel Name="PART_Toolbar"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Margin="16"
+                                   IsVisible="{TemplateBinding ShowToolbar}">
+                                <Border Background="#CC000000"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Padding="8">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="4"/>
+                                </Border>
+                            </Panel>
+                            <!-- Thumbnail strip -->
+                            <ItemsControl Name="PART_ThumbnailStrip"
+                                          DockPanel.Dock="Bottom"
+                                          Margin="16"
+                                          IsVisible="{TemplateBinding ShowThumbnails}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Panel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </Styles>

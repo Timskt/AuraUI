@@ -52,7 +52,8 @@ public class DialogPage : ComponentPageBase
                 _dialog,
                 CreateExampleSection("Dialog",
                     new WrapPanel { Children = { btnShow } },
-                    @"<feedback:AuraDialog DialogTitle=""Example Dialog""
+                    @"<feedback:AuraDialog x:Name=""Dialog""
+                       DialogTitle=""Example Dialog""
                        IsModal=""True""
                        CloseOnOverlay=""True""
                        DialogWidth=""480""
@@ -62,13 +63,60 @@ public class DialogPage : ComponentPageBase
         <TextBox Watermark=""Enter a value...""/>
         <StackPanel Orientation=""Horizontal"" Spacing=""8""
                     HorizontalAlignment=""Right"">
-            <Button Content=""Cancel""/>
-            <Button Content=""Submit"" Classes=""primary""/>
+            <Button Content=""Cancel"" Click=""OnCancel""/>
+            <Button Content=""Submit"" Classes=""primary""
+                    Click=""OnSubmit""/>
         </StackPanel>
     </StackPanel>
 </feedback:AuraDialog>",
-                    @"dialog.Show();   // open
-dialog.Hide();   // close"),
+                    @"// Show and hide the dialog
+private void OnShowDialog(object? sender, RoutedEventArgs e)
+{
+    _dialog?.Show();
+}
+
+private void OnCancel(object? sender, RoutedEventArgs e)
+{
+    _dialog?.Hide();
+}
+
+private void OnSubmit(object? sender, RoutedEventArgs e)
+{
+    // Process form data
+    _dialog?.Hide();
+    AuraToast.Success(""Submitted successfully!"");
+}",
+                    @"public partial class DialogViewModel : ViewModelBase
+{
+    private string _inputValue = """";
+    public string InputValue
+    {
+        get => _inputValue;
+        set => SetProperty(ref _inputValue, value);
+    }
+
+    public ICommand CancelCommand { get; }
+    public ICommand SubmitCommand { get; }
+
+    public DialogViewModel()
+    {
+        CancelCommand = new RelayCommand(() => IsOpen = false);
+        SubmitCommand = new RelayCommand(Submit);
+    }
+
+    private bool _isOpen;
+    public bool IsOpen
+    {
+        get => _isOpen;
+        set => SetProperty(ref _isOpen, value);
+    }
+
+    private void Submit()
+    {
+        // Process InputValue
+        IsOpen = false;
+    }
+}"),
                 CreateApiTable(GetApiProperties()),
                 CreateGuidelines(
                     "Use dialogs for complex forms, detailed information, and actions that require user attention before proceeding.",

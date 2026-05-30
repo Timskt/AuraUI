@@ -17,15 +17,114 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="selection:MultiComboBox">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+
+                            <DockPanel>
+                                <!-- Chevron toggle -->
+                                <Border Name="PART_DropdownGlyph"
+                                        DockPanel.Dock="Right"
+                                        Width="48"
+                                        Background="Transparent"
+                                        VerticalAlignment="Stretch">
+                                    <Path Name="Chevron"
+                                          Width="12" Height="12"
+                                          Data="M 1,4 L 6,9 L 11,4"
+                                          Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                          StrokeThickness="1.5"
+                                          Stretch="Uniform"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </Border>
+
+                                <!-- Tag container and selection display -->
+                                <Panel Margin="{TemplateBinding Padding}">
+                                    <ItemsControl Name="PART_TagContainer"
+                                                  VerticalAlignment="Center">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Panel>
+                            </DockPanel>
+
+                            <!-- Dropdown popup -->
+                            <Popup Name="PART_Popup"
+                                   IsLightDismissEnabled="True"
+                                   Placement="BottomEdgeAlignedLeft"
+                                   MaxHeight="350">
+                                <Border Name="PART_DropdownBorder"
+                                        Background="{DynamicResource AuraSurfaceBrush}"
+                                        BorderBrush="{DynamicResource AuraOutlineBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Padding="4"
+                                        BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000">
+                                    <DockPanel>
+                                        <!-- Search box -->
+                                        <TextBox Name="PART_SearchBox"
+                                                 DockPanel.Dock="Top"
+                                                 Margin="4,4,4,8"
+                                                 FontSize="14"
+                                                 Watermark="Search..."
+                                                 IsVisible="False"/>
+
+                                        <!-- Select all / Clear all buttons -->
+                                        <Grid DockPanel.Dock="Top"
+                                              ColumnDefinitions="*,*"
+                                              Margin="4,0,4,8">
+                                            <Button Name="PART_SelectAllButton"
+                                                    Grid.Column="0"
+                                                    Classes="text sm"
+                                                    Content="Select All"
+                                                    HorizontalAlignment="Left"/>
+                                            <Button Name="PART_ClearAllButton"
+                                                    Grid.Column="1"
+                                                    Classes="text sm"
+                                                    Content="Clear All"
+                                                    HorizontalAlignment="Right"/>
+                                        </Grid>
+
+                                        <!-- Dropdown items list -->
+                                        <ListBox Name="PART_DropdownItemsList"
+                                                 Background="Transparent"
+                                                 BorderThickness="0"/>
+                                    </DockPanel>
+                                </Border>
+                            </Popup>
+                        </Panel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+            </Transitions>
+        </Setter>
     </Style>
 
     <!-- Hover -->
-    <Style Selector="selection|MultiComboBox:pointerover">
+    <Style Selector="selection|MultiComboBox:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Focused -->
-    <Style Selector="selection|MultiComboBox:focus">
+    <Style Selector="selection|MultiComboBox:focus /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>

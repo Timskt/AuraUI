@@ -61,7 +61,24 @@ for (int i = 0; i < 12; i++)
 chart.XAxis.Categories = months;
 chart.XAxis.Scale = AxisScale.Category;
 chart.YAxis.Title = ""Sales ($K)"";
-chart.Series.Add(series);"),
+chart.Series.Add(series);",
+                    @"public partial class ChartViewModel : ViewModelBase
+{
+    public ObservableCollection<ChartDataPoint> Sales2024 { get; } = new();
+    public ObservableCollection<ChartDataPoint> Sales2023 { get; } = new();
+
+    public ChartViewModel()
+    {
+        var months = new[] { ""Jan"", ""Feb"", ""Mar"", ""Apr"",
+                             ""May"", ""Jun"", ""Jul"", ""Aug"",
+                             ""Sep"", ""Oct"", ""Nov"", ""Dec"" };
+        var values = new double[] { 42, 48, 55, 52, 68, 75,
+                                    82, 78, 90, 95, 88, 102 };
+
+        for (int i = 0; i < 12; i++)
+            Sales2024.Add(new ChartDataPoint(i, values[i], months[i]));
+    }
+}"),
                 CreateApiTable(GetApiProperties()),
                 CreateGuidelines(
                     "Use line charts for time-series data, trend analysis, and comparing multiple series over the same period.",

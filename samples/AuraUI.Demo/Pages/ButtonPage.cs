@@ -57,7 +57,16 @@ public class ButtonPage : ComponentPageBase
 <Button Content=""Destructive"" Classes=""destructive""/>
 <Button Content=""Success"" Classes=""success""/>
 <Button Content=""Warning"" Classes=""warning""/>
-<Button Content=""Link"" Classes=""link""/>");
+<Button Content=""Link"" Classes=""link""/>",
+            @"// Handle button click events
+private void OnPrimaryClick(object? sender, RoutedEventArgs e)
+{
+    AuraToast.Success(""Primary button clicked!"");
+}
+
+// Programmatically set variant classes
+var button = new Button { Content = ""Dynamic"" };
+button.Classes.Add(""primary"");");
     }
 
     private Control BuildSizesExample()
@@ -77,7 +86,11 @@ public class ButtonPage : ComponentPageBase
             @"<Button Content=""Small"" Classes=""primary sm""/>
 <Button Content=""Medium"" Classes=""primary""/>
 <Button Content=""Large"" Classes=""primary lg""/>
-<Button Content=""Pill"" Classes=""primary rounded""/>");
+<Button Content=""Pill"" Classes=""primary rounded""/>",
+            @"// Set size classes in C# code
+var button = new Button { Content = ""Styled"" };
+button.Classes.Add(""primary"");
+button.Classes.Add(""lg"");  // sm, lg, rounded");
     }
 
     private Control BuildStatesExample()
@@ -94,7 +107,10 @@ public class ButtonPage : ComponentPageBase
             },
             @"<Button Content=""Normal"" Classes=""primary""/>
 <Button Content=""Disabled"" Classes=""primary"" IsEnabled=""False""/>
-<Button Content=""Disabled"" IsEnabled=""False""/>");
+<Button Content=""Disabled"" IsEnabled=""False""/>",
+            @"// Toggle button enabled state
+button.IsEnabled = false;   // disable
+button.IsEnabled = true;    // re-enable");
     }
 
     private Control BuildLoadingExample()

@@ -13,6 +13,17 @@
         <Setter Property="UnselectedColor" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="ItemSize" Value="24"/>
         <Setter Property="ItemSpacing" Value="4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="selection:RateControl">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Panel Name="PART_RatingPanel"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Small size -->
