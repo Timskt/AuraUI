@@ -4,7 +4,7 @@
 
     <Style Selector="display|Statistic">
         <Setter Property="Template">
-            <ControlTemplate>
+            <ControlTemplate x:DataType="display:Statistic">
                 <StackPanel Spacing="4">
                     <TextBlock Text="{TemplateBinding Title}"
                                FontSize="{DynamicResource AuraFontSizeCaption}"
