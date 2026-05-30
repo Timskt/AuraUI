@@ -1,0 +1,63 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — Splitter -->
+
+    <Style Selector="layout|Splitter">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="SplitterBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="layout:Splitter">
+                    <Border Background="{TemplateBinding Background}">
+                        <Grid Name="PART_LayoutGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentControl Name="PART_FirstPanel"
+                                            Grid.Column="0"
+                                            Content="{TemplateBinding Tag}"
+                                            ClipToBounds="True"/>
+
+                            <Border Name="PART_SplitterGrip"
+                                    Grid.Column="1"
+                                    Width="{TemplateBinding SplitterThickness}"
+                                    Background="{TemplateBinding SplitterBrush}"
+                                    Cursor="SizeWestEast">
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Spacing="2">
+                                    <Ellipse Width="3" Height="3"
+                                             Fill="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+                                    <Ellipse Width="3" Height="3"
+                                             Fill="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+                                    <Ellipse Width="3" Height="3"
+                                             Fill="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ContentControl Name="PART_SecondPanel"
+                                            Grid.Column="2"
+                                            ClipToBounds="True"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Grip hover -->
+    <Style Selector="layout|Splitter /template/ Border#PART_SplitterGrip:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Dragging -->
+    <Style Selector="layout|Splitter:dragging /template/ Border#PART_SplitterGrip">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+</Styles>

@@ -23,10 +23,6 @@
                                     BorderBrush="{DynamicResource AuraBorderBrush}"
                                     BorderThickness="2"
                                     VerticalAlignment="Center">
-                                <Border.Transitions>
-                                    <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                                    <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
-                                </Border.Transitions>
                             </Border>
 
                             <!-- Knob -->
@@ -38,10 +34,6 @@
                                         Margin="8,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center">
-                                    <Border.Transitions>
-                                        <DoubleTransition Duration="0:0:0.200" Property="Margin" Easing="{StaticResource AuraEasingStandard}"/>
-                                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                                    </Border.Transitions>
                                 </Border>
                             </Panel>
                         </Panel>

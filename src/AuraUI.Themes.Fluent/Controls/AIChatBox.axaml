@@ -1,0 +1,95 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- AIChatBox — Fluent Style -->
+    <Style Selector="display|AIChatBox">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusLg}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <DockPanel>
+                        <!-- Header -->
+                        <Border DockPanel.Dock="Top"
+                                Background="{DynamicResource AuraCardBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="0,0,0,1"
+                                Padding="16,10">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="{TemplateBinding Tag}"
+                                           FontWeight="SemiBold" FontSize="14"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"
+                                           VerticalAlignment="Center"/>
+                                <Border Name="PART_ModelBadge"
+                                        Background="{DynamicResource AuraPrimaryMutedBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusFull}"
+                                        Padding="8,2"
+                                        IsVisible="False">
+                                    <TextBlock FontSize="11"
+                                               Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        <!-- Input area -->
+                        <Border DockPanel.Dock="Bottom"
+                                Background="{DynamicResource AuraCardBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="0,1,0,0"
+                                Padding="12,8">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBox Name="PART_InputBox"
+                                         Grid.Column="0"
+                                         Watermark="Type a message..."
+                                         Background="{DynamicResource AuraInputBackgroundBrush}"
+                                         BorderBrush="{DynamicResource AuraInputBorderBrush}"
+                                         CornerRadius="{DynamicResource AuraInputRadius}"
+                                         Padding="10,6"
+                                         MinHeight="36"/>
+                                <Button Name="PART_SendButton"
+                                        Grid.Column="1"
+                                        Background="{DynamicResource AuraPrimaryBrush}"
+                                        Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                                        CornerRadius="{DynamicResource AuraRadiusFull}"
+                                        Padding="10,6"
+                                        Margin="8,0,0,0"
+                                        Content="Send"/>
+                            </Grid>
+                        </Border>
+                        <!-- Messages area -->
+                        <ScrollViewer Name="PART_ScrollViewer"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto">
+                            <ItemsControl Name="PART_MessagesList"
+                                          Padding="16,12"/>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Streaming state -->
+    <Style Selector="display|AIChatBox:streaming">
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+
+    <!-- Loading state -->
+    <Style Selector="display|AIChatBox:loading /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|AIChatBox:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

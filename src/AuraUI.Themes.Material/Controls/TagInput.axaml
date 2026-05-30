@@ -1,0 +1,72 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — TagInput -->
+
+    <Style Selector="input|TagInput">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="input:TagInput">
+                    <StackPanel>
+                        <Border Name="PART_Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Padding="{TemplateBinding Padding}">
+                            <StackPanel>
+                                <ItemsControl Name="PART_TagItemsControl">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                                <TextBox Name="PART_TextBox"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Watermark="{TemplateBinding Placeholder}"
+                                         MinWidth="120"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Popup Name="PART_SuggestionsPopup"
+                               IsLightDismissEnabled="True"
+                               Placement="BottomEdgeAlignedLeft"
+                               IsOpen="False">
+                            <Border Background="{DynamicResource AuraSurfaceBrush}"
+                                    BorderBrush="{DynamicResource AuraOutlineVariantBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    BoxShadow="{DynamicResource AuraShadowMd}"
+                                    MaxHeight="200"
+                                    MinWidth="200">
+                                <ListBox Name="PART_SuggestionsList"
+                                         Background="Transparent"
+                                         BorderThickness="0"/>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style Selector="input|TagInput:focused /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="input|TagInput:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

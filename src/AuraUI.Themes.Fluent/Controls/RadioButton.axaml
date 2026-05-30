@@ -21,10 +21,6 @@
                             BorderBrush="{DynamicResource AuraInputBorderBrush}"
                             BorderThickness="1.5"
                             VerticalAlignment="Center">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                        </Border.Transitions>
                         <!-- Inner dot -->
                         <Border Name="PART_RadioInner"
                                 Width="10" Height="10"
@@ -32,11 +28,6 @@
                                 Background="Transparent"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                            <Border.Transitions>
-                                <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                                <DoubleTransition Duration="00:00:00.200" Property="Width"/>
-                                <DoubleTransition Duration="00:00:00.200" Property="Height"/>
-                            </Border.Transitions>
                         </Border>
                     </Border>
 
@@ -110,10 +101,6 @@
                         BorderThickness="1"
                         CornerRadius="{DynamicResource AuraRadiusMd}"
                         Padding="12">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <StackPanel Orientation="Horizontal" Spacing="12">
                         <Border Name="PART_RadioOuter"
                                 Width="20" Height="20"

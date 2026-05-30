@@ -1,0 +1,94 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- FloatingActionButton — Material Design 3 FAB Style -->
+    <Style Selector="layout|FloatingActionButton">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnPrimaryContainerBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusLg}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="MinWidth" Value="56"/>
+        <Setter Property="MinHeight" Value="56"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ClipToBounds" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            BoxShadow="{DynamicResource AuraShadowMd}"
+                            ClipToBounds="True">
+                        <Panel>
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Spacing="8">
+                                <ContentPresenter Name="PART_IconPresenter"
+                                                  VerticalAlignment="Center"/>
+                                <TextBlock Name="PART_LabelPresenter"
+                                           Text="{TemplateBinding Tag}"
+                                           FontWeight="Medium"
+                                           FontSize="14"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Panel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleX" Easing="{StaticResource AuraEasingStandard}"/>
+                <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleY" Easing="{StaticResource AuraEasingStandard}"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Hover state layer -->
+    <Style Selector="layout|FloatingActionButton:pointerover /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Pressed state layer -->
+    <Style Selector="layout|FloatingActionButton:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+    <Style Selector="layout|FloatingActionButton:pressed">
+        <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+    </Style>
+
+    <!-- Mini -->
+    <Style Selector="layout|FloatingActionButton.mini">
+        <Setter Property="MinWidth" Value="40"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="8"/>
+    </Style>
+
+    <!-- Large -->
+    <Style Selector="layout|FloatingActionButton.large">
+        <Setter Property="MinWidth" Value="96"/>
+        <Setter Property="MinHeight" Value="96"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusXl}"/>
+        <Setter Property="Padding" Value="20"/>
+    </Style>
+
+    <!-- Extended -->
+    <Style Selector="layout|FloatingActionButton.extended">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusLg}"/>
+        <Setter Property="Padding" Value="16,16"/>
+    </Style>
+
+    <Style Selector="layout|FloatingActionButton:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

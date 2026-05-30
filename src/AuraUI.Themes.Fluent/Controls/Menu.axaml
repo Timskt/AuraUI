@@ -46,9 +46,6 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}"
                         Margin="2,1">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.150" Property="Background"/>
-                    </Border.Transitions>
                     <Grid ColumnDefinitions="Auto,*,Auto,Auto" Name="PART_LayoutRoot">
                         <!-- Icon -->
                         <Image Name="PART_Icon"

@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- VirtualizingDataGrid — Fluent Style
+         Extends Avalonia DataGrid with additional virtualization optimizations.
+         Base DataGrid styles are inherited; this file adds custom property defaults. -->
+    <Style Selector="display|VirtualizingDataGrid">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="RowBackground" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraBorderBrush}"/>
+    </Style>
+
+    <!-- Alternating rows -->
+    <Style Selector="display|VirtualizingDataGrid /template/ DataGridRow:nth-child(even)">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+    </Style>
+
+    <!-- Hover row -->
+    <Style Selector="display|VirtualizingDataGrid /template/ DataGridRow:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Selected row -->
+    <Style Selector="display|VirtualizingDataGrid /template/ DataGridRow:selected">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
+    </Style>
+
+</Styles>

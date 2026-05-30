@@ -1,0 +1,87 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="using:AuraUI.Controls.Input">
+
+    <!-- PromptInput — Fluent Style -->
+    <Style Selector="input|PromptInput">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusLg}"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel>
+                        <!-- Model selector and temperature -->
+                        <StackPanel DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal"
+                                    Spacing="12"
+                                    Margin="0,8,0,0">
+                            <ComboBox Name="PART_ModelSelector"
+                                      MinWidth="120"
+                                      FontSize="12"/>
+                            <Slider Name="PART_TemperatureSlider"
+                                    Minimum="0" Maximum="2" Value="1"
+                                    Width="100"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Name="PART_TokenCount"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <!-- Input and submit -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Name="PART_InputBox"
+                                     Grid.Column="0"
+                                     Watermark="Enter your prompt..."
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     AcceptsReturn="True"
+                                     MinHeight="40"
+                                     TextWrapping="Wrap"
+                                     FontSize="14"/>
+                            <Button Name="PART_SubmitButton"
+                                    Grid.Column="1"
+                                    Background="{DynamicResource AuraPrimaryBrush}"
+                                    Foreground="{DynamicResource AuraForegroundOnAccentBrush}"
+                                    CornerRadius="{DynamicResource AuraRadiusFull}"
+                                    Padding="12,8"
+                                    Margin="8,0,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Content="Send"/>
+                        </Grid>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Focus state -->
+    <Style Selector="input|PromptInput:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="input|PromptInput:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- Loading state -->
+    <Style Selector="input|PromptInput:loading">
+        <Setter Property="Opacity" Value="0.7"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="input|PromptInput:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

@@ -32,10 +32,6 @@
                                     BoxShadow="{TemplateBinding DropDownShadow}"
                                     ClipToBounds="True"
                                     MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                <Border.Transitions>
-                                    <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                                    <BoxShadowsTransition Duration="0:0:0.200" Property="BoxShadow"/>
-                                </Border.Transitions>
                                 <ScrollViewer>
                                     <ContentPresenter Content="{TemplateBinding DropDownContent}"/>
                                 </ScrollViewer>

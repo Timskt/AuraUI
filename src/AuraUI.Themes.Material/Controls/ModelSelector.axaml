@@ -1,0 +1,65 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ModelSelector — Material Style -->
+    <Style Selector="selection|ModelSelector">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerLowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="MinHeight" Value="56"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel>
+                        <Border Name="PART_ProviderBadge"
+                                DockPanel.Dock="Left"
+                                Background="{DynamicResource AuraSecondaryContainerBrush}"
+                                CornerRadius="{DynamicResource AuraRadiusFull}"
+                                Padding="8,2"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center">
+                            <TextBlock FontSize="11"
+                                       Foreground="{DynamicResource AuraOnSecondaryContainerBrush}"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Name="PART_SelectedModel"
+                                       FontSize="14"
+                                       Foreground="{DynamicResource AuraOnSurfaceBrush}"/>
+                            <TextBlock Name="PART_ModelInfo"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource AuraOnSurfaceVariantBrush}"
+                                       IsVisible="False"/>
+                        </StackPanel>
+                        <Path Name="PART_DropDownGlyph"
+                              DockPanel.Dock="Right"
+                              Data="M 0,0 L 4,4 L 8,0"
+                              Stroke="{DynamicResource AuraOnSurfaceVariantBrush}"
+                              StrokeThickness="1.5"
+                              Width="8" Height="4"
+                              VerticalAlignment="Center"
+                              Margin="8,0,0,0"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="selection|ModelSelector:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="selection|ModelSelector:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

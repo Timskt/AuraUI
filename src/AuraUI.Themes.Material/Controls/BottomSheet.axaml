@@ -1,0 +1,48 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- BottomSheet — Material Style -->
+    <Style Selector="layout|BottomSheet">
+        <Setter Property="SheetBackground" Value="{DynamicResource AuraSurfaceContainerLowBrush}"/>
+        <Setter Property="OverlayBrush" Value="{DynamicResource AuraScrimBrush}"/>
+        <Setter Property="HandleBrush" Value="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Border Name="PART_Overlay"
+                            Background="{DynamicResource AuraScrimBrush}"
+                            IsVisible="False"/>
+                    <Border Name="PART_Sheet"
+                            Background="{DynamicResource AuraSurfaceContainerLowBrush}"
+                            CornerRadius="{DynamicResource AuraRadiusXl},{DynamicResource AuraRadiusXl},0,0"
+                            BoxShadow="{DynamicResource AuraShadowXl}"
+                            VerticalAlignment="Bottom"
+                            ClipToBounds="True">
+                        <DockPanel>
+                            <Border Name="PART_Handle"
+                                    DockPanel.Dock="Top"
+                                    Padding="0,12"
+                                    IsVisible="True">
+                                <Border Width="32" Height="4"
+                                        Background="{DynamicResource AuraOnSurfaceVariantBrush}"
+                                        CornerRadius="2"
+                                        Opacity="0.4"
+                                        HorizontalAlignment="Center"/>
+                            </Border>
+                            <ScrollViewer>
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  Padding="16,8,16,24"/>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="layout|BottomSheet:open /template/ Border#PART_Overlay">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,133 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ============================================================
+         Accordion — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|Accordion">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ItemsPresenter Name="PART_ItemsPresenter">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         AccordionItem — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|AccordionItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <DockPanel>
+                        <!-- Header (clickable area) -->
+                        <ContentControl Name="PART_HeaderSite"
+                                        DockPanel.Dock="Top"
+                                        Content="{TemplateBinding Header}"
+                                        Background="Transparent"
+                                        Padding="12,10"
+                                        MinHeight="44"
+                                        Cursor="Hand">
+                            <ContentControl.Template>
+                                <ControlTemplate>
+                                    <Border Background="{TemplateBinding Background}"
+                                            Padding="{TemplateBinding Padding}">
+                                        <Grid ColumnDefinitions="Auto,*,Auto">
+                                            <!-- Icon -->
+                                            <ContentPresenter Grid.Column="0"
+                                                              Content="{TemplateBinding Tag}"
+                                                              VerticalAlignment="Center"
+                                                              Margin="0,0,8,0"/>
+                                            <!-- Header content -->
+                                            <ContentPresenter Name="PART_ContentPresenter"
+                                                              Grid.Column="1"
+                                                              Content="{TemplateBinding Content}"
+                                                              VerticalAlignment="Center"/>
+                                            <!-- Chevron -->
+                                            <Path Name="Chevron"
+                                                  Grid.Column="2"
+                                                  Width="12"
+                                                  Height="12"
+                                                  Data="M 1,4 L 6,9 L 11,4"
+                                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                  StrokeThickness="1.5"
+                                                  Margin="12,0,0,0"
+                                                  VerticalAlignment="Center"
+                                                  RenderTransformOrigin="0.5,0.5">
+                                                <Path.RenderTransform>
+                                                    <RotateTransform Angle="0"/>
+                                                </Path.RenderTransform>
+                                                <Path.Transitions>
+                                                    <DoubleTransition Duration="00:00:00.200" Property="RotateTransform.Angle"/>
+                                                </Path.Transitions>
+                                            </Path>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </ContentControl.Template>
+                        </ContentControl>
+
+                        <!-- Expand/Collapse Content -->
+                        <ContentControl Name="PART_ExpandSite"
+                                        ClipToBounds="True"
+                                        IsVisible="False">
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="16,0,16,12"/>
+                        </ContentControl>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- AccordionItem expanded state — rotate chevron -->
+    <Style Selector="layout|AccordionItem:expanded /template/ Path#Chevron">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="180"/>
+        </Setter>
+    </Style>
+
+    <!-- AccordionItem header hover -->
+    <Style Selector="layout|AccordionItem /template/ ContentControl#PART_HeaderSite:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- First item: top border -->
+    <Style Selector="layout|AccordionItem:first-child">
+        <Setter Property="BorderThickness" Value="1,1,1,1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd},{DynamicResource AuraRadiusMd},0,0"/>
+    </Style>
+
+    <!-- Last item: bottom border and radius -->
+    <Style Selector="layout|AccordionItem:last-child">
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="CornerRadius" Value="0,0,8,8"/>
+    </Style>
+
+</Styles>

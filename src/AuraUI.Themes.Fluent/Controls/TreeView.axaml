@@ -54,10 +54,6 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="{TemplateBinding Padding}"
                             Margin="0,1">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                        </Border.Transitions>
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <!-- Expand/Collapse chevron -->
                             <Border Name="PART_ExpanderArrow"

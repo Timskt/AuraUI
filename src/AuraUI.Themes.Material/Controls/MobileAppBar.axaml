@@ -1,0 +1,41 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- MobileAppBar — Material Style (Top App Bar) -->
+    <Style Selector="navigation|MobileAppBar">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="Height" Value="64"/>
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Left"
+                                          VerticalAlignment="Center"
+                                          Margin="4,0"/>
+                        <ContentPresenter DockPanel.Dock="Right"
+                                          VerticalAlignment="Center"
+                                          Margin="4,0"/>
+                        <TextBlock Text="{TemplateBinding Tag}"
+                                   FontSize="22"
+                                   FontWeight="Regular"
+                                   Foreground="{DynamicResource AuraOnSurfaceBrush}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="12,0"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="navigation|MobileAppBar:elevated /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
+    </Style>
+
+</Styles>

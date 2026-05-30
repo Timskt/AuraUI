@@ -1,0 +1,43 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:printing="using:AuraUI.Controls.Printing">
+
+    <!-- PrintDialog — Material Style -->
+    <Style Selector="printing|PrintDialog">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusXl}"/>
+        <Setter Property="Padding" Value="24"/>
+        <Setter Property="MinWidth" Value="480"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}"
+                        BoxShadow="{DynamicResource AuraShadowXl}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Text="Print"
+                                   FontSize="24"
+                                   FontWeight="Regular"
+                                   Foreground="{DynamicResource AuraOnSurfaceBrush}"
+                                   Margin="0,0,0,16"/>
+                        <StackPanel DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Spacing="8"
+                                    Margin="0,24,0,0">
+                            <Button Content="Cancel" Classes="text" Padding="16,10"/>
+                            <Button Content="Print" Classes="filled" Padding="16,10"/>
+                        </StackPanel>
+                        <ScrollViewer>
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

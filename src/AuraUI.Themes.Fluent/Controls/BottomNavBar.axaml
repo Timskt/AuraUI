@@ -1,0 +1,83 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- BottomNavBar — Fluent Style -->
+    <Style Selector="navigation|BottomNavBar">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+        <Setter Property="Padding" Value="0,4"/>
+        <Setter Property="Height" Value="64"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ClipToBounds="True">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        Margin="{TemplateBinding Padding}">
+                            <ItemsPresenter.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- BottomNavBarItem — active state -->
+    <Style Selector="navigation|BottomNavBarItem">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Padding="8,4"
+                        Background="Transparent">
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="2">
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          Content="{TemplateBinding Icon}"
+                                          HorizontalAlignment="Center"
+                                          Width="24" Height="24"/>
+                        <TextBlock Name="PART_LabelPresenter"
+                                   Text="{TemplateBinding Label}"
+                                   FontSize="11"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Foreground"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Item active -->
+    <Style Selector="navigation|BottomNavBarItem:active">
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Item hover -->
+    <Style Selector="navigation|BottomNavBarItem:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Item pressed -->
+    <Style Selector="navigation|BottomNavBarItem:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
+</Styles>

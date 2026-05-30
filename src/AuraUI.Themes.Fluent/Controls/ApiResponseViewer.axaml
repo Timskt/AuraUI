@@ -1,0 +1,87 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ApiResponseViewer — Fluent Style -->
+    <Style Selector="display|ApiResponseViewer">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <DockPanel>
+                        <!-- Status bar -->
+                        <Border DockPanel.Dock="Top"
+                                Name="PART_StatusBadge"
+                                Padding="12,8"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="0,0,0,1">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock FontWeight="SemiBold" FontSize="13"
+                                           Foreground="{DynamicResource AuraSuccessBrush}"/>
+                                <TextBlock FontSize="12"
+                                           Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <!-- Copy button -->
+                        <Button Name="PART_CopyButton"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8,4"
+                                Margin="0,4,8,0"
+                                Content="Copy"
+                                FontSize="12"
+                                Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                        <!-- Body content -->
+                        <Border Padding="12">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Auto">
+                                <TextBlock Name="PART_BodyPresenter"
+                                           FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                           FontSize="13"
+                                           TextWrapping="NoWrap"
+                                           Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Success status -->
+    <Style Selector="display|ApiResponseViewer:success /template/ Border#PART_StatusBadge">
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessMutedBrush}"/>
+    </Style>
+
+    <!-- Client error -->
+    <Style Selector="display|ApiResponseViewer:client-error /template/ Border#PART_StatusBadge">
+        <Setter Property="Background" Value="{DynamicResource AuraWarningMutedBrush}"/>
+    </Style>
+
+    <!-- Server error -->
+    <Style Selector="display|ApiResponseViewer:server-error /template/ Border#PART_StatusBadge">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorMutedBrush}"/>
+    </Style>
+
+    <!-- Loading -->
+    <Style Selector="display|ApiResponseViewer:loading">
+        <Setter Property="Opacity" Value="0.6"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|ApiResponseViewer:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

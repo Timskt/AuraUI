@@ -1,0 +1,139 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         CheckedTreeView — Fluent Style (inherits AuraTreeView)
+         ============================================================ -->
+    <Style Selector="display|CheckedTreeView">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto">
+                        <ItemsPresenter Name="PART_ItemsPresenter">
+                            <ItemsPresenter.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ============================================================
+         CheckedTreeViewItem — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|CheckedTreeViewItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel>
+                    <!-- Item header row -->
+                    <Border Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="0,1">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <!-- Expand/Collapse chevron -->
+                            <Border Name="PART_ExpanderArrow"
+                                    Width="16" Height="16"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    CornerRadius="2">
+                                <Path Name="PART_ExpanderPath"
+                                      Width="8" Height="8"
+                                      Stretch="Uniform"
+                                      Fill="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      Data="M 0 0 L 4 4 L 0 8"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      RenderTransformOrigin="0.5,0.5">
+                                    <Path.RenderTransform>
+                                        <RotateTransform Angle="0"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </Border>
+
+                            <!-- Checkbox -->
+                            <CheckBox Name="PART_CheckBox"
+                                      VerticalAlignment="Center"
+                                      IsThreeState="True"
+                                      Margin="{TemplateBinding CheckBoxMargin}"/>
+
+                            <!-- Icon -->
+                            <Image Name="PART_Icon"
+                                   Width="16" Height="16"
+                                   Stretch="Uniform"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"/>
+
+                            <!-- Content -->
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Child items -->
+                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                    Margin="20,0,0,0">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="display|CheckedTreeViewItem:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Selected -->
+    <Style Selector="display|CheckedTreeViewItem:selected /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraSelectedBrush}"/>
+    </Style>
+
+    <!-- Expanded — rotate chevron -->
+    <Style Selector="display|CheckedTreeViewItem:expanded /template/ Path#PART_ExpanderPath">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="90"/>
+        </Setter>
+    </Style>
+
+    <!-- Leaf — hide expander -->
+    <Style Selector="display|CheckedTreeViewItem:leaf /template/ Border#PART_ExpanderArrow">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|CheckedTreeViewItem:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

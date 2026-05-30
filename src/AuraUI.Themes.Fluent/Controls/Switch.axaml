@@ -27,10 +27,6 @@
                             BorderBrush="{DynamicResource AuraBorderBrush}"
                             BorderThickness="1"
                             VerticalAlignment="Center">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                        </Border.Transitions>
 
                         <!-- Thumb -->
                         <Border Name="PART_Thumb"
@@ -41,10 +37,6 @@
                                 Margin="2,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
-                            <Border.Transitions>
-                                <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                                <ThicknessTransition Duration="00:00:00.200" Property="Margin"/>
-                            </Border.Transitions>
                         </Border>
                     </Border>
 

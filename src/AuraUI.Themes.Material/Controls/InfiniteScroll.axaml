@@ -1,0 +1,20 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- InfiniteScroll is an attached behavior provider. -->
+
+    <Style Selector="Border.infinite-scroll-loading">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Padding" Value="0,12"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style Selector="ProgressBar.infinite-scroll-spinner">
+        <Setter Property="IsIndeterminate" Value="True"/>
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerHighBrush}"/>
+    </Style>
+
+</Styles>

@@ -251,6 +251,7 @@ public static class AccessibilityHelper
         {
             foreach (var item in itemsControl.Items)
             {
+                if (item is null) continue;
                 if (item is InputElement itemElement)
                 {
                     CollectFocusableChildren(itemElement, result);

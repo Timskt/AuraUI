@@ -32,9 +32,6 @@
                                 BoxShadow="{TemplateBinding BubbleShadow}"
                                 Padding="{TemplateBinding Padding}"
                                 Margin="0,8,0,8">
-                            <Border.Transitions>
-                                <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                            </Border.Transitions>
                             <ContentPresenter Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"/>
                         </Border>

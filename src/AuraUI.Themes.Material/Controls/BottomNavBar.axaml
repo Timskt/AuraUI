@@ -1,0 +1,79 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- BottomNavBar — Material Style -->
+    <Style Selector="navigation|BottomNavBar">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        Margin="0,12,0,16">
+                            <ItemsPresenter.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- BottomNavBarItem — Material 3 style -->
+    <Style Selector="navigation|BottomNavBarItem">
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="4">
+                    <!-- Icon with indicator pill -->
+                    <Border Name="PART_Indicator"
+                            Width="64" Height="32"
+                            CornerRadius="16"
+                            Background="Transparent"
+                            HorizontalAlignment="Center">
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          Content="{TemplateBinding Icon}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Width="24" Height="24"/>
+                    </Border>
+                    <TextBlock Name="PART_LabelPresenter"
+                               Text="{TemplateBinding Label}"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Center"
+                               Foreground="{TemplateBinding Foreground}"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Active item with indicator pill -->
+    <Style Selector="navigation|BottomNavBarItem:active">
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+    </Style>
+    <Style Selector="navigation|BottomNavBarItem:active /template/ Border#PART_Indicator">
+        <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="navigation|BottomNavBarItem:pointerover /template/ Border#PART_Indicator">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+</Styles>

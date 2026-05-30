@@ -1,0 +1,71 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="using:AuraUI.Controls.Input">
+
+    <!-- PromptInput — Material Style -->
+    <Style Selector="input|PromptInput">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerLowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusXl}"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal"
+                                    Spacing="12"
+                                    Margin="0,8,0,0">
+                            <ComboBox Name="PART_ModelSelector"
+                                      MinWidth="120"
+                                      FontSize="12"/>
+                            <Slider Name="PART_TemperatureSlider"
+                                    Minimum="0" Maximum="2" Value="1"
+                                    Width="100"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Name="PART_TokenCount"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource AuraOnSurfaceVariantBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Name="PART_InputBox"
+                                     Grid.Column="0"
+                                     Watermark="Enter your prompt..."
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     AcceptsReturn="True"
+                                     MinHeight="40"
+                                     TextWrapping="Wrap"
+                                     FontSize="14"/>
+                            <Button Name="PART_SubmitButton"
+                                    Grid.Column="1"
+                                    Classes="filled"
+                                    Padding="16,10"
+                                    Margin="8,0,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Content="Send"/>
+                        </Grid>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="input|PromptInput:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="input|PromptInput:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

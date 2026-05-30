@@ -24,12 +24,6 @@
                         BoxShadow="{TemplateBinding BoxShadow}"
                         Padding="{TemplateBinding Padding}"
                         ClipToBounds="{TemplateBinding ClipToBounds}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                        <BoxShadowsTransition Duration="00:00:00.200" Property="BoxShadow"/>
-                        <DoubleTransition Duration="00:00:00.200" Property="TranslateTransform.Y" Easing="{DynamicResource AuraEasingDecelerate}"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <!-- Header -->
                         <Border DockPanel.Dock="Top"

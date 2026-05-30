@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- ErrorBoundary — Fluent Style -->
+    <Style Selector="layout|ErrorBoundary">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Normal content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"/>
+                    <!-- Error content overlay -->
+                    <Border Name="PART_ErrorBorder"
+                            Background="{DynamicResource AuraErrorMutedBrush}"
+                            BorderBrush="{DynamicResource AuraErrorBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{DynamicResource AuraRadiusMd}"
+                            Padding="16"
+                            IsVisible="False">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="An error occurred"
+                                       FontWeight="SemiBold"
+                                       FontSize="14"
+                                       Foreground="{DynamicResource AuraErrorBrush}"/>
+                            <ContentPresenter Content="{TemplateBinding ErrorContent}"/>
+                        </StackPanel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

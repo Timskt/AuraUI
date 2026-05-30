@@ -21,10 +21,6 @@
                         Cursor="Hand"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <TextBlock Text="&#x2191;"
                                FontSize="18"
                                FontWeight="SemiBold"
