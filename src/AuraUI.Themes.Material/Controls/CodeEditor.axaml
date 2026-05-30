@@ -1,0 +1,80 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- CodeEditor — Material Style -->
+    <Style Selector="display|CodeEditor">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerLowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top"
+                                    Orientation="Horizontal"
+                                    Spacing="4"
+                                    Margin="8,4"
+                                    HorizontalAlignment="Right">
+                            <ToggleButton Name="PART_WrapToggle"
+                                          Content="Wrap"
+                                          FontSize="11"
+                                          Padding="8,3"/>
+                            <Button Name="PART_CopyButton"
+                                    Classes="text"
+                                    Content="Copy"
+                                    FontSize="11"
+                                    Padding="8,3"/>
+                        </StackPanel>
+                        <ScrollViewer Name="PART_ScrollViewer"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <DockPanel>
+                                <TextBlock Name="PART_LineNumbers"
+                                           DockPanel.Dock="Left"
+                                           FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraOnSurfaceVariantBrush}"
+                                           Margin="8,4"
+                                           TextAlignment="Right"/>
+                                <TextBlock Name="PART_CodePresenter"
+                                           FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraOnSurfaceBrush}"
+                                           Margin="8,4"
+                                           TextWrapping="NoWrap"/>
+                            </DockPanel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|CodeEditor:dark">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceDarkBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDarkBrush}"/>
+    </Style>
+
+    <Style Selector="display|CodeEditor:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="display|CodeEditor:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

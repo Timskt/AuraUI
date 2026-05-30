@@ -1,0 +1,21 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ImageGallery — Material Style -->
+    <Style Selector="display|ImageGallery">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ItemsPresenter Name="PART_ItemsPresenter">
+                    <ItemsPresenter.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsPresenter.ItemsPanel>
+                </ItemsPresenter>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

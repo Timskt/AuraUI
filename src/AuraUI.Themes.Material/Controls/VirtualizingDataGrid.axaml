@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- VirtualizingDataGrid — Material Style -->
+    <Style Selector="display|VirtualizingDataGrid">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="RowBackground" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+    </Style>
+
+</Styles>

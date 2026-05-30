@@ -1,0 +1,68 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- VideoPlayer — Material Style -->
+    <Style Selector="display|VideoPlayer">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceDarkBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="{TemplateBinding ClipToBounds}">
+                    <Panel>
+                        <Panel Name="PART_VideoArea" Background="Black"/>
+                        <Border Name="PART_ControlsOverlay"
+                                Background="#80000000"
+                                VerticalAlignment="Bottom"
+                                Padding="8,6"
+                                IsVisible="True">
+                            <StackPanel Spacing="6">
+                                <Slider Name="PART_ProgressBar"
+                                        Minimum="0" Maximum="1"
+                                        Height="4"
+                                        Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                    <Button Name="PART_PlayButton"
+                                            Grid.Column="0"
+                                            Classes="icon"
+                                            Content="&#x25B6;"
+                                            FontSize="14"
+                                            Foreground="White"/>
+                                    <Slider Name="PART_VolumeSlider"
+                                            Grid.Column="2"
+                                            Minimum="0" Maximum="1" Value="1"
+                                            Width="80"
+                                            VerticalAlignment="Center"/>
+                                    <Button Name="PART_FullscreenButton"
+                                            Grid.Column="3"
+                                            Classes="icon"
+                                            Content="&#x26F6;"
+                                            FontSize="14"
+                                            Foreground="White"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|VideoPlayer:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="display|VideoPlayer:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

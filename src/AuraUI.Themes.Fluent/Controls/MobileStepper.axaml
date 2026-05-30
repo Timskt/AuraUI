@@ -1,0 +1,42 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- MobileStepper — Fluent Style -->
+    <Style Selector="navigation|MobileStepper">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="Padding" Value="16,8"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                    </Border.Transitions>
+                    <StackPanel Name="PART_StepsContainer"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Spacing="8"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Dots variant -->
+    <Style Selector="navigation|MobileStepper:dots">
+        <Setter Property="Height" Value="40"/>
+    </Style>
+
+    <!-- Progress variant -->
+    <Style Selector="navigation|MobileStepper:progress">
+        <Setter Property="Height" Value="48"/>
+    </Style>
+
+    <!-- Number variant -->
+    <Style Selector="navigation|MobileStepper:number">
+        <Setter Property="Height" Value="48"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,46 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- StatusIndicator — Material Style -->
+    <Style Selector="display|StatusIndicator">
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+    </Style>
+
+    <Style Selector="display|StatusIndicator:online">
+        <Setter Property="Foreground" Value="{DynamicResource AuraSuccessBrush}"/>
+    </Style>
+
+    <Style Selector="display|StatusIndicator:offline">
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+    </Style>
+
+    <Style Selector="display|StatusIndicator:warning">
+        <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
+    </Style>
+
+    <Style Selector="display|StatusIndicator:error">
+        <Setter Property="Foreground" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <Style Selector="display|StatusIndicator:maintenance">
+        <Setter Property="Foreground" Value="{DynamicResource AuraInfoBrush}"/>
+    </Style>
+
+    <Style Selector="display|StatusIndicator:pulsing">
+        <Style.Animations>
+            <Animation Duration="0:0:1.5" IterationCount="Infinite">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="1"/>
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="Opacity" Value="0.4"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+</Styles>

@@ -1,0 +1,56 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- DeploymentCard — Material Style -->
+    <Style Selector="display|DeploymentCard">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <Border Name="PART_StatusIndicator"
+                                DockPanel.Dock="Left"
+                                Width="4"
+                                CornerRadius="2"
+                                Margin="0,0,12,0"
+                                Background="{DynamicResource AuraSuccessBrush}"/>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|DeploymentCard:pointerover /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
+    </Style>
+
+    <Style Selector="display|DeploymentCard:success /template/ Border#PART_StatusIndicator">
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
+    </Style>
+    <Style Selector="display|DeploymentCard:building /template/ Border#PART_StatusIndicator">
+        <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
+    </Style>
+    <Style Selector="display|DeploymentCard:failed /template/ Border#PART_StatusIndicator">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <Style Selector="display|DeploymentCard:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

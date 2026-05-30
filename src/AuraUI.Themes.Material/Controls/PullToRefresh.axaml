@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- PullToRefresh — Material Style -->
+    <Style Selector="layout|PullToRefresh">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel ClipToBounds="True">
+                    <Border Name="PART_RefreshIndicator"
+                            Background="{DynamicResource AuraSurfaceContainerBrush}"
+                            VerticalAlignment="Top"
+                            Height="60"
+                            IsVisible="False">
+                        <ProgressBar IsIndeterminate="True"
+                                     Height="4"
+                                     Width="48"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                    </Border>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"/>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="layout|PullToRefresh:pulling /template/ Border#PART_RefreshIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="layout|PullToRefresh:refreshing /template/ Border#PART_RefreshIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+    </Style>
+
+</Styles>

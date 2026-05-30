@@ -1,0 +1,84 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- Terminal — Fluent Style -->
+    <Style Selector="display|Terminal">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceDarkBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontFamily" Value="Cascadia Code,Consolas,Courier New,monospace"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Output area -->
+                        <ScrollViewer Name="PART_ScrollViewer"
+                                      DockPanel.Dock="Top"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <ItemsControl Name="PART_OutputArea"
+                                          Margin="8,4">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <!-- Input line -->
+                        <Border DockPanel.Dock="Bottom"
+                                Padding="8,4"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="0,1,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text=">"
+                                           Foreground="{DynamicResource AuraPrimaryBrush}"
+                                           FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                           FontSize="13"
+                                           VerticalAlignment="Center"/>
+                                <TextBox Name="PART_InputBox"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                         FontSize="13"
+                                         Foreground="{DynamicResource AuraForegroundBrush}"
+                                         MinWidth="200"/>
+                            </StackPanel>
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="display|Terminal:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Active state (focused input) -->
+    <Style Selector="display|Terminal:active /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|Terminal:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,58 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- AudioPlayer — Material Style -->
+    <Style Selector="display|AudioPlayer">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerLowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <StackPanel Spacing="8">
+                        <ProgressBar Name="PART_ProgressBar"
+                                     Minimum="0" Maximum="1"
+                                     Height="4"
+                                     CornerRadius="2"
+                                     Foreground="{DynamicResource AuraPrimaryBrush}"
+                                     Background="{DynamicResource AuraSurfaceContainerHighBrush}"/>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Button Name="PART_PlayButton"
+                                    Grid.Column="0"
+                                    Classes="icon"
+                                    Content="&#x25B6;"
+                                    FontSize="16"/>
+                            <Slider Name="PART_VolumeSlider"
+                                    Grid.Column="2"
+                                    Minimum="0" Maximum="1" Value="1"
+                                    Width="80"
+                                    VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|AudioPlayer:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="display|AudioPlayer:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

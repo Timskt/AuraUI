@@ -1,0 +1,93 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="using:AuraUI.Controls.Input">
+
+    <!-- JsonEditor — Material Style -->
+    <Style Selector="input|JsonEditor">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceContainerLowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Border.Transitions>
+                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <Border Name="PART_ErrorBar"
+                                DockPanel.Dock="Bottom"
+                                Background="{DynamicResource AuraErrorContainerBrush}"
+                                Padding="10,6"
+                                IsVisible="False">
+                            <TextBlock Name="PART_ErrorText"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AuraErrorBrush}"/>
+                        </Border>
+                        <StackPanel DockPanel.Dock="Top"
+                                    Orientation="Horizontal"
+                                    Spacing="4"
+                                    Margin="8,4"
+                                    HorizontalAlignment="Right">
+                            <Button Name="PART_FormatButton"
+                                    Classes="text"
+                                    Content="Format"
+                                    FontSize="11"
+                                    Padding="8,3"/>
+                            <Button Name="PART_CopyButton"
+                                    Classes="text"
+                                    Content="Copy"
+                                    FontSize="11"
+                                    Padding="8,3"/>
+                        </StackPanel>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <DockPanel>
+                                <TextBlock Name="PART_LineNumbers"
+                                           DockPanel.Dock="Left"
+                                           FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource AuraOnSurfaceVariantBrush}"
+                                           Margin="8,4"
+                                           TextAlignment="Right"/>
+                                <TextBox Name="PART_Editor"
+                                         FontFamily="Cascadia Code,Consolas,Courier New,monospace"
+                                         FontSize="13"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         AcceptsReturn="True"
+                                         TextWrapping="NoWrap"
+                                         Margin="8,4"/>
+                            </DockPanel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="input|JsonEditor:invalid /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="input|JsonEditor:invalid /template/ Border#PART_ErrorBar">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="input|JsonEditor:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="input|JsonEditor:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

@@ -1,0 +1,103 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- VideoPlayer — Fluent Style -->
+    <Style Selector="display|VideoPlayer">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceDarkBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="{TemplateBinding ClipToBounds}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <Panel>
+                        <!-- Video area -->
+                        <Panel Name="PART_VideoArea"
+                               Background="Black"/>
+                        <!-- Controls overlay -->
+                        <Border Name="PART_ControlsOverlay"
+                                Background="#80000000"
+                                VerticalAlignment="Bottom"
+                                Padding="8,6"
+                                IsVisible="True">
+                            <StackPanel Spacing="6">
+                                <!-- Progress slider -->
+                                <Slider Name="PART_ProgressBar"
+                                        Minimum="0" Maximum="1"
+                                        Height="4"
+                                        Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                                <!-- Control buttons -->
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                    <Button Name="PART_PlayButton"
+                                            Grid.Column="0"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Padding="4"
+                                            Content="&#x25B6;"
+                                            FontSize="14"
+                                            Foreground="White"/>
+                                    <Slider Name="PART_VolumeSlider"
+                                            Grid.Column="2"
+                                            Minimum="0" Maximum="1" Value="1"
+                                            Width="80"
+                                            VerticalAlignment="Center"/>
+                                    <Button Name="PART_FullscreenButton"
+                                            Grid.Column="3"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Padding="4"
+                                            Content="&#x26F6;"
+                                            FontSize="14"
+                                            Foreground="White"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover on border -->
+    <Style Selector="display|VideoPlayer:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Playing state -->
+    <Style Selector="display|VideoPlayer:playing">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!-- Controls visible -->
+    <Style Selector="display|VideoPlayer:controls-visible /template/ Border#PART_ControlsOverlay">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Muted -->
+    <Style Selector="display|VideoPlayer:muted">
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+
+    <!-- Loading -->
+    <Style Selector="display|VideoPlayer:loading">
+        <Setter Property="Opacity" Value="0.6"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|VideoPlayer:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

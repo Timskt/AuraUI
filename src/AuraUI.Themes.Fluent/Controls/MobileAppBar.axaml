@@ -1,0 +1,62 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- MobileAppBar — Fluent Style -->
+    <Style Selector="navigation|MobileAppBar">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                        <DoubleTransition Duration="00:00:00.200" Property="TranslateTransform.Y" Easing="{DynamicResource AuraEasingStandard}"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Left action -->
+                        <ContentPresenter DockPanel.Dock="Left"
+                                          Content="{TemplateBinding Tag}"
+                                          VerticalAlignment="Center"
+                                          Margin="4,0"/>
+                        <!-- Right actions -->
+                        <ContentPresenter DockPanel.Dock="Right"
+                                          VerticalAlignment="Center"
+                                          Margin="4,0"/>
+                        <!-- Title -->
+                        <TextBlock Text="{TemplateBinding Tag}"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="8,0"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Elevated state -->
+    <Style Selector="navigation|MobileAppBar:elevated /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- Flat state -->
+    <Style Selector="navigation|MobileAppBar:flat /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="none"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+
+</Styles>

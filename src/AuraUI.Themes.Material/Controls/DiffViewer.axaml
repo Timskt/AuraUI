@@ -1,0 +1,10 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- DiffViewer — Material Style (Control-based) -->
+    <Style Selector="display|DiffViewer">
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+
+</Styles>

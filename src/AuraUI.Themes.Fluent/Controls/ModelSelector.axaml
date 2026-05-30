@@ -1,0 +1,79 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ModelSelector — Fluent Style -->
+    <Style Selector="selection|ModelSelector">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                    </Border.Transitions>
+                    <DockPanel>
+                        <!-- Provider badge -->
+                        <Border Name="PART_ProviderBadge"
+                                DockPanel.Dock="Left"
+                                Background="{DynamicResource AuraPrimaryMutedBrush}"
+                                CornerRadius="{DynamicResource AuraRadiusFull}"
+                                Padding="8,2"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center">
+                            <TextBlock FontSize="11"
+                                       Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                        </Border>
+                        <!-- Selection area -->
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Name="PART_SelectedModel"
+                                       FontSize="14"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"/>
+                            <TextBlock Name="PART_ModelInfo"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                       IsVisible="False"/>
+                        </StackPanel>
+                        <!-- Dropdown arrow -->
+                        <Path Name="PART_DropDownGlyph"
+                              DockPanel.Dock="Right"
+                              Data="M 0,0 L 4,4 L 8,0"
+                              Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
+                              StrokeThickness="1.5"
+                              Width="8" Height="4"
+                              VerticalAlignment="Center"
+                              Margin="8,0,0,0"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="selection|ModelSelector:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- Focus -->
+    <Style Selector="selection|ModelSelector:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|ModelSelector:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

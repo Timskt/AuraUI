@@ -130,4 +130,51 @@
     <StyleInclude Source="/Controls/QRCode.axaml"/>
     <StyleInclude Source="/Controls/ImageViewer.axaml"/>
 
+    <!-- V6 controls — additional controls -->
+    <StyleInclude Source="/Controls/AIChatBox.axaml"/>
+    <StyleInclude Source="/Controls/ApiResponseViewer.axaml"/>
+    <StyleInclude Source="/Controls/AudioPlayer.axaml"/>
+    <StyleInclude Source="/Controls/BottomNavBar.axaml"/>
+    <StyleInclude Source="/Controls/BottomSheet.axaml"/>
+    <StyleInclude Source="/Controls/ChipInput.axaml"/>
+    <StyleInclude Source="/Controls/CodeEditor.axaml"/>
+    <StyleInclude Source="/Controls/ConfigEditor.axaml"/>
+    <StyleInclude Source="/Controls/ConsoleOutput.axaml"/>
+    <StyleInclude Source="/Controls/DashboardGrid.axaml"/>
+    <StyleInclude Source="/Controls/DeploymentCard.axaml"/>
+    <StyleInclude Source="/Controls/DiffViewer.axaml"/>
+    <StyleInclude Source="/Controls/ErrorBoundary.axaml"/>
+    <StyleInclude Source="/Controls/FileExplorer.axaml"/>
+    <StyleInclude Source="/Controls/FloatingActionButton.axaml"/>
+    <StyleInclude Source="/Controls/FormPanel.axaml"/>
+    <StyleInclude Source="/Controls/Frame.axaml"/>
+    <StyleInclude Source="/Controls/GanttChart.axaml"/>
+    <StyleInclude Source="/Controls/ImageCropper.axaml"/>
+    <StyleInclude Source="/Controls/ImageGallery.axaml"/>
+    <StyleInclude Source="/Controls/InfiniteScroll.axaml"/>
+    <StyleInclude Source="/Controls/JsonEditor.axaml"/>
+    <StyleInclude Source="/Controls/LogViewer.axaml"/>
+    <StyleInclude Source="/Controls/MarkdownViewer.axaml"/>
+    <StyleInclude Source="/Controls/MetricCard.axaml"/>
+    <StyleInclude Source="/Controls/MobileAppBar.axaml"/>
+    <StyleInclude Source="/Controls/MobileStepper.axaml"/>
+    <StyleInclude Source="/Controls/ModelSelector.axaml"/>
+    <StyleInclude Source="/Controls/PipelineViewer.axaml"/>
+    <StyleInclude Source="/Controls/PrintDialog.axaml"/>
+    <StyleInclude Source="/Controls/PrintPreview.axaml"/>
+    <StyleInclude Source="/Controls/PromptInput.axaml"/>
+    <StyleInclude Source="/Controls/PullToRefresh.axaml"/>
+    <StyleInclude Source="/Controls/ResponsiveGrid.axaml"/>
+    <StyleInclude Source="/Controls/ResponsivePanel.axaml"/>
+    <StyleInclude Source="/Controls/SoftKeyboard.axaml"/>
+    <StyleInclude Source="/Controls/StackPanelResponsive.axaml"/>
+    <StyleInclude Source="/Controls/StatusIndicator.axaml"/>
+    <StyleInclude Source="/Controls/SwipeAction.axaml"/>
+    <StyleInclude Source="/Controls/Terminal.axaml"/>
+    <StyleInclude Source="/Controls/ToolBar.axaml"/>
+    <StyleInclude Source="/Controls/VideoPlayer.axaml"/>
+    <StyleInclude Source="/Controls/VirtualizingDataGrid.axaml"/>
+    <StyleInclude Source="/Controls/VirtualizingStackPanel.axaml"/>
+    <StyleInclude Source="/Controls/VirtualizingWrapPanel.axaml"/>
+
 </Styles>

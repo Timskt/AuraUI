@@ -1,0 +1,53 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- PullToRefresh — Fluent Style -->
+    <Style Selector="layout|PullToRefresh">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel ClipToBounds="True">
+                    <!-- Refresh indicator (pull-down area) -->
+                    <Border Name="PART_RefreshIndicator"
+                            Background="{DynamicResource AuraMutedBrush}"
+                            VerticalAlignment="Top"
+                            Height="60"
+                            IsVisible="False">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Spacing="4">
+                            <ProgressBar IsIndeterminate="True"
+                                         Height="2"
+                                         Width="40"
+                                         Foreground="{DynamicResource AuraPrimaryBrush}"/>
+                            <TextBlock Text="Pull to refresh..."
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AuraForegroundTertiaryBrush}"/>
+                        </StackPanel>
+                    </Border>
+                    <!-- Main content -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"/>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Duration="00:00:00.300" Property="TranslateTransform.Y" Easing="{DynamicResource AuraEasingDecelerate}"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Pulling state -->
+    <Style Selector="layout|PullToRefresh:pulling /template/ Border#PART_RefreshIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Refreshing state -->
+    <Style Selector="layout|PullToRefresh:refreshing /template/ Border#PART_RefreshIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
+    </Style>
+
+</Styles>

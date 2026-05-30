@@ -1,0 +1,62 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="using:AuraUI.Controls.Layout">
+
+    <!-- BottomSheet — Fluent Style -->
+    <Style Selector="layout|BottomSheet">
+        <Setter Property="SheetBackground" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="OverlayBrush" Value="{DynamicResource AuraSmokeBrush}"/>
+        <Setter Property="HandleBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Overlay -->
+                    <Border Name="PART_Overlay"
+                            Background="{DynamicResource AuraSmokeBrush}"
+                            IsVisible="False"/>
+                    <!-- Sheet -->
+                    <Border Name="PART_Sheet"
+                            Background="{DynamicResource AuraSurfaceBrush}"
+                            CornerRadius="{DynamicResource AuraRadiusLg},{DynamicResource AuraRadiusLg},0,0"
+                            BoxShadow="{DynamicResource AuraShadowXl}"
+                            VerticalAlignment="Bottom"
+                            ClipToBounds="True">
+                        <Border.Transitions>
+                            <DoubleTransition Duration="00:00:00.300" Property="TranslateTransform.Y"
+                                              Easing="{DynamicResource AuraEasingDecelerate}"/>
+                        </Border.Transitions>
+                        <DockPanel>
+                            <!-- Drag handle -->
+                            <Border Name="PART_Handle"
+                                    DockPanel.Dock="Top"
+                                    Padding="0,8"
+                                    HorizontalAlignment="Stretch"
+                                    IsVisible="True">
+                                <Border Width="40" Height="4"
+                                        Background="{DynamicResource AuraBorderBrush}"
+                                        CornerRadius="2"
+                                        HorizontalAlignment="Center"/>
+                            </Border>
+                            <!-- Content -->
+                            <ScrollViewer>
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  Padding="16,8,16,24"/>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="layout|BottomSheet:open /template/ Border#PART_Overlay">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Dragging state -->
+    <Style Selector="layout|BottomSheet:dragging /template/ Border#PART_Handle">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+</Styles>

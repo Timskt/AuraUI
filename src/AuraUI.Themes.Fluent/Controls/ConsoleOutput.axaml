@@ -1,0 +1,20 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ConsoleOutput — Fluent Style -->
+    <Style Selector="display|ConsoleOutput">
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+
+    <!-- Scrolling state -->
+    <Style Selector="display|ConsoleOutput:scrolling">
+        <Setter Property="Opacity" Value="0.95"/>
+    </Style>
+
+    <!-- Filtering state -->
+    <Style Selector="display|ConsoleOutput:filtering">
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+
+</Styles>
