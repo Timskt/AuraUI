@@ -79,7 +79,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Width" Value="NaN"/>
-        <Setter Property="Height" Value="{Binding $parent[layout:Drawer].DrawerHeight}"/>
+        <Setter Property="Height" Value="{TemplateBinding DrawerHeight}"/>
     </Style>
     <Style Selector="layout|Drawer:top:closed /template/ Border#PART_DrawerPanel">
         <Setter Property="Margin" Value="0,-320,0,0"/>
@@ -93,7 +93,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="Width" Value="NaN"/>
-        <Setter Property="Height" Value="{Binding $parent[layout:Drawer].DrawerHeight}"/>
+        <Setter Property="Height" Value="{TemplateBinding DrawerHeight}"/>
     </Style>
     <Style Selector="layout|Drawer:bottom:closed /template/ Border#PART_DrawerPanel">
         <Setter Property="Margin" Value="0,0,0,-320"/>
