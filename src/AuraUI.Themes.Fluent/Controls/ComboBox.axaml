@@ -67,6 +67,7 @@
                                     BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
                                     BorderThickness="1"
                                     CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    BoxShadow="{DynamicResource AuraShadowMd}"
                                     Padding="4">
                                 <DockPanel>
                                     <!-- Search box (shown when IsSearchable) -->
@@ -129,6 +130,12 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.150" Property="Background"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"

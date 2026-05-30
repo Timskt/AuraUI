@@ -67,6 +67,7 @@
                                     BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
                                     BorderThickness="1"
                                     CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    BoxShadow="{DynamicResource AuraShadowMd}"
                                     Padding="4">
                                 <DockPanel>
                                     <!-- Search box -->
@@ -115,7 +116,7 @@
     <!-- MultiComboBox :focus -->
     <Style Selector="selection|MultiComboBox:focus /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- MultiComboBox :disabled -->

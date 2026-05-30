@@ -72,7 +72,7 @@
                                         BorderThickness="1"
                                         CornerRadius="{DynamicResource AuraRadiusMd}"
                                         Padding="4"
-                                        BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000">
+                                        BoxShadow="{DynamicResource AuraShadowLevel3}">
                                     <DockPanel>
                                         <!-- Search box -->
                                         <TextBox Name="PART_SearchBox"
@@ -126,7 +126,7 @@
     <!-- Focused -->
     <Style Selector="selection|MultiComboBox:focus /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Disabled -->

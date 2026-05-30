@@ -70,7 +70,7 @@
                                         BorderThickness="1"
                                         CornerRadius="{DynamicResource AuraRadiusMd}"
                                         Padding="4"
-                                        BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000">
+                                        BoxShadow="{DynamicResource AuraShadowLevel3}">
                                     <DockPanel>
                                         <!-- Search box (shown when IsSearchable) -->
                                         <TextBox Name="PART_SearchBox"
