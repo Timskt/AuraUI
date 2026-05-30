@@ -128,7 +128,7 @@ public class CodeEditor : TemplatedControl
     /// <summary>
     /// Defines the <see cref="Theme"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<CodeEditorTheme> ThemeProperty =
+    public static new readonly StyledProperty<CodeEditorTheme> ThemeProperty =
         AvaloniaProperty.Register<CodeEditor, CodeEditorTheme>(nameof(Theme), CodeEditorTheme.Dark);
 
     /// <summary>
@@ -204,7 +204,7 @@ public class CodeEditor : TemplatedControl
     /// <summary>
     /// Gets or sets the color theme.
     /// </summary>
-    public CodeEditorTheme Theme
+    public new CodeEditorTheme Theme
     {
         get => GetValue(ThemeProperty);
         set => SetValue(ThemeProperty, value);
@@ -277,10 +277,12 @@ public class CodeEditor : TemplatedControl
     {
         if (_copyButton is not null)
             _copyButton.Click -= OnCopyButtonClick;
+#pragma warning disable CS0618 // ToggleButton.Checked/Unchecked deprecated — use IsCheckedChanged when available
         if (_wrapToggle is not null)
             _wrapToggle.Checked -= OnWrapToggleChanged;
         if (_wrapToggle is not null)
             _wrapToggle.Unchecked -= OnWrapToggleChanged;
+#pragma warning restore CS0618
 
         base.OnApplyTemplate(e);
 
@@ -293,11 +295,13 @@ public class CodeEditor : TemplatedControl
         if (_copyButton is not null)
             _copyButton.Click += OnCopyButtonClick;
 
+#pragma warning disable CS0618 // ToggleButton.Checked/Unchecked deprecated — use IsCheckedChanged when available
         if (_wrapToggle is not null)
         {
             _wrapToggle.Checked += OnWrapToggleChanged;
             _wrapToggle.Unchecked += OnWrapToggleChanged;
         }
+#pragma warning restore CS0618
 
         UpdatePseudoClasses();
         UpdateCodeDisplay();
@@ -309,11 +313,13 @@ public class CodeEditor : TemplatedControl
         base.OnDetachedFromVisualTree(e);
         if (_copyButton is not null)
             _copyButton.Click -= OnCopyButtonClick;
+#pragma warning disable CS0618 // ToggleButton.Checked/Unchecked deprecated — use IsCheckedChanged when available
         if (_wrapToggle is not null)
         {
             _wrapToggle.Checked -= OnWrapToggleChanged;
             _wrapToggle.Unchecked -= OnWrapToggleChanged;
         }
+#pragma warning restore CS0618
     }
 
     private void OnCodeChanged()

@@ -11,16 +11,13 @@ using Avalonia.Media;
 namespace AuraUI.Controls.Display;
 
 /// <summary>
-/// Specifies the pseudo-classes for the image viewer.
+/// An image viewer/gallery control with zoom, rotate, fullscreen, thumbnail strip,
+/// and keyboard navigation. Inspired by Element Plus's image viewer.
 /// </summary>
 [PseudoClasses(":fullscreen", ":loading", ":error")]
 [TemplatePart("PART_Image", typeof(Image))]
 [TemplatePart("PART_ThumbnailStrip", typeof(ItemsControl))]
 [TemplatePart("PART_Toolbar", typeof(Panel))]
-/// <summary>
-/// An image viewer/gallery control with zoom, rotate, fullscreen, thumbnail strip,
-/// and keyboard navigation. Inspired by Element Plus's image viewer.
-/// </summary>
 public class ImageViewer : TemplatedControl
 {
     private Image? _image;

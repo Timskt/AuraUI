@@ -21,7 +21,7 @@ public class ConfigProvider : ContentControl
     /// <summary>
     /// Defines the <see cref="Theme"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<ConfigProviderTheme> ThemeProperty =
+    public static new readonly StyledProperty<ConfigProviderTheme> ThemeProperty =
         AvaloniaProperty.Register<ConfigProvider, ConfigProviderTheme>(nameof(Theme), ConfigProviderTheme.Auto);
 
     /// <summary>
@@ -96,7 +96,7 @@ public class ConfigProvider : ContentControl
     /// <summary>
     /// Gets or sets the theme mode.
     /// </summary>
-    public ConfigProviderTheme Theme
+    public new ConfigProviderTheme Theme
     {
         get => GetValue(ThemeProperty);
         set => SetValue(ThemeProperty, value);

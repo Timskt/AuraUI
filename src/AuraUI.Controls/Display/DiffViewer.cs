@@ -108,7 +108,7 @@ public class DiffViewer : Control
     /// <summary>
     /// Defines the <see cref="FontSize"/> styled property.
     /// </summary>
-    public static new readonly StyledProperty<double> FontSizeProperty =
+    public static readonly StyledProperty<double> FontSizeProperty =
         AvaloniaProperty.Register<DiffViewer, double>(nameof(FontSize), 13.0);
 
     /// <summary>
@@ -174,7 +174,7 @@ public class DiffViewer : Control
     /// <summary>
     /// Gets or sets the font size for the diff display.
     /// </summary>
-    public new double FontSize
+    public double FontSize
     {
         get => GetValue(FontSizeProperty);
         set => SetValue(FontSizeProperty, value);

@@ -63,7 +63,7 @@ public class ChartMapSeries : ChartSeries
         AvaloniaProperty.Register<ChartMapSeries, IBrush?>(nameof(StrokeColor));
 
     /// <summary>
-    /// Defines the <see cref="StrokeThickness"/> styled property.
+    /// Defines the StrokeThickness styled property.
     /// Hides base class StrokeThickness to set a different default.
     /// </summary>
     public static readonly new StyledProperty<double> StrokeThicknessProperty =

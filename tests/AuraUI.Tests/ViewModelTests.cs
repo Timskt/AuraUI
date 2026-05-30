@@ -1,3 +1,4 @@
+#pragma warning disable xUnit1051 // Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken (xUnit v3 feature)
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using AuraUI.Core.MVVM;

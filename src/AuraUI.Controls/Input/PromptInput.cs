@@ -227,7 +227,9 @@ public class PromptInput : TemplatedControl
         {
             _inputBox.KeyDown += OnInputBoxKeyDown;
             _inputBox.TextChanged += OnInputBoxTextChanged;
+#pragma warning disable CS0618 // Watermark is deprecated but PlaceholderText not available in this version
             _inputBox.Watermark = Placeholder;
+#pragma warning restore CS0618
         }
 
         UpdatePseudoClasses();

@@ -37,7 +37,7 @@ public class ComputedProperty<T> : INotifyPropertyChanged, IDisposable
     private readonly Func<T> _selector;
     private readonly List<(INotifyPropertyChanged Source, string PropertyName)> _subscriptions = new();
     private readonly object _lock = new();
-    private T _value;
+    private T _value = default!;
     private bool _disposed;
     private bool _isDirty = true;
 

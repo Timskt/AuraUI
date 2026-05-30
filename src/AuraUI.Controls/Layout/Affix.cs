@@ -58,7 +58,7 @@ public class Affix : ContentControl
     /// <summary>
     /// Defines the <see cref="ZIndex"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<int> ZIndexProperty =
+    public static new readonly StyledProperty<int> ZIndexProperty =
         AvaloniaProperty.Register<Affix, int>(nameof(ZIndex), 100);
 
     /// <summary>

@@ -343,6 +343,7 @@ public class Upload : TemplatedControl
     /// <summary>
     /// Occurs before a file is uploaded. Can be used to cancel the upload.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler<UploadEventArgs>? BeforeUpload;
 
     /// <summary>
@@ -369,6 +370,7 @@ public class Upload : TemplatedControl
     /// Occurs when a file is successfully uploaded.
     /// </summary>
     public event EventHandler<UploadEventArgs>? Success;
+#pragma warning restore CS0067
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {

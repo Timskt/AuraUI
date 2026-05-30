@@ -57,7 +57,6 @@ public class VirtualizingWrapPanel : Panel
         AvaloniaProperty.Register<VirtualizingWrapPanel, bool>(nameof(StretchItems), false);
 
     private int _columns;
-    private double _scrollOffset;
 
     /// <summary>
     /// Gets or sets the width of each item.

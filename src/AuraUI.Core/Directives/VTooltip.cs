@@ -23,7 +23,7 @@ namespace AuraUI.Core.Directives;
 public static class VTooltip
 {
     /// <summary>
-    /// The tooltip text. Setting this also sets <see cref="ToolTip.Tip"/> on the control.
+    /// The tooltip text. Setting this also sets the ToolTip.Tip property on the control.
     /// </summary>
     public static readonly AttachedProperty<string?> TextProperty =
         AvaloniaProperty.RegisterAttached<Control, string?>("Text", typeof(VTooltip));

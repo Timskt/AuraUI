@@ -2,7 +2,7 @@ namespace AuraUI.Controls.DataGrid;
 
 /// <summary>
 /// Specifies custom cell template and/or edit-template types for a DataGrid column.
-/// The referenced types should be <see cref="Avalonia.Controls.DataTemplate"/>-compatible
+/// The referenced types should be DataTemplate-compatible
 /// types that the DataGrid can instantiate for rendering and editing.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]

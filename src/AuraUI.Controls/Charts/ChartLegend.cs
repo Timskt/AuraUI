@@ -138,12 +138,14 @@ public class ChartLegend : AvaloniaObject
     /// <summary>
     /// Raised when the "Select All" selector button is clicked.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event Action? SelectAllRequested;
 
     /// <summary>
     /// Raised when the "Inverse" selector button is clicked.
     /// </summary>
     public event Action? InverseRequested;
+#pragma warning restore CS0067
 
     /// <summary>
     /// Pixel rect allocated to the legend during layout.

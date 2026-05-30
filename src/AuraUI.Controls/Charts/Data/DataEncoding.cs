@@ -53,6 +53,7 @@ public class DataEncoding
     /// <param name="field">The data field to map.</param>
     /// <param name="min">Minimum visual size (pixels).</param>
     /// <param name="max">Maximum visual size (pixels).</param>
+    /// <param name="configure">Optional callback to further configure the channel encoding.</param>
     public DataEncoding Size(string field, double min = 4, double max = 40, Action<ChannelEncoding>? configure = null)
     {
         var enc = Set(VisualChannel.Size, field, configure);
@@ -76,6 +77,7 @@ public class DataEncoding
     /// <param name="field">The data field to map.</param>
     /// <param name="min">Minimum opacity (0-1).</param>
     /// <param name="max">Maximum opacity (0-1).</param>
+    /// <param name="configure">Optional callback to further configure the channel encoding.</param>
     public DataEncoding Opacity(string field, double min = 0.2, double max = 1.0, Action<ChannelEncoding>? configure = null)
     {
         var enc = Set(VisualChannel.Opacity, field, configure);

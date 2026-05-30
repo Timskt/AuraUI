@@ -135,12 +135,14 @@ public class PrintDialog : ContentControl
 
         // Page range
         settingsPanel.Children.Add(CreateLabel("Page Range:"));
+#pragma warning disable CS0618 // Watermark is deprecated but PlaceholderText not available in this version
         _pageRangeBox = new TextBox
         {
             Text = PageRange ?? "",
             Watermark = "e.g. 1-5 or 1,3,7 (empty = all)",
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
+#pragma warning restore CS0618
         settingsPanel.Children.Add(_pageRangeBox);
 
         // Separator
@@ -189,22 +191,26 @@ public class PrintDialog : ContentControl
 
         // Header text
         settingsPanel.Children.Add(CreateLabel("Header Text:"));
+#pragma warning disable CS0618 // Watermark is deprecated but PlaceholderText not available in this version
         _headerTextBox = new TextBox
         {
             Text = settings.HeaderText ?? "",
             Watermark = "Header (optional)",
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
+#pragma warning restore CS0618
         settingsPanel.Children.Add(_headerTextBox);
 
         // Footer text
         settingsPanel.Children.Add(CreateLabel("Footer Text:"));
+#pragma warning disable CS0618 // Watermark is deprecated but PlaceholderText not available in this version
         _footerTextBox = new TextBox
         {
             Text = settings.FooterText ?? "",
             Watermark = "Footer (optional)",
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
+#pragma warning restore CS0618
         settingsPanel.Children.Add(_footerTextBox);
 
         // Zoom controls for preview

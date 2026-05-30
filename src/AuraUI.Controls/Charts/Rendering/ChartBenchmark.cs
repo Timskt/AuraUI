@@ -10,7 +10,7 @@ namespace AuraUI.Controls.Charts.Rendering;
 ///   1. Set <see cref="IsEnabled"/> to true to start collecting metrics.
 ///   2. Call <see cref="BeginFrame"/> at the start of each Render pass.
 ///   3. Call <see cref="EndFrame"/> at the end of each Render pass.
-///   4. Call <see cref="RecordGeometryBuilt"/> each time a geometry is constructed.
+///   4. Call RecordGeometryBuilt each time a geometry is constructed.
 ///   5. Read the properties for current metrics.
 ///
 /// Thread safety: all methods are safe to call from any thread.

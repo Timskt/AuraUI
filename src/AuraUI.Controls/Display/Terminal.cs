@@ -183,7 +183,9 @@ public class Terminal : TemplatedControl
         if (_inputBox is not null)
         {
             _inputBox.KeyDown += OnInputBoxKeyDown;
+#pragma warning disable CS0618 // Watermark is deprecated but PlaceholderText not available in this version
             _inputBox.Watermark = "Enter command...";
+#pragma warning restore CS0618
         }
 
         UpdatePseudoClasses();

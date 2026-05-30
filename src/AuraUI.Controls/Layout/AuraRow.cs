@@ -88,7 +88,7 @@ public class AuraRow : StackPanel
     /// <summary>
     /// Gets or sets whether columns wrap to the next line.
     /// </summary>
-    public new bool Wrap
+    public bool Wrap
     {
         get => GetValue(WrapProperty);
         set => SetValue(WrapProperty, value);

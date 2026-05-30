@@ -183,7 +183,9 @@ public class FileDropZone : ContentControl
     {
         IsDragOver = false;
 
+#pragma warning disable CS0618 // GetFileNames deprecated — use GetFiles when targeting cross-platform
         var files = e.Data.GetFileNames()?.ToList();
+#pragma warning restore CS0618
         if (files is null || files.Count == 0)
         {
             RejectedFiles = Array.Empty<string>();

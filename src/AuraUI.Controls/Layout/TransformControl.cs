@@ -25,7 +25,7 @@ public enum TransformOriginAnchor
 
 /// <summary>
 /// A content control that wraps its content with animated scale, rotation,
-/// and translation transforms using <see cref="RenderTransform"/>.
+/// and translation transforms using RenderTransform.
 /// </summary>
 [PseudoClasses(":scaled", ":rotated", ":translated")]
 public class TransformControl : ContentControl

@@ -22,7 +22,6 @@ public class FileUploader : TemplatedControl
 {
     private Border? _dropZone;
     private Button? _selectButton;
-    private bool _isDragOver;
 
     #region Accept
 
@@ -151,8 +150,8 @@ public class FileUploader : TemplatedControl
     /// Defines the <see cref="SelectedFiles"/> direct property.
     /// The list of currently selected file paths.
     /// </summary>
-    public static readonly DirectProperty<FileUploader, IList<string>> SelectedFilesProperty =
-        AvaloniaProperty.RegisterDirect<FileUploader, IList<string>>(
+    public static readonly DirectProperty<FileUploader, IList<string>?> SelectedFilesProperty =
+        AvaloniaProperty.RegisterDirect<FileUploader, IList<string>?>(
             nameof(SelectedFiles),
             o => o.SelectedFiles);
 
@@ -161,7 +160,7 @@ public class FileUploader : TemplatedControl
     /// <summary>
     /// Gets the list of selected file paths.
     /// </summary>
-    public IList<string> SelectedFiles => _selectedFiles;
+    public IList<string>? SelectedFiles => _selectedFiles;
 
     #endregion
 
@@ -195,7 +194,9 @@ public class FileUploader : TemplatedControl
     /// <summary>
     /// Raised when an upload completes successfully.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler<FileUploadCompletedEventArgs>? FileUploaded;
+#pragma warning restore CS0067
 
     /// <summary>
     /// Raised when an upload error occurs.
@@ -290,26 +291,25 @@ public class FileUploader : TemplatedControl
         if (!IsDragDropEnabled)
             return;
 
-        _isDragOver = true;
         PseudoClasses.Set(":dragover", true);
         e.DragEffects = DragDropEffects.Copy;
     }
 
     private void OnDragLeave(object? sender, DragEventArgs e)
     {
-        _isDragOver = false;
         PseudoClasses.Set(":dragover", false);
     }
 
     private void OnDrop(object? sender, DragEventArgs e)
     {
-        _isDragOver = false;
         PseudoClasses.Set(":dragover", false);
 
         if (!IsDragDropEnabled)
             return;
 
+#pragma warning disable CS0618 // GetFileNames deprecated — use GetFiles when targeting cross-platform
         var files = e.Data.GetFileNames()?.ToList();
+#pragma warning restore CS0618
         if (files is null || files.Count == 0)
             return;
 

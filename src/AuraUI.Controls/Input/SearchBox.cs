@@ -49,7 +49,7 @@ public class SearchBox : TextBox
             defaultValue: 300);
 
     /// <summary>
-    /// Defines the <see cref="Watermark"/> property.
+    /// Defines the SearchWatermark property.
     /// Provides default search watermark text.
     /// </summary>
     public static readonly StyledProperty<string?> SearchWatermarkProperty =
