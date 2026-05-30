@@ -30,9 +30,6 @@
                               Stretch="Uniform"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center">
-                            <Path.Transitions>
-                                <BrushTransition Duration="00:00:00.200" Property="Stroke"/>
-                            </Path.Transitions>
                         </Path>
                     </Border>
 

@@ -38,7 +38,11 @@
                                     <Path Data="M 12,4 L 12,16 M 6,10 L 12,4 L 18,10"
                                           Stroke="White" StrokeThickness="2"
                                           Width="16" Height="16" Stretch="Uniform"
-                                          RenderTransform="rotate(90)"/>
+                                          RenderTransformOrigin="0.5,0.5">
+                                            <Path.RenderTransform>
+                                                <RotateTransform Angle="90"/>
+                                            </Path.RenderTransform>
+                                        </Path>
                                 </Button>
                                 <Button Classes="icon sm"
                                         Width="36" Height="36">
