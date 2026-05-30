@@ -53,11 +53,25 @@ public partial class MainWindow : Window
         _pageFactory["Skeleton"] = () => new SkeletonPage();
         _pageFactory["Drawer"] = () => new DrawerPage();
         _pageFactory["Divider"] = () => new DividerPage();
+        _pageFactory["FormField"] = () => new FormFieldPage();
+        _pageFactory["ResponsivePanel"] = () => new ResponsivePage();
+        _pageFactory["DashboardGrid"] = () => new DashboardGridPage();
+        _pageFactory["BottomSheet"] = () => new BottomSheetPage();
+        _pageFactory["PullToRefresh"] = () => new PullToRefreshPage();
+        _pageFactory["Watermark"] = () => new WatermarkPage();
+        _pageFactory["FloatButton"] = () => new FloatButtonPage();
+        _pageFactory["Affix"] = () => new AffixPage();
+        _pageFactory["BackTop"] = () => new BackTopPage();
+        _pageFactory["ConfigProvider"] = () => new ConfigProviderPage();
+        _pageFactory["Space"] = () => new SpacePage();
+        _pageFactory["VirtualizingStackPanel"] = () => new VirtualizingPage();
 
         // Input
         _pageFactory["Button"] = () => new ButtonPage();
         _pageFactory["TextBox"] = () => new TextBoxPage();
         _pageFactory["SearchBox"] = () => new SearchBoxPage();
+        _pageFactory["ChipInput"] = () => new ChipInputPage();
+        _pageFactory["Upload"] = () => new UploadPage();
 
         // Selection
         _pageFactory["ComboBox"] = () => new ComboBoxPage();
@@ -68,6 +82,12 @@ public partial class MainWindow : Window
         _pageFactory["ColorPicker"] = () => new ColorPickerPage();
         _pageFactory["DateTimePicker"] = () => new DateTimePickerPage();
         _pageFactory["RangeSlider"] = () => new RangeSliderPage();
+        _pageFactory["MultiComboBox"] = () => new MultiComboBoxPage();
+        _pageFactory["AuraListBox"] = () => new AuraListBoxPage();
+        _pageFactory["Transfer"] = () => new TransferPage();
+        _pageFactory["Cascader"] = () => new CascaderPage();
+        _pageFactory["TreeSelect"] = () => new TreeSelectPage();
+        _pageFactory["Segmented"] = () => new SegmentedPage();
 
         // Display
         _pageFactory["ProgressBar"] = () => new ProgressBarPage();
@@ -76,11 +96,28 @@ public partial class MainWindow : Window
         _pageFactory["Statistic"] = () => new StatisticPage();
         _pageFactory["Empty"] = () => new EmptyPage();
         _pageFactory["Result"] = () => new ResultPage();
+        _pageFactory["StepIndicator"] = () => new StepIndicatorPage();
+        _pageFactory["StatusIndicator"] = () => new StatusIndicatorPage();
+        _pageFactory["DeploymentCard"] = () => new DeploymentCardPage();
+        _pageFactory["MetricCard"] = () => new MetricCardPage();
+        _pageFactory["GanttChart"] = () => new GanttChartPage();
+        _pageFactory["PipelineViewer"] = () => new PipelineViewerPage();
+        _pageFactory["Descriptions"] = () => new DescriptionsPage();
+        _pageFactory["Calendar"] = () => new CalendarPage();
+        _pageFactory["ImageViewer"] = () => new ImageViewerPage();
+        _pageFactory["QRCode"] = () => new QRCodePage();
+        _pageFactory["Terminal"] = () => new TerminalPage();
+        _pageFactory["LogViewer"] = () => new LogViewerPage();
+        _pageFactory["CodeEditor"] = () => new CodeEditorPage();
+        _pageFactory["AIChatBox"] = () => new AIChatBoxPage();
+        _pageFactory["MarkdownViewer"] = () => new MarkdownViewerPage();
 
         // Navigation
         _pageFactory["TabControl"] = () => new TabControlPage();
         _pageFactory["Breadcrumb"] = () => new BreadcrumbPage();
         _pageFactory["Pagination"] = () => new PaginationPage();
+        _pageFactory["NavigationView"] = () => new NavigationViewPage();
+        _pageFactory["FileExplorer"] = () => new FileExplorerPage();
 
         // Feedback
         _pageFactory["Toast"] = () => new ToastPage();
@@ -88,6 +125,14 @@ public partial class MainWindow : Window
         _pageFactory["AuraDialog"] = () => new DialogPage();
         _pageFactory["Notification"] = () => new NotificationPage();
         _pageFactory["Snackbar"] = () => new SnackbarPage();
+        _pageFactory["LoadingOverlay"] = () => new LoadingOverlayPage();
+        _pageFactory["PendingDialog"] = () => new PendingDialogPage();
+        _pageFactory["AuraMessage"] = () => new MessengerPage();
+        _pageFactory["Popconfirm"] = () => new PopconfirmPage();
+        _pageFactory["Tour"] = () => new TourPage();
+
+        // Windowing
+        _pageFactory["WindowX"] = () => new WindowXPage();
 
         // Charts
         _pageFactory["LineChart"] = () => new LineChartPage();
@@ -114,27 +159,31 @@ public partial class MainWindow : Window
         _allNavItems.Add(new NavItem { Title = "Welcome", Tag = "Welcome" });
 
         _allNavItems.Add(new NavItem { Title = "-- LAYOUT", IsCategory = true });
-        foreach (var name in new[] { "Card", "Expander", "Badge", "Tag", "Avatar", "Skeleton", "Drawer", "Divider" })
+        foreach (var name in new[] { "Card", "Expander", "Badge", "Tag", "Avatar", "Skeleton", "Drawer", "Divider", "FormField", "ResponsivePanel", "DashboardGrid", "BottomSheet", "PullToRefresh", "Watermark", "FloatButton", "Affix", "BackTop", "ConfigProvider", "Space", "VirtualizingStackPanel" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
 
         _allNavItems.Add(new NavItem { Title = "-- INPUT", IsCategory = true });
-        foreach (var name in new[] { "Button", "TextBox", "SearchBox" })
+        foreach (var name in new[] { "Button", "TextBox", "SearchBox", "ChipInput", "Upload" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
 
         _allNavItems.Add(new NavItem { Title = "-- SELECTION", IsCategory = true });
-        foreach (var name in new[] { "ComboBox", "CheckBox", "RadioButton", "Switch", "RateControl", "ColorPicker", "DateTimePicker", "RangeSlider" })
+        foreach (var name in new[] { "ComboBox", "CheckBox", "RadioButton", "Switch", "RateControl", "ColorPicker", "DateTimePicker", "RangeSlider", "MultiComboBox", "AuraListBox", "Transfer", "Cascader", "TreeSelect", "Segmented" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
 
         _allNavItems.Add(new NavItem { Title = "-- DISPLAY", IsCategory = true });
-        foreach (var name in new[] { "ProgressBar", "Carousel", "Timeline", "Statistic", "Empty", "Result" })
+        foreach (var name in new[] { "ProgressBar", "Carousel", "Timeline", "Statistic", "Empty", "Result", "StepIndicator", "StatusIndicator", "DeploymentCard", "MetricCard", "GanttChart", "PipelineViewer", "Descriptions", "Calendar", "ImageViewer", "QRCode", "Terminal", "LogViewer", "CodeEditor", "AIChatBox", "MarkdownViewer" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
 
         _allNavItems.Add(new NavItem { Title = "-- NAVIGATION", IsCategory = true });
-        foreach (var name in new[] { "TabControl", "Breadcrumb", "Pagination" })
+        foreach (var name in new[] { "TabControl", "Breadcrumb", "Pagination", "NavigationView", "FileExplorer" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
 
         _allNavItems.Add(new NavItem { Title = "-- FEEDBACK", IsCategory = true });
-        foreach (var name in new[] { "Toast", "MessageBox", "AuraDialog", "Notification", "Snackbar" })
+        foreach (var name in new[] { "Toast", "MessageBox", "AuraDialog", "Notification", "Snackbar", "LoadingOverlay", "PendingDialog", "AuraMessage", "Popconfirm", "Tour" })
+            _allNavItems.Add(new NavItem { Title = name, Tag = name });
+
+        _allNavItems.Add(new NavItem { Title = "-- WINDOWING", IsCategory = true });
+        foreach (var name in new[] { "WindowX" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
 
         _allNavItems.Add(new NavItem { Title = "-- CHARTS", IsCategory = true });

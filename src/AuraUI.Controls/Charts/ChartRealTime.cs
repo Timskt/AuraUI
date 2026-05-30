@@ -48,6 +48,23 @@ public class ChartRealTime
     public double YPaddingRatio { get; set; } = 0.1;
 
     /// <summary>
+    /// Whether to use smooth animation when scrolling the view window.
+    /// When true, axis ranges transition smoothly instead of jumping.
+    /// </summary>
+    public bool SmoothScroll { get; set; } = true;
+
+    /// <summary>
+    /// Duration of the smooth scroll animation in milliseconds.
+    /// </summary>
+    public int SmoothScrollDurationMs { get; set; } = 150;
+
+    // Smooth scroll state
+    private double _targetXMin, _targetXMax, _targetYMin, _targetYMax;
+    private double _sourceXMin, _sourceXMax, _sourceYMin, _sourceYMax;
+    private DateTime _scrollAnimStart;
+    private bool _isScrollAnimating;
+
+    /// <summary>
     /// Event raised when new data is appended.
     /// </summary>
     public event EventHandler<DataAppendedEventArgs>? DataAppended;
@@ -97,14 +114,30 @@ public class ChartRealTime
             var xRange = _chart.XAxis.EffectiveMax - _chart.XAxis.EffectiveMin;
             if (MaxVisiblePoints > 0 && xRange > 0)
             {
-                // Keep a window of MaxVisiblePoints worth of X range
                 var allXValues = xy.DataPoints.Select(p => p.X).ToArray();
                 if (allXValues.Length > 0)
                 {
                     var latestX = allXValues[^1];
                     var windowStart = latestX - xRange;
-                    _chart.XAxis.EffectiveMin = windowStart;
-                    _chart.XAxis.EffectiveMax = latestX;
+
+                    if (SmoothScroll)
+                    {
+                        // Start smooth scroll animation
+                        _sourceXMin = _chart.XAxis.EffectiveMin;
+                        _sourceXMax = _chart.XAxis.EffectiveMax;
+                        _targetXMin = windowStart;
+                        _targetXMax = latestX;
+                        _scrollAnimStart = DateTime.UtcNow;
+                        _isScrollAnimating = true;
+
+                        // Start a timer to drive the animation
+                        StartScrollAnimationTimer();
+                    }
+                    else
+                    {
+                        _chart.XAxis.EffectiveMin = windowStart;
+                        _chart.XAxis.EffectiveMax = latestX;
+                    }
                 }
             }
         }
@@ -112,7 +145,20 @@ public class ChartRealTime
         // Auto-fit Y axis to visible data
         if (AutoFitY)
         {
-            FitYAxisToVisibleData();
+            if (SmoothScroll)
+            {
+                ComputeYTargets();
+                if (!_isScrollAnimating)
+                {
+                    _scrollAnimStart = DateTime.UtcNow;
+                    _isScrollAnimating = true;
+                    StartScrollAnimationTimer();
+                }
+            }
+            else
+            {
+                FitYAxisToVisibleData();
+            }
         }
 
         DataAppended?.Invoke(this, new DataAppendedEventArgs(seriesIndex, dataPoint));
@@ -211,6 +257,59 @@ public class ChartRealTime
     }
 
     /// <summary>
+    /// Append multiple data points at once (batch update).
+    /// More efficient than calling AppendData in a loop.
+    /// </summary>
+    /// <param name="seriesIndex">Index of the series.</param>
+    /// <param name="dataPoints">The data points to append.</param>
+    public void AppendDataRange(int seriesIndex, IEnumerable<ChartDataPoint> dataPoints)
+    {
+        if (seriesIndex < 0 || seriesIndex >= _chart.Series.Count)
+            throw new ArgumentOutOfRangeException(nameof(seriesIndex));
+
+        var series = _chart.Series[seriesIndex];
+        if (series is not XYChartSeries xy)
+            throw new InvalidOperationException("AppendDataRange only works with XY-based series.");
+
+        foreach (var dp in dataPoints)
+            xy.DataPoints.Add(dp);
+
+        // Enforce max visible points window
+        if (MaxVisiblePoints > 0 && xy.DataPoints.Count > MaxVisiblePoints * 2)
+        {
+            var excess = xy.DataPoints.Count - MaxVisiblePoints * 2;
+            for (int i = 0; i < excess; i++)
+                xy.DataPoints.RemoveAt(0);
+        }
+
+        // Auto-scroll and auto-fit (without smooth animation for batch)
+        if (AutoScroll)
+        {
+            var xRange = _chart.XAxis.EffectiveMax - _chart.XAxis.EffectiveMin;
+            if (MaxVisiblePoints > 0 && xRange > 0 && xy.DataPoints.Count > 0)
+            {
+                var latestX = xy.DataPoints[^1].X;
+                _chart.XAxis.EffectiveMin = latestX - xRange;
+                _chart.XAxis.EffectiveMax = latestX;
+            }
+        }
+
+        if (AutoFitY)
+            FitYAxisToVisibleData();
+
+        _chart.InvalidateVisual();
+    }
+
+    /// <summary>
+    /// Release resources held by this instance (animation timers).
+    /// </summary>
+    public void Dispose()
+    {
+        _scrollTimer?.Dispose();
+        _scrollTimer = null;
+    }
+
+    /// <summary>
     /// Get the current number of data points in a series.
     /// </summary>
     public int GetDataCount(int seriesIndex)
@@ -223,6 +322,92 @@ public class ChartRealTime
             return xy.DataPoints.Count;
 
         return 0;
+    }
+
+    /// <summary>
+    /// Compute target Y axis values for smooth scroll.
+    /// </summary>
+    private void ComputeYTargets()
+    {
+        double yMin = double.MaxValue;
+        double yMax = double.MinValue;
+
+        var xMin = _targetXMin;
+        var xMax = _targetXMax;
+
+        foreach (var s in _chart.Series)
+        {
+            if (s is not XYChartSeries xy || !s.IsVisible) continue;
+            foreach (var pt in xy.DataPoints)
+            {
+                if (!double.IsNaN(xMin) && pt.X < xMin) continue;
+                if (!double.IsNaN(xMax) && pt.X > xMax) continue;
+                if (pt.Y < yMin) yMin = pt.Y;
+                if (pt.Y > yMax) yMax = pt.Y;
+            }
+        }
+
+        if (yMin == double.MaxValue || yMax == double.MinValue)
+        {
+            _targetYMin = _chart.YAxis.EffectiveMin;
+            _targetYMax = _chart.YAxis.EffectiveMax;
+            return;
+        }
+
+        var yRange = yMax - yMin;
+        if (yRange < 1e-10) yRange = 1.0;
+        var padding = yRange * YPaddingRatio;
+
+        _sourceYMin = _chart.YAxis.EffectiveMin;
+        _sourceYMax = _chart.YAxis.EffectiveMax;
+        _targetYMin = yMin - padding;
+        _targetYMax = yMax + padding;
+    }
+
+    private System.Threading.Timer? _scrollTimer;
+
+    private void StartScrollAnimationTimer()
+    {
+        _scrollTimer?.Dispose();
+        _scrollTimer = new System.Threading.Timer(_ =>
+        {
+            Avalonia.Threading.Dispatcher.UIThread.Post(AnimateScrollStep);
+        }, null, 0, 16); // ~60fps
+    }
+
+    private void AnimateScrollStep()
+    {
+        if (!_isScrollAnimating)
+        {
+            _scrollTimer?.Dispose();
+            _scrollTimer = null;
+            return;
+        }
+
+        var elapsed = (DateTime.UtcNow - _scrollAnimStart).TotalMilliseconds;
+        var duration = Math.Max(SmoothScrollDurationMs, 1);
+        var t = Math.Clamp(elapsed / duration, 0, 1);
+
+        // Ease-out cubic
+        var easedT = 1 - Math.Pow(1 - t, 3);
+
+        _chart.XAxis.EffectiveMin = _sourceXMin + (_targetXMin - _sourceXMin) * easedT;
+        _chart.XAxis.EffectiveMax = _sourceXMax + (_targetXMax - _sourceXMax) * easedT;
+
+        if (AutoFitY)
+        {
+            _chart.YAxis.EffectiveMin = _sourceYMin + (_targetYMin - _sourceYMin) * easedT;
+            _chart.YAxis.EffectiveMax = _sourceYMax + (_targetYMax - _sourceYMax) * easedT;
+        }
+
+        _chart.InvalidateVisual();
+
+        if (t >= 1.0)
+        {
+            _isScrollAnimating = false;
+            _scrollTimer?.Dispose();
+            _scrollTimer = null;
+        }
     }
 
     /// <summary>
