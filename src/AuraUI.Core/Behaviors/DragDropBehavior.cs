@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -20,6 +21,17 @@ public class DragDropBehavior : Behavior<Control>
     private IBrush? _originalBackground;
 
     /// <summary>
+    /// Thread-safe store for in-process drag data, keyed by a unique transfer ID.
+    /// </summary>
+    private static readonly ConcurrentDictionary<string, object?> s_dragDataStore = new();
+
+    /// <summary>
+    /// The DataFormat used for the drag-drop data transfer.
+    /// </summary>
+    private static readonly DataFormat<string> s_dataFormat =
+        DataFormat.CreateStringApplicationFormat("AuraUI-DragDrop-Data");
+
+    /// <summary>
     /// Gets or sets whether the control acts as a drag source.
     /// </summary>
     public bool IsDragSource { get; set; }
@@ -32,7 +44,7 @@ public class DragDropBehavior : Behavior<Control>
     /// <summary>
     /// Gets or sets the custom data format identifier for the drag-drop data.
     /// </summary>
-    public string DataFormat { get; set; } = "AuraUI.DragDrop.Data";
+    public string DataFormatId { get; set; } = "AuraUI.DragDrop.Data";
 
     /// <summary>
     /// Gets or sets the command to execute when a drag operation starts.
@@ -136,7 +148,7 @@ public class DragDropBehavior : Behavior<Control>
         _isDragging = false;
     }
 
-    private void StartDrag()
+    private async void StartDrag()
     {
         if (AssociatedObject == null)
             return;
@@ -159,22 +171,23 @@ public class DragDropBehavior : Behavior<Control>
         if (dragData == null)
             return;
 
-        var dataObject = new DataObject();
-        if (dragData is DataObject existingDataObject)
-        {
-            dataObject = existingDataObject;
-        }
-        else
-        {
-            dataObject.Set(DataFormat, dragData);
-        }
+        // Store data in-process and transfer a key string
+        var transferId = Guid.NewGuid().ToString("N");
+        s_dragDataStore[transferId] = dragData;
+
+        var item = DataTransferItem.Create(s_dataFormat, transferId);
+        var dataTransfer = new DataTransfer();
+        dataTransfer.Add(item);
 
         var effects = DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
 
         if (_lastPointerPressedArgs != null)
         {
-            DragDrop.DoDragDrop(_lastPointerPressedArgs, dataObject, effects);
+            await DragDrop.DoDragDropAsync(_lastPointerPressedArgs, dataTransfer, effects);
         }
+
+        // Clean up stored data after drag completes
+        s_dragDataStore.TryRemove(transferId, out _);
     }
 
     #endregion
@@ -203,7 +216,7 @@ public class DragDropBehavior : Behavior<Control>
             return;
 
         // Accept the drag if it has our data format or we have a drop command
-        if (e.Data.Contains(DataFormat) || DropCommand != null)
+        if (e.DataTransfer.Contains(s_dataFormat) || DropCommand != null)
         {
             e.DragEffects = DragDropEffects.Copy | DragDropEffects.Move;
         }
@@ -222,9 +235,10 @@ public class DragDropBehavior : Behavior<Control>
 
         object? data = null;
 
-        if (e.Data.Contains(DataFormat))
+        var transferId = e.DataTransfer.TryGetValue(s_dataFormat);
+        if (transferId != null && s_dragDataStore.TryRemove(transferId, out var storedData))
         {
-            data = e.Data.Get(DataFormat);
+            data = storedData;
         }
 
         var command = DropCommand;

@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -106,6 +107,17 @@ public static class DragDropHelper
 
     private static readonly Dictionary<Control, IBrush?> _originalBrushes = new();
 
+    /// <summary>
+    /// The DataFormat used for drag-drop data transfer.
+    /// </summary>
+    private static readonly DataFormat<string> s_dataFormat =
+        DataFormat.CreateStringApplicationFormat("AuraUI-DragDrop-Data");
+
+    /// <summary>
+    /// Thread-safe store for in-process drag data, keyed by a unique transfer ID.
+    /// </summary>
+    private static readonly ConcurrentDictionary<string, object?> s_dragDataStore = new();
+
     static DragDropHelper()
     {
         AllowDragProperty.Changed.AddClassHandler<Control>(OnAllowDragChanged);
@@ -148,7 +160,7 @@ public static class DragDropHelper
         }
     }
 
-    private static void OnDragPointerMoved(object? sender, PointerEventArgs e)
+    private static async void OnDragPointerMoved(object? sender, PointerEventArgs e)
     {
         if (sender is not Control control)
             return;
@@ -173,23 +185,23 @@ public static class DragDropHelper
             if (data == null)
                 return;
 
-            var dataType = GetDragDataType(control) ?? "AuraUI.DragDrop.Data";
             var effects = GetDragEffects(control);
 
-            var dataObject = new DataObject();
-            if (data is DataObject existingDataObject)
-            {
-                dataObject = existingDataObject;
-            }
-            else
-            {
-                dataObject.Set(dataType, data);
-            }
+            // Store data in-process and transfer a key string
+            var transferId = Guid.NewGuid().ToString("N");
+            s_dragDataStore[transferId] = data;
+
+            var item = DataTransferItem.Create(s_dataFormat, transferId);
+            var dataTransfer = new DataTransfer();
+            dataTransfer.Add(item);
 
             if (_lastPressedArgs.TryGetValue(control, out var pressedArgs))
             {
-                DragDrop.DoDragDrop(pressedArgs, dataObject, effects);
+                await DragDrop.DoDragDropAsync(pressedArgs, dataTransfer, effects);
             }
+
+            // Clean up stored data after drag completes
+            s_dragDataStore.TryRemove(transferId, out _);
         }
         finally
         {
@@ -259,9 +271,7 @@ public static class DragDropHelper
         if (sender is not Control control)
             return;
 
-        var dataType = GetDragDataType(control) ?? "AuraUI.DragDrop.Data";
-
-        if (e.Data.Contains(dataType))
+        if (e.DataTransfer.Contains(s_dataFormat))
         {
             e.DragEffects = GetDragEffects(control);
         }
@@ -278,12 +288,12 @@ public static class DragDropHelper
 
         RestoreBackground(control);
 
-        var dataType = GetDragDataType(control) ?? "AuraUI.DragDrop.Data";
         object? data = null;
 
-        if (e.Data.Contains(dataType))
+        var transferId = e.DataTransfer.TryGetValue(s_dataFormat);
+        if (transferId != null && s_dragDataStore.TryRemove(transferId, out var storedData))
         {
-            data = e.Data.Get(dataType);
+            data = storedData;
         }
 
         var command = GetDropCommand(control);
