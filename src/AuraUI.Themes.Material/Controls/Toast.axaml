@@ -19,7 +19,7 @@
                             CornerRadius="{DynamicResource AuraRadiusSm}"
                             Padding="{TemplateBinding Padding}"
                             MaxWidth="{TemplateBinding MaxWidth}"
-                            BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000"
+                            BoxShadow="{DynamicResource AuraShadowLevel3}"
                             ClipToBounds="True">
                         <DockPanel>
                             <!-- Close button -->
@@ -78,25 +78,25 @@
     <!-- Success variant -->
     <Style Selector="feedback|AuraToast.success">
         <Setter Property="Background" Value="{DynamicResource AuraSuccessBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Error variant -->
     <Style Selector="feedback|AuraToast.error">
         <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Warning variant -->
     <Style Selector="feedback|AuraToast.warning">
         <Setter Property="Background" Value="{DynamicResource AuraWarningBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Info variant -->
     <Style Selector="feedback|AuraToast.info">
         <Setter Property="Background" Value="{DynamicResource AuraInfoBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
 </Styles>

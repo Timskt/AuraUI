@@ -22,6 +22,7 @@
                 <ControlTemplate>
                     <Border Background="{TemplateBinding Background}"
                             CornerRadius="{TemplateBinding CornerRadius}"
+                            BoxShadow="{DynamicResource AuraShadowLevel4}"
                             ClipToBounds="True">
                         <DockPanel>
                             <!-- Header -->

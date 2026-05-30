@@ -73,7 +73,7 @@
 
     <!-- Playing state -->
     <Style Selector="display|VideoPlayer:playing">
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <!-- Controls visible -->

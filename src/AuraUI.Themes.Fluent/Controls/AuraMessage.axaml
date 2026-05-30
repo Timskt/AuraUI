@@ -37,7 +37,46 @@
                                 Classes="message-icon"
                                 DockPanel.Dock="Left"
                                 Margin="0,0,10,0"
-                                IsVisible="{TemplateBinding ShowIcon}"/>
+                                IsVisible="{TemplateBinding ShowIcon}">
+                            <Panel>
+                                <Path Name="IconInfo"
+                                      Width="12" Height="12"
+                                      Data="M 8,1 A 7,7 0 1,1 8,15 A 7,7 0 1,1 8,1 M 8,4.5 L 8,5.5 M 8,7 L 8,11"
+                                      Stroke="{DynamicResource AuraInfoBrush}"
+                                      StrokeThickness="1.5"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                <Path Name="IconSuccess"
+                                      Width="12" Height="12"
+                                      Data="M 5,8 L 7,11 L 11,5"
+                                      Stroke="{DynamicResource AuraSuccessBrush}"
+                                      StrokeThickness="2"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      IsVisible="False"/>
+                                <Path Name="IconWarning"
+                                      Width="12" Height="12"
+                                      Data="M 8,2 L 15,14 L 1,14 Z M 8,6 L 8,10 M 8,12 L 8,12.5"
+                                      Stroke="{DynamicResource AuraWarningBrush}"
+                                      StrokeThickness="1.5"
+                                      Fill="Transparent"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      IsVisible="False"/>
+                                <Path Name="IconError"
+                                      Width="12" Height="12"
+                                      Data="M 5.5,5.5 L 10.5,10.5 M 10.5,5.5 L 5.5,10.5"
+                                      Stroke="{DynamicResource AuraErrorBrush}"
+                                      StrokeThickness="2"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      IsVisible="False"/>
+                            </Panel>
+                        </Border>
                         <!-- Text -->
                         <TextBlock Text="{TemplateBinding Text}"
                                    FontSize="14"
@@ -126,6 +165,34 @@
     </Style>
     <Style Selector="feedback|AuraMessage:info Border.message-icon">
         <Setter Property="Background" Value="{DynamicResource AuraInfoLightBrush}"/>
+    </Style>
+
+    <!-- ============================================================
+         AuraMessage Icon Variant Visibility
+         ============================================================ -->
+
+    <!-- Success: hide info, show checkmark -->
+    <Style Selector="feedback|AuraMessage:success Border.message-icon Path#IconInfo">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="feedback|AuraMessage:success Border.message-icon Path#IconSuccess">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Warning: hide info, show exclamation -->
+    <Style Selector="feedback|AuraMessage:warning Border.message-icon Path#IconInfo">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="feedback|AuraMessage:warning Border.message-icon Path#IconWarning">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <!-- Error: hide info, show X -->
+    <Style Selector="feedback|AuraMessage:error Border.message-icon Path#IconInfo">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="feedback|AuraMessage:error Border.message-icon Path#IconError">
+        <Setter Property="IsVisible" Value="True"/>
     </Style>
 
 </Styles>

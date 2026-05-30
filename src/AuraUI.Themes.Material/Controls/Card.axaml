@@ -82,7 +82,7 @@
 
     <!-- Hoverable elevated: lift on hover -->
     <Style Selector="layout|Card[IsHoverable=True]:pointerover /template/ Border#RootBorder">
-        <Setter Property="BoxShadow" Value="0 2 8 0 #20000000, 0 1 3 0 #15000000"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel2}"/>
         <Setter Property="TranslateTransform.Y" Value="-2"/>
     </Style>
 

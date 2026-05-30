@@ -7,7 +7,7 @@
          ============================================================ -->
     <Style Selector="layout|Badge">
         <Setter Property="BadgeBackground" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="BadgeForeground" Value="White"/>
+        <Setter Property="BadgeForeground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
         <Setter Property="BadgeCornerRadius" Value="999"/>
         <Setter Property="BadgeMinWidth" Value="20"/>
         <Setter Property="BadgeMinHeight" Value="20"/>
