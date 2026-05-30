@@ -124,7 +124,9 @@ public class LineRenderer : IChartRenderer
         ChartRenderContext.ReturnPointArray(points);
 
         // ─── Markers ───
-        var shape = line.ShowMarkers ? MarkerShape.Circle : line.MarkerShape;
+        var shape = line.ShowMarkers
+            ? (line.MarkerShape != MarkerShape.None ? line.MarkerShape : MarkerShape.Circle)
+            : line.MarkerShape;
         if (shape != MarkerShape.None)
         {
             DrawMarkers(context, visiblePoints, color, line.MarkerSize, shape);

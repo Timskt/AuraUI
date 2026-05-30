@@ -7,8 +7,8 @@
     <Style Selector="input|SearchBox">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
         <Setter Property="MinHeight" Value="48"/>
         <Setter Property="Padding" Value="8,0"/>
@@ -51,7 +51,7 @@
                                         <TextPresenter Name="PART_TextPresenter"
                                                        Text="{TemplateBinding Text, Mode=TwoWay}"
                                                        CaretBrush="{DynamicResource AuraPrimaryBrush}"
-                                                       SelectionBrush="#296750A4"
+                                                       SelectionBrush="{DynamicResource AuraPrimaryBrush}"
                                                        FontSize="16"/>
                                     </ScrollViewer>
                                 </Grid>
@@ -85,7 +85,6 @@
     <!-- Focused -->
     <Style Selector="input|SearchBox:focus /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
-        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Disabled -->

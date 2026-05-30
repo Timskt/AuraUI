@@ -6,7 +6,7 @@
          Calendar — Fluent Style
          ============================================================ -->
     <Style Selector="display|Calendar">
-        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>

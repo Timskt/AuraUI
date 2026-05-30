@@ -16,7 +16,7 @@
                             IsVisible="False"/>
                     <!-- Tooltip -->
                     <Border Name="PART_Tooltip"
-                            Background="{DynamicResource AuraCardBackgroundBrush}"
+                            Background="{DynamicResource AuraCardBrush}"
                             BorderBrush="{DynamicResource AuraBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="{DynamicResource AuraRadiusMd}"

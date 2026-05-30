@@ -10,6 +10,12 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                <BrushTransition Duration="00:00:00.150" Property="BorderBrush"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal" Spacing="8">

@@ -13,6 +13,12 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
@@ -78,7 +84,6 @@
     <!-- NumericUpDown :focus-within -->
     <Style Selector="NumericUpDown:focus-within /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
     <!-- NumericUpDown :disabled -->

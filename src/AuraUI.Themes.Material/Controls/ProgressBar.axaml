@@ -34,6 +34,32 @@
     <Style Selector="ProgressBar:indeterminate /template/ Border#PART_Indicator">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Width" Value="100"/>
+        <Style.Animations>
+            <Animation Duration="00:00:02.000"
+                       IterationCount="Infinite"
+                       Easing="LinearEasing">
+                <KeyFrame Cue="0%">
+                    <Setter Property="TranslateTransform.X" Value="-200"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="TranslateTransform.X" Value="500"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Color variants -->
+    <Style Selector="ProgressBar.success">
+        <Setter Property="Foreground" Value="{DynamicResource AuraSuccessBrush}"/>
+    </Style>
+    <Style Selector="ProgressBar.warning">
+        <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
+    </Style>
+    <Style Selector="ProgressBar.error">
+        <Setter Property="Foreground" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+    <Style Selector="ProgressBar.info">
+        <Setter Property="Foreground" Value="{DynamicResource AuraInfoBrush}"/>
     </Style>
 
     <!-- Thin variant -->

@@ -26,11 +26,11 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Margin="8,0,0,0"
-                                    Background="#80000000"
-                                    Foreground="White"
+                                    Background="{DynamicResource AuraInverseSurfaceBrush}"
+                                    Foreground="{DynamicResource AuraInverseOnSurfaceBrush}"
                                     CornerRadius="20">
                                 <Path Data="M 15,6 L 9,12 L 15,18"
-                                      Stroke="White"
+                                      Stroke="{DynamicResource AuraInverseOnSurfaceBrush}"
                                       StrokeThickness="2"
                                       Width="6"
                                       Height="12"/>
@@ -44,11 +44,11 @@
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Margin="0,0,8,0"
-                                    Background="#80000000"
-                                    Foreground="White"
+                                    Background="{DynamicResource AuraInverseSurfaceBrush}"
+                                    Foreground="{DynamicResource AuraInverseOnSurfaceBrush}"
                                     CornerRadius="20">
                                 <Path Data="M 9,6 L 15,12 L 9,18"
-                                      Stroke="White"
+                                      Stroke="{DynamicResource AuraInverseOnSurfaceBrush}"
                                       StrokeThickness="2"
                                       Width="6"
                                       Height="12"/>
@@ -67,7 +67,8 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Ellipse Width="8" Height="8"
-                                                 Fill="#80FFFFFF"/>
+                                                 Fill="{DynamicResource AuraInverseOnSurfaceBrush}"
+                                                 Opacity="0.6"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

@@ -29,6 +29,7 @@
                         <Border Name="PART_DialogBorder"
                                 Background="{TemplateBinding DialogBackground}"
                                 CornerRadius="{TemplateBinding DialogCornerRadius}"
+                                BoxShadow="{DynamicResource AuraShadowLevel4}"
                                 MinWidth="{DynamicResource AuraDialogMinWidth}"
                                 MaxWidth="{DynamicResource AuraDialogMaxWidth}"
                                 HorizontalAlignment="Center"

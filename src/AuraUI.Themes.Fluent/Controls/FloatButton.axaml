@@ -6,7 +6,7 @@
          FloatButton — Fluent Style
          ============================================================ -->
     <Style Selector="layout|FloatButton">
-        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -44,13 +44,13 @@
 
     <!-- FloatButton :pointerover -->
     <Style Selector="layout|FloatButton:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraOverlayBrush}"/>
         <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLg}"/>
     </Style>
 
     <!-- FloatButton :pressed -->
     <Style Selector="layout|FloatButton:pressed /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundHoverBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
         <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
     </Style>
 

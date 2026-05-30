@@ -46,6 +46,12 @@ public class RadarRenderer : IChartRenderer
         // Draw grid (concentric polygons at 20%, 40%, 60%, 80%, 100%)
         DrawRadarGrid(context, center, radius, axisCount, 5);
 
+        // Draw axis labels if categories are available
+        if (xAxis?.Categories != null && xAxis.Categories.Length >= axisCount)
+        {
+            DrawRadarLabels(context, center, radius, axisCount, xAxis.Categories);
+        }
+
         // Draw each data polygon
         foreach (var item in dataItems)
         {
@@ -191,6 +197,46 @@ public class RadarRenderer : IChartRenderer
                 center.X + radius * Math.Cos(rad),
                 center.Y + radius * Math.Sin(rad));
             context.DrawLine(gridPen, center, endPt);
+        }
+    }
+
+    private static void DrawRadarLabels(DrawingContext context, Point center, double radius, int axisCount, string[] categories)
+    {
+        var labelBrush = Brushes.Gray;
+        var labelFontSize = 11.0;
+        var labelRadius = radius + 16; // Offset labels beyond the grid
+
+        for (int i = 0; i < Math.Min(axisCount, categories.Length); i++)
+        {
+            if (string.IsNullOrEmpty(categories[i])) continue;
+
+            var angle = (360.0 / axisCount) * i - 90;
+            var rad = angle * Math.PI / 180;
+            var x = center.X + labelRadius * Math.Cos(rad);
+            var y = center.Y + labelRadius * Math.Sin(rad);
+
+            var formattedText = new FormattedText(
+                categories[i],
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.Normal),
+                labelFontSize,
+                labelBrush);
+
+            // Center the label on the axis endpoint
+            var textX = x - formattedText.Width / 2;
+            var textY = y - formattedText.Height / 2;
+
+            // Adjust alignment based on position around the circle
+            var cosVal = Math.Cos(rad);
+            if (cosVal < -0.3) textX = x - formattedText.Width;
+            else if (cosVal > 0.3) textX = x;
+
+            var sinVal = Math.Sin(rad);
+            if (sinVal < -0.3) textY = y - formattedText.Height;
+            else if (sinVal > 0.3) textY = y;
+
+            context.DrawText(formattedText, new Point(textX, textY));
         }
     }
 }

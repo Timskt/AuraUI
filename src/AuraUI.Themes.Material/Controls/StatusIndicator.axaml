@@ -4,7 +4,7 @@
 
     <!-- StatusIndicator — Material Style -->
     <Style Selector="display|StatusIndicator">
-        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 
     <Style Selector="display|StatusIndicator:online">
@@ -12,7 +12,7 @@
     </Style>
 
     <Style Selector="display|StatusIndicator:offline">
-        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
     </Style>
 
     <Style Selector="display|StatusIndicator:warning">

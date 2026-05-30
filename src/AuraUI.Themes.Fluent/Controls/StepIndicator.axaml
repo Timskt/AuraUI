@@ -81,7 +81,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="display|StepIndicatorItem:completed /template/ Border#PART_Circle TextBlock">
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>
 
     <Style Selector="display|StepIndicatorItem:active /template/ Border#PART_Circle">

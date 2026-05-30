@@ -227,6 +227,12 @@ internal static class ChartAxisRenderer
                 {
                     labelText = axis.LabelFormatter(tick);
                 }
+                else if (axis.Scale == AxisScale.Category && axis.Categories != null)
+                {
+                    // For category axes, use the category name at this tick index
+                    var idx = (int)Math.Round(tick);
+                    labelText = idx >= 0 && idx < axis.Categories.Length ? axis.Categories[idx] : tick.ToString();
+                }
                 else
                 {
                     var format = axis.LabelFormat ?? "{0}";

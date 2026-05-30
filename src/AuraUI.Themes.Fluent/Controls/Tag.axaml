@@ -12,6 +12,12 @@
         <Setter Property="CloseIconForeground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
         <Setter Property="CloseButtonSize" Value="10"/>
         <Setter Property="CloseButtonHoverBackground" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                <BrushTransition Duration="00:00:00.150" Property="BorderBrush"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"

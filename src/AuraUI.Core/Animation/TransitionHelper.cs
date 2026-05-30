@@ -38,6 +38,8 @@ public static class TransitionHelper
 
     /// <summary>
     /// Default transition properties for transform-related values.
+    /// Note: RotateTransform.AngleProperty is intentionally excluded —
+    /// DoubleTransition with Property="RotateTransform.Angle" causes a runtime crash.
     /// </summary>
     private static readonly AvaloniaProperty[] TransformTransitionProperties =
     {
@@ -45,7 +47,6 @@ public static class TransitionHelper
         TranslateTransform.YProperty,
         ScaleTransform.ScaleXProperty,
         ScaleTransform.ScaleYProperty,
-        RotateTransform.AngleProperty,
     };
 
     /// <summary>

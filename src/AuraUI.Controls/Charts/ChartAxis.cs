@@ -280,7 +280,16 @@ public class ChartAxis : AvaloniaObject
     internal double ValueToPixel(double value)
     {
         var range = EffectiveMax - EffectiveMin;
-        if (range <= 0) return PlotArea.Top;
+        if (range <= 0)
+        {
+            // Return a sensible default based on axis orientation
+            return Position switch
+            {
+                AxisPosition.Left or AxisPosition.Right => PlotArea.Top,
+                AxisPosition.Top or AxisPosition.Bottom => PlotArea.Left,
+                _ => 0
+            };
+        }
 
         var normalized = (value - EffectiveMin) / range;
         if (IsInverted) normalized = 1.0 - normalized;
@@ -324,7 +333,32 @@ public class ChartAxis : AvaloniaObject
     /// </summary>
     internal void ComputeAutoRange(IEnumerable<ChartSeries> allSeries)
     {
-        if (Scale == AxisScale.Category) return;
+        if (Scale == AxisScale.Category)
+        {
+            // For category axes, set range to span the category indices.
+            // Each category is centered at an integer position (0, 1, 2, ...).
+            var catCount = Categories?.Length ?? 0;
+            if (catCount == 0)
+            {
+                // No categories defined — try to infer count from data
+                double catDataMax = -1;
+                foreach (var series in allSeries)
+                {
+                    if (series is not XYChartSeries xy || !series.IsVisible) continue;
+                    foreach (var pt in xy.DataPoints)
+                        if (pt.X > catDataMax) catDataMax = pt.X;
+                }
+                catCount = catDataMax >= 0 ? (int)catDataMax + 1 : 1;
+            }
+
+            EffectiveMin = -0.5;
+            EffectiveMax = catCount - 0.5;
+            var ticks = new double[catCount];
+            for (int i = 0; i < catCount; i++) ticks[i] = i;
+            ComputedTicks = ticks;
+            ComputedMinorTicks = Array.Empty<double>();
+            return;
+        }
 
         double dataMin = double.MaxValue;
         double dataMax = double.MinValue;

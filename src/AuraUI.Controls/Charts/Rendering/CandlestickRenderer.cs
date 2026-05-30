@@ -92,7 +92,8 @@ public class CandlestickRenderer : IChartRenderer
         Rect plotArea,
         ChartAxis? xAxis,
         ChartAxis? yAxis,
-        IReadOnlyList<ChartSeries> allSeries)
+        IReadOnlyList<ChartSeries> allSeries,
+        ChartRenderContext? renderContext = null)
     {
         if (series is not CandlestickSeries candle) return null;
         if (xAxis == null || yAxis == null) return null;
