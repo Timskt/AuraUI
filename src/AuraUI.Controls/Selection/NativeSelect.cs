@@ -65,13 +65,13 @@ public class NativeSelect : ComboBox
         set => SetValue(IsInvalidProperty, value);
     }
 
-    protected override void OnGotFocus(GotFocusEventArgs e)
+    protected override void OnGotFocus(FocusChangedEventArgs e)
     {
         base.OnGotFocus(e);
         PseudoClasses.Set(":focus-visible", e.NavigationMethod == NavigationMethod.Directional);
     }
 
-    protected override void OnLostFocus(RoutedEventArgs e)
+    protected override void OnLostFocus(FocusChangedEventArgs e)
     {
         base.OnLostFocus(e);
         PseudoClasses.Set(":focus-visible", false);

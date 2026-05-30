@@ -97,7 +97,7 @@ public class InputGroup : ItemsControl
         SyncItemStates();
     }
 
-    private void OnDescendantGotFocus(object? sender, GotFocusEventArgs e)
+    private void OnDescendantGotFocus(object? sender, FocusChangedEventArgs e)
     {
         Classes.Set("has-focus-within", true);
     }
