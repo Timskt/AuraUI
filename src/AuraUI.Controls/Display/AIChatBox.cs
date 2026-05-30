@@ -301,7 +301,9 @@ public class AIChatBox : TemplatedControl
         if (_inputBox is not null)
         {
             _inputBox.KeyDown += OnInputBoxKeyDown;
+#pragma warning disable CS0618 // Watermark is deprecated but PlaceholderText not available in this version
             _inputBox.Watermark = Placeholder;
+#pragma warning restore CS0618
         }
 
         UpdatePseudoClasses();

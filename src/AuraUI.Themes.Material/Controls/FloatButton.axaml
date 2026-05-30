@@ -1,0 +1,73 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — FloatButton (FAB) -->
+
+    <Style Selector="layout|FloatButton">
+        <Setter Property="Background" Value="{DynamicResource AuraPrimaryContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnPrimaryContainerBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ClipToBounds" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        BoxShadow="{DynamicResource AuraShadowLevel3}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
+                        <BoxShadowsTransition Duration="0:0:0.200" Property="BoxShadow"/>
+                    </Border.Transitions>
+                    <Button Name="PART_Button"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                        <ContentPresenter Content="{TemplateBinding Icon}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Width="24" Height="24"/>
+                    </Button>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover (elevated) -->
+    <Style Selector="layout|FloatButton:pointerover /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel4}"/>
+    </Style>
+
+    <!-- Pressed -->
+    <Style Selector="layout|FloatButton:pressed /template/ Border#PART_Border">
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLevel2}"/>
+    </Style>
+
+    <!-- Shape: Square (Small FAB) -->
+    <Style Selector="layout|FloatButton.square /template/ Border#PART_Border">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusLg}"/>
+    </Style>
+
+    <!-- Small size -->
+    <Style Selector="layout|FloatButton.small">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+    </Style>
+
+    <!-- Large size -->
+    <Style Selector="layout|FloatButton.large">
+        <Setter Property="Width" Value="96"/>
+        <Setter Property="Height" Value="96"/>
+    </Style>
+
+</Styles>

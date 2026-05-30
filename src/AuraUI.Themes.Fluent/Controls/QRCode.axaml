@@ -1,0 +1,15 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         QRCode — Fluent Style
+         ============================================================ -->
+    <!-- QRCode inherits from Control and renders via custom drawing (Render override).
+         Styles are minimal — the control uses its own CodeForeground/CodeBackground properties. -->
+    <Style Selector="display|QRCode">
+        <Setter Property="CodeForeground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="CodeBackground" Value="{DynamicResource AuraCardBackgroundBrush}"/>
+    </Style>
+
+</Styles>

@@ -14,7 +14,7 @@ public partial class MainWindow : Window
 {
     private readonly Dictionary<string, Func<ComponentPageBase>> _pageFactory = new();
 
-    private new bool TryFindResource(string key, out object? resource)
+    private bool TryFindResource(string key, out object? resource)
     {
         try
         {

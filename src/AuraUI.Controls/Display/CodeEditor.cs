@@ -128,7 +128,7 @@ public class CodeEditor : TemplatedControl
     /// <summary>
     /// Defines the <see cref="Theme"/> styled property.
     /// </summary>
-    public static readonly StyledProperty<CodeEditorTheme> ThemeProperty =
+    public static new readonly StyledProperty<CodeEditorTheme> ThemeProperty =
         AvaloniaProperty.Register<CodeEditor, CodeEditorTheme>(nameof(Theme), CodeEditorTheme.Dark);
 
     /// <summary>
@@ -204,7 +204,7 @@ public class CodeEditor : TemplatedControl
     /// <summary>
     /// Gets or sets the color theme.
     /// </summary>
-    public CodeEditorTheme Theme
+    public new CodeEditorTheme Theme
     {
         get => GetValue(ThemeProperty);
         set => SetValue(ThemeProperty, value);

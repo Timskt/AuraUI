@@ -164,7 +164,7 @@ public class VirtualizingStackPanel : Avalonia.Controls.VirtualizingStackPanel
         }
     }
 
-    private Control? ContainerFromIndex(int index)
+    private new Control? ContainerFromIndex(int index)
     {
         // Attempt to find the realized container for the given index
         var children = Children;

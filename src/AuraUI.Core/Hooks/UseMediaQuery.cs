@@ -113,7 +113,9 @@ public class UseMediaQuery : IDisposable
 
     private void OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
+#pragma warning disable CS0618 // Use TopLevel.GetTopLevel instead of e.Root
         if (e.Root is TopLevel topLevel)
+#pragma warning restore CS0618
         {
             HookTopLevel(topLevel);
         }

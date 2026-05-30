@@ -39,6 +39,7 @@ namespace AuraUI.Core.MVVM;
 /// };
 /// </code>
 /// </example>
+#pragma warning disable AVP1002 // Generic types cannot be referenced from XAML — intentional for render-prop pattern
 public class RenderPropControl<T> : ContentControl
 {
     /// <summary>
@@ -58,6 +59,7 @@ public class RenderPropControl<T> : ContentControl
     /// </summary>
     public static readonly StyledProperty<object?> EmptyContentProperty =
         AvaloniaProperty.Register<RenderPropControl<T>, object?>(nameof(EmptyContent));
+#pragma warning restore AVP1002
 
     /// <summary>
     /// Gets or sets the data to pass to the render function.

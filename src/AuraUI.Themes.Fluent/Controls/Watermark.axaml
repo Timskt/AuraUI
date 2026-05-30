@@ -1,0 +1,14 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Watermark — Fluent Style
+         ============================================================ -->
+    <!-- Watermark is a Decorator that overlays text; it has no visible template
+         but uses attached properties for watermark rendering. Minimal styling. -->
+    <Style Selector="layout|Watermark">
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+
+</Styles>

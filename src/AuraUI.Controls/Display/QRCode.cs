@@ -48,13 +48,13 @@ public class QRCode : Control
             nameof(ErrorCorrectionLevel), QRErrorCorrectionLevel.M);
 
     /// <summary>
-    /// Defines the <see cref="Foreground"/> styled property.
+    /// Defines the CodeForeground styled property.
     /// </summary>
     public static readonly StyledProperty<IBrush?> CodeForegroundProperty =
         AvaloniaProperty.Register<QRCode, IBrush?>(nameof(CodeForeground), Brushes.Black);
 
     /// <summary>
-    /// Defines the <see cref="Background"/> styled property.
+    /// Defines the CodeBackground styled property.
     /// </summary>
     public static readonly StyledProperty<IBrush?> CodeBackgroundProperty =
         AvaloniaProperty.Register<QRCode, IBrush?>(nameof(CodeBackground), Brushes.White);

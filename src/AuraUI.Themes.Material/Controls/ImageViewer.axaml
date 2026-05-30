@@ -1,0 +1,13 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — ImageViewer -->
+
+    <Style Selector="display|ImageViewer">
+        <Setter Property="Background" Value="#1A000000"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+    </Style>
+
+</Styles>

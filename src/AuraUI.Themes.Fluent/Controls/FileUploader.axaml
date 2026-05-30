@@ -1,0 +1,63 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         FileUploader — Fluent Style
+         ============================================================ -->
+    <Style Selector="input|FileUploader">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}">
+                    <StackPanel Spacing="12">
+                        <!-- Drop zone area -->
+                        <Border Name="PART_DropZone"
+                                BorderBrush="{DynamicResource AuraInputBorderBrush}"
+                                BorderThickness="2"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="32,24"
+                                Background="{DynamicResource AuraInputBackgroundBrush}">
+                            <StackPanel Spacing="8"
+                                        HorizontalAlignment="Center">
+                                <Path Data="M 12,4 L 12,16 M 6,10 L 12,4 L 18,10"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="2"
+                                      Width="32" Height="32"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"/>
+                                <TextBlock Text="Drop files here or"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                           FontSize="14"
+                                           HorizontalAlignment="Center"/>
+                                <Button Name="PART_SelectButton"
+                                        Classes="sm"
+                                        Content="Browse Files"/>
+                            </StackPanel>
+                        </Border>
+                        <!-- File list -->
+                        <ListBox Name="PART_FileListBox"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 IsVisible="False"/>
+                        <!-- Progress bar -->
+                        <ProgressBar Name="PART_ProgressBar"
+                                     IsVisible="False"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Drop zone hover state -->
+    <Style Selector="input|FileUploader /template/ Border#PART_DropZone">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+    </Style>
+
+    <!-- FileUploader :disabled -->
+    <Style Selector="input|FileUploader:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

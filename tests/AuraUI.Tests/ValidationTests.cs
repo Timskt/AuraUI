@@ -737,12 +737,12 @@ public class ValidationTests
     }
 
     [Fact]
-    public void FluentValidator_ValidateAsync()
+    public async Task FluentValidator_ValidateAsync()
     {
         var validator = new FluentValidator<TestModel>()
             .Required(m => m.Name!);
 
-        var result = validator.ValidateAsync(new TestModel { Name = "John" }).Result;
+        var result = await validator.ValidateAsync(new TestModel { Name = "John" });
         Assert.True(result.IsValid);
     }
 

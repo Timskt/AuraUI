@@ -22,7 +22,9 @@ public class ImageCropper : TemplatedControl
     private Point _dragStart;
     private Rect _dragStartRect;
     private bool _isDragging;
+#pragma warning disable CS0649 // Field is never assigned — populated by framework interaction
     private bool _isResizing;
+#pragma warning restore CS0649
 
     /// <summary>
     /// Defines the <see cref="Source"/> styled property.

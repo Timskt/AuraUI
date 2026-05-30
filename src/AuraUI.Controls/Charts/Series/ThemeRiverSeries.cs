@@ -38,7 +38,7 @@ public class ThemeRiverSeries : ChartSeries
         AvaloniaProperty.Register<ThemeRiverSeries, double>(nameof(LabelFontSize), 10.0);
 
     /// <summary>
-    /// Defines the <see cref="Opacity"/> new property to hide base.
+    /// Defines the LayerOpacity property.
     /// </summary>
     public static readonly StyledProperty<double> LayerOpacityProperty =
         AvaloniaProperty.Register<ThemeRiverSeries, double>(nameof(LayerOpacity), 0.8);

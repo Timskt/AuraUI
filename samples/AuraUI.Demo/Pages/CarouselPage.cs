@@ -44,7 +44,7 @@ public class CarouselPage : ComponentPageBase
         var labels = new[] { "Slide 1", "Slide 2", "Slide 3", "Slide 4" };
         for (int i = 0; i < 4; i++)
         {
-            carousel.Items.Add(new Border
+            carousel.Items?.Add(new Border
             {
                 Background = new SolidColorBrush(Color.Parse(colors[i])),
                 CornerRadius = new CornerRadius(10),

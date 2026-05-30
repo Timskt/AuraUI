@@ -171,7 +171,9 @@ public class Calendar : TemplatedControl
     /// <summary>
     /// Occurs when the selected date changes.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler<SelectionChangedEventArgs>? SelectedDateChanged;
+#pragma warning restore CS0067
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {

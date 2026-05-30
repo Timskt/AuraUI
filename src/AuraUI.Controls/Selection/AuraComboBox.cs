@@ -85,7 +85,7 @@ public class AuraComboBox : ComboBox
             "Search...");
 
     /// <summary>
-    /// Defines the <see cref="DisplayMemberPath"/> styled property for filtering.
+    /// Defines the FilterMemberPath styled property for filtering.
     /// </summary>
     public static readonly StyledProperty<string?> FilterMemberPathProperty =
         AvaloniaProperty.Register<AuraComboBox, string?>(

@@ -106,10 +106,9 @@ public class LogEntry : AvaloniaObject
 [PseudoClasses(":auto-scroll", ":filtered", ":searching", ":empty")]
 public class LogViewer : Control
 {
-    private ItemsControl? _logList;
-    private StackPanel? _filterBar;
-    private TextBox? _searchBox;
+#pragma warning disable CS0649 // Field is never assigned — template part populated by framework
     private ScrollViewer? _scrollViewer;
+#pragma warning restore CS0649
 
     private readonly ObservableCollection<LogEntry> _filteredEntries = new();
     private IList<LogEntry>? _sourceEntries;

@@ -1,0 +1,18 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — Transfer -->
+
+    <Style Selector="selection|Transfer">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|Transfer:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

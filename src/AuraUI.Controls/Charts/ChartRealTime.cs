@@ -55,7 +55,9 @@ public class ChartRealTime
     /// <summary>
     /// Event raised when the visible window scrolls.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler? WindowScrolled;
+#pragma warning restore CS0067
 
     public ChartRealTime(Chart chart)
     {

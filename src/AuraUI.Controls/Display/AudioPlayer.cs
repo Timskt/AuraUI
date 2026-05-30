@@ -196,12 +196,16 @@ public class AudioPlayer : TemplatedControl
     /// <summary>
     /// Occurs when playback reaches the end.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler<RoutedEventArgs>? Ended;
+#pragma warning restore CS0067
 
     /// <summary>
     /// Occurs when the playback time is updated.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler<RoutedEventArgs>? TimeUpdated;
+#pragma warning restore CS0067
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {

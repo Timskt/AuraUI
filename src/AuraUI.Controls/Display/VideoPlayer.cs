@@ -275,6 +275,7 @@ public class VideoPlayer : TemplatedControl
     /// <summary>
     /// Occurs when playback reaches the end.
     /// </summary>
+#pragma warning disable CS0067 // Event is never used — public API for consumers
     public event EventHandler<RoutedEventArgs>? Ended;
 
     /// <summary>
@@ -286,6 +287,7 @@ public class VideoPlayer : TemplatedControl
     /// Occurs when the quality setting changes.
     /// </summary>
     public event EventHandler<RoutedEventArgs>? QualityChanged;
+#pragma warning restore CS0067
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {

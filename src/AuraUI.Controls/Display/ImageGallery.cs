@@ -28,7 +28,9 @@ public enum ImageGalleryPreviewMode
 [PseudoClasses(":preview-open")]
 public class ImageGallery : ItemsControl
 {
+#pragma warning disable CS0649 // Field is never assigned — template part populated by framework
     private ImageViewer? _viewer;
+#pragma warning restore CS0649
 
     /// <summary>
     /// Defines the <see cref="Columns"/> styled property.

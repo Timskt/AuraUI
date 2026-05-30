@@ -689,7 +689,7 @@ public class ConverterTests
     [Fact]
     public void Conditional_NullValues_ReturnsFalse()
     {
-        var result = ConditionalConverter.Instance.Convert(null, typeof(bool), null, EnUs);
+        var result = ConditionalConverter.Instance.Convert((IList<object?>)null!, typeof(bool), null, EnUs);
         Assert.Equal(false, result);
     }
 

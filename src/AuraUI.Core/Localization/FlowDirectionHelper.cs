@@ -19,7 +19,7 @@ namespace AuraUI.Core.Localization;
 public static class FlowDirectionHelper
 {
     /// <summary>
-    /// When set to <c>true</c> on a layout panel, its <see cref="Layoutable.FlowDirection"/>
+    /// When set to <c>true</c> on a layout panel, its FlowDirection
     /// is automatically updated whenever the active culture changes to an RTL culture.
     /// </summary>
     public static readonly AttachedProperty<bool> AutoDetectProperty =

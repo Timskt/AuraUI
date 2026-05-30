@@ -1,0 +1,77 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Segmented — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|Segmented">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}"
+                        ClipToBounds="True">
+                    <Panel>
+                        <ItemsPresenter Name="PART_ItemsPresenter">
+                            <ItemsPresenter.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                        <Border Name="PART_Indicator"
+                                Background="{DynamicResource AuraCardBackgroundBrush}"
+                                CornerRadius="{DynamicResource AuraRadiusSm}"
+                                BoxShadow="{DynamicResource AuraShadowSm}"
+                                IsHitTestVisible="False"/>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Segmented item container -->
+    <Style Selector="selection|Segmented ContentControl">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="selection|Segmented ContentControl:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="selection|Segmented ContentControl:selected">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Size variants -->
+    <Style Selector="selection|Segmented:small ContentControl">
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="MinHeight" Value="24"/>
+    </Style>
+
+    <Style Selector="selection|Segmented:large ContentControl">
+        <Setter Property="Padding" Value="16,8"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="MinHeight" Value="40"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|Segmented:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

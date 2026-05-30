@@ -1,0 +1,100 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         ImageViewer — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|ImageViewer">
+        <Setter Property="Background" Value="#1A000000"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                        ClipToBounds="True">
+                    <Panel>
+                        <!-- Main image area -->
+                        <Border Name="PART_ImageContainer"
+                                Background="Transparent">
+                            <Image Name="PART_Image"
+                                   Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        </Border>
+                        <!-- Toolbar -->
+                        <Panel Name="PART_Toolbar"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Margin="16"
+                               IsVisible="{TemplateBinding ShowToolbar}">
+                            <Border Background="#CC000000"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="8">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="4">
+                                <Button Classes="icon sm"
+                                        Width="36" Height="36">
+                                    <Path Data="M 12,4 L 12,16 M 6,10 L 12,4 L 18,10"
+                                          Stroke="White" StrokeThickness="2"
+                                          Width="16" Height="16" Stretch="Uniform"
+                                          RenderTransform="rotate(90)"/>
+                                </Button>
+                                <Button Classes="icon sm"
+                                        Width="36" Height="36">
+                                    <Path Data="M 12,20 L 12,8 M 18,14 L 12,20 L 6,14"
+                                          Stroke="White" StrokeThickness="2"
+                                          Width="16" Height="16" Stretch="Uniform"/>
+                                </Button>
+                                <Button Classes="icon sm"
+                                        Width="36" Height="36">
+                                    <Path Data="M 6,12 A 6,6 0 1,1 18,12 A 6,6 0 1,1 6,12 M 9,9 L 15,15 M 15,9 L 9,15"
+                                          Stroke="White" StrokeThickness="1.5"
+                                          Width="16" Height="16" Stretch="Uniform"/>
+                                </Button>
+                                <Button Classes="icon sm"
+                                        Width="36" Height="36">
+                                    <Path Data="M 4,4 L 10,4 L 10,6 L 6,6 L 6,10 L 4,10 Z M 20,4 L 14,4 L 14,6 L 18,6 L 18,10 L 20,10 Z M 4,20 L 10,20 L 10,18 L 6,18 L 6,14 L 4,14 Z M 20,20 L 14,20 L 14,18 L 18,18 L 18,14 L 20,14 Z"
+                                          Stroke="White" StrokeThickness="1.5"
+                                          Width="16" Height="16" Stretch="Uniform"/>
+                                </Button>
+                            </StackPanel>
+                            </Border>
+                        </Panel>
+                        <!-- Thumbnail strip -->
+                        <ItemsControl Name="PART_ThumbnailStrip"
+                                      DockPanel.Dock="Bottom"
+                                      Margin="16"
+                                      IsVisible="{TemplateBinding ShowThumbnails}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <!-- Loading indicator -->
+                        <Panel Name="PART_LoadingPanel"
+                               IsVisible="False"
+                               Background="#80000000">
+                            <ProgressBar IsIndeterminate="True"
+                                         Width="48" Height="48"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                        </Panel>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- ImageViewer :fullscreen -->
+    <Style Selector="display|ImageViewer:fullscreen">
+        <Setter Property="Background" Value="#FF000000"/>
+    </Style>
+
+    <!-- ImageViewer :loading -->
+    <Style Selector="display|ImageViewer:loading /template/ Panel#PART_LoadingPanel">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+</Styles>

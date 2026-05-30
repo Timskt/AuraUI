@@ -53,7 +53,7 @@ public class LineSeries : XYChartSeries
         AvaloniaProperty.Register<LineSeries, StepPosition>(nameof(StepPosition), StepPosition.After);
 
     /// <summary>
-    /// Defines the <see cref="GradientFill"/> styled property.
+    /// Defines the GradientFillColor styled property.
     /// When set, the area fill uses a gradient from this color to transparent.
     /// </summary>
     public static readonly StyledProperty<IBrush?> GradientFillColorProperty =
