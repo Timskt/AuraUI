@@ -65,11 +65,13 @@
     <!-- Hover state layer -->
     <Style Selector="input|AuraRepeatButton:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="#14FFFFFF"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Pressed state layer -->
     <Style Selector="input|AuraRepeatButton:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="#1EFFFFFF"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Focus -->
@@ -97,6 +99,7 @@
     </Style>
     <Style Selector="input|AuraRepeatButton.secondary:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Outline -->
@@ -108,6 +111,7 @@
     </Style>
     <Style Selector="input|AuraRepeatButton.outline:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Ghost (Text) -->
@@ -120,6 +124,7 @@
     </Style>
     <Style Selector="input|AuraRepeatButton.ghost:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="#146750A4"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Destructive -->
@@ -128,6 +133,7 @@
     </Style>
     <Style Selector="input|AuraRepeatButton.destructive:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="#14B3261E"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
 </Styles>

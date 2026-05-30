@@ -107,6 +107,7 @@
     <!-- TreeViewItem :pointerover -->
     <Style Selector="display|AuraTreeViewItem:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- TreeViewItem :selected -->
@@ -117,6 +118,7 @@
     <!-- TreeViewItem selected + :pointerover -->
     <Style Selector="display|AuraTreeViewItem:selected:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraSelectedHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- TreeViewItem :expanded — rotate chevron -->

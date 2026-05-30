@@ -88,6 +88,7 @@
     <!-- Hover -->
     <Style Selector="input|AuraNumericUpDown:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Focused -->

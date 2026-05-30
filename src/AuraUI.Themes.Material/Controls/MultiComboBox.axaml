@@ -121,6 +121,7 @@
     <!-- Hover -->
     <Style Selector="selection|MultiComboBox:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Focused -->

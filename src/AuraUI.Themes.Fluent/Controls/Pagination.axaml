@@ -47,12 +47,14 @@
     <!-- Page item :pointerover -->
     <Style Selector="Button.page-item:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
     </Style>
 
     <!-- Page item :pressed -->
     <Style Selector="Button.page-item:pressed /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Page item :selected (current page) -->

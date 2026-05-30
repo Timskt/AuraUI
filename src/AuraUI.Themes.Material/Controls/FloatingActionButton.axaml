@@ -54,11 +54,13 @@
     <!-- Hover state layer -->
     <Style Selector="layout|FloatingActionButton:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Pressed state layer -->
     <Style Selector="layout|FloatingActionButton:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
     <Style Selector="layout|FloatingActionButton:pressed">
         <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>

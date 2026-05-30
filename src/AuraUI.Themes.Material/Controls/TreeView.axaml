@@ -109,11 +109,13 @@
     <!-- Hover (state layer) -->
     <Style Selector="display|AuraTreeViewItem:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- Pressed -->
     <Style Selector="display|AuraTreeViewItem:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- Selected -->

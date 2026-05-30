@@ -107,6 +107,7 @@
     <!-- Chevron hover -->
     <Style Selector="layout|AccordionItem:pointerover /template/ Border#PART_ChevronContainer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="12"/>
     </Style>
 
     <!-- Expanded state — rotate chevron 180 degrees -->

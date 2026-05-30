@@ -64,12 +64,14 @@
     <Style Selector="RadioButton:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Opacity" Value="0.08"/>
+        <Setter Property="CornerRadius" Value="10"/>
     </Style>
 
     <!-- Pressed -->
     <Style Selector="RadioButton:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Opacity" Value="0.12"/>
+        <Setter Property="CornerRadius" Value="10"/>
     </Style>
 
     <!-- Focus -->

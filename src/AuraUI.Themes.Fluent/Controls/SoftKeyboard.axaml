@@ -15,7 +15,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        Padding="{TemplateBinding Padding}">
+                        Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}">
                     <StackPanel Name="PART_KeyRows"
                                 Spacing="4"/>
                 </Border>
@@ -26,6 +26,7 @@
     <!-- Hover -->
     <Style Selector="input|SoftKeyboard:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Disabled -->
