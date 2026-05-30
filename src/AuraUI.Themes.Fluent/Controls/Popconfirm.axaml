@@ -1,0 +1,70 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="clr-namespace:AuraUI.Controls.Feedback;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Popconfirm — Fluent Style
+         ============================================================ -->
+    <Style Selector="feedback|Popconfirm">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    <Popup Name="PART_Popup"
+                           IsLightDismissEnabled="True"
+                           Placement="{TemplateBinding Placement}">
+                        <Border Name="PART_PopupBorder"
+                                Background="{DynamicResource AuraFlyoutBackgroundBrush}"
+                                BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                BoxShadow="{DynamicResource AuraShadowMd}"
+                                Padding="16"
+                                MinWidth="220"
+                                MaxWidth="320">
+                            <StackPanel Spacing="12">
+                                <!-- Icon + Title -->
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <ContentPresenter Content="{TemplateBinding Icon}"
+                                                      VerticalAlignment="Top"
+                                                      IsVisible="False"/>
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="{TemplateBinding Title}"
+                                                   FontWeight="SemiBold"
+                                                   FontSize="14"/>
+                                        <TextBlock Name="PART_Description"
+                                                   Text="{TemplateBinding Description}"
+                                                   FontSize="13"
+                                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                   TextWrapping="Wrap"
+                                                   IsVisible="False"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <!-- Buttons -->
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8"
+                                            HorizontalAlignment="Right">
+                                    <Button Name="PART_CancelButton"
+                                            Classes="sm"
+                                            Content="{TemplateBinding CancelText}"/>
+                                    <Button Name="PART_OKButton"
+                                            Classes="primary sm"
+                                            Content="{TemplateBinding OkText}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Description visible when set -->
+    <Style Selector="feedback|Popconfirm:open /template/ Border#PART_PopupBorder">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+</Styles>

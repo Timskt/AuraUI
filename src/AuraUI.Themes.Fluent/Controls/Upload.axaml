@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Upload — Fluent Style
+         ============================================================ -->
+    <Style Selector="input|Upload">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        Padding="4">
+                    <DockPanel>
+                        <!-- Upload trigger area -->
+                        <Border DockPanel.Dock="Top"
+                                BorderBrush="{DynamicResource AuraInputBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="16"
+                                Background="{DynamicResource AuraInputBackgroundBrush}">
+                            <StackPanel Spacing="8"
+                                        HorizontalAlignment="Center">
+                                <Path Data="M 12,4 L 12,16 M 6,10 L 12,4 L 18,10"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="2"
+                                      Width="24" Height="24"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"/>
+                                <TextBlock Text="Click or drag files to upload"
+                                           Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                           FontSize="13"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <!-- File list -->
+                        <ItemsPresenter Name="PART_FileListPresenter"
+                                        Margin="0,8,0,0"/>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Upload :disabled -->
+    <Style Selector="input|Upload:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

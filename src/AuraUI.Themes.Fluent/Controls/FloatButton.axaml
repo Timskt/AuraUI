@@ -1,0 +1,77 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         FloatButton — Fluent Style
+         ============================================================ -->
+    <Style Selector="layout|FloatButton">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ClipToBounds" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        BoxShadow="{DynamicResource AuraShadowMd}">
+                    <Border.Transitions>
+                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                        <BoxShadowsTransition Duration="00:00:00.200" Property="BoxShadow"/>
+                    </Border.Transitions>
+                    <Button Name="PART_Button"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                        <ContentPresenter Content="{TemplateBinding Icon}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Width="24" Height="24"/>
+                    </Button>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- FloatButton :pointerover -->
+    <Style Selector="layout|FloatButton:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundHoverBrush}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLg}"/>
+    </Style>
+
+    <!-- FloatButton :pressed -->
+    <Style Selector="layout|FloatButton:pressed /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBackgroundHoverBrush}"/>
+        <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
+    </Style>
+
+    <!-- Shape variants -->
+    <Style Selector="layout|FloatButton.square /template/ Border#PART_Border">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+    </Style>
+
+    <!-- Size variants -->
+    <Style Selector="layout|FloatButton.small">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+    </Style>
+
+    <Style Selector="layout|FloatButton.large">
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="Height" Value="56"/>
+    </Style>
+
+</Styles>

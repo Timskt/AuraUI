@@ -1,0 +1,104 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Transfer — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|Transfer">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                        Padding="0">
+                    <Grid ColumnDefinitions="*,Auto,*">
+                        <!-- Source list -->
+                        <Border Grid.Column="0"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="0,0,1,0">
+                            <DockPanel>
+                                <Border DockPanel.Dock="Top"
+                                        Padding="12,8"
+                                        BorderBrush="{DynamicResource AuraDividerBrush}"
+                                        BorderThickness="0,0,0,1">
+                                    <TextBlock Text="{TemplateBinding LeftTitle}"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                </Border>
+                                <TextBox Name="PART_SourceSearchBox"
+                                         DockPanel.Dock="Top"
+                                         Margin="8,4"
+                                         FontSize="13"
+                                         Watermark="Search..."
+                                         IsVisible="False"/>
+                                <ListBox Name="PART_SourceList"
+                                         Background="Transparent"
+                                         BorderThickness="0"/>
+                            </DockPanel>
+                        </Border>
+
+                        <!-- Move buttons -->
+                        <StackPanel Grid.Column="1"
+                                    Spacing="8"
+                                    Margin="8,0"
+                                    VerticalAlignment="Center">
+                            <Button Name="PART_MoveRightButton"
+                                    Classes="sm"
+                                    HorizontalAlignment="Stretch"
+                                    MinWidth="60">
+                                <Path Data="M 4,12 L 12,4 L 20,12"
+                                      Width="12" Height="12"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"/>
+                            </Button>
+                            <Button Name="PART_MoveLeftButton"
+                                    Classes="sm"
+                                    HorizontalAlignment="Stretch"
+                                    MinWidth="60">
+                                <Path Data="M 4,4 L 12,12 L 20,4"
+                                      Width="12" Height="12"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+
+                        <!-- Target list -->
+                        <Border Grid.Column="2">
+                            <DockPanel>
+                                <Border DockPanel.Dock="Top"
+                                        Padding="12,8"
+                                        BorderBrush="{DynamicResource AuraDividerBrush}"
+                                        BorderThickness="0,0,0,1">
+                                    <TextBlock Text="{TemplateBinding RightTitle}"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                                </Border>
+                                <TextBox Name="PART_TargetSearchBox"
+                                         DockPanel.Dock="Top"
+                                         Margin="8,4"
+                                         FontSize="13"
+                                         Watermark="Search..."
+                                         IsVisible="False"/>
+                                <ListBox Name="PART_TargetList"
+                                         Background="Transparent"
+                                         BorderThickness="0"/>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Transfer :disabled -->
+    <Style Selector="selection|Transfer:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

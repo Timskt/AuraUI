@@ -106,4 +106,21 @@
     <StyleInclude Source="/Controls/ConfigProvider.axaml"/>
     <StyleInclude Source="/Controls/AuraMessage.axaml"/>
     <StyleInclude Source="/Controls/AuraScrollbar.axaml"/>
+
+    <!-- V5 controls — Gap analysis completions -->
+    <StyleInclude Source="/Controls/AutoComplete.axaml"/>
+    <StyleInclude Source="/Controls/Cascader.axaml"/>
+    <StyleInclude Source="/Controls/Transfer.axaml"/>
+    <StyleInclude Source="/Controls/TreeSelect.axaml"/>
+    <StyleInclude Source="/Controls/Segmented.axaml"/>
+    <StyleInclude Source="/Controls/Popconfirm.axaml"/>
+    <StyleInclude Source="/Controls/Calendar.axaml"/>
+    <StyleInclude Source="/Controls/Upload.axaml"/>
+    <StyleInclude Source="/Controls/FileUploader.axaml"/>
+    <StyleInclude Source="/Controls/FileDropZone.axaml"/>
+    <StyleInclude Source="/Controls/Watermark.axaml"/>
+    <StyleInclude Source="/Controls/FloatButton.axaml"/>
+    <StyleInclude Source="/Controls/Tour.axaml"/>
+    <StyleInclude Source="/Controls/QRCode.axaml"/>
+    <StyleInclude Source="/Controls/ImageViewer.axaml"/>
 </Styles>
