@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Kbd — Fluent Style (Keyboard Shortcut Display)
+         ============================================================ -->
+    <Style Selector="display|Kbd">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="Consolas,monospace"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundSecondaryBrush}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="MinWidth" Value="24"/>
+        <Setter Property="MinHeight" Value="24"/>
+    </Style>
+
+    <!-- Size: Small -->
+    <Style Selector="display|Kbd.small">
+        <Setter Property="Padding" Value="3,1"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="MinWidth" Value="18"/>
+        <Setter Property="MinHeight" Value="18"/>
+    </Style>
+
+    <!-- Size: Large -->
+    <Style Selector="display|Kbd.large">
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinWidth" Value="32"/>
+        <Setter Property="MinHeight" Value="32"/>
+    </Style>
+
+    <!-- KbdGroup -->
+    <Style Selector="display|KbdGroup">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="4">
+                    <ItemsPresenter Name="PART_ItemsPresenter"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

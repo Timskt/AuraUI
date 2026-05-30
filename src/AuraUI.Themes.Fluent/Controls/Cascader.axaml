@@ -71,7 +71,7 @@
     </Style>
 
     <!-- Cascader :open / :focus -->
-    <Style Selector="selection|Cascader:focus /template/ Border#PART_Border">
+    <Style Selector="selection|Cascader:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>

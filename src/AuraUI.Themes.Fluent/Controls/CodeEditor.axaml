@@ -79,7 +79,7 @@
     </Style>
 
     <!-- Focus -->
-    <Style Selector="display|CodeEditor:focus /template/ Border#PART_Border">
+    <Style Selector="display|CodeEditor:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
     </Style>
 

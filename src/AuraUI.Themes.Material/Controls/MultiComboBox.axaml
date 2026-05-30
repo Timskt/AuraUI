@@ -124,7 +124,7 @@
     </Style>
 
     <!-- Focused -->
-    <Style Selector="selection|MultiComboBox:focus /template/ Border#RootBorder">
+    <Style Selector="selection|MultiComboBox:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

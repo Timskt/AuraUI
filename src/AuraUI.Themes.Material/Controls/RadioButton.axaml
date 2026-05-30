@@ -56,6 +56,7 @@
             <Transitions>
                 <BrushTransition Property="Background" Duration="0:0:0.15"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -68,13 +69,12 @@
 
     <!-- Pressed -->
     <Style Selector="RadioButton:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Opacity" Value="0.12"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
 
     <!-- Focus -->
-    <Style Selector="RadioButton:focus /template/ Border#PART_OuterCircle">
+    <Style Selector="RadioButton:focus-visible /template/ Border#PART_OuterCircle">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="2.5"/>
     </Style>
@@ -101,6 +101,16 @@
 
     <Style Selector="RadioButton:checked:disabled /template/ Border#PART_InnerCircle">
         <Setter Property="Background" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="RadioButton:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

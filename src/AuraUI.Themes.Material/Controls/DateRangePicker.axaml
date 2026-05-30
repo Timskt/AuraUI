@@ -65,7 +65,7 @@
         </Setter>
     </Style>
 
-    <Style Selector="selection|DateRangePicker:focus /template/ Border#PART_TextBoxBorder">
+    <Style Selector="selection|DateRangePicker:focus-visible /template/ Border#PART_TextBoxBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

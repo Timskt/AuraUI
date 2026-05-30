@@ -1,0 +1,116 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:feedback="clr-namespace:AuraUI.Controls.Feedback;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Alert — Fluent Style
+         ============================================================ -->
+    <Style Selector="feedback|Alert">
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                        <!-- Icon -->
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          Content="{TemplateBinding Icon}"
+                                          Grid.Column="0"
+                                          Grid.RowSpan="2"
+                                          Margin="0,0,12,0"
+                                          VerticalAlignment="Top"/>
+
+                        <!-- Title -->
+                        <TextBlock Name="PART_Title"
+                                   Text="{TemplateBinding Title}"
+                                   Grid.Column="1"
+                                   Grid.Row="0"
+                                   FontWeight="SemiBold"
+                                   FontSize="14"
+                                   Foreground="{DynamicResource AuraForegroundBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,2"/>
+
+                        <!-- Description -->
+                        <TextBlock Name="PART_Description"
+                                   Text="{TemplateBinding Description}"
+                                   Grid.Column="1"
+                                   Grid.Row="1"
+                                   FontSize="13"
+                                   Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                   TextWrapping="Wrap"/>
+
+                        <!-- Close button -->
+                        <Button Name="PART_CloseButton"
+                                Grid.Column="2"
+                                Grid.RowSpan="2"
+                                Content="&#x2715;"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="4"
+                                Margin="8,0,0,0"
+                                VerticalAlignment="Top"
+                                FontSize="14"
+                                Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                Cursor="Hand"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hide parts when not present -->
+    <Style Selector="feedback|Alert:not(.has-title) /template/ TextBlock#PART_Title">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="feedback|Alert:not(.has-description) /template/ TextBlock#PART_Description">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="feedback|Alert:not(.has-icon) /template/ ContentPresenter#PART_IconPresenter">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="feedback|Alert /template/ Button#PART_CloseButton">
+        <Setter Property="Opacity" Value="0"/>
+    </Style>
+    <Style Selector="feedback|Alert:pointerover /template/ Button#PART_CloseButton">
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+
+    <!-- Variant: Info -->
+    <Style Selector="feedback|Alert.info">
+        <Setter Property="Background" Value="{DynamicResource AuraInfoLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInfoBrush}"/>
+    </Style>
+
+    <!-- Variant: Success -->
+    <Style Selector="feedback|Alert.success">
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
+    </Style>
+
+    <!-- Variant: Warning -->
+    <Style Selector="feedback|Alert.warning">
+        <Setter Property="Background" Value="{DynamicResource AuraWarningLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraWarningBrush}"/>
+    </Style>
+
+    <!-- Variant: Error -->
+    <Style Selector="feedback|Alert.error">
+        <Setter Property="Background" Value="{DynamicResource AuraErrorLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- Hidden when closed -->
+    <Style Selector="feedback|Alert.closed">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+</Styles>

@@ -82,7 +82,7 @@
     </Style>
 
     <!-- TreeSelect :open / :focus -->
-    <Style Selector="selection|TreeSelect:focus /template/ Border#PART_Border">
+    <Style Selector="selection|TreeSelect:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>

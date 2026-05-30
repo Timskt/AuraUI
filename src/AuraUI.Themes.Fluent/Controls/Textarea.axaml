@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:AuraUI.Controls.Input;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         Textarea — Fluent Style
+         ============================================================ -->
+    <Style Selector="input|Textarea">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+    </Style>
+
+    <!-- Focus state -->
+    <Style Selector="input|Textarea:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Size: Small -->
+    <Style Selector="input|Textarea:small">
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <!-- Size: Large -->
+    <Style Selector="input|Textarea:large">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- Disabled state -->
+    <Style Selector="input|Textarea:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+    </Style>
+
+</Styles>

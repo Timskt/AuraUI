@@ -67,18 +67,17 @@
             <Transitions>
                 <BrushTransition Property="Background" Duration="0:0:0.15"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
 
-    <!-- Hover state layer -->
-
+    <!-- Hover — border change only -->
+    <Style Selector="layout|Tag:pointerover /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
+    </Style>
 
     <!-- Pressed -->
-    <Style Selector="layout|Tag:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Closable — show close button -->
     <Style Selector="layout|Tag:closable /template/ Button#PART_CloseButton">
@@ -124,6 +123,16 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="layout|Tag:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

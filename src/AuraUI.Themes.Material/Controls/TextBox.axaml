@@ -117,14 +117,13 @@
     </Style>
 
     <!-- Focused -->
-    <Style Selector="TextBox:focus /template/ Border#RootBorder">
+    <Style Selector="TextBox:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Disabled -->
     <Style Selector="TextBox:disabled">
         <Setter Property="Opacity" Value="0.38"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Cursor" Value="Arrow"/>
     </Style>
 
@@ -136,7 +135,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
     </Style>
 
-    <Style Selector="TextBox.outlined:focus /template/ Border#RootBorder">
+    <Style Selector="TextBox.outlined:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
@@ -145,7 +144,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 
-    <Style Selector="TextBox:error:focus /template/ Border#RootBorder">
+    <Style Selector="TextBox:error:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
 

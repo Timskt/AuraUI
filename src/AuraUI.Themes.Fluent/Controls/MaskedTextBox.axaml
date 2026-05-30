@@ -92,7 +92,7 @@
     </Style>
 
     <!-- Focus state -->
-    <Style Selector="input|MaskedTextBox:focus /template/ Border#PART_Border">
+    <Style Selector="input|MaskedTextBox:focus-visible /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
@@ -100,8 +100,6 @@
 
     <!-- Disabled state -->
     <Style Selector="input|MaskedTextBox:disabled">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Opacity" Value="0.4"/>
     </Style>
 

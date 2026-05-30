@@ -47,6 +47,7 @@
                 <BrushTransition Duration="0:0:0.200" Property="Background"/>
                 <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleX" Easing="{StaticResource AuraEasingStandard}"/>
                 <DoubleTransition Duration="0:0:0.100" Property="ScaleTransform.ScaleY" Easing="{StaticResource AuraEasingStandard}"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{StaticResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -55,13 +56,10 @@
 
 
     <!-- Pressed state layer -->
-    <Style Selector="layout|FloatingActionButton:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
     <Style Selector="layout|FloatingActionButton:pressed">
-        <Setter Property="ScaleTransform.ScaleX" Value="0.95"/>
-        <Setter Property="ScaleTransform.ScaleY" Value="0.95"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <!-- Mini -->

@@ -22,9 +22,11 @@
                             Opacity="{TemplateBinding OverlayOpacity}"
                             IsVisible="False"/>
 
-                    <!-- Dialog border -->
+                    <!-- Dialog border — 1px AuraBorderBrush -->
                     <Border Name="PART_DialogBorder"
                             Background="{TemplateBinding DialogBackground}"
+                            BorderBrush="{DynamicResource AuraBorderBrush}"
+                            BorderThickness="1"
                             CornerRadius="{TemplateBinding DialogCornerRadius}"
                             BoxShadow="{TemplateBinding DialogShadow}"
                             ClipToBounds="True"
@@ -216,7 +218,7 @@
 
 
     <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
     </Style>
 
     <!-- Dialog overlay backdrop -->

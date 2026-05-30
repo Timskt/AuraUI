@@ -1,0 +1,65 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
+
+    <!-- ============================================================
+         NativeSelect — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|NativeSelect">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <!-- Focus visible -->
+    <Style Selector="selection|NativeSelect:focus-visible">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Invalid state -->
+    <Style Selector="selection|NativeSelect.invalid">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraErrorBrush}"/>
+    </Style>
+
+    <!-- Placeholder visible -->
+    <Style Selector="selection|NativeSelect.placeholder-visible">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundTertiaryBrush}"/>
+    </Style>
+
+    <!-- Size: Small -->
+    <Style Selector="selection|NativeSelect.small">
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="MinHeight" Value="28"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <!-- Size: Large -->
+    <Style Selector="selection|NativeSelect.large">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinHeight" Value="44"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- Option styling -->
+    <Style Selector="selection|NativeSelectOption">
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="selection|NativeSelectOption:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Disabled option -->
+    <Style Selector="selection|NativeSelectOption.option-disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

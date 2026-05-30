@@ -96,7 +96,7 @@
     </Style>
 
     <!-- Focus -->
-    <Style Selector="input|JsonEditor:focus /template/ Border#PART_Border">
+    <Style Selector="input|JsonEditor:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
     </Style>
 

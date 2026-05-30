@@ -103,16 +103,15 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
-    <!-- TextBox :focus -->
-    <Style Selector="TextBox:focus /template/ Border#PART_Border">
+    <!-- TextBox :focus — 2px accent border -->
+    <Style Selector="TextBox:focus-visible /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- TextBox :disabled -->
     <Style Selector="TextBox:disabled">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundDisabledBrush}"/>
         <Setter Property="Opacity" Value="0.4"/>
     </Style>
 

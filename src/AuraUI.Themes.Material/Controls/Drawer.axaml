@@ -22,9 +22,11 @@
                                 IsHitTestVisible="True">
                         </Border>
 
-                        <!-- Drawer Panel -->
+                        <!-- Drawer Panel — 1px AuraBorderBrush -->
                         <Border Name="PART_DrawerPanel"
                                 Background="{TemplateBinding Background}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
                                 CornerRadius="{TemplateBinding DrawerCornerRadius}"
                                 BoxShadow="{TemplateBinding DrawerShadow}"
                                 ClipToBounds="True"

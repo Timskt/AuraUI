@@ -122,6 +122,7 @@
         <Setter Property="Border.Transitions">
             <Transitions>
                 <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <DoubleTransition Duration="00:00:00.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -152,7 +153,9 @@
 
     <!-- Nav item :pressed -->
     <Style Selector="Border.nav-item:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
     <!-- Nav item :selected (active) -->

@@ -1,0 +1,32 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — HoverCard -->
+    <Style Selector="display|HoverCard">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <ContentPresenter Name="PART_TriggerPresenter"
+                                      Content="{TemplateBinding Trigger}"
+                                      ContentTemplate="{TemplateBinding TriggerTemplate}"/>
+                    <Border Name="PART_Popup"
+                            Background="{DynamicResource AuraSurfaceBrush}"
+                            CornerRadius="{DynamicResource AuraRadiusLg}"
+                            BoxShadow="{DynamicResource AuraShadowLg}"
+                            Padding="16"
+                            MinWidth="200" MaxWidth="400"
+                            IsVisible="False">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|HoverCard.open /template/ Border#PART_Popup">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+</Styles>

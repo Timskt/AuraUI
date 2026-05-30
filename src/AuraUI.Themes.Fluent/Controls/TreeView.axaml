@@ -128,7 +128,7 @@
     </Style>
 
     <!-- TreeViewItem :focus -->
-    <Style Selector="display|AuraTreeViewItem:focus /template/ Border#PART_Border">
+    <Style Selector="display|AuraTreeViewItem:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

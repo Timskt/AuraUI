@@ -1,0 +1,32 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — ButtonGroup -->
+    <Style Selector="layout|ButtonGroup">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        BorderBrush="{DynamicResource AuraOutlineBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource AuraRadiusFull}"
+                        ClipToBounds="True">
+                    <ItemsPresenter Name="PART_ItemsPresenter">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="layout|ButtonGroupText">
+        <Setter Property="Padding" Value="16,10"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+</Styles>

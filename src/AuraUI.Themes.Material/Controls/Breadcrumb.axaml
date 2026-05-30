@@ -46,8 +46,10 @@
         </Setter>
     </Style>
 
-    <!-- Hover -->
-
+    <!-- Hover — text color change only -->
+    <Style Selector="navigation|BreadcrumbItem:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
 
     <!-- Active (current page) -->
     <Style Selector="navigation|BreadcrumbItem:selected">

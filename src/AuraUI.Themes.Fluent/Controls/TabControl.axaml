@@ -84,6 +84,7 @@
             <Transitions>
                 <BrushTransition Duration="00:00:00.150" Property="Foreground"/>
                 <BrushTransition Duration="00:00:00.150" Property="Background"/>
+                <DoubleTransition Duration="00:00:00.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
         <Setter Property="Template">
@@ -147,7 +148,9 @@
 
 
     <Style Selector="Button.tab-scroll-button:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
     <!-- ============================================================
@@ -172,7 +175,9 @@
     </Style>
 
     <Style Selector="Button.add-tab-button:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
     <!-- ============================================================

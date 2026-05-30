@@ -63,7 +63,9 @@
 
     <!-- ColumnHeader :pressed -->
     <Style Selector="DataGridColumnHeader:pressed">
-        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
     <!-- ColumnHeader :sorted -->
@@ -81,7 +83,7 @@
 
     <!-- DataGridRow :pointerover -->
     <Style Selector="DataGridRow:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="Opacity" Value="0.92"/>
     </Style>
 
     <!-- DataGridRow :selected -->
@@ -91,7 +93,7 @@
 
     <!-- DataGridRow selected + :pointerover -->
     <Style Selector="DataGridRow:selected:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraSelectedHoverBrush}"/>
+        <Setter Property="Opacity" Value="0.92"/>
     </Style>
 
     <!-- ============================================================
@@ -112,7 +114,7 @@
     </Style>
 
     <!-- DataGridCell :focus -->
-    <Style Selector="DataGridCell:focus">
+    <Style Selector="DataGridCell:focus-visible">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

@@ -40,7 +40,7 @@
         </Setter>
     </Style>
 
-    <Style Selector="input|ConfigEditor:focus /template/ Border#PART_Border">
+    <Style Selector="input|ConfigEditor:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

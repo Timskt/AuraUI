@@ -46,6 +46,7 @@
                 <BrushTransition Property="Background" Duration="0:0:0.200"/>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
                 <BrushTransition Property="Foreground" Duration="0:0:0.200"/>
+                <DoubleTransition Duration="0:0:0.200" Property="Opacity" Easing="{DynamicResource AuraEasingStandard}"/>
             </Transitions>
         </Setter>
     </Style>
@@ -54,10 +55,6 @@
 
 
     <!-- Pressed -->
-    <Style Selector="ToggleButton:pressed /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <!-- Checked (selected/on) -->
     <Style Selector="ToggleButton:checked">
@@ -74,7 +71,7 @@
     </Style>
 
     <!-- Focus -->
-    <Style Selector="ToggleButton:focus /template/ Border#RootBorder">
+    <Style Selector="ToggleButton:focus-visible /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
@@ -83,6 +80,16 @@
     <Style Selector="ToggleButton:disabled">
         <Setter Property="Opacity" Value="0.38"/>
         <Setter Property="Cursor" Value="Arrow"/>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!-- CodexSwitchUI: Opacity-based interaction states              -->
+    <!-- ============================================================ -->
+    <Style Selector="ToggleButton:pressed">
+        <Setter Property="Opacity" Value="0.86"/>
+        <Setter Property="ScaleTransform.ScaleX" Value="0.98"/>
+        <Setter Property="ScaleTransform.ScaleY" Value="0.98"/>
     </Style>
 
 </Styles>

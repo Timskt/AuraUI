@@ -95,7 +95,7 @@
         </Setter>
     </Style>
 
-    <Style Selector="selection|TimePicker:focus /template/ Border#PART_TextBoxBorder">
+    <Style Selector="selection|TimePicker:focus-visible /template/ Border#PART_TextBoxBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>

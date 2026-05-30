@@ -51,7 +51,7 @@
     </Style>
 
     <!-- Focus -->
-    <Style Selector="navigation|FileExplorer:focus /template/ Border#PART_Border">
+    <Style Selector="navigation|FileExplorer:focus-visible /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
     </Style>
 

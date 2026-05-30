@@ -1,0 +1,55 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:AuraUI.Controls.Display;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — AuraLabel -->
+    <Style Selector="display|AuraLabel">
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Padding" Value="0,0,0,4"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="2">
+                    <DockPanel>
+                        <TextBlock Name="PART_RequiredIndicator"
+                                   Text=" *"
+                                   Foreground="{DynamicResource AuraErrorBrush}"
+                                   FontWeight="Bold"
+                                   DockPanel.Dock="Right"
+                                   IsVisible="False"/>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    </DockPanel>
+                    <TextBlock Name="PART_Description"
+                               Text="{TemplateBinding Description}"
+                               FontSize="12"
+                               Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="display|AuraLabel.required /template/ TextBlock#PART_RequiredIndicator">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="display|AuraLabel:not(.has-description) /template/ TextBlock#PART_Description">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <Style Selector="display|AuraLabel.small">
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    <Style Selector="display|AuraLabel.large">
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style Selector="display|AuraLabel.target-disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

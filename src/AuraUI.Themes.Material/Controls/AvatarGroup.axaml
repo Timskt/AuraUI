@@ -1,0 +1,21 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:layout="clr-namespace:AuraUI.Controls.Layout;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — AvatarGroup -->
+    <Style Selector="layout|AvatarGroup">
+        <Setter Property="ClipToBounds" Value="False"/>
+    </Style>
+
+    <Style Selector="layout|AvatarGroup Border.avatar-group-item">
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="layout|AvatarGroup Border.avatar-group-item:pointerover">
+        <Setter Property="ZIndex" Value="999"/>
+    </Style>
+
+</Styles>
