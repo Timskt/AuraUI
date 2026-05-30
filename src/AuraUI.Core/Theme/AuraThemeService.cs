@@ -28,7 +28,7 @@ public class AuraThemeService : IThemeService
     public void SetTheme(ThemeMode mode)
     {
         _currentMode = mode;
-        var app = Application.Current;
+        var app = Avalonia.Application.Current;
         if (app == null) return;
 
         var variant = mode switch
@@ -74,7 +74,7 @@ public class AuraThemeService : IThemeService
 
     private void ApplyColorMap(Avalonia.Styling.ThemeVariant variant)
     {
-        var app = Application.Current;
+        var app = Avalonia.Application.Current;
         if (app == null) return;
 
         foreach (var (key, colors) in _colorMap)
@@ -89,7 +89,7 @@ public class AuraThemeService : IThemeService
 
     private void ApplyCustomTheme(ThemeDefinition definition)
     {
-        var app = Application.Current;
+        var app = Avalonia.Application.Current;
         if (app == null) return;
 
         foreach (var (key, value) in definition.Resources)

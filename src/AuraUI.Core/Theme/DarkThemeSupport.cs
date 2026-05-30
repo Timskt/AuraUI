@@ -41,7 +41,7 @@ public static class DarkThemeSupport
     /// </remarks>
     public static void EnableAutoThemeSwitching()
     {
-        var app = Application.Current;
+        var app = Avalonia.Application.Current;
         if (app == null) return;
 
         // Setting RequestedThemeVariant to Default tells Avalonia to follow the
@@ -62,7 +62,7 @@ public static class DarkThemeSupport
     /// </remarks>
     public static void SetThemeVariant(ThemeVariant variant)
     {
-        var app = Application.Current;
+        var app = Avalonia.Application.Current;
         if (app == null) return;
 
         app.RequestedThemeVariant = variant;
