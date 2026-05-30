@@ -196,7 +196,6 @@
 
     <!-- Checked + hover -->
     <Style Selector="ToggleSwitch:checked:pointerover /template/ Border#PART_SwitchTrack">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="CornerRadius" Value="16"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>

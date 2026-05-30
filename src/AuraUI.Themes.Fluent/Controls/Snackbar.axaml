@@ -150,9 +150,6 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
-    <Style Selector="Border.snackbar Button.snackbar-close:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
     <!-- Snackbar divider between message and action -->
     <Style Selector="Border.snackbar-divider">

@@ -64,9 +64,12 @@
     </Style>
 
     <!-- Hover state layer -->
-    <Style Selector="input|MaskedTextBox:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
+
+
+    <!-- Focused -->
+    <!-- Hover -->
+    <Style Selector="input|MaskedTextBox:pointerover /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Focused -->

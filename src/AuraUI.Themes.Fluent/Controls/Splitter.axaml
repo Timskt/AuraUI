@@ -54,9 +54,7 @@
     </Style>
 
     <!-- Grip hover -->
-    <Style Selector="layout|Splitter /template/ Border#PART_SplitterGrip:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
-    </Style>
+
 
     <!-- Dragging state -->
     <Style Selector="layout|Splitter:dragging /template/ Border#PART_SplitterGrip">

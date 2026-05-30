@@ -34,7 +34,6 @@
 
     <!-- Hover state -->
     <Style Selector="layout|BackTop /template/ Border:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
     <Style Selector="layout|BackTop /template/ Border:pointerover TextBlock">

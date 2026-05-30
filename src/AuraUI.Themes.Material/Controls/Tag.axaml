@@ -72,10 +72,7 @@
     </Style>
 
     <!-- Hover state layer -->
-    <Style Selector="layout|Tag:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Pressed -->
     <Style Selector="layout|Tag:pressed /template/ Border#StateLayer">

@@ -102,17 +102,8 @@
     </Style>
 
     <!-- Window control button hover states -->
-    <Style Selector="Window.window-x /template/ Button#PART_MinimizeButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
-    <Style Selector="Window.window-x /template/ Button#PART_MaximizeButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
-    <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
-    </Style>
     <Style Selector="Window.window-x /template/ Button#PART_CloseButton:pointerover Path">
         <Setter Property="Stroke" Value="{DynamicResource AuraForegroundOnAccentBrush}"/>
     </Style>

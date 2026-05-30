@@ -86,9 +86,8 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="input|AuraNumericUpDown:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
+    <Style Selector="input|AuraNumericUpDown:pointerover /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Focused -->
@@ -109,9 +108,6 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
-    <Style Selector="input|AuraNumericUpDown /template/ Button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
     <Style Selector="input|AuraNumericUpDown /template/ Button:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>

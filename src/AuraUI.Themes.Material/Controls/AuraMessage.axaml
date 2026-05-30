@@ -111,7 +111,6 @@
     </Style>
     <Style Selector="Button.message-close:pointerover">
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <Style Selector="Border.message-icon">

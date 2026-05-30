@@ -56,9 +56,6 @@
         <Setter Property="MinHeight" Value="28"/>
     </Style>
 
-    <Style Selector="Button.tool-bar-overflow:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
     <Style Selector="Button.tool-bar-overflow:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>

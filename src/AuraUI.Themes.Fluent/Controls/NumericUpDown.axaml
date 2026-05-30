@@ -77,7 +77,6 @@
 
     <!-- NumericUpDown :pointerover -->
     <Style Selector="NumericUpDown:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
@@ -93,9 +92,7 @@
     </Style>
 
     <!-- Spin button styles -->
-    <Style Selector="NumericUpDown /template/ Button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
     <Style Selector="NumericUpDown /template/ Button:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>

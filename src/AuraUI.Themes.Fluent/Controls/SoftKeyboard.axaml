@@ -24,10 +24,7 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="input|SoftKeyboard:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraSurfaceHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Disabled -->
     <Style Selector="input|SoftKeyboard:disabled">

@@ -62,7 +62,6 @@
 
     <!-- Hover -->
     <Style Selector="RadioButton:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Opacity" Value="0.08"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>

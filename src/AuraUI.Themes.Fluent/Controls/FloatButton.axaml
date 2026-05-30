@@ -44,7 +44,6 @@
 
     <!-- FloatButton :pointerover -->
     <Style Selector="layout|FloatButton:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraOverlayBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowLg}"/>
     </Style>

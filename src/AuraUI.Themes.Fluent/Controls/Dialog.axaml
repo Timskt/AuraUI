@@ -130,9 +130,7 @@
     </Style>
 
     <!-- Dialog close button hover -->
-    <Style Selector="feedback|AuraDialog /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- ============================================================
          AuraMessageBox — Window.dialog style (for standalone windows)
@@ -215,9 +213,7 @@
     </Style>
 
     <!-- Dialog close button states -->
-    <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <Style Selector="Window.dialog /template/ Button#PART_CloseButton:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>

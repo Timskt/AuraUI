@@ -71,10 +71,7 @@
     </Style>
 
     <!-- Item hover -->
-    <Style Selector="navigation|BottomNavBarItem:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Item pressed -->
     <Style Selector="navigation|BottomNavBarItem:pressed /template/ Border#PART_Border">

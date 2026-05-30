@@ -59,8 +59,6 @@
     </Style>
 
     <!-- Hover on unchecked -->
-    <Style Selector="selection|ToggleButtonGroup /template/ ItemsPresenter ToggleButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
 </Styles>

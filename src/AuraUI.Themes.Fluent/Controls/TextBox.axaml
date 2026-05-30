@@ -100,7 +100,6 @@
 
     <!-- TextBox :pointerover -->
     <Style Selector="TextBox:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 

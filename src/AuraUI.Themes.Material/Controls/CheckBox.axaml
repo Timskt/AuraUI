@@ -66,7 +66,6 @@
 
     <!-- Hover state layer -->
     <Style Selector="CheckBox:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="Opacity" Value="0.08"/>
         <Setter Property="CornerRadius" Value="2"/>
     </Style>

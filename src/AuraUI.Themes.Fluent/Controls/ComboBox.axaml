@@ -96,7 +96,6 @@
 
     <!-- ComboBox :pointerover -->
     <Style Selector="ComboBox:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
@@ -117,9 +116,7 @@
     </Style>
 
     <!-- ComboBox dropdown toggle hover -->
-    <Style Selector="ComboBox /template/ Border#PART_DropdownGlyph:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- ============================================================
          ComboBoxItem — Fluent Style

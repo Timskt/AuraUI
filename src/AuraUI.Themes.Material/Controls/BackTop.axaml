@@ -27,9 +27,6 @@
         </Setter>
     </Style>
 
-    <Style Selector="layout|BackTop /template/ Border:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
-    </Style>
 
     <Style Selector="layout|BackTop:visible">
         <Style.Animations>

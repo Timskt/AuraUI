@@ -79,15 +79,10 @@
     </Style>
 
     <!-- Hover header -->
-    <Style Selector="layout|Expander:pointerover /template/ ContentControl#PART_HeaderSite">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Chevron hover state layer -->
-    <Style Selector="layout|Expander:pointerover /template/ Border#PART_ChevronContainer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="12"/>
-    </Style>
+
 
     <!-- Expanded state — rotate chevron 180 degrees -->
     <Style Selector="layout|Expander:expanded /template/ Path#PART_Chevron">

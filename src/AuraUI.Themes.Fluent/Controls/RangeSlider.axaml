@@ -71,7 +71,6 @@
 
     <!-- Thumb hover -->
     <Style Selector="selection|RangeSlider /template/ Thumb:pointerover /template/ Border#ThumbBorder">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BoxShadow" Value="0 0 0 4 #20005FB8"/>
     </Style>

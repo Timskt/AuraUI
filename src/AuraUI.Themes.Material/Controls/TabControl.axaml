@@ -119,10 +119,7 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="TabItem:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Selected -->
     <Style Selector="TabItem:selected">
@@ -152,9 +149,6 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
-    <Style Selector="Button.tab-scroll-button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
     <Style Selector="Button.tab-scroll-button:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
@@ -178,7 +172,6 @@
     </Style>
 
     <Style Selector="Button.add-tab-button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 
