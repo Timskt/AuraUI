@@ -24,6 +24,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyLargeFamily}"/>
         <Setter Property="Template">
@@ -33,11 +34,13 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             ClipToBounds="True">
                         <StackPanel>
                             <!-- Header area -->
                             <ContentControl Name="PART_HeaderSite"
-                                            Cursor="Hand">
+                                            Cursor="Hand"
+                                            MinHeight="48">
                                 <Grid ColumnDefinitions="Auto,*,Auto">
                                     <ContentPresenter Name="PART_IconPresenter"
                                                       Grid.Column="0"
@@ -99,6 +102,11 @@
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
+    <!-- Pressed header -->
+    <Style Selector="layout|AccordionItem:pressed /template/ ContentControl#PART_HeaderSite">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+    </Style>
+
     <!-- Chevron hover -->
     <Style Selector="layout|AccordionItem:pointerover /template/ Border#PART_ChevronContainer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
@@ -109,6 +117,18 @@
         <Setter Property="RenderTransform">
             <RotateTransform Angle="180"/>
         </Setter>
+    </Style>
+
+    <!-- First item: top border and corner radius -->
+    <Style Selector="layout|AccordionItem:first-child">
+        <Setter Property="BorderThickness" Value="1,1,1,1"/>
+        <Setter Property="CornerRadius" Value="12,12,0,0"/>
+    </Style>
+
+    <!-- Last item: bottom border and corner radius -->
+    <Style Selector="layout|AccordionItem:last-child">
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="CornerRadius" Value="0,0,12,12"/>
     </Style>
 
 </Styles>

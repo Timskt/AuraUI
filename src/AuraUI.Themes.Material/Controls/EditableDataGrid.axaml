@@ -9,7 +9,9 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="display:EditableDataGrid">
@@ -18,7 +20,8 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            ClipToBounds="True">
+                            ClipToBounds="True"
+                            BoxShadow="{DynamicResource AuraShadowLevel1}">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <StackPanel Name="PART_RowsPanel"/>
@@ -27,13 +30,31 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
+            </Transitions>
+        </Setter>
     </Style>
 
-    <Style Selector="display|EditableDataGrid:focus /template/ Border#PART_Border">
+    <!-- Hover -->
+    <Style Selector="display|EditableDataGrid:pointerover /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Focus -->
+    <Style Selector="display|EditableDataGrid:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
+    <!-- Read-only -->
+    <Style Selector="display|EditableDataGrid:readonly">
+        <Setter Property="Opacity" Value="0.85"/>
+    </Style>
+
+    <!-- Disabled -->
     <Style Selector="display|EditableDataGrid:disabled">
         <Setter Property="Opacity" Value="0.38"/>
     </Style>

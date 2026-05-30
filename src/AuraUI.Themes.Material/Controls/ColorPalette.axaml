@@ -8,7 +8,7 @@
         <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineVariantBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="CornerRadius" Value="12"/>
         <Setter Property="Padding" Value="12"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -18,20 +18,58 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            Padding="{TemplateBinding Padding}">
+                            Padding="{TemplateBinding Padding}"
+                            BoxShadow="{DynamicResource AuraShadowLevel1}">
                         <StackPanel Spacing="8">
+                            <!-- Swatch grid -->
                             <ItemsControl Name="PART_SwatchesGrid">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="32"
+                                                Height="32"
+                                                CornerRadius="16"
+                                                Cursor="Hand"
+                                                Margin="4"
+                                                BorderBrush="{DynamicResource AuraOutlineBrush}"
+                                                BorderThickness="1"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
                             </ItemsControl>
+
+                            <!-- Clear button -->
+                            <Button Name="PART_ClearButton"
+                                    Content="Clear"
+                                    HorizontalAlignment="Right"
+                                    Classes="text"
+                                    FontSize="12"
+                                    FontFamily="{DynamicResource AuraFontLabelMediumFamily}"
+                                    IsVisible="False"/>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Compact variant — smaller swatches and tighter padding -->
+    <Style Selector="selection|ColorPalette:compact">
+        <Setter Property="Padding" Value="8"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|ColorPalette:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
     </Style>
 
 </Styles>
