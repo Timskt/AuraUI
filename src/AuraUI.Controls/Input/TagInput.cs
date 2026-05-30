@@ -396,7 +396,7 @@ public class TagInput : TemplatedControl
         UpdatePseudoClasses();
     }
 
-    private void OnTextBoxGotFocus(object? sender, GotFocusEventArgs e)
+    private void OnTextBoxGotFocus(object? sender, FocusChangedEventArgs e)
     {
         PseudoClasses.Set(":focused", true);
     }
