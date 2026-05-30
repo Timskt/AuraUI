@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
+using Avalonia.Media.TextFormatting;
 
 namespace AuraUI.Controls.Display;
 
@@ -285,5 +286,75 @@ public class ConsoleOutput : Control
 
         // Strip ANSI escape sequences
         return System.Text.RegularExpressions.Regex.Replace(input, @"\x1B\[[0-9;]*[a-zA-Z]", string.Empty);
+    }
+
+    static ConsoleOutput()
+    {
+        AffectsRender<ConsoleOutput>(
+            LinesProperty, FilterLevelProperty, ShowTimestampProperty,
+            ShowSourceProperty, ShowLevelProperty, LineHeightProperty,
+            BackgroundProperty, ForegroundProperty, FontFamilyProperty,
+            FontSizeProperty, SearchTextProperty);
+        AffectsMeasure<ConsoleOutput>(
+            LinesProperty, LineHeightProperty, FontSizeProperty, MaxLinesProperty);
+    }
+
+    protected override Size MeasureOverride(Size availableSize)
+    {
+        var lines = Lines;
+        var lineCount = lines?.Count ?? 0;
+        var lineHeight = LineHeight;
+        var totalHeight = lineCount * lineHeight;
+        return new Size(
+            double.IsInfinity(availableSize.Width) ? 600 : availableSize.Width,
+            double.IsInfinity(availableSize.Height) ? Math.Max(totalHeight, 100) : Math.Max(totalHeight, availableSize.Height));
+    }
+
+    public override void Render(DrawingContext context)
+    {
+        var bounds = Bounds;
+        if (bounds.Width <= 0 || bounds.Height <= 0) return;
+
+        var bg = Background;
+        if (bg != null) context.DrawRectangle(bg, null, bounds);
+
+        var lines = Lines;
+        if (lines == null || lines.Count == 0) return;
+
+        var lineHeight = LineHeight;
+        var fontSize = FontSize;
+        var foreground = Foreground ?? Brushes.White;
+        var filterLevel = FilterLevel;
+        var showTimestamp = ShowTimestamp;
+        var showSource = ShowSource;
+        var showLevel = ShowLevel;
+        var typeface = new Typeface(FontFamily);
+        var searchText = SearchText;
+
+        int lineIndex = 0;
+        foreach (var line in lines)
+        {
+            if (filterLevel.HasValue && line.Level < filterLevel.Value) continue;
+
+            var y = lineIndex * lineHeight;
+            if (y > bounds.Height) break;
+
+            var parts = new System.Text.StringBuilder();
+            if (showTimestamp) parts.Append($"[{line.FormattedTimestamp}] ");
+            if (showLevel) parts.Append($"[{GetLevelLabel(line.Level)}] ");
+            if (showSource && !string.IsNullOrEmpty(line.Source)) parts.Append($"{line.Source}: ");
+            parts.Append(StripAnsiCodes(line.Message));
+
+            var text = parts.ToString();
+            var color = foreground;
+            if (!string.IsNullOrEmpty(searchText) && text.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                color = Brushes.Yellow;
+
+            var ft = new FormattedText(text,
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, typeface, fontSize, color);
+            context.DrawText(ft, new Point(4, y));
+            lineIndex++;
+        }
     }
 }

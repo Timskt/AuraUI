@@ -18,10 +18,12 @@ public enum GridLinesVisibility
 
 /// <summary>
 /// An extended <see cref="Grid"/> that renders visible grid lines.
-/// Useful for debugging layouts and form-based layouts.
+/// Uses a child overlay canvas since <see cref="Panel.Render"/> is sealed.
 /// </summary>
 public class GridX : Grid
 {
+    private readonly GridLineOverlay _overlay;
+
     /// <summary>
     /// Defines the <see cref="HorizontalGridLinesBrush"/> styled property.
     /// </summary>
@@ -55,6 +57,14 @@ public class GridX : Grid
     /// </summary>
     public static readonly StyledProperty<double[]?> GridLineDashArrayProperty =
         AvaloniaProperty.Register<GridX, double[]?>(nameof(GridLineDashArray));
+
+    public GridX()
+    {
+        _overlay = new GridLineOverlay(this);
+        SetRowSpan(_overlay, 999);
+        SetColumnSpan(_overlay, 999);
+        Children.Add(_overlay);
+    }
 
     static GridX()
     {
@@ -111,47 +121,60 @@ public class GridX : Grid
         set => SetValue(GridLineDashArrayProperty, value);
     }
 
-    public new void Render(DrawingContext context)
+    /// <summary>
+    /// Internal overlay that draws grid lines on top of grid content.
+    /// </summary>
+    private sealed class GridLineOverlay : Control
     {
-        base.Render(context);
+        private readonly GridX _owner;
 
-        var visibility = GridLinesVisibility;
-        if (visibility == GridLinesVisibility.None) return;
-
-        var bounds = new Rect(Bounds.Size);
-        if (bounds.Width <= 0 || bounds.Height <= 0) return;
-
-        var thickness = GridLineThickness;
-        var halfThickness = thickness / 2.0;
-
-        // Draw horizontal lines at row boundaries
-        if ((visibility & GridLinesVisibility.Horizontal) != 0 && RowDefinitions.Count > 0)
+        public GridLineOverlay(GridX owner)
         {
-            var brush = HorizontalGridLinesBrush ?? Brushes.LightGray;
-            var pen = new Pen(brush, thickness, new DashStyle(GridLineDashArray ?? Array.Empty<double>(), 0));
-            var y = 0.0;
+            _owner = owner;
+            IsHitTestVisible = false;
+        }
 
-            foreach (var row in RowDefinitions)
+        public override void Render(DrawingContext context)
+        {
+            var visibility = _owner.GridLinesVisibility;
+            if (visibility == GridLinesVisibility.None) return;
+
+            var bounds = new Rect(_owner.Bounds.Size);
+            if (bounds.Width <= 0 || bounds.Height <= 0) return;
+
+            var thickness = _owner.GridLineThickness;
+            var halfThickness = thickness / 2.0;
+
+            if ((visibility & GridLinesVisibility.Horizontal) != 0 && _owner.RowDefinitions.Count > 0)
             {
-                y += row.ActualHeight;
-                if (y > bounds.Height) break;
-                context.DrawLine(pen, new Point(0, y - halfThickness), new Point(bounds.Width, y - halfThickness));
+                var brush = _owner.HorizontalGridLinesBrush ?? Brushes.LightGray;
+                var pen = new Pen(brush, thickness, new DashStyle(_owner.GridLineDashArray ?? Array.Empty<double>(), 0));
+                var y = 0.0;
+                foreach (var row in _owner.RowDefinitions)
+                {
+                    y += row.ActualHeight;
+                    if (y > bounds.Height) break;
+                    context.DrawLine(pen, new Point(0, y - halfThickness), new Point(bounds.Width, y - halfThickness));
+                }
+            }
+
+            if ((visibility & GridLinesVisibility.Vertical) != 0 && _owner.ColumnDefinitions.Count > 0)
+            {
+                var brush = _owner.VerticalGridLinesBrush ?? Brushes.LightGray;
+                var pen = new Pen(brush, thickness, new DashStyle(_owner.GridLineDashArray ?? Array.Empty<double>(), 0));
+                var x = 0.0;
+                foreach (var col in _owner.ColumnDefinitions)
+                {
+                    x += col.ActualWidth;
+                    if (x > bounds.Width) break;
+                    context.DrawLine(pen, new Point(x - halfThickness, 0), new Point(x - halfThickness, bounds.Height));
+                }
             }
         }
 
-        // Draw vertical lines at column boundaries
-        if ((visibility & GridLinesVisibility.Vertical) != 0 && ColumnDefinitions.Count > 0)
+        protected override Size MeasureOverride(Size availableSize)
         {
-            var brush = VerticalGridLinesBrush ?? Brushes.LightGray;
-            var pen = new Pen(brush, thickness, new DashStyle(GridLineDashArray ?? Array.Empty<double>(), 0));
-            var x = 0.0;
-
-            foreach (var col in ColumnDefinitions)
-            {
-                x += col.ActualWidth;
-                if (x > bounds.Width) break;
-                context.DrawLine(pen, new Point(x - halfThickness, 0), new Point(x - halfThickness, bounds.Height));
-            }
+            return new Size(0, 0);
         }
     }
 }

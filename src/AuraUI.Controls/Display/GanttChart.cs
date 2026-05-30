@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.TextFormatting;
 
 namespace AuraUI.Controls.Display;
 
@@ -130,11 +131,23 @@ public class GanttChart : Control
     public static readonly StyledProperty<IBrush?> DependencyArrowBrushProperty =
         AvaloniaProperty.Register<GanttChart, IBrush?>(nameof(DependencyArrowBrush));
 
+    /// <summary>
+    /// Defines the <see cref="Foreground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ForegroundProperty =
+        AvaloniaProperty.Register<GanttChart, IBrush?>(nameof(Foreground));
+
     static GanttChart()
     {
-        TasksProperty.Changed.AddClassHandler<GanttChart>((x, _) => x.InvalidateVisual());
-        ZoomLevelProperty.Changed.AddClassHandler<GanttChart>((x, _) => x.InvalidateVisual());
-        ShowDependenciesProperty.Changed.AddClassHandler<GanttChart>((x, _) => x.InvalidateVisual());
+        AffectsRender<GanttChart>(
+            TasksProperty, ZoomLevelProperty, ShowDependenciesProperty,
+            StartDateProperty, EndDateProperty, RowHeightProperty,
+            HeaderHeightProperty, TaskNameWidthProperty,
+            GridLineBrushProperty, ProgressBrushProperty, DefaultBarBrushProperty,
+            DependencyArrowBrushProperty, ForegroundProperty);
+        AffectsMeasure<GanttChart>(
+            TasksProperty, RowHeightProperty, HeaderHeightProperty,
+            TaskNameWidthProperty, ZoomLevelProperty);
     }
 
     /// <summary>
@@ -243,5 +256,88 @@ public class GanttChart : Control
     {
         get => GetValue(DependencyArrowBrushProperty);
         set => SetValue(DependencyArrowBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for text.
+    /// </summary>
+    public IBrush? Foreground
+    {
+        get => GetValue(ForegroundProperty);
+        set => SetValue(ForegroundProperty, value);
+    }
+
+    protected override Size MeasureOverride(Size availableSize)
+    {
+        var tasks = Tasks;
+        var rowCount = tasks?.Count ?? 0;
+        var rowHeight = RowHeight;
+        var headerHeight = HeaderHeight;
+        var taskNameWidth = TaskNameWidth;
+        var totalHeight = headerHeight + rowCount * rowHeight;
+        var totalWidth = taskNameWidth + 400;
+        return new Size(
+            double.IsInfinity(availableSize.Width) ? totalWidth : availableSize.Width,
+            double.IsInfinity(availableSize.Height) ? totalHeight : Math.Max(totalHeight, availableSize.Height));
+    }
+
+    public override void Render(DrawingContext context)
+    {
+        var tasks = Tasks;
+        if (tasks == null || tasks.Count == 0) return;
+
+        var bounds = Bounds;
+        var rowHeight = RowHeight;
+        var headerHeight = HeaderHeight;
+        var taskNameWidth = TaskNameWidth;
+        var startDate = StartDate;
+        var endDate = EndDate;
+        var defaultBarBrush = DefaultBarBrush ?? new SolidColorBrush(Color.Parse("#2196F3"));
+        var progressBrush = ProgressBrush ?? new SolidColorBrush(Color.Parse("#4CAF50"));
+        var gridBrush = GridLineBrush ?? new SolidColorBrush(Color.Parse("#E0E0E0"));
+        var headerBrush = new SolidColorBrush(Color.Parse("#F5F5F5"));
+        var fgBrush = Foreground ?? Brushes.Black;
+
+        context.DrawRectangle(headerBrush, null, new Rect(0, 0, bounds.Width, headerHeight));
+
+        var gridPen = new Pen(gridBrush, 0.5);
+        for (int i = 0; i <= tasks.Count; i++)
+        {
+            var y = headerHeight + i * rowHeight;
+            context.DrawLine(gridPen, new Point(0, y), new Point(bounds.Width, y));
+        }
+
+        context.DrawLine(new Pen(gridBrush, 1), new Point(taskNameWidth, 0), new Point(taskNameWidth, bounds.Height));
+
+        var typeface = new Typeface(FontFamily.Default);
+        var totalDays = Math.Max(1, (endDate - startDate).TotalDays);
+        var timelineWidth = bounds.Width - taskNameWidth;
+
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            var task = tasks[i];
+            var y = headerHeight + i * rowHeight;
+
+            var nameText = new FormattedText(task.Name,
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, typeface, 12, fgBrush);
+            context.DrawText(nameText, new Point(8, y + (rowHeight - nameText.Height) / 2));
+
+            var taskStart = (task.Start - startDate).TotalDays / totalDays;
+            var taskEnd = (task.End - startDate).TotalDays / totalDays;
+            var barX = taskNameWidth + taskStart * timelineWidth;
+            var barWidth = (taskEnd - taskStart) * timelineWidth;
+            if (barWidth < 2) barWidth = 2;
+
+            var barBrush = task.Color ?? defaultBarBrush;
+            var barRect = new Rect(barX, y + 4, barWidth, rowHeight - 8);
+            context.DrawRectangle(barBrush, null, barRect, 3, 3);
+
+            if (task.Progress > 0)
+            {
+                var progressRect = new Rect(barX, y + 4, barWidth * task.Progress, rowHeight - 8);
+                context.DrawRectangle(progressBrush, null, progressRect, 3, 3);
+            }
+        }
     }
 }
