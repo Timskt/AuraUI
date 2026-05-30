@@ -18,10 +18,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <!-- Header -->
                         <TextBlock DockPanel.Dock="Top"

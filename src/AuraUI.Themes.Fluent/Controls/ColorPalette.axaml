@@ -1,0 +1,60 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ============================================================
+         ColorPalette — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|ColorPalette">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <StackPanel Spacing="8">
+                        <!-- Swatch grid -->
+                        <ItemsControl Name="PART_SwatchesGrid">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="28"
+                                            Height="28"
+                                            CornerRadius="4"
+                                            Cursor="Hand"
+                                            Margin="2">
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- Clear button -->
+                        <Button Name="PART_ClearButton"
+                                Content="Clear"
+                                HorizontalAlignment="Right"
+                                Classes="text"
+                                FontSize="12"
+                                IsVisible="False"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Compact variant -->
+    <Style Selector="selection|ColorPalette:compact">
+        <Setter Property="Padding" Value="8"/>
+    </Style>
+
+</Styles>

@@ -17,10 +17,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         ClipToBounds="True">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                   VerticalScrollBarVisibility="Disabled">
                         <ItemsPresenter Name="PART_ItemsPresenter"
@@ -46,10 +42,6 @@
                 <Border Name="PART_Border"
                         Padding="8,4"
                         Background="Transparent">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <StackPanel HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Spacing="2">

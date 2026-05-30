@@ -1,0 +1,101 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ============================================================
+         DateRangePicker — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|DateRangePicker">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinWidth" Value="260"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel>
+                    <!-- Text input area -->
+                    <Border Name="PART_TextBoxBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="0">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Name="PART_TextBox"
+                                     Grid.Column="0"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="12,8"
+                                     Watermark="{TemplateBinding PlaceholderText}"
+                                     IsReadOnly="True"/>
+                            <Button Name="PART_DropdownButton"
+                                    Grid.Column="1"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Padding="8"
+                                    Cursor="Hand">
+                                <Path Width="16" Height="16"
+                                      Data="M 3,6 L 8,11 L 13,6"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"
+                                      Stretch="Uniform"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Dropdown popup -->
+                    <Popup Name="PART_Popup"
+                           IsLightDismissEnabled="True"
+                           Placement="BottomEdgeAlignedLeft"
+                           IsOpen="False">
+                        <Border Background="{DynamicResource AuraCardBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="16"
+                                BoxShadow="{DynamicResource AuraShadowMd}">
+                            <StackPanel Spacing="12">
+                                <!-- Presets panel -->
+                                <ItemsControl Name="PART_PresetPanel">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="4"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+
+                                <!-- Calendar -->
+                                <Calendar Name="PART_Calendar"/>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Border hover -->
+    <Style Selector="selection|DateRangePicker /template/ Border#PART_TextBoxBorder:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="selection|DateRangePicker:open /template/ Border#PART_TextBoxBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Selecting end state -->
+    <Style Selector="selection|DateRangePicker:selecting-end /template/ Border#PART_TextBoxBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraSuccessBrush}"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|DateRangePicker:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

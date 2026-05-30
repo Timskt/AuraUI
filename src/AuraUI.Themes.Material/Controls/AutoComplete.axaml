@@ -21,10 +21,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         ClipToBounds="True">
-                    <Border.Transitions>
-                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <Panel>
                         <TextBox Name="PART_TextBox"
                                  Background="Transparent"

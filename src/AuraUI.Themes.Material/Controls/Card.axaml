@@ -25,11 +25,6 @@
                             BoxShadow="{TemplateBinding BoxShadow}"
                             Padding="{TemplateBinding Padding}"
                             ClipToBounds="True">
-                        <Border.Transitions>
-                            <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                            <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
-                            <BoxShadowsTransition Duration="0:0:0.200" Property="BoxShadow"/>
-                        </Border.Transitions>
                         <Panel>
                             <Border Name="StateLayer"
                                     Background="Transparent"

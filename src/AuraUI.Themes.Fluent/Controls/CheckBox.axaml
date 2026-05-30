@@ -21,10 +21,6 @@
                             BorderBrush="{DynamicResource AuraInputBorderBrush}"
                             BorderThickness="1.5"
                             VerticalAlignment="Center">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                            <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                        </Border.Transitions>
                         <!-- Checkmark -->
                         <Path Name="PART_CheckMark"
                               Width="12" Height="12"
@@ -125,10 +121,6 @@
                         BorderThickness="1"
                         CornerRadius="{DynamicResource AuraRadiusMd}"
                         Padding="12">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <StackPanel Orientation="Horizontal" Spacing="12">
                         <Border Name="PART_CheckBoxBorder"
                                 Width="20" Height="20"
@@ -174,9 +166,6 @@
                             CornerRadius="10"
                             Background="{DynamicResource AuraBorderBrush}"
                             VerticalAlignment="Center">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        </Border.Transitions>
                         <Border Name="PART_SwitchKnob"
                                 Width="16" Height="16"
                                 CornerRadius="8"
@@ -184,9 +173,6 @@
                                 Margin="2"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
-                            <Border.Transitions>
-                                <DoubleTransition Duration="00:00:00.200" Property="Margin"/>
-                            </Border.Transitions>
                         </Border>
                     </Border>
                     <ContentPresenter Name="PART_ContentPresenter"

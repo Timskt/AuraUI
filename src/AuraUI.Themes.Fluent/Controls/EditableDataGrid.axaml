@@ -1,0 +1,56 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="using:AuraUI.Controls.Display">
+
+    <!-- ============================================================
+         EditableDataGrid — Fluent Style
+         ============================================================ -->
+    <Style Selector="display|EditableDataGrid">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="GridLineBrush" Value="{DynamicResource AuraDividerBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="RowHoverBackground" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="EditCellBackground" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="PART_RowsPanel"/>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Hover -->
+    <Style Selector="display|EditableDataGrid:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Focus -->
+    <Style Selector="display|EditableDataGrid:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Read-only -->
+    <Style Selector="display|EditableDataGrid:readonly">
+        <Setter Property="Opacity" Value="0.85"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="display|EditableDataGrid:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

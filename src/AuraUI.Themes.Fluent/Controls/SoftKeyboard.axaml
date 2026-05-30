@@ -16,9 +16,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                    </Border.Transitions>
                     <StackPanel Name="PART_KeyRows"
                                 Spacing="4"/>
                 </Border>

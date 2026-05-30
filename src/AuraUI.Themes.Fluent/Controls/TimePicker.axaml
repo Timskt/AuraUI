@@ -1,0 +1,121 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
+
+    <!-- ============================================================
+         TimePicker — Fluent Style
+         ============================================================ -->
+    <Style Selector="selection|TimePicker">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinWidth" Value="180"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel>
+                    <!-- Text input area -->
+                    <Border Name="PART_TextBoxBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Name="PART_TextBox"
+                                     Grid.Column="0"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="12,8"
+                                     Watermark="{TemplateBinding PlaceholderText}"
+                                     IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Button Name="PART_DropdownButton"
+                                    Grid.Column="1"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Padding="8"
+                                    Cursor="Hand">
+                                <Path Width="16" Height="16"
+                                      Data="M 2,8 A 6,6 0 1,1 14,8 A 6,6 0 1,1 2,8 M 8,4 L 8,8 L 11,10"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"
+                                      Stretch="Uniform"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Dropdown popup -->
+                    <Popup Name="PART_Popup"
+                           IsLightDismissEnabled="True"
+                           Placement="BottomEdgeAlignedLeft"
+                           IsOpen="False">
+                        <Border Background="{DynamicResource AuraCardBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                Padding="12"
+                                BoxShadow="{DynamicResource AuraShadowMd}">
+                            <StackPanel Spacing="12">
+                                <Grid ColumnDefinitions="*,Auto,*,Auto,*">
+                                    <!-- Hour selector -->
+                                    <ListBox Name="PART_HourSelector"
+                                             Grid.Column="0"
+                                             MaxHeight="160"
+                                             Width="60"/>
+                                    <TextBlock Grid.Column="1"
+                                               Text=":"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="Bold"
+                                               FontSize="20"
+                                               Margin="4,0"/>
+                                    <!-- Minute selector -->
+                                    <ListBox Name="PART_MinuteSelector"
+                                             Grid.Column="2"
+                                             MaxHeight="160"
+                                             Width="60"/>
+                                    <TextBlock Grid.Column="3"
+                                               Text=":"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="Bold"
+                                               FontSize="20"
+                                               Margin="4,0"
+                                               IsVisible="False"/>
+                                    <!-- Second selector -->
+                                    <ListBox Name="PART_SecondSelector"
+                                             Grid.Column="4"
+                                             MaxHeight="160"
+                                             Width="60"
+                                             IsVisible="False"/>
+                                </Grid>
+
+                                <!-- AM/PM selector -->
+                                <ListBox Name="PART_AmPmSelector"
+                                         HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Border hover -->
+    <Style Selector="selection|TimePicker /template/ Border#PART_TextBoxBorder:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="selection|TimePicker:open /template/ Border#PART_TextBoxBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="selection|TimePicker:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

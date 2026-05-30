@@ -17,9 +17,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <!-- Header (clickable area) -->
                         <ContentControl Name="PART_HeaderSite"
@@ -37,9 +34,6 @@
                                             BorderBrush="{TemplateBinding BorderBrush}"
                                             BorderThickness="0,0,0,1"
                                             Padding="{TemplateBinding Padding}">
-                                        <Border.Transitions>
-                                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                                        </Border.Transitions>
                                         <Grid ColumnDefinitions="*,Auto">
                                             <ContentPresenter Name="PART_ContentPresenter"
                                                               Content="{TemplateBinding Content}"

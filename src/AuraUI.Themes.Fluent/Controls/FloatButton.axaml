@@ -26,10 +26,6 @@
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
                         BoxShadow="{DynamicResource AuraShadowMd}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BoxShadowsTransition Duration="00:00:00.200" Property="BoxShadow"/>
-                    </Border.Transitions>
                     <Button Name="PART_Button"
                             Background="Transparent"
                             BorderThickness="0"

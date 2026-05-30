@@ -17,11 +17,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
-                        <DoubleTransition Duration="00:00:00.200" Property="TranslateTransform.Y" Easing="{DynamicResource AuraEasingStandard}"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <!-- Left action -->
                         <ContentPresenter DockPanel.Dock="Left"

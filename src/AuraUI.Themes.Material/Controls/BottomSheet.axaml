@@ -19,10 +19,6 @@
                             BoxShadow="{DynamicResource AuraShadowXl}"
                             VerticalAlignment="Bottom"
                             ClipToBounds="True">
-                        <Border.Transitions>
-                            <DoubleTransition Duration="0:0:0.300" Property="TranslateTransform.Y"
-                                              Easing="{DynamicResource AuraEasingDecelerate}"/>
-                        </Border.Transitions>
                         <DockPanel>
                             <Border Name="PART_Handle"
                                     DockPanel.Dock="Top"

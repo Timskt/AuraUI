@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Media;
 
 namespace AuraUI.Core.Input;
 
@@ -96,6 +97,134 @@ public class GestureManager
 
     #endregion
 
+    #region EnableLongPress attached property
+
+    /// <summary>
+    /// Defines the EnableLongPress attached property.
+    /// When true, enables long press detection on the control using the configured duration.
+    /// </summary>
+    public static readonly AttachedProperty<bool> EnableLongPressProperty =
+        AvaloniaProperty.RegisterAttached<Control, bool>("EnableLongPress", typeof(GestureManager));
+
+    public static bool GetEnableLongPress(Control element) => element.GetValue(EnableLongPressProperty);
+    public static void SetEnableLongPress(Control element, bool value) => element.SetValue(EnableLongPressProperty, value);
+
+    #endregion
+
+    #region LongPressDuration attached property
+
+    /// <summary>
+    /// Defines the LongPressDuration attached property.
+    /// The duration in milliseconds that the pointer must be held for a long press to be recognized.
+    /// Default is 500ms.
+    /// </summary>
+    public static readonly AttachedProperty<int> LongPressDurationProperty =
+        AvaloniaProperty.RegisterAttached<Control, int>("LongPressDuration", typeof(GestureManager), 500);
+
+    public static int GetLongPressDuration(Control element) => element.GetValue(LongPressDurationProperty);
+    public static void SetLongPressDuration(Control element, int value) => element.SetValue(LongPressDurationProperty, value);
+
+    #endregion
+
+    #region EnablePinchZoom attached property
+
+    /// <summary>
+    /// Defines the EnablePinchZoom attached property.
+    /// When true, enables two-finger pinch-to-zoom gestures on the control.
+    /// The control must have a ScaleTransform on its RenderTransform for zoom to take effect.
+    /// </summary>
+    public static readonly AttachedProperty<bool> EnablePinchZoomProperty =
+        AvaloniaProperty.RegisterAttached<Control, bool>("EnablePinchZoom", typeof(GestureManager));
+
+    public static bool GetEnablePinchZoom(Control element) => element.GetValue(EnablePinchZoomProperty);
+    public static void SetEnablePinchZoom(Control element, bool value) => element.SetValue(EnablePinchZoomProperty, value);
+
+    #endregion
+
+    #region EnableSwipe attached property
+
+    /// <summary>
+    /// Defines the EnableSwipe attached property.
+    /// When true, enables swipe gesture detection on the control.
+    /// </summary>
+    public static readonly AttachedProperty<bool> EnableSwipeProperty =
+        AvaloniaProperty.RegisterAttached<Control, bool>("EnableSwipe", typeof(GestureManager));
+
+    public static bool GetEnableSwipe(Control element) => element.GetValue(EnableSwipeProperty);
+    public static void SetEnableSwipe(Control element, bool value) => element.SetValue(EnableSwipeProperty, value);
+
+    #endregion
+
+    #region SwipeLeftCommand attached property
+
+    /// <summary>
+    /// Defines the SwipeLeftCommand attached property.
+    /// A command executed when the user swipes left on the control.
+    /// </summary>
+    public static readonly AttachedProperty<System.Windows.Input.ICommand?> SwipeLeftCommandProperty =
+        AvaloniaProperty.RegisterAttached<Control, System.Windows.Input.ICommand?>("SwipeLeftCommand", typeof(GestureManager));
+
+    public static System.Windows.Input.ICommand? GetSwipeLeftCommand(Control element) => element.GetValue(SwipeLeftCommandProperty);
+    public static void SetSwipeLeftCommand(Control element, System.Windows.Input.ICommand? value) => element.SetValue(SwipeLeftCommandProperty, value);
+
+    #endregion
+
+    #region SwipeRightCommand attached property
+
+    /// <summary>
+    /// Defines the SwipeRightCommand attached property.
+    /// A command executed when the user swipes right on the control.
+    /// </summary>
+    public static readonly AttachedProperty<System.Windows.Input.ICommand?> SwipeRightCommandProperty =
+        AvaloniaProperty.RegisterAttached<Control, System.Windows.Input.ICommand?>("SwipeRightCommand", typeof(GestureManager));
+
+    public static System.Windows.Input.ICommand? GetSwipeRightCommand(Control element) => element.GetValue(SwipeRightCommandProperty);
+    public static void SetSwipeRightCommand(Control element, System.Windows.Input.ICommand? value) => element.SetValue(SwipeRightCommandProperty, value);
+
+    #endregion
+
+    #region SwipeUpCommand attached property
+
+    /// <summary>
+    /// Defines the SwipeUpCommand attached property.
+    /// A command executed when the user swipes up on the control.
+    /// </summary>
+    public static readonly AttachedProperty<System.Windows.Input.ICommand?> SwipeUpCommandProperty =
+        AvaloniaProperty.RegisterAttached<Control, System.Windows.Input.ICommand?>("SwipeUpCommand", typeof(GestureManager));
+
+    public static System.Windows.Input.ICommand? GetSwipeUpCommand(Control element) => element.GetValue(SwipeUpCommandProperty);
+    public static void SetSwipeUpCommand(Control element, System.Windows.Input.ICommand? value) => element.SetValue(SwipeUpCommandProperty, value);
+
+    #endregion
+
+    #region SwipeDownCommand attached property
+
+    /// <summary>
+    /// Defines the SwipeDownCommand attached property.
+    /// A command executed when the user swipes down on the control.
+    /// </summary>
+    public static readonly AttachedProperty<System.Windows.Input.ICommand?> SwipeDownCommandProperty =
+        AvaloniaProperty.RegisterAttached<Control, System.Windows.Input.ICommand?>("SwipeDownCommand", typeof(GestureManager));
+
+    public static System.Windows.Input.ICommand? GetSwipeDownCommand(Control element) => element.GetValue(SwipeDownCommandProperty);
+    public static void SetSwipeDownCommand(Control element, System.Windows.Input.ICommand? value) => element.SetValue(SwipeDownCommandProperty, value);
+
+    #endregion
+
+    #region SwipeThreshold attached property
+
+    /// <summary>
+    /// Defines the SwipeThreshold attached property.
+    /// The minimum distance in pixels for a swipe to be recognized. Default is 50.
+    /// </summary>
+    public static readonly AttachedProperty<double> SwipeThresholdProperty =
+        AvaloniaProperty.RegisterAttached<Control, double>("SwipeThreshold", typeof(GestureManager), 50.0);
+
+    public static double GetSwipeThreshold(Control element) => element.GetValue(SwipeThresholdProperty);
+    public static void SetSwipeThreshold(Control element, double value) => element.SetValue(SwipeThresholdProperty, value);
+
+    #endregion
+
     #region ClickWithModifiersCommand attached property
 
     /// <summary>
@@ -123,6 +252,8 @@ public class GestureManager
         DoubleClickCommandProperty.Changed.AddClassHandler<Control>(OnDoubleClickCommandChanged);
         LongPressCommandProperty.Changed.AddClassHandler<Control>(OnLongPressCommandChanged);
         ClickWithModifiersCommandProperty.Changed.AddClassHandler<Control>(OnClickWithModifiersCommandChanged);
+        EnableSwipeProperty.Changed.AddClassHandler<Control>(OnEnableSwipeChanged);
+        EnablePinchZoomProperty.Changed.AddClassHandler<Control>(OnEnablePinchZoomChanged);
     }
 
     /// <summary>
@@ -273,8 +404,12 @@ public class GestureManager
 
         _longPressStartTimes.Remove(control);
 
+        var threshold = GetEnableLongPress(control)
+            ? GetLongPressDuration(control)
+            : LongPressThresholdMs;
+
         var duration = (DateTime.UtcNow - startTime).TotalMilliseconds;
-        if (duration >= LongPressThresholdMs)
+        if (duration >= threshold)
         {
             var command = GetLongPressCommand(control);
             if (command?.CanExecute(null) == true)
@@ -312,6 +447,251 @@ public class GestureManager
         if (command.CanExecute(info))
         {
             command.Execute(info);
+        }
+    }
+
+    #endregion
+
+    #region Swipe gesture handling
+
+    private static readonly Dictionary<Control, Point> _swipeStartPoints = new();
+    private static readonly Dictionary<Control, DateTime> _swipeStartTimes = new();
+
+    private static void OnEnableSwipeChanged(Control control, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.NewValue is true)
+        {
+            control.PointerPressed += OnSwipePointerPressed;
+            control.PointerMoved += OnSwipePointerMoved;
+            control.PointerReleased += OnSwipePointerReleased;
+        }
+        else
+        {
+            control.PointerPressed -= OnSwipePointerPressed;
+            control.PointerMoved -= OnSwipePointerMoved;
+            control.PointerReleased -= OnSwipePointerReleased;
+        }
+    }
+
+    private static void OnSwipePointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not Control control)
+            return;
+
+        var properties = e.GetCurrentPoint(control).Properties;
+        if (properties.IsLeftButtonPressed)
+        {
+            _swipeStartPoints[control] = e.GetPosition(control);
+            _swipeStartTimes[control] = DateTime.UtcNow;
+        }
+    }
+
+    private static void OnSwipePointerMoved(object? sender, PointerEventArgs e)
+    {
+        // Track movement — actual swipe detection happens on release
+    }
+
+    private static void OnSwipePointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        if (sender is not Control control)
+            return;
+
+        if (!_swipeStartPoints.TryGetValue(control, out var startPoint))
+            return;
+
+        _swipeStartPoints.Remove(control);
+
+        // Must happen within 500ms to be a swipe (not a drag)
+        if (_swipeStartTimes.TryGetValue(control, out var startTime))
+        {
+            _swipeStartTimes.Remove(control);
+            if ((DateTime.UtcNow - startTime).TotalMilliseconds > 500)
+                return;
+        }
+
+        var endPoint = e.GetPosition(control);
+        var deltaX = endPoint.X - startPoint.X;
+        var deltaY = endPoint.Y - startPoint.Y;
+        var threshold = GetSwipeThreshold(control);
+
+        // Determine dominant direction
+        var absDx = Math.Abs(deltaX);
+        var absDy = Math.Abs(deltaY);
+
+        if (Math.Max(absDx, absDy) < threshold)
+            return; // Movement too small
+
+        System.Windows.Input.ICommand? command = null;
+
+        if (absDx > absDy)
+        {
+            // Horizontal swipe
+            command = deltaX < 0
+                ? GetSwipeLeftCommand(control)
+                : GetSwipeRightCommand(control);
+        }
+        else
+        {
+            // Vertical swipe
+            command = deltaY < 0
+                ? GetSwipeUpCommand(control)
+                : GetSwipeDownCommand(control);
+        }
+
+        if (command?.CanExecute(null) == true)
+        {
+            command.Execute(null);
+            e.Handled = true;
+        }
+    }
+
+    #endregion
+
+    #region Pinch zoom handling
+
+    private static void OnEnablePinchZoomChanged(Control control, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.NewValue is true)
+        {
+            control.PointerPressed += OnPinchPointerPressed;
+            control.PointerMoved += OnPinchPointerMoved;
+            control.PointerReleased += OnPinchPointerReleased;
+        }
+        else
+        {
+            control.PointerPressed -= OnPinchPointerPressed;
+            control.PointerMoved -= OnPinchPointerMoved;
+            control.PointerReleased -= OnPinchPointerReleased;
+        }
+    }
+
+    private static readonly Dictionary<Control, Dictionary<long, Point>> _pinchPointers = new();
+    private static readonly Dictionary<Control, double> _pinchInitialDistances = new();
+    private static readonly Dictionary<Control, double> _pinchInitialScales = new();
+
+    private static void OnPinchPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not Control control)
+            return;
+
+        if (!_pinchPointers.TryGetValue(control, out var pointers))
+        {
+            pointers = new Dictionary<long, Point>();
+            _pinchPointers[control] = pointers;
+        }
+
+        var point = e.GetPosition(control);
+        pointers[e.Pointer.Id] = point;
+
+        // When we have two pointers, record the initial pinch distance
+        if (pointers.Count == 2)
+        {
+            var pts = pointers.Values.ToArray();
+            var dist = Distance(pts[0], pts[1]);
+            _pinchInitialDistances[control] = dist;
+
+            // Record the current scale
+            var scale = GetScaleFromControl(control);
+            _pinchInitialScales[control] = scale;
+        }
+    }
+
+    private static void OnPinchPointerMoved(object? sender, PointerEventArgs e)
+    {
+        if (sender is not Control control)
+            return;
+
+        if (!_pinchPointers.TryGetValue(control, out var pointers))
+            return;
+
+        if (!pointers.ContainsKey(e.Pointer.Id))
+            return;
+
+        pointers[e.Pointer.Id] = e.GetPosition(control);
+
+        // Only process if we have exactly two pointers
+        if (pointers.Count != 2)
+            return;
+
+        if (!_pinchInitialDistances.TryGetValue(control, out var initialDist) || initialDist < 1)
+            return;
+
+        if (!_pinchInitialScales.TryGetValue(control, out var initialScale))
+            return;
+
+        var pts = pointers.Values.ToArray();
+        var currentDist = Distance(pts[0], pts[1]);
+        var scaleFactor = currentDist / initialDist;
+        var newScale = Math.Clamp(initialScale * scaleFactor, 0.1, 10.0);
+
+        SetScaleOnControl(control, newScale);
+        e.Handled = true;
+    }
+
+    private static void OnPinchPointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        if (sender is not Control control)
+            return;
+
+        if (_pinchPointers.TryGetValue(control, out var pointers))
+        {
+            pointers.Remove(e.Pointer.Id);
+
+            if (pointers.Count == 0)
+            {
+                _pinchPointers.Remove(control);
+                _pinchInitialDistances.Remove(control);
+                _pinchInitialScales.Remove(control);
+            }
+        }
+    }
+
+    private static double Distance(Point a, Point b)
+    {
+        return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+    }
+
+    private static double GetScaleFromControl(Control control)
+    {
+        if (control.RenderTransform is ScaleTransform st)
+            return st.ScaleX;
+        if (control.RenderTransform is TransformGroup tg)
+        {
+            foreach (var child in tg.Children)
+            {
+                if (child is ScaleTransform s)
+                    return s.ScaleX;
+            }
+        }
+        return 1.0;
+    }
+
+    private static void SetScaleOnControl(Control control, double scale)
+    {
+        if (control.RenderTransform is ScaleTransform st)
+        {
+            st.ScaleX = scale;
+            st.ScaleY = scale;
+        }
+        else if (control.RenderTransform is TransformGroup tg)
+        {
+            foreach (var child in tg.Children)
+            {
+                if (child is ScaleTransform s)
+                {
+                    s.ScaleX = scale;
+                    s.ScaleY = scale;
+                    return;
+                }
+            }
+            // No ScaleTransform found — add one
+            var newScale = new ScaleTransform(scale, scale);
+            tg.Children.Add(newScale);
+        }
+        else
+        {
+            // No transform at all — set a new ScaleTransform
+            control.RenderTransform = new ScaleTransform(scale, scale);
         }
     }
 

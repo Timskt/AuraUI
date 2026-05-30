@@ -13,9 +13,6 @@
                 <Border Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <ContentPresenter DockPanel.Dock="Left"
                                           VerticalAlignment="Center"

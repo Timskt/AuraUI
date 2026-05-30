@@ -1,0 +1,77 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="clr-namespace:AuraUI.Controls.Selection;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — DateRangePicker -->
+
+    <Style Selector="selection|DateRangePicker">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="MinWidth" Value="260"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="selection:DateRangePicker">
+                    <StackPanel>
+                        <Border Name="PART_TextBoxBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBox Name="PART_TextBox"
+                                         Grid.Column="0"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Padding="16,12"
+                                         Watermark="{TemplateBinding PlaceholderText}"
+                                         IsReadOnly="True"/>
+                                <Button Name="PART_DropdownButton"
+                                        Grid.Column="1"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="12"
+                                        Cursor="Hand">
+                                    <Path Width="20" Height="20"
+                                          Data="M 3,6 L 8,11 L 13,6"
+                                          Stroke="{DynamicResource AuraOnSurfaceVariantBrush}"
+                                          StrokeThickness="1.5"
+                                          Stretch="Uniform"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+
+                        <Popup Name="PART_Popup"
+                               IsLightDismissEnabled="True"
+                               Placement="BottomEdgeAlignedLeft"
+                               IsOpen="False">
+                            <Border Background="{DynamicResource AuraSurfaceBrush}"
+                                    BorderBrush="{DynamicResource AuraOutlineVariantBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="16"
+                                    BoxShadow="{DynamicResource AuraShadowMd}">
+                                <StackPanel Spacing="12">
+                                    <ItemsControl Name="PART_PresetPanel"/>
+                                    <Calendar Name="PART_Calendar"/>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style Selector="selection|DateRangePicker:focus /template/ Border#PART_TextBoxBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="selection|DateRangePicker:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

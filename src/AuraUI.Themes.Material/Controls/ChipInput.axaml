@@ -19,10 +19,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <StackPanel Spacing="4">
                         <ItemsControl Name="PART_ChipsList">
                             <ItemsControl.ItemsPanel>

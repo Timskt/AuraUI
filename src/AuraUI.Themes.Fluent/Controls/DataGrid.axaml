@@ -38,9 +38,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.150" Property="Background"/>
-                    </Border.Transitions>
                     <Grid ColumnDefinitions="*,Auto">
                         <ContentPresenter Grid.Column="0"
                                           Content="{TemplateBinding Content}"

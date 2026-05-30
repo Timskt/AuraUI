@@ -1,0 +1,86 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="using:AuraUI.Controls.Input">
+
+    <!-- ============================================================
+         TagInput — Fluent Style
+         ============================================================ -->
+    <Style Selector="input|TagInput">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Border Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <StackPanel>
+                            <!-- Tags + input row -->
+                            <ItemsControl Name="PART_TagItemsControl">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                            <!-- Text input -->
+                            <TextBox Name="PART_TextBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Watermark="{TemplateBinding Placeholder}"
+                                     MinWidth="120"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Suggestions popup -->
+                    <Popup Name="PART_SuggestionsPopup"
+                           IsLightDismissEnabled="True"
+                           Placement="BottomEdgeAlignedLeft"
+                           IsOpen="False">
+                        <Border Background="{DynamicResource AuraCardBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{DynamicResource AuraRadiusMd}"
+                                BoxShadow="{DynamicResource AuraShadowMd}"
+                                MaxHeight="200"
+                                MinWidth="200">
+                            <ListBox Name="PART_SuggestionsList"
+                                     Background="Transparent"
+                                     BorderThickness="0"/>
+                        </Border>
+                    </Popup>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Focus -->
+    <Style Selector="input|TagInput:focused /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <!-- Has suggestions -->
+    <Style Selector="input|TagInput:has-suggestions /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+    </Style>
+
+    <!-- Max reached -->
+    <Style Selector="input|TagInput:max-reached">
+        <Setter Property="Opacity" Value="0.85"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="input|TagInput:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

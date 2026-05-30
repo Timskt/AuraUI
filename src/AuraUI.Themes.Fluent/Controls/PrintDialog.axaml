@@ -20,9 +20,6 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}"
                         BoxShadow="{DynamicResource AuraShadowXl}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <!-- Title -->
                         <TextBlock DockPanel.Dock="Top"

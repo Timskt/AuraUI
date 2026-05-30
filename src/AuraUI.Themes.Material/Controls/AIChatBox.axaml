@@ -17,10 +17,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                        <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <!-- Header -->
                         <Border DockPanel.Dock="Top"

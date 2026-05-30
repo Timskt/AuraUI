@@ -201,7 +201,9 @@ public class CheckedTreeView : AuraTreeView
     /// <summary>
     /// Occurs when the checked items collection changes.
     /// </summary>
+#pragma warning disable CS0067 // Event is never invoked -- public API for consumers
     public event EventHandler? CheckedItemsChanged;
+#pragma warning restore CS0067
 
     /// <summary>
     /// Gets or sets whether checkboxes are visible.
@@ -245,6 +247,7 @@ public class CheckedTreeView : AuraTreeView
         if (items is null) yield break;
         foreach (var itemObj in items)
         {
+            if (itemObj is null) continue;
             var container = parent.ContainerFromItem(itemObj);
             if (container is CheckedTreeViewItem item)
             {

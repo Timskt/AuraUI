@@ -1,0 +1,58 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="clr-namespace:AuraUI.Controls.Navigation;assembly=AuraUI.Controls">
+
+    <!-- Material Design 3 — MultiLevelDropdown -->
+
+    <Style Selector="navigation|MultiLevelDropdown">
+        <Setter Property="Background" Value="{DynamicResource AuraSurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
+        <Setter Property="SubMenuCornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="navigation:MultiLevelDropdown">
+                    <StackPanel>
+                        <Button Name="PART_Button"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Padding="16,10"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ContentPresenter Content="{TemplateBinding Tag}"/>
+                                <TextBlock Text="▾"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource AuraOnSurfaceVariantBrush}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Popup Name="PART_Popup"
+                               IsLightDismissEnabled="True"
+                               Placement="{TemplateBinding Placement}"
+                               IsOpen="False">
+                            <Border Background="{DynamicResource AuraSurfaceBrush}"
+                                    BorderBrush="{DynamicResource AuraOutlineVariantBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{TemplateBinding SubMenuCornerRadius}"
+                                    Padding="4"
+                                    BoxShadow="{DynamicResource AuraShadowMd}">
+                                <ItemsControl Name="PART_RootMenu"
+                                              ItemsSource="{TemplateBinding Items}"/>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style Selector="navigation|MultiLevelDropdown:disabled">
+        <Setter Property="Opacity" Value="0.38"/>
+    </Style>
+
+</Styles>

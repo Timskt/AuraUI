@@ -27,9 +27,6 @@
                                 CornerRadius="2"
                                 VerticalAlignment="Center"
                                 IsHitTestVisible="False">
-                            <Border.Transitions>
-                                <BrushTransition Duration="0:0:0.150" Property="Background"/>
-                            </Border.Transitions>
                         </Border>
 
                         <!-- Lower Thumb -->
@@ -44,9 +41,6 @@
                                             Width="20"
                                             Height="20"
                                             CornerRadius="10">
-                                        <Border.Transitions>
-                                            <BrushTransition Duration="0:0:0.150" Property="Background"/>
-                                        </Border.Transitions>
                                     </Border>
                                 </ControlTemplate>
                             </Thumb.Template>
@@ -64,9 +58,6 @@
                                             Width="20"
                                             Height="20"
                                             CornerRadius="10">
-                                        <Border.Transitions>
-                                            <BrushTransition Duration="0:0:0.150" Property="Background"/>
-                                        </Border.Transitions>
                                     </Border>
                                 </ControlTemplate>
                             </Thumb.Template>

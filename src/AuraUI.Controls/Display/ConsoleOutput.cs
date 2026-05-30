@@ -103,6 +103,18 @@ public class ConsoleOutput : Control
         AvaloniaProperty.Register<ConsoleOutput, double>(nameof(LineHeight), 20);
 
     /// <summary>
+    /// Defines the <see cref="Background"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> BackgroundProperty =
+        AvaloniaProperty.Register<ConsoleOutput, IBrush?>(nameof(Background));
+
+    /// <summary>
+    /// Defines the <see cref="Foreground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ForegroundProperty =
+        AvaloniaProperty.Register<ConsoleOutput, IBrush?>(nameof(Foreground));
+
+    /// <summary>
     /// Defines the <see cref="FontFamily"/> styled property.
     /// </summary>
     public static readonly StyledProperty<FontFamily> FontFamilyProperty =
@@ -190,6 +202,24 @@ public class ConsoleOutput : Control
     {
         get => GetValue(LineHeightProperty);
         set => SetValue(LineHeightProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush.
+    /// </summary>
+    public IBrush? Background
+    {
+        get => GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for text.
+    /// </summary>
+    public IBrush? Foreground
+    {
+        get => GetValue(ForegroundProperty);
+        set => SetValue(ForegroundProperty, value);
     }
 
     /// <summary>

@@ -1,0 +1,84 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:navigation="using:AuraUI.Controls.Navigation">
+
+    <!-- ============================================================
+         MultiLevelDropdown — Fluent Style
+         ============================================================ -->
+    <Style Selector="navigation|MultiLevelDropdown">
+        <Setter Property="Background" Value="{DynamicResource AuraCardBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel>
+                    <!-- Trigger button -->
+                    <Button Name="PART_Button"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="12,8"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ContentPresenter Content="{TemplateBinding Tag}"/>
+                            <TextBlock Text="▾"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Popup with menu -->
+                    <Popup Name="PART_Popup"
+                           IsLightDismissEnabled="True"
+                           Placement="{TemplateBinding Placement}"
+                           IsOpen="False">
+                        <Border Name="PART_PopupBorder"
+                                Background="{DynamicResource AuraCardBrush}"
+                                BorderBrush="{DynamicResource AuraBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="{TemplateBinding SubMenuCornerRadius}"
+                                Padding="4"
+                                BoxShadow="{DynamicResource AuraShadowMd}">
+                            <ItemsControl Name="PART_RootMenu"
+                                          ItemsSource="{TemplateBinding Items}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="8,6"
+                                                CornerRadius="4"
+                                                Cursor="Hand">
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <TextBlock Text="{Binding Text}"
+                                                           VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Button hover -->
+    <Style Selector="navigation|MultiLevelDropdown /template/ Button#PART_Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Open state -->
+    <Style Selector="navigation|MultiLevelDropdown:open /template/ Border#PART_PopupBorder">
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+
+    <!-- Disabled -->
+    <Style Selector="navigation|MultiLevelDropdown:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+</Styles>

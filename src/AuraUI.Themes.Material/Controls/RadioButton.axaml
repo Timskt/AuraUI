@@ -29,10 +29,6 @@
                                     BorderThickness="2"
                                     BorderBrush="{DynamicResource AuraForegroundBrush}"
                                     Background="Transparent">
-                                <Border.Transitions>
-                                    <BrushTransition Duration="0:0:0.200" Property="BorderBrush"/>
-                                    <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                                </Border.Transitions>
                                 <Border Name="StateLayer"
                                         Background="Transparent"
                                         CornerRadius="10"/>

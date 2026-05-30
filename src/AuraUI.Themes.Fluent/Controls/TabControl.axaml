@@ -90,9 +90,6 @@
                             CornerRadius="1.5,1.5,0,0"
                             Background="Transparent"
                             Margin="0,4,0,-1">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        </Border.Transitions>
                     </Border>
 
                     <!-- Tab content -->
@@ -192,9 +189,6 @@
                         Background="Transparent"
                         CornerRadius="{DynamicResource AuraRadiusFull}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                    </Border.Transitions>
                     <ContentPresenter Name="PART_ContentPresenter"
                                       Content="{TemplateBinding Content}"
                                       HorizontalAlignment="Center"

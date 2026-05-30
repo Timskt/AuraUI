@@ -4,10 +4,33 @@ using Avalonia.Data.Converters;
 
 namespace AuraUI.Core.Converters;
 
+/// <summary>
+/// A multi-value converter that performs arithmetic operations (+, -, *, /, %)
+/// on two numeric values. The operation is specified via the converter parameter.
+/// </summary>
+/// <example>
+/// <code>
+/// &lt;MultiBinding Converter="{x:Static converters:MathConverter.Instance}" ConverterParameter="+"&gt;
+///     &lt;Binding Path="Width"/&gt;
+///     &lt;Binding Path="Offset"/&gt;
+/// &lt;/MultiBinding&gt;
+/// </code>
+/// </example>
 public class MathConverter : IMultiValueConverter
 {
+    /// <summary>
+    /// Singleton instance of the <see cref="MathConverter"/>.
+    /// </summary>
     public static MathConverter Instance { get; } = new();
 
+    /// <summary>
+    /// Converts two bound values using the specified arithmetic operation.
+    /// </summary>
+    /// <param name="values">The bound values (at least two numeric values expected).</param>
+    /// <param name="targetType">The target type for the result.</param>
+    /// <param name="parameter">The arithmetic operation as a string: "+", "-", "*", "/", or "%".</param>
+    /// <param name="culture">The culture info.</param>
+    /// <returns>The computed result, or <see cref="AvaloniaProperty.UnsetValue"/> on failure.</returns>
     public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
     {
         if (values.Count < 2)

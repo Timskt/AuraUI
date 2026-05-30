@@ -19,9 +19,6 @@
                             Padding="{TemplateBinding Padding}"
                             BoxShadow="{DynamicResource AuraShadowLg}"
                             ClipToBounds="True">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.200" Property="Background"/>
-                        </Border.Transitions>
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"

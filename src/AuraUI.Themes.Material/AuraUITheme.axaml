@@ -177,4 +177,16 @@
     <StyleInclude Source="/Controls/VirtualizingStackPanel.axaml"/>
     <StyleInclude Source="/Controls/VirtualizingWrapPanel.axaml"/>
 
+    <!-- V7 controls — Gap analysis: 10 most requested missing components -->
+    <StyleInclude Source="/Controls/Accordion.axaml"/>
+    <StyleInclude Source="/Controls/ColorPalette.axaml"/>
+    <StyleInclude Source="/Controls/RichTextBlock.axaml"/>
+    <StyleInclude Source="/Controls/EditableDataGrid.axaml"/>
+    <StyleInclude Source="/Controls/CheckedTreeView.axaml"/>
+    <StyleInclude Source="/Controls/MultiLevelDropdown.axaml"/>
+    <StyleInclude Source="/Controls/DateRangePicker.axaml"/>
+    <StyleInclude Source="/Controls/TagInput.axaml"/>
+    <StyleInclude Source="/Controls/Splitter.axaml"/>
+    <StyleInclude Source="/Controls/TimePicker.axaml"/>
+
 </Styles>

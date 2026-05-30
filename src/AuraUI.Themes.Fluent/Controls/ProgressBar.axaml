@@ -25,10 +25,6 @@
                             Background="{TemplateBinding Foreground}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             HorizontalAlignment="Left">
-                        <Border.Transitions>
-                            <DoubleTransition Duration="00:00:00.300" Property="Width"
-                                              Easing="{DynamicResource AuraEasingStandard}"/>
-                        </Border.Transitions>
                     </Border>
                 </Border>
             </ControlTemplate>

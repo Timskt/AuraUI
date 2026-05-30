@@ -185,12 +185,14 @@ public class ErrorBoundary : ContentControl
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        _isAttached = true;
         Dispatcher.UIThread.UnhandledException += OnDispatcherUnhandledException;
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
+        _isAttached = false;
         Dispatcher.UIThread.UnhandledException -= OnDispatcherUnhandledException;
     }
 
@@ -215,7 +217,7 @@ public class ErrorBoundary : ContentControl
     private void OnDispatcherUnhandledException(object? sender, DispatcherUnhandledExceptionEventArgs e)
     {
         // Only handle exceptions if we are in the visual tree
-        if (VisualRoot == null || IsError)
+        if (!_isAttached || IsError)
             return;
 
         SetError(e.Exception);

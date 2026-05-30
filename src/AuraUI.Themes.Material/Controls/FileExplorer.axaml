@@ -17,9 +17,6 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Padding="{TemplateBinding Padding}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                    </Border.Transitions>
                     <DockPanel>
                         <StackPanel DockPanel.Dock="Top"
                                     Orientation="Horizontal"

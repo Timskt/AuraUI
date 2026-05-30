@@ -15,9 +15,6 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                    <Border.Transitions>
-                        <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                    </Border.Transitions>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                   VerticalScrollBarVisibility="Disabled">
                         <ItemsPresenter Name="PART_ItemsPresenter"
@@ -49,9 +46,6 @@
                             CornerRadius="16"
                             Background="Transparent"
                             HorizontalAlignment="Center">
-                        <Border.Transitions>
-                            <BrushTransition Duration="0:0:0.200" Property="Background"/>
-                        </Border.Transitions>
                         <ContentPresenter Name="PART_IconPresenter"
                                           Content="{TemplateBinding Icon}"
                                           HorizontalAlignment="Center"

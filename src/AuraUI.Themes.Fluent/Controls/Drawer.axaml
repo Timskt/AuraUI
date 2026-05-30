@@ -18,9 +18,6 @@
                     <Border Name="PART_Overlay"
                             Background="{TemplateBinding OverlayBrush}"
                             IsHitTestVisible="True">
-                        <Border.Transitions>
-                            <BrushTransition Duration="00:00:00.250" Property="Background"/>
-                        </Border.Transitions>
                     </Border>
 
                     <!-- Drawer Panel -->
@@ -32,9 +29,6 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Stretch"
                             Width="{TemplateBinding DrawerWidth}">
-                        <Border.Transitions>
-                            <ThicknessTransition Duration="00:00:00.250" Property="Margin"/>
-                        </Border.Transitions>
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           Margin="{TemplateBinding Padding}"/>

@@ -106,6 +106,18 @@ public class DiffViewer : Control
         AvaloniaProperty.Register<DiffViewer, int>(nameof(ContextLines), 3);
 
     /// <summary>
+    /// Defines the <see cref="Background"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> BackgroundProperty =
+        AvaloniaProperty.Register<DiffViewer, IBrush?>(nameof(Background));
+
+    /// <summary>
+    /// Defines the <see cref="Foreground"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> ForegroundProperty =
+        AvaloniaProperty.Register<DiffViewer, IBrush?>(nameof(Foreground));
+
+    /// <summary>
     /// Defines the <see cref="FontSize"/> styled property.
     /// </summary>
     public static readonly StyledProperty<double> FontSizeProperty =
@@ -169,6 +181,24 @@ public class DiffViewer : Control
     {
         get => GetValue(ContextLinesProperty);
         set => SetValue(ContextLinesProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the background brush.
+    /// </summary>
+    public IBrush? Background
+    {
+        get => GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the foreground brush for text.
+    /// </summary>
+    public IBrush? Foreground
+    {
+        get => GetValue(ForegroundProperty);
+        set => SetValue(ForegroundProperty, value);
     }
 
     /// <summary>
