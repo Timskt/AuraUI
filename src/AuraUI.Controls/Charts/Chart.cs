@@ -860,7 +860,7 @@ public class Chart : Control
 
         // Determine which items to render
         var items = Legend.CustomItems != null
-            ? Series.Where((_, i) => i < Legend.CustomItems.Count).Select((s, i) => (Series: s, Custom: Legend.CustomItems[i])).ToList()
+            ? Series.Where((_, i) => i < Legend.CustomItems.Count).Select((s, i) => (Series: s, Custom: (LegendCustomItem?)Legend.CustomItems[i])).ToList()
             : Series.Select(s => (Series: s, Custom: (LegendCustomItem?)null)).ToList();
 
         // Apply scroll offset

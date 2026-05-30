@@ -150,6 +150,15 @@ public partial class MainWindow : Window
         _pageFactory["ColorPalette"] = () => new ColorPalettePage();
         _pageFactory["Typography"] = () => new TypographyPage();
         _pageFactory["DarkMode"] = () => new DarkModePage();
+
+        // Scenarios
+        _pageFactory["LoginPage"] = () => new LoginPage();
+        _pageFactory["Dashboard"] = () => new DashboardPage();
+        _pageFactory["Settings"] = () => new SettingsPage();
+        _pageFactory["ProductList"] = () => new ProductListPage();
+        _pageFactory["ChatDemo"] = () => new ChatDemoPage();
+        _pageFactory["Kanban"] = () => new KanbanPage();
+        _pageFactory["Analytics"] = () => new AnalyticsPage();
     }
 
     private void BuildNavigation()
@@ -193,6 +202,18 @@ public partial class MainWindow : Window
         _allNavItems.Add(new NavItem { Title = "-- THEMING", IsCategory = true });
         foreach (var name in new[] { "DesignTokens", "ColorPalette", "Typography", "DarkMode" })
             _allNavItems.Add(new NavItem { Title = name, Tag = name });
+
+        _allNavItems.Add(new NavItem { Title = "-- SCENARIOS", IsCategory = true });
+        foreach (var (name, tag) in new[] {
+            ("Login Page", "LoginPage"),
+            ("Dashboard", "Dashboard"),
+            ("Settings", "Settings"),
+            ("Product List", "ProductList"),
+            ("Chat Interface", "ChatDemo"),
+            ("Kanban Board", "Kanban"),
+            ("Analytics", "Analytics")
+        })
+            _allNavItems.Add(new NavItem { Title = name, Tag = tag });
 
         PopulateNavList(_allNavItems);
     }
