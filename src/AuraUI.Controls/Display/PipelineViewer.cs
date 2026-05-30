@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Media.TextFormatting;
 
 namespace AuraUI.Controls.Display;
 
@@ -107,9 +108,12 @@ public class PipelineViewer : Control
 
     static PipelineViewer()
     {
-        StagesProperty.Changed.AddClassHandler<PipelineViewer>((x, _) => x.InvalidateVisual());
-        OrientationProperty.Changed.AddClassHandler<PipelineViewer>((x, _) => x.InvalidateVisual());
-        SelectedStageIndexProperty.Changed.AddClassHandler<PipelineViewer>((x, _) => x.InvalidateVisual());
+        AffectsRender<PipelineViewer>(
+            StagesProperty, OrientationProperty, SelectedStageIndexProperty,
+            StageSpacingProperty, ConnectorThicknessProperty, ConnectorBrushProperty,
+            StageNodeSizeProperty);
+        AffectsMeasure<PipelineViewer>(
+            StagesProperty, OrientationProperty, StageSpacingProperty, StageNodeSizeProperty);
     }
 
     /// <summary>
@@ -187,4 +191,67 @@ public class PipelineViewer : Control
         PipelineStageStatus.Skipped => new SolidColorBrush(Color.Parse("#9E9E9E")),
         _ => Brushes.Gray
     };
+
+    protected override Size MeasureOverride(Size availableSize)
+    {
+        var stages = Stages;
+        if (stages == null || stages.Count == 0)
+            return new Size(0, 0);
+
+        var isHorizontal = Orientation == Orientation.Horizontal;
+        var nodeSize = StageNodeSize;
+        var spacing = StageSpacing;
+        var count = stages.Count;
+
+        double totalMain = count * nodeSize + (count - 1) * spacing;
+        double crossSize = nodeSize + 40;
+
+        return isHorizontal ? new Size(totalMain, crossSize) : new Size(crossSize, totalMain);
+    }
+
+    public override void Render(DrawingContext context)
+    {
+        var stages = Stages;
+        if (stages == null || stages.Count == 0) return;
+
+        var isHorizontal = Orientation == Orientation.Horizontal;
+        var nodeSize = StageNodeSize;
+        var spacing = StageSpacing;
+        var connectorBrush = ConnectorBrush ?? new SolidColorBrush(Color.Parse("#BDBDBD"));
+        var connectorThickness = ConnectorThickness;
+        var typeface = new Typeface(FontFamily.Default);
+
+        for (int i = 0; i < stages.Count; i++)
+        {
+            var stage = stages[i];
+            var offset = i * (nodeSize + spacing);
+            var center = new Point(
+                isHorizontal ? offset + nodeSize / 2 : nodeSize / 2,
+                isHorizontal ? nodeSize / 2 : offset + nodeSize / 2);
+
+            if (i > 0)
+            {
+                var prevOffset = (i - 1) * (nodeSize + spacing);
+                var prevCenter = new Point(
+                    isHorizontal ? prevOffset + nodeSize / 2 : nodeSize / 2,
+                    isHorizontal ? nodeSize / 2 : prevOffset + nodeSize / 2);
+                context.DrawLine(new Pen(connectorBrush, connectorThickness), prevCenter, center);
+            }
+
+            var statusColor = GetStatusColor(stage.Status);
+            var radius = nodeSize / 2.0 - 2;
+            context.DrawEllipse(statusColor, new Pen(Brushes.White, 2), center, radius, radius);
+
+            if (!string.IsNullOrEmpty(stage.Name))
+            {
+                var ft = new FormattedText(stage.Name,
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, typeface, 11, Brushes.Gray);
+                var labelPos = isHorizontal
+                    ? new Point(center.X - ft.Width / 2, center.Y + radius + 4)
+                    : new Point(center.X + radius + 4, center.Y - ft.Height / 2);
+                context.DrawText(ft, labelPos);
+            }
+        }
+    }
 }

@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Media;
+using Avalonia.Media.TextFormatting;
 
 namespace AuraUI.Controls.Display;
 
@@ -159,6 +160,10 @@ public class LogViewer : Control
 
     static LogViewer()
     {
+        AffectsRender<LogViewer>(
+            EntriesProperty, FilterLevelProperty, SearchTextProperty,
+            ShowTimestampProperty, ShowSourceProperty, AutoScrollProperty);
+        AffectsMeasure<LogViewer>(EntriesProperty);
         EntriesProperty.Changed.AddClassHandler<LogViewer>((x, e) => x.OnEntriesChanged(e));
         FilterLevelProperty.Changed.AddClassHandler<LogViewer>((x, _) => x.ApplyFilters());
         SearchTextProperty.Changed.AddClassHandler<LogViewer>((x, _) => x.ApplyFilters());
@@ -338,6 +343,55 @@ public class LogViewer : Control
     private void UpdatePseudoClasses()
     {
         PseudoClasses.Set(":auto-scroll", AutoScroll);
+    }
+
+    private const double LogLineHeight = 20.0;
+
+    protected override Size MeasureOverride(Size availableSize)
+    {
+        var entryCount = _filteredEntries.Count;
+        var totalHeight = entryCount * LogLineHeight;
+        return new Size(
+            double.IsInfinity(availableSize.Width) ? 600 : availableSize.Width,
+            double.IsInfinity(availableSize.Height) ? Math.Max(totalHeight, 100) : Math.Max(totalHeight, availableSize.Height));
+    }
+
+    public override void Render(DrawingContext context)
+    {
+        var bounds = Bounds;
+        if (bounds.Width <= 0 || bounds.Height <= 0) return;
+
+        var entries = _filteredEntries;
+        if (entries.Count == 0)
+        {
+            var emptyText = new FormattedText("No log entries",
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, new Typeface(FontFamily.Default), 13, Brushes.Gray);
+            context.DrawText(emptyText, new Point(8, 8));
+            return;
+        }
+
+        var showTimestamp = ShowTimestamp;
+        var showSource = ShowSource;
+        var typeface = new Typeface(FontFamily.Default);
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var y = i * LogLineHeight;
+            if (y > bounds.Height) break;
+
+            var entry = entries[i];
+            var sb = new System.Text.StringBuilder();
+            if (showTimestamp) sb.Append($"[{entry.Timestamp:HH:mm:ss.fff}] ");
+            if (showSource && !string.IsNullOrEmpty(entry.Source)) sb.Append($"{entry.Source}: ");
+            sb.Append(entry.Message ?? string.Empty);
+
+            var color = GetLevelColor(entry.Level);
+            var ft = new FormattedText(sb.ToString(),
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, typeface, 12, color);
+            context.DrawText(ft, new Point(4, y));
+        }
     }
 
     /// <summary>

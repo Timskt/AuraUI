@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Layout;
+using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 
@@ -114,6 +115,21 @@ public class Affix : ContentControl
     {
         get => GetValue(ZIndexProperty);
         set => SetValue(ZIndexProperty, value);
+    }
+
+    /// <summary>
+    /// Defines the <see cref="BoxShadow"/> styled property.
+    /// </summary>
+    public static readonly StyledProperty<BoxShadows> BoxShadowProperty =
+        AvaloniaProperty.Register<Affix, BoxShadows>(nameof(BoxShadow));
+
+    /// <summary>
+    /// Gets or sets the box shadow effect.
+    /// </summary>
+    public BoxShadows BoxShadow
+    {
+        get => GetValue(BoxShadowProperty);
+        set => SetValue(BoxShadowProperty, value);
     }
 
     /// <summary>
