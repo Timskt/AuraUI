@@ -167,6 +167,29 @@ public class ChartAxis : AvaloniaObject
     public static readonly StyledProperty<string?> MaxIntervalProperty =
         AvaloniaProperty.Register<ChartAxis, string?>(nameof(MaxInterval));
 
+    /// <summary>Whether to show minor ticks between major ticks.</summary>
+    public static readonly StyledProperty<bool> ShowMinorTicksProperty =
+        AvaloniaProperty.Register<ChartAxis, bool>(nameof(ShowMinorTicks));
+
+    /// <summary>Number of minor tick intervals between each pair of major ticks.</summary>
+    public static readonly StyledProperty<int> MinorTickCountProperty =
+        AvaloniaProperty.Register<ChartAxis, int>(nameof(MinorTickCount), 4);
+
+    /// <summary>Length of minor tick marks in pixels.</summary>
+    public static readonly StyledProperty<double> MinorTickLengthProperty =
+        AvaloniaProperty.Register<ChartAxis, double>(nameof(MinorTickLength), 2.0);
+
+    /// <summary>Brush for minor tick marks.</summary>
+    public static readonly StyledProperty<IBrush?> MinorTickBrushProperty =
+        AvaloniaProperty.Register<ChartAxis, IBrush?>(nameof(MinorTickBrush));
+
+    /// <summary>
+    /// Custom label formatter function. When set, overrides LabelFormat string.
+    /// Receives the tick value and returns the display string.
+    /// </summary>
+    public static readonly StyledProperty<Func<double, string>?> LabelFormatterProperty =
+        AvaloniaProperty.Register<ChartAxis, Func<double, string>?>(nameof(LabelFormatter));
+
     // CLR wrappers
     public AxisPosition Position { get => GetValue(PositionProperty); set => SetValue(PositionProperty, value); }
     public AxisScale Scale { get => GetValue(ScaleProperty); set => SetValue(ScaleProperty, value); }
@@ -206,6 +229,18 @@ public class ChartAxis : AvaloniaObject
     public string? LabelFontFamily { get => GetValue(LabelFontFamilyProperty); set => SetValue(LabelFontFamilyProperty, value); }
     public string? MinInterval { get => GetValue(MinIntervalProperty); set => SetValue(MinIntervalProperty, value); }
     public string? MaxInterval { get => GetValue(MaxIntervalProperty); set => SetValue(MaxIntervalProperty, value); }
+    public bool ShowMinorTicks { get => GetValue(ShowMinorTicksProperty); set => SetValue(ShowMinorTicksProperty, value); }
+    public int MinorTickCount { get => GetValue(MinorTickCountProperty); set => SetValue(MinorTickCountProperty, value); }
+    public double MinorTickLength { get => GetValue(MinorTickLengthProperty); set => SetValue(MinorTickLengthProperty, value); }
+    public IBrush? MinorTickBrush { get => GetValue(MinorTickBrushProperty); set => SetValue(MinorTickBrushProperty, value); }
+    public Func<double, string>? LabelFormatter { get => GetValue(LabelFormatterProperty); set => SetValue(LabelFormatterProperty, value); }
+
+    /// <summary>
+    /// Axis break ranges. Each break removes a range of values from the axis,
+    /// replacing it with a visual break indicator (zigzag or gap).
+    /// Useful when data has large gaps that waste space.
+    /// </summary>
+    public List<AxisBreakRange> BreakRanges { get; } = new();
 
     // ────────────────────────────────────────────────
     //  Computed layout (set by Chart during layout pass)
@@ -226,6 +261,12 @@ public class ChartAxis : AvaloniaObject
     /// Computed tick values after auto-scaling.
     /// </summary>
     internal double[] ComputedTicks { get; set; } = Array.Empty<double>();
+
+    /// <summary>
+    /// Computed minor tick values (between major ticks).
+    /// Populated when ShowMinorTicks is true.
+    /// </summary>
+    internal double[] ComputedMinorTicks { get; set; } = Array.Empty<double>();
 
     /// <summary>
     /// The effective min/max after auto-range calculation.
@@ -316,6 +357,29 @@ public class ChartAxis : AvaloniaObject
 
         // Nice-round the range
         (EffectiveMin, EffectiveMax, ComputedTicks) = NiceScale.Compute(min, max, MaxTicks);
+
+        // Compute minor ticks if enabled
+        if (ShowMinorTicks && ComputedTicks.Length >= 2 && MinorTickCount > 0)
+        {
+            var minorTicks = new List<double>();
+            var interval = ComputedTicks[1] - ComputedTicks[0];
+            var minorStep = interval / (MinorTickCount + 1);
+
+            for (int i = 0; i < ComputedTicks.Length - 1; i++)
+            {
+                for (int j = 1; j <= MinorTickCount; j++)
+                {
+                    var minorValue = ComputedTicks[i] + j * minorStep;
+                    if (minorValue >= EffectiveMin && minorValue <= EffectiveMax)
+                        minorTicks.Add(minorValue);
+                }
+            }
+            ComputedMinorTicks = minorTicks.ToArray();
+        }
+        else
+        {
+            ComputedMinorTicks = Array.Empty<double>();
+        }
     }
 }
 
@@ -375,4 +439,45 @@ internal static class NiceScale
 
         return nice * Math.Pow(10, exponent);
     }
+}
+
+/// <summary>
+/// Defines a range of values to skip (break) on an axis.
+/// When an axis has breaks, the specified range is removed and replaced
+/// with a visual break indicator, saving space for data with large gaps.
+///
+/// Usage:
+///   axis.BreakRanges.Add(new AxisBreakRange(20, 80));
+///   // Values 20-80 are skipped on the axis
+/// </summary>
+public class AxisBreakRange
+{
+    /// <summary>Start of the break range (inclusive).</summary>
+    public double Start { get; set; }
+
+    /// <summary>End of the break range (inclusive).</summary>
+    public double End { get; set; }
+
+    /// <summary>Size of the break gap in pixels.</summary>
+    public double GapSize { get; set; } = 12;
+
+    public AxisBreakRange() { }
+
+    public AxisBreakRange(double start, double end)
+    {
+        Start = start;
+        End = end;
+    }
+
+    public AxisBreakRange(double start, double end, double gapSize)
+    {
+        Start = start;
+        End = end;
+        GapSize = gapSize;
+    }
+
+    /// <summary>
+    /// Check if a value falls within this break range.
+    /// </summary>
+    public bool Contains(double value) => value >= Start && value <= End;
 }

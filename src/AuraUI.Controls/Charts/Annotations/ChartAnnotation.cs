@@ -33,6 +33,234 @@ public abstract class ChartAnnotation : AvaloniaObject
 }
 
 /// <summary>
+/// Renders a text label at a specific data point on the chart.
+/// Useful for calling out notable data points, thresholds, or events.
+///
+/// Usage:
+///   var text = new TextAnnotation();
+///   text.X = 5;
+///   text.Y = 100;
+///   text.Text = "Peak";
+///   chart.Annotations.Add(text);
+/// </summary>
+public class TextAnnotation : ChartAnnotation
+{
+    /// <summary>Defines the <see cref="X"/> styled property.</summary>
+    public static readonly StyledProperty<double> XProperty =
+        AvaloniaProperty.Register<TextAnnotation, double>(nameof(X));
+
+    /// <summary>Defines the <see cref="Y"/> styled property.</summary>
+    public static readonly StyledProperty<double> YProperty =
+        AvaloniaProperty.Register<TextAnnotation, double>(nameof(Y));
+
+    /// <summary>Defines the <see cref="Text"/> styled property.</summary>
+    public static readonly StyledProperty<string?> TextProperty =
+        AvaloniaProperty.Register<TextAnnotation, string?>(nameof(Text));
+
+    /// <summary>Defines the <see cref="FontSize"/> styled property.</summary>
+    public static readonly StyledProperty<double> FontSizeProperty =
+        AvaloniaProperty.Register<TextAnnotation, double>(nameof(FontSize), 11.0);
+
+    /// <summary>Defines the <see cref="FontWeight"/> styled property.</summary>
+    public static readonly StyledProperty<FontWeight> FontWeightProperty =
+        AvaloniaProperty.Register<TextAnnotation, FontWeight>(nameof(FontWeight), FontWeight.Normal);
+
+    /// <summary>Horizontal pixel offset from the data point.</summary>
+    public static readonly StyledProperty<double> OffsetXProperty =
+        AvaloniaProperty.Register<TextAnnotation, double>(nameof(OffsetX));
+
+    /// <summary>Vertical pixel offset from the data point (negative = above).</summary>
+    public static readonly StyledProperty<double> OffsetYProperty =
+        AvaloniaProperty.Register<TextAnnotation, double>(nameof(OffsetY), -16);
+
+    /// <summary>When true, draws a thin connector line from the label to the data point.</summary>
+    public static readonly StyledProperty<bool> ShowConnectorProperty =
+        AvaloniaProperty.Register<TextAnnotation, bool>(nameof(ShowConnector));
+
+    /// <summary>Defines the <see cref="BackgroundBrush"/> styled property.</summary>
+    public static readonly StyledProperty<IBrush?> BackgroundBrushProperty =
+        AvaloniaProperty.Register<TextAnnotation, IBrush?>(nameof(BackgroundBrush));
+
+    /// <summary>Defines the <see cref="CornerRadius"/> styled property.</summary>
+    public static readonly StyledProperty<double> CornerRadiusProperty =
+        AvaloniaProperty.Register<TextAnnotation, double>(nameof(CornerRadius), 3.0);
+
+    /// <summary>Defines the <see cref="Padding"/> styled property.</summary>
+    public static readonly StyledProperty<Thickness> PaddingProperty =
+        AvaloniaProperty.Register<TextAnnotation, Thickness>(nameof(Padding), new Thickness(4, 2));
+
+    public double X { get => GetValue(XProperty); set => SetValue(XProperty, value); }
+    public double Y { get => GetValue(YProperty); set => SetValue(YProperty, value); }
+    public string? Text { get => GetValue(TextProperty); set => SetValue(TextProperty, value); }
+    public double FontSize { get => GetValue(FontSizeProperty); set => SetValue(FontSizeProperty, value); }
+    public FontWeight FontWeight { get => GetValue(FontWeightProperty); set => SetValue(FontWeightProperty, value); }
+    public double OffsetX { get => GetValue(OffsetXProperty); set => SetValue(OffsetXProperty, value); }
+    public double OffsetY { get => GetValue(OffsetYProperty); set => SetValue(OffsetYProperty, value); }
+    public bool ShowConnector { get => GetValue(ShowConnectorProperty); set => SetValue(ShowConnectorProperty, value); }
+    public IBrush? BackgroundBrush { get => GetValue(BackgroundBrushProperty); set => SetValue(BackgroundBrushProperty, value); }
+    public double CornerRadius { get => GetValue(CornerRadiusProperty); set => SetValue(CornerRadiusProperty, value); }
+    public Thickness Padding { get => GetValue(PaddingProperty); set => SetValue(PaddingProperty, value); }
+
+    public override void Render(DrawingContext context, Rect plotArea,
+        ChartAxis? xAxis, ChartAxis? yAxis, IReadOnlyList<ChartSeries> allSeries)
+    {
+        if (!IsVisible || string.IsNullOrEmpty(Text)) return;
+        if (xAxis == null || yAxis == null) return;
+
+        var color = Color ?? Brushes.Black;
+        var typeface = new Typeface("Segoe UI", FontStyle.Normal, FontWeight);
+        var formattedText = new FormattedText(Text,
+            System.Globalization.CultureInfo.CurrentCulture,
+            FlowDirection.LeftToRight,
+            typeface, FontSize, color);
+
+        var dataPx = xAxis.ValueToPixel(X);
+        var dataPy = yAxis.ValueToPixel(Y);
+        var dataPoint = new Point(dataPx, dataPy);
+
+        var labelX = dataPx + OffsetX - formattedText.Width / 2;
+        var labelY = dataPy + OffsetY - formattedText.Height / 2;
+
+        // Draw background pill if set
+        if (BackgroundBrush is IBrush bg)
+        {
+            var pad = Padding;
+            var bgRect = new Rect(
+                labelX - pad.Left,
+                labelY - pad.Top,
+                formattedText.Width + pad.Left + pad.Right,
+                formattedText.Height + pad.Top + pad.Bottom);
+            context.DrawRectangle(bg, null, bgRect, CornerRadius, CornerRadius);
+        }
+
+        // Draw connector line
+        if (ShowConnector)
+        {
+            var connectorPen = new Pen(color, 1.0, new DashStyle(new double[] { 2, 2 }, 0));
+            var labelCenter = new Point(dataPx + OffsetX, dataPy + OffsetY);
+            context.DrawLine(connectorPen, dataPoint, labelCenter);
+        }
+
+        // Draw text
+        context.DrawText(formattedText, new Point(labelX, labelY));
+    }
+}
+
+/// <summary>
+/// Highlights the area between two data points (by X value) with a semi-transparent fill
+/// and optional boundary lines. Useful for marking time ranges, forecast zones, or
+/// significant periods in the data.
+///
+/// Usage:
+///   var region = new DataRegionAnnotation();
+///   region.StartX = 3;
+///   region.EndX = 7;
+///   region.Label = "Holiday Season";
+///   chart.Annotations.Add(region);
+/// </summary>
+public class DataRegionAnnotation : ChartAnnotation
+{
+    /// <summary>Defines the <see cref="StartX"/> styled property.</summary>
+    public static readonly StyledProperty<double> StartXProperty =
+        AvaloniaProperty.Register<DataRegionAnnotation, double>(nameof(StartX));
+
+    /// <summary>Defines the <see cref="EndX"/> styled property.</summary>
+    public static readonly StyledProperty<double> EndXProperty =
+        AvaloniaProperty.Register<DataRegionAnnotation, double>(nameof(EndX));
+
+    /// <summary>Defines the <see cref="Label"/> styled property.</summary>
+    public static readonly StyledProperty<string?> LabelProperty =
+        AvaloniaProperty.Register<DataRegionAnnotation, string?>(nameof(Label));
+
+    /// <summary>Defines the <see cref="FillOpacity"/> styled property.</summary>
+    public static readonly StyledProperty<double> FillOpacityProperty =
+        AvaloniaProperty.Register<DataRegionAnnotation, double>(nameof(FillOpacity), 0.1);
+
+    /// <summary>When true, draws dashed vertical lines at start and end.</summary>
+    public static readonly StyledProperty<bool> ShowBoundariesProperty =
+        AvaloniaProperty.Register<DataRegionAnnotation, bool>(nameof(ShowBoundaries), true);
+
+    /// <summary>Label position within the region.</summary>
+    public static readonly StyledProperty<DataRegionLabelPosition> LabelPositionProperty =
+        AvaloniaProperty.Register<DataRegionAnnotation, DataRegionLabelPosition>(nameof(LabelPosition), DataRegionLabelPosition.Top);
+
+    public double StartX { get => GetValue(StartXProperty); set => SetValue(StartXProperty, value); }
+    public double EndX { get => GetValue(EndXProperty); set => SetValue(EndXProperty, value); }
+    public string? Label { get => GetValue(LabelProperty); set => SetValue(LabelProperty, value); }
+    public double FillOpacity { get => GetValue(FillOpacityProperty); set => SetValue(FillOpacityProperty, value); }
+    public bool ShowBoundaries { get => GetValue(ShowBoundariesProperty); set => SetValue(ShowBoundariesProperty, value); }
+    public DataRegionLabelPosition LabelPosition { get => GetValue(LabelPositionProperty); set => SetValue(LabelPositionProperty, value); }
+
+    public override void Render(DrawingContext context, Rect plotArea,
+        ChartAxis? xAxis, ChartAxis? yAxis, IReadOnlyList<ChartSeries> allSeries)
+    {
+        if (!IsVisible) return;
+        if (xAxis == null) return;
+
+        var color = Color ?? Brushes.SteelBlue;
+        var fillBrush = new SolidColorBrush(((SolidColorBrush)color).Color) { Opacity = FillOpacity };
+
+        var px1 = xAxis.ValueToPixel(StartX);
+        var px2 = xAxis.ValueToPixel(EndX);
+        var regionRect = new Rect(Math.Min(px1, px2), plotArea.Top, Math.Abs(px2 - px1), plotArea.Height);
+
+        // Fill region
+        context.DrawRectangle(fillBrush, null, regionRect);
+
+        // Boundary lines
+        if (ShowBoundaries)
+        {
+            var boundaryPen = new Pen(color, 1.0, new DashStyle(new double[] { 4, 3 }, 0));
+            context.DrawLine(boundaryPen, new Point(px1, plotArea.Top), new Point(px1, plotArea.Bottom));
+            context.DrawLine(boundaryPen, new Point(px2, plotArea.Top), new Point(px2, plotArea.Bottom));
+        }
+
+        // Label
+        if (!string.IsNullOrEmpty(Label))
+        {
+            var formattedText = new FormattedText(Label,
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Segoe UI", FontStyle.Normal, FontWeight.SemiBold),
+                10.0, color);
+
+            double lx, ly;
+            switch (LabelPosition)
+            {
+                case DataRegionLabelPosition.Top:
+                    lx = regionRect.Center.X - formattedText.Width / 2;
+                    ly = regionRect.Top + 4;
+                    break;
+                case DataRegionLabelPosition.Center:
+                    lx = regionRect.Center.X - formattedText.Width / 2;
+                    ly = regionRect.Center.Y - formattedText.Height / 2;
+                    break;
+                case DataRegionLabelPosition.Bottom:
+                    lx = regionRect.Center.X - formattedText.Width / 2;
+                    ly = regionRect.Bottom - formattedText.Height - 4;
+                    break;
+                default:
+                    lx = regionRect.X + 4;
+                    ly = regionRect.Top + 4;
+                    break;
+            }
+
+            context.DrawText(formattedText, new Point(lx, ly));
+        }
+    }
+}
+
+/// <summary>
+/// Label position within a data region annotation.
+/// </summary>
+public enum DataRegionLabelPosition
+{
+    Top,
+    Center,
+    Bottom
+}
+
+/// <summary>
 /// Renders mark points (max, min, average) on chart series.
 /// Mark points are symbols placed at specific data locations to highlight important values.
 ///

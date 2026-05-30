@@ -140,6 +140,10 @@ public class Chart : Control
     /// <summary>DataZoom slider for selecting a data range subset.</summary>
     public DataZoom DataZoom { get; } = new();
 
+    /// <summary>Annotations collection for mark points, mark lines, mark areas,
+    /// text annotations, and data regions.</summary>
+    public AvaloniaList<Annotations.ChartAnnotation> Annotations { get; } = new();
+
     // ────────────────────────────────────────────────
     //  Series collection
     // ────────────────────────────────────────────────
@@ -287,6 +291,90 @@ public class Chart : Control
     }
 
     // ────────────────────────────────────────────────
+    //  Theme application
+    // ────────────────────────────────────────────────
+
+    /// <summary>
+    /// Apply a theme configuration to this chart. Sets backgrounds, colors,
+    /// fonts, and series palette to match the theme.
+    /// </summary>
+    /// <param name="themeConfig">The theme configuration to apply.</param>
+    public void ApplyTheme(G2.ChartThemeConfig themeConfig)
+    {
+        if (themeConfig.Background != null)
+            ChartBackground = themeConfig.Background;
+
+        if (themeConfig.PlotBackground != null)
+            Grid.PlotAreaBackground = themeConfig.PlotBackground;
+
+        if (themeConfig.TextBrush != null)
+            TitleBrush = themeConfig.TextBrush;
+
+        // Axes
+        if (themeConfig.AxisLineBrush != null)
+        {
+            XAxis.AxisLineBrush = themeConfig.AxisLineBrush;
+            YAxis.AxisLineBrush = themeConfig.AxisLineBrush;
+        }
+        if (themeConfig.AxisLabelBrush != null)
+        {
+            XAxis.LabelBrush = themeConfig.AxisLabelBrush;
+            YAxis.LabelBrush = themeConfig.AxisLabelBrush;
+        }
+        if (themeConfig.GridLineBrush != null)
+        {
+            XAxis.GridLineBrush = themeConfig.GridLineBrush;
+            YAxis.GridLineBrush = themeConfig.GridLineBrush;
+        }
+
+        // Legend
+        if (themeConfig.LegendTextBrush != null)
+            Legend.LabelBrush = themeConfig.LegendTextBrush;
+        Legend.FontSize = themeConfig.LegendFontSize;
+
+        // Tooltip
+        if (themeConfig.TooltipBackground != null)
+            Tooltip.Background = themeConfig.TooltipBackground;
+        if (themeConfig.TooltipTextBrush != null)
+            Tooltip.Foreground = themeConfig.TooltipTextBrush;
+        if (themeConfig.TooltipBorderBrush != null)
+            Tooltip.BorderBrush = themeConfig.TooltipBorderBrush;
+        Tooltip.FontSize = themeConfig.TooltipFontSize;
+        if (themeConfig.CrosshairBrush != null)
+            Tooltip.CrosshairBrush = themeConfig.CrosshairBrush;
+
+        // Title
+        TitleFontSize = themeConfig.TitleFontSize;
+
+        // Palette
+        if (themeConfig.ColorPalette != null)
+        {
+            var colors = themeConfig.ColorPalette
+                .Select(b => b is SolidColorBrush scb ? scb.Color : Colors.DodgerBlue)
+                .ToArray();
+            Palette = colors;
+        }
+
+        InvalidateVisual();
+    }
+
+    /// <summary>
+    /// Apply a preset theme by enum value.
+    /// </summary>
+    /// <param name="theme">The theme preset to apply.</param>
+    public void ApplyTheme(ChartTheme theme)
+    {
+        var config = theme switch
+        {
+            ChartTheme.Dark => G2.ChartThemeConfig.DefaultDark(),
+            ChartTheme.Light => G2.ChartThemeConfig.DefaultLight(),
+            _ => G2.ChartThemeConfig.DefaultLight()
+        };
+        ApplyTheme(config);
+        Theme = theme;
+    }
+
+    // ────────────────────────────────────────────────
     //  Lifecycle
     // ────────────────────────────────────────────────
 
@@ -401,7 +489,13 @@ public class Chart : Control
             renderer.Render(context, series, _plotArea, XAxis, seriesYAxis, progress, Series, _renderContext);
         }
 
-        // 6. Plot area border
+        // 6. Annotations
+        foreach (var annotation in Annotations)
+        {
+            annotation.Render(context, _plotArea, XAxis, YAxis, Series);
+        }
+
+        // 7. Plot area border
         if (Grid.PlotAreaBorderBrush is IBrush borderBrush && Grid.PlotAreaBorderThickness > 0)
         {
             context.DrawRectangle(null,
@@ -533,6 +627,96 @@ public class Chart : Control
             }
         }
 
+        // Minor ticks
+        if (axis.ShowMinorTicks && axis.MinorTickCount > 0)
+        {
+            var minorBrush = axis.MinorTickBrush ?? axisLineBrush;
+            var minorPen = new Pen(minorBrush, axis.AxisLineWidth * 0.5);
+            var minorLen = axis.MinorTickLength;
+
+            foreach (var minorTick in axis.ComputedMinorTicks)
+            {
+                var minorPixel = axis.ValueToPixel(minorTick);
+                switch (axis.Position)
+                {
+                    case AxisPosition.Bottom:
+                        context.DrawLine(minorPen,
+                            new Point(minorPixel, _plotArea.Bottom),
+                            new Point(minorPixel, _plotArea.Bottom + minorLen));
+                        break;
+                    case AxisPosition.Left:
+                        context.DrawLine(minorPen,
+                            new Point(_plotArea.Left - minorLen, minorPixel),
+                            new Point(_plotArea.Left, minorPixel));
+                        break;
+                    case AxisPosition.Top:
+                        context.DrawLine(minorPen,
+                            new Point(minorPixel, _plotArea.Top),
+                            new Point(minorPixel, _plotArea.Top - minorLen));
+                        break;
+                    case AxisPosition.Right:
+                        context.DrawLine(minorPen,
+                            new Point(_plotArea.Right, minorPixel),
+                            new Point(_plotArea.Right + minorLen, minorPixel));
+                        break;
+                }
+            }
+        }
+
+        // Split area (alternating bands between grid lines)
+        if (axis.ShowSplitArea && axis.ComputedTicks.Length > 1)
+        {
+            var splitBrush = axis.SplitAreaBrush
+                ?? TryFindResource<IBrush>("AuraMutedBrush")
+                ?? new SolidColorBrush(Colors.LightGray, 0.05);
+
+            for (int i = 0; i < axis.ComputedTicks.Length - 1; i += 2)
+            {
+                var p1 = axis.ValueToPixel(axis.ComputedTicks[i]);
+                var p2 = axis.ValueToPixel(axis.ComputedTicks[i + 1]);
+                Rect bandRect;
+                if (axis.Position is AxisPosition.Left or AxisPosition.Right)
+                    bandRect = new Rect(_plotArea.Left, Math.Min(p1, p2), _plotArea.Width, Math.Abs(p2 - p1));
+                else
+                    bandRect = new Rect(Math.Min(p1, p2), _plotArea.Top, Math.Abs(p2 - p1), _plotArea.Height);
+                context.DrawRectangle(splitBrush, null, bandRect);
+            }
+        }
+
+        // Axis break indicators
+        if (axis.BreakRanges.Count > 0)
+        {
+            var breakBrush = axisLineBrush;
+            foreach (var brk in axis.BreakRanges)
+            {
+                var p1 = axis.ValueToPixel(brk.Start);
+                var p2 = axis.ValueToPixel(brk.End);
+                var breakMid = (p1 + p2) / 2;
+
+                // Draw zigzag break indicator
+                var zigzagPen = new Pen(breakBrush, 1.5);
+                if (axis.Position is AxisPosition.Left or AxisPosition.Right)
+                {
+                    var x = _plotArea.Left;
+                    context.DrawLine(zigzagPen, new Point(x - 4, breakMid - 4), new Point(x + 0, breakMid));
+                    context.DrawLine(zigzagPen, new Point(x + 0, breakMid), new Point(x - 4, breakMid + 4));
+                    // Mirror on the other side
+                    var xr = _plotArea.Right;
+                    context.DrawLine(zigzagPen, new Point(xr + 4, breakMid - 4), new Point(xr, breakMid));
+                    context.DrawLine(zigzagPen, new Point(xr, breakMid), new Point(xr + 4, breakMid + 4));
+                }
+                else
+                {
+                    var y = _plotArea.Top;
+                    context.DrawLine(zigzagPen, new Point(breakMid - 4, y - 4), new Point(breakMid, y));
+                    context.DrawLine(zigzagPen, new Point(breakMid, y), new Point(breakMid + 4, y - 4));
+                    var yb = _plotArea.Bottom;
+                    context.DrawLine(zigzagPen, new Point(breakMid - 4, yb + 4), new Point(breakMid, yb));
+                    context.DrawLine(zigzagPen, new Point(breakMid, yb), new Point(breakMid + 4, yb + 4));
+                }
+            }
+        }
+
         // Tick marks and labels
         if (!axis.ShowLabels && !axis.ShowTicks) return;
 
@@ -572,8 +756,16 @@ public class Chart : Control
             // Label
             if (axis.ShowLabels)
             {
-                var format = axis.LabelFormat ?? "{0}";
-                var labelText = string.Format(System.Globalization.CultureInfo.CurrentCulture, format, tick);
+                string labelText;
+                if (axis.LabelFormatter != null)
+                {
+                    labelText = axis.LabelFormatter(tick);
+                }
+                else
+                {
+                    var format = axis.LabelFormat ?? "{0}";
+                    labelText = string.Format(System.Globalization.CultureInfo.CurrentCulture, format, tick);
+                }
 
                 var formattedText = new FormattedText(labelText,
                     System.Globalization.CultureInfo.CurrentCulture,
@@ -654,34 +846,93 @@ public class Chart : Control
         var swatchSize = Legend.SwatchSize;
         var fontSize = Legend.FontSize;
         var spacing = Legend.ItemSpacing;
+        var icon = Legend.Icon;
+        var inactiveColor = Legend.InactiveColor
+            ?? TryFindResource<IBrush>("AuraForegroundDisabledBrush")
+            ?? new SolidColorBrush(Colors.Gray, 0.3);
+        var inactiveLabelBrush = Legend.InactiveLabelBrush
+            ?? new SolidColorBrush(Colors.Gray, 0.5);
 
         var x = Legend.LayoutRect.Left;
         var y = Legend.LayoutRect.Top;
+        int renderedCount = 0;
+        int scrollOffset = Legend.ScrollOffset;
 
-        foreach (var series in Series)
+        // Determine which items to render
+        var items = Legend.CustomItems != null
+            ? Series.Where((_, i) => i < Legend.CustomItems.Count).Select((s, i) => (Series: s, Custom: Legend.CustomItems[i])).ToList()
+            : Series.Select(s => (Series: s, Custom: (LegendCustomItem?)null)).ToList();
+
+        // Apply scroll offset
+        int startIdx = 0;
+        if (Legend.IsScrollable && Legend.MaxVisibleItems > 0)
         {
-            if (!series.IsVisible || string.IsNullOrEmpty(series.Title)) continue;
+            startIdx = Math.Min(scrollOffset, Math.Max(0, items.Count - Legend.MaxVisibleItems));
+        }
 
-            var color = series.Color is IBrush b
-                ? b
-                : new SolidColorBrush(LineRenderer.DefaultPalette[series.SeriesIndex % LineRenderer.DefaultPalette.Length]);
+        for (int i = startIdx; i < items.Count; i++)
+        {
+            // Stop if we've hit the max visible items limit
+            if (Legend.IsScrollable && Legend.MaxVisibleItems > 0 && renderedCount >= Legend.MaxVisibleItems)
+                break;
 
-            // Swatch
-            var swatchRect = new Rect(x, y + (fontSize - swatchSize) / 2, swatchSize, swatchSize);
-            context.DrawRectangle(color, null, swatchRect,
-                Legend.SwatchCornerRadius, Legend.SwatchCornerRadius);
+            var (series, custom) = items[i];
+            if (custom == null && (string.IsNullOrEmpty(series.Title))) continue;
+
+            var isActive = custom?.IsActive ?? true;
+            var itemColor = isActive
+                ? (custom?.Color ?? (series.Color is IBrush b
+                    ? b
+                    : new SolidColorBrush(LineRenderer.DefaultPalette[series.SeriesIndex % LineRenderer.DefaultPalette.Length])))
+                : inactiveColor;
+            var itemLabelBrush = isActive ? labelBrush : inactiveLabelBrush;
+            var itemIcon = custom?.Icon ?? icon;
+            var title = custom?.Name ?? series.Title ?? "";
+
+            // Draw icon swatch based on LegendIcon type
+            var swatchCenterX = x + swatchSize / 2;
+            var swatchCenterY = y + fontSize / 2;
+            var halfSwatch = swatchSize / 2;
+
+            switch (itemIcon)
+            {
+                case LegendIcon.Circle:
+                    context.DrawEllipse(itemColor, null, new Point(swatchCenterX, swatchCenterY), halfSwatch, halfSwatch);
+                    break;
+                case LegendIcon.RoundRect:
+                    var rrRect = new Rect(x, y + (fontSize - swatchSize) / 2, swatchSize, swatchSize);
+                    context.DrawRectangle(itemColor, null, rrRect, Legend.SwatchCornerRadius, Legend.SwatchCornerRadius);
+                    break;
+                case LegendIcon.Triangle:
+                    DrawTriangleIcon(context, swatchCenterX, swatchCenterY, halfSwatch, itemColor);
+                    break;
+                case LegendIcon.Diamond:
+                    DrawDiamondIcon(context, swatchCenterX, swatchCenterY, halfSwatch, itemColor);
+                    break;
+                case LegendIcon.Pin:
+                    DrawPinIcon(context, swatchCenterX, swatchCenterY, halfSwatch, itemColor);
+                    break;
+                case LegendIcon.None:
+                    break;
+                case LegendIcon.Rect:
+                default:
+                    var swatchRect = new Rect(x, y + (fontSize - swatchSize) / 2, swatchSize, swatchSize);
+                    context.DrawRectangle(itemColor, null, swatchRect);
+                    break;
+            }
 
             // Label
-            var formattedText = new FormattedText(series.Title,
+            var formattedText = new FormattedText(title,
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                s_labelTypeface,
+                new Typeface(Legend.TextFontFamily ?? "Segoe UI", FontStyle.Normal, Legend.TextFontWeight),
                 fontSize,
-                labelBrush);
+                itemLabelBrush);
 
             context.DrawText(formattedText, new Point(x + swatchSize + 4, y));
 
             x += swatchSize + 4 + formattedText.Width + spacing;
+            renderedCount++;
 
             // Wrap to next line if needed
             if (x > Legend.LayoutRect.Right - 50)
@@ -690,6 +941,94 @@ public class Chart : Control
                 y += fontSize + 4;
             }
         }
+
+        // Render scroll indicators if scrollable
+        if (Legend.IsScrollable && Legend.MaxVisibleItems > 0 && items.Count > Legend.MaxVisibleItems)
+        {
+            var scrollIndicatorBrush = labelBrush;
+            if (startIdx > 0)
+            {
+                var upText = new FormattedText("▲",
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, s_labelTypeface, 8, scrollIndicatorBrush);
+                context.DrawText(upText, new Point(Legend.LayoutRect.Right - 20, Legend.LayoutRect.Top));
+            }
+            if (startIdx + Legend.MaxVisibleItems < items.Count)
+            {
+                var downText = new FormattedText("▼",
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, s_labelTypeface, 8, scrollIndicatorBrush);
+                context.DrawText(downText, new Point(Legend.LayoutRect.Right - 20, Legend.LayoutRect.Bottom - 12));
+            }
+        }
+
+        // Render selector buttons
+        if (Legend.ShowSelectAll || Legend.ShowInverse)
+        {
+            var selectorX = Legend.LayoutRect.Right - 80;
+            var selectorY = Legend.LayoutRect.Top;
+            var selectorBrush = Legend.SelectorBrush ?? labelBrush;
+            var selectorFontSize = fontSize - 1;
+
+            if (Legend.ShowSelectAll)
+            {
+                var allText = new FormattedText("All",
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, s_labelTypeface, selectorFontSize, selectorBrush);
+                context.DrawText(allText, new Point(selectorX, selectorY));
+                selectorX += 44;
+            }
+
+            if (Legend.ShowInverse)
+            {
+                var invText = new FormattedText("Inverse",
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, s_labelTypeface, selectorFontSize, selectorBrush);
+                context.DrawText(invText, new Point(selectorX, selectorY));
+            }
+        }
+    }
+
+    private static void DrawTriangleIcon(DrawingContext context, double cx, double cy, double half, IBrush fill)
+    {
+        var geometry = new PathGeometry();
+        var figure = new PathFigure { StartPoint = new Point(cx, cy - half), IsClosed = true };
+        figure.Segments!.Add(new LineSegment { Point = new Point(cx + half, cy + half * 0.6) });
+        figure.Segments!.Add(new LineSegment { Point = new Point(cx - half, cy + half * 0.6) });
+        geometry.Figures!.Add(figure);
+        context.DrawGeometry(fill, null, geometry);
+    }
+
+    private static void DrawDiamondIcon(DrawingContext context, double cx, double cy, double half, IBrush fill)
+    {
+        var geometry = new PathGeometry();
+        var figure = new PathFigure { StartPoint = new Point(cx, cy - half), IsClosed = true };
+        figure.Segments!.Add(new LineSegment { Point = new Point(cx + half, cy) });
+        figure.Segments!.Add(new LineSegment { Point = new Point(cx, cy + half) });
+        figure.Segments!.Add(new LineSegment { Point = new Point(cx - half, cy) });
+        geometry.Figures!.Add(figure);
+        context.DrawGeometry(fill, null, geometry);
+    }
+
+    private static void DrawPinIcon(DrawingContext context, double cx, double cy, double half, IBrush fill)
+    {
+        // Simplified pin (teardrop) shape
+        var geometry = new PathGeometry();
+        var figure = new PathFigure { StartPoint = new Point(cx, cy + half), IsClosed = true };
+        figure.Segments!.Add(new BezierSegment
+        {
+            Point1 = new Point(cx - half, cy),
+            Point2 = new Point(cx - half, cy - half),
+            Point3 = new Point(cx, cy - half)
+        });
+        figure.Segments!.Add(new BezierSegment
+        {
+            Point1 = new Point(cx + half, cy - half),
+            Point2 = new Point(cx + half, cy),
+            Point3 = new Point(cx, cy + half)
+        });
+        geometry.Figures!.Add(figure);
+        context.DrawGeometry(fill, null, geometry);
     }
 
     // ────────────────────────────────────────────────
