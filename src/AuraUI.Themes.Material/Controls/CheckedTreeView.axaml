@@ -29,6 +29,8 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraOnSurfaceBrush}"/>
         <Setter Property="Padding" Value="12,10"/>
         <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="display:CheckedTreeViewItem">
@@ -70,6 +72,13 @@
                                               VerticalAlignment="Center"
                                               IsThreeState="True"/>
 
+                                    <!-- Icon -->
+                                    <Image Name="PART_Icon"
+                                           Width="20" Height="20"
+                                           Stretch="Uniform"
+                                           VerticalAlignment="Center"
+                                           IsVisible="False"/>
+
                                     <!-- Content -->
                                     <ContentPresenter Name="PART_ContentPresenter"
                                                       Content="{TemplateBinding Header}"
@@ -91,11 +100,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.200"/>
+            </Transitions>
+        </Setter>
     </Style>
 
     <!-- Hover (state layer) -->
     <Style Selector="display|CheckedTreeViewItem:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+    </Style>
+
+    <!-- Pressed (state layer) -->
+    <Style Selector="display|CheckedTreeViewItem:pressed /template/ Border#StateLayer">
+        <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>
 
     <!-- Selected -->

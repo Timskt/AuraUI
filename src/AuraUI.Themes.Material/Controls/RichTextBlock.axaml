@@ -13,6 +13,7 @@
                 <ControlTemplate TargetType="display:RichTextBlock">
                     <StackPanel Name="PART_ContentPanel"
                                 Spacing="{TemplateBinding LineSpacing}">
+                        <!-- Segments rendered as inline TextBlocks -->
                         <ItemsControl Name="PART_SegmentsPresenter">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -24,6 +25,19 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Hyperlink styling within RichTextBlock -->
+    <Style Selector="display|RichTextBlock TextBlock.hyperlink">
+        <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+    </Style>
+
+    <!-- Hyperlink hover — Material state layer -->
+    <Style Selector="display|RichTextBlock TextBlock.hyperlink:pointerover">
+        <Setter Property="Opacity" Value="0.85"/>
     </Style>
 
 </Styles>
