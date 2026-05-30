@@ -101,6 +101,7 @@
     <!-- Hover -->
     <Style Selector="ComboBox:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Focused / Open -->
@@ -150,7 +151,8 @@
                             ClipToBounds="True">
                         <Panel>
                             <Border Name="StateLayer"
-                                    Background="Transparent"/>
+                                    Background="Transparent"
+                                    CornerRadius="{DynamicResource AuraRadiusNone}"/>
                             <ContentPresenter Name="PART_ContentPresenter"
                                               Margin="{TemplateBinding Padding}"
                                               Content="{TemplateBinding Content}"
@@ -171,16 +173,19 @@
     <!-- Hover -->
     <Style Selector="ComboBoxItem:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusNone}"/>
     </Style>
 
     <!-- Pressed -->
     <Style Selector="ComboBoxItem:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusNone}"/>
     </Style>
 
     <!-- Selected -->
     <Style Selector="ComboBoxItem:selected /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraSelectedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusNone}"/>
     </Style>
 
     <Style Selector="ComboBoxItem:selected">

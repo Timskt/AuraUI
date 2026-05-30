@@ -70,6 +70,7 @@
     <!-- Tag hover/press states -->
     <Style Selector="layout|Tag:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 

@@ -100,11 +100,13 @@
     <!-- Hover (state layer) -->
     <Style Selector="navigation|AuraMenuItem:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- Pressed -->
     <Style Selector="navigation|AuraMenuItem:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
     </Style>
 
     <!-- Selected -->

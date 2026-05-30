@@ -52,6 +52,7 @@
     <!-- CheckBox :pointerover -->
     <Style Selector="CheckBox:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
@@ -68,18 +69,21 @@
     <!-- CheckBox checked + :pointerover -->
     <Style Selector="CheckBox:checked:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
     </Style>
 
     <!-- CheckBox checked + :pressed -->
     <Style Selector="CheckBox:checked:pressed /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryPressedBrush}"/>
     </Style>
 
     <!-- CheckBox :pressed -->
     <Style Selector="CheckBox:pressed /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundDisabledBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
     </Style>
 
     <!-- CheckBox :focus -->
@@ -152,6 +156,7 @@
 
     <Style Selector="CheckBox.card:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderHoverBrush}"/>
     </Style>
 

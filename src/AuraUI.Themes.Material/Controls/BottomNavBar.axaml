@@ -74,6 +74,7 @@
     <!-- Hover -->
     <Style Selector="navigation|BottomNavBarItem:pointerover /template/ Border#PART_Indicator">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="16"/>
     </Style>
 
 </Styles>

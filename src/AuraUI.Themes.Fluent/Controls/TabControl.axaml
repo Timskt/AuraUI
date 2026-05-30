@@ -116,6 +116,7 @@
     </Style>
     <Style Selector="TabStripItem:pointerover /template/ Border#PART_SelectedPipe">
         <Setter Property="Background" Value="{DynamicResource AuraBorderHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="1.5,1.5,0,0"/>
     </Style>
 
     <!-- TabItem :selected -->
@@ -205,6 +206,7 @@
     </Style>
     <Style Selector="navigation|AuraTabControl.pills TabStripItem:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
     <Style Selector="navigation|AuraTabControl.pills TabStripItem:selected /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>

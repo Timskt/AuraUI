@@ -74,11 +74,13 @@
     <!-- Hover state layer (8% primary overlay) -->
     <Style Selector="Button:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Pressed state layer (12% primary overlay) -->
     <Style Selector="Button:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Pressed scale effect -->
@@ -111,10 +113,12 @@
 
     <Style Selector="Button.outlined:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="Button.outlined:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Text / Ghost Variant (.text) -->
@@ -129,10 +133,12 @@
 
     <Style Selector="Button.text:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="Button.text:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Tonal Variant (.tonal) -->
@@ -145,10 +151,12 @@
 
     <Style Selector="Button.tonal:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="Button.tonal:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Elevated Variant (.elevated) -->
@@ -161,10 +169,12 @@
 
     <Style Selector="Button.elevated:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="Button.elevated:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- FAB Variant (.fab) -->
@@ -183,10 +193,12 @@
 
     <Style Selector="Button.fab:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="Button.fab:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Small FAB -->
@@ -233,10 +245,12 @@
 
     <Style Selector="Button.icon:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="Button.icon:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Icon Filled -->

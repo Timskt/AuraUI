@@ -114,6 +114,7 @@
     <!-- Hover -->
     <Style Selector="TextBox:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <!-- Focused -->

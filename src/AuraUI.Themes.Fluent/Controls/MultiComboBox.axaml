@@ -110,6 +110,7 @@
     <!-- MultiComboBox :pointerover -->
     <Style Selector="selection|MultiComboBox:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
@@ -182,6 +183,7 @@
     <!-- MultiCombo toggle states -->
     <Style Selector="ToggleButton.multi-combo-toggle:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>
 
@@ -213,6 +215,7 @@
 
     <Style Selector="ListBox.multi-combo ListBoxItem:pointerover /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
     </Style>
 
     <Style Selector="ListBox.multi-combo ListBoxItem:selected /template/ Border#PART_Border">
