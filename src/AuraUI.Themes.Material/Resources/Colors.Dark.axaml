@@ -19,6 +19,9 @@
     <SolidColorBrush x:Key="AuraForegroundTertiaryBrush" Color="#938F99"/>
     <SolidColorBrush x:Key="AuraForegroundDisabledBrush" Color="#49454F"/>
     <SolidColorBrush x:Key="AuraForegroundOnAccentBrush" Color="#381E72"/>
+    <SolidColorBrush x:Key="AuraForegroundInverseBrush" Color="#313033"/>
+    <SolidColorBrush x:Key="AuraForegroundLinkBrush" Color="#D0BCFF"/>
+    <SolidColorBrush x:Key="AuraForegroundLinkHoverBrush" Color="#BEA8F0"/>
 
     <!-- Semantic / Brand Colors -->
     <SolidColorBrush x:Key="AuraPrimaryBrush" Color="#D0BCFF"/>
@@ -38,6 +41,10 @@
     <SolidColorBrush x:Key="AuraBorderBrush" Color="#49454F"/>
     <SolidColorBrush x:Key="AuraBorderHoverBrush" Color="#938F99"/>
     <SolidColorBrush x:Key="AuraDividerBrush" Color="#49454F"/>
+
+    <!-- On Surface / On Surface Variant (M3) -->
+    <SolidColorBrush x:Key="AuraOnSurfaceBrush" Color="#E6E1E5"/>
+    <SolidColorBrush x:Key="AuraOnSurfaceVariantBrush" Color="#CAC4D0"/>
 
     <!-- Surface Tint (Material You) -->
     <SolidColorBrush x:Key="AuraSurfaceTintBrush" Color="#D0BCFF"/>

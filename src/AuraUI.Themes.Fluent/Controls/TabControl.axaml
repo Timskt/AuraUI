@@ -80,6 +80,12 @@
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Margin" Value="0,0,4,0"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.150" Property="Foreground"/>
+                <BrushTransition Duration="00:00:00.150" Property="Background"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <DockPanel LastChildFill="False">

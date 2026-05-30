@@ -26,7 +26,7 @@ namespace AuraUI.Controls.Charts.Interaction;
 public class DataZoom
 {
     /// <summary>Whether the data zoom control is visible.</summary>
-    public bool IsVisible { get; set; } = true;
+    public bool IsVisible { get; set; }
 
     /// <summary>
     /// Display mode: Slider (below chart) or Inside (overlay on chart).

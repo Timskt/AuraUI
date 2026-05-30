@@ -9,7 +9,7 @@
          Styles are minimal — the control uses its own CodeForeground/CodeBackground properties. -->
     <Style Selector="display|QRCode">
         <Setter Property="CodeForeground" Value="{DynamicResource AuraForegroundBrush}"/>
-        <Setter Property="CodeBackground" Value="{DynamicResource AuraCardBackgroundBrush}"/>
+        <Setter Property="CodeBackground" Value="{DynamicResource AuraCardBrush}"/>
     </Style>
 
 </Styles>

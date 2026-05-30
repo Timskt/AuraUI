@@ -25,7 +25,7 @@
                             </ItemsPresenter.ItemsPanel>
                         </ItemsPresenter>
                         <Border Name="PART_Indicator"
-                                Background="{DynamicResource AuraCardBackgroundBrush}"
+                                Background="{DynamicResource AuraCardBrush}"
                                 CornerRadius="{DynamicResource AuraRadiusSm}"
                                 BoxShadow="{DynamicResource AuraShadowSm}"
                                 IsHitTestVisible="False"/>

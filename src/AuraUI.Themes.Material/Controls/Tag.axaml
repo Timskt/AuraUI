@@ -101,15 +101,15 @@
 
     <!-- Variant: Success -->
     <Style Selector="layout|Tag:success">
-        <Setter Property="Background" Value="#1A2E7D32"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraSuccessBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraSuccessContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnSuccessContainerBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
     </Style>
 
     <!-- Variant: Warning -->
     <Style Selector="layout|Tag:warning">
-        <Setter Property="Background" Value="#1AED6C02"/>
-        <Setter Property="Foreground" Value="{DynamicResource AuraWarningBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AuraWarningContainerBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraOnWarningContainerBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
     </Style>
 

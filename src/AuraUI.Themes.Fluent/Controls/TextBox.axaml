@@ -16,6 +16,12 @@
         <Setter Property="CaretBrush" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="SelectionBrush" Value="{DynamicResource AuraPrimaryMutedBrush}"/>
         <Setter Property="Watermark" Value=""/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
@@ -102,7 +108,6 @@
     <Style Selector="TextBox:focus /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
     <!-- TextBox :disabled -->

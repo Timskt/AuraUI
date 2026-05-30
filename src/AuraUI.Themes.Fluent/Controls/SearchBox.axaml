@@ -86,7 +86,6 @@
     <Style Selector="TextBox.search:focus /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundFocusBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
     <!-- SearchBox :disabled -->

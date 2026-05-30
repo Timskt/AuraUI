@@ -151,13 +151,13 @@
     </Style>
 
     <Style Selector="Border.snackbar Button.snackbar-close:pointerover">
-        <Setter Property="Background" Value="#20FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Snackbar divider between message and action -->
     <Style Selector="Border.snackbar-divider">
         <Setter Property="Width" Value="1"/>
-        <Setter Property="Background" Value="#40FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AuraDividerBrush}"/>
         <Setter Property="Margin" Value="8,0"/>
     </Style>
 

@@ -16,6 +16,13 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                <BrushTransition Duration="00:00:00.200" Property="Foreground"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"

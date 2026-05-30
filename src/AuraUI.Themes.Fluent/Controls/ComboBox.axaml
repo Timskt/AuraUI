@@ -15,6 +15,12 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Name="PART_Border"
@@ -96,7 +102,6 @@
     <!-- ComboBox :focus -->
     <Style Selector="ComboBox:focus /template/ Border#PART_Border">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
 
     <!-- ComboBox :disabled -->

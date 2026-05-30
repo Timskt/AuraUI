@@ -15,6 +15,14 @@
         <Setter Property="BoxShadow" Value="{DynamicResource AuraShadowSm}"/>
         <Setter Property="HeaderBackground" Value="Transparent"/>
         <Setter Property="FooterBackground" Value="Transparent"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="00:00:00.200" Property="Background"/>
+                <BrushTransition Duration="00:00:00.200" Property="BorderBrush"/>
+                <BoxShadowsTransition Duration="00:00:00.200" Property="BoxShadow"/>
+                <DoubleTransition Duration="00:00:00.200" Property="TranslateTransform.Y" Easing="{DynamicResource AuraEasingDecelerate}"/>
+            </Transitions>
+        </Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
