@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using Avalonia.Media;
-using AuraUI.Controls.Display;
 using AuraUI.Demo.Models;
 
 namespace AuraUI.Demo.Pages;
@@ -33,33 +32,127 @@ public class GanttChartPage : ComponentPageBase
 
     private Control BuildBasicExample()
     {
+        // Standard Avalonia fallback for GanttChart (custom control template not yet available)
         var today = DateTime.Today;
-        var tasks = new ObservableCollection<GanttTask>
+        var tasks = new[]
         {
-            new GanttTask { Name = "Design", Start = today, End = today.AddDays(5), Progress = 1.0, Color = new SolidColorBrush(Color.Parse("#0078D4")) },
-            new GanttTask { Name = "Frontend", Start = today.AddDays(3), End = today.AddDays(10), Progress = 0.6, Color = new SolidColorBrush(Color.Parse("#107C10")) },
-            new GanttTask { Name = "Backend", Start = today.AddDays(5), End = today.AddDays(12), Progress = 0.3, Color = new SolidColorBrush(Color.Parse("#D83B01")) },
-            new GanttTask { Name = "Testing", Start = today.AddDays(10), End = today.AddDays(14), Progress = 0.0, Color = new SolidColorBrush(Color.Parse("#5C2D91")) },
-            new GanttTask { Name = "Deploy", Start = today.AddDays(13), End = today.AddDays(15), Progress = 0.0, Color = new SolidColorBrush(Color.Parse("#008272")) },
-        };
-        tasks[1].Dependencies.Add("Design");
-        tasks[2].Dependencies.Add("Design");
-        tasks[3].Dependencies.Add("Frontend");
-        tasks[3].Dependencies.Add("Backend");
-        tasks[4].Dependencies.Add("Testing");
-
-        var chart = new GanttChart
-        {
-            Tasks = tasks,
-            StartDate = today,
-            EndDate = today.AddDays(16),
-            ShowDependencies = true,
-            ZoomLevel = 50,
-            Width = 700,
-            Height = 250
+            ("Design", 0, 5, 1.0, "#0078D4"),
+            ("Frontend", 3, 10, 0.6, "#107C10"),
+            ("Backend", 5, 12, 0.3, "#D83B01"),
+            ("Testing", 10, 14, 0.0, "#5C2D91"),
+            ("Deploy", 13, 15, 0.0, "#008272"),
         };
 
-        return CreateExampleSection("Project Timeline", chart,
+        var totalDays = 16;
+        var grid = new Grid
+        {
+            ColumnDefinitions = new ColumnDefinitions("120,*"),
+            RowDefinitions = new RowDefinitions(),
+            MaxWidth = 700,
+        };
+
+        // Header
+        grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
+        var headerBg = GetBrush("AuraMutedBrush", "#F5F5F5");
+        grid.Children.Add(new Border
+        {
+            Background = headerBg,
+            Padding = new Thickness(8),
+            Child = new TextBlock { Text = "Task", FontWeight = FontWeight.SemiBold, FontSize = 12, Foreground = GetBrush("AuraForegroundBrush") }
+        });
+        var timelineHeader = new StackPanel { Orientation = Orientation.Horizontal };
+        for (int d = 0; d < totalDays; d++)
+        {
+            timelineHeader.Children.Add(new TextBlock
+            {
+                Text = $"D{d + 1}",
+                Width = 38,
+                FontSize = 10,
+                TextAlignment = TextAlignment.Center,
+                Foreground = GetBrush("AuraForegroundSecondaryBrush", "#666666")
+            });
+        }
+        var timelineBorder = new Border { Background = headerBg, Padding = new Thickness(4), Child = timelineHeader };
+        Grid.SetColumn(timelineBorder, 1);
+        Grid.SetRow(timelineBorder, 0);
+        grid.Children.Add(timelineBorder);
+
+        // Task rows
+        for (int i = 0; i < tasks.Length; i++)
+        {
+            var (name, start, end, progress, color) = tasks[i];
+            grid.RowDefinitions.Add(new RowDefinition(new GridLength(36)));
+
+            // Task name
+            var nameCell = new Border
+            {
+                Padding = new Thickness(8, 4),
+                BorderBrush = GetBrush("AuraBorderBrush", "#E0E0E0"),
+                BorderThickness = new Thickness(0, 0, 0, 1),
+                Child = new TextBlock
+                {
+                    Text = name,
+                    FontSize = 13,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Foreground = GetBrush("AuraForegroundBrush")
+                }
+            };
+            Grid.SetColumn(nameCell, 0);
+            Grid.SetRow(nameCell, i + 1);
+            grid.Children.Add(nameCell);
+
+            // Bar area
+            var barContainer = new Grid
+            {
+                Margin = new Thickness(4),
+                Children =
+                {
+                    new Border
+                    {
+                        Margin = new Thickness(start * 38.0 / totalDays * totalDays / totalDays, 4, 0, 4),
+                        Width = (end - start) * 38.0,
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        Background = new SolidColorBrush(Color.Parse(color)) { Opacity = 0.25 },
+                        CornerRadius = new CornerRadius(4),
+                        BorderBrush = new SolidColorBrush(Color.Parse(color)),
+                        BorderThickness = new Thickness(1),
+                        Child = new Grid
+                        {
+                            Children =
+                            {
+                                new Border
+                                {
+                                    HorizontalAlignment = HorizontalAlignment.Left,
+                                    Width = (end - start) * 38.0 * progress,
+                                    Background = new SolidColorBrush(Color.Parse(color)),
+                                    CornerRadius = new CornerRadius(4),
+                                },
+                                new TextBlock
+                                {
+                                    Text = $"{progress:P0}",
+                                    FontSize = 10,
+                                    Foreground = Brushes.White,
+                                    FontWeight = FontWeight.SemiBold,
+                                    HorizontalAlignment = HorizontalAlignment.Center,
+                                    VerticalAlignment = VerticalAlignment.Center
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            var barBorder = new Border
+            {
+                BorderBrush = GetBrush("AuraBorderBrush", "#E0E0E0"),
+                BorderThickness = new Thickness(0, 0, 0, 1),
+                Child = barContainer
+            };
+            Grid.SetColumn(barBorder, 1);
+            Grid.SetRow(barBorder, i + 1);
+            grid.Children.Add(barBorder);
+        }
+
+        return CreateExampleSection("Project Timeline", grid,
             @"<display:GanttChart StartDate=""2024-01-01"" EndDate=""2024-01-16""
     ShowDependencies=""True"" ZoomLevel=""50""
     Width=""700"" Height=""250"">

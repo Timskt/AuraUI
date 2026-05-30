@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
-using AuraUI.Controls.Display;
+using Avalonia.Layout;
+using Avalonia.Media;
 using AuraUI.Demo.Models;
 
 namespace AuraUI.Demo.Pages;
@@ -32,25 +32,104 @@ public class PipelineViewerPage : ComponentPageBase
 
     private Control BuildBasicExample()
     {
-        var stages = new ObservableCollection<PipelineStage>
+        // Standard Avalonia fallback for PipelineViewer (custom control template not yet available)
+        var stages = new[]
         {
-            new PipelineStage { Name = "Checkout", Status = PipelineStageStatus.Success, Duration = TimeSpan.FromSeconds(3) },
-            new PipelineStage { Name = "Build", Status = PipelineStageStatus.Success, Duration = TimeSpan.FromMinutes(2).Add(TimeSpan.FromSeconds(15)) },
-            new PipelineStage { Name = "Test", Status = PipelineStageStatus.Running, Duration = TimeSpan.FromSeconds(45) },
-            new PipelineStage { Name = "Deploy", Status = PipelineStageStatus.Pending },
-            new PipelineStage { Name = "Notify", Status = PipelineStageStatus.Pending },
+            ("Checkout", "Success", TimeSpan.FromSeconds(3), "#107C10"),
+            ("Build", "Success", TimeSpan.FromMinutes(2).Add(TimeSpan.FromSeconds(15)), "#107C10"),
+            ("Test", "Running", TimeSpan.FromSeconds(45), "#0078D4"),
+            ("Deploy", "Pending", TimeSpan.Zero, "#666666"),
+            ("Notify", "Pending", TimeSpan.Zero, "#666666"),
         };
 
-        var pipeline = new PipelineViewer
+        var pipeline = new StackPanel
         {
-            Stages = stages,
-            Orientation = Avalonia.Layout.Orientation.Horizontal,
-            SelectedStageIndex = 2,
-            Width = 700,
-            Height = 120
+            Orientation = Orientation.Horizontal,
+            Spacing = 0,
+            VerticalAlignment = VerticalAlignment.Center,
+            MaxWidth = 700
         };
 
-        return CreateExampleSection("CI/CD Pipeline", pipeline,
+        for (int i = 0; i < stages.Length; i++)
+        {
+            var (name, status, duration, color) = stages[i];
+            var isSelected = i == 2;
+
+            var node = new Border
+            {
+                Width = 32, Height = 32,
+                CornerRadius = new CornerRadius(16),
+                Background = new SolidColorBrush(Color.Parse(color)),
+                BorderBrush = isSelected ? GetBrush("AuraForegroundBrush", "#000000") : null,
+                BorderThickness = isSelected ? new Thickness(2) : new Thickness(0),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Child = new TextBlock
+                {
+                    Text = status == "Success" ? "✓" : status == "Running" ? "▶" : (i + 1).ToString(),
+                    Foreground = Brushes.White,
+                    FontSize = 14,
+                    FontWeight = FontWeight.SemiBold,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                }
+            };
+
+            var label = new TextBlock
+            {
+                Text = name,
+                FontSize = 12,
+                FontWeight = isSelected ? FontWeight.SemiBold : FontWeight.Normal,
+                Foreground = GetBrush("AuraForegroundBrush", "#000000"),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(0, 6, 0, 0)
+            };
+
+            var durationText = new TextBlock
+            {
+                Text = duration > TimeSpan.Zero ? duration.ToString(@"mm\:ss") : "--",
+                FontSize = 10,
+                Foreground = GetBrush("AuraForegroundSecondaryBrush", "#666666"),
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            var stagePanel = new StackPanel
+            {
+                Spacing = 2,
+                Width = 80,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Children = { node, label, durationText }
+            };
+
+            pipeline.Children.Add(stagePanel);
+
+            // Connector line between stages
+            if (i < stages.Length - 1)
+            {
+                var connectorColor = stages[i + 1].Item2 == "Pending" ? "#E0E0E0" : "#107C10";
+                pipeline.Children.Add(new Border
+                {
+                    Height = 2,
+                    Width = 40,
+                    Background = new SolidColorBrush(Color.Parse(connectorColor)),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(0, 0, 0, 20)
+                });
+            }
+        }
+
+        return CreateExampleSection("CI/CD Pipeline",
+            new Border
+            {
+                Width = 700,
+                Height = 120,
+                Background = GetBrush("AuraCardBrush", "#FFFFFF"),
+                BorderBrush = GetBrush("AuraBorderBrush", "#E0E0E0"),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8),
+                Padding = new Thickness(24, 16),
+                Child = pipeline
+            },
             @"<display:PipelineViewer Orientation=""Horizontal""
     SelectedStageIndex=""2"" Width=""700"" Height=""120"">
     <display:PipelineStage Name=""Checkout"" Status=""Success""/>
