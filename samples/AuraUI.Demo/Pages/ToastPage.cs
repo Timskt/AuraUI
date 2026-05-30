@@ -63,7 +63,21 @@ private void ShowErrorToast(object? sender, RoutedEventArgs e)
     => AuraToast.Error(""An error occurred."", ""Error"");
 
 private void ShowInfoToast(object? sender, RoutedEventArgs e)
-    => AuraToast.Info(""Here is some information."", ""Info"");");
+    => AuraToast.Info(""Here is some information."", ""Info"");",
+            @"// Toast with custom duration and position
+AuraToast.Success(""Saved!"", ""Success"", TimeSpan.FromSeconds(5));
+
+// Toast via command in ViewModel
+public ICommand SaveCommand { get; }
+
+public MyViewModel()
+{
+    SaveCommand = new RelayCommand(() =>
+    {
+        // Save logic here
+        AuraToast.Success(""Changes saved!"");
+    });
+}");
     }
 
     private static IReadOnlyList<ApiProperty> GetApiProperties() => new[]

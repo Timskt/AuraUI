@@ -7,6 +7,60 @@
     <Style Selector="feedback|Popconfirm">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="{DynamicResource AuraFontBodyMediumFamily}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="feedback:Popconfirm">
+                    <Panel>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        <Popup Name="PART_Popup"
+                               IsLightDismissEnabled="True"
+                               Placement="{TemplateBinding Placement}">
+                            <Border Name="PART_PopupBorder"
+                                    Background="{DynamicResource AuraSurfaceBrush}"
+                                    BorderBrush="{DynamicResource AuraOutlineBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000"
+                                    Padding="16"
+                                    MinWidth="220"
+                                    MaxWidth="320">
+                                <StackPanel Spacing="12">
+                                    <!-- Icon + Title -->
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <ContentPresenter Content="{TemplateBinding Icon}"
+                                                          VerticalAlignment="Top"
+                                                          IsVisible="False"/>
+                                        <StackPanel Spacing="4">
+                                            <TextBlock Text="{TemplateBinding Title}"
+                                                       FontWeight="Medium"
+                                                       FontSize="14"/>
+                                            <TextBlock Name="PART_Description"
+                                                       Text="{TemplateBinding Description}"
+                                                       FontSize="14"
+                                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                                       TextWrapping="Wrap"
+                                                       IsVisible="False"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <!-- Buttons -->
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="8"
+                                                HorizontalAlignment="Right">
+                                        <Button Name="PART_CancelButton"
+                                                Classes="text"
+                                                Content="{TemplateBinding CancelText}"/>
+                                        <Button Name="PART_OKButton"
+                                                Content="{TemplateBinding OkText}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                    </Panel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </Styles>

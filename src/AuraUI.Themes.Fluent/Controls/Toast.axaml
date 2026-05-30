@@ -3,7 +3,7 @@
         xmlns:feedback="using:AuraUI.Controls.Feedback">
 
     <!-- ============================================================
-         AuraToast Control — Default property values
+         AuraToast Control — Fluent Style with ControlTemplate
          ============================================================ -->
     <Style Selector="feedback|AuraToast">
         <Setter Property="ProgressBarBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
@@ -12,6 +12,70 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusMd}"/>
         <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MaxWidth" Value="420"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="feedback:AuraToast">
+                <Border Name="RootBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{DynamicResource AuraBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}"
+                        BoxShadow="{DynamicResource AuraShadowMd}"
+                        ClipToBounds="True"
+                        MinWidth="300"
+                        MaxWidth="{TemplateBinding MaxWidth}">
+                    <DockPanel>
+                        <!-- Close button -->
+                        <Button Name="PART_CloseButton"
+                                DockPanel.Dock="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="4"
+                                Width="28" Height="28"
+                                Margin="8,0,-4,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Cursor="Hand"
+                                IsVisible="{TemplateBinding ShowClose}">
+                            <Path Width="10" Height="10"
+                                  Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                  Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                  StrokeThickness="1.5"/>
+                        </Button>
+
+                        <!-- Icon -->
+                        <ContentPresenter Name="PART_IconPresenter"
+                                          DockPanel.Dock="Left"
+                                          VerticalAlignment="Top"
+                                          Margin="0,0,12,0"/>
+
+                        <!-- Progress bar -->
+                        <Border Name="PART_ProgressBar"
+                                DockPanel.Dock="Bottom"
+                                Height="3"
+                                CornerRadius="1.5"
+                                Background="{TemplateBinding ProgressBarBrush}"
+                                Margin="0,8,0,0"
+                                HorizontalAlignment="Stretch"/>
+
+                        <!-- Content area -->
+                        <StackPanel Spacing="4" VerticalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding ToastTitle}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource AuraForegroundBrush}"
+                                       TextTrimming="CharacterEllipsis"
+                                       IsVisible="{TemplateBinding ToastTitle, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                            <TextBlock Text="{TemplateBinding Message}"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource AuraForegroundSecondaryBrush}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
     </Style>
 
     <!-- ============================================================

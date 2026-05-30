@@ -58,7 +58,35 @@ public class ComboBoxPage : ComponentPageBase
     <ComboBoxItem>Cherry</ComboBoxItem>
     <ComboBoxItem>Date</ComboBoxItem>
     <ComboBoxItem>Elderberry</ComboBoxItem>
-</ComboBox>");
+</ComboBox>",
+            @"// Handle selection change
+private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+{
+    if (sender is ComboBox comboBox && comboBox.SelectedItem is string selected)
+    {
+        Console.WriteLine($""Selected: {selected}"");
+    }
+}
+
+// Add items programmatically
+var comboBox = new ComboBox { PlaceholderText = ""Select..."" };
+comboBox.Items.Add(""Option A"");
+comboBox.Items.Add(""Option B"");
+comboBox.SelectedIndex = 0;",
+            @"public partial class MyViewModel : ViewModelBase
+{
+    public ObservableCollection<string> Items { get; } = new()
+    {
+        ""Apple"", ""Banana"", ""Cherry"", ""Date"", ""Elderberry""
+    };
+
+    private string? _selectedItem;
+    public string? SelectedItem
+    {
+        get => _selectedItem;
+        set => SetProperty(ref _selectedItem, value);
+    }
+}");
     }
 
     private Control BuildDisabledExample()
@@ -71,7 +99,10 @@ public class ComboBoxPage : ComponentPageBase
             @"<ComboBox PlaceholderText=""Disabled"" IsEnabled=""False"">
     <ComboBoxItem>Option A</ComboBoxItem>
     <ComboBoxItem>Option B</ComboBoxItem>
-</ComboBox>");
+</ComboBox>",
+            @"// Toggle enabled state
+comboBox.IsEnabled = false;   // disable
+comboBox.IsEnabled = true;    // re-enable");
     }
 
     private static IReadOnlyList<ApiProperty> GetApiProperties() => new[]

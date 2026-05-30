@@ -16,6 +16,80 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Border Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <Panel>
+                            <!-- State layer -->
+                            <Border Name="StateLayer"
+                                    Background="Transparent"
+                                    CornerRadius="{TemplateBinding CornerRadius}"/>
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <!-- Selection box area -->
+                                <Border Grid.Column="0"
+                                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter Name="PART_ContentPresenter"
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+
+                                <!-- Dropdown toggle -->
+                                <Border Name="PART_DropdownGlyph"
+                                        Grid.Column="1"
+                                        Width="48"
+                                        Background="Transparent"
+                                        VerticalAlignment="Stretch">
+                                    <Path Name="Chevron"
+                                          Width="12" Height="12"
+                                          Data="M 1,4 L 6,9 L 11,4"
+                                          Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                          StrokeThickness="1.5"
+                                          Stretch="Uniform"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RenderTransformOrigin="0.5,0.5"/>
+                                </Border>
+                            </Grid>
+
+                            <!-- Dropdown popup -->
+                            <Popup Name="PART_Popup"
+                                   IsLightDismissEnabled="True"
+                                   Placement="BottomEdgeAlignedLeft"
+                                   MaxHeight="300">
+                                <Border Name="PART_DropdownBorder"
+                                        Background="{DynamicResource AuraSurfaceBrush}"
+                                        BorderBrush="{DynamicResource AuraOutlineBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{DynamicResource AuraRadiusMd}"
+                                        Padding="4"
+                                        BoxShadow="0 4 8 3 #26000000, 0 1 3 0 #4D000000">
+                                    <DockPanel>
+                                        <!-- Search box (shown when IsSearchable) -->
+                                        <TextBox Name="PART_SearchBox"
+                                                 DockPanel.Dock="Top"
+                                                 Margin="4,4,4,8"
+                                                 FontSize="14"
+                                                 Watermark="Search..."
+                                                 IsVisible="False"/>
+                                        <ScrollViewer>
+                                            <ItemsPresenter Name="PART_ItemsPresenter"/>
+                                        </ScrollViewer>
+                                    </DockPanel>
+                                </Border>
+                            </Popup>
+                        </Panel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.200"/>
@@ -25,12 +99,18 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="ComboBox:pointerover">
+    <Style Selector="ComboBox:pointerover /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
     </Style>
 
     <!-- Focused / Open -->
-    <Style Selector="ComboBox:focus">
+    <Style Selector="ComboBox:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- Expanded -->
+    <Style Selector="ComboBox:expanded /template/ Border#RootBorder">
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
     </Style>
@@ -47,6 +127,11 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusSm}"/>
+    </Style>
+
+    <Style Selector="ComboBox.outlined:focus /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- ComboBoxItem -->

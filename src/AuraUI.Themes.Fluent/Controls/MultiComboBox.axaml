@@ -1,8 +1,130 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:selection="using:AuraUI.Controls.Selection">
 
     <!-- ============================================================
-         MultiComboBox — Fluent Style (ListBox with checkboxes in popup)
+         MultiComboBox — Fluent Style (Multi-select with tags in popup)
+         ============================================================ -->
+    <Style Selector="selection|MultiComboBox">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource AuraInputRadius}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="{DynamicResource AuraControlHeightMd}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="selection:MultiComboBox">
+                <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Panel>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <!-- Tag container area -->
+                            <Border Grid.Column="0"
+                                    Padding="8,6">
+                                <Panel>
+                                    <ItemsControl Name="PART_TagContainer"
+                                                  VerticalAlignment="Center">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Panel>
+                            </Border>
+
+                            <!-- Dropdown toggle -->
+                            <Border Name="PART_DropdownGlyph"
+                                    Grid.Column="1"
+                                    Width="32"
+                                    Background="Transparent"
+                                    VerticalAlignment="Stretch">
+                                <Path Name="Chevron"
+                                      Width="12" Height="12"
+                                      Data="M 1,4 L 6,9 L 11,4"
+                                      Stroke="{DynamicResource AuraForegroundSecondaryBrush}"
+                                      StrokeThickness="1.5"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <!-- Dropdown popup -->
+                        <Popup Name="PART_Popup"
+                               IsLightDismissEnabled="True"
+                               Placement="BottomEdgeAlignedLeft"
+                               MaxHeight="350">
+                            <Border Name="PART_DropdownBorder"
+                                    Background="{DynamicResource AuraFlyoutBackgroundBrush}"
+                                    BorderBrush="{DynamicResource AuraFlyoutBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{DynamicResource AuraRadiusMd}"
+                                    Padding="4">
+                                <DockPanel>
+                                    <!-- Search box -->
+                                    <TextBox Name="PART_SearchBox"
+                                             DockPanel.Dock="Top"
+                                             Margin="4,4,4,8"
+                                             FontSize="13"
+                                             Watermark="Search..."
+                                             IsVisible="False"/>
+
+                                    <!-- Select all / Clear all -->
+                                    <Grid DockPanel.Dock="Top"
+                                          ColumnDefinitions="*,*"
+                                          Margin="4,0,4,8">
+                                        <Button Name="PART_SelectAllButton"
+                                                Grid.Column="0"
+                                                Classes="ghost sm"
+                                                Content="Select All"
+                                                HorizontalAlignment="Left"/>
+                                        <Button Name="PART_ClearAllButton"
+                                                Grid.Column="1"
+                                                Classes="ghost sm"
+                                                Content="Clear All"
+                                                HorizontalAlignment="Right"/>
+                                    </Grid>
+
+                                    <!-- Dropdown items list -->
+                                    <ListBox Name="PART_DropdownItemsList"
+                                             Background="Transparent"
+                                             BorderThickness="0"/>
+                                </DockPanel>
+                            </Border>
+                        </Popup>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- MultiComboBox :pointerover -->
+    <Style Selector="selection|MultiComboBox:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
+    </Style>
+
+    <!-- MultiComboBox :focus -->
+    <Style Selector="selection|MultiComboBox:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderFocusBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+    </Style>
+
+    <!-- MultiComboBox :disabled -->
+    <Style Selector="selection|MultiComboBox:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+
+    <!-- ============================================================
+         ListBox.multi-combo — Legacy Fluent Style (ListBox with checkboxes in popup)
          ============================================================ -->
     <Style Selector="ListBox.multi-combo">
         <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundBrush}"/>

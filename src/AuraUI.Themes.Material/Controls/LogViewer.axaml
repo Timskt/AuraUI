@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:display="using:AuraUI.Controls.Display">
 
-    <!-- LogViewer — Material Style (Control-based) -->
+    <!-- LogViewer — Material Style (Control-based, no Template) -->
     <Style Selector="display|LogViewer">
         <Setter Property="Opacity" Value="1"/>
     </Style>

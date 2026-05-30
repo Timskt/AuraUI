@@ -39,10 +39,18 @@
                                     Spacing="8"
                                     HorizontalAlignment="Right"
                                     Margin="24,16,24,20">
+                            <Button Name="PART_NoButton"
+                                    Classes="ghost"
+                                    Content="No"
+                                    IsVisible="False"/>
                             <Button Name="PART_CancelButton"
                                     Classes="ghost"
-                                    Content="Cancel"/>
-                            <Button Name="PART_OkButton"
+                                    Content="Cancel"
+                                    IsVisible="False"/>
+                            <Button Name="PART_YesButton"
+                                    Content="Yes"
+                                    IsVisible="False"/>
+                            <Button Name="PART_OKButton"
                                     Content="OK"/>
                         </StackPanel>
                     </DockPanel>

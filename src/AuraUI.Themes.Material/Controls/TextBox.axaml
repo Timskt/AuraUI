@@ -28,23 +28,63 @@
                                     CornerRadius="{TemplateBinding CornerRadius}"/>
 
                             <!-- Content area -->
-                            <Grid Margin="{TemplateBinding Padding}">
-                                <!-- Watermark / placeholder -->
-                                <TextBlock Name="PART_Watermark"
-                                           Text="{TemplateBinding Watermark}"
+                            <DockPanel Margin="{TemplateBinding Padding}">
+                                <!-- Prefix -->
+                                <ContentPresenter Name="PART_PrefixPresenter"
+                                                  DockPanel.Dock="Left"
+                                                  VerticalAlignment="Center"
+                                                  Margin="0,0,4,0"/>
+                                <!-- Suffix -->
+                                <ContentPresenter Name="PART_SuffixPresenter"
+                                                  DockPanel.Dock="Right"
+                                                  VerticalAlignment="Center"
+                                                  Margin="4,0,0,0"/>
+                                <!-- Clear button -->
+                                <Button Name="PART_ClearButton"
+                                        DockPanel.Dock="Right"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="4,0"
+                                        Margin="4,0,0,0"
+                                        VerticalAlignment="Center"
+                                        IsVisible="False">
+                                    <Path Width="10" Height="10"
+                                          Data="M 1,1 L 9,9 M 9,1 L 1,9"
+                                          Stroke="{DynamicResource AuraForegroundTertiaryBrush}"
+                                          StrokeThickness="1.5"/>
+                                </Button>
+                                <!-- Character count -->
+                                <TextBlock Name="PART_CharacterCount"
+                                           DockPanel.Dock="Bottom"
+                                           FontSize="11"
                                            Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
-                                           FontSize="16"
-                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,2,0,4"
                                            IsVisible="False"/>
-                                <ScrollViewer Name="PART_ScrollViewer"
-                                              HorizontalScrollBarVisibility="Hidden"
-                                              VerticalScrollBarVisibility="Hidden">
-                                    <TextPresenter Name="PART_TextPresenter"
-                                                   Text="{TemplateBinding Text, Mode=TwoWay}"
-                                                   CaretBrush="{TemplateBinding CaretBrush}"
-                                                   SelectionBrush="{TemplateBinding SelectionBrush}"/>
-                                </ScrollViewer>
-                            </Grid>
+                                <!-- Text input area -->
+                                <Panel>
+                                    <!-- Watermark / placeholder -->
+                                    <TextBlock Name="PART_Watermark"
+                                               Text="{TemplateBinding Watermark}"
+                                               Foreground="{DynamicResource AuraForegroundTertiaryBrush}"
+                                               FontSize="16"
+                                               VerticalAlignment="Center"
+                                               IsHitTestVisible="False"
+                                               IsVisible="False"/>
+                                    <ScrollViewer Name="PART_ScrollViewer"
+                                                  HorizontalScrollBarVisibility="Hidden"
+                                                  VerticalScrollBarVisibility="Hidden">
+                                        <TextPresenter Name="PART_TextPresenter"
+                                                       Text="{TemplateBinding Text, Mode=TwoWay}"
+                                                       CaretBrush="{TemplateBinding CaretBrush}"
+                                                       SelectionBrush="{TemplateBinding SelectionBrush}"
+                                                       TextAlignment="{TemplateBinding TextAlignment}"
+                                                       SelectionStart="{TemplateBinding SelectionStart}"
+                                                       SelectionEnd="{TemplateBinding SelectionEnd}"
+                                                       CaretIndex="{TemplateBinding CaretIndex}"/>
+                                    </ScrollViewer>
+                                </Panel>
+                            </DockPanel>
                         </Panel>
                     </Border>
                 </ControlTemplate>

@@ -34,13 +34,17 @@ public class MessageBoxPage : ComponentPageBase
         var btnInfo = new Button { Content = "Info MessageBox", Classes = { "primary" }, Margin = new Thickness(0, 0, 8, 8) };
         btnInfo.Click += async (_, _) =>
         {
-            await AuraMessageBox.ShowAsync(this.VisualRoot as Window ?? throw new System.Exception(), "Information", "This is an AuraUI message box dialog.", MessageBoxButtons.OK, MessageBoxIcon.Info);
+            var owner = this.VisualRoot as Window;
+            if (owner == null) return;
+            await AuraMessageBox.ShowAsync(owner, "Information", "This is an AuraUI message box dialog.", MessageBoxButtons.OK, MessageBoxIcon.Info);
         };
 
         var btnConfirm = new Button { Content = "Confirmation", Classes = { "outline" }, Margin = new Thickness(0, 0, 8, 8) };
         btnConfirm.Click += async (_, _) =>
         {
-            var result = await AuraMessageBox.ShowAsync(this.VisualRoot as Window ?? throw new System.Exception(), "Confirm Action", "Are you sure you want to proceed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var owner = this.VisualRoot as Window;
+            if (owner == null) return;
+            var result = await AuraMessageBox.ShowAsync(owner, "Confirm Action", "Are you sure you want to proceed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         };
 
         return CreateExampleSection("MessageBox Variants",

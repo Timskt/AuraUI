@@ -257,9 +257,24 @@ public partial class MainWindow : Window
         if (!_pageFactory.TryGetValue(tag, out var factory))
             return;
 
-        _currentPage = factory();
-        ContentArea!.Content = _currentPage;
-        UpdateStatus($"Viewing: {_currentPage.ComponentName}");
+        try
+        {
+            _currentPage = factory();
+            ContentArea!.Content = _currentPage;
+            UpdateStatus($"Viewing: {_currentPage.ComponentName}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[NavigateTo] Error loading page '{tag}': {ex}");
+            ContentArea!.Content = new TextBlock
+            {
+                Text = $"Error loading '{tag}': {ex.Message}",
+                Margin = new Avalonia.Thickness(32),
+                TextWrapping = Avalonia.Media.TextWrapping.Wrap,
+                Foreground = Avalonia.Media.Brushes.Red
+            };
+            UpdateStatus($"Error loading: {tag}");
+        }
     }
 
     private void NavList_SelectionChanged(object? sender, SelectionChangedEventArgs e)
