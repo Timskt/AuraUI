@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
-using AuraUI.Controls.Navigation;
 using AuraUI.Demo.Models;
 
 namespace AuraUI.Demo.Pages;
@@ -32,26 +31,84 @@ public class NavigationViewPage : ComponentPageBase
 
     private Control BuildBasicExample()
     {
-        var navView = new NavigationView
+        // Standard Avalonia fallback for NavigationView (custom control template not yet available)
+        var contentText = new TextBlock
         {
-            DisplayMode = NavigationViewDisplayMode.Compact,
-            Header = new TextBlock
+            Text = "Home - Main content area. Select a navigation item from the pane.",
+            Margin = new Thickness(24),
+            TextWrapping = TextWrapping.Wrap,
+            FontSize = 14,
+            Foreground = GetBrush("AuraForegroundBrush", "#000000")
+        };
+
+        var navItems = new ListBox
+        {
+            Width = 200,
+            SelectedIndex = 0
+        };
+        foreach (var item in new[] { "Home", "Documents", "Settings", "About" })
+            navItems.Items.Add(new ListBoxItem { Content = item, Padding = new Thickness(12, 8) });
+
+        navItems.SelectionChanged += (_, _) =>
+        {
+            if (navItems.SelectedItem is ListBoxItem li)
+                contentText.Text = $"{li.Content} - Main content area. Select a navigation item from the pane.";
+        };
+
+        var headerBorder = new Border
+        {
+            Padding = new Thickness(16, 12),
+            Child = new TextBlock
             {
                 Text = "My App",
                 FontWeight = FontWeight.Bold,
                 FontSize = 16,
-                Margin = new Thickness(16, 8)
-            },
-            IsSettingsVisible = true,
-            IsPaneOpen = true,
+                Foreground = GetBrush("AuraForegroundBrush", "#000000")
+            }
+        };
+        DockPanel.SetDock(headerBorder, Dock.Top);
+
+        var footerBorder = new Border
+        {
+            Padding = new Thickness(12, 8),
+            Child = new TextBlock
+            {
+                Text = "Settings",
+                FontSize = 13,
+                Foreground = GetBrush("AuraForegroundSecondaryBrush", "#666666")
+            }
+        };
+        DockPanel.SetDock(footerBorder, Dock.Bottom);
+
+        var navView = new Grid
+        {
+            ColumnDefinitions = new ColumnDefinitions("Auto,*"),
             Width = 600,
             Height = 350,
-            ItemsSource = new List<string> { "Home", "Documents", "Settings", "About" },
-            Content = new TextBlock
+            Clip = new RectangleGeometry(new Rect(0, 0, 600, 350)),
+            Children =
             {
-                Text = "Main content area - select a navigation item from the pane.",
-                Margin = new Thickness(24),
-                TextWrapping = TextWrapping.Wrap
+                new Border
+                {
+                    Background = GetBrush("AuraSurfaceBrush", "#F9F9F9"),
+                    BorderBrush = GetBrush("AuraBorderBrush", "#E0E0E0"),
+                    BorderThickness = new Thickness(0, 0, 1, 0),
+                    Width = 200,
+                    Child = new DockPanel
+                    {
+                        Children =
+                        {
+                            headerBorder,
+                            footerBorder,
+                            navItems
+                        }
+                    }
+                },
+                SetColumn(new Border
+                {
+                    Background = GetBrush("AuraCardBrush", "#FFFFFF"),
+                    Child = contentText
+                }, 1)
             }
         };
 
@@ -78,4 +135,10 @@ public class NavigationViewPage : ComponentPageBase
         new ApiProperty { PropertyName = "IsBackEnabled", Type = "bool", Default = "false", Description = "Show back button" },
         new ApiProperty { PropertyName = "SelectedItem", Type = "object", Default = "null", Description = "Currently selected item" },
     };
+
+    private static T SetColumn<T>(T control, int column) where T : Control
+    {
+        Grid.SetColumn(control, column);
+        return control;
+    }
 }
