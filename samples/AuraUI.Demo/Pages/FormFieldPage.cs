@@ -40,7 +40,7 @@ public class FormFieldPage : ComponentPageBase
             IsRequired = true,
             Width = 350,
             Margin = new Thickness(0, 0, 0, 12),
-            Content = new AuraTextBox { Watermark = "John Doe" }
+            Content = new AuraTextBox { PlaceholderText = "John Doe" }
         };
 
         var emailField = new FormField
@@ -51,7 +51,7 @@ public class FormFieldPage : ComponentPageBase
             ErrorText = "Please enter a valid email address",
             Width = 350,
             Margin = new Thickness(0, 0, 0, 12),
-            Content = new AuraTextBox { Watermark = "user@example.com" }
+            Content = new AuraTextBox { PlaceholderText = "user@example.com" }
         };
 
         var panel = new StackPanel { Spacing = 8 };
@@ -74,7 +74,7 @@ var nameField = new FormField
     Label = ""Full Name"",
     HelperText = ""Enter your first and last name"",
     IsRequired = true,
-    Content = new TextBox { Watermark = ""John Doe"" }
+    Content = new TextBox { PlaceholderText = ""John Doe"" }
 };
 
 // Set validation error
@@ -83,7 +83,7 @@ var emailField = new FormField
     Label = ""Email"",
     HasError = true,
     ErrorText = ""Please enter a valid email address"",
-    Content = new TextBox { Watermark = ""user@example.com"" }
+    Content = new TextBox { PlaceholderText = ""user@example.com"" }
 };",
             @"public partial class FormViewModel : ViewModelBase
 {
@@ -131,7 +131,7 @@ var emailField = new FormField
             LabelPlacement = FormFieldLabelPlacement.Top,
             Width = 350,
             Margin = new Thickness(0, 0, 0, 12),
-            Content = new AuraTextBox { Watermark = "Top label placement" }
+            Content = new AuraTextBox { PlaceholderText = "Top label placement" }
         };
 
         var leftField = new FormField
@@ -141,7 +141,7 @@ var emailField = new FormField
             LabelWidth = 120,
             Width = 400,
             Margin = new Thickness(0, 0, 0, 12),
-            Content = new AuraTextBox { Watermark = "Left label placement" }
+            Content = new AuraTextBox { PlaceholderText = "Left label placement" }
         };
 
         var panel = new StackPanel { Spacing = 8 };
@@ -164,7 +164,7 @@ var field = new FormField
     Label = ""Label on Left"",
     LabelPlacement = FormFieldLabelPlacement.Left,
     LabelWidth = 120,
-    Content = new TextBox { Watermark = ""Left label"" }
+    Content = new TextBox { PlaceholderText = ""Left label"" }
 };");
     }
 

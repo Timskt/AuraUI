@@ -32,7 +32,7 @@ public class DialogPage : ComponentPageBase
                 Children =
                 {
                     new TextBlock { Text = "This dialog is declared inline and toggled via Show/Hide.", TextWrapping = TextWrapping.Wrap, FontSize = 14, Foreground = GetBrush("AuraForegroundBrush") },
-                    new TextBox { Watermark = "Enter a value..." },
+                    new TextBox { PlaceholderText = "Enter a value..." },
                     new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right, Children = {
                         new Button { Content = "Cancel" },
                         new Button { Content = "Submit", Classes = { "primary" } }

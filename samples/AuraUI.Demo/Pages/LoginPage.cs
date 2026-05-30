@@ -69,14 +69,14 @@ public class LoginPage : ComponentPageBase
         // Username field
         var usernameBox = new TextBox
         {
-            Watermark = "Enter your username",
+            PlaceholderText = "Enter your username",
             Height = 36
         };
 
         // Password field
         var passwordBox = new TextBox
         {
-            Watermark = "Enter your password",
+            PlaceholderText = "Enter your password",
             PasswordChar = '*',
             Height = 36
         };

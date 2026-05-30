@@ -42,7 +42,7 @@ public class ConfigProviderPage : ComponentPageBase
                 {
                     new Avalonia.Controls.TextBlock { Text = "Default Config", FontWeight = FontWeight.SemiBold },
                     new AuraButton { Content = "Default Button", Classes = { "primary" } },
-                    new AuraTextBox { Watermark = "Default size input" }
+                    new AuraTextBox { PlaceholderText = "Default size input" }
                 }
             }
         };
@@ -57,7 +57,7 @@ public class ConfigProviderPage : ComponentPageBase
                 {
                     new Avalonia.Controls.TextBlock { Text = "Small Config", FontWeight = FontWeight.SemiBold },
                     new AuraButton { Content = "Small Button", Classes = { "primary" } },
-                    new AuraTextBox { Watermark = "Small input" }
+                    new AuraTextBox { PlaceholderText = "Small input" }
                 }
             }
         };

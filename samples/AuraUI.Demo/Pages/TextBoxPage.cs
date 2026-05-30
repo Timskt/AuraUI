@@ -39,9 +39,9 @@ public class TextBoxPage : ComponentPageBase
                 Spacing = 8, MaxWidth = 400,
                 Children =
                 {
-                    new TextBox { Watermark = "Enter your name..." },
-                    new TextBox { Watermark = "With default value", Text = "Hello World" },
-                    new TextBox { Watermark = "Multi-line", AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, MinHeight = 80 },
+                    new TextBox { PlaceholderText = "Enter your name..." },
+                    new TextBox { PlaceholderText = "With default value", Text = "Hello World" },
+                    new TextBox { PlaceholderText = "Multi-line", AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, MinHeight = 80 },
                 }
             },
             @"<TextBox Watermark=""Enter your name...""/>
@@ -81,14 +81,14 @@ textBox.Text = ""New value"";",
                 Spacing = 8, MaxWidth = 400,
                 Children =
                 {
-                    new TextBox { Watermark = "Default style" },
-                    new TextBox { Watermark = "Underline style", Classes = { "underline" } },
+                    new TextBox { PlaceholderText = "Default style" },
+                    new TextBox { PlaceholderText = "Underline style", Classes = { "underline" } },
                 }
             },
             @"<TextBox Watermark=""Default style""/>
 <TextBox Watermark=""Underline style"" Classes=""underline""/>",
             @"// Apply style classes in code
-var textBox = new TextBox { Watermark = ""Styled"" };
+var textBox = new TextBox { PlaceholderText = ""Styled"" };
 textBox.Classes.Add(""underline"");");
     }
 
@@ -100,10 +100,10 @@ textBox.Classes.Add(""underline"");");
                 Spacing = 8, MaxWidth = 400,
                 Children =
                 {
-                    new TextBox { Watermark = "Normal" },
-                    new TextBox { Watermark = "Read-only", Text = "Read-only content", IsReadOnly = true },
-                    new TextBox { Watermark = "Disabled", IsEnabled = false },
-                    new TextBox { Watermark = "Password", PasswordChar = '*', MaxLength = 32 },
+                    new TextBox { PlaceholderText = "Normal" },
+                    new TextBox { PlaceholderText = "Read-only", Text = "Read-only content", IsReadOnly = true },
+                    new TextBox { PlaceholderText = "Disabled", IsEnabled = false },
+                    new TextBox { PlaceholderText = "Password", PasswordChar = '*', MaxLength = 32 },
                 }
             },
             @"<TextBox Watermark=""Normal""/>

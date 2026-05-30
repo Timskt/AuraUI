@@ -82,7 +82,7 @@ public class ColorPickerPage : ComponentPageBase
 
         var hexInput = new TextBox
         {
-            Watermark = "#0078D4",
+            PlaceholderText = "#0078D4",
             Width = 120,
             Text = "#0078D4"
         };

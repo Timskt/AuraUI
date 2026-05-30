@@ -175,7 +175,7 @@ public class CodeBlock : UserControl
         var topLevel = TopLevel.GetTopLevel(this);
         if (topLevel?.Clipboard != null)
         {
-            await topLevel.Clipboard.SetTextAsync(Code);
+            await Avalonia.Input.Platform.ClipboardExtensions.SetTextAsync(topLevel.Clipboard, Code);
 
             if (_copyButton != null)
             {

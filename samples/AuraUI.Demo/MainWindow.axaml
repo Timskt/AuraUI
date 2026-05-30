@@ -60,7 +60,7 @@
                     <!-- Search -->
                     <Border DockPanel.Dock="Top" Padding="12,10">
                         <TextBox x:Name="SearchBox"
-                                 Watermark="Search components..."
+                                 PlaceholderText="Search components..."
                                  Classes="underline"
                                  KeyUp="SearchBox_KeyUp"/>
                     </Border>

@@ -96,7 +96,7 @@ public class SettingsPage : ComponentPageBase
                                 Children =
                                 {
                                     new TextBlock { Text = "Full Name", FontSize = 13, FontWeight = FontWeight.SemiBold, Foreground = GetBrush("AuraForegroundBrush", "#000000") },
-                                    new TextBox { Text = "John Doe", Watermark = "Your full name" }
+                                    new TextBox { Text = "John Doe", PlaceholderText = "Your full name" }
                                 }
                             }, 0),
                             SetColumn(new StackPanel
@@ -106,7 +106,7 @@ public class SettingsPage : ComponentPageBase
                                 Children =
                                 {
                                     new TextBlock { Text = "Email", FontSize = 13, FontWeight = FontWeight.SemiBold, Foreground = GetBrush("AuraForegroundBrush", "#000000") },
-                                    new TextBox { Text = "john.doe@example.com", Watermark = "Your email" }
+                                    new TextBox { Text = "john.doe@example.com", PlaceholderText = "Your email" }
                                 }
                             }, 1)
                         }
@@ -120,7 +120,7 @@ public class SettingsPage : ComponentPageBase
                             new TextBox
                             {
                                 Text = "Senior software engineer with a passion for building great user interfaces.",
-                                Watermark = "Tell us about yourself",
+                                PlaceholderText = "Tell us about yourself",
                                 AcceptsReturn = true,
                                 TextWrapping = TextWrapping.Wrap,
                                 MinHeight = 60

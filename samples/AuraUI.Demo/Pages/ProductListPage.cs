@@ -54,7 +54,7 @@ public class ProductListPage : ComponentPageBase
         // --- Search Bar ---
         var searchBox = new SearchBox
         {
-            Watermark = "Search products...",
+            PlaceholderText = "Search products...",
             SearchDelay = 200,
             MaxWidth = 300
         };
@@ -116,9 +116,9 @@ public class ProductListPage : ComponentPageBase
                                 Spacing = 8,
                                 Children =
                                 {
-                                    new TextBox { Watermark = "Min", Width = 75, Height = 30 },
+                                    new TextBox { PlaceholderText = "Min", Width = 75, Height = 30 },
                                     new TextBlock { Text = "-", VerticalAlignment = VerticalAlignment.Center, Foreground = GetBrush("AuraForegroundSecondaryBrush", "#666666") },
-                                    new TextBox { Watermark = "Max", Width = 75, Height = 30 },
+                                    new TextBox { PlaceholderText = "Max", Width = 75, Height = 30 },
                                 }
                             }
                         }

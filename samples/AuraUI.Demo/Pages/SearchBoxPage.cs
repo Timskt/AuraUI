@@ -36,8 +36,8 @@ public class SearchBoxPage : ComponentPageBase
                 Spacing = 12, MaxWidth = 400,
                 Children =
                 {
-                    new SearchBox { Watermark = "Search products...", SearchDelay = 300 },
-                    new SearchBox { Watermark = "Instant search", SearchDelay = 0 },
+                    new SearchBox { PlaceholderText = "Search products...", SearchDelay = 300 },
+                    new SearchBox { PlaceholderText = "Instant search", SearchDelay = 0 },
                 }
             },
             @"<input:SearchBox Watermark=""Search products..."" SearchDelay=""300""/>
