@@ -57,9 +57,7 @@
     </Style>
 
     <!-- ColumnHeader :pointerover -->
-    <Style Selector="DataGridColumnHeader:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraMutedBrush}"/>
-    </Style>
+
 
     <!-- ColumnHeader :sorted -->
     <Style Selector="DataGridColumnHeader:sorted /template/ Path#PART_SortIcon">

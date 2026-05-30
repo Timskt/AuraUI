@@ -77,7 +77,6 @@
 
     <!-- TreeSelect :pointerover -->
     <Style Selector="selection|TreeSelect:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraInputBackgroundHoverBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraInputBorderHoverBrush}"/>
     </Style>

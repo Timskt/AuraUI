@@ -147,9 +147,7 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
-    <Style Selector="Button.toast-close:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
     <Style Selector="Button.toast-close:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
     </Style>

@@ -111,9 +111,7 @@
     </Style>
 
     <!-- AccordionItem header hover -->
-    <Style Selector="layout|AccordionItem /template/ ContentControl#PART_HeaderSite:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- First item: top border -->
     <Style Selector="layout|AccordionItem:first-child">

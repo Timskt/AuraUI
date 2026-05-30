@@ -95,9 +95,7 @@
     </Style>
 
     <!-- Hover header -->
-    <Style Selector="layout|AccordionItem:pointerover /template/ ContentControl#PART_HeaderSite">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Pressed header -->
     <Style Selector="layout|AccordionItem:pressed /template/ ContentControl#PART_HeaderSite">
@@ -105,10 +103,7 @@
     </Style>
 
     <!-- Chevron hover -->
-    <Style Selector="layout|AccordionItem:pointerover /template/ Border#PART_ChevronContainer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="12"/>
-    </Style>
+
 
     <!-- Expanded state — rotate chevron 180 degrees -->
     <Style Selector="layout|AccordionItem:expanded /template/ Path#PART_Chevron">

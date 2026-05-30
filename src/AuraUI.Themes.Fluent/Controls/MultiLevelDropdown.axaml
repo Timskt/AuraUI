@@ -67,9 +67,7 @@
     </Style>
 
     <!-- Button hover -->
-    <Style Selector="navigation|MultiLevelDropdown /template/ Button#PART_Button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Open state -->
     <Style Selector="navigation|MultiLevelDropdown:open /template/ Border#PART_PopupBorder">

@@ -108,10 +108,7 @@
     </Style>
 
     <!-- Hover (state layer) -->
-    <Style Selector="display|CheckedTreeViewItem:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource AuraRadiusFull}"/>
-    </Style>
+
 
     <!-- Pressed (state layer) -->
     <Style Selector="display|CheckedTreeViewItem:pressed /template/ Border#StateLayer">

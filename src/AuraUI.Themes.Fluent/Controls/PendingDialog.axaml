@@ -69,9 +69,7 @@
     </Style>
 
     <!-- Close button hover -->
-    <Style Selector="feedback|PendingDialog /template/ Button#PART_CancelButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Dialog open animation -->
     <Style Selector="feedback|PendingDialog /template/ Border#PART_DialogBorder">

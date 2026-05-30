@@ -148,9 +148,7 @@
     </Style>
 
     <!-- Nav item :pointerover -->
-    <Style Selector="Border.nav-item:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Nav item :pressed -->
     <Style Selector="Border.nav-item:pressed">

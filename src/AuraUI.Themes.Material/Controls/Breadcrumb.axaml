@@ -47,10 +47,7 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="navigation|BreadcrumbItem:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="4"/>
-    </Style>
+
 
     <!-- Active (current page) -->
     <Style Selector="navigation|BreadcrumbItem:selected">

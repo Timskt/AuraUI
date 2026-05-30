@@ -110,10 +110,7 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="display|CheckedTreeViewItem:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Selected -->
     <Style Selector="display|CheckedTreeViewItem:selected /template/ Border#PART_Border">

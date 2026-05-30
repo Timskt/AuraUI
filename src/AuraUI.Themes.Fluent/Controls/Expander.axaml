@@ -87,9 +87,7 @@
     </Style>
 
     <!-- Expander header hover -->
-    <Style Selector="layout|Expander /template/ ContentControl#PART_HeaderSite:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Expander with border -->
     <Style Selector="layout|Expander.bordered">

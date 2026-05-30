@@ -63,10 +63,7 @@
     </Style>
 
     <!-- Hover state layer -->
-    <Style Selector="input|AuraRepeatButton:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#14FFFFFF"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Pressed state layer -->
     <Style Selector="input|AuraRepeatButton:pressed /template/ Border#StateLayer">
@@ -97,10 +94,7 @@
         <Setter Property="Background" Value="{DynamicResource AuraSecondaryContainerBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraOnSecondaryContainerBrush}"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.secondary:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Outline -->
     <Style Selector="input|AuraRepeatButton.outline">
@@ -109,10 +103,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AuraOutlineBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.outline:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Ghost (Text) -->
     <Style Selector="input|AuraRepeatButton.ghost">
@@ -122,18 +113,12 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="12,10"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.ghost:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#146750A4"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Destructive -->
     <Style Selector="input|AuraRepeatButton.destructive">
         <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.destructive:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="#14B3261E"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
 </Styles>

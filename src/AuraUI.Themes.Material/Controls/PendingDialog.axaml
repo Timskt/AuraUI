@@ -67,8 +67,6 @@
     </Style>
 
     <!-- Cancel button hover state layer -->
-    <Style Selector="feedback|PendingDialog /template/ Button#PART_CancelButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
 </Styles>

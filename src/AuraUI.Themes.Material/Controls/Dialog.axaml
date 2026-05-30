@@ -103,9 +103,7 @@
     </Style>
 
     <!-- Close button hover -->
-    <Style Selector="feedback|AuraDialog /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Close button pressed -->
     <Style Selector="feedback|AuraDialog /template/ Button#PART_CloseButton:pressed">

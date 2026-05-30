@@ -58,10 +58,7 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="input|AuraRepeatButton:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Pressed -->
     <Style Selector="input|AuraRepeatButton:pressed /template/ Border#PART_Border">
@@ -91,10 +88,7 @@
     <Style Selector="input|AuraRepeatButton.secondary">
         <Setter Property="Background" Value="{DynamicResource AuraSecondaryBrush}"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.secondary:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraSecondaryHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
     <Style Selector="input|AuraRepeatButton.secondary:pressed /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraSecondaryPressedBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
@@ -106,10 +100,7 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.outline:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Ghost -->
     <Style Selector="input|AuraRepeatButton.ghost">
@@ -117,19 +108,13 @@
         <Setter Property="Foreground" Value="{DynamicResource AuraPrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.ghost:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- Destructive -->
     <Style Selector="input|AuraRepeatButton.destructive">
         <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
     </Style>
-    <Style Selector="input|AuraRepeatButton.destructive:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraErrorHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
 
     <!-- ============================================================
          Size Classes

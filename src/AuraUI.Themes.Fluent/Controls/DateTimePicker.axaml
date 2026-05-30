@@ -88,9 +88,7 @@
     </Style>
 
     <!-- Dropdown button hover -->
-    <Style Selector="selection|DateTimePicker /template/ Button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Disabled -->
     <Style Selector="selection|DateTimePicker:disabled">

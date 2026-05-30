@@ -59,9 +59,7 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="input|AutoComplete:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Focused -->
     <Style Selector="input|AutoComplete:focus /template/ Border#PART_Border">

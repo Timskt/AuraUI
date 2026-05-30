@@ -90,8 +90,6 @@
     </Style>
 
     <!-- Close button hover — red background -->
-    <Style Selector="windowing|WindowX /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraErrorBrush}"/>
-    </Style>
+
 
 </Styles>

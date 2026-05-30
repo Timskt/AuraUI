@@ -46,7 +46,6 @@
 
     <!-- Page item :pointerover -->
     <Style Selector="Button.page-item:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AuraBorderBrush}"/>
     </Style>
@@ -88,9 +87,6 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
-    <Style Selector="Button.page-prev:pointerover, Button.page-next:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
     <Style Selector="Button.page-prev:disabled, Button.page-next:disabled">
         <Setter Property="Opacity" Value="0.3"/>

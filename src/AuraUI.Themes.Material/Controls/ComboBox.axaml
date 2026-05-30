@@ -99,9 +99,8 @@
     </Style>
 
     <!-- Hover -->
-    <Style Selector="ComboBox:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
+    <Style Selector="ComboBox:pointerover /template/ Border#RootBorder">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Focused / Open -->

@@ -59,9 +59,7 @@
     </Style>
 
     <!-- ColumnHeader :pointerover -->
-    <Style Selector="DataGridColumnHeader:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraOverlayBrush}"/>
-    </Style>
+
 
     <!-- ColumnHeader :pressed -->
     <Style Selector="DataGridColumnHeader:pressed">

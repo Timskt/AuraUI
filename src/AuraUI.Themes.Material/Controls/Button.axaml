@@ -111,10 +111,6 @@
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
-    <Style Selector="Button.outlined:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <Style Selector="Button.outlined:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
@@ -131,10 +127,6 @@
         <Setter Property="MinWidth" Value="48"/>
     </Style>
 
-    <Style Selector="Button.text:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <Style Selector="Button.text:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
@@ -243,10 +235,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <Style Selector="Button.icon:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
 
     <Style Selector="Button.icon:pressed /template/ Border#StateLayer">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>

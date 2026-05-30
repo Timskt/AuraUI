@@ -68,10 +68,9 @@
         </Setter>
     </Style>
 
-    <!-- Hover state layer -->
-    <Style Selector="selection|DateTimePicker:pointerover /template/ Border#StateLayer">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
+    <!-- Hover -->
+    <Style Selector="selection|DateTimePicker:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AuraPrimaryBrush}"/>
     </Style>
 
     <!-- Focus state -->
@@ -96,9 +95,7 @@
     </Style>
 
     <!-- Dropdown button hover -->
-    <Style Selector="selection|DateTimePicker /template/ Button:pointerover /template/ Border">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Disabled -->
     <Style Selector="selection|DateTimePicker:disabled">

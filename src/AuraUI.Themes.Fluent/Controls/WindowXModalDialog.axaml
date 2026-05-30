@@ -96,9 +96,7 @@
     </Style>
 
     <!-- Close button hover -->
-    <Style Selector="windowing|WindowXModalDialog /template/ Button#PART_CloseButton:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
+
 
     <!-- Close button pressed -->
     <Style Selector="windowing|WindowXModalDialog /template/ Button#PART_CloseButton:pressed">

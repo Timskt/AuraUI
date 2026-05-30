@@ -114,10 +114,7 @@
     <Style Selector="TabStripItem:pointerover">
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
-    <Style Selector="TabStripItem:pointerover /template/ Border#PART_SelectedPipe">
-        <Setter Property="Background" Value="{DynamicResource AuraBorderHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="1.5,1.5,0,0"/>
-    </Style>
+
 
     <!-- TabItem :selected -->
     <Style Selector="TabStripItem:selected">
@@ -148,9 +145,6 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
-    <Style Selector="Button.tab-scroll-button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-    </Style>
 
     <Style Selector="Button.tab-scroll-button:pressed">
         <Setter Property="Background" Value="{DynamicResource AuraPressedBrush}"/>
@@ -174,7 +168,6 @@
     </Style>
 
     <Style Selector="Button.add-tab-button:pointerover">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AuraForegroundBrush}"/>
     </Style>
 
@@ -204,10 +197,7 @@
             </ControlTemplate>
         </Setter>
     </Style>
-    <Style Selector="navigation|AuraTabControl.pills TabStripItem:pointerover /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AuraHoverBrush}"/>
-        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}"/>
-    </Style>
+
     <Style Selector="navigation|AuraTabControl.pills TabStripItem:selected /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AuraPrimaryLightBrush}"/>
     </Style>
